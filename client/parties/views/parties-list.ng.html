@@ -1,0 +1,19 @@
+<div ng-controller="PartiesListCtrl">
+<form>
+    <label>Name</label>
+    <input ng-model="newParty.name">
+    <label>Description</label>
+    <input ng-model="newParty.description">
+    <!--<button ng-click="parties.save(newParty)">Add</button>-->
+    <button class="mdl-button mdl-button--raised mdl-js-ripple-effect" ng-click="newParty.owner=$root.currentUser._id; parties.save(newParty)">Add</button>
+    <button class="mdl-button mdl-button--raised mdl-js-ripple-effect" ng-click="removeAll()">Remove All</button>
+    <md-button class="md-raised md-primary">Primary</md-button>
+</form>
+<ul>
+    <li ng-repeat="party in parties">
+        <a href="/parties/{{party._id}}">{{party.name}}</a>
+        <p>{{party.description}}</p>
+        <button ng-click="newParty.owner=$root.currentUser._id; remove(party)">X</button>
+    </li>
+</ul>
+</div>
