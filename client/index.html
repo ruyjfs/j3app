@@ -1,47 +1,54 @@
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="/">
-    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.indigo-pink.min.css">
-    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body>
-<!-- No header, and the drawer stays open on larger screens (fixed drawer). -->
-<!-- Always shows a header, even in smaller screens. -->
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header">
-        <div class="mdl-layout__header-row">
-            <!-- Title -->
-            <span class="mdl-layout-title">j3rotherhood</span>
-            <!-- Add spacer, to align navigation to the right -->
-            <div class="mdl-layout-spacer"></div>
-            <!-- Navigation. We hide it in small screens. -->
-            <nav class="mdl-navigation mdl-layout--large-screen-only">
-                <a class="mdl-navigation__link" href="/parties">Home</a>
-                <a class="mdl-navigation__link" href="">Link</a>
-                <a class="mdl-navigation__link" href="">Link</a>
-                <a class="mdl-navigation__link" href="">Link</a>
-            </nav>
-        </div>
-    </header>
-    <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">j3rotherhood</span>
-        <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="/parties">Home</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-        </nav>
-    </div>
-    <main class="mdl-layout__content">
-        <div class="page-content"><!-- Your content goes here --></div>
-    </main>
-</div>
-<div ng-app="socially">
-    <blaze-template name="loginButtons"></blaze-template>
-    <h1>
-        <a href="/parties">Home</a>
-    </h1>
+<!--<body>-->
+<!--&lt;!&ndash; No header, and the drawer stays open on larger screens (fixed drawer). &ndash;&gt;-->
+<!--&lt;!&ndash; Always shows a header, even in smaller screens. &ndash;&gt;-->
+<!--<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">-->
+    <!--<header class="mdl-layout__header">-->
+        <!--<div class="mdl-layout__header-row">-->
+            <!--&lt;!&ndash; Title &ndash;&gt;-->
+            <!--<span class="mdl-layout-title">meteor</span>-->
+            <!--&lt;!&ndash; Add spacer, to align navigation to the right &ndash;&gt;-->
+            <!--<div class="mdl-layout-spacer"></div>-->
+            <!--&lt;!&ndash; Navigation. We hide it in small screens. &ndash;&gt;-->
+            <!--<nav class="mdl-navigation mdl-layout--large-screen-only">-->
+                <!--&lt;!&ndash;<a class="mdl-navigation__link" href="/parties">Home</a>&ndash;&gt;-->
+            <!--</nav>-->
+        <!--</div>-->
+    <!--</header>-->
+    <!--<div class="mdl-layout__drawer">-->
+        <!--<span class="mdl-layout-title">meteor</span>-->
+        <!--<nav class="mdl-navigation">-->
+            <!--<a class="mdl-navigation__link" href="/parties">Home</a>-->
+        <!--</nav>-->
+    <!--</div>-->
+    <!--<main class="mdl-layout__content">-->
+        <!--<div class="page-content">-->
+            <!--<div>-->
+                <!--<blaze-template name="loginButtons"></blaze-template>-->
+                <!--<div ui-view></div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</main>-->
+<!--</div>-->
+<!--</body>-->
 
-    <div ui-view></div>
-</div>
+
+<body layout="column">
+<md-toolbar md-scroll-shrink layout="row" layout-align="start center" layout-padding>
+    <h2>
+        <a ui-sref="parties"><span class="md-title">Socially</span></a>
+    </h2>
+    <span flex></span>
+    <div class="navbar-right navbar-text">
+        <md-button ng-href="/login" ng-hide="$root.currentUser">Login</md-button>
+        <md-button ng-href="/register" ng-hide="$root.currentUser">Sign up</md-button>
+        <div ng-show="$root.currentUser">{{ $root.currentUser }}</div>
+        <md-button ng-href="/logout" ng-show="$root.currentUser">Logout</md-button>
+    </div>
+</md-toolbar>
+<div ui-view flex-gt-sm layout-gt-sm="row"></div>
 </body>
