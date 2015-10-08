@@ -1,5 +1,5 @@
 body {
-    background-color: rgba(0,0,0,.04);
+    /*background-color: rgba(0,0,0,.04);*/
 }
 
 /*md-toolbar:not(.md-menu-toolbar){*/
@@ -7,6 +7,6 @@ body {
 /*}*/
 
 .md-title, a{
-    color: #FFFFFF;
-    text-decoration: none;
+    /*color: #FFFFFF;*/
+    /*text-decoration: none;*/
  }

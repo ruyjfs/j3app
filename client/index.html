@@ -7,24 +7,24 @@
 <body layout="column">
 <div ng-controller="ChatCtrl" layout="column" ng-cloak>
     <md-toolbar md-scroll-shrink layout="row" layout-align="start center" layout-padding>
+        <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()"  hide-gt-md>
+            <md-icon md-svg-icon="navigation:ic_menu_24px"></md-icon>
+        </md-button>
         <h2>
             <a ui-sref="brotherhood"><span class="md-title">brotherhood</span></a>
         </h2>
         <span flex></span>
         <div class="navbar-right navbar-text">
-
-            <md-button ng-click="toggleLeft()"
-                       class="md-primary" hide-gt-md>
-                Toggle left
-            </md-button>
-            <md-button ng-click="toggleRight()"
-                       class="md-primary">
-                Toggle right
+            <md-button class="md-icon-button" ng-click="toggleRight()">
+                <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
             </md-button>
             <md-button ng-href="/user/login" ng-hide="$root.currentUser">Login</md-button>
             <md-button ng-href="/user/register" ng-hide="$root.currentUser">Sign up</md-button>
             <div ng-show="$root.currentUser">{{ $root.currentUser }}</div>
-            <md-button ng-href="/user/logout" ng-show="$root.currentUser">Logout</md-button>
+            <md-button ng-href="/user/logout" ng-show="$root.currentUser">
+                <md-icon md-svg-icon="action:ic_power_settings_new_24px"></md-icon>
+                Logout
+            </md-button>
         </div>
     </md-toolbar>
     <section layout="row" flex>

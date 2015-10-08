@@ -1,5 +1,5 @@
 if (Meteor.isClient) {
-    angular.module('scrum',[
+    angular.module('driver',[
         'angular-meteor',
         'ui.router',
         'angularUtils.directives.dirPagination',
@@ -8,12 +8,11 @@ if (Meteor.isClient) {
     ]);
 
 
-    //angular.module('scrum')
+    //angular.module('driver')
     //    .config(function($mdThemingProvider){
-    //        $mdThemingProvider.theme('scrum')
-    //            .dark()
+    //        $mdThemingProvider.theme('driver')
     //            .primaryPalette('grey', {
-    //                'default': '900',
+    //                'default': '500',
     //            })
     //            .warnPalette('red', {
     //                'default': '900',
@@ -22,7 +21,7 @@ if (Meteor.isClient) {
     //                'default': 'A700',
     //            });
     //
-    //        //$mdThemingProvider.setDefaultTheme('default');
+    //        //$mdThemingProvider.setDefaultTheme('driver');
     //        //
     //        //$mdThemingProvider.alwaysWatchTheme(true);
     //    });

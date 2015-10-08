@@ -19,6 +19,6 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                 controller: 'DefaultCtrl'
             });
 
-        $urlRouterProvider.otherwise("/scrum");
+        //$urlRouterProvider.otherwise("/scrum");
     }
 ]);

@@ -11,7 +11,7 @@ if (Meteor.isClient) {
     angular.module('brotherhood')
         .config(function($mdThemingProvider){
             $mdThemingProvider.theme('default')
-                .dark()
+                //.dark()
                 .primaryPalette('grey', {
                     'default': '900',
                 })
@@ -37,6 +37,8 @@ if (Meteor.isClient) {
     //             // specify primary color, all
     //        // other color intentions will be inherited
     //        // from default
+    //
+    //        //$mdThemingProvider.setDefaultTheme('altTheme');
     //    });
 
     //angular.module('brotherhood')

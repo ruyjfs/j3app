@@ -8,24 +8,23 @@ if (Meteor.isClient) {
     ]);
 
 
-    angular.module('gamer')
-        .config(function($mdThemingProvider){
-            $mdThemingProvider.theme('gamer')
-                .dark()
-                .primaryPalette('grey', {
-                    'default': '900',
-                })
-                .warnPalette('red', {
-                    'default': '900',
-                })
-                .accentPalette('orange', {
-                    'default': 'A700',
-                });
-
-            //$mdThemingProvider.setDefaultTheme('default');
-            //
-            //$mdThemingProvider.alwaysWatchTheme(true);
-        });
+    //angular.module('gamer')
+    //    .config(function($mdThemingProvider){
+    //        $mdThemingProvider.theme('gamer')
+    //            .primaryPalette('red', {
+    //                'default': '900',
+    //            })
+    //            .warnPalette('red', {
+    //                'default': '900',
+    //            })
+    //            .accentPalette('orange', {
+    //                'default': 'A700',
+    //            });
+    //
+    //        //$mdThemingProvider.setDefaultTheme('gamer');
+    //        //
+    //        //$mdThemingProvider.alwaysWatchTheme(true);
+    //    });
 
     //angular.module('brotherhood')
     //    .config(function($mdThemingProvider) {
