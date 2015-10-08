@@ -1,5 +1,6 @@
 angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor', '$rootScope', '$state', '$mdDialog',
     function($scope, $meteor, $rootScope, $state, $mdDialog){
+
     //$scope.parties = $meteor.collection(Parties, false);
 
     $scope.page = 1;

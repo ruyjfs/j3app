@@ -1,0 +1,17 @@
+<md-content class="md-padding" ng-repeat="project in projects">
+    <md-card>
+        <!--<img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">-->
+        <md-card-content>
+            <h2 class="md-title">{{project.name}}</h2>
+
+            <p>
+                The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+                two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+            </p>
+        </md-card-content>
+        <div class="md-actions" layout="row" layout-align="end center">
+            <md-button ng-href="{{project.link}}">Ir</md-button>
+        </div>
+    </md-card>
+    <br/>
+</md-content>

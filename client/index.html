@@ -1,54 +1,70 @@
 <head>
+    <!--<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.brown-deep_orange.min.css" />-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="/">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<!--<body>-->
-<!--&lt;!&ndash; No header, and the drawer stays open on larger screens (fixed drawer). &ndash;&gt;-->
-<!--&lt;!&ndash; Always shows a header, even in smaller screens. &ndash;&gt;-->
-<!--<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">-->
-    <!--<header class="mdl-layout__header">-->
-        <!--<div class="mdl-layout__header-row">-->
-            <!--&lt;!&ndash; Title &ndash;&gt;-->
-            <!--<span class="mdl-layout-title">meteor</span>-->
-            <!--&lt;!&ndash; Add spacer, to align navigation to the right &ndash;&gt;-->
-            <!--<div class="mdl-layout-spacer"></div>-->
-            <!--&lt;!&ndash; Navigation. We hide it in small screens. &ndash;&gt;-->
-            <!--<nav class="mdl-navigation mdl-layout--large-screen-only">-->
-                <!--&lt;!&ndash;<a class="mdl-navigation__link" href="/parties">Home</a>&ndash;&gt;-->
-            <!--</nav>-->
-        <!--</div>-->
-    <!--</header>-->
-    <!--<div class="mdl-layout__drawer">-->
-        <!--<span class="mdl-layout-title">meteor</span>-->
-        <!--<nav class="mdl-navigation">-->
-            <!--<a class="mdl-navigation__link" href="/parties">Home</a>-->
-        <!--</nav>-->
-    <!--</div>-->
-    <!--<main class="mdl-layout__content">-->
-        <!--<div class="page-content">-->
-            <!--<div>-->
-                <!--<blaze-template name="loginButtons"></blaze-template>-->
-                <!--<div ui-view></div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</main>-->
-<!--</div>-->
-<!--</body>-->
-
-
 <body layout="column">
-<md-toolbar md-scroll-shrink layout="row" layout-align="start center" layout-padding>
-    <h2>
-        <a ui-sref="parties"><span class="md-title">Socially</span></a>
-    </h2>
-    <span flex></span>
-    <div class="navbar-right navbar-text">
-        <md-button ng-href="/login" ng-hide="$root.currentUser">Login</md-button>
-        <md-button ng-href="/register" ng-hide="$root.currentUser">Sign up</md-button>
-        <div ng-show="$root.currentUser">{{ $root.currentUser }}</div>
-        <md-button ng-href="/logout" ng-show="$root.currentUser">Logout</md-button>
-    </div>
-</md-toolbar>
-<div ui-view flex-gt-sm layout-gt-sm="row"></div>
+<div ng-controller="ChatCtrl" layout="column" ng-cloak>
+    <md-toolbar md-scroll-shrink layout="row" layout-align="start center" layout-padding>
+        <h2>
+            <a ui-sref="brotherhood"><span class="md-title">brotherhood</span></a>
+        </h2>
+        <span flex></span>
+        <div class="navbar-right navbar-text">
+
+            <md-button ng-click="toggleLeft()"
+                       class="md-primary" hide-gt-md>
+                Toggle left
+            </md-button>
+            <md-button ng-click="toggleRight()"
+                       class="md-primary">
+                Toggle right
+            </md-button>
+            <md-button ng-href="/user/login" ng-hide="$root.currentUser">Login</md-button>
+            <md-button ng-href="/user/register" ng-hide="$root.currentUser">Sign up</md-button>
+            <div ng-show="$root.currentUser">{{ $root.currentUser }}</div>
+            <md-button ng-href="/user/logout" ng-show="$root.currentUser">Logout</md-button>
+        </div>
+    </md-toolbar>
+    <section layout="row" flex>
+        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+            <md-toolbar class="md-theme-indigo">
+                <h1 class="md-toolbar-tools">Sidenav Left</h1>
+            </md-toolbar>
+            <md-content layout-padding ng-controller="LeftCtrl">
+                <md-button ng-click="close()" class="md-primary" hide-gt-md>
+                    Close Sidenav Left
+                </md-button>
+                <p hide-md show-gt-md>
+                    This sidenav is locked open on your device. To go back to the default behavior,
+                    narrow your display.
+                </p>
+            </md-content>
+        </md-sidenav>
+        <md-content flex layout-padding>
+            <div layout="column" layout-fill layout-align="top center">
+                <div ui-view flex-gt-sm layout-gt-sm="row"></div>
+            </div>
+            <div flex></div>
+        </md-content>
+        <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+            <md-toolbar class="md-theme-light">
+                <h1 class="md-toolbar-tools">Sidenav Right</h1>
+            </md-toolbar>
+            <md-content ng-controller="RightCtrl" layout-padding>
+                <form>
+                    <md-input-container>
+                        <label for="testInput">Test input</label>
+                        <input type="text" id="testInput"
+                               ng-model="data" md-autofocus>
+                    </md-input-container>
+                </form>
+                <md-button ng-click="close()" class="md-primary">
+                    Close Sidenav Right
+                </md-button>
+            </md-content>
+        </md-sidenav>
+    </section>
+</div>
 </body>
