@@ -6,7 +6,8 @@ body {
     /*background-color: #212121;*/
 /*}*/
 
-.md-title, a{
-    /*color: #FFFFFF;*/
-    /*text-decoration: none;*/
+/*.md-title, */
+a{
+    color: #FFFFFF;
+    text-decoration: none;
  }

@@ -5,40 +5,50 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body layout="column">
-<div ng-controller="ChatCtrl" layout="column" ng-cloak>
+<div ng-controller="MenuCtrl" layout="column" ng-cloak>
     <md-toolbar md-scroll-shrink layout="row" layout-align="start center" layout-padding>
-        <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()"  hide-gt-md>
-            <md-icon md-svg-icon="navigation:ic_menu_24px"></md-icon>
+        <md-button class="md-icon-button" ng-click="toggleMenu()"  hide-gt-md>
+            <md-icon md-svg-icon="navigation:ic_menu_24px" aria-label="Menu"></md-icon>
         </md-button>
-        <h2>
+        <!--<h2>-->
             <a ui-sref="brotherhood"><span class="md-title">brotherhood</span></a>
-        </h2>
+           <!--<span class="md-title">brotherhood</span>-->
+        <!--</h2>-->
         <span flex></span>
         <div class="navbar-right navbar-text">
-            <md-button class="md-icon-button" ng-click="toggleRight()">
-                <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
-            </md-button>
             <md-button ng-href="/user/login" ng-hide="$root.currentUser">Login</md-button>
             <md-button ng-href="/user/register" ng-hide="$root.currentUser">Sign up</md-button>
             <div ng-show="$root.currentUser">{{ $root.currentUser }}</div>
-            <md-button ng-href="/user/logout" ng-show="$root.currentUser">
-                <md-icon md-svg-icon="action:ic_power_settings_new_24px"></md-icon>
-                Logout
-            </md-button>
+            <div hide-gt-md>
+                <md-button class="md-icon-button" ng-click="toggleContactList()" ng-show="$root.currentUser">
+                    <md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-href="/user/logout" ng-show="$root.currentUser" style="margin-bottom: -19px;">
+                    <md-icon md-svg-icon="action:ic_settings_power_24px" aria-label="Exit"></md-icon>
+                </md-button>
+            </div>
+            <div hide-md show-gt-md>
+                <md-button ng-click="toggleRight()" ng-show="$root.currentUser">
+                    <md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>
+                    Chat
+                </md-button>
+                <md-button ng-href="/user/logout" ng-show="$root.currentUser" style="margin-bottom: -12px;">
+                    <md-icon md-svg-icon="action:ic_settings_power_24px" aria-label="Exit"></md-icon>
+                    Exit
+                </md-button>
+            </div>
         </div>
     </md-toolbar>
     <section layout="row" flex>
-        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="menu" md-is-locked-open="$mdMedia('gt-md')">
             <md-toolbar class="md-theme-indigo">
-                <h1 class="md-toolbar-tools">Sidenav Left</h1>
+                <h1 class="md-toolbar-tools">Menu</h1>
             </md-toolbar>
             <md-content layout-padding ng-controller="LeftCtrl">
                 <md-button ng-click="close()" class="md-primary" hide-gt-md>
                     Close Sidenav Left
                 </md-button>
                 <p hide-md show-gt-md>
-                    This sidenav is locked open on your device. To go back to the default behavior,
-                    narrow your display.
                 </p>
             </md-content>
         </md-sidenav>
@@ -46,25 +56,18 @@
             <div layout="column" layout-fill layout-align="top center">
                 <div ui-view flex-gt-sm layout-gt-sm="row"></div>
             </div>
-            <div flex></div>
+            <!--<div flex></div>-->
         </md-content>
-        <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
-            <md-toolbar class="md-theme-light">
-                <h1 class="md-toolbar-tools">Sidenav Right</h1>
-            </md-toolbar>
-            <md-content ng-controller="RightCtrl" layout-padding>
-                <form>
-                    <md-input-container>
-                        <label for="testInput">Test input</label>
-                        <input type="text" id="testInput"
-                               ng-model="data" md-autofocus>
-                    </md-input-container>
-                </form>
-                <md-button ng-click="close()" class="md-primary">
-                    Close Sidenav Right
-                </md-button>
-            </md-content>
+
+        <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="chat">
+            <div ng-include="'client/module/user/views/chat.ng.html'"></div>
+        </md-sidenav>
+        <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="contact-list">
+            <div ng-include="'client/module/user/views/contact-list.ng.html'"></div>
         </md-sidenav>
     </section>
 </div>
+<!--<div  ng-app="brotherhood">-->
+
+<!--</div>-->
 </body>

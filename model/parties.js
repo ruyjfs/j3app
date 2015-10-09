@@ -11,7 +11,8 @@ Parties.allow({
         return userId && party.owner === userId;
     }
 });
-
+//yemiX6y3u7vnqpS3n
+//92okH9HNck243cdQ5
 Meteor.methods({
     invite: function (partyId, userId) {
         check(partyId, String);

@@ -1,0 +1,29 @@
+<div ng-controller="ContactCtrl">
+    <md-toolbar class="md-theme-light">
+        <div class="md-toolbar-tools">
+            <md-button ng-click="close()">
+                <md-icon md-svg-icon="communication:ic_contacts_24px" aria-label="Contact"></md-icon>
+                Contatos
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content ng-controller="RightCtrl" layout-padding>
+        <form>
+            <md-input-container>
+                <label for="testInput">Procurar amigo</label>
+                <input type="text" id="testInput" ng-model="data" md-autofocus>
+            </md-input-container>
+        </form>
+        <div>
+            <ul ng-repeat="user in users">
+                <li ng-click="toggleChat()">
+                    <md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>
+                    {{user.name}}
+                </li>
+            </ul>
+        </div>
+        <!--<md-button ng-click="close()" class="md-primary">-->
+        <!--Close Sidenav Right-->
+        <!--</md-button>-->
+    </md-content>
+</div>

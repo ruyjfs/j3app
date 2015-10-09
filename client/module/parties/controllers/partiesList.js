@@ -1,5 +1,27 @@
-angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor', '$rootScope', '$state', '$mdDialog',
-    function($scope, $meteor, $rootScope, $state, $mdDialog){
+angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor', '$rootScope', '$state', '$mdDialog', '$log',
+    function($scope, $meteor, $rootScope, $state, $mdDialog, $log){
+
+
+        //
+        $scope.parties = $meteor.collection(function() {
+            return Parties.find({});
+        });
+        $log.debug('parties 1');
+        $log.debug($scope.parties);
+        $scope.messages = $meteor.collection(function() {
+            return Messages.find({});
+        });
+        $log.debug('parties 2');
+        $log.debug($scope.messages);
+        //$log.debug($scope.parties[0]);
+
+
+
+
+
+
+
+
 
     //$scope.parties = $meteor.collection(Parties, false);
 
@@ -51,7 +73,7 @@ angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor', '
     $scope.openAddNewPartyModal = function(){
         $mdDialog.show({
             controller: 'AddNewPartyCtrl',
-            templateUrl: 'client/parties/views/add-new-party-modal.ng.html',
+            templateUrl: 'client/module/parties/views/add-new-party-modal.ng.html',
             clickOutsideToClose:true,
             resolve: {
                 parties: function () {
