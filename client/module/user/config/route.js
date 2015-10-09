@@ -15,7 +15,7 @@ angular.module('user').config(['$urlRouterProvider', '$stateProvider', '$locatio
         $stateProvider
             .state('user', {
                 url: '/user',
-                templateUrl: 'client/module/user/view/default.ng.html',
+                templateUrl: 'client/module/user/views/default.ng.html',
                 controller: 'DefaultCtrl'
             })
             .state('user/login', {

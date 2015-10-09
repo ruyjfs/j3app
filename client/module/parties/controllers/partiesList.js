@@ -1,26 +1,17 @@
 angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor', '$rootScope', '$state', '$mdDialog', '$log',
     function($scope, $meteor, $rootScope, $state, $mdDialog, $log){
 
-
-        //
         $scope.parties = $meteor.collection(function() {
             return Parties.find({});
         });
-        $log.debug('parties 1');
-        $log.debug($scope.parties);
-        $scope.messages = $meteor.collection(function() {
-            return Messages.find({});
-        });
-        $log.debug('parties 2');
-        $log.debug($scope.messages);
+        //$log.debug('parties 1');
+        //$log.debug($scope.parties);
+        //$scope.messages = $meteor.collection(function() {
+        //    return Messages.find({});
+        //});
+        //$log.debug('parties 2');
+        //$log.debug($scope.messages);
         //$log.debug($scope.parties[0]);
-
-
-
-
-
-
-
 
 
     //$scope.parties = $meteor.collection(Parties, false);

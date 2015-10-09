@@ -28,7 +28,7 @@
                 </md-button>
             </div>
             <div hide-md show-gt-md>
-                <md-button ng-click="toggleRight()" ng-show="$root.currentUser">
+                <md-button ng-click="toggleContactList()" ng-show="$root.currentUser">
                     <md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>
                     Chat
                 </md-button>
@@ -41,16 +41,7 @@
     </md-toolbar>
     <section layout="row" flex>
         <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="menu" md-is-locked-open="$mdMedia('gt-md')">
-            <md-toolbar class="md-theme-indigo">
-                <h1 class="md-toolbar-tools">Menu</h1>
-            </md-toolbar>
-            <md-content layout-padding ng-controller="LeftCtrl">
-                <md-button ng-click="close()" class="md-primary" hide-gt-md>
-                    Close Sidenav Left
-                </md-button>
-                <p hide-md show-gt-md>
-                </p>
-            </md-content>
+            <div ng-include="'client/module/user/views/menu-items.ng.html'"></div>
         </md-sidenav>
         <md-content flex layout-padding>
             <div layout="column" layout-fill layout-align="top center">

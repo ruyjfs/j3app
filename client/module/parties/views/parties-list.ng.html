@@ -4,12 +4,12 @@
             <div>
                 <div layout-padding layout="row">
                     <md-input-container style="width:50%;margin-right:10px;">
-                        <label>Search</label>
+                        <label>Procurar</label>
                         <input type="text" ng-model="search"/>
                     </md-input-container>
                     <md-select ng-model="orderProperty" placeholder="Sort Order" >
-                        <md-option value="1">Ascending</md-option>
-                        <md-option value="-1">Descending</md-option>
+                        <md-option value="1">Crescente</md-option>
+                        <md-option value="-1">Decrescente</md-option>
                     </md-select>
                     <md-button class="md-fab" aria-label="Eat cake" ng-click="openAddNewPartyModal()">
                         <md-icon md-font-set="material-icons primary"> add </md-icon>
@@ -17,43 +17,41 @@
                 </div>
             </div>
             <md-content class="md-padding" style="padding-top:0;">
-                <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+                <!--<dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>-->
                 <div  dir-paginate="party in parties | itemsPerPage: perPage" total-items="partiesCount.count" class="ma-party">
                     <md-card>
                         <md-card-content>
                             <h2 class="md-title ma-name" style=""><a href="/parties/{{party._id}}">{{party.name}}</a></h2>
                             <p class="ma-description" style="padding:0 10px;margin-bottom:35px;margin-top: 6px;">{{party.description}}</p>
-
-
                             <div layout="row">
                                 <div flex="1">
                                     <p style="margin-top:0px;margin-bottom:3px;font-size:14px;color:#aaa;">
                                         <small>Posted by {{ creator(party) | displayName }}</small>
-                                        <span ng-if="party.public" style="font-size:12px;color:#999;">| Everyone is invited</span>
+                                        <span ng-if="party.public" style="font-size:12px;color:#999;">| Todo mundo foi convidade</span>
                                     </p>
 
                                     <div ng-show="$root.currentUser" class="md-actions" layout="row">
-                                        <md-button ng-click="rsvp(party._id, 'yes')">I'm going!</md-button>
-                                        <md-button ng-click="rsvp(party._id, 'maybe')">Maybe</md-button>
-                                        <md-button ng-click="rsvp(party._id, 'no')">No</md-button>
+                                        <md-button ng-click="rsvp(party._id, 'yes')">Eu vou</md-button>
+                                        <md-button ng-click="rsvp(party._id, 'maybe')">Talvez</md-button>
+                                        <md-button ng-click="rsvp(party._id, 'no')">Não</md-button>
                                     </div>
                                 </div>
                                 <div  layout="row" layout-align="end end">
                                     <div ng-hide="$root.currentUser" style="font-size:13px;margin-bottom:10px;">
-                                        Sign in to RSVP for this party
+                                        Entre no RSVP para este evento
                                     </div>
                                     <div>
                                         <div class="rsvps-sum">
                                             <div class="rsvps-amount">{{ (party.rsvps | filter:{rsvp:'yes'}).length || "0" }}</div>
-                                            <div class="rsvps-title">Yes</div>
+                                            <div class="rsvps-title">Sim</div>
                                         </div>
                                         <div class="rsvps-sum">
                                             <div class="rsvps-amount">{{ (party.rsvps | filter:{rsvp:'maybe'}).length || "0" }}</div>
-                                            <div class="rsvps-title">Maybe</div>
+                                            <div class="rsvps-title">Talvez</div>
                                         </div>
                                         <div class="rsvps-sum">
                                             <div class="rsvps-amount">{{ (party.rsvps | filter:{rsvp:'no'}).length || "0" }}</div>
-                                            <div class="rsvps-title">No</div>
+                                            <div class="rsvps-title">Não</div>
                                         </div>
                                     </div>
                                 </div>

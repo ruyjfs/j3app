@@ -35,6 +35,24 @@ if (Meteor.isClient) {
     //
     angular.module('user').config(themeIcons);
 
+    //angular.module('user')
+    //.config(function($mdThemingProvider){
+    //    $mdThemingProvider.theme('default')
+    //        //.dark()
+    //        .primaryPalette('grey', {
+    //            'default': '900',
+    //        })
+    //        .warnPalette('red', {
+    //            'default': '900',
+    //        })
+    //        .accentPalette('orange', {
+    //            'default': 'A700',
+    //        });
+    //
+    //$mdThemingProvider.setDefaultTheme('default');
+    //$mdThemingProvider.alwaysWatchTheme(true);
+    //});
+
 
     //var themeIcons = ['$mdIconProvider' , function ($mdIconProvider) {
 

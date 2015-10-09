@@ -9,14 +9,14 @@ Messages.allow({
         //return userId && party.owner === userId;
         return userId;
     },
-    remove: function (userId, party) {a
+    remove: function (userId, party) {
         //return userId && party.owner === userId;
         return userId;
     }
 });
 //yemiX6y3u7vnqpS3n
 //92okH9HNck243cdQ5
-Meteor.methods({
+//Meteor.methods({
     //invite: function (partyId, userId) {
     //    check(partyId, String);
     //    check(userId, String);
@@ -90,7 +90,7 @@ Meteor.methods({
     //            {$push: {rsvps: {user: this.userId, rsvp: rsvp}}});
     //    }
     //}
-});
+//});
 
 //var contactEmail = function (user) {
 //    if (user.emails && user.emails.length)

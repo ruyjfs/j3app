@@ -12,6 +12,7 @@ angular.module('user').controller('MenuCtrl', [ '$scope', '$timeout', '$mdSidena
     $scope.toggleMenu = buildToggler('menu');
     $scope.toggleContactList = buildToggler('contact-list');
     $scope.toggleChat = buildToggler('chat');
+
     /**
      * Build handler to open/close a SideNav; when animation finishes
      * report completion in console
@@ -36,26 +37,28 @@ angular.module('user').controller('MenuCtrl', [ '$scope', '$timeout', '$mdSidena
         }, 200);
         return debounceFn;
     }
+}]);
 
 
-}]).controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, $log) {
-    $scope.close = function () {
-        $mdSidenav('left').close()
-            .then(function () {
-                $log.debug("close LEFT is done");
-            });
-    };
-}).controller('RightCtrl', function ($scope, $timeout, $mdSidenav, $log, $meteor) {
-    $scope.close = function () {
-        $mdSidenav('right').close()
-            .then(function () {
-                $log.debug("close RIGHT is done");
-            });
-    };
-
-    //$scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
-    //$log.debug($scope.users[0]);
-    //$scope.teste = 'teste 2';
-    //$log.debug($scope.teste);
-    //this.ae = ' asdasd';
-});
+//.controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+//    $scope.close = function () {
+//        $mdSidenav('left').close()
+//            .then(function () {
+//                $log.debug("close LEFT is done");
+//            });
+//    };
+//})
+//.controller('RightCtrl', function ($scope, $timeout, $mdSidenav, $log, $meteor) {
+//    $scope.close = function () {
+//        $mdSidenav('right').close()
+//            .then(function () {
+//                $log.debug("close RIGHT is done");
+//            });
+//    };
+//
+//    //$scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
+//    //$log.debug($scope.users[0]);
+//    //$scope.teste = 'teste 2';
+//    //$log.debug($scope.teste);
+//    //this.ae = ' asdasd';
+//})

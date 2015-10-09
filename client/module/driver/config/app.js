@@ -1,11 +1,11 @@
-//if (Meteor.isClient) {
-//    angular.module('driver',[
-//        'angular-meteor',
-//        'ui.router',
-//        'angularUtils.directives.dirPagination',
-//        'uiGmapgoogle-maps',
-//        'ngMaterial'
-//    ]);
+if (Meteor.isClient) {
+    angular.module('driver',[
+        'angular-meteor',
+        'ui.router',
+        'angularUtils.directives.dirPagination',
+        'uiGmapgoogle-maps',
+        'ngMaterial'
+    ]);
 //
 //
 //    //angular.module('driver')
@@ -51,4 +51,4 @@
 //
 //    //$mdThemingProvider.alwaysWatchTheme(true);
 //
-//}
+}

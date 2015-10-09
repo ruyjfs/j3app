@@ -9,7 +9,7 @@ angular.module("brotherhood").controller("DefaultCtrl", ['$scope', '$meteor', '$
             },
             {
                 'name': 'j3gamer',
-                'description': 'Uma biblíoteca incrível de jogos.as asd as dasd asd asd asdasdas dasd as ',
+                'description': 'Uma biblioteca incrÃ­vel de jogos.as asd as dasd asd asd asdasdas dasd as ',
                 'link': '/gamer'
             },
             {
@@ -18,8 +18,6 @@ angular.module("brotherhood").controller("DefaultCtrl", ['$scope', '$meteor', '$
                 'link': '/driver'
             }
         ];
-
-
 
         //alert('teste');
         ////$scope.parties = $meteor.collection(Parties, false);

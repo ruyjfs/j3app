@@ -14,9 +14,10 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
             }
         }
 
-        $scope.messages = $meteor.collection(function() {
-            return Messages.find({});
-        });
+        //$scope.messages = $meteor.collection(function() {
+        //    return Messages.find({});
+        //});
+        $scope.messages = $meteor.collection(Messages, false).subscribe('messages');
         $log.debug('parties 2');
         $log.debug($scope.messages);
         //$log.debug($scope.messages[0]);

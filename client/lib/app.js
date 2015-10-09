@@ -4,11 +4,11 @@ if (Meteor.isClient) {
         angular.bootstrap(document,
             [
                 'user',
-                'brotherhood',
-                //'scrum',
-                //'gamer',
-                //'driver',
-                'socially'
+                'scrum',
+                'gamer',
+                'driver',
+                'socially',
+                'brotherhood'
             ]);
     }
     //

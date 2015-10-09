@@ -1,7 +1,7 @@
 Meteor.publish("messages", function (options, searchString) {
 
 
-    return Meteor.messages.find({});
+    return Messages.find({});
 
     //if (searchString == null)
     //    searchString = '';

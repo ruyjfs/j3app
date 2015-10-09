@@ -7,7 +7,7 @@
             </md-button>
         </div>
     </md-toolbar>
-    <md-content ng-controller="RightCtrl" layout-padding>
+    <md-content layout-padding>
         <form>
             <md-input-container>
                 <label for="testInput">Procurar amigo</label>
@@ -15,12 +15,16 @@
             </md-input-container>
         </form>
         <div>
-            <ul ng-repeat="user in users">
-                <li ng-click="toggleChat()">
+            <md-list ng-cloak>
+                <!--<md-divider></md-divider>-->
+                <!--<md-subheader class="md-no-sticky">Avatar with Secondary Action Icon</md-subheader>-->
+                <md-list-item ng-repeat="user in users" ng-click="toggleChat()">
+                    <img alt="" ng-src="" class="md-avatar" />
+                    <p>{{user.emails[0].address}}</p>
+                    <!--<md-icon md-svg-icon="communication:messenger" ng-click="doSecondaryAction($event)" aria-label="Open Chat" class="md-secondary md-hue-3" ng-class="{'md-primary': person.newMessage}"></md-icon>-->
                     <md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>
-                    {{user.name}}
-                </li>
-            </ul>
+                </md-list-item>
+            </md-list>
         </div>
         <!--<md-button ng-click="close()" class="md-primary">-->
         <!--Close Sidenav Right-->
