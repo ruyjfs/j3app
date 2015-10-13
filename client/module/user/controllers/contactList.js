@@ -12,7 +12,7 @@ angular.module('user').controller('ContactCtrl', [ '$scope', '$timeout', '$mdSid
     $scope.close = function () {
         $mdSidenav('contact-list').close()
             .then(function () {
-                $log.debug("close CONTACT is done");
+                $log.debug("close CONTACTss is done");
             });
     };
 

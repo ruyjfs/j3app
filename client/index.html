@@ -5,43 +5,11 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body layout="column">
-<div ng-controller="MenuCtrl" layout="column" ng-cloak>
-    <md-toolbar md-scroll-shrink layout="row" layout-align="start center" layout-padding>
-        <md-button class="md-icon-button" ng-click="toggleMenu()"  hide-gt-md>
-            <md-icon md-svg-icon="navigation:ic_menu_24px" aria-label="Menu"></md-icon>
-        </md-button>
-        <!--<h2>-->
-            <a ui-sref="brotherhood"><span class="md-title">brotherhood</span></a>
-           <!--<span class="md-title">brotherhood</span>-->
-        <!--</h2>-->
-        <span flex></span>
-        <div class="navbar-right navbar-text">
-            <md-button ng-href="/user/login" ng-hide="$root.currentUser">Login</md-button>
-            <md-button ng-href="/user/register" ng-hide="$root.currentUser">Sign up</md-button>
-            <div ng-show="$root.currentUser">{{ $root.currentUser }}</div>
-            <div hide-gt-md>
-                <md-button class="md-icon-button" ng-click="toggleContactList()" ng-show="$root.currentUser">
-                    <md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>
-                </md-button>
-                <md-button class="md-icon-button" ng-href="/user/logout" ng-show="$root.currentUser" style="margin-bottom: -19px;">
-                    <md-icon md-svg-icon="action:ic_settings_power_24px" aria-label="Exit"></md-icon>
-                </md-button>
-            </div>
-            <div hide-md show-gt-md>
-                <md-button ng-click="toggleContactList()" ng-show="$root.currentUser">
-                    <md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>
-                    Chat
-                </md-button>
-                <md-button ng-href="/user/logout" ng-show="$root.currentUser" style="margin-bottom: -12px;">
-                    <md-icon md-svg-icon="action:ic_settings_power_24px" aria-label="Exit"></md-icon>
-                    Exit
-                </md-button>
-            </div>
-        </div>
-    </md-toolbar>
+<div ng-controller="ToolbarCtrl" layout="column" ng-cloak>
+    <div ng-include="'client/module/admin/view/toolbar.ng.html'"></div>
     <section layout="row" flex>
         <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="menu" md-is-locked-open="$mdMedia('gt-md')">
-            <div ng-include="'client/module/user/views/menu-items.ng.html'"></div>
+            <div ng-include="'client/module/admin/view/menu-items.ng.html'"></div>
         </md-sidenav>
         <md-content flex layout-padding>
             <div layout="column" layout-fill layout-align="top center">

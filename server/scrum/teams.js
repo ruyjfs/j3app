@@ -1,5 +1,5 @@
 //Meteor.publish("messages", function (friendId) {
-Meteor.publish("messages", function (limit) {
+Meteor.publish("teams", function (limit) {
 //    Messages.cancel();
 
     if (limit) {
@@ -8,7 +8,7 @@ Meteor.publish("messages", function (limit) {
         limit = {};
     }
 
-    result = Messages.find({
+    result = Teams.find({
         //'owner' : $rootScope.currentUser._id,
         //'owner': this.userId,
         //'friendId': friendId

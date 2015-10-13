@@ -1,5 +1,5 @@
-Messages = new Mongo.Collection("messages");
-Messages.allow({
+Teams = new Mongo.Collection("teams");
+Teams.allow({
     insert: function (userId) {
         //return userId && party.owner === userId;
         return userId;

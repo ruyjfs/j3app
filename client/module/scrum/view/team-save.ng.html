@@ -1,0 +1,50 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2> Save</h2>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="min-width:300px;max-width:800px;max-height:810px; ">
+            <div  ng-show="$root.currentUser">
+                <md-input-container>
+                    <label>Name</label>
+                    <input ng-model="teamForm.name" id="nameInput" type="text" aria-label="Name" required>
+                </md-input-container>
+                <md-input-container>
+                    <label>Time per member</label>
+                    <md-select ng-model="teamForm.time" id="time" aria-label=""  placeholder="Select" required>
+                        <md-option  ng-repeat="time in times" value="{{time}}">
+                            {{time}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container>
+                    <label>Members</label>
+                    <md-select ng-model="teamForm.members" id="members" aria-label=""  placeholder="Select" multiple="true" required>
+                        <md-option  ng-repeat="member in members" value="{{member._id}}">
+                            {{member.name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container>
+                    <label>Description</label>
+                    <textarea ng-model="teamForm.description" id="description" aria-label="Description"></textarea>
+                </md-input-container>
+                <!--<md-checkbox ng-model="newParty.public" id="public" aria-label="Public">-->
+                    <!--Public-->
+                <!--</md-checkbox>-->
+            </div>
+        </md-dialog-content>
+    </form>
+    <div class="md-actions" layout="row">
+        <span flex></span>
+        <md-button class="primary" ng-click="close()">
+            Cancel
+        </md-button>
+        <md-button class="primary" ng-click="save()">
+            Save
+        </md-button>
+    </div>
+</md-dialog>

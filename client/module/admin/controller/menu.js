@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('user').controller('MenuCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor) {
+angular.module('admin').controller('MenuCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$meteor', '$rootScope',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $meteor, $rootScope) {
 
     //$scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
     //$scope.teste = 'teste 1';
@@ -9,34 +9,34 @@ angular.module('user').controller('MenuCtrl', [ '$scope', '$timeout', '$mdSidena
     //$log.debug($scope.teste);
 
     //$scope.root = $root;
-    $scope.toggleMenu = buildToggler('menu');
-    $scope.toggleContactList = buildToggler('contact-list');
-    $scope.toggleChat = buildToggler('chat');
+    //$scope.toggleChat = buildToggler('chat');
+
+
+    //$mdSidenav('menu')
+    //    .then(function () {
+    //        //$scope.teste = 'AEEEEEEEEEEEE';
+    //        //$scope.messages = $meteor.collection(Messages, false).subscribe('messages');
+    //        $log.debug('hahahaah');
+    //    });
+    //$scope.nameModule = 'Brotherhood';
+
 
     /**
      * Build handler to open/close a SideNav; when animation finishes
      * report completion in console
      */
-    function buildToggler(navID) {
-        var debounceFn = $mdUtil.debounce(function () {
-            $mdSidenav(navID)
-                .toggle()
-                .then(function () {
-                    $log.debug("toggle " + navID + " is done");
-                });
-
-            if (navID == 'chat') {
-                $mdSidenav('contact-list').close()
-                    .then(function () {
-                        //$scope.teste = 'AEEEEEEEEEEEE';
-                        //$log.debug('asdsd');
-                    });
-            }
-
-
-        }, 200);
-        return debounceFn;
-    }
+    //function buildToggler(navID) {
+    //    var debounceFn = $mdUtil.debounce(function () {
+    //        $mdSidenav(navID)
+    //            .toggle()
+    //            .then(function () {
+    //                $log.debug("toggle " + navID + " is done");
+    //                //$scope.messages = [];
+    //                //console.info('ENTROU MANO')
+    //            });
+    //    }, 200);
+    //    return debounceFn;
+    //}
 }]);
 
 

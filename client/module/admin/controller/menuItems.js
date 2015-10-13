@@ -1,8 +1,12 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('user').controller('MenuItemsCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope',
+angular.module('admin').controller('MenuItemsCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope',
     function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope) {
         $scope.menuItems = [
+            {
+                name: 'Admin',
+                link: '/admin',
+            },
             {
                 name: 'Brotherhood',
                 link: '/brotherhood',
@@ -26,7 +30,7 @@ angular.module('user').controller('MenuItemsCtrl', [ '$scope', '$timeout', '$mdS
             {
                 name: 'Eventos',
                 link: '/parties',
-            }
+            },
         ];
     }
 ]);

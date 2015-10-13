@@ -8,7 +8,7 @@
         <!--</md-button>-->
         <md-menu>
             <md-menu-item ng-repeat="menuItem in menuItems">
-                <md-button ng-href="{{menuItem.link}}">
+                <md-button ng-click="redirect(menuItem.link)">
                     <!--<md-icon md-svg-icon="call:dialpad" md-menu-align-target></md-icon>-->
                     {{menuItem.name}}
                 </md-button>

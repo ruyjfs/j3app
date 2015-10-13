@@ -1,0 +1,45 @@
+<md-toolbar layout="row" layout-align="start center" layout-padding>
+    <!--<md-toolbar md-scroll-shrink layout="row" layout-align="start center" style="position: fixed;"  layout-padding>-->
+    <!--<md-toolbar  md-scroll-shrink ng-if="true" layout-align="start center" layout-padding style="position: fixed;">-->
+    <md-button class="md-icon-button" ng-click="toggleMenu()"  hide-gt-md>
+        <md-icon md-svg-icon="navigation:ic_menu_24px" aria-label="Menu"></md-icon>
+    </md-button>
+    <!--<md-toolbar class="md-theme-indigo">-->
+    <!--Brotherhood-->
+    <!--</md-toolbar>-->
+    <!--<h2>-->
+    <!--<a ui-sref="brotherhood"><span class="md-title">brotherhood</span></a>-->
+    <span class="md-title" style="text-transform: capitalize;">{{title}}</span>
+    <!--</h2>-->
+    <!--<a ui-sref="brotherhood"><span class="md-title">brotherhood</span></a>-->
+    <!--<md-toolbar class="md-theme-indigo">-->
+    <!--<h1 class="md-toolbar-tools">Brotherhood</h1>-->
+    <!--<span class="md-title"><a ui-sref="brotherhood" class="md-toolbar-tools">brotherhood</a></span>-->
+
+    <!--teste-->
+    <!--</md-toolbar>-->
+    <span flex></span>
+    <div class="navbar-right navbar-text">
+        <md-button ng-href="/user/login" ng-hide="$root.currentUser">Login</md-button>
+        <md-button ng-href="/user/register" ng-hide="$root.currentUser">Sign up</md-button>
+        <!--<div ng-show="$root.currentUser">{{ $root.currentUser.name }}</div>-->
+        <div hide-gt-md>
+            <md-button class="md-icon-button" ng-click="toggleContactList()" ng-show="$root.currentUser">
+                <md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" ng-href="/user/logout" ng-show="$root.currentUser" style="margin-bottom: -19px;">
+                <md-icon md-svg-icon="action:ic_settings_power_24px" aria-label="Exit"></md-icon>
+            </md-button>
+        </div>
+        <div hide-md show-gt-md>
+            <md-button ng-click="toggleContactList()" ng-show="$root.currentUser">
+                <md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>
+                Chat
+            </md-button>
+            <md-button ng-href="/user/logout" ng-show="$root.currentUser" style="margin-bottom: -12px;">
+                <md-icon md-svg-icon="action:ic_settings_power_24px" aria-label="Exit"></md-icon>
+                Exit
+            </md-button>
+        </div>
+    </div>
+</md-toolbar>

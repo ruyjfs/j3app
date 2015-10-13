@@ -8,22 +8,59 @@
         </div>
     </md-toolbar>
     <md-content layout-padding>
+        <!--<md-list>-->
+            <!--<md-list-item class="md-whiteframe-2dp md-2-line" ng-repeat="message in messages" >-->
+                <!--&lt;!&ndash;<img ng-src="" class="face" alt="">&ndash;&gt;-->
+                <!--<div class="md-list-item-text" style="text-align:{{getMessageAlign(message)}}">-->
+                    <!--<h3>{{message.text}}</h3>-->
+                    <!--&lt;!&ndash;<h4>tasd asdasd</h4>&ndash;&gt;-->
+                    <!--<p>{{getOwnerMessage(message)}}</p>-->
+                <!--</div>-->
+                <!--&lt;!&ndash;<md-divider md-inset></md-divider>&ndash;&gt;-->
+            <!--</md-list-item>-->
+        <!--</md-list>-->
+        <!--<md-card ng-repeat="message in messages"  style="text-align:{{getMessageAlign(message)}}">-->
+            <!--<md-card-content>-->
+                <!--<h3>{{message.text}}</h3>-->
+                <!--<p>{{getOwnerMessage(message)}}</p>-->
+            <!--</md-card-content>-->
+        <!--</md-card>-->
         <div>
-            <ul>
-                <li ng-repeat="message in messages">
-                    <p>{{message.text}}</p>
-                </li>
-            </ul>
+            <!--<ul>-->
+                <!--<li ng-repeat="message in messages" class="text-right md-whiteframe-11dp"  style="-->
+                    <!--margin: 0px;-->
+                    <!--padding: 1px 15px 1px 15px;-->
+                    <!--text-align:{{getMessageAlign(message)}}">-->
+                    <!--<p>{{message.text}}</p>-->
+                    <!--<p><b>{{getOwnerMessage(message)}}</b></p>-->
+                <!--</li>-->
+            <!--</ul>-->
+            <div ng-repeat="message in messages" class="text-right md-whiteframe-2dp"  style="{{getMessageStyle(message)}};">
+                <p>
+                    {{message.text}}
+                </p>
+                <p style="color:rgba(0,0,0,0.54);">
+                    {{getOwnerMessage(message)}}
+                </p>
+            </div>
         </div>
-        <form>
-            <md-input-container>
-                <label for="testInput">Message</label>
-                <input ng-model="newMessage.text" id="text" type="text" aria-label="Text"  md-autofocus>
-            </md-input-container>
-            <md-input-container>
-                <md-button ng-click="addNewMessage()" class="md-raised md-primary">Enviar</md-button>
-            </md-input-container>
-        </form>
+        <br />
+        <!--<md-divider></md-divider>-->
+        <div>
+            <form>
+                <md-input-container>
+                    <label for="testInput">Enter message...</label>
+                    <input ng-keydown="typing(this)" ng-model="newMessage.text" id="text" type="text" aria-label="Text"  md-autofocus>
+                    <!--<textarea ng-keyup="typing($event)" ng-model="newMessage.text" id="text" md-autofocus></textarea>-->
+                </md-input-container>
+                <md-input-container>
+                    <md-button ng-click="addNewMessage()" class="md-raised md-primary" id="buttonSend">
+                        <md-icon md-svg-icon="content:ic_send_24px" aria-label="Send"></md-icon>
+                        Send
+                    </md-button>
+                </md-input-container>
+            </form>
+        </div>
         <!--<md-button ng-click="close()" class="md-primary">-->
         <!--Close Sidenav Right-->
         <!--</md-button>-->
