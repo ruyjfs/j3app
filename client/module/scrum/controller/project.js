@@ -1,13 +1,12 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope',
+angular.module('scrum').controller('ProjectCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope',
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $meteor, $rootScope) {
         //$scope.title = 'Scrum';
 
-        $scope.test = 'HAHAHAHAA';
-        $meteor.subscribe('team');
-        $scope.team = $meteor.collection( function() {
-            return Team.find(
+        $meteor.subscribe('project');
+        $scope.projects = $meteor.collection( function() {
+            return Project.find(
                 {
                     //$or: [
                     //    {
@@ -36,7 +35,7 @@ angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdSide
             //    .targetEvent(ev)
 
             $mdDialog.show({
-                controller: 'TeamSaveCtrl',
+                controller: 'ProjectSaveCtrl',
                 templateUrl: 'client/module/scrum/view/team-save.ng.html',
                 clickOutsideToClose:true,
                 resolve: {

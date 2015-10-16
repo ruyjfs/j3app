@@ -1,5 +1,5 @@
-Teams = new Mongo.Collection("teams");
-Teams.allow({
+Project = new Mongo.Collection("project");
+Project.allow({
     insert: function (userId) {
         //return userId && party.owner === userId;
         return userId;
