@@ -1,13 +1,13 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope',
+angular.module('scrum').controller('StatusCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope',
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $meteor, $rootScope) {
         //$scope.title = 'Scrum';
 
         $scope.test = 'HAHAHAHAA';
-        $meteor.subscribe('team');
-        $scope.teams = $meteor.collection( function() {
-            return Team.find(
+        $meteor.subscribe('status');
+        $scope.states = $meteor.collection( function() {
+            return Status.find(
                 {
                     //$or: [
                     //    {
@@ -24,7 +24,7 @@ angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdSide
             );
         });
 
-        $scope.modalSave = function(ev, id){
+        $scope.modalSave = function(ev){
             //$mdDialog.alert()
             //    .parent(angular.element(document.querySelector('#popupContainer')))
             //    .clickOutsideToClose(true)
@@ -35,8 +35,8 @@ angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdSide
             //    .targetEvent(ev)
 
             $mdDialog.show({
-                controller: 'TeamSaveCtrl',
-                templateUrl: 'client/module/scrum/view/team-save.ng.html',
+                controller: 'StatusSaveCtrl',
+                templateUrl: 'client/module/scrum/view/status-save.ng.html',
                 clickOutsideToClose:true,
                 resolve: {
                     //parties: function () {

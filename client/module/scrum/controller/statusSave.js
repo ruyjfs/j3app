@@ -1,13 +1,10 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('ProjectSaveCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$mdDialog',
+angular.module('scrum').controller('StatusSaveCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$mdDialog',
     function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, $mdDialog) {
-        $scope.title = 'Project';
-
-
         //$scope.teams = $meteor.collection(Meteor.team, false).subscribe('team');
-        $scope.teams = $meteor.collection( function() {
-            return Team.find(
+        $scope.projects = $meteor.collection( function() {
+            return Project.find(
                 {
                     //$or: [
                     //    {
@@ -23,12 +20,6 @@ angular.module('scrum').controller('ProjectSaveCtrl', [ '$scope', '$timeout', '$
                 }
             );
         });
-        $scope.weeks = [
-            1,
-            2,
-            3,
-            4
-        ];
 
         $scope.form = {};
         $scope.save = function () {
@@ -40,7 +31,7 @@ angular.module('scrum').controller('ProjectSaveCtrl', [ '$scope', '$timeout', '$
                 //    }
                 //];
                 //teams.push($scope.teamForm);
-                Project.insert($scope.form);
+                Status.insert($scope.form);
                 $scope.form = '';
                 $mdDialog.hide();
             }

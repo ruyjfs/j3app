@@ -36,7 +36,7 @@ angular.module('scrum').controller('ProjectCtrl', [ '$scope', '$mdDialog', '$mdS
 
             $mdDialog.show({
                 controller: 'ProjectSaveCtrl',
-                templateUrl: 'client/module/scrum/view/team-save.ng.html',
+                templateUrl: 'client/module/scrum/view/project-save.ng.html',
                 clickOutsideToClose:true,
                 resolve: {
                     //parties: function () {

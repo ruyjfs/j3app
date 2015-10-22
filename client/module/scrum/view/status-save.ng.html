@@ -7,30 +7,21 @@
             </div>
         </md-toolbar>
         <md-dialog-content style="min-width:300px;max-width:800px;max-height:810px; ">
-            <div ng-show="$root.currentUser">
+            <div  ng-show="$root.currentUser">
                 <md-input-container>
                     <label>Name</label>
                     <input ng-model="form.name" id="nameInput" type="text" aria-label="Name" required>
                 </md-input-container>
                 <md-input-container>
-                    <label>Week</label>
-                    <md-select ng-model="form.week" id="week" aria-label=""  placeholder="Week" required>
-                        <md-option  ng-repeat="week in weeks" value="{{week}}">
-                            {{week}}
+                    <md-select ng-model="form.project" id="time" aria-label=""  placeholder="Project" required>
+                        <md-option  ng-repeat="project in projects" value="{{project._id}}">
+                            {{project.name}}
                         </md-option>
                     </md-select>
                 </md-input-container>
                 <md-input-container>
-                    <label>Color</label>
-                    <input ng-model="form.color" id="color" type="color" aria-label="Name" required>
-                </md-input-container>
-                <md-input-container>
-                    <label>Team</label>
-                    <md-select ng-model="form.teams" id="teams" aria-label=""  placeholder="Team" multiple="true" required>
-                        <md-option  ng-repeat="team in teams" value="{{team._id}}">
-                            {{team.name}}
-                        </md-option>
-                    </md-select>
+                    <label>Order</label>
+                    <input ng-model="form.order" id="order" type="number" aria-label="Name" required>
                 </md-input-container>
                 <md-input-container>
                     <label>Description</label>

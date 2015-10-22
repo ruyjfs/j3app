@@ -13,7 +13,8 @@ angular.module('scrum').controller('TeamSaveCtrl', [ '$scope', '$timeout', '$mdS
             5,
             6,
             7,
-            8
+            8,
+            9
         ];
 
 console.log($scope.members);
@@ -27,7 +28,7 @@ console.log($scope.members);
                 //    }
                 //];
                 //teams.push($scope.teamForm);
-                Teams.insert($scope.teamForm);
+                Team.insert($scope.teamForm);
                 $scope.teamForm = '';
                 $mdDialog.hide();
             }

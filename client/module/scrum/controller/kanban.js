@@ -5,8 +5,8 @@ angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdSide
         //$scope.title = 'Scrum';
 
         $scope.test = 'HAHAHAHAA';
-        $meteor.subscribe('teams');
-        $scope.teams = $meteor.collection( function() {
+        $meteor.subscribe('team');
+        $scope.team = $meteor.collection( function() {
             return Teams.find(
                 {
                     //$or: [
