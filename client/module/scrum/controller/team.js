@@ -24,6 +24,10 @@ angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdSide
             );
         });
 
+        $scope.remove = function(team) {
+            $scope.teams.remove(team);
+        }
+
         $scope.modalSave = function(ev, id){
             //$mdDialog.alert()
             //    .parent(angular.element(document.querySelector('#popupContainer')))
@@ -38,10 +42,8 @@ angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdSide
                 controller: 'TeamSaveCtrl',
                 templateUrl: 'client/module/scrum/view/team-save.ng.html',
                 clickOutsideToClose:true,
-                resolve: {
-                    //parties: function () {
-                    //    return $scope.parties;
-                    //}
+                locals : {
+                    id: id
                 },
                 targetEvent: ev
             }).then(function(answer) {

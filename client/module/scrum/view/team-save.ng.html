@@ -11,10 +11,13 @@
                 <md-input-container>
                     <label>Name</label>
                     <input ng-model="teamForm.name" id="nameInput" type="text" aria-label="Name" required>
+                    <!--<div ng-messages="teamForm.name.$error">-->
+                        <!--<div ng-message="required">required</div>-->
+                    <!--</div>-->
                 </md-input-container>
                 <md-input-container>
                     <label>Time per member</label>
-                    <md-select ng-model="teamForm.time" id="time" aria-label=""  placeholder="Select" required>
+                    <md-select ng-model="teamForm.time" id="time" aria-label=""  placeholder="Time per member" required>
                         <md-option  ng-repeat="time in times" value="{{time}}">
                             {{time}}
                         </md-option>
@@ -22,7 +25,7 @@
                 </md-input-container>
                 <md-input-container>
                     <label>Members</label>
-                    <md-select ng-model="teamForm.members" id="members" aria-label=""  placeholder="Select" multiple="true" required>
+                    <md-select ng-model="teamForm.members" id="members" aria-label=""  placeholder="Members" multiple="true" required>
                         <md-option  ng-repeat="member in members" value="{{member._id}}">
                             {{member.name}}
                         </md-option>

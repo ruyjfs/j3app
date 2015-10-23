@@ -22,26 +22,18 @@ angular.module('scrum').controller('ProjectCtrl', [ '$scope', '$mdDialog', '$mdS
                 }
             );
         });
-        $scope.modalSave = function(ev){
-            console.log('asd');
 
-            //$mdDialog.alert()
-            //    .parent(angular.element(document.querySelector('#popupContainer')))
-            //    .clickOutsideToClose(true)
-            //    .title('This is an alert title')
-            //    .content('You can specify some description text in here.')
-            //    .ariaLabel('Alert Dialog Demo')
-            //    .ok('Got it!')
-            //    .targetEvent(ev)
+        $scope.remove = function(id) {
+            $scope.projects.remove(id);
+        }
 
+        $scope.modalSave = function(ev, id){
             $mdDialog.show({
                 controller: 'ProjectSaveCtrl',
                 templateUrl: 'client/module/scrum/view/project-save.ng.html',
                 clickOutsideToClose:true,
-                resolve: {
-                    //parties: function () {
-                    //    return $scope.parties;
-                    //}
+                locals : {
+                    id: id
                 },
                 targetEvent: ev
             }).then(function(answer) {

@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('ProjectSaveCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$mdDialog',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, $mdDialog) {
+angular.module('scrum').controller('ProjectSaveCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$mdDialog', 'id',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, $mdDialog, id) {
         $scope.title = 'Project';
 
 
@@ -30,17 +30,20 @@ angular.module('scrum').controller('ProjectSaveCtrl', [ '$scope', '$timeout', '$
             4
         ];
 
-        $scope.form = {};
+        if (id) {
+            $scope.form = $meteor.object(Project, id, false);
+        } else {
+            $scope.form = {};
+        }
+
         $scope.save = function () {
             if($scope.form.name){
-                //$scope.teamForm.members = [
-                //    {
-                //        'userId' : $rootScope.currentUser._id,
-                //        'perfil' : 'Admin'
-                //    }
-                //];
-                //teams.push($scope.teamForm);
-                Project.insert($scope.form);
+                if (id) {
+                    $scope.form.save();
+                } else {
+                    Project.insert($scope.teamForm);
+                }
+
                 $scope.form = '';
                 $mdDialog.hide();
             }

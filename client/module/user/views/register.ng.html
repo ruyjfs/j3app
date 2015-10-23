@@ -1,6 +1,6 @@
 <md-content layout="row">
     <span flex></span>
-    <md-whiteframe layout="column" flex="50">
+    <md-whiteframe layout="column" layout-align="center center" flex>
         <div layout="row" layout-align="space-around center">
             <div>Register</div>
             <md-button>Twitter</md-button>
@@ -20,12 +20,14 @@
                 <input type="password" ng-model="rc.credentials.password"
                        placeholder="password" aria-label="password"/>
             </md-input-container>
-            <md-button class="md-raised md-primary"
-                       ng-click="rc.register()">Create Account
+            <md-button class="md-raised md-primary" ng-click="rc.register()">
+                Create Account
             </md-button>
         </form>
         <div layout="row" layout-align="end center">
-            <a href="/login">Login</a>
+            <md-button class="md-raised md-primary" ng-href="/login">
+                Login
+            </md-button>
         </div>
     </md-whiteframe>
     <span flex></span>
