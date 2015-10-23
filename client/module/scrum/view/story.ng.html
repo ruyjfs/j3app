@@ -1,4 +1,4 @@
-<div ng-controller="TeamCtrl" flex>
+<div ng-controller="StoryCtrl" flex>
     <div flex-sm>
         <div>
             <div layout-padding layout="row" layout-align="center">
@@ -10,7 +10,7 @@
                     <md-option value="1">Crescente</md-option>
                     <md-option value="-1">Decrescente</md-option>
                 </md-select>
-                <md-button class="md-fab" aria-label="New Team" ng-click="modalSave($event)">
+                <md-button class="md-fab" aria-label="New" ng-click="modalSave($event)">
                     <md-icon md-svg-icon="content:ic_add_24px" aria-label="New"></md-icon>
                 </md-button>
             </div>
@@ -18,14 +18,14 @@
     </div>
     <md-content>
         <md-list>
-            <md-list-item class="md-3-line" ng-repeat="team in teams">
+            <md-list-item class="md-3-line" ng-repeat="story in stories">
                 <div class="md-list-item-text" layout="column" layout-align="center center">
-                    <h3>{{team.name}}</h3>
+                    <h3>{{story.name}}</h3>
                     <!--<h4>{{item.who}}</h4>-->
-                    <p>{{team.description}}</p>
+                    <p>{{story.description}}</p>
                 </div>
                 <div class="md-list-item-text" layout="row" layout-align="center center">
-                    <md-button class="md-fab" aria-label="Edit" ng-click="modalSlave($event)">
+                    <md-button class="md-fab" aria-label="Edit" ng-click="modalSave($event, story._id)">
                         <md-icon md-svg-icon="content:ic_create_24px" aria-label="Edit"></md-icon>
                     </md-button>
                     <md-button class="md-fab" aria-label="Remove" ng-click="delete(team._id)">
@@ -66,5 +66,4 @@
 
     <!--<h1 class="md-display-2">Team</h1> {{test}}-->
     <!--<p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>-->
-
 </div>

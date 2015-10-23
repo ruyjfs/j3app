@@ -1,13 +1,13 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('StatusSaveCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$mdDialog', 'id',
+angular.module('scrum').controller('StorySaveCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$mdDialog', 'id',
     function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, $mdDialog, id) {
         $scope.projects = $meteor.collection( function() {
             return Project.find({});
         });
 
         if (id) {
-            $scope.form = $meteor.object(Status, id, false);
+            $scope.form = $meteor.object(Story, id, false);
         } else {
             $scope.form = {};
         }
@@ -18,7 +18,7 @@ angular.module('scrum').controller('StatusSaveCtrl', [ '$scope', '$timeout', '$m
                     if (id) {
                         $scope.form.save();
                     } else {
-                        Status.insert($scope.form);
+                        Story.insert($scope.form);
                     }
                 }
                 $scope.form = '';

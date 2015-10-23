@@ -16,25 +16,38 @@
             </div>
         </div>
     </div>
-    <md-content>l
-        <md-list>
-            <md-list-item class="md-3-line" ng-repeat="team in teams">
-                <div class="md-list-item-text" layout="column" layout-align="center center">
-                    <h3>{{team.name}}</h3>
-                    <!--<h4>{{item.who}}</h4>-->
-                    <p>{{team.description}}</p>
-                </div>
-                <div class="md-list-item-text" layout="row" layout-align="center center">
-                    <md-button class="md-fab" aria-label="Edit" ng-click="modalSlave($event)">
-                        <md-icon md-svg-icon="content:ic_create_24px" aria-label="Edit"></md-icon>
-                    </md-button>
-                    <md-button class="md-fab" aria-label="Remove" ng-click="delete(team._id)">
-                        <md-icon md-svg-icon="content:ic_clear_24px" aria-label="Remove"></md-icon>
-                    </md-button>
-                </div>
-                <md-divider ng-if="!$last"></md-divider>
-            </md-list-item>
-        </md-list>
+    <md-content>
+        <table>
+            <thead>
+                <tr>
+                    <th>Previous</th>
+                    <th>Current</th>
+                    <th>Next</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+
+        <!--<md-list>-->
+            <!--<md-list-item class="md-3-line" ng-repeat="team in teams">-->
+                <!--<div class="md-list-item-text" layout="column" layout-align="center center">-->
+                    <!--<h3>{{team.name}}</h3>-->
+                    <!--&lt;!&ndash;<h4>{{item.who}}</h4>&ndash;&gt;-->
+                    <!--<p>{{team.description}}</p>-->
+                <!--</div>-->
+                <!--<div class="md-list-item-text" layout="row" layout-align="center center">-->
+                    <!--<md-button class="md-fab" aria-label="Edit" ng-click="modalSlave($event)">-->
+                        <!--<md-icon md-svg-icon="content:ic_create_24px" aria-label="Edit"></md-icon>-->
+                    <!--</md-button>-->
+                    <!--<md-button class="md-fab" aria-label="Remove" ng-click="delete(team._id)">-->
+                        <!--<md-icon md-svg-icon="content:ic_clear_24px" aria-label="Remove"></md-icon>-->
+                    <!--</md-button>-->
+                <!--</div>-->
+                <!--<md-divider ng-if="!$last"></md-divider>-->
+            <!--</md-list-item>-->
+        <!--</md-list>-->
         <!--<table class="table table-hover table-mc-light-blue" flex>-->
             <!--<thead>-->
             <!--<tr>-->

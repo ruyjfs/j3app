@@ -22,3 +22,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
         //$urlRouterProvider.otherwise("/scrum");
     }
 ]);
+
+
+///produtos/salvar     POST /produtos Product.save(product)
+///produtos/getAll     GET  /produtos   return Product.find();

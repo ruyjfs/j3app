@@ -4,7 +4,6 @@ angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdSide
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $meteor, $rootScope) {
         //$scope.title = 'Scrum';
 
-        $scope.test = 'HAHAHAHAA';
         $meteor.subscribe('teams');
         $scope.teams = $meteor.collection( function() {
             return Teams.find(

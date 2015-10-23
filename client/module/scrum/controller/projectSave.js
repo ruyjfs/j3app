@@ -7,21 +7,7 @@ angular.module('scrum').controller('ProjectSaveCtrl', [ '$scope', '$timeout', '$
 
         //$scope.teams = $meteor.collection(Meteor.team, false).subscribe('team');
         $scope.teams = $meteor.collection( function() {
-            return Team.find(
-                {
-                    //$or: [
-                    //    {
-                    //        'userId' : $rootScope.currentUser._id,
-                    //        'friendId' : friendId
-                    //    }
-                    //    ,
-                    //    {
-                    //        'userId' : friendId,
-                    //        'friendId' : $rootScope.currentUser._id
-                    //    }
-                    //]
-                }
-            );
+            return Team.find({});
         });
         $scope.weeks = [
             1,
