@@ -1,4 +1,4 @@
-<div ng-controller="TeamCtrl" flex>
+<div ng-controller="KanbanCtrl" flex>
     <div flex-sm>
         <div>
             <div layout-padding layout="row" layout-align="center">
@@ -17,18 +17,29 @@
         </div>
     </div>
     <md-content>
-        <table>
-            <thead>
-                <tr>
-                    <th>Previous</th>
-                    <th>Current</th>
-                    <th>Next</th>
-                </tr>
-            </thead>
-            <tbody>
+            <ul ng-sortable>
+                <li ng-repeat="item in items">{{item}}</li>
+            </ul>
 
-            </tbody>
-        </table>
+            <ul ng-sortable="{ group: 'foobar' }">
+                <li ng-repeat="item in foo">{{item}}</li>
+            </ul>
+
+            <ul ng-sortable="barConfig">
+                <li ng-repeat="item in bar">{{item}}</li>
+            </ul>
+        <!--<table>-->
+            <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th>Previous</th>-->
+                    <!--<th>Current</th>-->
+                    <!--<th>Next</th>-->
+                <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+
+            <!--</tbody>-->
+        <!--</table>-->
 
         <!--<md-list>-->
             <!--<md-list-item class="md-3-line" ng-repeat="team in teams">-->

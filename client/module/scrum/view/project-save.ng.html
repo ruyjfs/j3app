@@ -21,10 +21,6 @@
                     </md-select>
                 </md-input-container>
                 <md-input-container>
-                    <label>Color</label>
-                    <input ng-model="form.color" id="color" type="color" aria-label="Name" required>
-                </md-input-container>
-                <md-input-container>
                     <label>Team</label>
                     <md-select ng-model="form.teams" id="teams" aria-label=""  placeholder="Team" multiple="true" required>
                         <md-option  ng-repeat="team in teams" value="{{team._id}}">
