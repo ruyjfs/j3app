@@ -12,7 +12,7 @@ angular.module("user").controller("LoginCtrl", ['$meteor', '$state',
         vm.login = function () {
             $meteor.loginWithPassword(vm.credentials.email, vm.credentials.password).then(
                 function () {
-                    $state.go('parties');
+                    $state.go('scrum/project');
                 },
                 function (err) {
                     vm.error = 'Login error - ' + err;

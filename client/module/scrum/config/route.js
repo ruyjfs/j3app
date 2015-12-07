@@ -19,6 +19,20 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                 controller: 'DefaultCtrl'
             });
 
+        $stateProvider
+            .state('scrum/project', {
+                url: '/scrum/project',
+                templateUrl: 'client/module/scrum/view/project.ng.html',
+                controller: 'ProjectCtrl'
+            });
+
+        $stateProvider
+            .state('scrum/team', {
+                url: '/scrum/team',
+                templateUrl: 'client/module/scrum/view/team.ng.html',
+                controller: 'TeamCtrl'
+            });
+
         //$urlRouterProvider.otherwise("/scrum");
     }
 ]);

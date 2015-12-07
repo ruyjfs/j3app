@@ -1,33 +1,70 @@
-<!--<div ng-cloak>-->
-    <md-content class="md-padding" flex>
-        <md-tabs md-dynamic-height md-border-bottom>
-            <md-tab label="Kanban">
-                <md-content ng-include="'client/module/scrum/view/kanban.ng.html'" layout="row" layout-sm="column">
-                </md-content>
-            </md-tab>
-            <md-tab label="Sprint">
-                <md-content ng-include="'client/module/scrum/view/sprint.ng.html'" layout="row" layout-sm="column">
-                </md-content>
-            </md-tab>
-            <md-tab label="Story">
-                <md-content ng-include="'client/module/scrum/view/story.ng.html'" layout="row" layout-sm="column">
-                </md-content>
-            </md-tab>
-            <md-tab label="Status">
-                <md-content class="md-padding">
-                    <md-content ng-include="'client/module/scrum/view/status.ng.html'" layout="row" layout-sm="column">
-                    </md-content>
-                </md-content>
-            </md-tab>
-            <md-tab label="Project">
-                <md-content ng-include="'client/module/scrum/view/project.ng.html'" layout="row" layout-sm="column">
-                </md-content>
-            </md-tab>
-            <md-tab label="Team">
-                <!--<md-content ng-include="'client/module/scrum/view/team.ng.html'" flex>-->
-                <md-content ng-include="'client/module/scrum/view/team.ng.html'" layout="row" layout-sm="column">
-                </md-content>
-            </md-tab>
-        </md-tabs>
-    </md-content>
-<!--</div>-->
+    <!--<div class="container">-->
+    <div class="parallax-container">
+        <div class="parallax"><img src="img/38737768-scrum-agile-methodology-software-development-illustration-project-management-Stock-Vector.jpg"></div>
+    </div>
+    <div class="section white">
+        <div class="row container">
+            <h1 class="header center orange-text">Scrum</h1>
+            <div class="row center">
+                <!--<h5 class="header col s12 light">{{_ 'A modern way of using the agile development methodology SCRUM'}}</h5>-->
+            </div>
+            <!--<h2 class="header">Scrum</h2>-->
+            <!--<p class="grey-text text-darken-3 lighten-3">No j3scrum você pode criar o seu próprio produto/projeto, criar o seu time para os produtos/projetos -->
+            <!--cadastrar uma história/categoria para .</p>-->
+            <div class="row center">
+                <p class="grey-text text-darken-3 lighten-3">
+                    <!--{{_ "The J3scrum you can create your post its (Tasks), and set them by category (History) and puts them on a project (Product) that his will be composed of your team"}}.-->
+                </p>
+                <p class="grey-text text-darken-3 lighten-3">
+                    <!--{{_ 'Please log in or register to get access to your scrum'}}.-->
+                </p>
+            </div>
+            <div class="row center">
+                <a href="/user/login" class="btn-large waves-effect waves-light orange hoverable modal-trigger">
+                    <i class="material-icons left">person</i>
+                    Login
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="parallax-container">
+        <div class="parallax"><img src="img/44258047-Scrum-project-development-and-managemet-with-presentation-board-illustrated-Stock-Vector.jpg"></div>
+    </div>
+    <div class="section white">
+        <div class="row container">
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
+                    <!--<h5 class="center">{{_ 'Speeds up development'}}</h5>-->
+                    <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+                </div>
+            </div>
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center brown-text"><i class="material-icons">group</i></h2>
+                    <!--<h5 class="center">{{_ 'User experience focused'}}</h5>-->
+
+                    <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+                </div>
+            </div>
+
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center brown-text"><i class="material-icons">settings</i></h2>
+                    <!--<h5 class="center">{{_ 'Easy to work with'}}</h5>-->
+
+                    <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="parallax-container">
+        <!--<div class="parallax"><img src="img/44520803-Scrum-agile-board-with-scrum-board-agile-and-workspace-Stock-Vector.jpg"></div>-->
+        <div class="parallax"><img src="img/38752664-scrum-board-agile-methodology-software-development-illustration-project-management-Stock-Vector.jpg"></div>
+        <!--<div class="parallax"><img src="img/38752668-scrum-agile-methodology-software-development-illustration-burn-down-project-management-Stock-Vector.jpg"></div>-->
+    </div>
+    <!--</div>-->
+
+    <!--Modal Struct-->
+    <div id="modalLogin" class="modal modal-fixed-footer">
+    </div>

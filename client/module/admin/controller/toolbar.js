@@ -49,6 +49,47 @@ angular.module('admin').controller('ToolbarCtrl', [ '$scope', '$timeout', '$mdSi
             //$scope.messages = $meteor.collection(Messages).subscribe('messages', friendId);
         };
 
+        $scope.menuItems = [
+            {
+                name: 'Project',
+                link: '/scrum/project',
+                icon: 'business_center',
+            },
+            {
+                name: 'Team',
+                link: '/scrum/team',
+                icon: 'group_work',
+            },
+            {
+                name: 'Chat',
+                //link: '/team',
+                icon: 'chat',
+            },
+            {
+                name: 'Language',
+                //link: '/driver',
+                icon: 'language',
+            },
+            {
+                name: 'Configuration',
+                link: '/user',
+                icon: 'settings',
+            },
+            {
+                name: 'Exit',
+                link: '/user/logout',
+                icon: 'power_settings_new',
+            },
+            //{
+            //    name: 'Usuário',
+            //    link: '/user',
+            //},
+            //{
+            //    name: 'Eventos',
+            //    link: '/parties',
+            //},
+        ];
+
         /**
          * Build handler to open/close a SideNav; when animation finishes
          * report completion in console

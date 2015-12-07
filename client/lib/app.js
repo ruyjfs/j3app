@@ -5,11 +5,11 @@ if (Meteor.isClient) {
             [
                 'admin',
                 'user',
-                'scrum',
                 'gamer',
                 'driver',
                 'socially',
-                'brotherhood'
+                'brotherhood',
+                'scrum',
             ]);
     }
 
@@ -72,7 +72,7 @@ if (Meteor.isClient) {
 
         $mdThemingProvider.theme('scrum')
             .primaryPalette('brown', {
-                'default': '500',
+                'default': '700',
             })
             .warnPalette('red', {
                 'default': '900',

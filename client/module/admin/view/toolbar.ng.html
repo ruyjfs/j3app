@@ -2,7 +2,8 @@
     <!--<md-toolbar md-scroll-shrink layout="row" layout-align="start center" style="position: fixed;"  layout-padding>-->
     <!--<md-toolbar  md-scroll-shrink ng-if="true" layout-align="start center" layout-padding style="position: fixed;">-->
     <md-button class="md-icon-button" ng-click="toggleMenu()"  hide-gt-md>
-        <md-icon md-svg-icon="navigation:ic_menu_24px" aria-label="Menu"></md-icon>
+        <!--<md-icon md-svg-icon="navigation:ic_menu_24px" aria-label="Menu"></md-icon>-->
+        <i class="material-icons">menu</i>
     </md-button>
     <!--<md-toolbar class="md-theme-indigo">-->
     <!--Brotherhood-->
@@ -10,6 +11,7 @@
     <!--<h2>-->
     <!--<a ui-sref="brotherhood"><span class="md-title">brotherhood</span></a>-->
     <span class="md-title" style="text-transform: capitalize;">{{title}}</span>
+    <!--<span class="md-title" layout-align="center center" style="text-transform: capitalize;">Nome do projeto</span>-->
     <!--</h2>-->
     <!--<a ui-sref="brotherhood"><span class="md-title">brotherhood</span></a>-->
     <!--<md-toolbar class="md-theme-indigo">-->
@@ -23,23 +25,54 @@
         <md-button ng-href="/user/login" ng-hide="$root.currentUser">Login</md-button>
         <md-button ng-href="/user/register" ng-hide="$root.currentUser">Sign up</md-button>
         <!--<div ng-show="$root.currentUser">{{ $root.currentUser.name }}</div>-->
-        <div hide-gt-md>
-            <md-button class="md-icon-button" ng-click="toggleContactList()" ng-show="$root.currentUser">
-                <md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>
+        <div hide-md hide-sm show-gt-md >
+            <!--<md-button ng-repeat="menuItem in menuItems" class="md-icon-button" ng-click="redirect(menuItem.link)" ng-show="$root.currentUser">-->
+            <!--&lt;!&ndash;<md-icon md-svg-icon="action:ic_group_work_24px" aria-label="Chat"></md-icon>&ndash;&gt;-->
+                <!--<i class="material-icons">{{menuItem.icon}}</i>-->
+            <!--</md-button>-->
+            <md-button class="md-icon-button" ng-click="redirect('/scrum/project')" ng-show="$root.currentUser">
+                <!--<md-icon md-svg-icon="places:ic_business_24px" aria-label="Chat"></md-icon>-->
+                <!--<md-icon md-svg-icon="action:group_work_24px"  aria-label="Add"    ></md-icon>-->
+                <i class="material-icons">business_center</i>
+                <!--<md-icon md-font-icon="business_center" aria-label="teste" class="step"></md-icon>-->
+                <!--<md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>-->
             </md-button>
-            <md-button class="md-icon-button" ng-href="/user/logout" ng-show="$root.currentUser" style="margin-bottom: -19px;">
-                <md-icon md-svg-icon="action:ic_settings_power_24px" aria-label="Exit"></md-icon>
+            <md-button class="md-icon-button" ng-click="redirect('/scrum/team')" ng-show="$root.currentUser">
+                <!--<md-icon md-svg-icon="action:ic_group_work_24px" aria-label="Chat"></md-icon>-->
+                <i class="material-icons">group_work</i>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="toggleContactList()" ng-show="$root.currentUser">
+                <!--<md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>-->
+                <i class="material-icons">chat</i>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="toggleContactList()" ng-show="$root.currentUser">
+                <!--<md-icon md-svg-icon="action:ic_language_24px" aria-label="Chat"></md-icon>-->
+                <i class="material-icons">language</i>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="toggleContactList()" ng-show="$root.currentUser">
+                <!--<md-icon md-svg-icon="action:ic_settings_24px" aria-label="Chat"></md-icon>-->
+                <i class="material-icons">settings</i>
+            </md-button>
+            <!--<md-button class="md-icon-button" layout="row" layout-align="center center" ng-href="/user/logout" ng-show="$root.currentUser" style="margin-bottom: -19px;">-->
+            <md-button class="md-icon-button" layout="row" layout-align="center center" ng-click="redirect('/user/logout')" ng-show="$root.currentUser" style="margin-bottom: -19px;">
+                <!--<md-icon md-svg-icon="action:ic_settings_power_24px" aria-label="Exit"></md-icon>-->
+                <i class="material-icons">power_settings_new</i>
             </md-button>
         </div>
-        <div hide-md show-gt-md>
-            <md-button ng-click="toggleContactList()" ng-show="$root.currentUser">
-                <md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>
-                Chat
+        <div hide-gt-md>
+            <md-button class="md-icon-button" ng-click="toggleContactList()" ng-show="$root.currentUser">
+                <!--<md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>-->
+                <i class="material-icons">chat</i>
             </md-button>
-            <md-button ng-href="/user/logout" ng-show="$root.currentUser" style="margin-bottom: -12px;">
-                <md-icon md-svg-icon="action:ic_settings_power_24px" aria-label="Exit"></md-icon>
-                Exit
-            </md-button>
+            <!--<md-button class="md-icon-button" layout="row" layout-align="center center" ng-href="/user/logout" ng-show="$root.currentUser" style="margin-bottom: -19px;">-->
+            <!--<md-button ng-click="toggleContactList()" ng-show="$root.currentUser">-->
+                <!--&lt;!&ndash;<md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>&ndash;&gt;-->
+                <!--<i class="material-icons">chat</i>-->
+            <!--</md-button>-->
+            <!--<md-button ng-href="/user/logout" ng-show="$root.currentUser" style="margin-bottom: -12px;">-->
+                <!--<i class="material-icons">power_settings_new</i>-->
+                <!--&lt;!&ndash;<md-icon md-svg-icon="action:ic_settings_power_new_24px" aria-label="Exit"></md-icon>&ndash;&gt;-->
+            <!--</md-button>-->
         </div>
     </div>
 </md-toolbar>

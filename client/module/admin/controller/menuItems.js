@@ -2,35 +2,76 @@
 //    function($scope, $stateParams, $meteor){
 angular.module('admin').controller('MenuItemsCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope',
     function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope) {
+        //$scope.menuItems = [
+        //    {
+        //        name: 'Admin',
+        //        link: '/admin',
+        //        icon: '',
+        //    },
+        //    {
+        //        name: 'Brotherhood',
+        //        link: '/brotherhood',
+        //    },
+        //    {
+        //        name: 'Driver',
+        //        link: '/driver',
+        //    },
+        //    {
+        //        name: 'Gamer',
+        //        link: '/gamer',
+        //    },
+        //    {
+        //        name: 'Scrum',
+        //        link: '/scrum',
+        //    },
+        //    {
+        //        name: 'Usuário',
+        //        link: '/user',
+        //    },
+        //    {
+        //        name: 'Eventos',
+        //        link: '/parties',
+        //    },
+        //];
         $scope.menuItems = [
             {
-                name: 'Admin',
-                link: '/admin',
+                name: 'Project',
+                link: '/scrum/project',
+                icon: 'business_center',
             },
             {
-                name: 'Brotherhood',
-                link: '/brotherhood',
+                name: 'Team',
+                link: '/scrum/team',
+                icon: 'group_work',
             },
             {
-                name: 'Driver',
-                link: '/driver',
+                name: 'Chat',
+                link: 'ng-click="toggleContactList()"',
+                icon: 'chat',
             },
             {
-                name: 'Gamer',
-                link: '/gamer',
+                name: 'Language',
+                //link: '/driver',
+                icon: 'language',
             },
             {
-                name: 'Scrum',
-                link: '/scrum',
-            },
-            {
-                name: 'Usuário',
+                name: 'Configuration',
                 link: '/user',
+                icon: 'settings',
             },
             {
-                name: 'Eventos',
-                link: '/parties',
+                name: 'Exit',
+                link: '/user/logout',
+                icon: 'power_settings_new',
             },
+            //{
+            //    name: 'Usuário',
+            //    link: '/user',
+            //},
+            //{
+            //    name: 'Eventos',
+            //    link: '/parties',
+            //},
         ];
     }
 ]);

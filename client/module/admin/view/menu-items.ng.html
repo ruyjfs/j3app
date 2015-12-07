@@ -1,16 +1,48 @@
 <div ng-controller="MenuItemsCtrl">
     <md-toolbar class="md-theme-indigo">
-        <h1 class="md-toolbar-tools">Menu</h1>
+        <h1 class="md-toolbar-tools"><i class="material-icons">menu</i> Menu</h1>
     </md-toolbar>
     <md-content layout-padding>
         <!--<md-button ng-click="close()" class="md-primary" hide-gt-md>-->
             <!--Close Sidenav Left-->
         <!--</md-button>-->
         <md-menu>
-            <md-menu-item ng-repeat="menuItem in menuItems">
-                <md-button ng-click="redirect(menuItem.link)">
-                    <!--<md-icon md-svg-icon="call:dialpad" md-menu-align-target></md-icon>-->
-                    {{menuItem.name}}
+            <!--<md-menu-item ng-repeat="menuItem in menuItems">-->
+                <!--&lt;!&ndash;<md-button class="md-accent" ng-click="redirect(menuItem.link)">&ndash;&gt;-->
+                <!--<md-button ng-if="menuItem" class="md-accent" ng-click="redirect(menuItem.link)">-->
+                    <!--&lt;!&ndash;<md-icon md-svg-icon="call:dialpad" md-menu-align-target></md-icon>&ndash;&gt;-->
+                    <!--<i class="material-icons">{{menuItem.icon}}</i>-->
+                    <!--{{menuItem.name}}-->
+                <!--</md-button>-->
+            <!--</md-menu-item>-->
+            <md-menu-item>
+                <md-button class="md-accent" ng-click="redirect('/scrum/project')" ng-show="$root.currentUser">
+                    <i class="material-icons">business_center</i> Project
+                </md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button class="md-accent" ng-click="redirect('/scrum/team')" ng-show="$root.currentUser">
+                    <i class="material-icons">group_work</i> Team
+                </md-button>
+            </md-menu-item>
+            <!--<md-menu-item>-->
+                <!--<md-button class="md-accent" ng-click="toggleContactList()" ng-show="$root.currentUser">-->
+                    <!--<i class="material-icons">chat</i> Chat-->
+                <!--</md-button>-->
+            <!--</md-menu-item>-->
+            <md-menu-item>
+                <md-button class="md-accent" ng-click="toggleContactList()" ng-show="$root.currentUser">
+                    <i class="material-icons">language</i> Language
+                </md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button class="md-accent" ng-click="redirect('/scrum/team')" ng-show="$root.currentUser">
+                    <i class="material-icons">settings</i> Settings
+                </md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button class="md-accent" ng-click="redirect('/user/logout')" ng-show="$root.currentUser">
+                    <i class="material-icons">power_settings_new</i> Exit
                 </md-button>
             </md-menu-item>
             <md-menu-divider></md-menu-divider>
