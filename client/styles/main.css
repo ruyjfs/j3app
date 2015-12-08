@@ -55,6 +55,25 @@ md-card {
     border-radius: 2px;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
 }
+
+md-sidenav {
+    z-index: 1000;
+}
+
+/*.navbar-fixed {*/
+    /*position: relative;*/
+    /*height: 56px;*/
+    /*z-index: 50;*/
+/*}*/
+/*.fixed-action-btn {*/
+    /*position: fixed;*/
+    /*right: 23px;*/
+    /*bottom: 23px;*/
+    /*padding-top: 15px;*/
+    /*margin-bottom: 0;*/
+    /*z-index: 49;*/
+/*}*/
+
 md-card .md-actions {
     border-top: 1px solid rgba(160,160,160,0.2);
     background-color: #ffcc80;
@@ -72,6 +91,10 @@ md-card-content {
 /*md-card {*/
     color: #FFFFFF;
     background-color: #ffcc80;
+}
+
+md-dialog md-dialog-content {
+    padding: 24px;
 }
 
 md-menu-item {

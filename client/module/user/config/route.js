@@ -31,7 +31,11 @@ angular.module('user').config(['$urlRouterProvider', '$stateProvider', '$locatio
                 resolve: {
                     "logout": ['$meteor', '$state', function($meteor, $state) {
                         return $meteor.logout().then(function(){
-                            $state.go('parties');
+                            //$state.go('parties');
+                            $state.go('scrum').then(function() {
+                                // Get in a spaceship and fly to Jupiter, or whatever your callback does.
+                                $('.parallax').parallax();
+                            });
                         }, function(err){
                             console.log('logout error - ', err);
                         });

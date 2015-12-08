@@ -3,9 +3,12 @@ angular.module("scrum").run(['$rootScope', '$state', function($rootScope, $state
         // We can catch the error thrown when the $requireUser promise is rejected
         // and redirect the user back to the main page
         if (error === 'AUTH_REQUIRED') {
-            $state.go('user');
+            $state.go('scrum');
         }
     });
+
+    //console.log(error);
+    console.log($rootScope.currentUser);
 }]);
 
 angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
@@ -17,26 +20,26 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                 url: '/scrum',
                 templateUrl: 'client/module/scrum/view/default.ng.html',
                 controller: 'DefaultCtrl'
-            });
-
-        $stateProvider
+            })
             .state('scrum/project', {
                 url: '/scrum/project',
                 templateUrl: 'client/module/scrum/view/project.ng.html',
                 controller: 'ProjectCtrl'
-            });
-
-        $stateProvider
+            })
             .state('scrum/team', {
                 url: '/scrum/team',
                 templateUrl: 'client/module/scrum/view/team.ng.html',
                 controller: 'TeamCtrl'
+            })
+            .state('scrum/kanban', {
+                url: '/scrum/kanban/:id',
+                templateUrl: 'client/module/scrum/view/kanban.ng.html',
+                controller: 'KanbanCtrl'
             });
 
-        //$urlRouterProvider.otherwise("/scrum");
+        $urlRouterProvider.otherwise("/scrum");
     }
 ]);
-
 
 ///produtos/salvar     POST /produtos Product.save(product)
 ///produtos/getAll     GET  /produtos   return Product.find();

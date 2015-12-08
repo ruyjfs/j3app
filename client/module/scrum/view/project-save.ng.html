@@ -6,37 +6,35 @@
                 <span flex></span>
             </div>
         </md-toolbar>
-        <md-dialog-content style="min-width:300px;max-width:800px;max-height:810px; ">
-            <div class="container">
-                <div ng-show="$root.currentUser">
-                    <md-input-container>
-                        <label>Name</label>
-                        <input ng-model="form.name" id="nameInput" type="text" aria-label="Name" required>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Week</label>
-                        <md-select ng-model="form.week" id="week" aria-label=""  placeholder="Week" required>
-                            <md-option  ng-repeat="week in weeks" value="{{week}}">
-                                {{week}}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Team</label>
-                        <md-select ng-model="form.teams" id="teams" aria-label=""  placeholder="Team" multiple="true" required>
-                            <md-option  ng-repeat="team in teams" value="{{team._id}}">
-                                {{team.name}}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Description</label>
-                        <textarea ng-model="form.description" id="description" aria-label="Description"></textarea>
-                    </md-input-container>
-                    <!--<md-checkbox ng-model="newParty.public" id="public" aria-label="Public">-->
-                        <!--Public-->
-                    <!--</md-checkbox>-->
-                </div>
+        <md-dialog-content style="min-width:400px;max-width:800px;max-height:810px;">
+            <div ng-show="$root.currentUser">
+                <md-input-container>
+                    <label>Name</label>
+                    <input ng-model="form.name" id="nameInput" type="text" aria-label="Name" required>
+                </md-input-container>
+                <md-input-container>
+                    <label>Week</label>
+                    <md-select ng-model="form.week" id="week" aria-label=""  placeholder="Week" required>
+                        <md-option  ng-repeat="week in weeks" value="{{week}}">
+                            {{week}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container>
+                    <label>Team</label>
+                    <md-select ng-model="form.teams" id="teams" aria-label=""  placeholder="Team" multiple="true" required>
+                        <md-option  ng-repeat="team in teams" value="{{team._id}}">
+                            {{team.name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container>
+                    <label>Description</label>
+                    <textarea ng-model="form.description" id="description" aria-label="Description"></textarea>
+                </md-input-container>
+                <!--<md-checkbox ng-model="newParty.public" id="public" aria-label="Public">-->
+                    <!--Public-->
+                <!--</md-checkbox>-->
             </div>
         </md-dialog-content>
     </form>

@@ -33,7 +33,8 @@
                     <!--<a href="/scrum/kanban">{{_ 'Enter'}}</a>-->
                     <a href="#">Delete</a>
                     <a href="#" ng-click="modalSave($event, project._id)" >Edit</a>
-                    <a href="/scrum/kanban">Enter</a>
+                    <!--<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>-->
+                    <a href="/scrum/kanban/{{project._id}}">Enter</a>
                 </div>
             </div>
         </div>

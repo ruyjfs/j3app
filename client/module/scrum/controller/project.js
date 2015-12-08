@@ -22,6 +22,9 @@ angular.module('scrum').controller('ProjectCtrl', [ '$scope', '$mdDialog', '$mdS
                 }
             );
         });
+//console.log($rootScope.currentUser._id);
+console.log($rootScope.currentUser);
+
 
         $scope.remove = function(id) {
             $scope.projects.remove(id);
