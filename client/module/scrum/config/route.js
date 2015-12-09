@@ -35,6 +35,11 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                 url: '/scrum/kanban/:id',
                 templateUrl: 'client/module/scrum/view/kanban.ng.html',
                 controller: 'KanbanCtrl'
+            })
+            .state('scrum/content', {
+                url: '/scrum/content/:id',
+                templateUrl: 'client/module/scrum/view/project-content.ng.html',
+                controller: 'ProjectContentCtrl'
             });
 
         $urlRouterProvider.otherwise("/scrum");

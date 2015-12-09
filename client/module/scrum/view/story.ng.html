@@ -1,21 +1,21 @@
 <div ng-controller="StoryCtrl" flex>
-    <div flex-sm>
-        <div>
-            <div layout-padding layout="row" layout-align="center">
-                <md-input-container style="width:50%;margin-right:10px;">
-                    <label>Search</label>
-                    <input type="text" ng-model="search"/>
-                </md-input-container>
-                <md-select ng-model="orderProperty" placeholder="Sort Order" >
-                    <md-option value="1">Crescente</md-option>
-                    <md-option value="-1">Decrescente</md-option>
-                </md-select>
-                <md-button class="md-fab" aria-label="New" ng-click="modalSave($event)">
-                    <md-icon md-svg-icon="content:ic_add_24px" aria-label="New"></md-icon>
-                </md-button>
-            </div>
-        </div>
-    </div>
+    <!--<div flex-sm>-->
+        <!--<div>-->
+            <!--<div layout-padding layout="row" layout-align="center">-->
+                <!--<md-input-container style="width:50%;margin-right:10px;">-->
+                    <!--<label>Search</label>-->
+                    <!--<input type="text" ng-model="search"/>-->
+                <!--</md-input-container>-->
+                <!--<md-select ng-model="orderProperty" placeholder="Sort Order" >-->
+                    <!--<md-option value="1">Crescente</md-option>-->
+                    <!--<md-option value="-1">Decrescente</md-option>-->
+                <!--</md-select>-->
+                <!--<md-button class="md-fab" aria-label="New" ng-click="modalSave($event)">-->
+                    <!--<md-icon md-svg-icon="content:ic_add_24px" aria-label="New"></md-icon>-->
+                <!--</md-button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
     <md-content>
         <md-list>
             <md-list-item class="md-3-line" ng-repeat="story in stories">

@@ -59,11 +59,18 @@ table#scrumy-board .plus-button{opacity:.5;filter:alpha(opacity=50);}table#scrum
     -webkit-border-radius: 2px;
     border-radius: 4px;
 
-    box-shadow: 2px 2px 12px -3px #222222;
+    /*box-shadow: 2px 2px 12px -3px #222222;*/
+
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+input[type=color] + label {
+    top: -25px;
+    font-size: 17px;
 }
 
 .task:hover{
-    box-shadow: 8px 9px 40px 0px rgba(0,0,0,.18) , 0 4px 15px 0 rgba(0,0,0,.15);
+    /*box-shadow: 8px 9px 40px 0px rgba(0,0,0,.18) , 0 4px 15px 0 rgba(0,0,0,.15);*/
 }
 
 .task .handle{
@@ -84,11 +91,12 @@ table#scrumy-board .plus-button{opacity:.5;filter:alpha(opacity=50);}table#scrum
     position:absolute;
     top: 25px;
     left: 1px;
-    width: 198px;
+    width: 196px;
     height: 134px;
     /*text-align: center;*/
     font-size: 11px;
     overflow: hidden;
+    text-align: left;
 }
 /*    .title b{
         text-align: center;
@@ -362,7 +370,7 @@ td.status_5{
     -webkit-border-radius: 2px;
     border-radius: 4px;
 
-    box-shadow: 2px 2px 12px -3px #222222;
+    /*box-shadow: 2px 2px 12px -3px #222222;*/
 }
 
 .task-kanban .handle{
@@ -398,7 +406,7 @@ td.status_5{
     word-wrap:break-word;
     display:inline;
     font-size: 11px;
-
+    text-align: left;
 
     position: relative;
     font-size: 12px;

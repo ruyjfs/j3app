@@ -14,31 +14,42 @@
 <!--</md-card>-->
 
 <div class="container">
-    <div class="row">
-        <!--<div class="container col l4 s12 row">-->
-        <div class="col l4 s12" ng-repeat="project in projects">
-            <div class="card orange lighten-3 hoverable" >
-                <div class="card-content white-text">
-                    <span class="card-title activator text-darken-4">{{project.name}}<i class="material-icons right">more_vert</i></span>
-                    <p>{{project.description}}</p>
+    <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="Project">
+            <md-content class="md-padding">
+                <div class="row">
+                    <!--<div class="container col l4 s12 row">-->
+                    <div class="col l4 s12" ng-repeat="project in projects">
+                        <div class="card orange lighten-3 hoverable" >
+                            <div class="card-content white-text">
+                                <span class="card-title activator text-darken-4">{{project.name}}<i class="material-icons right">more_vert</i></span>
+                                <p>{{project.description}}</p>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                                <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                            </div>
+                            <div class="card-action center">
+                                <!--<a href="#">{{_ 'Delete'}}</a>-->
+                                <!--<a href="#projectSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>-->
+                                <!--<a href="/project/save/{{_id}}">{{_ 'Edit'}}</a>-->
+                                <!--<a href="/scrum/kanban">{{_ 'Enter'}}</a>-->
+                                <a href="#" ng-click="remove(project._id)">Delete</a>
+                                <a href="#" ng-click="modalSave($event, project._id)" >Edit</a>
+                                <!--<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>-->
+                                <a href="/scrum/content/{{project._id}}">Enter</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-                <div class="card-action center">
-                    <!--<a href="#">{{_ 'Delete'}}</a>-->
-                    <!--<a href="#projectSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>-->
-                    <!--<a href="/project/save/{{_id}}">{{_ 'Edit'}}</a>-->
-                    <!--<a href="/scrum/kanban">{{_ 'Enter'}}</a>-->
-                    <a href="#">Delete</a>
-                    <a href="#" ng-click="modalSave($event, project._id)" >Edit</a>
-                    <!--<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>-->
-                    <a href="/scrum/kanban/{{project._id}}">Enter</a>
-                </div>
-            </div>
-        </div>
-    </div>
+            </md-content>
+        </md-tab>
+        <md-tab label="Team">
+            <md-content class="md-padding">
+                <div ng-include="'client/module/scrum/view/team.ng.html'"></div>
+            </md-content>
+        </md-tab>
+    </md-tabs>
 </div>
 <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
     <a class="btn-floating btn-large waves-effect waves-light deep-orange hoverable" href="#">

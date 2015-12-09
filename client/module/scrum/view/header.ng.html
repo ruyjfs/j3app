@@ -7,7 +7,7 @@
                     <div ng-if="$root.currentUser">
                         <li><a href="/scrum/project"><i class="material-icons">business_center</i></a></li>
                         <!--<li><a href="/scrum/team"><i class="material-icons">group</i></a></li>-->
-                        <li><a href="/scrum/team"><i class="material-icons">group_work</i></a></li>
+                        <!--<li><a href="/scrum/team"><i class="material-icons">group_work</i></a></li>-->
                         <li><a href="#" ng-click="toggleContactList()"><i class="material-icons">chat</i></a></li>
                         <li><a class="dropdown-button" href="#" data-activates="dropdown1"><i class="material-icons">language</i></a></li>
                         <!-- Dropdown Structure -->
@@ -46,7 +46,7 @@
                         <li><a href="#" class="waves-effect waves-orange"><i class="material-icons left">power_settings_new</i>Exit</a></li>
                             <!--{{else}}-->
                     </div>
-                    <div ng-if="!$root.currentUser">
+                    <div ng-if="!$root.currentUser">l
                         <li><a href="/" class="waves-effect waves-orange"><i class="material-icons left">home</i>Home</a></li>
                         <li><a href="#loginModal" class="modal-trigger waves-effect waves-orange"><i class="material-icons left">person</i>Login</a></li>
                         <li><a href="#" class="waves-effect waves-orange dropdown-button" data-activates="dropdown2"><i class="material-icons left">language</i>Language</a></li>

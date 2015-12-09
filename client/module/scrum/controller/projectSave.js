@@ -27,7 +27,7 @@ angular.module('scrum').controller('ProjectSaveCtrl', [ '$scope', '$timeout', '$
                 if (id) {
                     $scope.form.save();
                 } else {
-                    Project.insert($scope.teamForm);
+                    Project.insert($scope.form);
                 }
 
                 $scope.form = '';

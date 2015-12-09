@@ -54,5 +54,6 @@ angular.module("user").run(['$rootScope', '$state', function($rootScope, $state)
         if (error === 'AUTH_REQUIRED') {
             $state.go('user');
         }
+        $('.parallax').parallax();
     });
 }]);
