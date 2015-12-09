@@ -23,7 +23,7 @@ angular.module('scrum').controller('ProjectContentCtrl', [ '$scope', '$mdDialog'
             );
         });
 //console.log($rootScope.currentUser._id);
-console.log($rootScope.currentUser);
+//console.log($rootScope.currentUser);
 
 
         $scope.remove = function(id) {

@@ -1,0 +1,124 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Save Status</h2>
+            <span flex></span>
+        </div>
+    </md-toolbar>
+    <md-dialog-content style="min-width:600px;max-width:800px;max-height:810px; ">
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Login">
+                <md-content class="md-padding">
+                    <div layout="row" layout-align="space-around center">
+                        <div>Login with:</div>
+                        <md-button>Twitter</md-button>
+                        <md-button>Facebook</md-button>
+                    </div>
+                    <div ng-show="error" class="md-warn">
+                        <small>{{ error }}</small>
+                    </div>
+                    <form layout="column">
+                        <md-input-container>
+                            <md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
+                            <input type="text" ng-model="dataForm.email"
+                                   placeholder="email" aria-label="email"/>
+                        </md-input-container>
+                        <md-input-container>
+                            <md-icon md-svg-icon="action:ic_lock_open_24px"></md-icon>
+                            <input type="password" ng-model="dataForm.password"
+                                   placeholder="password" aria-label="password"/>
+                        </md-input-container>
+                        <!--<md-button class="md-raised md-primary" ng-click="lc.login()"-->
+                        <!--aria-label="login">Sign In-->
+                        <!--</md-button>-->
+                    </form>
+                </md-content>
+            </md-tab>
+            <md-tab label="Forgot password?">
+                <md-content class="md-padding">
+                </md-content>
+            </md-tab>
+            <md-tab label="Create account">
+                <md-content class="md-padding">
+                    <md-content layout="row">
+                        <span flex></span>
+                        <md-whiteframe layout="column" layout-align="center center" flex>
+                            <div layout="row" layout-align="space-around center">
+                                <div>Register</div>
+                                <md-button>Twitter</md-button>
+                                <md-button>Facebook</md-button>
+                            </div>
+                            <div ng-show="rc.error" class="md-warn">
+                                <small>{{ rc.error }}</small>
+                            </div>
+                            <form layout="column">
+                                <md-input-container>
+                                    <md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
+                                    <input type="text" ng-model="rc.credentials.email"
+                                           placeholder="email" aria-label="email"/>
+                                </md-input-container>
+                                <md-input-container>
+                                    <md-icon md-svg-icon="action:ic_lock_open_24px"></md-icon>
+                                    <input type="password" ng-model="rc.credentials.password"
+                                           placeholder="password" aria-label="password"/>
+                                </md-input-container>
+                                <md-button class="md-raised md-primary" ng-click="rc.register()">
+                                    Create Account
+                                </md-button>
+                            </form>
+                            <div layout="row" layout-align="end center">
+                                <md-button class="md-raised md-primary" ng-href="/login">
+                                    Login
+                                </md-button>
+                            </div>
+                        </md-whiteframe>
+                        <span flex></span>
+                    </md-content>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <span flex></span>
+        <md-button class="primary" ng-click="close()">
+            Cancel
+        </md-button>
+        <md-button class="md-raised md-primary" ng-click="login()"
+                   aria-label="login">Sign In
+        </md-button>
+    </div>
+</md-dialog>
+
+<!--<md-content layout="row">-->
+<!--<span flex></span>-->
+<!--<md-whiteframe layout="column" layout-align="center center" >-->
+<!--<div layout="row" layout-align="space-around center">-->
+<!--<div>Login with:</div>-->
+<!--<md-button>Twitter</md-button>-->
+<!--<md-button>Facebook</md-button>-->
+<!--</div>-->
+<!--<div ng-show="lc.error" class="md-warn">-->
+<!--<small>{{ lc.error }}</small>-->
+<!--</div>-->
+<!--<form layout="column">-->
+<!--<md-input-container>-->
+<!--<md-icon md-svg-icon="content:ic_mail_24px"></md-icon>-->
+<!--<input type="text" ng-model="lc.credentials.email"-->
+<!--placeholder="email" aria-label="email"/>-->
+<!--</md-input-container>-->
+<!--<md-input-container>-->
+<!--<md-icon md-svg-icon="action:ic_lock_open_24px"></md-icon>-->
+<!--<input type="password" ng-model="lc.credentials.password"-->
+<!--placeholder="password" aria-label="password"/>-->
+<!--</md-input-container>-->
+<!--<md-button class="md-raised md-primary" ng-click="lc.login()"-->
+<!--aria-label="login">Sign In-->
+<!--</md-button>-->
+<!--</form>-->
+<!--<div layout="row" layout-align="space-around center">-->
+<!--<a href="/resetpw">Forgot password?</a>-->
+<!--<a href="/register">Create an account</a>-->
+<!--</div>-->
+<!--</md-whiteframe>-->
+<!--<span flex></span>-->
+<!--</md-content>-->

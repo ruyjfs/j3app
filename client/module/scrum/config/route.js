@@ -8,7 +8,7 @@ angular.module("scrum").run(['$rootScope', '$state', function($rootScope, $state
     });
 
     //console.log(error);
-    console.log($rootScope.currentUser);
+    //console.log($rootScope.currentUser);
 }]);
 
 angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
@@ -19,7 +19,14 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
             .state('scrum', {
                 url: '/scrum',
                 templateUrl: 'client/module/scrum/view/default.ng.html',
-                controller: 'DefaultCtrl'
+                controller: 'DefaultCtrl',
+                resolve: {
+                    paralax: function(){
+                        setTimeout(function(){
+                            $('.parallax').parallax();
+                        }, 200);
+                    }
+                }
             })
             .state('scrum/project', {
                 url: '/scrum/project',
