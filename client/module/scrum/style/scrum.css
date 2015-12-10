@@ -102,6 +102,13 @@ input[type=color] + label {
         text-align: center;
     }*/
 
+.note {
+    padding: 4px !important;
+}
+
+.note .card-content .card-title {
+    line-height: 24px !important;
+}
 
 
 .task .title .title_inner,

@@ -137,37 +137,92 @@
                     <!--</div>-->
                 </td>
                 <td id="backLog" class="linha status_1" sprintid="" sprinthorasgastas="" sprinthoraslimite="">
-                    <div sprintpostitid="2" sprintpostithoras="2" class="task hoverable" style="background-color: {{backLogNote.story.color}}" ng-repeat="backLogNote in backLogNotes">
-                        <div class="handle"> {{backLogNote.story.name}} </div>
-                        <div class="title">
-                            <!--<pre class="title_inner" style="background-color: #f0f0f0; color: #9F9F9F">-->
-                                        <pre class="title_inner">
-
-
-<b>{{backLogNote.name}}</b>
-
-{{backLogNote.description}}</pre>
+                    <div class="row">
+                        <!--<div class="container col l4 s12 row">-->
+                        <div class="col" ng-repeat="backLogNote in backLogNotes">
+                            <div class="card hoverable" style="background-color: {{backLogNote.story.color}}; width: 200px; height: 140px;">
+                                <div class="card-content white-text note">
+                                    <span class="card-title activator text-darken-4">{{backLogNote.name}}<i class="material-icons right">more_vert</i></span>
+                                    <p>{{backLogNote.owner.firstName}}</p>
+                                    <p></p>
+                                </div>
+                                <div class="card-reveal note">
+                                    <!--<span class="card-title grey-text text-darken-4">{{backLogNote.story.name}}<i class="material-icons right">close</i></span>-->
+                                    <span class="card-title grey-text text-darken-4">
+                                        <i class="material-icons right">close</i>
+                                        <a href="#" ng-click="modalStorySave($event, backLogNote.story._id)" title="Add story" class="btn-floating green hoverable">
+                                            <i class="material-icons">content_paste</i>
+                                        </a>
+                                        <a href="#" ng-click="modalNoteSave($event, backLogNote._id)" title="Add note" class="btn-floating amber accent-4 hoverable">
+                                            <i class="material-icons">mode_edit</i>
+                                        </a>
+                                    </span>
+                                    <p>{{backLogNote.story.name}}</p>
+                                    <p>{{backLogNote.description}}</p>
+                                </div>
+                                <!--<div class="card-action center">-->
+                                    <!--&lt;!&ndash;<a href="#">{{_ 'Delete'}}</a>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a href="#projectSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a href="/project/save/{{_id}}">{{_ 'Edit'}}</a>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a href="/scrum/kanban">{{_ 'Enter'}}</a>&ndash;&gt;-->
+                                    <!--<a href="#" ng-click="remove(project._id)">Delete</a>-->
+                                    <!--<a href="#" ng-click="modalSave($event, project._id)" >Edit</a>-->
+                                    <!--&lt;!&ndash;<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a href="/scrum/content/{{backLogNote._id}}">Enter</a>&ndash;&gt;-->
+                                <!--</div>-->
+                            </div>
                         </div>
-                        <!--unassigned-->
-                        <div class="iconEdit" sprintpostitid="2">
-                            <i class="glyphicon glyphicon-pencil"></i>
-                        </div>
-                        <div class="iconUserOn">
-                            <i class="glyphicon glyphicon-user"></i>
-                        </div>
-                        <div class="iconUser">
-                            <i style="font-size: 20px" class="glyphicon glyphicon-user"></i>
-                        </div>
-                        <div class="user">{{backLogNote.owner.firstName}}</div>
-                        <div class="assignment">
-                            {{backLogNote.time}}
-                        </div>
-                        <!--<a href="#" class="edit-task" observedactions="click">Change</a>-->
-                        <!--<a href="/gardner_mec/destroy_task?id=2298313" class="delete-task" observedactions="click">Delete</a>-->
-
-
-                        <img class="overflow_indicator" src="/images/overflow_indicator.gif">
                     </div>
+                    <!--<div class="row">-->
+                        <!--<div class="col s2 m2">-->
+                            <!--<div class="card-panel teal">-->
+                                <!--<span class="white-text">-->
+                                    <!--I am a very simple card. I am good at containing small bits of information.-->
+                                    <!--I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.-->
+                                <!--</span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col s2 m2">-->
+                            <!--<div class="card-panel teal" style="width: 200px; height: 200px;">-->
+                                <!--<span class="white-text">-->
+<!--I am a very simple card. I am good at containing small bits of information.-->
+<!--I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.-->
+                                <!--</span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div sprintpostitid="2" sprintpostithoras="2" class="task hoverable" style="background-color: {{backLogNote.story.color}}" ng-repeat="backLogNote in backLogNotes">-->
+                        <!--<div class="handle"> {{backLogNote.story.name}} </div>-->
+                        <!--<div class="title">-->
+                            <!--&lt;!&ndash;<pre class="title_inner" style="background-color: #f0f0f0; color: #9F9F9F">&ndash;&gt;-->
+                                        <!--<pre class="title_inner">-->
+
+
+<!--<b>{{backLogNote.name}}</b>-->
+
+<!--{{backLogNote.description}}</pre>-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash;unassigned&ndash;&gt;-->
+                        <!--<div class="iconEdit" sprintpostitid="2">-->
+                            <!--<i class="glyphicon glyphicon-pencil"></i>-->
+                        <!--</div>-->
+                        <!--<div class="iconUserOn">-->
+                            <!--<i class="glyphicon glyphicon-user"></i>-->
+                        <!--</div>-->
+                        <!--<div class="iconUser">-->
+                            <!--<i style="font-size: 20px" class="glyphicon glyphicon-user"></i>-->
+                        <!--</div>-->
+                        <!--<div class="user">{{backLogNote.owner.firstName}}</div>-->
+                        <!--<div class="assignment">-->
+                            <!--{{backLogNote.time}}-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash;<a href="#" class="edit-task" observedactions="click">Change</a>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<a href="/gardner_mec/destroy_task?id=2298313" class="delete-task" observedactions="click">Delete</a>&ndash;&gt;-->
+
+
+                        <!--<img class="overflow_indicator" src="/images/overflow_indicator.gif">-->
+                    <!--</div>-->
                 </td>
             </tr>
             </tbody>

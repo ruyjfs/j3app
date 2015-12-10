@@ -16,24 +16,4 @@ angular.module('scrum').controller('SprintCtrl', [ '$scope', '$mdDialog', '$mdSi
             });
             return notes;
         });
-
-        //console.log(Story.find({}));
-
-
-        $scope.modalSave = function(ev, id){
-            $mdDialog.show({
-                controller: 'NoteSaveCtrl',
-                templateUrl: 'client/module/scrum/view/note-save.ng.html',
-                clickOutsideToClose: true,
-                targetEvent: ev,
-                locals:
-                {
-                    id: id
-                }
-            }).then(function(answer) {
-                $scope.status = 'You said the information was "' + answer + '".';
-            }, function() {
-                $scope.status = 'You cancelled the dialog.';
-            });
-        };
 }]);

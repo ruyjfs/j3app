@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$meteor', '$rootScope', '$mdDialog',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $meteor, $rootScope, $mdDialog) {
+angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$meteor', '$rootScope', '$mdDialog', '$mdBottomSheet', '$mdToast',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $meteor, $rootScope, $mdDialog, $mdBottomSheet, $mdToast) {
 
         $scope.toggleMenu = buildToggler('menu');
         $scope.toggleContactList = buildToggler('contact-list');
@@ -22,6 +22,25 @@ angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSid
                 });
             $mdSidenav('contact-list').toggle();
         }
+
+        $scope.showModulesGrid = function($event) {
+            console.log($mdBottomSheet);
+            $scope.alert = '';
+            $mdBottomSheet.show({
+                module: 'user',
+                controller: 'ModulesGridCtrl',
+                templateUrl: 'client/module/user/views/modules-grid.ng.html',
+                clickOutsideToClose: true,
+                targetEvent: $event
+            }).then(function(clickedItem) {
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent(clickedItem['name'] + ' clicked!')
+                        .position('top right')
+                        .hideDelay(1500)
+                );
+            });
+        };
 
         $scope.toggleChat = function(friendId){
             $mdSidenav('contact-list').close();
