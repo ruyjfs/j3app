@@ -30,10 +30,35 @@ console.log($rootScope.currentUser);
             $scope.projects.remove(id);
         }
 
-        $scope.modalSave = function(ev, id){
+        $scope.modalProjectSave = function(ev, id){
             $mdDialog.show({
                 controller: 'ProjectSaveCtrl',
                 templateUrl: 'client/module/scrum/view/project-save.ng.html',
+                clickOutsideToClose:true,
+                locals : {
+                    id: id
+                },
+                targetEvent: ev
+            }).then(function(answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+            }, function() {
+                $scope.status = 'You cancelled the dialog.';
+            });
+        };
+
+        $scope.modalTeamSave = function(ev, id){
+            //$mdDialog.alert()
+            //    .parent(angular.element(document.querySelector('#popupContainer')))
+            //    .clickOutsideToClose(true)
+            //    .title('This is an alert title')
+            //    .content('You can specify some description text in here.')
+            //    .ariaLabel('Alert Dialog Demo')
+            //    .ok('Got it!')
+            //    .targetEvent(ev)
+
+            $mdDialog.show({
+                controller: 'TeamSaveCtrl',
+                templateUrl: 'client/module/scrum/view/team-save.ng.html',
                 clickOutsideToClose:true,
                 locals : {
                     id: id
