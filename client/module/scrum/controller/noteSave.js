@@ -14,6 +14,7 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$timeout', '$mdS
         }
 
         $scope.save = function () {
+            console.log('asdasd');
             if($scope.form.name) {
                 if (id) {
                     $scope.form.save();

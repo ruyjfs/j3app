@@ -1,18 +1,20 @@
+
+
 //Users = new Mongo.Collection("users");
-//Users.allow({
-//    insert: function (userId) {
-//        //return userId && party.owner === userId;
-//        return userId;
-//    },
-//    update: function (userId, party, fields, modifier) {
-//        //return userId && party.owner === userId;
-//        return userId;
-//    },
-//    remove: function (userId, party) {
-//        //return userId && party.owner === userId;
-//        return userId;
-//    }
-//});
+Meteor.users.allow({
+    insert: function (userId) {
+        //return userId && party.owner === userId;
+        return userId;
+    },
+    update: function (userId, party, fields, modifier) {
+        //return userId && party.owner === userId;
+        return userId;
+    },
+    remove: function (userId, party) {
+        //return userId && party.owner === userId;
+        return userId;
+    }
+});
 //yemiX6y3u7vnqpS3n
 //92okH9HNck243cdQ5
 //Meteor.methods({

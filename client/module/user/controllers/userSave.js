@@ -17,45 +17,20 @@ angular.module('user').controller('UserSaveCtrl', [ '$scope', '$timeout', '$mdSi
         //    9
         //];
 
-        $scope.dataForm = {
-            name: '',
-            lastName: '',
-            email: '',
-            password: '',
-            confirmPassword: ''
-        };
-        //if (id) {
-        //    //$scope.teste = $meteor.collection( function() {
-        //    //    return Team.findOne(id);
-        //    //});
-        //    $scope.dataForm = $meteor.object(Team, $rootScope.user._id, false);
-        //$scope.dataForm = Users.findOne($rootScope.currentUser._id);
+        //$scope.dataForm = {
+        //    name: '',
+        //    lastName: '',
+        //    email: '',
+        //    password: '',
+        //    confirmPassword: ''
+        //};
 
-        //$meteor.collection( function() {
-        //    return Users.find({});
-        //});
-
-        //$scope.teamForm = $meteor.object(Users, id, false);
         //$scope.dataForm = $meteor.object(Users, $rootScope.currentUser._id, false);
+        //$scope.members = $meteor.collection(Meteor.users, false).subscribe('users');
+        $scope.dataForm = $meteor.object(Meteor.users, $rootScope.currentUser._id, false);
+        $scope.dataForm.email = $scope.dataForm.emails[0].address;
 
-        //$meteor.subscribe('users');
-        //$scope.dataForm = $meteor.collection( function() {
-        //    return Users.findOne($rootScope.currentUser._id);
-        //});
-
-        //$scope.dataForm = $meteor.collection(Meteor.users, false).subscribe('users');
-//        $scope.teamForm = $meteor.object(Users, $rootScope.currentUser._id, false);
-//console.log($scope.dataForm);
-        //    //$scope.teamForm = {};
-        //    //console.log(id);
-        //    //console.log($scope.teste);
-        //} else {
-        //    $scope.teamForm = {};
-        //}
-
-
-
-        $scope.save = function (){
+        $scope.saveUser = function (){
             //$meteor.call('teamSave', $scope.teamForm).then(
             //    function(data){
             //        console.log('success inviting', data);
@@ -65,18 +40,24 @@ angular.module('user').controller('UserSaveCtrl', [ '$scope', '$timeout', '$mdSi
             //    }
             //);
             if(
-                $scope.teamForm.name,
-                $scope.teamForm.time,
-                $scope.teamForm.members
+                $scope.dataForm.name,
+                $scope.dataForm.lastName,
+                $scope.dataForm.email
             ){
-
-                if (id) {
-                    $scope.teamForm.save();
-                } else {
-                    Team.insert($scope.teamForm);
-                }
-                $scope.teamForm = '';
-                $mdDialog.hide();
+                //if (id) {
+                $scope.dataForm.save().then(function(numberOfDocs){
+                    console.log('save success doc affected ', numberOfDocs);
+                    //$scope.dataForm = $meteor.object(Meteor.users, $rootScope.currentUser._id, false);
+                }, function(error){
+                    console.log('save error', error);
+                });
+                //$scope.dataForm.emailMain = $scope.dataForm.emails[0].address;
+                //console.log($scope.dataForm);
+                //} else {
+                //    Team.insert($scope.teamForm);
+                //}
+                //$scope.teamForm = '';
+                //$mdDialog.hide();
             }
         }
 

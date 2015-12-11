@@ -11,10 +11,13 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
         $scope.backLogNotes = [];
         $meteor.collection( function() {
             notes = Note.find({});
+            $meteor.subscribe('story');
             notes.forEach(function(note, noteKey){
                 note.story = Story.findOne(note.story);
                 note.owner = Meteor.users.findOne(note.owner);
-                note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
+                //teste = note.owner.name.split(' ');
+                //console.log(teste);
+                //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
                 $scope.backLogNotes[noteKey] = note;
             });
             return notes;
