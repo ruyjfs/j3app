@@ -1,49 +1,36 @@
-<md-dialog aria-label="Mango (Fruit)">
-    <form>
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2>Save Story</h2>
-                <span flex></span>
-            </div>
-        </md-toolbar>
-        <md-dialog-content style="min-width:400px;max-width:800px;max-height:810px; ">
-            <div  ng-show="$root.currentUser">
-                <md-input-container>
-                    <md-select ng-model="form.project" id="time" aria-label=""  placeholder="Project" required>
-                        <md-option  ng-repeat="project in projects" value="{{project._id}}">
-                            {{project.name}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
-                <md-input-container>
-                    <label>Color</label>
-                    <input ng-model="form.color" id="color" type="color" aria-label="Name" required>
-                </md-input-container>
-                <md-input-container>
-                    <label>Name</label>
-                    <input ng-model="form.name" id="nameInput" type="text" aria-label="Name" required>
-                </md-input-container>
-                <md-input-container>
-                    <label>Order</label>
-                    <input ng-model="form.order" id="order" type="number" aria-label="Name" required>
-                </md-input-container>
-                <md-input-container>
-                    <label>Description</label>
-                    <textarea ng-model="form.description" id="description" aria-label="Description"></textarea>
-                </md-input-container>
-                <!--<md-checkbox ng-model="newParty.public" id="public" aria-label="Public">-->
-                    <!--Public-->
-                <!--</md-checkbox>-->
-            </div>
-        </md-dialog-content>
-    </form>
-    <div class="md-actions" layout="row">
-        <span flex></span>
-        <md-button class="primary" ng-click="close()">
-            Cancel
-        </md-button>
-        <md-button class="primary" ng-click="save()">
-            Save
-        </md-button>
+<div ng-controller="UserSaveCtrl" flex>
+    <div class="container">
+        <form layout="column">
+            <div flex></div>
+            <md-input-container>
+                <md-icon md-svg-icon="action:ic_face_24px"></md-icon>
+                <input type="text" ng-model="dataForm.name"
+                       placeholder="Name" aria-label="name"/>
+            </md-input-container>
+            <md-input-container>
+                <md-icon md-svg-icon="content:ic_face_24px"></md-icon>
+                <input type="text" ng-model="dataForm.lastName"
+                       placeholder="Last name" aria-label="lastName"/>
+            </md-input-container>
+            <md-input-container>
+                <md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
+                <input type="text" ng-model="dataForm.email"
+                       placeholder="Email" aria-label="email"/>
+            </md-input-container>
+            <md-input-container>
+                <md-icon md-svg-icon="action:ic_lock_open_24px"></md-icon>
+                <input type="password" ng-model="dataForm.password"
+                       placeholder="Password" aria-label="password"/>
+            </md-input-container>
+            <md-input-container>
+                <md-icon md-svg-icon="action:ic_lock_open_24px"></md-icon>
+                <input type="password" ng-model="dataForm.confirmPassword"
+                       placeholder="Confirm password" aria-label="confirmPassword"/>
+            </md-input-container>
+            <md-button class="md-raised md-primary" ng-click="register()" flex>
+                Create Account
+            </md-button>
+            <div flex></div>
+        </form>
     </div>
-</md-dialog>
+</div>
