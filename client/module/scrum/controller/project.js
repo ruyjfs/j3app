@@ -1,8 +1,16 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('ProjectCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope',
-    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $meteor, $rootScope) {
-        //$scope.title = 'Scrum';
+angular.module('scrum').controller('ProjectCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$reactive',
+    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $meteor, $reactive) {
+        $reactive(this).attach($scope);
+
+
+        //this.helpers({
+        //        parties: () => {
+        //                return Parties.find({});
+        //    }
+        //});
+
 
         $meteor.subscribe('project');
         $scope.projects = $meteor.collection( function() {
@@ -23,7 +31,7 @@ angular.module('scrum').controller('ProjectCtrl', [ '$scope', '$mdDialog', '$mdS
             );
         });
 //console.log($rootScope.currentUser._id);
-console.log($rootScope.currentUser);
+//console.log($rootScope.currentUser);
 
 
         $scope.remove = function(id) {

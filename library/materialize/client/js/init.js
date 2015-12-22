@@ -1,7 +1,9 @@
 (function($){
   $(function(){
 
-    $('.button-collapse').sideNav();
+    $('.button-collapse').sideNav({
+      closeOnClick: true
+    });
     //$('.modal-trigger').leanModal(
     //    {
     //      in_duration: 500, // Transition in duration

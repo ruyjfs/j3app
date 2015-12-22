@@ -23,6 +23,22 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
             return notes;
         });
 
+        $meteor.subscribe('status');
+        $scope.states = [];
+        $meteor.collection( function() {
+            result = Status.find({});
+            //$meteor.subscribe('story');
+            result.forEach(function(value, key){
+            //    note.story = Story.findOne(note.story);
+            //    note.owner = Meteor.users.findOne(note.owner);
+            //    //teste = note.owner.name.split(' ');
+            //    //console.log(teste);
+            //    //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
+                $scope.states[key] = value;
+            });
+            return result;
+        });
+
         //console.log(Story.find({}));
 
 

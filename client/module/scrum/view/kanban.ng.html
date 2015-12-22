@@ -22,18 +22,22 @@
                     <span>Criado</span> <br>
                     <a href="#" class="select-all" style="display: none">Select All</a>
                 </th>
-                <th id="header-sprintAtual" class="plus-header">
-                    <span>Em execução</span> <br>
+                <th class="plus-header" ng-repeat="status in states">
+                    <span>{{status.name}}</span> <br>
                     <a href="#" class="select-all" style="display: none">Select All</a>
                 </th>
-                <th id="header-proximaSprint" class="plus-header">
-                    <span>Aguardando verificação</span> <br>
-                    <a href="#" class="select-all" style="display: none">Select All</a>
-                </th>
-                <th id="header-backLog" class="plus-header">
-                    <span>Pronto</span>
-                    <a href="#" class="select-all" style="display: none">Select All</a>
-                </th>
+                <!--<th id="header-sprintAtual" class="plus-header">-->
+                    <!--<span>Em execução</span> <br>-->
+                    <!--<a href="#" class="select-all" style="display: none">Select All</a>-->
+                <!--</th>-->
+                <!--<th id="header-proximaSprint" class="plus-header">-->
+                    <!--<span>Aguardando verificação</span> <br>-->
+                    <!--<a href="#" class="select-all" style="display: none">Select All</a>-->
+                <!--</th>-->
+                <!--<th id="header-backLog" class="plus-header">-->
+                    <!--<span>Pronto</span>-->
+                    <!--<a href="#" class="select-all" style="display: none">Select All</a>-->
+                <!--</th>-->
             </tr>
             <tr class="story-task-row">
                 <td rowspan="2" id="story-915989-title" class="stories">
@@ -66,9 +70,8 @@
                 </td>
                 <td class="verify"></td>
                 <td id="sprintAnterior" class="linha status_1" sprintid="" sprinthorasgastas="0" sprinthoras="">
-
                     <div class="task-kanban hoverable" id="task_{{backLogNote._id}}" style="background-color: {{backLogNote.story.color}}"  ng-repeat="backLogNote in backLogNotes">
-                        <div class="handle"> {{backLogNote.owner.firstName}} </div>
+                        <div class="handle"> {{backLogNote.owner.name}} </div>
                         <div class="title" title="{{backLogNote.name}}" >
 <pre class="title_inner" style="text-align: left;">{{backLogNote.description}}</pre>
                         </div>
