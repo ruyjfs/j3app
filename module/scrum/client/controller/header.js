@@ -1,20 +1,21 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$meteor', '$rootScope', '$mdDialog', '$mdBottomSheet', '$mdToast',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $meteor, $rootScope, $mdDialog, $mdBottomSheet, $mdToast) {
+angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$reactive', '$auth', '$mdDialog', '$mdBottomSheet', '$mdToast',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $reactive, $auth, $mdDialog, $mdBottomSheet, $mdToast) {
+        $reactive(this).attach($scope);
 
-        $scope.toggleMenu = buildToggler('menu');
-        $scope.toggleContactList = buildToggler('contact-list');
+        this.toggleMenu = buildToggler('menu');
+        this.toggleContactList = buildToggler('contact-list');
 
-        $scope.title = 'Brotherhood';
-        $scope.redirect = function(route){
+        this.title = 'Brotherhood';
+        this.redirect = function(route){
             arrTitle = route.split('/');
             $scope.title = arrTitle[1];
             $mdSidenav('menu').close();
             $location.path(route);
         }
 
-        $scope.close = function(){
+        this.close = function(){
             $mdSidenav('chat').close()
                 .then(function(){
                     $scope.messages = [];
@@ -23,7 +24,7 @@ angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSid
             $mdSidenav('contact-list').toggle();
         }
 
-        $scope.showModulesGrid = function($event) {
+        this.showModulesGrid = function($event) {
             console.log($mdBottomSheet);
             $scope.alert = '';
             $mdBottomSheet.show({
@@ -42,24 +43,24 @@ angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSid
             });
         };
 
-        $scope.toggleChat = function(friendId){
+        this.toggleChat = function(friendId){
             $mdSidenav('contact-list').close();
             $scope.friendId = friendId;
-            $scope.currentUser.userId = $rootScope.currentUser._id;
+            this.currentUser.userId = $auth.currentUser._id;
 
-            $meteor.subscribe('messages');
-            $scope.messages = $meteor.collection( function() {
+            this.subscribe('messages');
+            $scope.messages = Meteor.collection( function() {
                 return Messages.find(
                     {
                         $or: [
                             {
-                                'userId' : $rootScope.currentUser._id,
+                                'userId' : $auth.currentUser._id,
                                 'friendId' : friendId
                             }
                             ,
                             {
                                 'userId' : friendId,
-                                'friendId' : $rootScope.currentUser._id
+                                'friendId' : $auth.currentUser._id
                             }
                         ]
                     }
@@ -70,7 +71,7 @@ angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSid
             //$scope.messages = $meteor.collection(Messages).subscribe('messages', friendId);
         };
 
-        $scope.modalLogin = function(ev, id){
+        this.modalLogin = function(ev, id){
             //$mdDialog.alert()
             //    .parent(angular.element(document.querySelector('#popupContainer')))
             //    .clickOutsideToClose(true)

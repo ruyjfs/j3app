@@ -5,44 +5,61 @@ angular.module('scrum').controller('ProjectCtrl', [ '$scope', '$mdDialog', '$mdS
         $reactive(this).attach($scope);
 
         this.subscribe('project');
-
-        //this.helpers({
-        //        projects: () => {
-        //        return Project.find(
-        //            {
-        //                //$or: [
-        //                //    {
-        //                //        'userId' : $rootScope.currentUser._id,
-        //                //        'friendId' : friendId
-        //                //    }
-        //                //    ,
-        //                //    {
-        //                //        'userId' : friendId,
-        //                //        'friendId' : $rootScope.currentUser._id
-        //                //    }
-        //                //]
-        //            }
-        //        );
-        //    }
-        //});d
-
-        this.projects = $meteor.collection( function() {
-            return Project.find(
-                {
-                    //$or: [
-                    //    {
-                    //        'userId' : $rootScope.currentUser._id,
-                    //        'friendId' : friendId
-                    //    }
-                    //    ,
-                    //    {
-                    //        'userId' : friendId,
-                    //        'friendId' : $rootScope.currentUser._id
-                    //    }
-                    //]
-                }
-            );
+        this.helpers({
+                projects: function() {
+                return Project.find(
+                    {
+                        //$or: [
+                        //    {
+                        //        'userId' : $rootScope.currentUser._id,
+                        //        'friendId' : friendId
+                        //    }
+                        //    ,
+                        //    {
+                        //        'userId' : friendId,
+                        //        'friendId' : $rootScope.currentUser._id
+                        //    }
+                        //]
+                    }
+                );
+            }
         });
+
+        //this.projects = Project.find(
+        //                {
+        //                    //$or: [
+        //                    //    {
+        //                    //        'userId' : $rootScope.currentUser._id,
+        //                    //        'friendId' : friendId
+        //                    //    }
+        //                    //    ,
+        //                    //    {
+        //                    //        'userId' : friendId,
+        //                    //        'friendId' : $rootScope.currentUser._id
+        //                    //    }
+        //                    //]
+        //                }
+        //            );
+        //
+        //console.log(this.projects);
+
+        //this.projects = $meteor.collection( function() {
+        //    return Project.find(
+        //        {
+        //            //$or: [
+        //            //    {
+        //            //        'userId' : $rootScope.currentUser._id,
+        //            //        'friendId' : friendId
+        //            //    }
+        //            //    ,
+        //            //    {
+        //            //        'userId' : friendId,
+        //            //        'friendId' : $rootScope.currentUser._id
+        //            //    }
+        //            //]
+        //        }
+        //    );
+        //});
 
         //$scope.projects = [];
 //console.log($rootScope.currentUser._id);
@@ -50,7 +67,7 @@ angular.module('scrum').controller('ProjectCtrl', [ '$scope', '$mdDialog', '$mdS
 
 
         this.remove = function(id) {
-            $scope.projects.remove(id);
+            this.projects.remove(id);
         }
 
         this.modalProjectSave = function(ev, id){
@@ -63,9 +80,9 @@ angular.module('scrum').controller('ProjectCtrl', [ '$scope', '$mdDialog', '$mdS
                 },
                 targetEvent: ev
             }).then(function(answer) {
-                $scope.status = 'You said the information was "' + answer + '".';
+                this.status = 'You said the information was "' + answer + '".';
             }, function() {
-                $scope.status = 'You cancelled the dialog.';
+                this.status = 'You cancelled the dialog.';
             });
         };
 
@@ -88,9 +105,9 @@ angular.module('scrum').controller('ProjectCtrl', [ '$scope', '$mdDialog', '$mdS
                 },
                 targetEvent: ev
             }).then(function(answer) {
-                $scope.status = 'You said the information was "' + answer + '".';
+                this.status = 'You said the information was "' + answer + '".';
             }, function() {
-                $scope.status = 'You cancelled the dialog.';
+                this.status = 'You cancelled the dialog.';
             });
         };
 }]);

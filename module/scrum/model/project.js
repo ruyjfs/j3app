@@ -1,21 +1,33 @@
 Project = new Mongo.Collection("project");
 Project.allow({
-    insert: function (userId) {
+    insert: function () {
         //return userId && party.owner === userId;
-        return userId;
+        return true;
     },
     update: function (userId, party, fields, modifier) {
         //return userId && party.owner === userId;
-        return userId;
+        return true;
     },
     remove: function (userId, party) {
         //return userId && party.owner === userId;
-        return userId;
+        return true;
     }
 });
 //yemiX6y3u7vnqpS3n
 //92okH9HNck243cdQ5
 Meteor.methods({
+    projectSave: function(dataForm){
+        dataForm.userId = Meteor.userId();
+        if (dataForm._id) {
+            Project.update(dataForm._id, { $set: dataForm});
+        } else {
+            Project.insert(dataForm);
+        }
+    },
+    projectDelete: function(id){
+        Project.remove(id);
+    }
+
     //invite: function (partyId, userId) {
     //    check(partyId, String);
     //    check(userId, String);

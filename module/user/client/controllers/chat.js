@@ -1,5 +1,5 @@
-angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$anchorScroll', '$location',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, $anchorScroll, $location) {
+angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$auth', '$anchorScroll', '$location',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $auth, $anchorScroll, $location) {
 
         $scope.newMessage = {};
         $scope.addNewMessage = function () {
@@ -8,10 +8,10 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
 
                 //console.log($rootScope.currentUser._id);
                 console.log($scope.friendId);
-                console.log($rootScope.currentUser._id);
+                console.log($auth.currentUser._id);
                 //console.log($rootScope.currentUser);
 
-                $scope.newMessage.userId = $rootScope.currentUser._id;
+                $scope.newMessage.userId = $auth.currentUser._id;
                 $scope.newMessage.friendId = $scope.friendId;
                 $scope.newMessage.date = new Date();
                 $scope.newMessage.userEnabled = true;
@@ -61,7 +61,7 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
         //};
 
         $scope.getOwnerMessage = function(message){
-            if (message.userId == $rootScope.currentUser._id) {
+            if (message.userId == $auth.currentUser._id) {
                 return 'You';
             } else {
                 user = Meteor.users.findOne(message.userId);
@@ -71,7 +71,7 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
         }
 
         $scope.getMessageStyle = function(message){
-            if (message.userId == $rootScope.currentUser._id) {
+            if (message.userId == $auth.currentUser._id) {
                 var style = "margin-top: 15px; padding: 0.1px 15px 0.1px 15px; text-align: right; background-color: #FFECB3;";
                 return style;
             } else {

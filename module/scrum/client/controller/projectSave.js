@@ -1,14 +1,16 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('ProjectSaveCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$mdDialog', 'id',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, $mdDialog, id) {
-        $scope.title = 'Project';
+angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$reactive', '$rootScope', '$mdDialog', 'id',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $reactive, $rootScope, $mdDialog, id) {
+        $reactive(this).attach($scope);
+        this.title = 'Project';
 
-
-        //$scope.teams = $meteor.collection(Meteor.team, false).subscribe('team');
-        $scope.teams = $meteor.collection( function() {
-            return Team.find({});
+        $scope.helpers({
+            teams: function () {
+                return Team.find({});
+            }
         });
+
         $scope.weeks = [
             1,
             2,
@@ -17,22 +19,23 @@ angular.module('scrum').controller('ProjectSaveCtrl', [ '$scope', '$timeout', '$
         ];
 
         if (id) {
-            $scope.form = $meteor.object(Project, id, false);
+            //$scope.form = $meteor.object(Project, id, false);
+            $scope.form = Project.findOne(id);
         } else {
             $scope.form = {};
         }
 
         $scope.save = function () {
-            if($scope.form.name){
-                if (id) {
-                    $scope.form.save();
-                } else {
-                    Project.insert($scope.form);
-                }
 
-                $scope.form = '';
-                $mdDialog.hide();
-            }
+            Meteor.call('projectSave', $scope.form, function (error) {
+                if (error) {
+                    console.log('Oops, unable to invite!');
+                } else {
+                    console.log('Saved!');
+                    $scope.form = '';
+                    $mdDialog.hide();
+                }
+            });
         }
 
         $scope.close = function () {

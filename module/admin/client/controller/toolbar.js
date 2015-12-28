@@ -1,5 +1,5 @@
-angular.module('admin').controller('ToolbarCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$meteor', '$rootScope',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $meteor, $rootScope) {
+angular.module('admin').controller('ToolbarCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$meteor', '$auth',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $meteor, $auth) {
 
         $scope.toggleMenu = buildToggler('menu');
         $scope.toggleContactList = buildToggler('contact-list');
@@ -24,7 +24,7 @@ angular.module('admin').controller('ToolbarCtrl', [ '$scope', '$timeout', '$mdSi
         $scope.toggleChat = function(friendId){
             $mdSidenav('contact-list').close();
             $scope.friendId = friendId;
-            $scope.currentUser.userId = $rootScope.currentUser._id;
+            $auth.currentUser.userId = $auth.currentUser._id;
 
             $meteor.subscribe('messages');
             $scope.messages = $meteor.collection( function() {
@@ -32,13 +32,13 @@ angular.module('admin').controller('ToolbarCtrl', [ '$scope', '$timeout', '$mdSi
                     {
                         $or: [
                             {
-                                'userId' : $rootScope.currentUser._id,
+                                'userId' : $auth.currentUser._id,
                                 'friendId' : friendId
                             }
                             ,
                             {
                                 'userId' : friendId,
-                                'friendId' : $rootScope.currentUser._id
+                                'friendId' : $auth.currentUser._id
                             }
                         ]
                     }

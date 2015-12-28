@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('user').controller('UserSaveCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$mdDialog',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, $mdDialog) {
+angular.module('user').controller('UserSaveCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$auth', '$mdDialog',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $auth, $mdDialog) {
 
         //$scope.title = 'Scrum';
         //$scope.members = $meteor.collection(Meteor.users, false).subscribe('users');
@@ -27,7 +27,7 @@ angular.module('user').controller('UserSaveCtrl', [ '$scope', '$timeout', '$mdSi
 
         //$scope.dataForm = $meteor.object(Users, $rootScope.currentUser._id, false);
         //$scope.members = $meteor.collection(Meteor.users, false).subscribe('users');
-        $scope.dataForm = $meteor.object(Meteor.users, $rootScope.currentUser._id, false);
+        $scope.dataForm = $meteor.object(Meteor.users, $auth.currentUser._id, false);
         $scope.dataForm.email = $scope.dataForm.emails[0].address;
 
         $scope.saveUser = function (){

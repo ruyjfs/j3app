@@ -1,4 +1,4 @@
-<div ng-controller="HeaderCtrl" flex>
+<div ng-controller="HeaderCtrl as vm" flex>
     <div class="navbar-fixed">
         <nav class="brown darken-3" role="navigation">
             <div class="nav-wrapper container">
@@ -9,7 +9,7 @@
                         <!--<li><a href="/scrum/team"><i class="material-icons">group</i></a></li>-->
                         <!--<li><a href="/scrum/team"><i class="material-icons">group_work</i></a></li>-->
                         <!--<li><a href="#" ng-click="toggleContactList()"><i class="material-icons">chat</i></a></li>-->
-                        <li><a href="#" ng-click="toggleContactList()"><i class="material-icons">question_answer</i></a></li>
+                        <li><a href="#" ng-click="vm.toggleContactList()"><i class="material-icons">question_answer</i></a></li>
                         <li><a class="dropdown-button" href="#" data-activates="dropdown1"><i class="material-icons">language</i></a></li>
                         <!-- Dropdown Structure -->
                         <ul id="dropdown1" class="dropdown-content">
@@ -17,7 +17,7 @@
                             <li><a href="#" onclick="javascript:setUserLanguage('pt-BR')">Portuguese</a></li>
                         </ul>
                         <!--<li><a href="#" ng-click="showModulesGrid($event)"><i class="material-icons">settings</i></a></li>-->
-                        <li><a href="#" ng-click="showModulesGrid($event)"><i class="material-icons">view_module</i></a></li>
+                        <li><a href="#" ng-click="vm.showModulesGrid($event)"><i class="material-icons">view_module</i></a></li>
                         <!--<li><a href="/user"><i class="material-icons"><i class="material-icons">person</i></i></a></li>-->
                         <li><a href="/user/logout" class="logout"><i class="material-icons">power_settings_new</i></a></li>
                     </div>
@@ -25,7 +25,7 @@
                         <li><a href="/"><i class="material-icons">home</i></a></li>
                         <!--<li><a class="modal-trigger" href="#modalLogin"><i class="material-icons">person</i></a></li>-->
                         <!--<li><i class="material-icons left">person</i>{{> loginButtons}}</li>-->
-                        <li><a href="#" ng-click="modalLogin($event, project._id)"><i class="material-icons">person</i></a></li>
+                        <li><a href="#" ng-click="vm.modalLogin($event, project._id)"><i class="material-icons">person</i></a></li>
                         <li><a class="dropdown-button" href="#" data-activates="dropdown1"><i class="material-icons">language</i></a></li>
                         <!-- Dropdown Structure -->
                         <ul id="dropdown1" class="dropdown-content">
@@ -51,7 +51,7 @@
                     </div>
                     <div ng-if="!$root.currentUser">l
                         <li><a href="/" class="waves-effect waves-orange"><i class="material-icons left">home</i>Home</a></li>
-                        <li><a href="#" ng-click="modalLogin($event, project._id)" class="waves-effect waves-orange"><i class="material-icons left">person</i>Login</a></li>
+                        <li><a href="#" ng-click="vm.modalLogin($event, project._id)" class="waves-effect waves-orange"><i class="material-icons left">person</i>Login</a></li>
                         <li><a href="#" class="waves-effect waves-orange dropdown-button" data-activates="dropdown2"><i class="material-icons left">language</i>Language</a></li>
                         <ul id='dropdown2' class='dropdown-content' style="min-width: 200px;">
                             <li><a href="#!" onclick="javascript:setUserLanguage('en-US')">English</a></li>
@@ -63,7 +63,7 @@
                 </ul>
                 <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul ng-hide="!$root.currentUser" class="right hide-on-large-only">
-                    <li><a href="#" ng-click="toggleContactList()"><i class="material-icons">chat</i></a></li>
+                    <li><a href="#" ng-click="vm.toggleContactList()"><i class="material-icons">chat</i></a></li>
                 </ul>
             </div>
         </nav>
