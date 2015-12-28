@@ -1,0 +1,75 @@
+<head>
+    <!--<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.brown-deep_orange.min.css" />-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--<title>j3scrum</title>-->
+</head>
+<!--<body layout="column">-->
+<body>
+<!--<div ng-controller="ToolbarCtrl" layout="column" layout-fill ng-cloak>-->
+<!--<div ng-controller="ToolbarCtrl" layout="column">-->
+<!--<header>-->
+<!--<div ng-include="'client/module/admin/view/toolbar.ng.html'"></div>-->
+<!--</header>-->
+<!--<main>-->
+<!--<section layout="row" flex>-->
+<!--&lt;!&ndash;<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="menu" md-is-locked-open="$mdMedia('gt-md')">&ndash;&gt;-->
+<!--<md-content flex layout-padding>-->
+<!--<div layout="column" layout-align="top center">-->
+<!--<div ui-view ></div>-->
+<!--</div>-->
+<!--&lt;!&ndash;<div flex></div>&ndash;&gt;-->
+<!--&lt;!&ndash;layout-wrap&ndash;&gt;-->
+<!--</md-content>-->
+<!--</section>-->
+<!--</main>-->
+<!--<footer class="page-footer brown darken-4" style="margin-top: 0px;">-->
+<!--<div class="footer-copyright">-->
+<!--<div class="container">-->
+<!--Made by <a class="orange-text text-lighten-3" href="http://j3rotherhood.com">j3rotherhood</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash;<div layout="row" layout-align="center center">&ndash;&gt;-->
+<!--&lt;!&ndash;<h2>My Awesome Footer</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<md-toolbar layout="row" layout-align="start center" layout-padding>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;<md-toolbar md-scroll-shrink layout="row" layout-align="start center" style="position: fixed;"  layout-padding>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;<md-toolbar  md-scroll-shrink ng-if="true" layout-align="start center" layout-padding style="position: fixed;">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;<md-button class="md-icon-button" ng-click="toggleMenu()"  hide-gt-md>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;<md-icon md-svg-icon="navigation:ic_menu_24px" aria-label="Menu"></md-icon>&ndash;&gt;&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;<i class="material-icons">menu</i>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;</md-button>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;<md-toolbar class="md-theme-indigo">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;Brotherhood&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;</md-toolbar>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;<h2>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;<a ui-sref="brotherhood"><span class="md-title">brotherhood</span></a>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<span class="md-title" style="text-transform: capitalize;">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;Teste&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;<h2>My Awesome Footer</h2>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;</span>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;</md-toolbar>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--</footer>-->
+<!--<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="menu">-->
+<!--<div ng-include="'client/module/admin/view/menu-items.ng.html'"></div>-->
+<!--</md-sidenav>-->
+<!--<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="chat">-->
+<!--<div ng-include="'client/module/user/views/chat.ng.html'"></div>-->
+<!--</md-sidenav>-->
+<!--<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="contact-list">-->
+<!--<div ng-include="'client/module/user/views/contact-list.ng.html'"></div>-->
+<!--</md-sidenav>-->
+<!--</div>-->
+<!--<div  ng-app="brotherhood">-->
+
+<header>
+    <div ng-include="'module/scrum/client/view/header.ng.html'"></div>
+</header>
+<main>
+    <div ui-view></div>
+</main>
+<footer class="page-footer brown darken-4" style="margin-top: 0px; padding-top: 0px; min-height: 64px;">
+    <div ng-include="'module/scrum/client/view/footer.ng.html'"></div>
+</footer>
+</body>
