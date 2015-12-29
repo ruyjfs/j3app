@@ -1,7 +1,7 @@
-//angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
-//    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('ProjectCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$log', '$meteor', '$reactive',
-    function ($scope, $mdDialog, $mdSidenav, $log, $meteor, $reactive) {
+//angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams'',
+//    function($scope, $stateParams){
+angular.module('scrum').controller('ProjectCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$log', '$reactive',
+    function ($scope, $mdDialog, $mdSidenav, $log, $reactive) {
         $reactive(this).attach($scope);
 
         this.subscribe('project');

@@ -1,8 +1,8 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$mdDialog', '$state',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, $mdDialog, $state) {
-        //var vm = this;
+angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$rootScope', '$mdDialog', '$state', '$reactive',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $rootScope, $mdDialog, $state, $reactive) {
+        $reactive(this).attach($scope);
 
         $scope.dataForm = {
             name: '',
@@ -15,19 +15,18 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
         $scope.error = '';
 
         $scope.login = function () {
-            $meteor.loginWithPassword($scope.dataForm.email, $scope.dataForm.password).then(
-                function () {
+            Meteor.loginWithPassword(this.dataForm.email, this.dataForm.password, function(err) {
+                if (err) {
+                    this.error = err;
+                } else {
                     $mdDialog.hide();
                     $state.go('scrum/project');
-                },
-                function (err) {
-                    $scope.error = 'Login error - ' + err;
                 }
-            );
+            });
         };
 
         $scope.reset = function () {
-            $meteor.forgotPassword($scope.dataForm.email).then(
+            Meteor.forgotPassword($scope.dataForm.email).then(
                 function () {
                     $mdDialog.hide();
                     $state.go('scrum/project');
@@ -43,7 +42,7 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
             if (!$scope.dataForm.name || !$scope.dataForm.lastName) {
                 $scope.error = 'Registration error - Inform you name';
             } else if ($scope.dataForm.password == $scope.dataForm.confirmPassword) {
-                $meteor.createUser($scope.dataForm).then(
+                Meteor.createUser($scope.dataForm).then(
                     function () {
                         //$scope.teamForm = $meteor.object(Team, id, false);
                         $mdDialog.hide();

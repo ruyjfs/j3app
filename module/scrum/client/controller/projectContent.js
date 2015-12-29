@@ -4,7 +4,7 @@ angular.module('scrum').controller('ProjectContentCtrl', [ '$scope', '$mdDialog'
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $meteor, $rootScope) {
         //$scope.title = 'Scrum';
 
-        $meteor.subscribe('project');
+        Meteor.subscribe('project');
         $scope.projects = $meteor.collection( function() {
             return Project.find(
                 {

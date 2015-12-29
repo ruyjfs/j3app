@@ -3,7 +3,7 @@
 angular.module('scrum').controller('StoryCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope',
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $meteor, $rootScope) {
 
-        $meteor.subscribe('story');
+        Meteor.subscribe('story');
         $scope.stories = $meteor.collection( function() {
             return Story.find({});
         });

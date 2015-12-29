@@ -84,7 +84,7 @@ angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor', '
         });
     });
 
-    $meteor.subscribe('parties', {
+        Meteor.subscribe('parties', {
         limit: parseInt($scope.getReactively('perPage')),
         skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
         sort: $scope.getReactively('sort')
@@ -93,7 +93,7 @@ angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor', '
     });
 
     $meteor.autorun($scope, function() {
-        $meteor.subscribe('parties', {
+        Meteor.subscribe('parties', {
             limit: parseInt($scope.perPage),
             skip: parseInt(($scope.page - 1) * $scope.perPage),
             sort: $scope.sort

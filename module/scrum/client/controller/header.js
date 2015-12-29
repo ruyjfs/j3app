@@ -1,8 +1,12 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$reactive', '$auth', '$mdDialog', '$mdBottomSheet', '$mdToast',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $reactive, $auth, $mdDialog, $mdBottomSheet, $mdToast) {
+angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$reactive', '$mdDialog', '$mdBottomSheet', '$mdToast',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $reactive, $mdDialog, $mdBottomSheet, $mdToast) {
         $reactive(this).attach($scope);
+
+
+        this.friendId = '1';
+        friendId = '2';
 
         this.toggleMenu = buildToggler('menu');
         this.toggleContactList = buildToggler('contact-list');
@@ -15,15 +19,6 @@ angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSid
             $location.path(route);
         }
 
-        this.close = function(){
-            $mdSidenav('chat').close()
-                .then(function(){
-                    $scope.messages = [];
-                    console.info('ENTROU MANO')
-                });
-            $mdSidenav('contact-list').toggle();
-        }
-
         this.showModulesGrid = function($event) {
             console.log($mdBottomSheet);
             $scope.alert = '';
@@ -34,41 +29,13 @@ angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSid
                 clickOutsideToClose: true,
                 targetEvent: $event
             }).then(function(clickedItem) {
-                $mdToast.show(
-                    $mdToast.simple()
-                        .textContent(clickedItem['name'] + ' clicked!')
-                        .position('top right')
-                        .hideDelay(1500)
-                );
+                //$mdToast.show(
+                //    $mdToast.simple()
+                //        .textContent(clickedItem['name'] + ' clicked!')
+                //        .position('top right')
+                //        .hideDelay(1500)
+                //);
             });
-        };
-
-        this.toggleChat = function(friendId){
-            $mdSidenav('contact-list').close();
-            $scope.friendId = friendId;
-            this.currentUser.userId = $auth.currentUser._id;
-
-            this.subscribe('messages');
-            $scope.messages = Meteor.collection( function() {
-                return Messages.find(
-                    {
-                        $or: [
-                            {
-                                'userId' : $auth.currentUser._id,
-                                'friendId' : friendId
-                            }
-                            ,
-                            {
-                                'userId' : friendId,
-                                'friendId' : $auth.currentUser._id
-                            }
-                        ]
-                    }
-                );
-            });
-
-            $mdSidenav('chat').toggle();
-            //$scope.messages = $meteor.collection(Messages).subscribe('messages', friendId);
         };
 
         this.modalLogin = function(ev, id){

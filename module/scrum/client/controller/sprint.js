@@ -4,11 +4,11 @@ angular.module('scrum').controller('SprintCtrl', [ '$scope', '$mdDialog', '$mdSi
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $meteor, $rootScope) {
         //$scope.title = 'Scrum';
 
-        $meteor.subscribe('note');
+        Meteor.subscribe('note');
         $scope.backLogNotes = [];
         $meteor.collection( function() {
             notes = Note.find({});
-            $meteor.subscribe('story');
+            Meteor.subscribe('story');
             notes.forEach(function(note, noteKey){
                 note.story = Story.findOne(note.story);
                 note.owner = Meteor.users.findOne(note.owner);

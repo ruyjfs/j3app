@@ -1,16 +1,16 @@
-<div ng-controller="UserSaveCtrl" flex>
+<div ng-controller="UserSaveCtrl as vm" flex>
     <!--<div class="container">-->
         <md-content class="md-padding">
         <form layout="column">
             <div flex></div>
             <md-input-container>
                 <md-icon md-svg-icon="action:ic_face_24px"></md-icon>
-                <input type="text" ng-model="dataForm.name"
+                <input type="text" ng-model="vm.form.name"
                        placeholder="Name" aria-label="name"/>
             </md-input-container>
             <md-input-container>
                 <md-icon md-svg-icon="action:ic_face_24px"></md-icon>
-                <input type="text" ng-model="dataForm.lastName"
+                <input type="text" ng-model="vm.form.lastName"
                        placeholder="Last name" aria-label="lastName"/>
             </md-input-container>
             <!--<md-input-container>-->
@@ -28,7 +28,7 @@
                 <!--<input type="password" ng-model="dataForm.confirmPassword"-->
                        <!--placeholder="Confirm password" aria-label="confirmPassword"/>-->
             <!--</md-input-container>-->
-            <md-button class="md-raised md-primary" ng-click="saveUser()" flex>
+            <md-button class="md-raised md-primary" ng-click="vm.saveUser()" flex>
                 Save
             </md-button>
             <div flex></div>

@@ -1,26 +1,21 @@
-angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$auth', '$anchorScroll', '$location',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $auth, $anchorScroll, $location) {
+angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$reactive', '$anchorScroll', '$location', '$rootScope',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $reactive, $anchorScroll, $location, $rootScope) {
+        $reactive(this).attach($scope);
 
-        $scope.newMessage = {};
-        $scope.addNewMessage = function () {
+        this.newMessage = {};
+        this.addNewMessage = function () {
 
-            if($scope.newMessage.text && $scope.friendId){
-
-                //console.log($rootScope.currentUser._id);
-                console.log($scope.friendId);
-                console.log($auth.currentUser._id);
-                //console.log($rootScope.currentUser);
-
-                $scope.newMessage.userId = $auth.currentUser._id;
-                $scope.newMessage.friendId = $scope.friendId;
-                $scope.newMessage.date = new Date();
-                $scope.newMessage.userEnabled = true;
-                $scope.newMessage.friendEnabled = true;
-                Messages.insert($scope.newMessage);
+            if(this.newMessage.text && $rootScope.friendId){
+                this.newMessage.userId = Meteor.user()._id;
+                this.newMessage.friendId = $rootScope.friendId;
+                this.newMessage.date = new Date();
+                this.newMessage.userEnabled = true;
+                this.newMessage.friendEnabled = true;
+                Messages.insert(this.newMessage);
                 //$scope.newMessage.owner = $scope.friendId;
                 //$scope.newMessage.friendId = $rootScope.currentUser._id;
                 //Messages.insert($scope.newMessage);
-                $scope.newMessage = [];
+                this.newMessage = [];
 
                 // set the location.hash to the id of
                 // the element you wish to scroll to.
@@ -33,11 +28,24 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
             }
         }
 
-        $scope.typing = function($event){
+        this.typing = function($event){
             //if ($scope.newMessage.text.length > 0) {
             //    console.log($scope.newMessage.text);
             //}
         }
+
+        Meteor.subscribe('messages');
+        //this.helpers({
+        //    messages: function() {
+        //        return $rootScope.messages;
+        //    }
+        //});
+
+        this.messages = $rootScope.messages;
+
+        console.log(this.messages);
+
+            //$scope.messages = $meteor.collection(Messages).subscribe('messages', friendId);
 
 
         //$mdSidenav().when('chat').then(function(){
@@ -60,8 +68,8 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
         //    $scope.messages = [{}];
         //};
 
-        $scope.getOwnerMessage = function(message){
-            if (message.userId == $auth.currentUser._id) {
+        this.getOwnerMessage = function(message){
+            if (message.userId == Meteor.user()._id) {
                 return 'You';
             } else {
                 user = Meteor.users.findOne(message.userId);
@@ -70,8 +78,8 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
             }
         }
 
-        $scope.getMessageStyle = function(message){
-            if (message.userId == $auth.currentUser._id) {
+        this.getMessageStyle = function(message){
+            if (message.userId == Meteor.user()._id) {
                 var style = "margin-top: 15px; padding: 0.1px 15px 0.1px 15px; text-align: right; background-color: #FFECB3;";
                 return style;
             } else {
@@ -89,6 +97,13 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
         //        $log.debug('hahahaah');
         //    });
 
+        this.close = function(){
+            $mdSidenav('chat').close()
+                .then(function(){
+                    $scope.messages = [];
+                });
+            $mdSidenav('contact-list').toggle();
+        }
 
         //$scope.messages = $meteor.collection(Messages, false).subscribe('messages');
         //$scope.messages = $scope.parties;

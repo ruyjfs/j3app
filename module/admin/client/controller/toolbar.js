@@ -1,5 +1,5 @@
-angular.module('admin').controller('ToolbarCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$meteor', '$auth',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $meteor, $auth) {
+angular.module('admin').controller('ToolbarCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$meteor',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $meteor) {
 
         $scope.toggleMenu = buildToggler('menu');
         $scope.toggleContactList = buildToggler('contact-list');
@@ -21,33 +21,51 @@ angular.module('admin').controller('ToolbarCtrl', [ '$scope', '$timeout', '$mdSi
             $mdSidenav('contact-list').toggle();
         }
 
-        $scope.toggleChat = function(friendId){
-            $mdSidenav('contact-list').close();
-            $scope.friendId = friendId;
-            $auth.currentUser.userId = $auth.currentUser._id;
-
-            $meteor.subscribe('messages');
-            $scope.messages = $meteor.collection( function() {
-                return Messages.find(
-                    {
-                        $or: [
-                            {
-                                'userId' : $auth.currentUser._id,
-                                'friendId' : friendId
-                            }
-                            ,
-                            {
-                                'userId' : friendId,
-                                'friendId' : $auth.currentUser._id
-                            }
-                        ]
-                    }
-                );
-            });
-
-            $mdSidenav('chat').toggle();
-            //$scope.messages = $meteor.collection(Messages).subscribe('messages', friendId);
-        };
+        //$scope.toggleChat = function(friendId){
+        //    $mdSidenav('contact-list').close();
+        //
+        //
+        //    //this.friendId = friendId;
+        //
+        //    return Messages.find(
+        //        {
+        //            $or: [
+        //                {
+        //                    'userId' : Meteor.user()._id,
+        //                    'friendId' : $rootScope.friendId
+        //                }
+        //                ,
+        //                {
+        //                    'userId' : $rootScope.friendId,
+        //                    'friendId' : Meteor.user()._id
+        //                }
+        //            ]
+        //        }
+        //    );
+        //    //this.currentUser.userId = Meteor.user()._id;
+        //
+        //    //Meteor.subscribe('messages');
+        //    //$scope.messages = $meteor.collection( function() {
+        //    //    return Messages.find(
+        //    //        {
+        //    //            $or: [
+        //    //                {
+        //    //                    'userId' : Meteor.user()._id,
+        //    //                    'friendId' : friendId
+        //    //                }
+        //    //                ,
+        //    //                {
+        //    //                    'userId' : friendId,
+        //    //                    'friendId' : Meteor.user()._id
+        //    //                }
+        //    //            ]
+        //    //        }
+        //    //    );
+        //    //});
+        //
+        //    $mdSidenav('chat').toggle();
+        //    //$scope.messages = $meteor.collection(Messages).subscribe('messages', friendId);
+        //};
 
         $scope.menuItems = [
             {

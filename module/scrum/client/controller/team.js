@@ -1,27 +1,28 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope',
-    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $meteor, $rootScope) {
-        //$scope.title = 'Scrum';
+angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$reactive',
+    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive) {
+        $reactive(this).attach($scope);
 
-        $scope.test = 'HAHAHAHAA';
-        $meteor.subscribe('team');
-        $scope.teams = $meteor.collection( function() {
-            return Team.find(
-                {
-                    //$or: [
-                    //    {
-                    //        'userId' : $rootScope.currentUser._id,
-                    //        'friendId' : friendId
-                    //    }
-                    //    ,
-                    //    {
-                    //        'userId' : friendId,
-                    //        'friendId' : $rootScope.currentUser._id
-                    //    }
-                    //]
-                }
-            );
+        Meteor.subscribe('team');
+        this.helpers({
+            teams: function() {
+                return Team.find(
+                    {
+                        //$or: [
+                        //    {
+                        //        'userId' : $rootScope.currentUser._id,
+                        //        'friendId' : friendId
+                        //    }
+                        //    ,
+                        //    {
+                        //        'userId' : friendId,
+                        //        'friendId' : $rootScope.currentUser._id
+                        //    }
+                        //]
+                    }
+                );
+            }
         });
 
         $scope.remove = function(team) {

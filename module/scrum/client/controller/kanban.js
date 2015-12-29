@@ -7,11 +7,11 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
 
         //$stateParams.id
 
-        $meteor.subscribe('note');
+        Meteor.subscribe('note');
         $scope.backLogNotes = [];
         $meteor.collection( function() {
             notes = Note.find({});
-            $meteor.subscribe('story');
+            Meteor.subscribe('story');
             notes.forEach(function(note, noteKey){
                 note.story = Story.findOne(note.story);
                 note.owner = Meteor.users.findOne(note.owner);
@@ -23,7 +23,7 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
             return notes;
         });
 
-        $meteor.subscribe('status');
+        Meteor.subscribe('status');
         $scope.states = [];
         $meteor.collection( function() {
             result = Status.find({});

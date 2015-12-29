@@ -5,7 +5,7 @@ angular.module('scrum').controller('StatusCtrl', [ '$scope', '$mdDialog', '$mdSi
         //$scope.title = 'Scrum';
 
         $scope.test = 'HAHAHAHAA';
-        $meteor.subscribe('status');
+        Meteor.subscribe('status');
         $scope.states = $meteor.collection( function() {
             return Status.find(
                 {

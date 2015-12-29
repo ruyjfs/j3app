@@ -15,9 +15,27 @@ Meteor.users.allow({
         return userId;
     }
 });
-//yemiX6y3u7vnqpS3n
-//92okH9HNck243cdQ5
-//Meteor.methods({
+
+Meteor.methods({
+    userSave: function(form){
+        //form.userId = Meteor.userId();
+        //if (form._id) {
+        //    //var newForm = form;
+        //    //delete newForm._id;
+        //    //Meteor.users.update({_id: form._id}, { $set: newForm});
+        //    Meteor.users.update(form);
+        //    //console.log(Meteor.userId());
+        //} else {
+        //    Meteor.users.insert(form);
+        //}
+        form.userId = Meteor.userId();
+        if (form._id) {
+            Meteor.users.update(form._id, { $set: form});
+        } else {
+            Meteor.users.insert(form);
+        }
+    }
+
     //invite: function (partyId, userId) {
     //    check(partyId, String);
     //    check(userId, String);
@@ -91,7 +109,7 @@ Meteor.users.allow({
     //            {$push: {rsvps: {user: this.userId, rsvp: rsvp}}});
     //    }
     //}
-//});
+});
 
 //var contactEmail = function (user) {
 //    if (user.emails && user.emails.length)
