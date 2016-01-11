@@ -1,4 +1,4 @@
-<div ng-controller="TeamCtrl" flex>
+<div ng-controller="TeamCtrl as vm" flex>
     <!--<div flex-sm>-->
         <!--<div>-->
             <!--<div layout-padding layout="row" layout-align="center">-->
@@ -18,7 +18,7 @@
     <!--</div>-->
     <md-content>
         <md-list>
-            <md-list-item class="md-3-line" ng-repeat="team in teams">
+            <md-list-item class="md-3-line" ng-repeat="team in vm.teams">
                 <div class="md-list-item-text" layout="column" layout-align="center center">
                     <h3>{{team.name}}</h3>
                     <!--<h4>{{item.who}}</h4>-->

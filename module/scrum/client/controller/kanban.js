@@ -1,43 +1,46 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$stateParams',
+angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$stateParams', '$reactive',
     //function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, Sortable, id) {
-    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, $stateParams) {
-        //$scope.title = 'Scrum';
+    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $stateParams, $reactive) {
+        $reactive(this).attach($scope);
 
         //$stateParams.id
 
         Meteor.subscribe('note');
         $scope.backLogNotes = [];
-        $meteor.collection( function() {
-            notes = Note.find({});
-            Meteor.subscribe('story');
-            notes.forEach(function(note, noteKey){
-                note.story = Story.findOne(note.story);
-                note.owner = Meteor.users.findOne(note.owner);
-                //teste = note.owner.name.split(' ');
-                //console.log(teste);
-                //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
-                $scope.backLogNotes[noteKey] = note;
-            });
-            return notes;
-        });
 
         Meteor.subscribe('status');
         $scope.states = [];
-        $meteor.collection( function() {
-            result = Status.find({});
-            //$meteor.subscribe('story');
-            result.forEach(function(value, key){
-            //    note.story = Story.findOne(note.story);
-            //    note.owner = Meteor.users.findOne(note.owner);
-            //    //teste = note.owner.name.split(' ');
-            //    //console.log(teste);
-            //    //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
-                $scope.states[key] = value;
-            });
-            return result;
+        this.helpers({
+            notes: function() {
+                notes = Note.find({});
+                Meteor.subscribe('story');
+                notes.forEach(function(note, noteKey){
+                    note.story = Story.findOne(note.story);
+                    note.owner = Meteor.users.findOne(note.owner);
+                    //teste = note.owner.name.split(' ');
+                    //console.log(teste);
+                    //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
+                    $scope.backLogNotes[noteKey] = note;
+                });
+                return notes;
+            },
+            states: function() {
+                result = Status.find({});
+                //$meteor.subscribe('story');
+                result.forEach(function(value, key){
+                    //    note.story = Story.findOne(note.story);
+                    //    note.owner = Meteor.users.findOne(note.owner);
+                    //    //teste = note.owner.name.split(' ');
+                    //    //console.log(teste);
+                    //    //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
+                    $scope.states[key] = value;
+                });
+                return result;
+            }
         });
+
 
         //console.log(Story.find({}));
 

@@ -1,4 +1,4 @@
-angular.module("scrum").run(['$rootScope', '$state', function($rootScope, $state) {
+//angular.module("scrum").run(['$rootScope', '$state', function($rootScope, $state) {
     //$rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
     //    // We can catch the error thrown when the $requireUser promise is rejected
     //    // and redirect the user back to the main page
@@ -9,7 +9,7 @@ angular.module("scrum").run(['$rootScope', '$state', function($rootScope, $state
 
     //console.log(error);
     //console.log($rootScope.currentUser);
-}]);
+//}]);
 
 angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
     function($urlRouterProvider, $stateProvider, $locationProvider){

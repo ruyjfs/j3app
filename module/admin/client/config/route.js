@@ -16,19 +16,19 @@ angular.module('admin').config(['$urlRouterProvider', '$stateProvider', '$locati
     }
 ]);
 
-angular.module("admin").run(['$rootScope', '$state', function($rootScope, $state) {
-    $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
-        // We can catch the error thrown when the $requireUser promise is rejected
-        // and redirect the user back to the main page
-        if (error === 'AUTH_REQUIRED') {
-            $state.go('admin');
-        }
-    });
-
-    $rootScope.$on("$stateChangeStart",
-        function (event, toState) {
-            nameModule = toState.name.split('/')[0];
-            //setTheme(nameModule);
-        }
-    );
-}]);
+//angular.module("admin").run(['$rootScope', '$state', function($rootScope, $state) {
+//    $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
+//        // We can catch the error thrown when the $requireUser promise is rejected
+//        // and redirect the user back to the main page
+//        if (error === 'AUTH_REQUIRED') {
+//            $state.go('admin');
+//        }
+//    });
+//
+//    $rootScope.$on("$stateChangeStart",
+//        function (event, toState) {
+//            nameModule = toState.name.split('/')[0];
+//            //setTheme(nameModule);
+//        }
+//    );
+//}]);

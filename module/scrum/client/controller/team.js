@@ -4,7 +4,7 @@ angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdSide
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive) {
         $reactive(this).attach($scope);
 
-        Meteor.subscribe('team');
+        this.subscribe('team');
         this.helpers({
             teams: function() {
                 return Team.find(

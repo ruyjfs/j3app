@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$rootScope', '$mdDialog', '$state', '$reactive',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $rootScope, $mdDialog, $state, $reactive) {
+angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$mdDialog', '$state', '$reactive',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $mdDialog, $state, $reactive) {
         $reactive(this).attach($scope);
 
         $scope.dataForm = {

@@ -1,27 +1,16 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('StatusCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope',
-    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $meteor, $rootScope) {
+angular.module('scrum').controller('StatusCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$reactive',
+    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive) {
+        $reactive(this).attach($scope);
         //$scope.title = 'Scrum';
 
         $scope.test = 'HAHAHAHAA';
-        Meteor.subscribe('status');
-        $scope.states = $meteor.collection( function() {
-            return Status.find(
-                {
-                    //$or: [
-                    //    {
-                    //        'userId' : $rootScope.currentUser._id,
-                    //        'friendId' : friendId
-                    //    }
-                    //    ,
-                    //    {
-                    //        'userId' : friendId,
-                    //        'friendId' : $rootScope.currentUser._id
-                    //    }
-                    //]
-                }
-            );
+        this.subscribe('status');
+        $scope.helpers({
+            states: function () {
+                return Status.find({});
+            }
         });
 
         $scope.modalSave = function(ev, id){

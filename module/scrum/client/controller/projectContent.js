@@ -1,27 +1,16 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('ProjectContentCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope',
-    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $meteor, $rootScope) {
+angular.module('scrum').controller('ProjectContentCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log',
+    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log) {
         //$scope.title = 'Scrum';
 
         Meteor.subscribe('project');
-        $scope.projects = $meteor.collection( function() {
-            return Project.find(
-                {
-                    //$or: [
-                    //    {
-                    //        'userId' : $rootScope.currentUser._id,
-                    //        'friendId' : friendId
-                    //    }
-                    //    ,
-                    //    {
-                    //        'userId' : friendId,
-                    //        'friendId' : $rootScope.currentUser._id
-                    //    }
-                    //]
-                }
-            );
+        $scope.helpers({
+            projects: function () {
+                return Project.find({});
+            }
         });
+
 //console.log($rootScope.currentUser._id);
 //console.log($rootScope.currentUser);
 

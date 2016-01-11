@@ -1,5 +1,5 @@
-angular.module("brotherhood").controller("DefaultCtrl", ['$scope', '$meteor', '$rootScope', '$state', '$mdDialog',
-    function($scope, $meteor, $rootScope, $state, $mdDialog){
+angular.module("brotherhood").controller("DefaultCtrl", ['$scope', '$state', '$mdDialog',
+    function($scope, $state, $mdDialog){
 
         $scope.projects = [
             {

@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$reactive', '$rootScope', '$mdDialog', 'id',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $reactive, $rootScope, $mdDialog, id) {
+angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$reactive', '$mdDialog', 'id',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $reactive, $mdDialog, id) {
         $reactive(this).attach($scope);
         this.title = 'Project';
 

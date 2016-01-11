@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('admin').controller('MenuItemsCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope) {
+angular.module('admin').controller('MenuItemsCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log) {
         //$scope.menuItems = [
         //    {
         //        name: 'Admin',

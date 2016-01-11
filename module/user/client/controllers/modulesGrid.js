@@ -1,5 +1,5 @@
-angular.module("user").controller("ModulesGridCtrl", ['$scope', '$meteor', '$rootScope', '$state', '$mdDialog', '$mdBottomSheet',
-    function($scope, $meteor, $rootScope, $state, $mdDialog,  $mdBottomSheet){
+angular.module("user").controller("ModulesGridCtrl", ['$scope', '$state', '$mdDialog', '$mdBottomSheet',
+    function($scope, $state, $mdDialog,  $mdBottomSheet){
 
         $scope.items = [
             { name: 'User', icon: 'person', link: 'user'},
