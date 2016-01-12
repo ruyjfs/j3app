@@ -1,23 +1,22 @@
-angular.module("socially").controller("RegisterCtrl", ['$meteor', '$state',
-    function ($meteor, $state) {
-        var vm = this;
+angular.module("socially").controller("RegisterCtrl", ['$scope', '$reactive', '$state',
+    function ($scope, $reactive, $state) {
+        $reactive(this).attach($scope);
 
-        vm.credentials = {
+        $scope.credentials = {
             email: '',
             password: ''
         };
 
-        vm.error = '';
+        $scope.error = '';
 
-        vm.register = function () {
-            $meteor.createUser(vm.credentials).then(
-                function () {
-                    $state.go('parties');
-                },
-                function (err) {
-                    vm.error = 'Registration error - ' + err;
+        $scope.register = function () {
+            Accounts.createUser($scope.credentials, function(err) {
+                if (err) {
+                    $scope.error = 'Registration error - ' + err;
+                } else {
+                    $state.go('scrum');
                 }
-            );
-        };
+            });
+        }
     }
 ]);

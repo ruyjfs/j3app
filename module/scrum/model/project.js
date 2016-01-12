@@ -26,7 +26,36 @@ Meteor.methods({
     },
     projectDelete: function(id){
         Project.remove(id);
+    },
+    getProjectByUser: function(id) {
+        projectsNew = [];
+        projects = Project.find({});
+        //projects.forEach(function(project, projectKey){
+        //    if (project.userId != id) {
+        //        project.teams = Team.find(
+        //            {
+        //                _id: { $in: [project.teams] },
+        //                $and: [{'members' : Meteor.user()._id}]
+        //            });
+        //
+        //        //project.teams.filter({members: Meteor.user()._id});
+        //        if (project.teams) {
+        //            projectsNew[projectKey] = project;
+        //        }
+        //    } else {
+        //        projectsNew[projectKey] = project;
+        //    }
+        //
+        //    //note.owner = Meteor.users.findOne(note.owner);
+        //    //teste = note.owner.name.split(' ');
+        //    //console.log(teste);
+        //    //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
+        //    //projectsNew[projectKey] = project;
+        //});
+        //return projectsNew;
     }
+
+
 
     //invite: function (partyId, userId) {
     //    check(partyId, String);

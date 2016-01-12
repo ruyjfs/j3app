@@ -1,22 +1,21 @@
-angular.module("socially").controller("ResetCtrl", ['$meteor', '$state',
-    function ($meteor, $state) {
-        var vm = this;
+angular.module("socially").controller("ResetCtrl", ['$scope', '$reactive', '$state',
+    function ($scope, $reactive, $state) {
+        $reactive(this).attach($scope);
 
-        vm.credentials = {
+        $scope.credentials = {
             email: ''
         };
 
-        vm.error = '';
+        $scope.error = '';
 
-        vm.reset = function () {
-            $meteor.forgotPassword(vm.credentials.email).then(
-                function () {
+        $scope.reset = function () {
+            Accounts.forgotPassword($scope.credentials, function(err){
+                if (err) {
+                    $scope.error = 'Error sending forgot password email - ' + err;
+                } else {
                     $state.go('scrum/project');
-                },
-                function (err) {
-                    vm.error = 'Error sending forgot password email - ' + err;
                 }
-            );
+            });
         };
     }
 ]);
