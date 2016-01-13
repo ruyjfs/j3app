@@ -2,23 +2,42 @@
 Meteor.publish("project", function (limit) {
 //    Messages.cancel();
 
-    if (limit) {
-        limit = {limit: limit};
-    } else {
-        limit = {};
-    }
-
-    result = Project.find({
-        //'owner' : $rootScope.currentUser._id,
-        //'owner': this.userId,
-        //'friendId': friendId
-    }, limit);
+    //if (limit) {
+    //    limit = {limit: limit};
+    //} else {
+    //    limit = {};
+    //}
+    //
+    //result = Project.find({
+    //    //'owner' : $rootScope.currentUser._id,
+    //    //'owner': this.userId,
+    //    //'friendId': friendId
+    //}, limit);
     //console.log('_____________________________________________________________________');
     //console.log('Firend: ' + friendId);
     //console.log('UserId: ' + this.userId);
     //console.log('Quantidade: ' + result);
-    return result;
-
+    projectsNew = [];
+    projects = Project.find({});
+    //projects.forEach(function(project){
+    //    console.log(project);
+    //    //if (this.userId && this.userId != Meteor.user()._id) {
+    //    //    if (this.teams) {
+    //    //        teams = Team.find(
+    //    //            {
+    //    //                _id: { $in: this.teams},
+    //    //                $and: [{'members' : Meteor.user()._id}]
+    //    //            });
+    //    //        if (teams.fetch().length > 0) {
+    //    //            console.log(this);
+    //    //            projectsNew.push(this);
+    //    //        }
+    //    //    }
+    //    //} else if (this) {
+    //        projectsNew.push(project);
+    //    //}
+    //});
+    return projects;
     //return Messages.find({
     //    'owner': this.userId,
     //    'friendId': friendId

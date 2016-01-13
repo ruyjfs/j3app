@@ -17,7 +17,10 @@ Project.allow({
 //92okH9HNck243cdQ5
 Meteor.methods({
     projectSave: function(dataForm){
-        dataForm.userId = Meteor.userId();
+        if (!dataForm.userId) {
+            dataForm.userId = Meteor.userId();
+        }
+
         if (dataForm._id) {
             Project.update(dataForm._id, { $set: dataForm});
         } else {

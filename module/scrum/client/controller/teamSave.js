@@ -18,15 +18,10 @@ angular.module('scrum').controller('TeamSaveCtrl', [ '$scope', '$timeout', '$mdS
         ];
 
         if (id) {
-            //$scope.teste = $meteor.collection( function() {
-            //    return Team.findOne(id);
-            //});
-            $scope.teamForm = $meteor.object(Team, id, false);
-            //$scope.teamForm = {};
-            //console.log(id);
-            //console.log($scope.teste);
+            //$scope.form = $meteor.object(Project, id, false);
+            $scope.form = Team.findOne(id);
         } else {
-            $scope.teamForm = {};
+            $scope.form = {};
         }
 
         $scope.save = function (){
@@ -38,20 +33,16 @@ angular.module('scrum').controller('TeamSaveCtrl', [ '$scope', '$timeout', '$mdS
             //        console.log('failed', err);
             //    }
             //);
-            if(
-                $scope.teamForm.name,
-                $scope.teamForm.time,
-                $scope.teamForm.members
-            ){
 
-                if (id) {
-                    $scope.teamForm.save();
+            Meteor.call('teamSave', $scope.form, function (error) {
+                if (error) {
+                    console.log(error);
                 } else {
-                    Team.insert($scope.teamForm);
+                    console.log('Saved!');
+                    $scope.form = '';
+                    $mdDialog.hide();
                 }
-                $scope.teamForm = '';
-                $mdDialog.hide();
-            }
+            });
         }
 
         $scope.close = function () {

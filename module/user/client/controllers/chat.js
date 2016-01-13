@@ -43,7 +43,7 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
 
         this.messages = $rootScope.messages;
 
-        console.log(this.messages);
+        //console.log(this.messages);
 
             //$scope.messages = $meteor.collection(Messages).subscribe('messages', friendId);
 

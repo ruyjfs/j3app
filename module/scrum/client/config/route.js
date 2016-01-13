@@ -31,22 +31,22 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
             .state('scrum/project', {
                 url: '/scrum/project',
                 templateUrl: 'module/scrum/client/view/project.ng.html',
-                controller: 'ProjectCtrl'
+                //controller: 'ProjectCtrl'
             })
             .state('scrum/team', {
                 url: '/scrum/team',
                 templateUrl: 'module/scrum/client/view/team.ng.html',
-                controller: 'TeamCtrl'
+                //controller: 'TeamCtrl'
             })
             .state('scrum/kanban', {
                 url: '/scrum/kanban/:id',
                 templateUrl: 'module/scrum/client/view/kanban.ng.html',
-                controller: 'KanbanCtrl'
+                //controller: 'KanbanCtrl'
             })
             .state('scrum/content', {
                 url: '/scrum/content/:id',
                 templateUrl: 'module/scrum/client/view/project-content.ng.html',
-                controller: 'ProjectContentCtrl'
+                //controller: 'ProjectContentCtrl'
             });
 
         $urlRouterProvider.otherwise("/scrum");

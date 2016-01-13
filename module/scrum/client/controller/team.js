@@ -7,21 +7,23 @@ angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdSide
         this.subscribe('team');
         this.helpers({
             teams: function() {
-                return Team.find(
+                teams = Team.find(
                     {
-                        //$or: [
-                        //    {
-                        //        'userId' : $rootScope.currentUser._id,
-                        //        'friendId' : friendId
-                        //    }
-                        //    ,
-                        //    {
-                        //        'userId' : friendId,
-                        //        'friendId' : $rootScope.currentUser._id
-                        //    }
-                        //]
-                    }
-                );
+                        //$or: [{userId: Meteor.user()._id}, {members : Meteor.user()._id}]
+
+                        $or: [
+                            {
+                                'userId' : Meteor.user()._id,
+                            }
+                            ,
+                            {
+                                'members' : Meteor.user()._id,
+                                //'userId' : friendId,
+                                //'friendId' : $rootScope.currentUser._id
+                            }
+                        ]
+                    });
+                return teams;
             }
         });
 
