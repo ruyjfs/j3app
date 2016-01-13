@@ -1,15 +1,18 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('StatusCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$reactive',
-    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive) {
-        $reactive(this).attach($scope);
+angular.module('scrum').controller('StatusCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$reactive', '$stateParams',
+    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive, $stateParams) {
+        reactiveContext = $reactive(this).attach($scope);
         //$scope.title = 'Scrum';
 
-        $scope.test = 'HAHAHAHAA';
+        if (!$stateParams.id) {
+            $state.go('scrum');
+        }
+
         this.subscribe('status');
         $scope.helpers({
             states: function () {
-                return Status.find({});
+                return Status.find({$or: [{projectId: $stateParams.id}, {projectId: null}]});
             }
         });
 

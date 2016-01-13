@@ -7,7 +7,7 @@ if (Meteor.isClient) {
                 'user',
                 //'gamer',
                 //'driver',
-                //'socially',
+                'socially',
                 //'brotherhood',
                 'scrum',
             ]);

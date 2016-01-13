@@ -16,6 +16,17 @@ Status.allow({
 //yemiX6y3u7vnqpS3n
 //92okH9HNck243cdQ5
 Meteor.methods({
+    statusSave: function(dataForm){
+        if (!dataForm.userId) {
+            dataForm.userId = Meteor.userId();
+        }
+
+        if (dataForm._id) {
+            Status.update(dataForm._id, { $set: dataForm});
+        } else {
+            Status.insert(dataForm);
+        }
+    },
     //invite: function (partyId, userId) {
     //    check(partyId, String);
     //    check(userId, String);

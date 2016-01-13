@@ -16,6 +16,17 @@ Note.allow({
 //yemiX6y3u7vnqpS3n
 //92okH9HNck243cdQ5
 Meteor.methods({
+    noteSave: function(dataForm){
+        if (!dataForm.userId) {
+            dataForm.userId = Meteor.userId();
+        }
+
+        if (dataForm._id) {
+            Story.update(dataForm._id, { $set: dataForm});
+        } else {
+            Story.insert(dataForm);
+        }
+    },
     //teamSave: function (dataForm) {
         //console.log(dataForm);
         //check(partyId, String);

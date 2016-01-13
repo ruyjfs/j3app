@@ -1,25 +1,26 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('ProjectContentCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log',
-    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log) {
+angular.module('scrum').controller('ProjectContentCtrl', [ '$scope', '$mdDialog', '$stateParams', '$reactive', '$state',
+    function ($scope, $mdDialog, $stateParams, $reactive, $state) {
+        $reactive(this).attach($scope);
+
         //$scope.title = 'Scrum';
 
-        Meteor.subscribe('project');
-        $scope.helpers({
-            projects: function () {
-                return Project.find({});
-            }
-        });
+        if (!$stateParams.id) {
+            $state.go('scrum');
+        }
+
+        //Meteor.subscribe('project');
+        //$scope.helpers({
+        //    project: function () {
+        //        return Project.findOne($stateParams.id);
+        //    }
+        //});
 
 //console.log($rootScope.currentUser._id);
 //console.log($rootScope.currentUser);
 
-
-        $scope.remove = function(id) {
-            $scope.projects.remove(id);
-        }
-
-        $scope.modalNoteSave = function(ev, id){
+        this.modalNoteSave = function(ev, id){
             $mdDialog.show({
                 controller: 'NoteSaveCtrl',
                 templateUrl: 'module/scrum/client/view/note-save.ng.html',
@@ -36,7 +37,7 @@ angular.module('scrum').controller('ProjectContentCtrl', [ '$scope', '$mdDialog'
             });
         };
 
-        $scope.modalStorySave = function(ev, id){
+        this.modalStorySave = function(ev, id){
             $mdDialog.show({
                 controller: 'StorySaveCtrl',
                 templateUrl: 'module/scrum/client/view/story-save.ng.html',
@@ -46,7 +47,7 @@ angular.module('scrum').controller('ProjectContentCtrl', [ '$scope', '$mdDialog'
             });
         };
 
-        $scope.modalStatusSave = function(ev, id){
+        this.modalStatusSave = function(ev, id){
             $mdDialog.show({
                 controller: 'StatusSaveCtrl',
                 templateUrl: 'module/scrum/client/view/status-save.ng.html',

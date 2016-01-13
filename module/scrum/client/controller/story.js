@@ -1,13 +1,13 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('StoryCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$reactive',
-    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive) {
+angular.module('scrum').controller('StoryCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$reactive', '$stateParams',
+    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive, $stateParams) {
         $reactive(this).attach($scope);
 
         this.subscribe('story');
         $scope.helpers({
             stories: function () {
-                return Story.find({});
+                return Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]});
             }
         });
 

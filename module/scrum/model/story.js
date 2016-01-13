@@ -16,6 +16,17 @@ Story.allow({
 //yemiX6y3u7vnqpS3n
 //92okH9HNck243cdQ5
 Meteor.methods({
+    storySave: function(dataForm){
+        if (!dataForm.userId) {
+            dataForm.userId = Meteor.userId();
+        }
+
+        if (dataForm._id) {
+            Story.update(dataForm._id, { $set: dataForm});
+        } else {
+            Story.insert(dataForm);
+        }
+    },
     //invite: function (partyId, userId) {
     //    check(partyId, String);
     //    check(userId, String);

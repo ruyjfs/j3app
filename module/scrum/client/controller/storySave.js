@@ -1,29 +1,28 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('StorySaveCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$mdDialog', 'id',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, $mdDialog, id) {
+angular.module('scrum').controller('StorySaveCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$mdDialog', 'id', '$stateParams',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, $mdDialog, id, $stateParams) {
         $scope.projects = $meteor.collection( function() {
             return Project.find({});
         });
 
         if (id) {
-            $scope.form = $meteor.object(Story, id, false);
+            $scope.form = Story.findOne(id);
         } else {
             $scope.form = {};
         }
+        $scope.form.projectId = $stateParams.id;
 
         $scope.save = function () {
-            if($scope.form.name){
-                if($scope.form.name) {
-                    if (id) {
-                        $scope.form.save();
-                    } else {
-                        Story.insert($scope.form);
-                    }
+            Meteor.call('storySave', $scope.form, function (error) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Saved!');
+                    $scope.form = '';
+                    $mdDialog.hide();
                 }
-                $scope.form = '';
-                $mdDialog.hide();
-            }
+            });
         }
 
         $scope.close = function () {

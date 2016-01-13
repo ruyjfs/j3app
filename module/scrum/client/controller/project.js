@@ -14,8 +14,7 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
                 projects.forEach(function(project){
                     if (project.userId && project.userId != Meteor.user()._id) {
                         if (project.teams) {
-                            teams = Team.find(
-                                {
+                            teams = Team.find({
                                     _id: { $in: project.teams},
                                     $and: [{'members' : Meteor.user()._id}]
                                 });
