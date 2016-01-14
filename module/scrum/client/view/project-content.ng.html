@@ -2,6 +2,7 @@
     <md-tabs md-dynamic-height md-border-bottom md-selected="1">
         <md-tab label="Burndown">
             <md-content class="md-padding">
+                Em desenvolvimento...
             </md-content>
         </md-tab>
         <md-tab label="Kanban" >
@@ -16,6 +17,7 @@
         </md-tab>
         <md-tab label="Team">
             <md-content class="md-padding">
+                Em desenvolvimento...
             </md-content>
         </md-tab>
         <md-tab label="Story">
@@ -32,37 +34,40 @@
     <!--<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">-->
     <div class="fixed-action-btn horizontal">
 
-        <md-fab-speed-dial md-direction="up" md-open="demo.isOpen"
-                           class="md-scale" ng-class="{ 'md-hover-full': demo.hover }"
-                           ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
+        <!--<md-fab-speed-dial md-direction="up" md-open="vm.isOpen"-->
+                           <!--class="md-scale" ng-class="{ 'md-hover-full': vm.hover }"-->
+                           <!--ng-mouseenter="vm.isOpen=true" ng-mouseleave="vm.isOpen=false">-->
+            <md-fab-speed-dial ng-hide="vm.hidden" md-direction="up" md-open="vm.isOpen"
+                               class="md-scale md-fab-buttom-right"
+                               ng-mouseenter="vm.isOpen=true" ng-mouseleave="vm.isOpen=false">
             <md-fab-trigger>
-                <md-button aria-label="menu" class="md-fab  md-primary btn-floating btn-large deep-orange hoverable" >
-                    <md-tooltip md-direction="left" md-visible="tooltipVisible">Add</md-tooltip>
+                <md-button aria-label="Add" class="md-fab btn-floating btn-large hoverable" >
+                    <md-tooltip md-direction="left" md-visible="vm.tooltipVisible">Add</md-tooltip>
                     <!--<md-icon md-svg-src="img/icons/menu.svg" aria-label="menu"></md-icon>-->
                     <i title="" class="material-icons">add</i>
                 </md-button>
             </md-fab-trigger>
             <md-fab-actions>
-                <md-button aria-label="Add status" class="md-fab md-primary btn-floating md-raised md-mini red hoverable"
-                           ng-click="vm.modalStatusSave($event, project._id)" style="line-height: 0px;">
-                    <md-tooltip md-direction="left" md-visible="tooltipVisible"
+                <md-button aria-label="Status" class="md-fab btn-floating md-raised md-mini amber accent-4  hoverable"
+                           ng-click="vm.modalNoteSave($event)" style="line-height: 0px;">
+                    <md-tooltip md-direction="left"
                                 md-autohide="false">
                         Add status
                     </md-tooltip>
                     <i class="material-icons">insert_drive_file</i>
                 </md-button>
-                <md-button aria-label="Add story" class="md-fab  md-primary btn-floating md-raised md-mini green hoverable"
-                           ng-click="vm.modalStorySave($event, project._id)" style="line-height: 0px;">
-                    <md-tooltip md-direction="left" md-visible="tooltipVisible"
-                                md-autohide="true">
+                <md-button aria-label="Story" class="md-fab btn-floating md-raised md-mini green hoverable"
+                           ng-click="vm.modalStorySave($event)" style="line-height: 0px;">
+                    <md-tooltip md-direction="left"
+                                md-autohide="false">
                         Add story
                     </md-tooltip>
                     <i class="material-icons">content_paste</i>
                 </md-button>
-                <md-button aria-label="Add status" class="md-fab  md-primary btn-floating md-raised md-mini amber accent-4 hoverable"
-                           ng-click="vm.modalTeamSave($event, project._id)" style="line-height: 0px;">
-                    <md-tooltip md-direction="top" md-visible="tooltipVisible"
-                                md-autohide="true">
+                <md-button aria-label="Note" class="md-fab btn-floating md-raised md-mini purple hoverable"
+                           ng-click="vm.modalStatusSave($event)" style="line-height: 0px;">
+                    <md-tooltip md-direction="top"
+                                md-autohide="false">
                         Add status
                     </md-tooltip>
                     <i class="material-icons">style</i>

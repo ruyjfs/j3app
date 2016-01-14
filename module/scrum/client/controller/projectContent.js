@@ -61,20 +61,24 @@ angular.module('scrum').controller('ProjectContentCtrl', [ '$scope', '$mdDialog'
             });
         };
 
-
-        this.hidden = false;
-        this.isOpen = false;
-        this.hover = false;
+        //var self = this;
+        //self.hidden = false;
+        //self.isOpen = false;
+        //self.hover = false;
         // On opening, add a delayed property which shows tooltips after the speed dial has opened
         // so that they have the proper position; if closing, immediately hide the tooltips
-        $scope.$watch('demo.isOpen', function(isOpen) {
-            console.log('aaa');
-            if (isOpen) {
-                $timeout(function() {
-                    this.tooltipVisible = self.isOpen;
-                }, 600);
-            } else {
-                this.tooltipVisible = self.isOpen;
-            }
-        });
+        //$scope.$watch('vm.isOpen', function(isOpen) {
+        //
+        //    console.log('hidden:' + self.hidden);
+        //    console.log('isOpen:' + self.isOpen);
+        //    console.log('hover:' + self.hover);
+        //    console.log('________');
+        //    if (isOpen) {
+        //        $timeout(function() {
+        //            this.tooltipVisible = self.isOpen;
+        //        }, 600);
+        //    } else {
+        //        this.tooltipVisible = self.isOpen;
+        //    }
+        //});
 }]);

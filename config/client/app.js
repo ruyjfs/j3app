@@ -78,12 +78,12 @@ if (Meteor.isClient) {
                 'default': '900',
             })
             .accentPalette('orange', {
-                'default': 'A700',
+                'default': '800',
             });
 
         $mdThemingProvider.theme('user')
             .primaryPalette('orange', {
-                'default': 'A700',
+                'default': '800',
             })
             .warnPalette('red', {
                 'default': '900',
@@ -94,7 +94,7 @@ if (Meteor.isClient) {
 
         $mdThemingProvider.theme('parties')
             .primaryPalette('orange', {
-                'default': 'A700',
+                'default': '800',
             })
             .warnPalette('red', {
                 'default': '900',
