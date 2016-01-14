@@ -70,6 +70,18 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
 //console.log($rootScope.currentUser._id);
 //console.log($rootScope.currentUser);
 
+        this.items = [
+            { name: "Project", icon: "business_center", direction: "left", color: 'red' },
+            { name: "Team", icon: "group_work", direction: "top", color: 'blue' }
+        ];
+
+        this.isOwner = function(userId) {
+            if (userId) {
+                return (Meteor.user()._id == userId);
+            } else {
+                return true;
+            }
+        }
 
         this.remove = function (id) {
             this.projects.remove(id);

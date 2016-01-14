@@ -29,19 +29,17 @@
                                         <p>{{project.description}}</p>
                                     </div>
                                     <div class="card-reveal">
-                                        <span class="card-title grey-text text-darken-4">Card Title<i
+                                        <span class="card-title grey-text text-darken-4">{{project.name}}<i
                                                 class="material-icons right">close</i></span>
-
-                                        <p>Here is some more information about this product that is only revealed once
-                                            clicked on.</p>
+                                        <p></p>
                                     </div>
                                     <div class="card-action center">
                                         <!--<a href="#">{{_ 'Delete'}}</a>-->
                                         <!--<a href="#projectSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>-->
                                         <!--<a href="/project/save/{{_id}}">{{_ 'Edit'}}</a>-->
                                         <!--<a href="/scrum/kanban">{{_ 'Enter'}}</a>-->
-                                        <a href="#" ng-click="vm.remove(project._id)">Delete</a>
-                                        <a href="#" ng-click="vm.modalProjectSave($event, project._id)">Edit</a>
+                                        <a href="#" ng-if="vm.isOwner(project.userId)" ng-click="vm.remove(project._id)">Delete</a>
+                                        <a href="#" ng-if="vm.isOwner(project.userId)" ng-click="vm.modalProjectSave($event, project._id)">Edit</a>
                                         <!--<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>-->
                                         <a href="/scrum/content/{{project._id}}">Enter</a>
                                     </div>
@@ -57,26 +55,54 @@
             </md-tab>
         </md-tabs>
     </div>
-    <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
-        <a class="btn-floating btn-large waves-effect waves-light deep-orange hoverable" href="#">
-            <i title="" class="material-icons">add</i>
-        </a>
-        <ul>
-            <!--<li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>-->
-            <!--<li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>-->
-            <li>
-                <a href="#" ng-click="vm.modalTeamSave($event, project._id)" class="btn-floating blue hoverable"><i
-                        title="" class="material-icons">group_work</i></a>
-                <!--<md-button class="md-fab" aria-label="Edit" ng-click="modalSave($event, project._id)">-->
-                <!--<i title="" class="material-icons">group_work</i>-->
-                <!--</md-button>-->
-            </li>
-            <!--<li><a href="/project/save/" class="btn-floating red hoverable"><i title="" class="material-icons">business_center</i></a></li>-->
-            <a href="#" ng-click="vm.modalProjectSave($event, project._id)" class="btn-floating red hoverable"><i
-                    title="" class="material-icons">business_center</i></a>
-            <!--<li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>-->
-            <!--<li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>-->
-        </ul>
+    <!--<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">-->
+    <div class="fixed-action-btn horizontal">
+
+        <md-fab-speed-dial md-direction="up" md-open="vm.isOpen"
+                           class="md-scale" ng-class="{ 'md-hover-full': vm.hover }"
+                           ng-mouseenter="vm.isOpen=true" ng-mouseleave="vm.isOpen=false">
+            <md-fab-trigger>
+                <md-button aria-label="menu" class="md-fab  md-primary btn-floating btn-large deep-orange hoverable" >
+                    <md-tooltip md-direction="left" md-visible="tooltipVisible">Add</md-tooltip>
+                    <!--<md-icon md-svg-src="img/icons/menu.svg" aria-label="menu"></md-icon>-->
+                    <i title="" class="material-icons">add</i>
+                </md-button>
+            </md-fab-trigger>
+            <md-fab-actions>
+                <!--<div ng-repeat="item in vm.items">-->
+                    <md-button aria-label="Project" class="md-fab md-primary btn-floating md-raised md-mini red hoverable"
+                               ng-click="vm.modalProjectSave($event, project._id)" style="line-height: 0px;">
+                        <md-tooltip md-direction="left" md-visible="tooltipVisible"
+                                    md-autohide="false">
+                            Project
+                        </md-tooltip>
+                        <!--<md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>-->
+                        <i class="material-icons">business_center</i>
+                    </md-button>
+                    <md-button aria-label="Team" class="md-fab  md-primary btn-floating md-raised md-mini blue hoverable"
+                               ng-click="vm.modalTeamSave($event, project._id)" style="line-height: 0px;">
+                        <md-tooltip md-direction="top" md-visible="tooltipVisible"
+                                    md-autohide="false">
+                            Team
+                        </md-tooltip>
+                        <!--<md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>-->
+                        <i class="material-icons">group_work</i>
+                    </md-button>
+                <!--</div>-->
+            </md-fab-actions>
+        </md-fab-speed-dial>
+
+        <!--<a class="btn-floating btn-large waves-effect waves-light deep-orange hoverable" href="#">-->
+            <!--<i title="" class="material-icons">add</i>-->
+        <!--</a>-->
+        <!--<ul>-->
+            <!--<li>-->
+                <!--<a href="#" ng-click="vm.modalTeamSave($event, project._id)" class="btn-floating blue hoverable"><i-->
+                        <!--title="" class="material-icons">group_work</i></a>-->
+            <!--</li>-->
+            <!--<a href="#" ng-click="vm.modalProjectSave($event, project._id)" class="btn-floating red hoverable"><i-->
+                    <!--title="" class="material-icons">business_center</i></a>-->
+        <!--</ul>-->
     </div>
     <!--</div>-->
     <!--<br/>-->

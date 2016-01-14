@@ -1,6 +1,10 @@
 <div ng-controller="ProjectContentCtrl as vm" flex>
-    <md-tabs md-dynamic-height md-border-bottom>
-        <md-tab label="Kanban">
+    <md-tabs md-dynamic-height md-border-bottom md-selected="1">
+        <md-tab label="Burndown">
+            <md-content class="md-padding">
+            </md-content>
+        </md-tab>
+        <md-tab label="Kanban" >
             <md-content class="md-padding">
                 <div ng-include="'module/scrum/client/view/kanban.ng.html'"></div>
             </md-content>
@@ -8,10 +12,6 @@
         <md-tab label="Sprint">
             <md-content class="md-padding">
                 <div ng-include="'module/scrum/client/view/sprint.ng.html'"></div>
-            </md-content>
-        </md-tab>
-        <md-tab label="Burndown">
-            <md-content class="md-padding">
             </md-content>
         </md-tab>
         <md-tab label="Team">
@@ -29,20 +29,55 @@
             </md-content>
         </md-tab>
     </md-tabs>
-    <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
-        <a class="btn-floating btn-large waves-effect waves-light deep-orange modal-trigger hoverable" href="#modal1">
-            <i class="material-icons">add</i>
-        </a>
-        <ul>
-            <!--<li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>-->
-            <!--<li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>-->
-            <!--<li><a class="btn-floating green"><i class="material-icons">group_work</i></a></li>-->
-            <li><a href="#" ng-click="vm.modalStatusSave($event)" title="Add status" class="btn-floating purple hoverable"><i class="material-icons">style</i></a></li>
-            <li><a href="#" ng-click="vm.modalStorySave($event)" title="Add story" class="btn-floating green hoverable"><i class="material-icons">content_paste</i></a></li>
-            <li><a href="#" ng-click="vm.modalNoteSave($event)" title="Add note" class="btn-floating amber accent-4 hoverable"><i class="material-icons">insert_drive_file</i></a></li>
-            <!--<li><a class="btn-floating blue"><i class="material-icons">business_center</i></a></li>-->
-            <!--<li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>-->
-            <!--<li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>-->
-        </ul>
+    <!--<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">-->
+    <div class="fixed-action-btn horizontal">
+
+        <md-fab-speed-dial md-direction="up" md-open="demo.isOpen"
+                           class="md-scale" ng-class="{ 'md-hover-full': demo.hover }"
+                           ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
+            <md-fab-trigger>
+                <md-button aria-label="menu" class="md-fab  md-primary btn-floating btn-large deep-orange hoverable" >
+                    <md-tooltip md-direction="left" md-visible="tooltipVisible">Add</md-tooltip>
+                    <!--<md-icon md-svg-src="img/icons/menu.svg" aria-label="menu"></md-icon>-->
+                    <i title="" class="material-icons">add</i>
+                </md-button>
+            </md-fab-trigger>
+            <md-fab-actions>
+                <md-button aria-label="Add status" class="md-fab md-primary btn-floating md-raised md-mini red hoverable"
+                           ng-click="vm.modalStatusSave($event, project._id)" style="line-height: 0px;">
+                    <md-tooltip md-direction="left" md-visible="tooltipVisible"
+                                md-autohide="false">
+                        Add status
+                    </md-tooltip>
+                    <i class="material-icons">insert_drive_file</i>
+                </md-button>
+                <md-button aria-label="Add story" class="md-fab  md-primary btn-floating md-raised md-mini green hoverable"
+                           ng-click="vm.modalStorySave($event, project._id)" style="line-height: 0px;">
+                    <md-tooltip md-direction="left" md-visible="tooltipVisible"
+                                md-autohide="true">
+                        Add story
+                    </md-tooltip>
+                    <i class="material-icons">content_paste</i>
+                </md-button>
+                <md-button aria-label="Add status" class="md-fab  md-primary btn-floating md-raised md-mini amber accent-4 hoverable"
+                           ng-click="vm.modalTeamSave($event, project._id)" style="line-height: 0px;">
+                    <md-tooltip md-direction="top" md-visible="tooltipVisible"
+                                md-autohide="true">
+                        Add status
+                    </md-tooltip>
+                    <i class="material-icons">style</i>
+                </md-button>
+            </md-fab-actions>
+        </md-fab-speed-dial>
+
+
+        <!--<a class="btn-floating btn-large waves-effect waves-light deep-orange modal-trigger hoverable" href="#modal1">-->
+            <!--<i class="material-icons">add</i>-->
+        <!--</a>-->
+        <!--<ul>-->
+            <!--<li><a href="#" ng-click="vm.modalStatusSave($event)" title="Add status" class="btn-floating purple hoverable"><i class="material-icons">style</i></a></li>-->
+            <!--<li><a href="#" ng-click="vm.modalStorySave($event)" title="Add story" class="btn-floating green hoverable"><i class="material-icons">content_paste</i></a></li>-->
+            <!--<li><a href="#" ng-click="vm.modalNoteSave($event)" title="Add note" class="btn-floating amber accent-4 hoverable"><i class="material-icons">insert_drive_file</i></a></li>-->
+        <!--</ul>-->
     </div>
 </div>

@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('ProjectContentCtrl', [ '$scope', '$mdDialog', '$stateParams', '$reactive', '$state',
-    function ($scope, $mdDialog, $stateParams, $reactive, $state) {
+angular.module('scrum').controller('ProjectContentCtrl', [ '$scope', '$mdDialog', '$stateParams', '$reactive', '$state', '$timeout',
+    function ($scope, $mdDialog, $stateParams, $reactive, $state, $timeout) {
         $reactive(this).attach($scope);
 
         //$scope.title = 'Scrum';
@@ -60,4 +60,21 @@ angular.module('scrum').controller('ProjectContentCtrl', [ '$scope', '$mdDialog'
                 $scope.status = 'You cancelled the dialog.';
             });
         };
+
+
+        this.hidden = false;
+        this.isOpen = false;
+        this.hover = false;
+        // On opening, add a delayed property which shows tooltips after the speed dial has opened
+        // so that they have the proper position; if closing, immediately hide the tooltips
+        $scope.$watch('demo.isOpen', function(isOpen) {
+            console.log('aaa');
+            if (isOpen) {
+                $timeout(function() {
+                    this.tooltipVisible = self.isOpen;
+                }, 600);
+            } else {
+                this.tooltipVisible = self.isOpen;
+            }
+        });
 }]);
