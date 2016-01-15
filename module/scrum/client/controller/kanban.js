@@ -12,7 +12,37 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
 
         Meteor.subscribe('status');
         $scope.states = [];
+        $scope.stories = [];
+
+        this.teste1 = function(id){
+            return 'Hahahaa 1' + id;
+        };
+
+        //this.notes = function(storyId) {
+        //    console.log(storyId);
+        //    if (storyId) {
+        //        notes = Note.find({storyId:storyId});
+        //    } else {
+        //        notes = Note.find();
+        //    }
+        //    //Meteor.subscribe('story');
+        //    //notes.forEach(function(note, noteKey){
+        //    //    note.story = Story.findOne(note.story);
+        //    //    note.owner = Meteor.users.findOne(note.owner);
+        //    //    //teste = note.owner.name.split(' ');
+        //    //    //console.log(teste);
+        //    //    //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
+        //    //    $scope.backLogNotes[noteKey] = note;
+        //    //});
+        //    return notes;
+        //};
+
+        this.teste2 = 'Hahahaa 2';
+        $scope.teste3 = 'Hahahaa 3';
         this.helpers({
+            //teste1: function(id){
+            //  return 'Hahahaa 1' + id;
+            //},
             notes: function() {
                 notes = Note.find({});
                 Meteor.subscribe('story');
@@ -38,6 +68,20 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                     $scope.states[key] = value;
                 });
                 return result;
+            },
+            stories: function() {
+                stories = Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]});
+                //$meteor.subscribe('story');
+                stories.forEach(function(value, key){
+                    //    note.story = Story.findOne(note.story);
+                    //    note.owner = Meteor.users.findOne(note.owner);
+                    //    //teste = note.owner.name.split(' ');
+                    //    //console.log(teste);
+                    //    //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
+                    $scope.stories[key] = value;
+                });
+                console.log(stories);
+                return stories;
             }
         });
 
