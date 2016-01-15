@@ -5,9 +5,18 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$timeout', '$m
         $reactive(this).attach($scope);
         this.title = 'Project';
 
+        if (id) {
+            //$scope.form = $meteor.object(Project, id, false);
+            $scope.form = Project.findOne(id);
+        } else {
+            $scope.form = {};
+        }
+
         $scope.helpers({
             teams: function () {
-                return Team.find({});
+                return Team.find({
+                    $or: [{members : Meteor.user()._id}, {userId : Meteor.user()._id}, {_id: {$in: $scope.form.teams}}]
+                });
             }
         });
 
@@ -18,12 +27,6 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$timeout', '$m
             4
         ];
 
-        if (id) {
-            //$scope.form = $meteor.object(Project, id, false);
-            $scope.form = Project.findOne(id);
-        } else {
-            $scope.form = {};
-        }
 
         $scope.save = function () {
 
