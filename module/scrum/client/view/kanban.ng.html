@@ -4,6 +4,7 @@
         {{vm.teste1(2)}} ---
         {{vm.teste2}} ---
         {{teste3}} ---
+        {{vm.notesBackLog}} ---
 
         <!--<md-content>-->
         <table id="scrumy-board" cellspacing="0" class="live scrum" style="min-height: 300px;">
@@ -12,70 +13,30 @@
                     <th id="story-header">
                         <span>Story</span>
                     </th>
-                    <!--<td id="plus-header" class="plus-header"></td>-->
-                    <!--<th id="header-sprintAnterior" class="plus-header">-->
-                        <!--<span></span> <br>-->
-                        <!--<a href="#" class="select-all" style="display: none">Select All</a>-->
-                    <!--</th>-->
-                    <!--<td id="plus-header" class="verify"></td>-->
                     <th id="plus-header">
-                    </th>
-                    <th id="header-sprintAnterior" class="plus-header">
-                        <span>BackLog</span> <br>
-                        <a href="#" class="select-all" style="display: none">Select All</a>
                     </th>
                     <th class="plus-header" ng-repeat="status in vm.states">
                         <span>{{status.name}}</span> <br>
                         <a href="#" class="select-all" style="display: none">Select All</a>
                     </th>
-                    <!--<th id="header-sprintAtual" class="plus-header">-->
-                        <!--<span>Em execução</span> <br>-->
-                        <!--<a href="#" class="select-all" style="display: none">Select All</a>-->
-                    <!--</th>-->
-                    <!--<th id="header-proximaSprint" class="plus-header">-->
-                        <!--<span>Aguardando verificação</span> <br>-->
-                        <!--<a href="#" class="select-all" style="display: none">Select All</a>-->
-                    <!--</th>-->
-                    <!--<th id="header-backLog" class="plus-header">-->
-                        <!--<span>Pronto</span>-->
-                        <!--<a href="#" class="select-all" style="display: none">Select All</a>-->
-                    <!--</th>-->
                 </tr>
-                <tr class="story-task-row" ng-repeat="story in stories">
-                    <!--<td rowspan="2" id="story-915989-title" class="stories">-->
-                        <!--<div id="story_editor_915989" >-->
-                            <!--<div class="story-handle">-->
-                                                <!--<span class="title">-->
-                                                    <!--Projeto tal tal-->
-                                                <!--</span>-->
-                                <!--&lt;!&ndash;                                                    <form action="/gardner_mec/save_story" class="story_editor clearfix" method="post" style="display:none"><div style="margin:0;padding:0"><input name="authenticity_token" type="hidden" value="9ea6e059f68de90cd804a0fc52b71f9b341a9d96"></div>-->
-                                                                <!--<textarea cols="12" id="story_title" name="story[title]" rows="3">Programa��o Or�ament�ria (ELABREV)</textarea>-->
-                                                                <!--<input id="story_id" name="story[id]" type="hidden" value="915989">-->
-                                                                <!--<input class="dk save_button" src="/images/blank.gif?1365750341" type="image">                <input class="dk cancel_button" type="button" value="" observedactions="click"><br>-->
-                                                            <!--</form> &ndash;&gt;-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</td>-->
+                <tr class="story-task-row" ng-repeat="story in vm.stories">
                     <td rowspan="" id="story-915989-title" class="stories">
                         <div id="story_editor_915989" >
                             <div class="story-handle">
-                                                <span class="title">
-                                                    {{story.name}}
-                                                </span>
-                                <!--                                                    <form action="/gardner_mec/save_story" class="story_editor clearfix" method="post" style="display:none"><div style="margin:0;padding:0"><input name="authenticity_token" type="hidden" value="9ea6e059f68de90cd804a0fc52b71f9b341a9d96"></div>
-                                                                <textarea cols="12" id="story_title" name="story[title]" rows="3">Programa��o Or�ament�ria (ELABREV)</textarea>
-                                                                <input id="story_id" name="story[id]" type="hidden" value="915989">
-                                                                <input class="dk save_button" src="/images/blank.gif?1365750341" type="image">                <input class="dk cancel_button" type="button" value="" observedactions="click"><br>
-                                                            </form> -->
+                                <span class="title">
+                                    {{story.name}}
+                                </span>
                             </div>
                         </div>
                     </td>
                     <td class="verify"></td>
-                    <td id="sprintAnterior" class="linha status_1" sprintid="" sprinthorasgastas="0" sprinthoras="">
-                        <div class="task-kanban hoverable" id="task_{{backLogNote._id}}" style="background-color: {{backLogNote.story.color}}"  ng-repeat="backLogNote in backLogNotes">
-                            <div class="handle"> {{backLogNote.owner.name}} </div>
-                            <div class="title" title="{{backLogNote.name}}" >
-    <pre class="title_inner" style="text-align: left;">{{backLogNote.description}}</pre>
+                    <td class="linha status_1" sprintid="" sprinthorasgastas="" sprinthoras="" ng-repeat="status in story.states">
+                        <!--{{status.notes}}-->
+                        <div class="task-kanban hoverable" id="task_{{note._id}}" style="background-color: {{story.color}}"  ng-repeat="note in status.notes">
+                            <div class="handle"> {{note.owner.name}} </div>
+                            <div class="title" title="{{note.name}}" >
+                                <pre class="title_inner" style="text-align: left;">{{note.description}}</pre>
                             </div>
 
                             <div class="iconEdit" sprintPostitId=">">
@@ -83,210 +44,30 @@
                             </div>
                             <!--unassigned-->
                             <div class="assignment">
-                                {{backLogNote.time}}h
+                                {{note.time}}h
                             </div>
-
-                            <!--<a href="#" class="edit-task" observedactions="click">Change</a>-->
-                            <!--<a href="/gardner_mec/destroy_task?id=2298313" class="delete-task" observedactions="click">Delete</a>-->
-
-
                             <img class="overflow_indicator" src="/images/overflow_indicator.gif">
                         </div>
-
-                        <!--<div sprintpostitid="2" sprintpostithoras="2" class="task hoverable" style="background-color: {{backLogNote.story.color}}" ng-repeat="backLogNote in backLogNotes">-->
-                            <!--<div class="handle"> {{backLogNote.story.name}} </div>-->
-                            <!--<div class="title">-->
-                                <!--&lt;!&ndash;<pre class="title_inner" style="background-color: #f0f0f0; color: #9F9F9F">&ndash;&gt;-->
-                                            <!--<pre class="title_inner">-->
-
-
-    <!--<b>{{backLogNote.name}}</b>-->
-
-    <!--{{backLogNote.description}}</pre>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash;unassigned&ndash;&gt;-->
-                            <!--<div class="iconEdit" sprintpostitid="2">-->
-                                <!--<i class="glyphicon glyphicon-pencil"></i>-->
-                            <!--</div>-->
-                            <!--<div class="iconUserOn">-->
-                                <!--<i class="glyphicon glyphicon-user"></i>-->
-                            <!--</div>-->
-                            <!--<div class="iconUser">-->
-                                <!--<i style="font-size: 20px" class="glyphicon glyphicon-user"></i>-->
-                            <!--</div>-->
-                            <!--<div class="user">{{backLogNote.owner.name}}</div>-->
-                            <!--<div class="assignment">-->
-                                <!--{{backLogNote.time}}-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash;<a href="#" class="edit-task" observedactions="click">Change</a>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<a href="/gardner_mec/destroy_task?id=2298313" class="delete-task" observedactions="click">Delete</a>&ndash;&gt;-->
-
-
-                            <!--<img class="overflow_indicator" src="/images/overflow_indicator.gif">-->
-                        <!--</div>-->
                     </td>
-                    <td id="sprintAtual" class="linha status_2" sprintid="" sprinthorasgastas="0" sprinthoras="">
-                    </td>
-                    <td id="proximaSprint" class="linha status_3" sprintid="" sprinthorasgastas="6" sprinthoras="">
-                        <!--<div sprintpostitid="2" sprintpostithoras="2" class="task" style="background-color: #CCC">-->
-                        <!--<div class="handle"> subprgdsc </div>-->
-                        <!--<div class="title">-->
-                        <!--<pre class="title_inner" style="background-color: #f0f0f0; color: #9F9F9F">-->
-                        <!--<b>esttitulo</b>-->
+                    <td id="sprintAnterior" class="linha status_1" sprintid="" sprinthorasgastas="0" sprinthoras="">
+                        <div class="task-kanban hoverable" id="task_{{note._id}}" style="background-color: {{backLogNote.story.color}}"  ng-repeat="note in story.notes">
+                            <div class="handle"> {{note.owner.name}} </div>
+                            <div class="title" title="{{note.name}}" >
+    <pre class="title_inner" style="text-align: left;">{{note.description}}</pre>
+                            </div>
 
-                        <!--entdsc                                        </pre>-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash;unassigned&ndash;&gt;-->
-                        <!--<div class="iconEdit" sprintpostitid="2">-->
-                        <!--<i class="glyphicon glyphicon-pencil"></i>-->
-                        <!--</div>-->
-                        <!--<div class="iconUserOn">-->
-                        <!--<i class="glyphicon glyphicon-user"></i>-->
-                        <!--</div>-->
-                        <!--<div class="iconUser">-->
-                        <!--<i style="font-size: 20px" class="glyphicon glyphicon-user"></i>-->
-                        <!--</div>-->
-                        <!--<div class="user">Ruy</div>-->
-                        <!--<div class="assignment">-->
-                        <!--2hs-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash;<a href="#" class="edit-task" observedactions="click">Change</a>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<a href="/gardner_mec/destroy_task?id=2298313" class="delete-task" observedactions="click">Delete</a>&ndash;&gt;-->
-
-
-                        <!--<img class="overflow_indicator" src="/images/overflow_indicator.gif">-->
-                        <!--</div>-->
-
-                        <!--<div sprintpostitid="2" sprintpostithoras="2" class="task" style="background-color: red">-->
-                        <!--<div class="handle"> subprgdsc </div>-->
-                        <!--<div class="title">-->
-                        <!--<pre class="title_inner" style="">-->
-                        <!--<b>esttitulo</b>-->
-
-                        <!--entdsc                                        </pre>-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash;unassigned&ndash;&gt;-->
-                        <!--<div class="iconEdit" sprintpostitid="2">-->
-                        <!--<i class="glyphicon glyphicon-pencil"></i>-->
-                        <!--</div>-->
-                        <!--<div class="iconUserOn">-->
-                        <!--<i class="glyphicon glyphicon-user"></i>-->
-                        <!--</div>-->
-                        <!--<div class="iconUser">-->
-                        <!--<i style="font-size: 20px" class="glyphicon glyphicon-user"></i>-->
-                        <!--</div>-->
-                        <!--<div class="user">João</div>-->
-                        <!--<div class="assignment">-->
-                        <!--2hs-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash;<a href="#" class="edit-task" observedactions="click">Change</a>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<a href="/gardner_mec/destroy_task?id=2298313" class="delete-task" observedactions="click">Delete</a>&ndash;&gt;-->
-
-
-                        <!--<img class="overflow_indicator" src="/images/overflow_indicator.gif">-->
-                        <!--</div>-->
-
-                        <!--<div sprintpostitid="2" sprintpostithoras="2" class="task" style="background-color: orange">-->
-                        <!--<div class="handle"> subprgdsc </div>-->
-                        <!--<div class="title">-->
-                        <!--<pre class="title_inner" style="">-->
-                        <!--<b>esttitulo</b>-->
-
-                        <!--entdsc                                        </pre>-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash;unassigned&ndash;&gt;-->
-                        <!--<div class="iconEdit" sprintpostitid="2">-->
-                        <!--<i class="glyphicon glyphicon-pencil"></i>-->
-                        <!--</div>-->
-                        <!--<div class="iconUserOn">-->
-                        <!--<i class="glyphicon glyphicon-user"></i>-->
-                        <!--</div>-->
-                        <!--<div class="iconUser">-->
-                        <!--<i style="font-size: 20px" class="glyphicon glyphicon-user"></i>-->
-                        <!--</div>-->
-                        <!--<div class="user">Ruy</div>-->
-                        <!--<div class="assignment">-->
-                        <!--2hs-->
-                        <!--</div>-->
-                        <!--<a href="#" class="edit-task" observedactions="click">Change</a>-->
-                        <!--<a href="/gardner_mec/destroy_task?id=2298313" class="delete-task" observedactions="click">Delete</a>-->
-                        <!--<img class="overflow_indicator" src="/images/overflow_indicator.gif">-->
-                        <!--</div>-->
-                    </td>
-                    <td id="backLog" class="linha status_5" sprintid="" sprinthorasgastas="" sprinthoraslimite="">
-                        <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
-                            <!--&lt;!&ndash;&lt;!&ndash;<div class="container col l4 s12 row">&ndash;&gt;&ndash;&gt;-->
-                            <!--&lt;!&ndash;<div class="col l4 s12" ng-repeat="backLogNote in backLogNotes">&ndash;&gt;-->
-                                <!--&lt;!&ndash;<div class="card orange lighten-3 hoverable" >&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<div class="card-content white-text">&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<span class="card-title activator text-darken-4">{{backLogNote.story.name}}<i class="material-icons right">more_vert</i></span>&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<p>{{backLogNote.description}}</p>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<div class="card-reveal">&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<p>Here is some more information about this product that is only revealed once clicked on.</p>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<div class="card-action center">&ndash;&gt;-->
-                                        <!--&lt;!&ndash;&lt;!&ndash;<a href="#">{{_ 'Delete'}}</a>&ndash;&gt;&ndash;&gt;-->
-                                        <!--&lt;!&ndash;&lt;!&ndash;<a href="#projectSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>&ndash;&gt;&ndash;&gt;-->
-                                        <!--&lt;!&ndash;&lt;!&ndash;<a href="/project/save/{{_id}}">{{_ 'Edit'}}</a>&ndash;&gt;&ndash;&gt;-->
-                                        <!--&lt;!&ndash;&lt;!&ndash;<a href="/scrum/kanban">{{_ 'Enter'}}</a>&ndash;&gt;&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<a href="#" ng-click="remove(project._id)">Delete</a>&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<a href="#" ng-click="modalSave($event, project._id)" >Edit</a>&ndash;&gt;-->
-                                        <!--&lt;!&ndash;&lt;!&ndash;<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>&ndash;&gt;&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<a href="/scrum/content/{{backLogNote._id}}">Enter</a>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <div class="iconEdit" sprintPostitId=">">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </div>
+                            <!--unassigned-->
+                            <div class="assignment">
+                                {{note.time}}h
+                            </div>
+                            <img class="overflow_indicator" src="/images/overflow_indicator.gif">
+                        </div>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <!--<md-list>-->
-        <!--<md-list-item class="md-3-line" ng-repeat="team in teams">-->
-        <!--<div class="md-list-item-text" layout="column" layout-align="center center">-->
-        <!--<h3>{{team.name}}</h3>-->
-        <!--&lt;!&ndash;<h4>{{item.who}}</h4>&ndash;&gt;-->
-        <!--<p>{{team.description}}</p>-->
-        <!--</div>-->
-        <!--<div class="md-list-item-text" layout="row" layout-align="center center">-->
-        <!--<md-button class="md-fab" aria-label="Edit" ng-click="modalSlave($event)">-->
-        <!--<md-icon md-svg-icon="content:ic_create_24px" aria-label="Edit"></md-icon>-->
-        <!--</md-button>-->
-        <!--<md-button class="md-fab" aria-label="Remove" ng-click="delete(team._id)">-->
-        <!--<md-icon md-svg-icon="content:ic_clear_24px" aria-label="Remove"></md-icon>-->
-        <!--</md-button>-->
-        <!--</div>-->
-        <!--<md-divider ng-if="!$last"></md-divider>-->
-        <!--</md-list-item>-->
-        <!--</md-list>-->
-        <!--<table class="table table-hover table-mc-light-blue" flex>-->
-        <!--<thead>-->
-        <!--<tr>-->
-        <!--<th data-field="id">Name</th>-->
-        <!--<th data-field="name">Item Name</th>-->
-        <!--<th data-field="price">Item Price</th>-->
-        <!--</tr>-->
-        <!--</thead>-->
-
-        <!--<tbody>-->
-        <!--<tr>-->
-        <!--<td>Alvin</td>-->
-        <!--<td>Eclair</td>-->
-        <!--<td>$0.87</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-        <!--<td>Alan</td>-->
-        <!--<td>Jellybean</td>-->
-        <!--<td>$3.76</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-        <!--<td>Jonathan</td>-->
-        <!--<td>Lollipop</td>-->
-        <!--<td>$7.00</td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
-        <!--</table>-->
     </md-content>
 </div>

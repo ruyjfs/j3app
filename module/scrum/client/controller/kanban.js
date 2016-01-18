@@ -8,38 +8,37 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
         //$stateParams.id
 
         Meteor.subscribe('note');
-        $scope.backLogNotes = [];
+        //$scope.backLogNotes = [];
 
         Meteor.subscribe('status');
-        $scope.states = [];
-        $scope.stories = [];
 
         this.teste1 = function(id){
             return 'Hahahaa 1' + id;
         };
 
-        this.notes = function(storyId) {
-            console.log(storyId);
-            if (storyId) {
-                notes = Note.find({storyId:storyId});
-            } else {
-                notes = Note.find();
-            }
-            console.log(notes);
-            //Meteor.subscribe('story');
-            notes.forEach(function(note, noteKey){
-                note.story = Story.findOne(note.story);
-                note.owner = Meteor.users.findOne(note.owner);
-                //teste = note.owner.name.split(' ');
-                //console.log(teste);
-                //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
-                $scope.backLogNotes[noteKey] = note;
-            });
-            return notes;
-        };
+        //this.notesBackLog = function(storyId) {
+        //    console.log(storyId);
+        //    if (storyId) {
+        //        notes = Note.find({storyId:storyId});
+        //    } else {
+        //        notes = Note.find();
+        //    }
+        //    console.log(notes);
+        //    //Meteor.subscribe('story');
+        //    notes.forEach(function(note, noteKey){
+        //        note.story = Story.findOne(note.story);
+        //        note.owner = Meteor.users.findOne(note.owner);
+        //        //teste = note.owner.name.split(' ');
+        //        //console.log(teste);
+        //        //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
+        //        $scope.backLogNotes[noteKey] = note;
+        //    });
+        //    return notes;
+        //};
 
         this.teste2 = 'Hahahaa 2';
         $scope.teste3 = 'Hahahaa 3';
+
         this.helpers({
             //teste1: function(id){
             //  return 'Hahahaa 1' + id;
@@ -58,30 +57,65 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
             //    return notes;
             //},
             states: function() {
+                statesNew = [];
+                statesNew[0] = {name: 'BackLog', _id: null};
                 result = Status.find({});
-                //$meteor.subscribe('story');
+                number = 1;
                 result.forEach(function(value, key){
-                    //    note.story = Story.findOne(note.story);
-                    //    note.owner = Meteor.users.findOne(note.owner);
-                    //    //teste = note.owner.name.split(' ');
-                    //    //console.log(teste);
-                    //    //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
-                    $scope.states[key] = value;
+                    statesNew[number] = value;
+                    number++;
                 });
-                return result;
+                return statesNew;
             },
             stories: function() {
                 stories = Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]});
-                //$meteor.subscribe('story');
-                stories.forEach(function(value, key){
+                states = this.getReactively('states');
+                storiesNew = [];
+                stories.forEach(function(storyValue, storyKey){
+                    storiesNew[storyKey] = storyValue;
+                    statesNew = [];
+                    states.forEach(function(statusValue, statusKey){
+                        statesNew[statusKey] = statusValue;
+                        if (statusKey == 0) {
+                            //if (storyValue._id == '9WWHyzFrPrhGNYbar') {
+                                notes = Note.find({story:storyValue._id, status: null});
+                                console.log(notes.fetch());
+                            //} else {
+                            //    notes = [];
+                            //}
+                            console.log(storyValue._id);
+                        } else {
+                            notes = Note.find({story:storyValue._id, status: statusValue._id});
+                        }
+                        var notesNew = [];
+                        notes.forEach(function(noteValue, noteKey){
+                            noteValue.owner = Meteor.users.findOne(noteValue.owner);
+                            notesNew[noteKey] = noteValue;
+                        });
+                        statesNew[statusKey].notes = notesNew;
+                    });
+                    storiesNew[storyKey].states = statesNew;
+
+
                     //    note.story = Story.findOne(note.story);
                     //    note.owner = Meteor.users.findOne(note.owner);
                     //    //teste = note.owner.name.split(' ');
                     //    //console.log(teste);
                     //    //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
-                    $scope.stories[key] = value;
+                    //notes = Note.find({storyId:key});
+                    //
+                    ////Meteor.subscribe('story');
+                    //notes.forEach(function(note, noteKey){
+                    //    note.story = Story.findOne(note.story);
+                    //    note.owner = Meteor.users.findOne(note.owner);
+                    //    //teste = note.owner.name.split(' ');
+                    //    //console.log(teste);
+                    //    //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
+                    //    $scope.backLogNotes[noteKey] = note;
+                    //});
                 });
-                return stories;
+console.log(storiesNew);
+                return storiesNew;
             }
         });
 
