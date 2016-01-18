@@ -18,24 +18,25 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
             return 'Hahahaa 1' + id;
         };
 
-        //this.notes = function(storyId) {
-        //    console.log(storyId);
-        //    if (storyId) {
-        //        notes = Note.find({storyId:storyId});
-        //    } else {
-        //        notes = Note.find();
-        //    }
-        //    //Meteor.subscribe('story');
-        //    //notes.forEach(function(note, noteKey){
-        //    //    note.story = Story.findOne(note.story);
-        //    //    note.owner = Meteor.users.findOne(note.owner);
-        //    //    //teste = note.owner.name.split(' ');
-        //    //    //console.log(teste);
-        //    //    //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
-        //    //    $scope.backLogNotes[noteKey] = note;
-        //    //});
-        //    return notes;
-        //};
+        this.notes = function(storyId) {
+            console.log(storyId);
+            if (storyId) {
+                notes = Note.find({storyId:storyId});
+            } else {
+                notes = Note.find();
+            }
+            console.log(notes);
+            //Meteor.subscribe('story');
+            notes.forEach(function(note, noteKey){
+                note.story = Story.findOne(note.story);
+                note.owner = Meteor.users.findOne(note.owner);
+                //teste = note.owner.name.split(' ');
+                //console.log(teste);
+                //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
+                $scope.backLogNotes[noteKey] = note;
+            });
+            return notes;
+        };
 
         this.teste2 = 'Hahahaa 2';
         $scope.teste3 = 'Hahahaa 3';
@@ -43,19 +44,19 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
             //teste1: function(id){
             //  return 'Hahahaa 1' + id;
             //},
-            notes: function() {
-                notes = Note.find({});
-                Meteor.subscribe('story');
-                notes.forEach(function(note, noteKey){
-                    note.story = Story.findOne(note.story);
-                    note.owner = Meteor.users.findOne(note.owner);
-                    //teste = note.owner.name.split(' ');
-                    //console.log(teste);
-                    //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
-                    $scope.backLogNotes[noteKey] = note;
-                });
-                return notes;
-            },
+            //notes: function() {
+            //    notes = Note.find({});
+            //    Meteor.subscribe('story');
+            //    notes.forEach(function(note, noteKey){
+            //        note.story = Story.findOne(note.story);
+            //        note.owner = Meteor.users.findOne(note.owner);
+            //        //teste = note.owner.name.split(' ');
+            //        //console.log(teste);
+            //        //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
+            //        $scope.backLogNotes[noteKey] = note;
+            //    });
+            //    return notes;
+            //},
             states: function() {
                 result = Status.find({});
                 //$meteor.subscribe('story');
@@ -80,7 +81,6 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                     //    //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
                     $scope.stories[key] = value;
                 });
-                console.log(stories);
                 return stories;
             }
         });
