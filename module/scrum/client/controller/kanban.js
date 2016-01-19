@@ -12,9 +12,9 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
 
         Meteor.subscribe('status');
 
-        this.teste1 = function(id){
-            return 'Hahahaa 1' + id;
-        };
+        //this.teste1 = function(id){
+        //    return 'Hahahaa 1' + id;
+        //};
 
         //this.notesBackLog = function(storyId) {
         //    console.log(storyId);
@@ -35,6 +35,21 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
         //    });
         //    return notes;
         //};
+
+        //
+        //result = Status.find({}).map(function(a){
+        //    console.log(a);
+        //    value.teste = 'Hahaha';
+        //    return value;
+        //});
+
+        //Meteor.subscribe('story');
+        //titles=Posts.find().map(function(a) {return a.title});
+        //teste = Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]}).map( function (a){ return a;});
+        //teste = Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]});
+
+        //this.teste2 = teste.map(function(a){ return a});
+        //console.log(teste2);
 
         this.teste2 = 'Hahahaa 2';
         $scope.teste3 = 'Hahahaa 3';
@@ -79,11 +94,11 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                         if (statusKey == 0) {
                             //if (storyValue._id == '9WWHyzFrPrhGNYbar') {
                                 notes = Note.find({story:storyValue._id, status: null});
-                                console.log(notes.fetch());
+                                //console.log(notes.fetch());
                             //} else {
                             //    notes = [];
                             //}
-                            console.log(storyValue._id);
+                            //console.log(storyValue._id);
                         } else {
                             notes = Note.find({story:storyValue._id, status: statusValue._id});
                         }
@@ -114,7 +129,7 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                     //    $scope.backLogNotes[noteKey] = note;
                     //});
                 });
-console.log(storiesNew);
+//console.log(storiesNew);
                 return storiesNew;
             }
         });
