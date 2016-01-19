@@ -72,65 +72,26 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
             //    return notes;
             //},
             states: function() {
-                statesNew = [];
-                statesNew[0] = {name: 'BackLog', _id: null};
-                result = Status.find({});
-                number = 1;
-                result.forEach(function(value, key){
-                    statesNew[number] = value;
-                    number++;
-                });
-                return statesNew;
+                var states = Status.find({}).fetch();
+                states.unshift({name: 'BackLog', _id: null});
+                return states;
             },
+
             stories: function() {
-                stories = Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]});
-                states = this.getReactively('states');
-                storiesNew = [];
-                stories.forEach(function(storyValue, storyKey){
-                    storiesNew[storyKey] = storyValue;
-                    statesNew = [];
-                    states.forEach(function(statusValue, statusKey){
-                        statesNew[statusKey] = statusValue;
-                        if (statusKey == 0) {
-                            //if (storyValue._id == '9WWHyzFrPrhGNYbar') {
-                                notes = Note.find({story:storyValue._id, status: null});
-                                //console.log(notes.fetch());
-                            //} else {
-                            //    notes = [];
-                            //}
-                            //console.log(storyValue._id);
-                        } else {
-                            notes = Note.find({story:storyValue._id, status: statusValue._id});
-                        }
-                        var notesNew = [];
-                        notes.forEach(function(noteValue, noteKey){
-                            noteValue.owner = Meteor.users.findOne(noteValue.owner);
-                            notesNew[noteKey] = noteValue;
+                var stories = Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]}).map(function(story){
+                    var states = Status.find({}).fetch();
+                    states.unshift({name: 'BackLog', _id: null});
+                    story.states = states.map(function(status) {
+                        var notes = Note.find({story:story._id, status: status._id}).map(function(note) {
+                            note.owner = Meteor.users.findOne(note.owner);
+                            return note;
                         });
-                        statesNew[statusKey].notes = notesNew;
+                        status.notes = notes;
+                       return status;
                     });
-                    storiesNew[storyKey].states = statesNew;
-
-
-                    //    note.story = Story.findOne(note.story);
-                    //    note.owner = Meteor.users.findOne(note.owner);
-                    //    //teste = note.owner.name.split(' ');
-                    //    //console.log(teste);
-                    //    //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
-                    //notes = Note.find({storyId:key});
-                    //
-                    ////Meteor.subscribe('story');
-                    //notes.forEach(function(note, noteKey){
-                    //    note.story = Story.findOne(note.story);
-                    //    note.owner = Meteor.users.findOne(note.owner);
-                    //    //teste = note.owner.name.split(' ');
-                    //    //console.log(teste);
-                    //    //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
-                    //    $scope.backLogNotes[noteKey] = note;
-                    //});
+                    return story;
                 });
-//console.log(storiesNew);
-                return storiesNew;
+                return stories;
             }
         });
 

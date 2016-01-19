@@ -20,7 +20,7 @@ angular.module('scrum').controller('ProjectContentCtrl', [ '$scope', '$mdDialog'
 //console.log($rootScope.currentUser._id);
 //console.log($rootScope.currentUser);
 
-        this.modalNoteSave = function(ev, id){
+        $scope.modalNoteSave = function(ev, id){
             $mdDialog.show({
                 controller: 'NoteSaveCtrl',
                 templateUrl: 'module/scrum/client/view/note-save.ng.html',
@@ -37,7 +37,7 @@ angular.module('scrum').controller('ProjectContentCtrl', [ '$scope', '$mdDialog'
             });
         };
 
-        this.modalStorySave = function(ev, id){
+        $scope.modalStorySave = function(ev, id){
             $mdDialog.show({
                 controller: 'StorySaveCtrl',
                 templateUrl: 'module/scrum/client/view/story-save.ng.html',
@@ -47,7 +47,7 @@ angular.module('scrum').controller('ProjectContentCtrl', [ '$scope', '$mdDialog'
             });
         };
 
-        this.modalStatusSave = function(ev, id){
+        $scope.modalStatusSave = function(ev, id){
             $mdDialog.show({
                 controller: 'StatusSaveCtrl',
                 templateUrl: 'module/scrum/client/view/status-save.ng.html',
