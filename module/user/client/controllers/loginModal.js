@@ -17,7 +17,8 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
         $scope.login = function () {
             Meteor.loginWithPassword(this.dataForm.email, this.dataForm.password, function(err) {
                 if (err) {
-                    this.error = err;
+                    //console.log(err);
+                    $scope.error = 'User not found';
                 } else {
                     $mdDialog.hide();
                     $state.go('scrum/project');
@@ -26,13 +27,14 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
         };
 
         $scope.reset = function () {
-            Meteor.forgotPassword($scope.dataForm.email).then(
-                function () {
-                    $mdDialog.hide();
-                    $state.go('scrum/project');
-                },
-                function (err) {
-                    $scope.error = 'Error sending forgot password email - ' + err;
+            Accounts.forgotPassword($scope.dataForm.email, function(err) {
+                    if (err) {
+                        $scope.error = 'Error sending forgot password email - ' + err;
+                    } else {
+                        $mdDialog.hide();
+                        $state.go('scrum/project');
+
+                    }
                 }
             );
         };
@@ -42,11 +44,24 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
             if (!$scope.dataForm.name || !$scope.dataForm.lastName) {
                 $scope.error = 'Registration error - Inform you name';
             } else if ($scope.dataForm.password == $scope.dataForm.confirmPassword) {
-                Meteor.createUser($scope.dataForm).then(
-                    function () {
-                        //$scope.teamForm = $meteor.object(Team, id, false);
-                        $mdDialog.hide();
-                        $state.go('scrum/project');
+                Accounts.createUser($scope.dataForm, function (err) {
+                        if (err) {
+                            $scope.error = 'Registration error - ' + err;
+                        } else {
+                            var form = Meteor.users.findOne(Meteor.user()._id);
+                            form.name = $scope.dataForm.lastName;
+                            form.lastName = $scope.dataForm.lastName;
+
+                            Meteor.call('userSave', form, function (error) {
+                                if (error) {
+                                    console.log('Oops!');
+                                } else {
+                                    $mdDialog.hide();
+                                    $state.go('scrum/project');
+                                    console.log('Saved!');
+                                }
+                            });
+                        }
                     },
                     function (err) {
                         $scope.error = 'Registration error - ' + err;

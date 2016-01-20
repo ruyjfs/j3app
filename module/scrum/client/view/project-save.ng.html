@@ -36,13 +36,21 @@
                 <!--</md-checkbox>-->
         </md-dialog-content>
     </form>
-    <div class="md-actions" layout="row">
-        <span flex></span>
-        <md-button class="primary" ng-click="close()">
+    <div class="md-actions" layout="row" layout-align="center center">
+        <!--<md-button class="md-raised hoverable" ng-click="close()">-->
+            <!--Cancel-->
+        <!--</md-button>-->
+        <!--<md-button class="md-raised hoverable md-accent" ng-click="save()">-->
+            <!--Save-->
+            <!--<i class="material-icons right">send</i>-->
+        <!--</md-button>-->
+        <button class="btn white waves-effect waves-orange hoverable" type="button" ng-click="close()">
+            <!--<i class="material-icons right">close</i>-->
             Cancel
-        </md-button>
-        <md-button class="primary" ng-click="save()">
+        </button>
+        <button class="btn orange darken-3 waves-effect waves-light hoverable" type="button" ng-click="save()">
+            <!--<i class="material-icons right">check</i>-->
             Save
-        </md-button>
+        </button>
     </div>
 </md-dialog>

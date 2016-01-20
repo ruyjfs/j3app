@@ -28,19 +28,11 @@ angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdSide
         });
 
         $scope.remove = function(team) {
-            $scope.teams.remove(team);
+            console.log(this.getReactively('teams'));
+            this.teams.remove(team);
         }
 
         $scope.modalSave = function(ev, id){
-            //$mdDialog.alert()
-            //    .parent(angular.element(document.querySelector('#popupContainer')))
-            //    .clickOutsideToClose(true)
-            //    .title('This is an alert title')
-            //    .content('You can specify some description text in here.')
-            //    .ariaLabel('Alert Dialog Demo')
-            //    .ok('Got it!')
-            //    .targetEvent(ev)
-
             $mdDialog.show({
                 controller: 'TeamSaveCtrl',
                 templateUrl: 'module/scrum/client/view/team-save.ng.html',

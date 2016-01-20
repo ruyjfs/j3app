@@ -14,9 +14,15 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$timeout', '$m
 
         $scope.helpers({
             teams: function () {
-                return Team.find({
-                    $or: [{members : Meteor.user()._id}, {userId : Meteor.user()._id}, {_id: {$in: $scope.form.teams}}]
-                });
+                if ($scope.form.teams) {
+                    return Team.find({
+                        $or: [{members : Meteor.user()._id}, {userId : Meteor.user()._id}, {_id: {$in: $scope.form.teams}}]
+                    });
+                } else {
+                    return Team.find({
+                        $or: [{members : Meteor.user()._id}, {userId : Meteor.user()._id}]
+                    });
+                }
             }
         });
 
