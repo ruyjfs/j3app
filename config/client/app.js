@@ -9,7 +9,7 @@ if (Meteor.isClient) {
                 //'driver',
                 'socially',
                 //'brotherhood',
-                'scrum',
+                //'scrum',
             ]);
     }
 
