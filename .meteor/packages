@@ -33,3 +33,5 @@ tap:i18n
 rubaxa:sortable
 accounts-base
 angular-meteor-auth
+mizzao:jquery-ui
+dsyko:jquery-ui-touch-punch
