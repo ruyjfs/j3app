@@ -2,7 +2,7 @@
     <md-content class="md-padding">
         <!--<md-content>-->
         <table id="scrumy-board" cellspacing="0" class="live scrum" style="min-height: 300px;">
-            <tbody id="scrumy-board-body">
+            <tbody id="scrumy-board-body" ng-sortable="{animation:150}">
                 <tr id="scrumy-board-header" style="position: relative;">
                     <th id="story-header">
                         <span>Story</span>
@@ -25,9 +25,9 @@
                         </div>
                     </td>
                     <td class="verify"></td>
-                    <td class="linha status_1" sprintid="" sprinthorasgastas="" sprinthoras="" ng-repeat="status in story.states">
+                    <td class="linha status_1 status" sprintid="" sprinthorasgastas="" sprinthoras="" ng-repeat="status in story.states">
                         <!--{{status.notes}}-->
-                        <div class="task-kanban hoverable" id="task_{{note._id}}" style="background-color: {{story.color}}"  ng-repeat="note in status.notes">
+                        <div class="task-kanban hoverable note" id="task_{{note._id}}" style="background-color: {{story.color}}"  ng-repeat="note in status.notes">
                             <div class="handle"> {{note.owner.name}} </div>
                             <div class="title" title="{{note.name}}" >
                                 <pre class="title_inner" style="text-align: left;">{{note.description}}</pre>
@@ -43,25 +43,42 @@
                             <img class="overflow_indicator" src="/images/overflow_indicator.gif">
                         </div>
                     </td>
-                    <td id="sprintAnterior" class="linha status_1" sprintid="" sprinthorasgastas="0" sprinthoras="">
-                        <div class="task-kanban hoverable" id="task_{{note._id}}" style="background-color: {{backLogNote.story.color}}"  ng-repeat="note in story.notes">
-                            <div class="handle"> {{note.owner.name}} </div>
-                            <div class="title" title="{{note.name}}" >
-    <pre class="title_inner" style="text-align: left;">{{note.description}}</pre>
-                            </div>
+                    <!--<td id="sprintAnterior" class="linha status_1" sprintid="" sprinthorasgastas="0" sprinthoras="">-->
+                        <!--<div class="task-kanban hoverable" id="task_{{note._id}}" style="background-color: {{backLogNote.story.color}}"  ng-repeat="note in story.notes">-->
+                            <!--<div class="handle"> {{note.owner.name}} </div>-->
+                            <!--<div class="title" title="{{note.name}}" >-->
+    <!--<pre class="title_inner" style="text-align: left;">{{note.description}}</pre>-->
+                            <!--</div>-->
 
-                            <div class="iconEdit" sprintPostitId=">">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </div>
-                            <!--unassigned-->
-                            <div class="assignment">
-                                {{note.time}}h
-                            </div>
-                            <img class="overflow_indicator" src="/images/overflow_indicator.gif">
-                        </div>
-                    </td>
+                            <!--<div class="iconEdit" sprintPostitId=">">-->
+                                <!--<i class="glyphicon glyphicon-search"></i>-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash;unassigned&ndash;&gt;-->
+                            <!--<div class="assignment">-->
+                                <!--{{note.time}}h-->
+                            <!--</div>-->
+                            <!--<img class="overflow_indicator" src="/images/overflow_indicator.gif">-->
+                        <!--</div>-->
+                    <!--</td>-->
                 </tr>
             </tbody>
         </table>
     </md-content>
 </div>
+<script>
+    $(function() {
+        setTimeout(function(){
+            $( ".status" ).sortable({
+                connectWith: "td.status"
+            });
+        }, 300);
+        $( ".status" ).disableSelection();
+
+//        $( "ul.dropfalse" ).sortable({
+//            connectWith: "ul",
+//            dropOnEmpty: false
+//        });
+
+//        $( "#sortable1, #sortable2, #sortable3" ).disableSelection();
+    });
+</script>

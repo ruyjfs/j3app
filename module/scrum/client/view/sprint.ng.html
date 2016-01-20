@@ -45,17 +45,17 @@
                     <a href="#" class="select-all" style="display: none">Select All</a>
                 </th>
             </tr>
-            <tr class="story-task-row"><td id="backLog" class="linha status_1" sprintid="" sprinthorasgastas="" sprinthoraslimite="">
-                <div class="row">
+            <tr class="story-task-row">
+                <td id="backLog" class="linha status_1 containerSprint row" sprintid="" sprinthorasgastas="" sprinthoraslimite="">
                     <!--<div class="container col l4 s12 row">-->
-                    <div class="col" ng-repeat="backLogNote in backLogNotes">
+                    <div class="col containerNote" ng-repeat="backLogNote in backLogNotes">
                         <div class="card hoverable" style="background-color: {{backLogNote.story.color}}; width: 200px; height: 140px;">
                             <div class="card-content white-text note">
                                 <span class="card-title activator text-darken-4">{{backLogNote.owner.name}}<i class="material-icons right">more_vert</i></span>
                                 <p>{{backLogNote.description}}</p>
                                 <p></p>
                             </div>
-                            <div class="card-reveal note">
+                            <div class="card-reveal">
                                 <!--<span class="card-title grey-text text-darken-4">{{backLogNote.story.name}}<i class="material-icons right">close</i></span>-->
                                     <span class="card-title grey-text text-darken-4">
                                         <i class="material-icons right">close</i>
@@ -81,7 +81,6 @@
                             <!--</div>-->
                         </div>
                     </div>
-                </div>
                 <!--<div class="row">-->
                 <!--<div class="col s2 m2">-->
                 <!--<div class="card-panel teal">-->
@@ -133,11 +132,11 @@
                 <!--<img class="overflow_indicator" src="/images/overflow_indicator.gif">-->
                 <!--</div>-->
             </td>
-                <td id="sprintAnterior" class="linha status_3" sprintid="" sprinthorasgastas="0" sprinthoras="">
+                <td id="sprintAnterior" class="linha status_3 containerSprint row" sprintid="" sprinthorasgastas="0" sprinthoras="">
                 </td>
-                <td id="sprintAtual" class="linha status_5" sprintid="" sprinthorasgastas="0" sprinthoras="">
+                <td id="sprintAtual" class="linha status_5 containerSprint  row" sprintid="" sprinthorasgastas="0" sprinthoras="">
                 </td>
-                <td id="proximaSprint" class="linha status_2" sprintid="" sprinthorasgastas="6" sprinthoras="">
+                <td id="proximaSprint" class="linha status_2 containerSprint row" sprintid="" sprinthorasgastas="6" sprinthoras="">
                     <!--<div sprintpostitid="2" sprintpostithoras="2" class="task" style="background-color: #CCC">-->
                     <!--<div class="handle"> subprgdsc </div>-->
                     <!--<div class="title">-->
@@ -277,3 +276,21 @@
     <!--<p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>-->
 
 </div>
+<script>
+    $(function() {
+        setTimeout(function(){
+            $( ".containerSprint" ).sortable({
+                connectWith: ".containerSprint",
+                items: ".containerNote"
+            });
+        }, 300);
+        $( ".containerSprint" ).disableSelection();
+
+//        $( "ul.dropfalse" ).sortable({
+//            connectWith: "ul",
+//            dropOnEmpty: false
+//        });
+
+//        $( "#sortable1, #sortable2, #sortable3" ).disableSelection();
+    });
+</script>
