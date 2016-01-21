@@ -24,4 +24,9 @@ angular.module('scrum').controller('DefaultCtrl', [ '$scope', '$mdDialog',
                 $scope.status = 'You cancelled the dialog.';
             });
         };
+
+
+        $scope.t = function($text) {
+            return $text;
+        };
 }]);

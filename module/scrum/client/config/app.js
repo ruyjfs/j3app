@@ -5,8 +5,19 @@ if (Meteor.isClient) {
         'ui.router',
         'angularUtils.directives.dirPagination',
         'uiGmapgoogle-maps',
+        //'ngCookies',
         'ngMaterial'
-    ]);
+    ]).directive('teste', function () {
+            return 'asdasdasdasdasd';
+            //return {
+                //restrict: 'A',
+                //link: function(scope,element,attrs){
+                //    element.bind('click',function(){
+                //        scope.$eval(attrs.sonClick);
+                //    })
+                //}
+            //};
+        });
 
 
     //angular.module('scrum')

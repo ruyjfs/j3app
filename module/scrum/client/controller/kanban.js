@@ -12,6 +12,21 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
 
         Meteor.subscribe('status');
 
+        $scope.teste3 = 'Hahahaa 3';
+        //$scope.t = function($text) {
+        //    return '$text';
+        //};
+
+        //$scope.t = function($text) {
+        //    return $text;
+        //}
+
+        //$scope.helpers({
+        //    t: function($text) {
+        //        return $text;
+        //    }
+        //});
+
         //this.teste1 = function(id){
         //    return 'Hahahaa 1' + id;
         //};
@@ -52,7 +67,7 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
         //console.log(teste2);
 
         this.teste2 = 'Hahahaa 2';
-        $scope.teste3 = 'Hahahaa 3';
+        //$scope.teste3 = 'Hahahaa 3';
 
         this.helpers({
             //teste1: function(id){
