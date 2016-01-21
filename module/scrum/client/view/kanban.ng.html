@@ -25,22 +25,38 @@
                         </div>
                     </td>
                     <td class="verify"></td>
-                    <td class="linha status_1 status" sprintid="" sprinthorasgastas="" sprinthoras="" ng-repeat="status in story.states">
+                    <td class="linha status_1 containerStatus" sprintid="" sprinthorasgastas="" sprinthoras="" ng-repeat="status in story.states">
                         <!--{{status.notes}}-->
-                        <div class="task-kanban hoverable note" id="task_{{note._id}}" style="background-color: {{story.color}}"  ng-repeat="note in status.notes">
-                            <div class="handle"> {{note.owner.name}} </div>
-                            <div class="title" title="{{note.name}}" >
-                                <pre class="title_inner" style="text-align: left;">{{note.description}}</pre>
+                        <div class="card hoverable containerNote" style="background-color: {{story.color}}; width: 120px; height: 90px; float: left; margin: 10px;" ng-repeat="note in status.notes">
+                            <div class="card-content white-text note">
+                                <span class=" text-darken-4">{{note.owner.name}}<i class=" activator material-icons right" style="">more_vert</i></span>
+                                <p>{{note.description}}</p>
+                                <p></p>
                             </div>
-
-                            <div class="iconEdit" sprintPostitId=">">
-                                <i class="glyphicon glyphicon-search"></i>
+                            <div class="card-reveal">
+                                <!--<span class="card-title grey-text text-darken-4">{{note.story.name}}<i class="material-icons right">close</i></span>-->
+                                <span class="card-title grey-text text-darken-4">
+                                    <i class="material-icons right">close</i>
+                                    <a href="#" ng-click="modalStorySave($event, story._id)" title="Add story" class="btn-floating green hoverable">
+                                        <i class="material-icons">content_paste</i>
+                                    </a>
+                                    <a href="#" ng-click="modalNoteSave($event, note._id)" title="Add note" class="btn-floating amber accent-4 hoverable">
+                                        <i class="material-icons">mode_edit</i>
+                                    </a>
+                                </span>
+                                <!--<p>{{note.story.name}}</p>-->
+                                <!--<p>{{note.description}}</p>-->
                             </div>
-                            <!--unassigned-->
-                            <div class="assignment">
-                                {{note.time}}h
-                            </div>
-                            <img class="overflow_indicator" src="/images/overflow_indicator.gif">
+                            <!--<div class="card-action center">-->
+                            <!--&lt;!&ndash;<a href="#">{{_ 'Delete'}}</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="#projectSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="/project/save/{{_id}}">{{_ 'Edit'}}</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="/scrum/kanban">{{_ 'Enter'}}</a>&ndash;&gt;-->
+                            <!--<a href="#" ng-click="remove(project._id)">Delete</a>-->
+                            <!--<a href="#" ng-click="modalSave($event, project._id)" >Edit</a>-->
+                            <!--&lt;!&ndash;<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="/scrum/content/{{backLogNote._id}}">Enter</a>&ndash;&gt;-->
+                            <!--</div>-->
                         </div>
                     </td>
                     <!--<td id="sprintAnterior" class="linha status_1" sprintid="" sprinthorasgastas="0" sprinthoras="">-->
@@ -68,11 +84,12 @@
 <script>
     $(function() {
         setTimeout(function(){
-            $( ".status" ).sortable({
-                connectWith: "td.status"
+            $( ".containerStatus" ).sortable({
+                connectWith: "td.containerStatus",
+                items: ".containerNote"
             });
         }, 300);
-        $( ".status" ).disableSelection();
+        $( ".containerStatus" ).disableSelection();
 
 //        $( "ul.dropfalse" ).sortable({
 //            connectWith: "ul",
