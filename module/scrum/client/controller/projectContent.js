@@ -1,6 +1,6 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('ProjectContentCtrl', [ '$scope', '$mdDialog', '$stateParams', '$reactive', '$state', '$timeout',
+angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog', '$stateParams', '$reactive', '$state', '$timeout',
     function ($scope, $mdDialog, $stateParams, $reactive, $state, $timeout) {
         $reactive(this).attach($scope);
 
@@ -10,53 +10,71 @@ angular.module('scrum').controller('ProjectContentCtrl', [ '$scope', '$mdDialog'
             $state.go('scrum');
         }
 
-        //Meteor.subscribe('project');
-        //$scope.helpers({
-        //    project: function () {
-        //        return Project.findOne($stateParams.id);
-        //    }
-        //});
+        $scope.helpers({
+            project: function () {
+                this.subscribe('project');
+                return Project.findOne($stateParams.id);
+            },
+            sprint: function(){
+                var project = this.project;
+                this.subscribe('sprint');
 
-//console.log($rootScope.currentUser._id);
-//console.log($rootScope.currentUser);
+                sprint = Sprint.findOne({$or: [{projectId: $stateParams.id}, {projectId: null}]});
 
-        $scope.modalNoteSave = function(ev, id){
+                if (!sprint) {
+                    Meteor.call('sprintCreate', $stateParams.id, function (error) {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log('Saved!');
+                            $scope.form = '';
+                            $mdDialog.hide();
+                        }
+                    });
+                    console.log(project);
+
+                } else {
+                    return sprint;
+                }
+            }
+        });
+
+        $scope.modalNoteSave = function (ev, id) {
             $mdDialog.show({
                 controller: 'NoteSaveCtrl',
                 templateUrl: 'module/scrum/client/view/note-save.ng.html',
                 clickOutsideToClose: true,
                 targetEvent: ev,
-                locals:
-                {
+                locals: {
                     id: id
                 }
-            }).then(function(answer) {
+            }).then(function (answer) {
                 $scope.status = 'You said the information was "' + answer + '".';
-            }, function() {
+            }, function () {
                 $scope.status = 'You cancelled the dialog.';
             });
         };
 
-        $scope.modalStorySave = function(ev, id){
+        $scope.modalStorySave = function (ev, id) {
             $mdDialog.show({
                 controller: 'StorySaveCtrl',
                 templateUrl: 'module/scrum/client/view/story-save.ng.html',
-                clickOutsideToClose:true,
+                clickOutsideToClose: true,
                 locals: {id: id},
                 targetEvent: ev
             });
         };
 
-        $scope.modalStatusSave = function(ev, id){
+        $scope.modalStatusSave = function (ev, id) {
             $mdDialog.show({
                 controller: 'StatusSaveCtrl',
                 templateUrl: 'module/scrum/client/view/status-save.ng.html',
-                clickOutsideToClose:true,
+                clickOutsideToClose: true,
                 locals: {'id': id},
                 targetEvent: ev
-            }).then(function(answer) {
+            }).then(function (answer) {
                 $scope.status = 'You said the information was "' + answer + '".';
-            }, function() {
+            }, function () {
                 $scope.status = 'You cancelled the dialog.';
             });
         };
@@ -81,4 +99,4 @@ angular.module('scrum').controller('ProjectContentCtrl', [ '$scope', '$mdDialog'
         //        this.tooltipVisible = self.isOpen;
         //    }
         //});
-}]);
+    }]);

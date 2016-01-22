@@ -16,6 +16,35 @@ Sprint.allow({
 //yemiX6y3u7vnqpS3n
 //92okH9HNck243cdQ5
 Meteor.methods({
+    sprintCreate: function(projectId){
+        project = Project.findOne(projectId);
+
+        if (project) {
+            sprint = {};
+
+            console.log(new Date());
+            sprint.userId = Meteor.userId();
+            sprint.projectId = projectId;
+            sprint.date
+
+        //    Sprint.insert(dataForm)
+
+        } else {
+            return false;
+        }
+
+
+
+        //if (!dataForm.userId) {
+        //    dataForm.userId = Meteor.userId();
+        //}
+        //
+        //if (dataForm._id) {
+        //    Status.update(dataForm._id, { $set: dataForm});
+        //} else {
+        //    Status.insert(dataForm);
+        //}
+    }
     //invite: function (partyId, userId) {
     //    check(partyId, String);
     //    check(userId, String);

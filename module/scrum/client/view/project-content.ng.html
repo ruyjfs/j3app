@@ -1,4 +1,6 @@
 <div ng-controller="ProjectContentCtrl as vm" flex>
+    {{project}} --
+    {{vm.project}} --
     <md-tabs md-dynamic-height md-border-bottom md-selected="1">
         <md-tab label="Burndown">
             <md-content class="md-padding">
@@ -10,9 +12,9 @@
                 <div ng-include="'module/scrum/client/view/kanban.ng.html'"></div>
             </md-content>
         </md-tab>
-        <md-tab label="Sprint">
+        <md-tab label="Backlog">
             <md-content class="md-padding">
-                <div ng-include="'module/scrum/client/view/sprint.ng.html'"></div>
+                <div ng-include="'module/scrum/client/view/backlog.ng.html'"></div>
             </md-content>
         </md-tab>
         <md-tab label="Team">
@@ -28,6 +30,11 @@
         <md-tab label="Status">
             <md-content class="md-padding">
                 <div ng-include="'module/scrum/client/view/status.ng.html'"></div>
+            </md-content>
+        </md-tab>
+        <md-tab label="Sprint">
+            <md-content class="md-padding">
+                <div ng-include="'module/scrum/client/view/sprint.ng.html'"></div>
             </md-content>
         </md-tab>
     </md-tabs>

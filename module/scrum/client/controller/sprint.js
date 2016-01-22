@@ -1,23 +1,23 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('SprintCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$reactive',
-    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive) {
+angular.module('scrum').controller('SprintCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$reactive', '$stateParams',
+    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive, $stateParams) {
         $reactive(this).attach($scope);
 
-        Meteor.subscribe('note');
-        $scope.backLogNotes = [];
-
+        this.subscribe('sprint');
         $scope.helpers({
-            notes: function () {
-                notes = Note.find({});
-                Meteor.subscribe('story');
-                notes.forEach(function(note, noteKey){
-                    note.story = Story.findOne(note.story);
-                    note.owner = Meteor.users.findOne(note.owner);
-                    //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
-                    $scope.backLogNotes[noteKey] = note;
-                });
-                return notes;
+            sprints: function () {
+                return Sprint.find({$or: [{projectId: $stateParams.id}, {projectId: null}]});
             }
         });
+
+        $scope.modalSave = function(ev, id){
+            $mdDialog.show({
+                controller: 'SprintSaveCtrl',
+                templateUrl: 'module/scrum/client/view/sprint-save.ng.html',
+                clickOutsideToClose:true,
+                locals: {id: id},
+                targetEvent: ev
+            });
+        };
 }]);
