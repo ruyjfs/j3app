@@ -15,7 +15,7 @@ angular.module('gamer').config(['$urlRouterProvider', '$stateProvider', '$locati
         $stateProvider
             .state('gamer', {
                 url: '/gamer',
-                templateUrl: 'client/module/gamer/view/default.ng.html',
+                templateUrl: 'module/gamer/client/view/default.ng.html',
                 controller: 'DefaultCtrl'
             });
 

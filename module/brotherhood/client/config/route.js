@@ -64,6 +64,6 @@ angular.module('brotherhood').config(['$urlRouterProvider', '$stateProvider', '$
 //                }
 //            });
 
-        $urlRouterProvider.otherwise("/scrum");
+        //$urlRouterProvider.otherwise("/brotherhood");
     }
 ]);

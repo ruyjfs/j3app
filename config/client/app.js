@@ -5,10 +5,10 @@ if (Meteor.isClient) {
             [
                 'admin',
                 'user',
-                //'gamer',
-                //'driver',
+                'gamer',
+                'driver',
                 'socially',
-                //'brotherhood',
+                'brotherhood',
                 'scrum',
             ]);
     }
@@ -108,7 +108,7 @@ if (Meteor.isClient) {
         $mdThemingProvider.alwaysWatchTheme(true);
     }];
 
-    angular.module('scrum').config(theme);
+    angular.module('admin').config(theme);
 
     nameModule = '';
     setTheme = function ($nameTheme){
