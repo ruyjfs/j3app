@@ -1,0 +1,12 @@
+<div ng-controller="IndexCtrl">
+    <header>
+        <div ng-include="'module/scrum/client/view/header.ng.html'"></div>
+        <!--<div ng-include="'module/admin/client/view/toolbar.ng.html'"></div>-->
+    </header>
+    <main>
+        <div ui-view></div>
+    </main>
+    <footer class="page-footer brown darken-4" style="margin-top: 0px; padding-top: 0px; min-height: 56px;">
+        <div ng-include="'module/scrum/client/view/footer.ng.html'"></div>
+    </footer>
+</div>

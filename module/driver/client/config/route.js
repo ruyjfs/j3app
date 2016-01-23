@@ -15,7 +15,7 @@ angular.module('driver').config(['$urlRouterProvider', '$stateProvider', '$locat
         $stateProvider
             .state('driver', {
                 url: '/driver',
-                templateUrl: 'client/module/driver/view/default.ng.html',
+                templateUrl: 'module/driver/client/view/default.ng.html',
                 controller: 'DefaultCtrl'
             });
 
