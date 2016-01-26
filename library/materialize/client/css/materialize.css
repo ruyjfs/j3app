@@ -5321,8 +5321,11 @@ nav {
     nav .brand-logo.right {
       right: 0.5rem;
       padding: 0; }
-  nav ul {
-    margin: 0; }
+  /*nav  ul.hide-on-med-and-down {*/
+  /*nav ul.hide-on-large-only {*/
+nav  ul {
+  margin: 0;
+  }
     nav ul li {
       -webkit-transition: background-color .3s;
       -moz-transition: background-color .3s;
