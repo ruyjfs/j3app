@@ -1,7 +1,7 @@
 <div ng-controller="ProjectContentCtrl as vm" flex>
-    {{project}} --
-    {{vm.project}} --
-    <md-tabs md-dynamic-height md-border-bottom md-selected="1">
+    <!--{{project}} -->
+    <!--{{vm.project}} -->
+    <md-tabs md-center-tabs md-dynamic-height md-border-bottom md-selected="1">
         <md-tab label="Burndown">
             <md-content class="md-padding">
                 Em desenvolvimento...
@@ -33,6 +33,11 @@
             </md-content>
         </md-tab>
         <md-tab label="Sprint">
+            <md-content class="md-padding">
+                <div ng-include="'module/scrum/client/view/sprint.ng.html'"></div>
+            </md-content>
+        </md-tab>
+        <md-tab label="Project">
             <md-content class="md-padding">
                 <div ng-include="'module/scrum/client/view/sprint.ng.html'"></div>
             </md-content>
