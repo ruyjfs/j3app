@@ -1,6 +1,18 @@
 <div ng-controller="ProjectContentCtrl as vm" flex>
-    <!--{{project}} -->
-    <!--{{vm.project}} -->
+    <!--{{project}}-->
+    <!--{{vm.project}}-->
+    <!--<md-tabs md-center-tabs md-dynamic-height md-border-bottom md-selected="1" >-->
+        <!--<md-tab label="05/01/2016 - 15/01/2016 (12)">-->
+            <!--<md-content class="md-padding">-->
+                <!--Em desenvolvimento...-->
+            <!--</md-content>-->
+        <!--</md-tab>-->
+        <!--<md-tab label="Kanban" >-->
+            <!--<md-content class="md-padding">-->
+                <!--&lt;!&ndash;<div ng-include="'module/scrum/client/view/kanban.ng.html'"></div>&ndash;&gt;-->
+            <!--</md-content>-->
+        <!--</md-tab>-->
+    <!--</md-tabs>-->
     <md-tabs md-center-tabs md-dynamic-height md-border-bottom md-selected="1">
         <md-tab label="Burndown">
             <md-content class="md-padding">
@@ -33,11 +45,6 @@
             </md-content>
         </md-tab>
         <md-tab label="Sprint">
-            <md-content class="md-padding">
-                <div ng-include="'module/scrum/client/view/sprint.ng.html'"></div>
-            </md-content>
-        </md-tab>
-        <md-tab label="Project">
             <md-content class="md-padding">
                 <div ng-include="'module/scrum/client/view/sprint.ng.html'"></div>
             </md-content>
