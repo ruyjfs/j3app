@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog', '$stateParams', '$reactive', '$state', '$timeout',
-    function ($scope, $mdDialog, $stateParams, $reactive, $state, $timeout) {
+angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog', '$stateParams', '$reactive', '$state', '$timeout', '$rootScope',
+    function ($scope, $mdDialog, $stateParams, $reactive, $state, $timeout, $rootScope) {
         $reactive(this).attach($scope);
 
         //$scope.title = 'Scrum';
@@ -15,27 +15,42 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                 this.subscribe('project');
                 return Project.findOne($stateParams.id);
             },
-            sprint: function(){
-                var project = this.project;
+            sprint: function() {
+                //project = Project.findOne($stateParams.id);
+            //    //sprint = [];
+            //    //Meteor.call('sprintCurrent', $stateParams.id, function (error, result) {sprint = result; return result;});
+            //    //console.log(sprint);
                 this.subscribe('sprint');
-
-                sprint = Sprint.findOne({$or: [{projectId: $stateParams.id}, {projectId: null}]});
+                dateNow = moment().format('x');
+                sprint = Sprint.findOne(
+                    {
+                        $and: [
+                            {projectId: $stateParams.id},
+                            {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
+                        ]
+                    }
+                );
 
                 if (!sprint) {
-                    Meteor.call('sprintCreate', $stateParams.id, function (error) {
+                    Meteor.call('sprintCreate', $stateParams.id, function (error, result) {
                         if (error) {
                             console.log(error);
                         } else {
-                            console.log('Saved!');
-                            $scope.form = '';
-                            $mdDialog.hide();
+                            //console.log('Saved!');
+                            //$scope.form = '';
+                            //$mdDialog.hide();
                         }
+                        //$rootScope.titleMiddle = result.dateStart + ' - ' + result.dateEnd + ' (' + result.number + ')';
+                        $rootScope.titleMiddle = moment(result.dateStart, 'x').format('L') + ' - ' + moment(result.dateEnd, 'x').format('L');
                     });
-                    console.log(project);
-
                 } else {
-                    return sprint;
+                    $rootScope.titleMiddle = moment(sprint.dateStart, 'x').format('L')  + ' - ' + moment(sprint.dateEnd, 'x').format('L');
+                    //sprint.dateStartTreated = moment(sprint.dateStart).format('L');
+                    //sprint.dateEndTreated = moment(sprint.dateEnd).format('L');
                 }
+
+                $rootScope.sprint = sprint;
+                return sprint;
             }
         });
 

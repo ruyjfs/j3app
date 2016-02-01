@@ -28,6 +28,24 @@ Meteor.methods({
             Story.insert(dataForm);
         }
     },
+    noteChangeStatus: function(form){
+
+        formNew = Note.findOne(form.noteId);
+        if (form.statusId) {
+            formNew.statusId = form.statusId;
+        }
+        Note.update(form.noteId, { $set: formNew});
+
+        //if (!dataForm.userId) {
+        //    dataForm.userId = Meteor.userId();
+        //}
+        //
+        //if (dataForm._id) {
+        //    note.update(dataForm._id, { $set: dataForm});
+        //} else {
+        //    Story.insert(dataForm);
+        //}
+    },
     //teamSave: function (dataForm) {
         //console.log(dataForm);
         //check(partyId, String);

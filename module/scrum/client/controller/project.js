@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams'',
 //    function($scope, $stateParams){
-angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSidenav', '$log', '$reactive',
-    function ($scope, $mdDialog, $mdSidenav, $log, $reactive) {
+angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSidenav', '$log', '$reactive', '$rootScope',
+    function ($scope, $mdDialog, $mdSidenav, $log, $reactive, $rootScope) {
         $reactive(this).attach($scope);
 
         //console.log(Meteor.user()._id);
@@ -103,6 +103,7 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
             });
         };
 
+        $rootScope.titleMiddle = '';
         this.modalTeamSave = function (ev, id) {
             //$mdDialog.alert()
             //    .parent(angular.element(document.querySelector('#popupContainer')))

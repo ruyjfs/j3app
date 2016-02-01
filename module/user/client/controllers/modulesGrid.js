@@ -2,12 +2,12 @@ angular.module("user").controller("ModulesGridCtrl", ['$scope', '$state', '$mdDi
     function($scope, $state, $mdDialog,  $mdBottomSheet){
 
         $scope.items = [
-            { name: 'Admin', icon: 'dashboard', link: 'admin'},
+            { name: 'Admin', icon: 'tune', link: 'admin'},
             { name: 'User', icon: 'person', link: 'user'},
             { name: 'Scrum', icon: 'dashboard', link: 'scrum/project'},
-            { name: 'Gamer', icon: 'dashboard', link: 'gamer'},
-            { name: 'Driver', icon: 'dashboard', link: 'driver'},
-            { name: 'Brotherhood', icon: 'dashboard', link: 'brotherhood'},
+            { name: 'Gamer', icon: 'videogame_asset', link: 'gamer'},
+            { name: 'Driver', icon: 'directions_car', link: 'driver'},
+            { name: 'Brotherhood', icon: 'domain', link: 'brotherhood'},
             //{ name: 'Message', icon: 'message' },
             //{ name: 'Copy', icon: 'copy2' },
             //{ name: 'Facebook', icon: 'facebook' },

@@ -94,10 +94,10 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
 
             stories: function() {
                 var stories = Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]}).map(function(story){
-                    var states = Status.find({}).fetch();
+                    var states = Status.find({projectId: $stateParams.id}).fetch();
                     states.unshift({name: 'BackLog', _id: null});
                     story.states = states.map(function(status) {
-                        var notes = Note.find({story:story._id, status: status._id}).map(function(note) {
+                        var notes = Note.find({story:story._id, statusId: status._id}).map(function(note) {
                             note.owner = Meteor.users.findOne(note.owner);
                             return note;
                         });
@@ -106,6 +106,12 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                     });
                     return story;
                 });
+
+                setTimeout(function(){
+                    console.log('teste 123');
+                    testando();
+                }, 300);
+
                 return stories;
             }
         });

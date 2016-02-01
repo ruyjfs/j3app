@@ -38,6 +38,19 @@ angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSid
             });
         };
 
+        this.modalSprintChange = function (ev) {
+            $mdDialog.show({
+                controller: 'SprintChangeCtrl',
+                templateUrl: 'module/scrum/client/view/sprint-change.ng.html',
+                clickOutsideToClose: true,
+                targetEvent: ev
+            }).then(function (answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
+        };
+
         this.modalLogin = function(ev, id){
             //$mdDialog.alert()
             //    .parent(angular.element(document.querySelector('#popupContainer')))

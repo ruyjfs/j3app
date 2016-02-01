@@ -25,9 +25,9 @@
                         </div>
                     </td>
                     <td class="verify"></td>
-                    <td class="linha status_1 containerStatus" sprintid="" sprinthorasgastas="" sprinthoras="" ng-repeat="status in story.states">
-                        <!--{{status.notes}}-->
-                        <div class="card hoverable containerNote" style="background-color: {{story.color}}; width: 120px; height: 90px; float: left; margin: 10px;" ng-repeat="note in status.notes">
+                    <td data-sortable-row="{{story._id}}" data-statusId="{{status._id}}" class="status_1 containerStatus" sprintid="" sprinthorasgastas="" sprinthoras="" ng-repeat="status in story.states">
+                        <!--{{status._id}}-->
+                        <div data-sortable-row="{{story._id}}" data-noteId="{{note._id}}" class="card hoverable containerNote" style="background-color: {{story.color}}; width: 120px; height: 90px; float: left; margin: 10px;" ng-repeat="note in status.notes">
                             <div class="card-content white-text note">
                                 <span class=" text-darken-4">{{note.owner.name}}<i class=" activator material-icons right" style="">more_vert</i></span>
                                 <p>{{note.description}}</p>
@@ -83,19 +83,144 @@
 </div>
 <script>
     $(function() {
+
         setTimeout(function(){
-            $( ".containerStatus" ).sortable({
-                connectWith: "td.containerStatus",
-                items: ".containerNote"
+//            $( ".containerStatus" ).sortable({
+//                connectWith: "td.containerStatus",
+//                items: ".containerNote"
+//            });
+
+            testando();
+
+        }, 500);
+
+        testando = function (){
+            $('div[data-sortable-row]').each(function(elementKey, elementValue){
+                element = $(elementValue);
+                row = element.attr('data-sortable-row');
+                $('td[data-sortable-row='+row+']').sortable({
+                    connectWith: 'td[data-sortable-row='+row+']',
+                    beforeStop: function(event, ui) {
+                        console.log(event);
+                        statusId = $(ui.item.context).closest('td').attr('data-statusId');
+                        noteId = $(ui.item.context).attr('data-noteId');
+
+                        form = {};
+                        form.statusId = statusId;
+                        form.noteId = noteId;
+                        Meteor.call('noteChangeStatus', form, function(error, result){
+                            if (error) {
+                                console.log(error);
+                            } else {
+                                console.log(result);
+                                console.log(statusId);
+                                console.log(noteId);
+                            }
+                        });
+
+
+//                        var arrStatus = $(ui.item.context).parent('td').attr('class').split(' ');
+//                        var arrStatus = arrStatus[0].split('_');
+//                        var idStatus = arrStatus[1];
+//
+//                        var arrPostit = ui.item.context.id.split('_')
+//                        var idPostit = arrPostit[1];
+
+                        //                                                                console.log('Postit: ' + idPostit);
+                        //                                                                console.log('Status: ' + idStatus);
+
+//                        dataPost = {controller : 'kanban', action: 'tramitSprint', idpostit: idPostit, idstatus: idStatus}
+
+//                        $.post(window.location, dataPost, function(result) {
+//                            console.log(result);
+//                        });
+                    }
+                }).disableSelection();
             });
-        }, 300);
-        $( ".containerStatus" ).disableSelection();
+        }
 
-//        $( "ul.dropfalse" ).sortable({
-//            connectWith: "ul",
-//            dropOnEmpty: false
-//        });
 
-//        $( "#sortable1, #sortable2, #sortable3" ).disableSelection();
+//        $('[data-sortable-row]').sortable({
+//            connectWith: ".linha_<?php echo $keyFilhosSubprogramas ?>",
+//            beforeStop: function(event, ui) {
+//                var arrStatus = $(ui.item.context).parent('td').attr('class').split(' ');
+//                var arrStatus = arrStatus[0].split('_');
+//                var idStatus = arrStatus[1];
+//
+//                var arrPostit = ui.item.context.id.split('_')
+//                var idPostit = arrPostit[1];
+//
+//                //                                                                console.log('Postit: ' + idPostit);
+//                //                                                                console.log('Status: ' + idStatus);
+//
+//                dataPost = {controller : 'kanban', action: 'tramitSprint', idpostit: idPostit, idstatus: idStatus}
+//
+//                $.post(window.location, dataPost, function(result) {
+//                    console.log(result);
+//                });
+//            }
+//        }).disableSelection();
     });
+
+    //                        $(function() {
+    //                            setTimeout(function(){
+    //                                $( ".containerStatus" ).sortable({
+    //                                    connectWith: "td.containerStatus",
+    //                                    items: ".containerNote"
+    //                                });
+    //                            }, 500);
+    //                            $( ".containerStatus" ).disableSelection();
+
+    //        $( "ul.dropfalse" ).sortable({
+    //            connectWith: "ul",
+    //            dropOnEmpty: false
+    //        });
+
+    //        $( "#sortable1, #sortable2, #sortable3" ).disableSelection();
+    //                        });
+</script>
+<script>
+
+
+
+
+//    $(function() {
+//        $('<?php echo implode(' , ', $classStatus) ?>').sortable({
+//            connectWith: ".linha_<?php echo $keyFilhosSubprogramas ?>",
+//            beforeStop: function(event, ui) {
+//                var arrStatus = $(ui.item.context).parent('td').attr('class').split(' ');
+//                var arrStatus = arrStatus[0].split('_');
+//                var idStatus = arrStatus[1];
+//
+//                var arrPostit = ui.item.context.id.split('_')
+//                var idPostit = arrPostit[1];
+//
+//                //                                                                console.log('Postit: ' + idPostit);
+//                //                                                                console.log('Status: ' + idStatus);
+//
+//                dataPost = {controller : 'kanban', action: 'tramitSprint', idpostit: idPostit, idstatus: idStatus}
+//
+//                $.post(window.location, dataPost, function(result) {
+//                    console.log(result);
+//                });
+//            }
+//        }).disableSelection();
+//    });
+//
+//    $(function() {
+//        setTimeout(function(){
+//            $( ".containerStatus" ).sortable({
+//                connectWith: "td.containerStatus",
+//                items: ".containerNote"
+//            });
+//        }, 500);
+//        $( ".containerStatus" ).disableSelection();
+//
+////        $( "ul.dropfalse" ).sortable({
+////            connectWith: "ul",
+////            dropOnEmpty: false
+////        });
+//
+////        $( "#sortable1, #sortable2, #sortable3" ).disableSelection();
+//    });
 </script>

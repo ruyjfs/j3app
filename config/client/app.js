@@ -11,6 +11,10 @@ if (Meteor.isClient) {
                 'brotherhood',
                 'scrum',
             ]);
+
+        $('.button-collapse').sideNav({
+            closeOnClick: true
+        });
     }
 
     mdThemingProvider = '';
@@ -111,12 +115,14 @@ if (Meteor.isClient) {
     angular.module('admin').config(theme);
 
     nameModule = '';
+    titleMiddle = '';
     setTheme = function ($nameTheme){
         nameModule = $nameTheme;
         mdThemingProvider.setDefaultTheme($nameTheme);
     };
 
-
+    moment.locale('pt-BR');
+    moment.createFromInputFallback = function(config) { config._d = new Date(config._i); };
     getUserLanguage = function () {
         // Put here the logic for determining the user language
         return "pt-BR";

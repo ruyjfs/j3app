@@ -3,8 +3,8 @@
         <nav class="brown darken-3" role="navigation">
             <div class="nav-wrapper container">
                 <a id="logo-container" href="#" class="brand-logo">{{nameModule}}</a>
-                <a id="logo-container" href="#" class="brand-logo center hide-on-med-and-down" style="font-size: 20px;">
-                    05/01/2016 - 15/01/2016 (12)
+                <a id="logo-middle" ng-click="vm.modalSprintChange($event)" href="#" class="brand-logo center hide-on-med-and-down" style="font-size: 20px;">
+                    {{titleMiddle}}
                 </a>
                 <!--<a id="logo-container" href="#" class="brand-logo">-->
                     <!--<md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>-->
@@ -45,18 +45,18 @@
                     <div ng-if="$auth.currentUser">
                             <!--{{#if currentUser}}-->
                         <li><a href="/scrum/project" class="waves-effect waves-orange"><i class="material-icons left">business_center</i>Project</a></li>
-                        <li><a href="/scrum/team" class="waves-effect waves-orange"><i class="material-icons left">group_work</i>Team</a></li>
+                        <!--<li><a href="/scrum/team" class="waves-effect waves-orange"><i class="material-icons left">group_work</i>Team</a></li>-->
                         <!--<li><a href="#" class="waves-effect waves-orange" ng-click="toggleContactList()"><i class="material-icons">chat</i>Chat</a></li>-->
                         <li><a href="#" class="waves-effect waves-orange dropdown-button" data-activates="dropdown2"><i class="material-icons left">language</i>Language</a></li>
                         <ul id='dropdown2' class='dropdown-content' style="min-width: 200px;">
                             <li><a href="#" onclick="javascript:setUserLanguage('en-US')">English</a></li>
                             <li><a href="#" onclick="javascript:setUserLanguage('pt-BR')">Portuguese</a></li>
                         </ul>
-                        <li><a href="#" ng-click="showModulesGrid($event)" class="waves-effect waves-orange"><i class="material-icons left">view_module</i>Options</a></li>
-                        <li><a href="#" class="waves-effect waves-orange"><i class="material-icons left">power_settings_new</i>Exit</a></li>
+                        <li><a href="#" ng-click="vm.showModulesGrid($event)" class="waves-effect waves-orange"><i class="material-icons left">view_module</i>Options</a></li>
+                        <li><a href="/user/logout" class="waves-effect waves-orange"><i class="material-icons left">power_settings_new</i>Exit</a></li>
                             <!--{{else}}-->
                     </div>
-                    <div ng-if="!$auth.currentUser">l
+                    <div ng-if="!$auth.currentUser">
                         <li><a href="/" class="waves-effect waves-orange"><i class="material-icons left">home</i>Home</a></li>
                         <li><a href="#" ng-click="vm.modalLogin($event, project._id)" class="waves-effect waves-orange"><i class="material-icons left">person</i>Login</a></li>
                         <li><a href="#" class="waves-effect waves-orange dropdown-button" data-activates="dropdown2"><i class="material-icons left">language</i>Language</a></li>
@@ -68,6 +68,7 @@
                         <!--</div>-->
                     </div>
                 </ul>
+                <!--<a href="#" ng-click="vm.toggleContactList()" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>-->
                 <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul ng-hide="!$auth.currentUser" class="right hide-on-large-only">
                     <li><a href="#" ng-click="vm.toggleContactList()"><i class="material-icons">chat</i></a></li>

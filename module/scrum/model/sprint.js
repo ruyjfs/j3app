@@ -18,23 +18,36 @@ Sprint.allow({
 Meteor.methods({
     sprintCreate: function(projectId){
         project = Project.findOne(projectId);
-
         if (project) {
-            sprint = {};
+            sprint = Sprint.findOne(
+                {$and: [{projectId: projectId}]}
+            );
 
-            console.log(new Date());
-            sprint.userId = Meteor.userId();
-            sprint.projectId = projectId;
-            sprint.date
+            if (sprint) {
+                return sprint;
+            } else {
+                moment.locale('en');
+                sprint = {};
+                //sprint.dateStart = moment().startOf('week').format('DD/MM/YYYY, HH:mm:ss');
+                //sprint.dateStart = moment().startOf('week').format('DD/MM/YYYY');
+                sprint.dateStart = moment().startOf('week').format('x');
+                sprint.dateEnd = moment().endOf('week').add(project.week, 'week').format('x');
+                //console.log(project.week);
+                //console.log(moment().startOf('week'));
+                //console.log(new Date());
+                sprint.userId = Meteor.userId();
+                sprint.projectId = projectId;
+                sprint.number = 1;
+                //console.log(sprint);
+                Sprint.insert(sprint);
+                return sprint;
 
-        //    Sprint.insert(dataForm)
-
+                //sprint.date
+                //    Sprint.insert(dataForm)
+            }
         } else {
             return false;
         }
-
-
-
         //if (!dataForm.userId) {
         //    dataForm.userId = Meteor.userId();
         //}
@@ -44,7 +57,28 @@ Meteor.methods({
         //} else {
         //    Status.insert(dataForm);
         //}
-    }
+    },
+    //sprintCurrent: function(projectId){
+    //    sprint = Sprint.findOne(
+    //        {$and: [{projectId: projectId}]}
+    //    );
+    //    sprint.dateStartTreated = moment.unix(sprint.dateStart).calendar('L');
+    //    sprint.dateEndTreated = moment.unix(sprint.dateEnd).calendar('L');
+    //    console.log(sprint);
+    //    console.log('sprint');
+    //    return sprint;
+    //},
+    //sprintFindAllByProject: function(projectId){
+    //    console.log(projectId);
+    //    sprint = Sprint.find(
+    //        {$and: [{projectId: projectId}]}
+    //    ).fetch().map(function(sprint){
+    //            sprint.dateStartTreated = moment.unix(sprint.dateStart).calendar('L');
+    //            sprint.dateEndTreated = moment.unix(sprint.dateEnd).calendar('L');
+    //            return sprint;
+    //        });
+    //    return sprint;
+    //}
     //invite: function (partyId, userId) {
     //    check(partyId, String);
     //    check(userId, String);
