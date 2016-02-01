@@ -29,12 +29,16 @@ Meteor.methods({
         }
     },
     noteChangeStatus: function(form){
-
         formNew = Note.findOne(form.noteId);
-        if (form.statusId) {
+        //if (typeof form.statusId != 'undefined') {
+        //if (form.statusId != '') {
             formNew.statusId = form.statusId;
-        }
-        Note.update(form.noteId, { $set: formNew});
+        //    console.log('ett');
+        //} else {
+        //    delete formNew.statusId;
+        //}
+        delete formNew._id;
+        Note.update(form.noteId, { $set: formNew})
 
         //if (!dataForm.userId) {
         //    dataForm.userId = Meteor.userId();

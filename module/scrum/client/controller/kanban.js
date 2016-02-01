@@ -97,10 +97,17 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                     var states = Status.find({projectId: $stateParams.id}).fetch();
                     states.unshift({name: 'BackLog', _id: null});
                     story.states = states.map(function(status) {
-                        var notes = Note.find({story:story._id, statusId: status._id}).map(function(note) {
-                            note.owner = Meteor.users.findOne(note.owner);
-                            return note;
-                        });
+                        if (status._id) {
+                            var notes = Note.find({story:story._id, statusId: status._id}).map(function(note) {
+                                note.owner = Meteor.users.findOne(note.owner);
+                                return note;
+                            });
+                        } else {
+                            var notes = Note.find({story:story._id, $or: [{statusId: status._id}, {statusId: ''}]}).map(function(note) {
+                                note.owner = Meteor.users.findOne(note.owner);
+                                return note;
+                            });
+                        }
                         status.notes = notes;
                        return status;
                     });

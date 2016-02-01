@@ -6,6 +6,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
 
         Meteor.subscribe('note');
         $scope.backLogNotes = [];
+        //$scope.sprintCurrent = {};
 
         $scope.helpers({
             notes: function () {
@@ -18,6 +19,40 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                     $scope.backLogNotes[noteKey] = note;
                 });
                 return notes;
-            }
+            },
+            //sprintCurrents: function() {
+            //    Meteor.subscribe('sprint');
+            //    dateNow = moment().format('x');
+            //    sprint = Sprint.findOne(
+            //        {
+            //            $and: [
+            //                {projectId: $stateParams.id},
+            //                {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
+            //            ]
+            //        }
+            //    );
+            //    sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('L');
+            //    sprint.dateEndTreated = moment(sprint.dateEnd, 'x').format('L');
+            //    $scope.sprintCurrent = sprint;
+            //    return sprint;
+            //}
         });
+
+        Meteor.subscribe('sprint');
+        $scope.sprintCurrent = function() {
+            dateNow = moment().format('x');
+            sprint = Sprint.findOne(
+                {
+                    $and: [
+                        {projectId: $stateParams.id},
+                        {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
+                    ]
+                }
+            );
+            sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('L');
+            sprint.dateEndTreated = moment(sprint.dateEnd, 'x').format('L');
+            console.log(sprint);
+            console.log('sprint');
+            return sprint;
+        }
 }]);
