@@ -49,7 +49,7 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
                             $scope.error = 'Registration error - ' + err;
                         } else {
                             var form = Meteor.users.findOne(Meteor.user()._id);
-                            form.name = $scope.dataForm.lastName;
+                            form.name = $scope.dataForm.name;
                             form.lastName = $scope.dataForm.lastName;
 
                             Meteor.call('userSave', form, function (error) {
