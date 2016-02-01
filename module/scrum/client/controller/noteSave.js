@@ -12,6 +12,7 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$timeout', '$mdS
         } else {
             $scope.form = {};
         }
+        $scope.form.projectId = $stateParams.id;
 
         $scope.save = function () {
             if (id) {

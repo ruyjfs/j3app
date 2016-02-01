@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$reactive',
-    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive) {
+angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$reactive', '$stateParams',
+    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive, $stateParams) {
         $reactive(this).attach($scope);
 
         Meteor.subscribe('note');
@@ -9,7 +9,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
 
         $scope.helpers({
             notes: function () {
-                notes = Note.find({});
+                notes = Note.find({$or: [{projectId: $stateParams.id}, {projectId: null}]});
                 Meteor.subscribe('story');
                 notes.forEach(function(note, noteKey){
                     note.story = Story.findOne(note.story);
