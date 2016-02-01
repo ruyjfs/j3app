@@ -38,6 +38,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
             //}
         });
 
+
         Meteor.subscribe('sprint');
         $scope.sprintCurrent = function() {
             dateNow = moment().format('x');
