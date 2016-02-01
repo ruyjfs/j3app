@@ -87,7 +87,7 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
             //    return notes;
             //},
             states: function() {
-                var states = Status.find({}).fetch();
+                var states = Status.find({projectId: $stateParams.id}).fetch();
                 states.unshift({name: 'BackLog', _id: null});
                 return states;
             },
