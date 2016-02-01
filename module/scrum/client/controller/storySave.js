@@ -2,9 +2,6 @@
 //    function($scope, $stateParams, $meteor){
 angular.module('scrum').controller('StorySaveCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$mdDialog', 'id', '$stateParams',
     function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, $mdDialog, id, $stateParams) {
-        $scope.projects = $meteor.collection( function() {
-            return Project.find({});
-        });
 
         if (id) {
             $scope.form = Story.findOne(id);

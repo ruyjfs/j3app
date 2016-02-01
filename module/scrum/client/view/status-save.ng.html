@@ -13,13 +13,6 @@
                     <input ng-model="form.name" id="nameInput" type="text" aria-label="Name" required>
                 </md-input-container>
                 <md-input-container>
-                    <md-select ng-model="form.project" id="time" aria-label=""  placeholder="Project" required>
-                        <md-option  ng-repeat="project in projects" value="{{project._id}}">
-                            {{project.name}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
-                <md-input-container>
                     <label>Order</label>
                     <input ng-model="form.order" id="order" type="number" aria-label="Name" required>
                 </md-input-container>
