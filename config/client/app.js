@@ -4,12 +4,12 @@ if (Meteor.isClient) {
         angular.bootstrap(document,
             [
                 'user',
+                'admin',
                 'gamer',
                 'driver',
                 'socially',
                 'brotherhood',
                 'scrum',
-                'admin',
             ]);
 
         $('.button-collapse').sideNav({
