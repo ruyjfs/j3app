@@ -28,9 +28,11 @@ Meteor.methods({
         //} else {
         //    Meteor.users.insert(form);
         //}
-        form.userId = Meteor.userId();
+        //form.userId = Meteor.userId();
+        var userId = form._id;
         if (form._id) {
-            Meteor.users.update(form._id, { $set: form});
+            delete form._id;
+            Meteor.users.update(userId, { $set: form});
         } else {
             Meteor.users.insert(form);
         }

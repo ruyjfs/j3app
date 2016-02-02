@@ -20,9 +20,9 @@
         <md-list>
             <md-list-item class="md-3-line" ng-repeat="user in vm.users">
                 <div class="md-list-item-text" layout="column" layout-align="center center">
-                    <h3>{{user.name}}</h3>
+                    <h3>{{user.name}} {{user.lastName}}</h3>
                     <!--<h4>{{item.who}}</h4>-->
-                    <p>{{user.nameLast}}</p>
+                    <p>{{user.email}}</p>
                 </div>
                 <div class="md-list-item-text" layout="row" layout-align="center center">
                     <md-button class="md-fab md-mini hoverable" aria-label="Edit" ng-click="vm.modalUserSave($event, user._id)">

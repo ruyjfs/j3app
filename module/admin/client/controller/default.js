@@ -1,4 +1,4 @@
-angular.module("admin").controller("DefaultCtrl", ['$scope', '$state', '$mdDialog',
+angular.module("admin").controller("DefaultAdminCtrl", ['$scope', '$state', '$mdDialog',
     function($scope, $state, $mdDialog){
 
         this.teste = 'haha Admin';

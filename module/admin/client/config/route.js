@@ -6,7 +6,7 @@ angular.module('admin').config(['$urlRouterProvider', '$stateProvider', '$locati
             .state('admin', {
                 url: '/admin',
                 templateUrl: 'module/admin/client/view/default.ng.html',
-                controller: 'DefaultCtrl'
+                controller: 'DefaultAdminCtrl'
             });
 
         $urlRouterProvider.otherwise("/admin");
