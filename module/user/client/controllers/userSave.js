@@ -9,18 +9,21 @@ angular.module('user').controller('UserSaveCtrl', [ '$scope', '$timeout', '$mdSi
 
         //$scope.dataForm = $meteor.object(Meteor.users, Meteor.user()._id, false);
         //$scope.dataForm = Meteor.users().findOne(Meteor.user()._id);
+
+        Meteor.subscribe('users');
         this.form = Meteor.users.findOne(Meteor.user()._id);
         this.form.email = this.form.emails[0].address;
-
+        console.log(this.form);
         this.saveUser = function (){
             Meteor.call('userSave', this.form, function (error) {
                 if (error) {
-                    console.log('Oops, unable to invite!');
+                    //console.log('Oops, unable to invite!');
+                    Materialize.toast('Erro: ' + error, 4000);
                 } else {
                     this.form = Meteor.users.findOne(Meteor.user()._id);
                     //console.log(this.form);
                     //console.log('aqui');
-                    console.log('Saved!');
+                    Materialize.toast('Saved successfully!', 4000);
                 }
             });
 
@@ -59,10 +62,6 @@ angular.module('user').controller('UserSaveCtrl', [ '$scope', '$timeout', '$mdSi
                 //$scope.teamForm = '';
                 //$mdDialog.hide();
             //}
-        }
-
-        this.close = function () {
-            $mdDialog.hide();
         }
     }
 ]);

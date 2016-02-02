@@ -1,10 +1,10 @@
-Note = new Mongo.Collection("note");
-Note.allow({
+Contact = new Mongo.Collection("contact");
+Contact.allow({
     insert: function (userId) {
         //return userId && party.owner === userId;
         return userId;
     },
-    update: function (userId, team) {
+    update: function (userId, party, fields, modifier) {
         //return userId && party.owner === userId;
         return userId;
     },
@@ -13,77 +13,20 @@ Note.allow({
         return userId;
     }
 });
-
 //yemiX6y3u7vnqpS3n
 //92okH9HNck243cdQ5
 Meteor.methods({
-    noteSave: function(dataForm){
+    contactSave: function(dataForm){
         if (!dataForm.userId) {
             dataForm.userId = Meteor.userId();
         }
 
         if (dataForm._id) {
-            Note.update(dataForm._id, { $set: dataForm});
+            Contact.update(dataForm._id, { $set: dataForm});
         } else {
-            Note.insert(dataForm);
+            Contact.insert(dataForm);
         }
     },
-    noteChangeStatus: function(form){
-        formNew = Note.findOne(form.noteId);
-        //if (typeof form.statusId != 'undefined') {
-        //if (form.statusId != '') {
-            formNew.statusId = form.statusId;
-        //    console.log('ett');
-        //} else {
-        //    delete formNew.statusId;
-        //}
-        delete formNew._id;
-        Note.update(form.noteId, { $set: formNew})
-
-        //if (!dataForm.userId) {
-        //    dataForm.userId = Meteor.userId();
-        //}
-        //
-        //if (dataForm._id) {
-        //    note.update(dataForm._id, { $set: dataForm});
-        //} else {
-        //    Story.insert(dataForm);
-        //}
-    },
-    //teamSave: function (dataForm) {
-        //console.log(dataForm);
-        //check(partyId, String);
-        //check(userId, String);
-        //var party = Messages.findOne(partyId);
-        //if (!party)
-        //    throw new Meteor.Error(404, "No such party");
-        //if (party.owner !== this.userId)
-        //    throw new Meteor.Error(404, "No such party");
-        //if (party.public)
-        //    throw new Meteor.Error(400,
-        //        "That party is public. No need to invite people.");
-        //
-        //if (userId !== party.owner && ! _.contains(party.invited, userId)) {
-        //    Messages.update(partyId, { $addToSet: { invited: userId } });
-        //
-        //    var from = contactEmail(Meteor.users.findOne(this.userId));
-        //    var to = contactEmail(Meteor.users.findOne(userId));
-        //
-        //    if (Meteor.isServer && to) {
-        //        // This code only runs on the server. If you didn't want clients
-        //        // to be able to see it, you could move it to a separate file.
-        //        Email.send({
-        //            from: "noreply@socially.com",
-        //            to: to,
-        //            replyTo: from || undefined,
-        //            subject: "PARTY: " + party.title,
-        //            text:
-        //            "Hey, I just invited you to '" + party.title + "' on Socially." +
-        //            "\n\nCome check it out: " + Meteor.absoluteUrl() + "\n"
-        //        });
-        //    }
-        //}
-    //},
     //invite: function (partyId, userId) {
     //    check(partyId, String);
     //    check(userId, String);

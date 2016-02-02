@@ -10,6 +10,7 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
             $state.go('scrum');
         }
 
+        moment.locale('pt-BR');
         $scope.helpers({
             project: function () {
                 this.subscribe('project');

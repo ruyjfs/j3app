@@ -1,0 +1,41 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Add friend</h2>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="min-width:400px;max-width:800px;max-height:810px;">
+            <div  ng-show="$root.currentUser">
+                <md-input-container>
+                    <label>Email</label>
+                    <input ng-model="form.email" id="nameInput" type="text" aria-label="Email" required>
+                    <!--<div ng-messages="form.name.$error">-->
+                        <!--<div ng-message="required">required</div>-->
+                    <!--</div>-->
+                </md-input-container>
+                <!--<md-checkbox ng-model="newParty.public" id="public" aria-label="Public">-->
+                    <!--Public-->
+                <!--</md-checkbox>-->
+            </div>
+        </md-dialog-content>
+    </form>
+    <div class="md-actions" layout="row">
+        <span flex></span>
+        <!--<md-button class="primary" ng-click="close()">-->
+            <!--Cancel-->
+        <!--</md-button>-->
+        <!--<md-button class="primary" ng-click="save()">-->
+            <!--Save-->
+        <!--</md-button>-->
+        <button class="btn white waves-effect waves-orange hoverable" type="button" ng-click="close()">
+            <!--<i class="material-icons right">close</i>-->
+            Cancel
+        </button>
+        <button class="btn orange darken-3 waves-effect waves-light hoverable" type="button" ng-click="saveFriend()">
+            <!--<i class="material-icons right">check</i>-->
+            Save
+        </button>
+    </div>
+</md-dialog>

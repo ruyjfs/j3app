@@ -1,0 +1,51 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Save user</h2>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="min-width:400px;max-width:800px;max-height:810px;">
+            <div  ng-show="$root.currentUser">
+                <md-input-container>
+                    <label>Name</label>
+                    <input ng-model="form.name" type="text" aria-label="Name" required>
+                    <!--<div ng-messages="form.name.$error">-->
+                        <!--<div ng-message="required">required</div>-->
+                    <!--</div>-->
+                </md-input-container>
+                <md-input-container>
+                    <label>Last name</label>
+                    <input ng-model="form.lastName" type="text" aria-label="Last name" required>
+                </md-input-container>
+                <div ng-repeat="email in form.emails">
+                    {{email}}
+                </div>
+            </div>
+        </md-dialog-content>
+    </form>
+    <div class="md-actions" layout="row">
+        <span flex></span>
+        <!--<md-button class="primary" ng-click="close()">-->
+            <!--Cancel-->
+        <!--</md-button>-->
+        <!--<md-button class="primary" ng-click="save()">-->
+            <!--Save-->
+        <!--</md-button>-->
+
+        <!--<md-button class="md-raised md-primary">Cancel</md-button>-->
+        <md-button class="md-raised" style="color: #000000;" ng-click="close()">Cancel</md-button>
+        <!--<md-button class="md-raised md-warn">Cancel</md-button>-->
+        <md-button class="md-raised md-accent" ng-click="save()">Save</md-button>
+
+        <!--<button class="btn white waves-effect waves-orange hoverable" type="button" ng-click="close()">-->
+        <!--&lt;!&ndash;<i class="material-icons right">close</i>&ndash;&gt;-->
+        <!--Cancel-->
+        <!--</button>-->
+        <!--<button class="btn orange darken-3 waves-effect waves-light hoverable" type="button" ng-click="save()">-->
+            <!--&lt;!&ndash;<i class="material-icons right">check</i>&ndash;&gt;-->
+            <!--Save-->
+        <!--</button>-->
+    </div>
+</md-dialog>

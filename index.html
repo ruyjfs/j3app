@@ -74,7 +74,14 @@
     <!--<div ng-include="'module/admin/client/view/toolbar.ng.html'"></div>-->
 </header>
 <main>
-    <div ui-view></div>
+    <md-content>
+        <div ui-view></div>
+    </md-content>
+    <!--<div layout="row" style="min-height: 100%;">-->
+        <!--<div layout="column" style="min-height: 100%;">-->
+            <!--<div flex ui-view style="min-height: 100%;"></div>-->
+        <!--</div>-->
+    <!--</div>-->
 </main>
 <footer class="page-footer brown darken-4" style="margin-top: 0px; padding-top: 0px; min-height: 56px;">
     <div ng-include="'module/scrum/client/view/footer.ng.html'"></div>

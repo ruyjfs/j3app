@@ -12,9 +12,9 @@ angular.module('scrum').controller('StatusSaveCtrl', [ '$scope', '$timeout', '$m
         $scope.save = function () {
             Meteor.call('statusSave', $scope.form, function (error) {
                 if (error) {
-                    console.log(error);
+                    Materialize.toast('Erro: ' + error, 4000);
                 } else {
-                    console.log('Saved!');
+                    Materialize.toast('Saved successfully!', 4000);
                     $scope.form = '';
                     $mdDialog.hide();
                 }

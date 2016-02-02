@@ -2,10 +2,15 @@
 //    function($scope, $stateParams, $meteor){
 angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$mdDialog', 'id', '$stateParams',
     function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, $mdDialog, id, $stateParams) {
-        $scope.stories = $meteor.collection( function() {
-            return Story.find({projectId: $stateParams.id});
+
+        $scope.helpers({
+            stories: function () {
+                return Story.find({projectId: $stateParams.id});
+            },
+            members: function () {
+                return Meteor.users.find({});
+            }
         });
-        $scope.members = $meteor.collection(Meteor.users, false).subscribe('users');
 
         if (id) {
             $scope.form = $meteor.object(Note, id, false);
@@ -20,9 +25,23 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$timeout', '$mdS
             } else {
                 Note.insert($scope.form);
             }
+            Materialize.toast('Saved successfully!', 4000);
             $scope.form = '';
             $mdDialog.hide();
+
         }
+
+        //$scope.save = function () {
+        //    Meteor.call('noteSave', $scope.form, function (error) {
+        //        if (error) {
+        //            Materialize.toast('Erro: ' + error, 4000);
+        //        } else {
+        //            Materialize.toast('Saved successfully!', 4000);
+        //            $scope.form = '';
+        //            $mdDialog.hide();
+        //        }
+        //    });
+        //}
 
         $scope.close = function () {
             $mdDialog.hide();

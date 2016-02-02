@@ -1,25 +1,12 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('TeamSaveCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$mdDialog', 'id',
+angular.module('admin').controller('UserSaveModalCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$mdDialog', 'id',
     function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, $mdDialog, id) {
-
-        $scope.title = 'Scrum';
-        $scope.members = $meteor.collection(Meteor.users, false).subscribe('users');
-        $scope.times = [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9
-        ];
 
         if (id) {
             //$scope.form = $meteor.object(Project, id, false);
-            $scope.form = Team.findOne(id);
+            Meteor.subscribe('users');
+            $scope.form = Meteor.users.findOne(id);
         } else {
             $scope.form = {};
         }
@@ -34,10 +21,11 @@ angular.module('scrum').controller('TeamSaveCtrl', [ '$scope', '$timeout', '$mdS
             //    }
             //);
 
-            Meteor.call('teamSave', $scope.form, function (error) {
+            Meteor.call('userSave', $scope.form, function (error) {
                 if (error) {
                     Materialize.toast('Erro: ' + error, 4000);
                 } else {
+                    console.log('Saved!');
                     Materialize.toast('Saved successfully!', 4000);
                     $scope.form = '';
                     $mdDialog.hide();

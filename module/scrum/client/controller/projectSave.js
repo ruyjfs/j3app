@@ -38,9 +38,9 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$timeout', '$m
 
             Meteor.call('projectSave', $scope.form, function (error) {
                 if (error) {
-                    console.log('Oops, unable to invite!');
+                    Materialize.toast('Erro: ' + error, 4000);
                 } else {
-                    console.log('Saved!');
+                    Materialize.toast('Saved successfully!', 4000);
                     $scope.form = '';
                     $mdDialog.hide();
                 }

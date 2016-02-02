@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams'',
 //    function($scope, $stateParams){
-angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSidenav', '$log', '$reactive', '$rootScope',
-    function ($scope, $mdDialog, $mdSidenav, $log, $reactive, $rootScope) {
+    angular.module("admin").controller("UserCtrl", ['$scope', '$state', '$mdDialog', '$reactive', '$rootScope',
+    function ($scope, $state, $mdDialog, $reactive, $rootScope) {
         $reactive(this).attach($scope);
 
         $scope.teste = '1';
@@ -11,25 +11,25 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
         this.subscribe('project');
         this.subscribe('team');
         this.helpers({
-            projects: function () {
-                projectsNew = [];
-                projects = Project.find({});
-                projects.forEach(function(project){
-                    if (project.userId && project.userId != Meteor.user()._id) {
-                        if (project.teams) {
-                            teams = Team.find({
-                                    _id: { $in: project.teams},
-                                    $and: [{'members' : Meteor.user()._id}]
-                                });
-                            if (teams.fetch().length > 0) {
-                                projectsNew.push(project);
-                            }
-                        }
-                    } else if (project) {
-                        projectsNew.push(project);
-                    }
-                });
-                return projectsNew;
+            users: function () {
+                Meteor.subscribe('users');
+                users = Meteor.users.find({});
+                //teams = Team.find(
+                //    {
+                //        //$or: [{userId: Meteor.user()._id}, {members : Meteor.user()._id}]
+                //        $or: [
+                //            {
+                //                'userId' : Meteor.user()._id,
+                //            }
+                //            ,
+                //            {
+                //                'members' : Meteor.user()._id,
+                //                //'userId' : friendId,
+                //                //'friendId' : $rootScope.currentUser._id
+                //            }
+                //        ]
+                //    });
+                return users;
             }
         });
 
@@ -90,36 +90,10 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
             this.projects.remove(id);
         }
 
-        this.modalProjectSave = function (ev, id) {
+        this.modalUserSave = function (ev, id) {
             $mdDialog.show({
-                controller: 'ProjectSaveCtrl',
-                templateUrl: 'module/scrum/client/view/project-save.ng.html',
-                clickOutsideToClose: true,
-                locals: {
-                    id: id
-                },
-                targetEvent: ev
-            }).then(function (answer) {
-                this.status = 'You said the information was "' + answer + '".';
-            }, function () {
-                this.status = 'You cancelled the dialog.';
-            });
-        };
-
-        $rootScope.titleMiddle = '';
-        this.modalTeamSave = function (ev, id) {
-            //$mdDialog.alert()
-            //    .parent(angular.element(document.querySelector('#popupContainer')))
-            //    .clickOutsideToClose(true)
-            //    .title('This is an alert title')
-            //    .content('You can specify some description text in here.')
-            //    .ariaLabel('Alert Dialog Demo')
-            //    .ok('Got it!')
-            //    .targetEvent(ev)
-
-            $mdDialog.show({
-                controller: 'TeamSaveCtrl',
-                templateUrl: 'module/scrum/client/view/team-save.ng.html',
+                controller: 'UserSaveModalCtrl',
+                templateUrl: 'module/admin/client/view/user-save-modal.ng.html',
                 clickOutsideToClose: true,
                 locals: {
                     id: id

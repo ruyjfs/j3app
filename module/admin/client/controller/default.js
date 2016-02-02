@@ -1,6 +1,9 @@
 angular.module("admin").controller("DefaultCtrl", ['$scope', '$state', '$mdDialog',
     function($scope, $state, $mdDialog){
 
+        this.teste = 'haha Admin';
+        $scope.teste2 = 'haha Admin';
+
         $scope.projects = [
             {
                 'name': 'j3scrum',
