@@ -5,9 +5,11 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$timeout', '$mdS
 
         $scope.helpers({
             stories: function () {
+                Meteor.subscribe('stories');
                 return Story.find({projectId: $stateParams.id});
             },
             members: function () {
+                Meteor.subscribe('users');
                 return Meteor.users.find({});
             }
         });
