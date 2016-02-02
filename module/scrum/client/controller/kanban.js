@@ -10,6 +10,7 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
         Meteor.subscribe('note');
         //$scope.backLogNotes = [];
 
+        Meteor.subscribe('users');
         Meteor.subscribe('status');
 
         $scope.teste3 = 'Hahahaa 3';

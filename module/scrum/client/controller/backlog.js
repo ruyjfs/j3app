@@ -4,6 +4,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive, $stateParams) {
         $reactive(this).attach($scope);
 
+        Meteor.subscribe('users');
         Meteor.subscribe('note');
         $scope.backLogNotes = [];
         //$scope.sprintCurrent = {};
