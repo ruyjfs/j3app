@@ -51,6 +51,9 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                 }
 
                 $rootScope.sprint = sprint;
+                Session.set('sprintCurrent', sprint);
+                //console.log(Session.get('sprintCurrent'));
+                //console.log('aqui');
                 return sprint;
             }
         });

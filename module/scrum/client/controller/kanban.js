@@ -90,6 +90,7 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
             states: function() {
                 var states = Status.find({projectId: $stateParams.id}).fetch();
                 states.unshift({name: 'BackLog', _id: null});
+                states.push({name: 'Done', _id: 1});
                 return states;
             },
 
@@ -97,6 +98,7 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                 var stories = Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]}).map(function(story){
                     var states = Status.find({projectId: $stateParams.id}).fetch();
                     states.unshift({name: 'BackLog', _id: null});
+                    states.push({name: 'Done', _id: '1'});
                     story.states = states.map(function(status) {
                         if (status._id) {
                             var notes = Note.find({story:story._id, statusId: status._id}).map(function(note) {
@@ -116,7 +118,6 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                 });
 
                 setTimeout(function(){
-                    console.log('teste 123');
                     testando();
                 }, 300);
 

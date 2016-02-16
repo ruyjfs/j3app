@@ -23,9 +23,7 @@ Meteor.methods({
                 {$and: [{projectId: projectId}]}
             );
 
-            if (sprint) {
-                return sprint;
-            } else {
+            if (!sprint) {
                 moment.locale('en');
                 sprint = {};
                 //sprint.dateStart = moment().startOf('week').format('DD/MM/YYYY, HH:mm:ss');
@@ -40,11 +38,31 @@ Meteor.methods({
                 sprint.number = 1;
                 //console.log(sprint);
                 Sprint.insert(sprint);
-                return sprint;
 
                 //sprint.date
                 //    Sprint.insert(dataForm)
             }
+
+            sprintNext = Sprint.findOne({$and :{number: sprint + 1}});
+
+            if (!sprintNext) {
+                moment.locale('en');
+                sprint = {};
+                //sprint.dateStart = moment().startOf('week').format('DD/MM/YYYY, HH:mm:ss');
+                //sprint.dateStart = moment().startOf('week').format('DD/MM/YYYY');
+                sprint.dateStart = moment().startOf('week').add(project.week + 1, 'week').format('x');
+                sprint.dateEnd = moment().endOf('week').add(project.week + project.week, 'week').format('x');
+                //console.log(project.week);
+                //console.log(moment().startOf('week'));
+                //console.log(new Date());
+                sprint.userId = Meteor.userId();
+                sprint.projectId = projectId;
+                sprint.number = sprint.number + 1;
+                //console.log(sprint);
+                //Sprint.insert(sprint);
+            }
+
+            return sprint;
         } else {
             return false;
         }

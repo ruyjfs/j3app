@@ -1,8 +1,8 @@
 <div ng-controller="BacklogCtrl as vm" flex>
-    {{vm.teste}} 1
-    {{teste2}} 2
-    {{sprintCurrent}} 3
-    {{sprint}} 4
+    <!--{{vm.teste}} 1-->
+    <!--{{teste2}} 2-->
+    <!--{{vm.sprintCurrent}} 3-->
+    <!--{{sprint}} 4-->
     <!--<div flex-sm>-->
     <!--<div>-->
     <!--<div layout-padding layout="row" layout-align="center">-->
@@ -32,7 +32,8 @@
                 </th>
                 <th id="header-sprintAnterior" class="header">
                     <span>Previous sprint</span> <br>
-                    10/10/2010 - 10/10/2010 <br>
+                    <!--10/10/2010 - 10/10/2010 <br>-->
+                    {{sprintPrevious.dateStartTreated}} - {{sprintPrevious.dateEndTreated}} ({{sprintPrevious.number}})<br>
                     (<span class="sprintHorasGastas">0hs</span>/ hs )
                     <a href="#" class="select-all" style="display: none">Select All</a>
                 </th>
@@ -45,7 +46,8 @@
                 </th>
                 <th id="header-proximaSprint" class="header">
                     <span>Next sprint</span> <br>
-                    10/10/2010 - 10/10/2010 <br>
+                    <!--10/10/2010 - 10/10/2010 <br>-->
+                    {{sprintNext.dateStartTreated}} - {{sprintNext.dateEndTreated}} ({{sprintNext.number}})<br>
                     (<span class="sprintHorasGastas">6hs</span>/ hs )
                     <a href="#" class="select-all" style="display: none">Select All</a>
                 </th>
