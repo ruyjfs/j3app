@@ -13,8 +13,7 @@ Status.allow({
         return userId;
     }
 });
-//yemiX6y3u7vnqpS3n
-//92okH9HNck243cdQ5
+
 Meteor.methods({
     statusSave: function(dataForm){
         if (!dataForm.userId) {
@@ -26,6 +25,12 @@ Meteor.methods({
         } else {
             Status.insert(dataForm);
         }
+    },
+    statusFindByProject: function(param){
+        var states = Status.find({projectId: param.projectId}).fetch();
+        states.unshift({name: 'BackLog', _id: null});
+        states.push({name: 'Done', _id: 1});
+        return states;
     },
     //invite: function (partyId, userId) {
     //    check(partyId, String);

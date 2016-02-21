@@ -1,99 +1,31 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
 angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$stateParams', '$reactive',
-    //function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, Sortable, id) {
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $stateParams, $reactive) {
         $reactive(this).attach($scope);
 
-        //$stateParams.id
+        //this.call('statusFindByProject', {projectId: $stateParams.id}, function(error, result){
+        //    this.states = result;
+        //});
+        //Meteor.call('storyFindByProject', {projectId: $stateParams.id}, function(error, result){
+        //    Session.set('stories', result);
+        //    //this.stories = result;
+        //    console.log('story');
+        //    console.log(result);
+        //    setTimeout(function(){
+        //        testando();
+        //    }, 300);
+        //});
 
-        Meteor.subscribe('note');
-        //$scope.backLogNotes = [];
-
-        Meteor.subscribe('users');
-        Meteor.subscribe('status');
-
-        $scope.teste3 = 'Hahahaa 3';
-        //$scope.t = function($text) {
-        //    return '$text';
-        //};
-
-        //$scope.t = function($text) {
-        //    return $text;
-        //}
-
-        //$scope.helpers({
-        //    t: function($text) {
-        //        return $text;
+        //this.helpers({
+        //    stories: function() {
+        //        return Session.get('stories');
         //    }
         //});
 
-        //this.teste1 = function(id){
-        //    return 'Hahahaa 1' + id;
-        //};
-
-        //this.notesBackLog = function(storyId) {
-        //    console.log(storyId);
-        //    if (storyId) {
-        //        notes = Note.find({storyId:storyId});
-        //    } else {
-        //        notes = Note.find();
-        //    }
-        //    console.log(notes);
-        //    //Meteor.subscribe('story');
-        //    notes.forEach(function(note, noteKey){
-        //        note.story = Story.findOne(note.story);
-        //        note.owner = Meteor.users.findOne(note.owner);
-        //        //teste = note.owner.name.split(' ');
-        //        //console.log(teste);
-        //        //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
-        //        $scope.backLogNotes[noteKey] = note;
-        //    });
-        //    return notes;
-        //};
-
-        //
-        //result = Status.find({}).map(function(a){
-        //    console.log(a);
-        //    value.teste = 'Hahaha';
-        //    return value;
-        //});
-
-        //Meteor.subscribe('story');
-        //titles=Posts.find().map(function(a) {return a.title});
-        //teste = Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]}).map( function (a){ return a;});
-        //teste = Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]});
-
-        //this.teste2 = teste.map(function(a){ return a});
-        //console.log(teste2);
-
-        this.teste2 = 'Hahahaa 2';
-        //$scope.teste3 = 'Hahahaa 3';
-
+        //Meteor.subscribe('note');
+        //Meteor.subscribe('users');
         this.helpers({
-            //teste1: function(id){
-            //  return 'Hahahaa 1' + id;
-            //},
-            //notes: function() {
-            //    notes = Note.find({});
-            //    Meteor.subscribe('story');
-            //    notes.forEach(function(note, noteKey){
-            //        note.story = Story.findOne(note.story);
-            //        note.owner = Meteor.users.findOne(note.owner);
-            //        //teste = note.owner.name.split(' ');
-            //        //console.log(teste);
-            //        //note.owner.firstName = note.owner.name.substring(0, note.owner.name.trim().search(' '));
-            //        $scope.backLogNotes[noteKey] = note;
-            //    });
-            //    return notes;
-            //},
-            states: function() {
-                var states = Status.find({projectId: $stateParams.id}).fetch();
-                states.unshift({name: 'BackLog', _id: null});
-                states.push({name: 'Done', _id: 1});
-                return states;
-            },
-
             stories: function() {
                 var stories = Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]}).map(function(story){
                     var states = Status.find({projectId: $stateParams.id}).fetch();
@@ -118,33 +50,36 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                 });
 
                 setTimeout(function(){
-                    testando();
+                    sortableKanban();
                 }, 300);
 
                 return stories;
+            },
+            states: function(){
+                var states = Status.find({projectId: $stateParams.id}).fetch();
+                states.unshift({name: 'BackLog', _id: null});
+                states.push({name: 'Done', _id: 1});
+                return states;
             }
         });
 
-
-        //console.log(Story.find({}));
-
-
-        $scope.modalSave = function(ev, id){
-            $mdDialog.show({
-                controller: 'NoteSaveCtrl',
-                templateUrl: 'module/scrum/client/view/note-save.ng.html',
-                clickOutsideToClose: true,
-                targetEvent: ev,
-                locals:
-                {
-                    id: id
-                }
-            }).then(function(answer) {
-                $scope.status = 'You said the information was "' + answer + '".';
-            }, function() {
-                $scope.status = 'You cancelled the dialog.';
-            });
-        };
+        //$scope.modalSave = function(ev, id){
+        //    console.log('teste');
+        //    $mdDialog.show({
+        //        controller: 'NoteSaveCtrl',
+        //        templateUrl: 'module/scrum/client/view/note-save.ng.html',
+        //        clickOutsideToClose: true,
+        //        targetEvent: ev,
+        //        locals:
+        //        {
+        //            id: id
+        //        }
+        //    }).then(function(answer) {
+        //        $scope.status = 'You said the information was "' + answer + '".';
+        //    }, function() {
+        //        $scope.status = 'You cancelled the dialog.';
+        //    });
+        //};
 
 
 

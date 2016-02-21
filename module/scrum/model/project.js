@@ -22,7 +22,9 @@ Meteor.methods({
         }
 
         if (dataForm._id) {
-            Project.update(dataForm._id, { $set: dataForm});
+            id = dataForm._id;
+            delete dataForm._id;
+            Project.update(id, { $set: dataForm});
         } else {
             Project.insert(dataForm);
         }

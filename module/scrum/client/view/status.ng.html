@@ -1,4 +1,4 @@
-<div ng-controller="StatusCtrl" flex>
+<div ng-controller="StatusCtrl as vm" flex>
     <!--<div flex-sm>-->
         <!--<div>-->
             <!--<div layout-padding layout="row" layout-align="center">-->
@@ -18,7 +18,7 @@
     <!--</div>-->
     <md-content>
         <md-list>
-            <md-list-item class="md-3-line" ng-repeat="status in states">
+            <md-list-item class="md-3-line" ng-repeat="status in vm.states">
                 <div class="md-list-item-text" layout="column" layout-align="center center">
                     <h3>{{status.name}}</h3>
                     <!--<h4>{{item.who}}</h4>-->

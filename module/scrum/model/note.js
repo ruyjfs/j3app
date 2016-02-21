@@ -14,41 +14,35 @@ Note.allow({
     }
 });
 
-//yemiX6y3u7vnqpS3n
-//92okH9HNck243cdQ5
 Meteor.methods({
-    noteSave: function(dataForm){
-        if (!dataForm.userId) {
-            dataForm.userId = Meteor.userId();
+    noteSave: function(form){
+        if (!form.userId) {
+            form.userId = Meteor.userId();
         }
 
-        if (dataForm._id) {
-            Note.update(dataForm._id, { $set: dataForm});
+        if (form._id) {
+            id = form._id;
+            delete form._id;
+            Note.update(id, { $set: form});
         } else {
-            Note.insert(dataForm);
+            Note.insert(form);
         }
     },
     noteChangeStatus: function(form){
-        formNew = Note.findOne(form.noteId);
-        //if (typeof form.statusId != 'undefined') {
-        //if (form.statusId != '') {
-            formNew.statusId = form.statusId;
-        //    console.log('ett');
-        //} else {
-        //    delete formNew.statusId;
-        //}
+        var formNew = Note.findOne(form.noteId);
+        formNew.statusId = form.statusId;
+        id = form.noteId;
         delete formNew._id;
-        Note.update(form.noteId, { $set: formNew})
-
-        //if (!dataForm.userId) {
-        //    dataForm.userId = Meteor.userId();
-        //}
-        //
-        //if (dataForm._id) {
-        //    note.update(dataForm._id, { $set: dataForm});
-        //} else {
-        //    Story.insert(dataForm);
-        //}
+        Note.update(id, { $set: formNew});
+    },
+    noteFindBackLog: function(param){
+        notes = Note.find({$or: [{projectId: param.projectId}, {projectId: null}]}).fetch();
+        notes.map(function(note){
+            note.story = Story.findOne(note.story);
+            note.owner = Meteor.users.findOne(note.owner);
+            return note;
+        });
+        return notes;
     },
     //teamSave: function (dataForm) {
         //console.log(dataForm);

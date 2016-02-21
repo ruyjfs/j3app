@@ -1,7 +1,5 @@
-//angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
-//    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('StorySaveCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$mdDialog', 'id', '$stateParams',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, $mdDialog, id, $stateParams) {
+angular.module('scrum').controller('StorySaveCtrl', [ '$scope', '$mdDialog', 'id', '$stateParams',
+    function ($scope, $mdDialog, id, $stateParams) {
 
         if (id) {
             $scope.form = Story.findOne(id);
@@ -20,7 +18,7 @@ angular.module('scrum').controller('StorySaveCtrl', [ '$scope', '$timeout', '$md
                     $mdDialog.hide();
                 }
             });
-        }
+        };
 
         $scope.close = function () {
             $mdDialog.hide();

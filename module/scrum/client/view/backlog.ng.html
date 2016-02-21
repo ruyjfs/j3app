@@ -3,6 +3,7 @@
     <!--{{teste2}} 2-->
     <!--{{vm.sprintCurrent}} 3-->
     <!--{{sprint}} 4-->
+    <!--{{notesBackLog}} 4-->
     <!--<div flex-sm>-->
     <!--<div>-->
     <!--<div layout-padding layout="row" layout-align="center">-->
@@ -55,7 +56,7 @@
             <tr class="story-task-row">
                 <td id="backLog" class="linha status_1 containerSprint row" sprintid="" sprinthorasgastas="" sprinthoraslimite="">
                     <!--<div class="container col l4 s12 row">-->
-                    <div class="col containerNote" ng-repeat="backLogNote in backLogNotes">
+                    <div class="col containerNote" ng-repeat="backLogNote in vm.notesBackLog">
                         <div class="card hoverable" style="background-color: {{backLogNote.story.color}}; width: 200px; height: 140px;">
                             <div class="card-content white-text note">
                                 <span class="card-title activator text-darken-4">{{backLogNote.owner.name}}<i class="material-icons right">more_vert</i></span>

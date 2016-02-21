@@ -22,6 +22,8 @@ Meteor.methods({
         }
 
         if (dataForm._id) {
+            id = dataForm._id;
+            delete dataForm._id;
             Team.update(dataForm._id, { $set: dataForm});
         } else {
             Team.insert(dataForm);

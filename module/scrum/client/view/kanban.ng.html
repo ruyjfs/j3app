@@ -89,11 +89,11 @@
 //                items: ".containerNote"
 //            });
 
-            testando();
+            sortableKanban();
 
         }, 500);
 
-        testando = function (){
+        sortableKanban = function (){
             $('div[data-sortable-row]').each(function(elementKey, elementValue){
                 element = $(elementValue);
                 row = element.attr('data-sortable-row');
@@ -109,11 +109,10 @@
                         form.noteId = noteId;
                         Meteor.call('noteChangeStatus', form, function(error, result){
                             if (error) {
-                                console.log(error);
+//                                console.log(error);
                             } else {
-                                console.log(result);
-                                console.log(statusId);
-                                console.log(noteId);
+//                                console.log(statusId);
+//                                console.log(noteId);
                             }
                         });
 

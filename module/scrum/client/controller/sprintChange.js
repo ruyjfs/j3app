@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$mdDialog', '$stateParams', '$reactive',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, $mdDialog, $stateParams, $reactive) {
+angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$rootScope', '$mdDialog', '$stateParams', '$reactive', '$state',
+    function ($scope, $rootScope, $mdDialog, $stateParams, $reactive, $state) {
         $reactive(this).attach($scope);
         //projectId = $stateParams.id;
         //$scope.form.projectId = projectId;
@@ -33,14 +33,19 @@ angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$timeout', '
         });
 
         dateNow = moment().format('x');
-        $scope.form.sprint = Sprint.findOne(
-            {
-                $and: [
-                    {projectId: $stateParams.id},
-                    {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
-                ]
-            }
-        )._id;
+
+        if ($stateParams.sprintId == '1') {
+            $scope.form.sprintId = Sprint.findOne(
+                {
+                    $and: [
+                        {projectId: $stateParams.id},
+                        {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
+                    ]
+                }
+            )._id;
+        } else {
+            $scope.form.sprintId = $stateParams.sprintId;
+        }
 
         $scope.save = function () {
             Meteor.call('storySave', $scope.form, function (error) {
@@ -55,6 +60,12 @@ angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$timeout', '
         };
 
         $scope.close = function () {
+            $mdDialog.hide();
+        };
+
+        $scope.change = function (sprintId) {
+            var link = 'scrum/content';
+            $state.go(link, {id: $stateParams.id, sprintId: sprintId});
             $mdDialog.hide();
         }
     }

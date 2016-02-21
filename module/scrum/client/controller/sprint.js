@@ -4,7 +4,7 @@ angular.module('scrum').controller('SprintCtrl', [ '$scope', '$mdDialog', '$mdSi
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive, $stateParams) {
         $reactive(this).attach($scope);
 
-        this.subscribe('sprint');
+        Meteor.subscribe('sprint');
         this.helpers({
             sprints: function () {
                 return Sprint.find({$or: [{projectId: $stateParams.id}, {projectId: null}]}).map(function(sprint){
@@ -44,7 +44,7 @@ angular.module('scrum').controller('SprintCtrl', [ '$scope', '$mdDialog', '$mdSi
 //console.log(sprints);
 //console.log('sprints');
 
-        $scope.modalSave = function(ev, id){
+        this.modalSave = function(ev, id){
             $mdDialog.show({
                 controller: 'SprintSaveCtrl',
                 templateUrl: 'module/scrum/client/view/sprint-save.ng.html',

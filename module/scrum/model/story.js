@@ -13,8 +13,7 @@ Story.allow({
         return userId;
     }
 });
-//yemiX6y3u7vnqpS3n
-//92okH9HNck243cdQ5
+
 Meteor.methods({
     storySave: function(dataForm){
         if (!dataForm.userId) {
@@ -22,10 +21,36 @@ Meteor.methods({
         }
 
         if (dataForm._id) {
-            Story.update(dataForm._id, { $set: dataForm});
+            id = dataForm._id;
+            delete dataForm._id;
+            Story.update(id, { $set: dataForm});
         } else {
             Story.insert(dataForm);
         }
+    },
+    storyFindByProject: function(param){
+        stories = Story.find({$or: [{projectId: param.projectId}, {projectId: null}]}).map(function(story){
+            var states = Status.find({projectId: param.projectId}).fetch();
+            states.unshift({name: 'BackLog', _id: null});
+            states.push({name: 'Done', _id: '1'});
+            story.states = states.map(function(status) {
+                if (status._id) {
+                    notes = Note.find({story:story._id, statusId: status._id}).map(function(note) {
+                        note.owner = Meteor.users.findOne(note.owner);
+                        return note;
+                    });
+                } else {
+                    notes = Note.find({story:story._id, $or: [{statusId: status._id}, {statusId: ''}]}).map(function(note) {
+                        note.owner = Meteor.users.findOne(note.owner);
+                        return note;
+                    });
+                }
+                status.notes = notes;
+                return status;
+            });
+            return story;
+        });
+        return stories;
     },
     //invite: function (partyId, userId) {
     //    check(partyId, String);

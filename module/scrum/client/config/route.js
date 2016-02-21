@@ -44,7 +44,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                 //controller: 'KanbanCtrl'
             })
             .state('scrum/content', {
-                url: '/scrum/content/:id',
+                url: '/scrum/content/:id/:sprintId',
                 templateUrl: 'module/scrum/client/view/project-content.ng.html',
                 //controller: 'ProjectContentCtrl'
             });

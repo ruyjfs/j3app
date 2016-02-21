@@ -1,4 +1,4 @@
-<div ng-controller="StoryCtrl" flex>
+<div ng-controller="StoryCtrl as vm" flex>
     <!--<div flex-sm>-->
         <!--<div>-->
             <!--<div layout-padding layout="row" layout-align="center">-->
@@ -18,14 +18,14 @@
     <!--</div>-->
     <md-content>
         <md-list>
-            <md-list-item class="md-3-line" ng-repeat="story in stories">
+            <md-list-item class="md-3-line" ng-repeat="story in vm.stories">
                 <div class="md-list-item-text" layout="column" layout-align="center center">
                     <h3>{{story.name}}</h3>
                     <!--<h4>{{item.who}}</h4>-->
                     <p>{{story.description}}</p>
                 </div>
                 <div class="md-list-item-text" layout="row" layout-align="center center">
-                    <md-button class="md-fab md-mini hoverable" aria-label="Edit" ng-click="modalSave($event, story._id)">
+                    <md-button class="md-fab md-mini hoverable" aria-label="Edit" ng-click="modalStorySave($event, story._id)">
                         <md-icon md-svg-icon="content:ic_create_24px" aria-label="Edit"></md-icon>
                     </md-button>
                     <md-button class="md-fab md-mini hoverable" aria-label="Remove" ng-click="delete(team._id)">

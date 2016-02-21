@@ -23,14 +23,19 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
             //    //console.log(sprint);
                 this.subscribe('sprint');
                 dateNow = moment().format('x');
-                sprint = Sprint.findOne(
-                    {
-                        $and: [
-                            {projectId: $stateParams.id},
-                            {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
-                        ]
-                    }
-                );
+
+                if ($stateParams.sprintId == '1') {
+                    sprint = Sprint.findOne(
+                        {
+                            $and: [
+                                {projectId: $stateParams.id},
+                                {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
+                            ]
+                        }
+                    );
+                } else {
+                    sprint = Sprint.findOne($stateParams.sprintId);
+                }
 
                 if (!sprint) {
                     Meteor.call('sprintCreate', $stateParams.id, function (error, result) {

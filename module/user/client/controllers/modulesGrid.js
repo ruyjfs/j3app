@@ -14,7 +14,7 @@ angular.module("user").controller("ModulesGridCtrl", ['$scope', '$state', '$mdDi
             //{ name: 'Twitter', icon: 'twitter' },
         ];
         $scope.listItemClick = function($index, $link) {
-            $state.go($link)
+            $state.go($link);
             var clickedItem = $scope.items[$index];
             $mdBottomSheet.hide(clickedItem);
         };

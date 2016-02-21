@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$reactive', '$mdDialog', 'id',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $reactive, $mdDialog, id) {
+angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$reactive', '$mdDialog', 'id',
+    function ($scope, $reactive, $mdDialog, id) {
         $reactive(this).attach($scope);
         this.title = 'Project';
 
@@ -33,7 +33,6 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$timeout', '$m
             4
         ];
 
-
         $scope.save = function () {
 
             Meteor.call('projectSave', $scope.form, function (error) {
@@ -45,7 +44,7 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$timeout', '$m
                     $mdDialog.hide();
                 }
             });
-        }
+        };
 
         $scope.close = function () {
             $mdDialog.hide();

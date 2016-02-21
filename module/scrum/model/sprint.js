@@ -43,23 +43,23 @@ Meteor.methods({
                 //    Sprint.insert(dataForm)
             }
 
-            sprintNext = Sprint.findOne({$and :{number: sprint + 1}});
-
+            sprintNextNumber = sprint.number + 1;
+            sprintNext = Sprint.findOne({projectId: projectId, number: sprintNextNumber});
             if (!sprintNext) {
                 moment.locale('en');
-                sprint = {};
+                sprintNext = {};
                 //sprint.dateStart = moment().startOf('week').format('DD/MM/YYYY, HH:mm:ss');
                 //sprint.dateStart = moment().startOf('week').format('DD/MM/YYYY');
-                sprint.dateStart = moment().startOf('week').add(project.week + 1, 'week').format('x');
-                sprint.dateEnd = moment().endOf('week').add(project.week + project.week, 'week').format('x');
+                sprintNext.dateStart = moment().startOf('week').add(project.week + 1, 'week').format('x');
+                sprintNext.dateEnd = moment().endOf('week').add(project.week + project.week, 'week').format('x');
                 //console.log(project.week);
                 //console.log(moment().startOf('week'));
                 //console.log(new Date());
-                sprint.userId = Meteor.userId();
-                sprint.projectId = projectId;
-                sprint.number = sprint.number + 1;
+                sprintNext.userId = Meteor.userId();
+                sprintNext.projectId = projectId;
+                sprintNext.number = sprintNextNumber;
                 //console.log(sprint);
-                //Sprint.insert(sprint);
+                Sprint.insert(sprintNext);
             }
 
             return sprint;
