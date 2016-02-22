@@ -10,26 +10,23 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
         //console.log(Meteor.user()._id);
         this.subscribe('project');
         this.subscribe('team');
+        this.subscribe('users');
         this.helpers({
             projects: function () {
-                projectsNew = [];
-                projects = Project.find({});
-                projects.forEach(function(project){
-                    if (project.userId && project.userId != Meteor.user()._id) {
+                projects = Project.find({}).map(function(project){
+                    if (project.userId && project.userId != Meteor.userId()) {
                         if (project.teams) {
-                            teams = Team.find({
+                            project.teams = Team.find({
                                     _id: { $in: project.teams},
                                     $and: [{'members' : Meteor.user()._id}]
-                                });
-                            if (teams.fetch().length > 0) {
-                                projectsNew.push(project);
-                            }
+                                }).fetch();
                         }
-                    } else if (project) {
-                        projectsNew.push(project);
                     }
+                    project.owner = Meteor.users.findOne(project.userId);
+
+                    return project;
                 });
-                return projectsNew;
+                return projects;
             }
         });
 
