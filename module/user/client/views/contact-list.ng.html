@@ -1,7 +1,7 @@
-<div ng-controller="ContactCtrl as vm">
+<div ng-controller="ContactListCtrl as vm">
     <md-toolbar class="md-theme-light">
         <div class="md-toolbar-tools">
-            <md-button ng-click="vm.close()">
+            <md-button ng-click="close()">
                 <md-icon md-svg-icon="communication:ic_contacts_24px" aria-label="Contact"></md-icon>
                 Contatos
             </md-button>
@@ -18,7 +18,7 @@
             <md-list ng-cloak>
                 <!--<md-divider></md-divider>-->
                 <!--<md-subheader class="md-no-sticky">Avatar with Secondary Action Icon</md-subheader>-->
-                <md-list-item ng-repeat="user in vm.users" ng-click="vm.toggleChat(user._id)">
+                <md-list-item ng-repeat="user in users" ng-click="toggleChat(user._id)">
                     <img alt="" ng-src="" class="md-avatar" />
                     <p>{{user.emails[0].address}}</p>
                     <!--<md-icon md-svg-icon="communication:messenger" ng-click="doSecondaryAction($event)" aria-label="Open Chat" class="md-secondary md-hue-3" ng-class="{'md-primary': person.newMessage}"></md-icon>-->

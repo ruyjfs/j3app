@@ -3,7 +3,7 @@
 angular.module('scrum').controller('ContactCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$reactive',
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive) {
         $reactive(this).attach($scope);
-        this.helpers({
+        $scope.helpers({
             contacts: function() {
                 Meteor.subscribe('contact');
                 Meteor.subscribe('users');

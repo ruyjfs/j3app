@@ -1,7 +1,7 @@
 <div ng-controller="ChatCtrl as vm">
     <md-toolbar class="md-theme-light">
         <div class="md-toolbar-tools">
-            <md-button ng-click="vm.close()">
+            <md-button ng-click="close()">
                 <md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>
                 Bate-papo
             </md-button>
@@ -35,12 +35,12 @@
                     <!--<p><b>{{getOwnerMessage(message)}}</b></p>-->
                 <!--</li>-->
             <!--</ul>-->
-            <div ng-repeat="message in vm.messages" class="text-right md-whiteframe-2dp"  style="{{getMessageStyle(message)}};">
+            <div ng-repeat="message in messages" class="text-right md-whiteframe-2dp"  style="{{message.style}};">
                 <p>
                     {{message.text}}
                 </p>
                 <p style="color:rgba(0,0,0,0.54);">
-                    {{vm.getOwnerMessage(message)}}
+                    {{message.owner}}
                 </p>
             </div>
         </div>
@@ -50,11 +50,11 @@
             <form>
                 <md-input-container>
                     <label for="testInput">Enter message...</label>
-                    <input ng-keydown="typing(this)" ng-model="vm.newMessage.text" id="text" type="text" aria-label="Text"  md-autofocus>
+                    <input ng-keydown="typing(this)" ng-model="newMessage.text" id="text" type="text" aria-label="Text"  md-autofocus>
                     <!--<textarea ng-keyup="typing($event)" ng-model="newMessage.text" id="text" md-autofocus></textarea>-->
                 </md-input-container>
                 <md-input-container>
-                    <md-button ng-click="vm.addNewMessage()" class="md-raised md-primary" id="buttonSend">
+                    <md-button ng-click="addNewMessage()" class="md-raised md-primary" id="buttonSend">
                         <md-icon md-svg-icon="content:ic_send_24px" aria-label="Send"></md-icon>
                         Send
                     </md-button>

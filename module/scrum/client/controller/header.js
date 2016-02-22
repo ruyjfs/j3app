@@ -38,7 +38,7 @@ angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSid
             });
         };
 
-        this.modalSprintChange = function (ev) {
+        $scope.modalSprintChange = function (ev) {
             $mdDialog.show({
                 controller: 'SprintChangeCtrl',
                 templateUrl: 'module/scrum/client/view/sprint-change.ng.html',

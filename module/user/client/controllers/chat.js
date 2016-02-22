@@ -2,20 +2,19 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
     function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $reactive, $anchorScroll, $location, $rootScope) {
         $reactive(this).attach($scope);
 
-        this.newMessage = {};
-        this.addNewMessage = function () {
-
-            if(this.newMessage.text && $rootScope.friendId){
-                this.newMessage.userId = Meteor.user()._id;
-                this.newMessage.friendId = $rootScope.friendId;
-                this.newMessage.date = new Date();
-                this.newMessage.userEnabled = true;
-                this.newMessage.friendEnabled = true;
+        $scope.newMessage = {};
+        $scope.addNewMessage = function () {
+            if($scope.newMessage.text && $rootScope.friendId){
+                $scope.newMessage.userId = Meteor.user()._id;
+                $scope.newMessage.friendId = $rootScope.friendId;
+                $scope.newMessage.date = new Date();
+                $scope.newMessage.userEnabled = true;
+                $scope.newMessage.friendEnabled = true;
                 Messages.insert(this.newMessage);
                 //$scope.newMessage.owner = $scope.friendId;
                 //$scope.newMessage.friendId = $rootScope.currentUser._id;
                 //Messages.insert($scope.newMessage);
-                this.newMessage = [];
+                $scope.newMessage = [];
 
                 // set the location.hash to the id of
                 // the element you wish to scroll to.
@@ -26,22 +25,71 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
                 //messages.save($scope.newMessage, false);
         //        $log.debug($scope.newMessage.text);
             }
-        }
+        };
 
-        this.typing = function($event){
+        $scope.typing = function($event){
             //if ($scope.newMessage.text.length > 0) {
             //    console.log($scope.newMessage.text);
             //}
         }
 
-        Meteor.subscribe('messages');
+        //console.log($rootScope.messages);
+
+        //$scope.messages = $rootScope.messages;
+
         //this.helpers({
         //    messages: function() {
         //        return $rootScope.messages;
         //    }
         //});
+//
+//        $scope.messages = [];
+//        Meteor.subscribe('users');
+//        Meteor.subscribe('messages');
+//        $scope.helpers({
+//            messages: function() {
+//                messages = Messages.find(
+//                    {
+//                        $or: [
+//                            {
+//                                'userId' : Meteor.user()._id,
+//                                'friendId' : $rootScope.friendId
+//                            }
+//                            ,
+//                            {
+//                                'userId' : $rootScope.friendId,
+//                                'friendId' : Meteor.user()._id
+//                            }
+//                        ]
+//                    }
+//                ).fetch();
+//
+//                //messages.map(function(message){
+//                //    if (message.userId == Meteor.user()._id) {
+//                //        message.owner.name = 'You';
+//                //    } else {
+//                //        user = Meteor.users.findOne(message.userId);
+//                //        message.owner.name = user.name;
+//                //    }
+//                //
+//                //    if (message.userId == Meteor.user()._id) {
+//                //        message.style = "margin-top: 15px; padding: 0.1px 15px 0.1px 15px; text-align: right; background-color: #FFECB3;";
+//                //    } else {
+//                //        message.style = "margin-top: 15px; padding: 0.1px 15px 0.1px 15px; text-align: left; background-color: #FFF8E1;";
+//                //    }
+//                //
+//                //    return message;
+//                //});
+//
+//console.log(messages);
+//
+//                $scope.messages = messages;
+//                return messages;
+//            }
+//        });
 
-        this.messages = $rootScope.messages;
+        //console.log('aeee');
+
 
         //console.log(this.messages);
 
@@ -68,25 +116,15 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
         //    $scope.messages = [{}];
         //};
 
-        this.getOwnerMessage = function(message){
-            if (message.userId == Meteor.user()._id) {
-                return 'You';
-            } else {
-                user = Meteor.users.findOne(message.userId);
-
-                return user.name;
-            }
-        }
-
-        this.getMessageStyle = function(message){
-            if (message.userId == Meteor.user()._id) {
-                var style = "margin-top: 15px; padding: 0.1px 15px 0.1px 15px; text-align: right; background-color: #FFECB3;";
-                return style;
-            } else {
-                var style = "margin-top: 15px; padding: 0.1px 15px 0.1px 15px; text-align: left; background-color: #FFF8E1;";
-                return style;
-            }
-        }
+        //$scope.getOwnerMessage = function(message){
+        //    if (message.userId == Meteor.user()._id) {
+        //        return 'You';
+        //    } else {
+        //        user = Meteor.users.findOne(message.userId);
+        //
+        //        return user.name;
+        //    }
+        //}
 
         //$log.debug($scope.parties);
 
@@ -97,13 +135,13 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
         //        $log.debug('hahahaah');
         //    });
 
-        this.close = function(){
+        $scope.close = function(){
             $mdSidenav('chat').close()
                 .then(function(){
-                    $scope.messages = [];
+                    //$scope.messages = [];
                 });
             $mdSidenav('contact-list').toggle();
-        }
+        };
 
         //$scope.messages = $meteor.collection(Messages, false).subscribe('messages');
         //$scope.messages = $scope.parties;
