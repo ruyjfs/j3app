@@ -4,6 +4,7 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$reactive', '$
     function ($scope, $reactive, $mdDialog, id) {
         $reactive(this).attach($scope);
         this.title = 'Project';
+        Meteor.subscribe('users');
 
         if (id) {
             //$scope.form = $meteor.object(Project, id, false);
@@ -22,7 +23,7 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$reactive', '$
                 $or: [{members : Meteor.userId()}, {userId : Meteor.userId()}]
             }).fetch();
         }
-
+        $scope.users = Meteor.users.find().fetch();
         $scope.weeks = [
             1,
             2,

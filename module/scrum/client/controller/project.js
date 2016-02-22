@@ -22,7 +22,7 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
                                 }).fetch();
                         }
                     }
-                    project.owner = Meteor.users.findOne(project.userId);
+                    //project.owner = Meteor.users.findOne(project.userId);
 
                     return project;
                 });
@@ -77,7 +77,7 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
 
         this.isOwner = function(userId) {
             if (userId) {
-                return (Meteor.user()._id == userId);
+                return (Meteor.userId() == userId);
             } else {
                 return true;
             }

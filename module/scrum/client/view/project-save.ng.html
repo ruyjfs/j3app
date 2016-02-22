@@ -9,7 +9,15 @@
         <md-dialog-content style="min-width:400px;max-width:800px;max-height:810px;">
                 <md-input-container>
                     <label>Name</label>
-                    <input ng-model="form.name" id="names" type="text" aria-label="Name" required>
+                    <input ng-model="form.name" type="text" aria-label="Name" required>
+                </md-input-container>
+                <md-input-container>
+                    <label>Owner</label>
+                    <md-select ng-model="form.userId" aria-label=""  placeholder="Owner" required>
+                        <md-option  ng-repeat="user in users" value="{{user._id}}">
+                            {{user.name}}
+                        </md-option>
+                    </md-select>
                 </md-input-container>
                 <md-input-container>
                     <label>Week</label>

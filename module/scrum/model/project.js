@@ -21,6 +21,8 @@ Meteor.methods({
             dataForm.userId = Meteor.userId();
         }
 
+        console.log(dataForm.userId);
+
         if (dataForm._id) {
             id = dataForm._id;
             delete dataForm._id;
