@@ -21,7 +21,9 @@ Meteor.methods({
         }
 
         if (dataForm._id) {
-            Status.update(dataForm._id, { $set: dataForm});
+            id = dataForm._id;
+            delete dataForm._id;
+            Status.update(id, { $set: dataForm});
         } else {
             Status.insert(dataForm);
         }
