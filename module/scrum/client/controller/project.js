@@ -13,16 +13,17 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
         this.subscribe('users');
         this.helpers({
             projects: function () {
-                projects = Project.find({}).map(function(project){
-                    if (project.userId && project.userId != Meteor.userId()) {
-                        if (project.teams) {
-                            project.teams = Team.find({
-                                    _id: { $in: project.teams},
-                                    $and: [{'members' : Meteor.user()._id}]
-                                }).fetch();
-                        }
+                teamsId = Team.find({$or: [{members: Meteor.userId()}, {userId: Meteor.userId()}]}).map(function(member){
+                    return member._id;
+                });
+                projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}]}).map(function(project){
+                    if (project.teams) {
+                        project.teams = Team.find({
+                                _id: { $in: project.teams},
+                                $or: [{'members' : Meteor.userId(), userId: Meteor.userId()}]
+                            }).fetch();
                     }
-                    //project.owner = Meteor.users.findOne(project.userId);
+                    project.owner = Meteor.users.findOne(project.userId);
 
                     return project;
                 });
