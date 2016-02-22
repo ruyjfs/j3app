@@ -4,10 +4,6 @@ angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSid
     function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $reactive, $mdDialog, $mdBottomSheet, $mdToast) {
         $reactive(this).attach($scope);
 
-
-        this.friendId = '1';
-        friendId = '2';
-
         this.toggleMenu = buildToggler('menu');
         this.toggleContactList = buildToggler('contact-list');
 
@@ -17,7 +13,7 @@ angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSid
             $scope.title = arrTitle[1];
             $mdSidenav('menu').close();
             $location.path(route);
-        }
+        };
 
         this.showModulesGrid = function($event) {
             console.log($mdBottomSheet);

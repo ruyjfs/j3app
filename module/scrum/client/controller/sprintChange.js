@@ -12,7 +12,7 @@ angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$rootScope',
         //    $scope.form = {};
         //}
 
-        this.subscribe('sprint');
+        Meteor.subscribe('sprint');
         //$scope.helpers({
         //    sprints: function () {
         //        return Sprint.find({$and: [{projectId: $stateParams.id}]}).map(function(sprint){
@@ -35,14 +35,18 @@ angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$rootScope',
         dateNow = moment().format('x');
 
         if ($stateParams.sprintId == '1') {
-            $scope.form.sprintId = Sprint.findOne(
+            var sprint = Sprint.findOne(
                 {
                     $and: [
                         {projectId: $stateParams.id},
                         {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
                     ]
                 }
-            )._id;
+            );
+            console.log(sprint);
+            if (sprint) {
+                $scope.form.sprintId = sprint._id;
+            }
         } else {
             $scope.form.sprintId = $stateParams.sprintId;
         }
