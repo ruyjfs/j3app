@@ -12,6 +12,14 @@
             </list>
           </option>
         </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="label" value="Digital Ocean" />
+          <option name="serverUrls">
+            <list>
+              <option value="45.55.95.64:3001" />
+            </list>
+          </option>
+        </ServerConfiguration>
       </list>
     </option>
   </component>

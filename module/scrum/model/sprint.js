@@ -16,6 +16,29 @@ Sprint.allow({
 //yemiX6y3u7vnqpS3n
 //92okH9HNck243cdQ5
 Meteor.methods({
+    sprintSave: function(param){
+        if (!param.userId) {
+            param.userId = Meteor.userId();
+        }
+
+        moment.locale('pt-BR');
+        param.dateStart = moment(param.dateStart, 'L').format('x');
+        //console.log(param.dateEnd);
+        param.dateEnd = moment(param.dateEnd, 'L').format('x');
+        //console.log(param.dateEnd);
+        //console.log(moment(param.dateEnd, 'L').format('x'));
+        //console.log(param);
+
+        if (param._id) {
+            id = param._id;
+            delete param._id;
+            Sprint.update(id, { $set: param});
+            console.log('u');
+        } else {
+            Sprint.insert(param);
+            console.log('i');
+        }
+    },
     sprintCreate: function(projectId){
         project = Project.findOne(projectId);
         if (project) {
@@ -41,6 +64,10 @@ Meteor.methods({
                 sprint.userId = Meteor.userId();
                 sprint.projectId = projectId;
                 sprint.number = 1;
+
+
+                sprint.time = 0;
+
                 //console.log(sprint);
                 Sprint.insert(sprint);
 

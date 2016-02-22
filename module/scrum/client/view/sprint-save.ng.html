@@ -16,13 +16,16 @@
                     <!--</div>-->
                 </md-input-container>
                 <md-input-container>
-                    <!--<label>Date start</label>-->
+                    <label>Date start</label>
+                    <input ng-model="form.dateStart" type="text" aria-label="Date start" required>
                     <!--<md-datepicker ng-model="form.dateStart" md-placeholder="Date start" disabled></md-datepicker>-->
                     <!--<div ng-messages="form.name.$error">-->
                     <!--<div ng-message="required">required</div>-->
                     <!--</div>-->
                 </md-input-container>
                 <md-input-container>
+                    <label>Date end</label>
+                    <input ng-model="form.dateEnd" type="text" aria-label="Date end" required>
                     <!--<md-datepicker ng-model="form.dateEnd" md-placeholder="Date end" disabled></md-datepicker>-->
                     <!--<div ng-messages="form.name.$error">-->
                     <!--<div ng-message="required">required</div>-->
@@ -47,9 +50,9 @@
             <!--<i class="material-icons right">close</i>-->
             Cancel
         </button>
-        <!--<button class="btn orange darken-3 waves-effect waves-light hoverable" type="button" ng-click="save()">-->
+        <button class="btn orange darken-3 waves-effect waves-light hoverable" type="button" ng-click="save()">
             <!--<i class="material-icons right">check</i>-->
-            <!--Save-->
-        <!--</button>-->
+            Save
+        </button>
     </div>
 </md-dialog>

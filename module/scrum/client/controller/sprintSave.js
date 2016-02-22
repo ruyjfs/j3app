@@ -2,6 +2,7 @@ angular.module('scrum').controller('SprintSaveCtrl', [ '$scope', '$mdDialog', 'i
     function ($scope, $mdDialog, id, $stateParams) {
 
         Meteor.subscribe('sprint');
+        moment.locale('pt-BR');
         if (id) {
             $scope.form = Sprint.findOne(id);
             //console.log($scope.dateStart);
