@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('StatusSaveCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$mdDialog', 'id', '$stateParams',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, $mdDialog, id, $stateParams) {
+angular.module('scrum').controller('StatusSaveCtrl', [ '$scope', '$mdDialog', 'id', '$stateParams',
+    function ($scope, $mdDialog, id, $stateParams) {
         if (id) {
             $scope.form = Status.findOne(id);
         } else {

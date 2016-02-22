@@ -64,8 +64,6 @@ Meteor.methods({
                 sprint.userId = Meteor.userId();
                 sprint.projectId = projectId;
                 sprint.number = 1;
-
-
                 sprint.time = 0;
 
                 //console.log(sprint);
@@ -87,6 +85,7 @@ Meteor.methods({
                 //console.log(project.week);
                 //console.log(moment().startOf('week'));
                 //console.log(new Date());
+                sprintNext.time = 0;
                 sprintNext.userId = Meteor.userId();
                 sprintNext.projectId = projectId;
                 sprintNext.number = sprintNextNumber;
@@ -139,6 +138,7 @@ Meteor.methods({
                 sprintNext.userId = Meteor.userId();
                 sprintNext.projectId = param.projectId;
                 sprintNext.number = sprintNextNumber;
+                sprintNext.time = 0;
                 Sprint.insert(sprintNext);
             }
         }
