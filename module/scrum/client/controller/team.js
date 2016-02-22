@@ -7,17 +7,24 @@ angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdSide
         this.subscribe('team');
         this.helpers({
             teams: function() {
+
+                if (Meteor.user()){
+                    userId = Meteor.user()._id;
+                } else {
+                    userId = '';
+                }
+
                 teams = Team.find(
                     {
                         //$or: [{userId: Meteor.user()._id}, {members : Meteor.user()._id}]
 
                         $or: [
                             {
-                                'userId' : Meteor.user()._id,
+                                'userId' : userId,
                             }
                             ,
                             {
-                                'members' : Meteor.user()._id,
+                                'members' : userId,
                                 //'userId' : friendId,
                                 //'friendId' : $rootScope.currentUser._id
                             }

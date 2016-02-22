@@ -1,10 +1,13 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('TeamSaveCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$meteor', '$rootScope', '$mdDialog', 'id',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $meteor, $rootScope, $mdDialog, id) {
+angular.module('scrum').controller('TeamSaveCtrl', [ '$scope', '$rootScope', '$mdDialog', 'id',
+    function ($scope, $rootScope, $mdDialog, id) {
 
         $scope.title = 'Scrum';
-        $scope.members = $meteor.collection(Meteor.users, false).subscribe('users');
+        Meteor.subscribe('users');
+        Meteor.subscribe('team');
+        //$scope.members = $meteor.collection(Meteor.users, false).subscribe('users');
+        $scope.members = Meteor.users.find().fetch();
         $scope.times = [
             1,
             2,

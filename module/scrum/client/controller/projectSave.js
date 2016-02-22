@@ -12,19 +12,16 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$reactive', '$
             $scope.form = {};
         }
 
-        $scope.helpers({
-            teams: function () {
-                if ($scope.form.teams) {
-                    return Team.find({
-                        $or: [{members : Meteor.user()._id}, {userId : Meteor.user()._id}, {_id: {$in: $scope.form.teams}}]
-                    });
-                } else {
-                    return Team.find({
-                        $or: [{members : Meteor.user()._id}, {userId : Meteor.user()._id}]
-                    });
-                }
-            }
-        });
+        Meteor.subscribe('team');
+        if ($scope.form.teams) {
+            $scope.teams = Team.find({
+                $or: [{members : Meteor.userId()}, {userId : Meteor.userId()}, {_id: {$in: $scope.form.teams}}]
+            }).fetch();
+        } else {
+            $scope.teams =  Team.find({
+                $or: [{members : Meteor.userId()}, {userId : Meteor.userId()}]
+            }).fetch();
+        }
 
         $scope.weeks = [
             1,
