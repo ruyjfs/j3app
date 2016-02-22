@@ -68,9 +68,9 @@ angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$rootScope',
         };
 
         $scope.change = function (sprintId) {
+            $mdDialog.hide();
             var link = 'scrum/content';
             $state.go(link, {id: $stateParams.id, sprintId: sprintId});
-            $mdDialog.hide();
         }
     }
 ]);

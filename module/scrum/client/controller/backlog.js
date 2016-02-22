@@ -47,20 +47,30 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
             sprintPrevious: function() {
                 Meteor.subscribe('sprint');
                 dateNow = moment().format('x');
-                sprint = Sprint.findOne(
-                    {
-                        $and: [
-                            {projectId: $stateParams.id},
-                            {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
-                        ]
-                    }
-                );
-                if (sprint) {
-                    sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('L');
-                    sprint.dateEndTreated = moment(sprint.dateEnd, 'x').format('L');
+                if ($stateParams.sprintId != '1') {
+                    sprint = Sprint.findOne({projectId: $stateParams.id, _id: $stateParams.sprintId});
+                } else {
+                    sprint = Sprint.findOne(
+                        {
+                            $and: [
+                                {projectId: $stateParams.id},
+                                {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
+                            ]
+                        }
+                    );
                 }
-                $scope.sprintPrevious = sprint;
-                return sprint;
+
+                sprintPrevious = {};
+                if (sprint) {
+                    sprintNextNumber = sprint.number - 1;
+                    sprintPrevious = Sprint.findOne({projectId: $stateParams.id, number: sprintNextNumber});
+                }
+                if (sprintPrevious) {
+                    sprintPrevious.dateStartTreated = moment(sprintPrevious.dateStart, 'x').format('L');
+                    sprintPrevious.dateEndTreated = moment(sprintPrevious.dateEnd, 'x').format('L');
+                }
+                $scope.sprintPrevious = sprintPrevious;
+                return sprintPrevious;
             },
             sprintCurrent: function() {
                 Meteor.subscribe('sprint');
@@ -93,16 +103,11 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
             sprintNext: function() {
                 //console.log('sprint');
                 //console.log(sprint);
-                Meteor.subscribe('sprint');
-                dateNow = moment().format('x');
-                sprint = Sprint.findOne(
-                    {
-                        $and: [
-                            {projectId: $stateParams.id},
-                            {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
-                        ]
-                    }
-                );
+
+                Meteor.call('sprintNext', {projectId: $stateParams.id, sprintId: $stateParams.sprintId}, function(error, result){
+                    $scope.sprintNext = sprintNext;
+                });
+                return sprintNext;
                 //console.log(sprint);
                 //sprintNextNumber = sprint.number + 1;
                 //

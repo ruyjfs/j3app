@@ -24,12 +24,17 @@ Meteor.methods({
             );
 
             if (!sprint) {
-                moment.locale('en');
+                moment.locale('pt-BR');
                 sprint = {};
                 //sprint.dateStart = moment().startOf('week').format('DD/MM/YYYY, HH:mm:ss');
                 //sprint.dateStart = moment().startOf('week').format('DD/MM/YYYY');
                 sprint.dateStart = moment().startOf('week').format('x');
-                sprint.dateEnd = moment().endOf('week').add(project.week, 'week').format('x');
+
+                //week = project.week;
+                //if (week == 1) {
+                //    week = week - 1;
+                //}
+                sprint.dateEnd = moment().endOf('week').add(project.week - 1, 'week').format('x');
                 //console.log(project.week);
                 //console.log(moment().startOf('week'));
                 //console.log(new Date());
@@ -46,12 +51,12 @@ Meteor.methods({
             sprintNextNumber = sprint.number + 1;
             sprintNext = Sprint.findOne({projectId: projectId, number: sprintNextNumber});
             if (!sprintNext) {
-                moment.locale('en');
+                moment.locale('pt-BR');
                 sprintNext = {};
                 //sprint.dateStart = moment().startOf('week').format('DD/MM/YYYY, HH:mm:ss');
                 //sprint.dateStart = moment().startOf('week').format('DD/MM/YYYY');
-                sprintNext.dateStart = moment().startOf('week').add(project.week + 1, 'week').format('x');
-                sprintNext.dateEnd = moment().endOf('week').add(project.week + project.week, 'week').format('x');
+                sprintNext.dateStart = moment(sprint.dateEnd, 'x').startOf('week').add(1, 'week').format('x');
+                sprintNext.dateEnd = moment(sprint.dateEnd, 'x').endOf('week').add(project.week, 'week').format('x');
                 //console.log(project.week);
                 //console.log(moment().startOf('week'));
                 //console.log(new Date());
@@ -75,6 +80,43 @@ Meteor.methods({
         //} else {
         //    Status.insert(dataForm);
         //}
+    },
+    sprintNext: function(param){
+        dateNow = moment().format('x');
+        if (param.sprintId != '1') {
+            sprint = Sprint.findOne({projectId: param.projectId, _id: param.sprintId});
+        } else {
+            sprint = Sprint.findOne(
+                {
+                    $and: [
+                        {projectId: param.projectId},
+                        {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
+                    ]
+                }
+            );
+        }
+        sprintNext = {};
+        if (sprint) {
+            sprintNextNumber = sprint.number + 1;
+            sprintNext = Sprint.findOne({projectId: param.projectId, number: sprintNextNumber});
+
+            if (sprintNext) {
+                sprintNext.dateStartTreated = moment(sprintNext.dateStart, 'x').format('L');
+                sprintNext.dateEndTreated = moment(sprintNext.dateEnd, 'x').format('L');
+            } else {
+                moment.locale('pt-BR');
+                sprintNext = {};
+                project = Project.findOne(param.projectId);
+                sprintNext.dateStart = moment(sprint.dateEnd, 'x').startOf('week').add(1, 'week').format('x');
+                sprintNext.dateEnd = moment(sprint.dateEnd, 'x').endOf('week').add(project.week, 'week').format('x');
+                sprintNext.userId = Meteor.userId();
+                sprintNext.projectId = param.projectId;
+                sprintNext.number = sprintNextNumber;
+                Sprint.insert(sprintNext);
+            }
+        }
+
+        return sprintNext;
     },
     //sprintCurrent: function(projectId){
     //    sprint = Sprint.findOne(
