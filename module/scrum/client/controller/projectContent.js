@@ -63,14 +63,15 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
             }
         });
 
-        $scope.modalNoteSave = function (ev, id) {
+        $scope.modalNoteSave = function (ev, id, storyId) {
             $mdDialog.show({
                 controller: 'NoteSaveCtrl',
                 templateUrl: 'module/scrum/client/view/note-save.ng.html',
                 clickOutsideToClose: true,
                 targetEvent: ev,
                 locals: {
-                    id: id
+                    id: id,
+                    storyId: storyId
                 }
             }).then(function (answer) {
                 $scope.status = 'You said the information was "' + answer + '".';

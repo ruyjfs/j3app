@@ -24,7 +24,13 @@
                             </div>
                         </div>
                     </td>
-                    <td class="verify"></td>
+                    <td class="verify centered" style="display: grid; vertical-align: middle;">
+                        <md-button class="md-fab md-mini hoverable" aria-label="Edit" ng-click="modalNoteSave($event, '', story._id)">
+                            <md-tooltip md-direction="left">Add note</md-tooltip>
+                            <md-icon md-svg-icon="content:ic_add_24px" aria-label="Edit"></md-icon>
+                            <!--<i title="" class="material-icons ng-scope">add</i>-->
+                        </md-button>
+                    </td>
                     <td data-sortable-row="{{story._id}}" data-statusId="{{status._id}}" class="status_1 containerStatus" sprintid="" sprinthorasgastas="" sprinthoras="" ng-repeat="status in story.states">
                         <!--{{status._id}}-->
                         <div data-sortable-row="{{story._id}}" data-noteId="{{note._id}}" class="card hoverable containerNote" style="background-color: {{story.color}}; width: 120px; height: 90px; float: left; margin: 10px;" ng-repeat="note in status.notes">
