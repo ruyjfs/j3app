@@ -48,6 +48,10 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                         }
                         //$rootScope.titleMiddle = result.dateStart + ' - ' + result.dateEnd + ' (' + result.number + ')';
                         $rootScope.titleMiddle = moment(result.dateStart, 'x').format('L') + ' - ' + moment(result.dateEnd, 'x').format('L');
+
+                        if ($stateParams.sprintId == 1) {
+                            $state.go('scrum/content', {id:$stateParams.id, sprintId:result._id})
+                        }
                     });
                 } else {
                     $rootScope.titleMiddle = moment(sprint.dateStart, 'x').format('L')  + ' - ' + moment(sprint.dateEnd, 'x').format('L');
@@ -56,7 +60,8 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                 }
 
                 $rootScope.sprint = sprint;
-                Session.set('sprintCurrent', sprint);
+
+                //Session.set('sprintCurrent', sprint);
                 //console.log(Session.get('sprintCurrent'));
                 //console.log('aqui');
                 return sprint;

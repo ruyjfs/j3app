@@ -5,19 +5,18 @@ angular.module('scrum').controller('ProjectTeamCtrl', [ '$scope', '$mdDialog', '
         $reactive(this).attach($scope);
 
         this.subscribe('team');
+        this.subscribe('users');
+
         this.helpers({
             teams: function() {
-
                 if (Meteor.user()){
-                    userId = Meteor.user()._id;
+                    userId = Meteor.userId();
                 } else {
                     userId = '';
                 }
-
                 teams = Team.find(
                     {
                         //$or: [{userId: Meteor.user()._id}, {members : Meteor.user()._id}]
-
                         $or: [
                             {
                                 'userId' : userId,
