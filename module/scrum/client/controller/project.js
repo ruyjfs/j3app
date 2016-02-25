@@ -24,6 +24,30 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
                             }).fetch();
                     }
                     project.owner = Meteor.users.findOne(project.userId);
+                    dateNow = moment().format('x');
+                    sprint = Sprint.findOne(
+                        {
+                            $and: [
+                                {projectId: project._id},
+                                {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
+                            ]
+                        }
+                    );
+
+                    if (sprint) {
+                        project.sprint = sprint;
+                    } else {
+                        Meteor.call('sprintCreate', project._id, function (error, result) {
+                            if (error) {
+                                console.log(error);
+                            } else {
+                                //console.log('Saved!');
+                                //$scope.form = '';
+                                //$mdDialog.hide();
+                                project.sprint = result;
+                            }
+                        });
+                    }
 
                     return project;
                 });

@@ -48,7 +48,6 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                 if (sprint) {
                     sprintNextNumber = sprint.number + 1;
                     sprintNext = Sprint.findOne({projectId: $stateParams.id, number: sprintNextNumber});
-                    console.log(sprintNext);
                     if (sprintNext) {
                         sprintNext.dateStartTreated = moment(sprintNext.dateStart, 'x').format('L');
                         sprintNext.dateEndTreated = moment(sprintNext.dateEnd, 'x').format('L');
@@ -60,7 +59,6 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                         });
                     }
                 }
-                console.log(notes);
                 return notes;
             },
             sprintPrevious: function() {
