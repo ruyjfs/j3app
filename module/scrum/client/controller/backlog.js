@@ -6,7 +6,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
         Meteor.subscribe('sprint');
         this.helpers({
             notesBackLog: function () {
-                notes = Note.find({$and: [{sprintId: null}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
+                notes = Note.find({$and: [{$or: [{sprintId: null}, {sprintId: ''}]}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
                 notes.map(function(note){
                     note.story = Story.findOne(note.story);
                     note.owner = Meteor.users.findOne(note.owner);
