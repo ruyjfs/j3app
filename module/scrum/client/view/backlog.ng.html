@@ -38,7 +38,6 @@
                     (<span class="sprintHorasGastas">0hs</span>/ hs )
                     <a href="#" class="select-all" style="display: none">Select All</a>
                 </th>
-
                 <th id="header-sprintAtual" class="header">
                     <span>Current sprint</span> <br>
                     {{sprintCurrent.dateStartTreated}} - {{sprintCurrent.dateEndTreated}} ({{sprintCurrent.number}})<br>
@@ -53,24 +52,24 @@
                     <a href="#" class="select-all" style="display: none">Select All</a>
                 </th>
             </tr>
-            <tr class="story-task-row">
-                <td id="backLog" class="linha status_1 containerSprint row" sprintid="" sprinthorasgastas="" sprinthoraslimite="">
+            <tr class="backlogContainer">
+                <td id="backLog" class="linha status_1 containerSprint row" data-sprintId="" sprinthorasgastas="" sprinthoraslimite="">
                     <!--<div class="container col l4 s12 row">-->
-                    <div class="col containerNote" ng-repeat="backLogNote in vm.notesBackLog">
+                    <div class="col containerNote" ng-repeat="backLogNote in vm.notesBackLog" data-noteId="{{backLogNote._id}}">
                         <div class="card hoverable" style="background-color: {{backLogNote.story.color}}; width: 200px; height: 140px;">
                             <div class="card-content white-text note">
-                                <span class="card-title activator text-darken-4">{{backLogNote.owner.name}}<i class="material-icons right">more_vert</i></span>
+                                <span class="card-title activator text-darken-4 note-notHandle">{{backLogNote.owner.name}}<i class="material-icons right">more_vert</i></span>
                                 <p>{{backLogNote.description}}</p>
                                 <p></p>
                             </div>
                             <div class="card-reveal">
                                 <!--<span class="card-title grey-text text-darken-4">{{backLogNote.story.name}}<i class="material-icons right">close</i></span>-->
                                     <span class="card-title grey-text text-darken-4">
-                                        <i class="material-icons right">close</i>
-                                        <a href="#" ng-click="modalStorySave($event, backLogNote.story._id)" title="Add story" class="btn-floating green hoverable">
+                                        <i class="note-notHandle material-icons right">close</i>
+                                        <a href="#" ng-click="modalStorySave($event, backLogNote.story._id)" title="Add story" class="note-notHandle btn-floating green hoverable">
                                             <i class="material-icons">content_paste</i>
                                         </a>
-                                        <a href="#" ng-click="modalNoteSave($event, backLogNote._id)" title="Add note" class="btn-floating amber accent-4 hoverable">
+                                        <a href="#" ng-click="modalNoteSave($event, backLogNote._id)" title="Add note" class="note-notHandle btn-floating amber accent-4 hoverable">
                                             <i class="material-icons">mode_edit</i>
                                         </a>
                                     </span>
@@ -140,11 +139,110 @@
                 <!--<img class="overflow_indicator" src="/images/overflow_indicator.gif">-->
                 <!--</div>-->
             </td>
-                <td id="sprintPrevious" class="linha status_3 containerSprint row" sprintid="" sprinthorasgastas="0" sprinthoras="">
+                <td id="sprintPrevious" class="linha status_3 containerSprint row" data-sprintId="{{sprintPrevious._id}}" sprinthorasgastas="0" sprinthoras="">
+                    <div class="col containerNote" ng-repeat="backLogNote in vm.notesSprintPrevious" data-noteId="{{backLogNote._id}}">
+                        <div class="card hoverable" style="background-color: {{backLogNote.story.color}}; width: 200px; height: 140px;">
+                            <div class="card-content white-text note">
+                                <span class="card-title activator text-darken-4 note-notHandle">{{backLogNote.owner.name}}<i class="material-icons right">more_vert</i></span>
+                                <p>{{backLogNote.description}}</p>
+                                <p></p>
+                            </div>
+                            <div class="card-reveal">
+                                <!--<span class="card-title grey-text text-darken-4">{{backLogNote.story.name}}<i class="material-icons right">close</i></span>-->
+                                    <span class="card-title grey-text text-darken-4">
+                                        <i class="note-notHandle material-icons right">close</i>
+                                        <a href="#" ng-click="modalStorySave($event, backLogNote.story._id)" title="Add story" class="note-notHandle btn-floating green hoverable">
+                                            <i class="material-icons">content_paste</i>
+                                        </a>
+                                        <a href="#" ng-click="modalNoteSave($event, backLogNote._id)" title="Add note" class="note-notHandle btn-floating amber accent-4 hoverable">
+                                            <i class="material-icons">mode_edit</i>
+                                        </a>
+                                    </span>
+                                <p>{{backLogNote.story.name}}</p>
+                                <p>{{backLogNote.description}}</p>
+                            </div>
+                            <!--<div class="card-action center">-->
+                            <!--&lt;!&ndash;<a href="#">{{_ 'Delete'}}</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="#projectSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="/project/save/{{_id}}">{{_ 'Edit'}}</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="/scrum/kanban">{{_ 'Enter'}}</a>&ndash;&gt;-->
+                            <!--<a href="#" ng-click="remove(project._id)">Delete</a>-->
+                            <!--<a href="#" ng-click="modalSave($event, project._id)" >Edit</a>-->
+                            <!--&lt;!&ndash;<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="/scrum/content/{{backLogNote._id}}">Enter</a>&ndash;&gt;-->
+                            <!--</div>-->
+                        </div>
+                    </div>
                 </td>
-                <td id="sprintCurrent" class="linha status_5 containerSprint  row" sprintid="" sprinthorasgastas="0" sprinthoras="">
+                <td id="sprintCurrent" class="linha status_5 containerSprint  row" data-sprintId="{{sprintCurrent._id}}" sprinthorasgastas="0" sprinthoras="">
+                    <div class="col containerNote" ng-repeat="backLogNote in vm.notesSprintCurrent" data-noteId="{{backLogNote._id}}">
+                        <div class="card hoverable" style="background-color: {{backLogNote.story.color}}; width: 200px; height: 140px;">
+                            <div class="card-content white-text note">
+                                <span class="card-title activator text-darken-4 note-notHandle">{{backLogNote.owner.name}}<i class="material-icons right">more_vert</i></span>
+                                <p>{{backLogNote.description}}</p>
+                                <p></p>
+                            </div>
+                            <div class="card-reveal">
+                                <!--<span class="card-title grey-text text-darken-4">{{backLogNote.story.name}}<i class="material-icons right">close</i></span>-->
+                                    <span class="card-title grey-text text-darken-4">
+                                        <i class="note-notHandle material-icons right">close</i>
+                                        <a href="#" ng-click="modalStorySave($event, backLogNote.story._id)" title="Add story" class="note-notHandle btn-floating green hoverable">
+                                            <i class="material-icons">content_paste</i>
+                                        </a>
+                                        <a href="#" ng-click="modalNoteSave($event, backLogNote._id)" title="Add note" class="note-notHandle btn-floating amber accent-4 hoverable">
+                                            <i class="material-icons">mode_edit</i>
+                                        </a>
+                                    </span>
+                                <p>{{backLogNote.story.name}}</p>
+                                <p>{{backLogNote.description}}</p>
+                            </div>
+                            <!--<div class="card-action center">-->
+                            <!--&lt;!&ndash;<a href="#">{{_ 'Delete'}}</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="#projectSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="/project/save/{{_id}}">{{_ 'Edit'}}</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="/scrum/kanban">{{_ 'Enter'}}</a>&ndash;&gt;-->
+                            <!--<a href="#" ng-click="remove(project._id)">Delete</a>-->
+                            <!--<a href="#" ng-click="modalSave($event, project._id)" >Edit</a>-->
+                            <!--&lt;!&ndash;<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="/scrum/content/{{backLogNote._id}}">Enter</a>&ndash;&gt;-->
+                            <!--</div>-->
+                        </div>
+                    </div>
                 </td>
-                <td id="sprintNext" class="linha status_2 containerSprint row" sprintid="" sprinthorasgastas="6" sprinthoras="">
+                <td id="sprintNext" class="linha status_2 containerSprint row" data-sprintId="{{sprintNext._id}}" sprinthorasgastas="6" sprinthoras="">
+                    <div class="col containerNote" ng-repeat="backLogNote in vm.notesSprintNext" data-noteId="{{backLogNote._id}}">
+                        <div class="card hoverable" style="background-color: {{backLogNote.story.color}}; width: 200px; height: 140px;">
+                            <div class="card-content white-text note">
+                                <span class="card-title activator text-darken-4 note-notHandle">{{backLogNote.owner.name}}<i class="material-icons right">more_vert</i></span>
+                                <p>{{backLogNote.description}}</p>
+                                <p></p>
+                            </div>
+                            <div class="card-reveal">
+                                <!--<span class="card-title grey-text text-darken-4">{{backLogNote.story.name}}<i class="material-icons right">close</i></span>-->
+                                    <span class="card-title grey-text text-darken-4">
+                                        <i class="note-notHandle material-icons right">close</i>
+                                        <a href="#" ng-click="modalStorySave($event, backLogNote.story._id)" title="Add story" class="note-notHandle btn-floating green hoverable">
+                                            <i class="material-icons">content_paste</i>
+                                        </a>
+                                        <a href="#" ng-click="modalNoteSave($event, backLogNote._id)" title="Add note" class="note-notHandle btn-floating amber accent-4 hoverable">
+                                            <i class="material-icons">mode_edit</i>
+                                        </a>
+                                    </span>
+                                <p>{{backLogNote.story.name}}</p>
+                                <p>{{backLogNote.description}}</p>
+                            </div>
+                            <!--<div class="card-action center">-->
+                            <!--&lt;!&ndash;<a href="#">{{_ 'Delete'}}</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="#projectSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="/project/save/{{_id}}">{{_ 'Edit'}}</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="/scrum/kanban">{{_ 'Enter'}}</a>&ndash;&gt;-->
+                            <!--<a href="#" ng-click="remove(project._id)">Delete</a>-->
+                            <!--<a href="#" ng-click="modalSave($event, project._id)" >Edit</a>-->
+                            <!--&lt;!&ndash;<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="/scrum/content/{{backLogNote._id}}">Enter</a>&ndash;&gt;-->
+                            <!--</div>-->
+                        </div>
+                    </div>
                     <!--<div sprintpostitid="2" sprintpostithoras="2" class="task" style="background-color: #CCC">-->
                     <!--<div class="handle"> subprgdsc </div>-->
                     <!--<div class="title">-->
@@ -289,10 +387,59 @@
         setTimeout(function(){
             $( ".containerSprint" ).sortable({
                 connectWith: ".containerSprint",
-                items: ".containerNote"
-            });
+                items: ".containerNote",
+                cancel: ".note-notHandle",
+                beforeStop: function(event, ui) {
+                    sprint = $(ui.item.context).closest('td');
+                    sprintId = sprint.attr('data-sprintId');
+                    note = $(ui.item.context);
+                    noteId = $(note).attr('data-noteId');
+
+
+
+                    if (!sprintId && sprint.attr('id') != 'backLog') {
+                        $(event.target).sortable('cancel');
+                        Materialize.toast('Nonexistent Sprint!', 2000);
+                    } else {
+                        form = {};
+                        form.sprintId = sprintId;
+                        form.noteId = noteId;
+                        Meteor.call('noteChangeSprint', form, function(error, result){
+                            if (error) {
+                                    console.log(error);
+                            } else {
+    //                                console.log(statusId);
+    //                                console.log(noteId);
+                            }
+                        });
+                        console.log(event);
+                        console.log($(event.target));
+                        console.log(sprintId);
+                        console.log(noteId);
+                    }
+
+//                    return false;
+//
+
+
+//                        var arrStatus = $(ui.item.context).parent('td').attr('class').split(' ');
+//                        var arrStatus = arrStatus[0].split('_');
+//                        var idStatus = arrStatus[1];
+//
+//                        var arrPostit = ui.item.context.id.split('_')
+//                        var idPostit = arrPostit[1];
+
+                    //                                                                console.log('Postit: ' + idPostit);
+                    //                                                                console.log('Status: ' + idStatus);
+
+//                        dataPost = {controller : 'kanban', action: 'tramitSprint', idpostit: idPostit, idstatus: idStatus}
+
+//                        $.post(window.location, dataPost, function(result) {
+//                            console.log(result);
+//                        });
+                }
+            }).disableSelection();
         }, 300);
-        $( ".containerSprint" ).disableSelection();
 
 //        $( "ul.dropfalse" ).sortable({
 //            connectWith: "ul",

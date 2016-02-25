@@ -35,18 +35,18 @@
                         <!--{{status._id}}-->
                         <div data-sortable-row="{{story._id}}" data-noteId="{{note._id}}" class="card hoverable containerNote" style="background-color: {{story.color}}; width: 120px; height: 90px; float: left; margin: 10px;" ng-repeat="note in status.notes">
                             <div class="card-content white-text note">
-                                <span class=" text-darken-4">{{note.owner.name}}<i class=" activator material-icons right" style="">more_vert</i></span>
+                                <span class="note-notHandle text-darken-4">{{note.owner.name}}<i class=" activator material-icons right" style="">more_vert</i></span>
                                 <p>{{note.description}}</p>
                                 <p></p>
                             </div>
                             <div class="card-reveal">
                                 <!--<span class="card-title grey-text text-darken-4">{{note.story.name}}<i class="material-icons right">close</i></span>-->
                                 <span class="card-title grey-text text-darken-4">
-                                    <i class="material-icons right">close</i>
-                                    <a href="#" ng-click="modalStorySave($event, story._id)" title="Add story" class="btn-floating green hoverable">
+                                    <i class="note-notHandle material-icons right">close</i>
+                                    <a href="#" ng-click="modalStorySave($event, story._id)" title="Add story" class="note-notHandle btn-floating green hoverable">
                                         <i class="material-icons">content_paste</i>
                                     </a>
-                                    <a href="#" ng-click="modalNoteSave($event, note._id)" title="Add note" class="btn-floating amber accent-4 hoverable">
+                                    <a href="#" ng-click="modalNoteSave($event, note._id)" title="Add note" class="note-notHandle btn-floating amber accent-4 hoverable">
                                         <i class="material-icons">mode_edit</i>
                                     </a>
                                 </span>
@@ -105,6 +105,7 @@
                 row = element.attr('data-sortable-row');
                 $('td[data-sortable-row='+row+']').sortable({
                     connectWith: 'td[data-sortable-row='+row+']',
+                    cancel: ".note-notHandle",
                     beforeStop: function(event, ui) {
                         console.log(event);
                         statusId = $(ui.item.context).closest('td').attr('data-statusId');

@@ -33,12 +33,12 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                     states.push({name: 'Done', _id: '1'});
                     story.states = states.map(function(status) {
                         if (status._id) {
-                            var notes = Note.find({story:story._id, statusId: status._id}).map(function(note) {
+                            var notes = Note.find({story:story._id, statusId: status._id, sprintId: $stateParams.sprintId}).map(function(note) {
                                 note.owner = Meteor.users.findOne(note.owner);
                                 return note;
                             });
                         } else {
-                            var notes = Note.find({story:story._id, $or: [{statusId: status._id}, {statusId: ''}]}).map(function(note) {
+                            var notes = Note.find({story:story._id, sprintId: $stateParams.sprintId, $or: [{statusId: status._id}, {statusId: ''}]}).map(function(note) {
                                 note.owner = Meteor.users.findOne(note.owner);
                                 return note;
                             });

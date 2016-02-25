@@ -44,6 +44,22 @@ Meteor.methods({
         });
         return notes;
     },
+    noteChangeSprint: function(form){
+        var formNew = Note.findOne(form.noteId);
+        formNew.sprintId = form.sprintId;
+        id = form.noteId;
+        delete formNew._id;
+        Note.update(id, { $set: formNew});
+    },
+    noteFindBackLog: function(param){
+        notes = Note.find({$or: [{projectId: param.projectId}, {projectId: null}]}).fetch();
+        notes.map(function(note){
+            note.story = Story.findOne(note.story);
+            note.owner = Meteor.users.findOne(note.owner);
+            return note;
+        });
+        return notes;
+    },
     //teamSave: function (dataForm) {
         //console.log(dataForm);
         //check(partyId, String);
