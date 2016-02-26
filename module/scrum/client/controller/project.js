@@ -34,20 +34,20 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
                         }
                     );
 
-                    if (sprint) {
+                    //if (sprint) {
                         project.sprint = sprint;
-                    } else {
-                        Meteor.call('sprintCreate', project._id, function (error, result) {
-                            if (error) {
-                                console.log(error);
-                            } else {
-                                //console.log('Saved!');
-                                //$scope.form = '';
-                                //$mdDialog.hide();
-                                project.sprint = result;
-                            }
-                        });
-                    }
+                    //} else {
+                    //    Meteor.call('sprintCreate', project._id, function (error, result) {
+                    //        if (error) {
+                    //            console.log(error);
+                    //        } else {
+                    //            //console.log('Saved!');
+                    //            //$scope.form = '';
+                    //            //$mdDialog.hide();
+                    //            project.sprint = result;
+                    //        }
+                    //    });
+                    //}
 
                     return project;
                 });
