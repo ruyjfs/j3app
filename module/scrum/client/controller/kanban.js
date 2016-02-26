@@ -31,6 +31,7 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                     var states = Status.find({projectId: $stateParams.id}).fetch();
                     states.unshift({name: 'BackLog', _id: null});
                     states.push({name: 'Done', _id: '1'});
+                    showStory = false;
                     story.states = states.map(function(status) {
                         if (status._id) {
                             var notes = Note.find({story:story._id, statusId: status._id, sprintId: $stateParams.sprintId}).map(function(note) {
@@ -43,17 +44,34 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                                 return note;
                             });
                         }
+                        if (notes.length > 0) {
+                            showStory = true;
+                        }
                         status.notes = notes;
                        return status;
                     });
-                    return story;
+
+                    if (showStory) {
+                        return story;
+                    } else {
+                        return null;
+                    }
                 });
 
                 setTimeout(function(){
                     sortableKanban();
                 }, 300);
 
-                return stories;
+                storiesNew = [];
+                key = 0;
+                stories.forEach(function(value){
+                    if (value) {
+                        storiesNew[key] = value;
+                        key++;
+                    }
+                });
+                console.log(storiesNew);
+                return storiesNew;
             },
             states: function(){
                 var states = Status.find({projectId: $stateParams.id}).fetch();
