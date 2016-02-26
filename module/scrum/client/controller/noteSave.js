@@ -34,10 +34,9 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id'
         if (storyId) {
             $scope.form.story = storyId;
             if ($stateParams.sprintId != 1) {
-                $scope.form.sprint = $stateParams.sprintId;
+                $scope.form.sprintId = $stateParams.sprintId;
             }
         }
-        //$scope.form.projectId = $stateParams.id;
 
         $scope.save = function () {
             Meteor.call('noteSave', $scope.form, function (error) {
