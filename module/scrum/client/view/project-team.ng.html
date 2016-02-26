@@ -1,20 +1,22 @@
 <div ng-controller="ProjectTeamCtrl as vm" flex>
     <md-content>
-
-        <div class="row">
-            <div class="col l3 s12" ng-repeat="project in vm.teams">
-                <div ng-if="project" class="card orange lighten-3 hoverable">
+        <div class="row" ng-repeat="team in vm.teams">
+            <div class=".md-display-2">
+                {{team.name}}
+            </div>
+            <div class="col l3 s12" ng-repeat="user in team.members">
+                <div class="card orange lighten-3 hoverable">
                     <div class="card-content white-text">
-                                        <span class="card-title activator text-darken-4">{{project.name}}<i
+                                        <span class="card-title activator text-darken-4">{{user.name}}<i
                                                 class="material-icons right">more_vert</i></span>
 
-                        <p>{{project.description}}</p>
+                        <!--<p>{{team.description}}</p>-->
                     </div>
                     <div class="card-reveal">
-                                        <span class="card-title grey-text text-darken-4">{{project.name}}<i
+                                        <span class="card-title grey-text text-darken-4">{{user.name}}<i
                                                 class="material-icons right">close</i></span>
 
-                        <p>{{project.owner.name}}</p>
+                        <p>{{user.name}}</p>
                     </div>
                     <div class="card-action center">
                         <!--<a href="#">{{_ 'Delete'}}</a>-->
@@ -26,7 +28,7 @@
                            ng-click="vm.modalProjectSave($event, project._id)">Edit</a>
                         <!--<a href="#" ng-click="vm.modalProjectSave($event, project._id)">Edit</a>-->
                         <!--<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>-->
-                        <a href="/scrum/content/{{project._id}}/1">Enter</a>
+                        <!--<a href="/scrum/content/{{user._id}}/1">Enter</a>-->
                     </div>
                 </div>
             </div>

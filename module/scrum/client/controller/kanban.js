@@ -31,7 +31,6 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                     var states = Status.find({projectId: $stateParams.id}).fetch();
                     states.unshift({name: 'BackLog', _id: null});
                     states.push({name: 'Done', _id: '1'});
-                    showStory = false;
                     story.states = states.map(function(status) {
                         if (status._id) {
                             var notes = Note.find({story:story._id, statusId: status._id, sprintId: $stateParams.sprintId}).map(function(note) {
@@ -44,34 +43,21 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                                 return note;
                             });
                         }
-                        if (notes.length > 0) {
-                            showStory = true;
-                        }
                         status.notes = notes;
                        return status;
                     });
 
-                    if (showStory) {
-                        return story;
-                    } else {
-                        return null;
-                    }
+                    return story;
+                }).filter(function(story){
+                    var notes = Note.find({story:story._id, sprintId: $stateParams.sprintId}).fetch();
+                    return (notes.length > 0);
                 });
 
                 setTimeout(function(){
                     sortableKanban();
                 }, 300);
 
-                storiesNew = [];
-                key = 0;
-                stories.forEach(function(value){
-                    if (value) {
-                        storiesNew[key] = value;
-                        key++;
-                    }
-                });
-                console.log(storiesNew);
-                return storiesNew;
+                return stories;
             },
             states: function(){
                 var states = Status.find({projectId: $stateParams.id}).fetch();

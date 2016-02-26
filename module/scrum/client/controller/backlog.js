@@ -10,6 +10,11 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                 notes.map(function(note){
                     note.story = Story.findOne(note.story);
                     note.owner = Meteor.users.findOne(note.owner);
+                    if (note.statusId == '1') {
+                        note.color = '#dbdbdb';
+                    } else {
+                        note.color = note.story.color;
+                    }
                     return note;
                 });
                 return notes;
@@ -27,6 +32,12 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                         notes.map(function(note){
                             note.story = Story.findOne(note.story);
                             note.owner = Meteor.users.findOne(note.owner);
+                            if (note.statusId == 1) {
+                                note.color = '#dbdbdb';
+                            } else {
+                                note.color = note.story.color;
+                            }
+
                             return note;
                         });
                     }
@@ -38,6 +49,11 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                 notes.map(function(note){
                     note.story = Story.findOne(note.story);
                     note.owner = Meteor.users.findOne(note.owner);
+                    if (note.statusId == 1) {
+                        note.color = '#dbdbdb';
+                    } else {
+                        note.color = note.story.color;
+                    }
                     return note;
                 });
                 return notes;
@@ -55,6 +71,11 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                         notes.map(function(note){
                             note.story = Story.findOne(note.story);
                             note.owner = Meteor.users.findOne(note.owner);
+                            if (note.statusId == 1) {
+                                note.color = '#dbdbdb';
+                            } else {
+                                note.color = note.story.color;
+                            }
                             return note;
                         });
                     }
