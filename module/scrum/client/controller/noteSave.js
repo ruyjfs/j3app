@@ -13,14 +13,22 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id'
             },
             members: function () {
                 return Meteor.users.find({});
+            },
+            projects: function () {
+                teamsId = Team.find({$or: [{members: Meteor.userId()}, {userId: Meteor.userId()}]}).map(function(member){
+                    return member._id;
+                });
+                projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}]})
+                return projects;
             }
         });
 
         $scope.form = {};
         if (id) {
             $scope.form = Note.findOne(id);
-            console.log(Note.findOne(id));
-            console.log($scope.form);
+            $scope.projectIdOwd = $scope.form.projectId;
+        } else {
+            $scope.form.projectId = $stateParams.id;
         }
 
         if (storyId) {
@@ -33,6 +41,12 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id'
 
         $scope.save = function () {
             Meteor.call('noteSave', $scope.form, function (error) {
+
+                if ($scope.projectIdOwd != $scope.form.projectId) {
+                    $scope.form.story = '';
+                    $scope.form.sprintId = '';
+                }
+
                 if (error) {
                     Materialize.toast('Erro: ' + error, 4000);
                 } else {
