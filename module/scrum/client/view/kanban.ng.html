@@ -40,31 +40,22 @@
                                 <p></p>
                             </div>
                             <div class="card-reveal" layout="row" style="padding: 5px;">
-                                <!--<span class="card-title grey-text text-darken-4">{{note.story.name}}<i class="material-icons right">close</i></span>-->
+                                <div style="height: 25px;">
+                                    <!--<span class="card-title grey-text text-darken-4">{{note.story.name}}<i class="material-icons right">close</i></span>-->
                                 <span class="card-title grey-text text-darken-4">
                                     <i class="note-notHandle material-icons right">close</i>
                                 </span>
-                                <a href="#" ng-click="modalStorySave($event, story._id)" title="Add story" class="note-notHandle btn-floating green hoverable">
-                                    <i class="material-icons">content_paste</i>
-                                </a>
-                                <a href="#" ng-click="modalNoteSave($event, note._id)" title="Add note" class="note-notHandle btn-floating amber accent-4 hoverable">
-                                    <i class="material-icons">mode_edit</i>
-                                </a>
+                                </div>
+                                <div layout="row"  layout-align="center center" >
+                                    <a href="#" ng-click="modalStorySave($event, story._id)" title="Add story" class="note-notHandle btn-floating green hoverable" style="margin: 5px;">
+                                        <i class="material-icons">content_paste</i>
+                                    </a>
+                                    <a href="#" ng-click="modalNoteSave($event, note._id)" title="Add note" class="note-notHandle btn-floating amber accent-4 hoverable" style="margin: 5px;">
+                                        <i class="material-icons">mode_edit</i>
+                                    </a>
+                                </div>
                                 <!--<p>{{note.story.name}}</p>-->
                                 <!--<p>{{note.description}}</p>-->
-
-                                <div class="card-action center">
-                                    <!--<a href="#">{{_ 'Delete'}}</a>-->
-                                    <!--<a href="#projectSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>-->
-                                    <!--<a href="/project/save/{{_id}}">{{_ 'Edit'}}</a>-->
-                                    <!--<a href="/scrum/kanban">{{_ 'Enter'}}</a>-->
-                                    <a href="#" ng-if="vm.isOwner(project.userId)" ng-click="vm.remove(project._id)">Delete</a>
-                                    <a href="#" ng-if="vm.isOwner(project.userId)"
-                                       ng-click="vm.modalProjectSave($event, project._id)">Edit</a>
-                                    <!--<a href="#" ng-click="vm.modalProjectSave($event, project._id)">Edit</a>-->
-                                    <!--<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>-->
-                                    <!--<a href="/scrum/content/{{user._id}}/1">Enter</a>-->
-                                </div>
                             </div>
                             <!--<div class="card-action center">-->
                             <!--&lt;!&ndash;<a href="#">{{_ 'Delete'}}</a>&ndash;&gt;-->
