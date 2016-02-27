@@ -30,8 +30,15 @@
                     </md-select>
                 </md-input-container>
                 <md-input-container>
-                    <label>Time</label>
-                    <input ng-model="form.time" id="time" type="time" aria-label="Time">
+                    <!--<label>Time</label>-->
+                    <!--<input ng-model="form.time" id="time" type="time" aria-label="Time">-->
+                    <!--<div layout>-->
+                    <div flex="10" layout layout-align="center center">
+                        <span class="md-body-1">Time: {{form.time}}h</span>
+                    </div>
+                    <md-slider ng-model="form.time" id="time-slider" flex class="md-primary" md-discrete step="1" min="1" max="16" aria-label="rating">
+                    </md-slider>
+                    <!--</div>-->
                 </md-input-container>
                 <md-input-container>
                     <label>Description</label>

@@ -56,7 +56,7 @@
                 <td id="backLog" class="linha status_1 containerSprint row" data-sprintId="" sprinthorasgastas="" sprinthoraslimite="">
                     <!--<div class="container col l4 s12 row">-->
                     <div class="col containerNote" ng-repeat="backLogNote in vm.notesBackLog" data-noteId="{{backLogNote._id}}">
-                        <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px;">
+                        <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px;  line-height: 1.2;">
                             <div class="card-content white-text note">
                                 <span class="card-title activator text-darken-4 note-notHandle">{{backLogNote.owner.name}}<i class="material-icons right">more_vert</i></span>
                                 <p>{{backLogNote.description}}</p>
@@ -141,7 +141,7 @@
             </td>
                 <td id="sprintPrevious" class="linha status_3 containerSprint row" data-sprintId="{{sprintPrevious._id}}" sprinthorasgastas="0" sprinthoras="">
                     <div class="col containerNote" ng-repeat="backLogNote in vm.notesSprintPrevious" data-noteId="{{backLogNote._id}}">
-                        <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px;">
+                        <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px;  line-height: 1.2;">
                             <div class="card-content white-text note">
                                 <span class="card-title activator text-darken-4 note-notHandle">{{backLogNote.owner.name}}<i class="material-icons right">more_vert</i></span>
                                 <p>{{backLogNote.description}}</p>
@@ -176,7 +176,7 @@
                 </td>
                 <td id="sprintCurrent" class="linha status_5 containerSprint  row" data-sprintId="{{sprintCurrent._id}}" sprinthorasgastas="0" sprinthoras="">
                     <div class="col containerNote" ng-repeat="backLogNote in vm.notesSprintCurrent" data-noteId="{{backLogNote._id}}">
-                        <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px;">
+                        <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px;  line-height: 1.2;">
                             <div class="card-content white-text note">
                                 <span class="card-title activator text-darken-4 note-notHandle">{{backLogNote.owner.name}}<i class="material-icons right">more_vert</i></span>
                                 <p>{{backLogNote.description}}</p>
@@ -211,7 +211,7 @@
                 </td>
                 <td id="sprintNext" class="linha status_2 containerSprint row" data-sprintId="{{sprintNext._id}}" sprinthorasgastas="6" sprinthoras="">
                     <div class="col containerNote" ng-repeat="backLogNote in vm.notesSprintNext" data-noteId="{{backLogNote._id}}">
-                        <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px;">
+                        <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px; line-height: 1.2;">
                             <div class="card-content white-text note">
                                 <span class="card-title activator text-darken-4 note-notHandle">{{backLogNote.owner.name}}<i class="material-icons right">more_vert</i></span>
                                 <p>{{backLogNote.description}}</p>

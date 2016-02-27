@@ -18,7 +18,8 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
             Meteor.loginWithPassword(this.dataForm.email, this.dataForm.password, function(err) {
                 if (err) {
                     //console.log(err);
-                    $scope.error = 'User not found';
+                    //$scope.error = 'User not found';
+                    Materialize.toast('User not found!', 4000);
                 } else {
                     $mdDialog.hide();
                     $state.go('scrum/project');
@@ -29,7 +30,8 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
         $scope.reset = function () {
             Accounts.forgotPassword($scope.dataForm.email, function(err) {
                     if (err) {
-                        $scope.error = 'Error sending forgot password email - ' + err;
+                        //$scope.error = 'Error sending forgot password email - ' + err;
+                        Materialize.toast('Error sending forgot password email - ' + err, 4000);
                     } else {
                         $mdDialog.hide();
                         $state.go('scrum/project');
@@ -42,11 +44,14 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
         $scope.register = function () {
 
             if (!$scope.dataForm.name || !$scope.dataForm.lastName) {
-                $scope.error = 'Registration error - Inform you name';
+                //$scope.error = 'Registration error - Inform you name';
+                Materialize.toast('Registration error - Inform you name', 4000);
             } else if ($scope.dataForm.password == $scope.dataForm.confirmPassword) {
                 Accounts.createUser($scope.dataForm, function (err) {
                         if (err) {
-                            $scope.error = 'Registration error - ' + err;
+                            //$scope.error = 'Registration error - ' + err;
+                            error = 'Registration error - ' + err;
+                            Materialize.toast(error, 4000);
                         } else {
                             var form = Meteor.users.findOne(Meteor.user()._id);
                             form.name = $scope.dataForm.name;
@@ -54,7 +59,8 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
 
                             Meteor.call('userSave', form, function (error) {
                                 if (error) {
-                                    console.log('Oops!');
+                                    //console.log('Oops!');
+                                    Materialize.toast(error, 4000);
                                 } else {
                                     $mdDialog.hide();
                                     $state.go('scrum/project');
@@ -64,11 +70,14 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
                         }
                     },
                     function (err) {
-                        $scope.error = 'Registration error - ' + err;
+                        //$scope.error = 'Registration error - ' + err;
+                        error = 'Registration error - ' + err;
+                        Materialize.toast(error, 4000);
                     }
                 );
             } else {
-                $scope.error = 'Registration error - Confirm password!';
+                error = 'Registration error - Confirm password!';
+                Materialize.toast(error, 4000);
             }
         };
 
