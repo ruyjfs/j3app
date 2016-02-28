@@ -19,7 +19,8 @@
                         <!--<li><a href="#" data-activates="nav-contact" ng-click="vm.toggleContactList()"><i class="material-icons">question_answer</i></a></li>-->
                         <li>
                             <a href="#" ng-click="showNavContactList()">
-                                <i class="material-icons">question_answer</i>
+                                <!--<i class="material-icons">question_answer</i>-->
+                                <i class="material-icons">chat</i>
                                 <span class="alert">{{vm.totalMessagesNotVisualized}}</span>
                             </a>
                         </li>
@@ -77,7 +78,7 @@
                 <a href="#" class="button-collapse nav-button-left"><i class="material-icons">menu</i></a>
                 <!--<a href="#" data-activates="nav-mobile" class="button-collapse nav-button-left"><i class="material-icons">menu</i></a>-->
                 <a href="#" ng-click="showNavContactList()" class="button-collapse right" ng-hide="!$auth.currentUser">
-                    <i class="material-icons">question_answer</i>
+                    <i class="material-icons">chat</i>
                     <span class="alert">{{vm.totalMessagesNotVisualized}}</span>
                 </a>
                 <a href="#" style="display:none;" data-activates="nav-contact" class="nav-button-contact button-collapse nav-button-right right" ng-hide="!$auth.currentUser"><i class="material-icons">question_answer</i></a>
