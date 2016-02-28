@@ -1,8 +1,12 @@
 (function($){
   $(function(){
 
-    $('.button-collapse').sideNav({
+    $('.nav-button-left').sideNav({
       closeOnClick: true
+    });
+    $('.nav-button-right').sideNav({
+      closeOnClick: true,
+      //edge: 'left'
     });
     //$('.modal-trigger').leanModal(
     //    {

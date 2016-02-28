@@ -1,21 +1,51 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$reactive', '$mdDialog', '$mdBottomSheet', '$mdToast',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $reactive, $mdDialog, $mdBottomSheet, $mdToast) {
+angular.module('scrum').controller('HeaderCtrl', ['$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$reactive', '$mdDialog', '$mdBottomSheet', '$rootScope',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $reactive, $mdDialog, $mdBottomSheet, $rootScope) {
         $reactive(this).attach($scope);
 
-        this.toggleMenu = buildToggler('menu');
-        this.toggleContactList = buildToggler('contact-list');
+        //this.toggleMenu = buildToggler('menu');
+        //this.toggleContactList = buildToggler('contact-list');
+
+        Meteor.subscribe('users');
+        Meteor.subscribe('message');
+        this.helpers(
+            {
+                totalMessagesNotVisualized: function () {
+                    user = Meteor.users.find().map(function (user) {
+                        user.messagesNotVisualized = Message.find(
+                            {
+                                $and: [
+                                    {
+                                        'userId': user._id,
+                                        'contactId': Meteor.userId(),
+                                        $or: [
+                                            {visualized: ''},
+                                            {visualized: null}
+                                        ]
+                                    },
+                                ]
+                            }
+                        ).fetch().length;
+                        return user;
+                    }).filter(function(user){
+                        return (user.messagesNotVisualized > 0);
+                    });
+
+                    return (user.length > 0)? user.length: '';
+                }
+            }
+        );
 
         this.title = 'Brotherhood';
-        this.redirect = function(route){
+        this.redirect = function (route) {
             arrTitle = route.split('/');
             $scope.title = arrTitle[1];
             $mdSidenav('menu').close();
             $location.path(route);
         };
 
-        this.showModulesGrid = function($event) {
+        this.showModulesGrid = function ($event) {
             console.log($mdBottomSheet);
             $scope.alert = '';
             $mdBottomSheet.show({
@@ -24,7 +54,7 @@ angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSid
                 templateUrl: 'module/user/client/views/modules-grid.ng.html',
                 clickOutsideToClose: true,
                 targetEvent: $event
-            }).then(function(clickedItem) {
+            }).then(function (clickedItem) {
                 //$mdToast.show(
                 //    $mdToast.simple()
                 //        .textContent(clickedItem['name'] + ' clicked!')
@@ -47,7 +77,7 @@ angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSid
             });
         };
 
-        this.modalLogin = function(ev, id){
+        this.modalLogin = function (ev, id) {
             //$mdDialog.alert()
             //    .parent(angular.element(document.querySelector('#popupContainer')))
             //    .clickOutsideToClose(true)
@@ -61,14 +91,14 @@ angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSid
                 module: 'user',
                 controller: 'LoginModalCtrl',
                 templateUrl: 'module/user/client/views/login-modal.ng.html',
-                clickOutsideToClose:true,
-                locals : {
+                clickOutsideToClose: true,
+                locals: {
                     id: id
                 },
                 targetEvent: ev
-            }).then(function(answer) {
+            }).then(function (answer) {
                 $scope.status = 'You said the information was "' + answer + '".';
-            }, function() {
+            }, function () {
                 $scope.status = 'You cancelled the dialog.';
             });
         };
@@ -77,17 +107,17 @@ angular.module('scrum').controller('HeaderCtrl', [ '$scope', '$timeout', '$mdSid
          * Build handler to open/close a SideNav; when animation finishes
          * report completion in console
          */
-        function buildToggler(navID) {
-            var debounceFn = $mdUtil.debounce(function () {
-                $mdSidenav(navID)
-                    .toggle()
-                    .then(function () {
-                        $log.debug("toggle " + navID + " is done");
-                        //$scope.messages = [];
-                        //console.info('ENTROU MANO')
-                    });
-            }, 200);
-            return debounceFn;
-        }
+        //function buildToggler(navID) {
+        //    var debounceFn = $mdUtil.debounce(function () {
+        //        $mdSidenav(navID)
+        //            .toggle()
+        //            .then(function () {
+        //                $log.debug("toggle " + navID + " is done");
+        //                //$scope.messages = [];
+        //                //console.info('ENTROU MANO')
+        //            });
+        //    }, 200);
+        //    return debounceFn;
+        //}
     }
 ]);

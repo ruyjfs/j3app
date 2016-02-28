@@ -19,7 +19,7 @@ Meteor.methods({
     //invite: function (partyId, userId) {
     //    check(partyId, String);
     //    check(userId, String);
-    //    var party = Messages.findOne(partyId);
+    //    var party = Message.findOne(partyId);
     //    if (!party)
     //        throw new Meteor.Error(404, "No such party");
     //    if (party.owner !== this.userId)
@@ -29,7 +29,7 @@ Meteor.methods({
     //            "That party is public. No need to invite people.");
     //
     //    if (userId !== party.owner && ! _.contains(party.invited, userId)) {
-    //        Messages.update(partyId, { $addToSet: { invited: userId } });
+    //        Message.update(partyId, { $addToSet: { invited: userId } });
     //
     //        var from = contactEmail(Meteor.users.findOne(this.userId));
     //        var to = contactEmail(Meteor.users.findOne(userId));
@@ -56,7 +56,7 @@ Meteor.methods({
     //        throw new Meteor.Error(403, "You must be logged in to RSVP");
     //    if (! _.contains(['yes', 'no', 'maybe'], rsvp))
     //        throw new Meteor.Error(400, "Invalid RSVP");
-    //    var party = Messages.findOne(partyId);
+    //    var party = Message.findOne(partyId);
     //    if (! party)
     //        throw new Meteor.Error(404, "No such party");
     //    if (! party.public && party.owner !== this.userId &&
@@ -70,7 +70,7 @@ Meteor.methods({
     //
     //        if (Meteor.isServer) {
     //            // update the appropriate rsvp entry with $
-    //            Messages.update(
+    //            Message.update(
     //                {_id: partyId, "rsvps.user": this.userId},
     //                {$set: {"rsvps.$.rsvp": rsvp}});
     //        } else {
@@ -79,13 +79,13 @@ Meteor.methods({
     //            // safe on the client since there's only one thread.
     //            var modifier = {$set: {}};
     //            modifier.$set["rsvps." + rsvpIndex + ".rsvp"] = rsvp;
-    //            Messages.update(partyId, modifier);
+    //            Message.update(partyId, modifier);
     //        }
     //        // Possible improvement: send email to the other people that are
     //        // coming to the party.
     //    } else {
     //        // add new rsvp entry
-    //        Messages.update(partyId,
+    //        Message.update(partyId,
     //            {$push: {rsvps: {user: this.userId, rsvp: rsvp}}});
     //    }
     //}

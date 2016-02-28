@@ -1,6 +1,6 @@
-//Meteor.publish("messages", function (friendId) {
+//Meteor.publish("message", function (contactId) {
 Meteor.publish("project", function (limit) {
-//    Messages.cancel();
+//    Message.cancel();
 
     //if (limit) {
     //    limit = {limit: limit};
@@ -11,10 +11,10 @@ Meteor.publish("project", function (limit) {
     //result = Project.find({
     //    //'owner' : $rootScope.currentUser._id,
     //    //'owner': this.userId,
-    //    //'friendId': friendId
+    //    //'contactId': contactId
     //}, limit);
     //console.log('_____________________________________________________________________');
-    //console.log('Firend: ' + friendId);
+    //console.log('Firend: ' + contactId);
     //console.log('UserId: ' + this.userId);
     //console.log('Quantidade: ' + result);
     projectsNew = [];
@@ -38,15 +38,15 @@ Meteor.publish("project", function (limit) {
     //    //}
     //});
     return projects;
-    //return Messages.find({
+    //return Message.find({
     //    'owner': this.userId,
-    //    'friendId': friendId
+    //    'contactId': contactId
     //});
 
     //if (searchString == null)
     //    searchString = '';
     //
-    //Counts.publish(this, 'numberOfMessages', Messages.find({
+    //Counts.publish(this, 'numberOfMessages', Message.find({
     //    'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
     //    $or:[
     //        //{$and:[
@@ -63,7 +63,7 @@ Meteor.publish("project", function (limit) {
     //        //]}
     //    ]}), { noReady: true });
     //
-    //return Messages.find({
+    //return Message.find({
     //    'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
     //    $or:[
     //    //    //{$and:[

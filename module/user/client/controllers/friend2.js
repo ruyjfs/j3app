@@ -18,8 +18,8 @@ angular.module('scrum').controller('Friend2Ctrl', [ '$scope', '$mdDialog', '$mdS
                 //            ,
                 //            {
                 //                'members' : Meteor.user()._id,
-                //                //'userId' : friendId,
-                //                //'friendId' : $rootScope.currentUser._id
+                //                //'userId' : contactId,
+                //                //'contactId' : $rootScope.currentUser._id
                 //            }
                 //        ]
                 //    });

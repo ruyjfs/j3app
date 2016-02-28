@@ -60,12 +60,12 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
         //                    //$or: [
         //                    //    {
         //                    //        'userId' : $rootScope.currentUser._id,
-        //                    //        'friendId' : friendId
+        //                    //        'contactId' : contactId
         //                    //    }
         //                    //    ,
         //                    //    {
-        //                    //        'userId' : friendId,
-        //                    //        'friendId' : $rootScope.currentUser._id
+        //                    //        'userId' : contactId,
+        //                    //        'contactId' : $rootScope.currentUser._id
         //                    //    }
         //                    //]
         //                }
@@ -79,12 +79,12 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
         //            //$or: [
         //            //    {
         //            //        'userId' : $rootScope.currentUser._id,
-        //            //        'friendId' : friendId
+        //            //        'contactId' : contactId
         //            //    }
         //            //    ,
         //            //    {
-        //            //        'userId' : friendId,
-        //            //        'friendId' : $rootScope.currentUser._id
+        //            //        'userId' : contactId,
+        //            //        'contactId' : $rootScope.currentUser._id
         //            //    }
         //            //]
         //        }

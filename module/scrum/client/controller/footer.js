@@ -9,12 +9,12 @@ angular.module('scrum').controller('FooterCtrl', [ '$scope', '$timeout', '$mdSid
         //            //$or: [
         //            //    {
         //            //        'userId' : $rootScope.currentUser._id,
-        //            //        'friendId' : friendId
+        //            //        'contactId' : contactId
         //            //    }
         //            //    ,
         //            //    {
-        //            //        'userId' : friendId,
-        //            //        'friendId' : $rootScope.currentUser._id
+        //            //        'userId' : contactId,
+        //            //        'contactId' : $rootScope.currentUser._id
         //            //    }
         //            //]
         //        }

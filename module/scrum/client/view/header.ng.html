@@ -16,7 +16,13 @@
                         <!--<li><a href="/scrum/team"><i class="material-icons">group</i></a></li>-->
                         <!--<li><a href="/scrum/team"><i class="material-icons">group_work</i></a></li>-->
                         <!--<li><a href="#" ng-click="toggleContactList()"><i class="material-icons">chat</i></a></li>-->
-                        <li><a href="#" ng-click="vm.toggleContactList()"><i class="material-icons">question_answer</i></a></li>
+                        <!--<li><a href="#" data-activates="nav-contact" ng-click="vm.toggleContactList()"><i class="material-icons">question_answer</i></a></li>-->
+                        <li>
+                            <a href="#" ng-click="showNavContactList()">
+                                <i class="material-icons">question_answer</i>
+                                <span class="alert">{{vm.totalMessagesNotVisualized}}</span>
+                            </a>
+                        </li>
                         <li><a class="dropdown-button" href="#" data-activates="dropdown1"><i class="material-icons">language</i></a></li>
                         <!-- Dropdown Structure -->
                         <ul id="dropdown1" class="dropdown-content">
@@ -68,18 +74,31 @@
                         <!--</div>-->
                     </div>
                 </ul>
-                <!--<a href="#" ng-click="vm.toggleContactList()" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>-->
-                <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-                <ul ng-hide="!$auth.currentUser" class="right hide-on-large-only">
-                    <li><a href="#" ng-click="vm.toggleContactList()"><i class="material-icons">chat</i></a></li>
-                </ul>
+                <a href="#" class="button-collapse nav-button-left"><i class="material-icons">menu</i></a>
+                <!--<a href="#" data-activates="nav-mobile" class="button-collapse nav-button-left"><i class="material-icons">menu</i></a>-->
+                <a href="#" ng-click="showNavContactList()" class="button-collapse right" ng-hide="!$auth.currentUser">
+                    <i class="material-icons">question_answer</i>
+                    <span class="alert">{{vm.totalMessagesNotVisualized}}</span>
+                </a>
+                <a href="#" style="display:none;" data-activates="nav-contact" class="nav-button-contact button-collapse nav-button-right right" ng-hide="!$auth.currentUser"><i class="material-icons">question_answer</i></a>
+                <a href="#" style="display: none;" data-activates="nav-chat" class="nav-button-chat button-collapse nav-button-right right" ng-hide="!$auth.currentUser"><i class="material-icons">question_answer</i></a>
+                <!--<ul ng-hide="!$auth.currentUser" class="right hide-on-large-only">-->
+                    <!--<li><a href="#" ng-click="vm.toggleContactList()"><i class="material-icons">chat</i></a></li>-->
+                <!--</ul>-->
             </div>
         </nav>
     </div>
-    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="chat">
-        <div ng-include="'module/user/client/views/chat.ng.html'"></div>
-    </md-sidenav>
-    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="contact-list">
-        <div ng-include="'module/user/client/views/contact-list.ng.html'"></div>
-    </md-sidenav>
+    <!--<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="chat">-->
+        <!--<div ng-include="'module/user/client/views/chat.ng.html'"></div>-->
+    <!--</md-sidenav>-->
+    <!--<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="contact-list">-->
+        <!--<div ng-include="'module/user/client/views/contact-list.ng.html'"></div>-->
+    <!--</md-sidenav>-->
 </div>
+
+<ul id="nav-contact" class="side-nav">
+    <div ng-include="'module/user/client/views/contact-list.ng.html'"></div>
+</ul>
+<ul id="nav-chat" class="side-nav">
+    <div ng-include="'module/user/client/views/chat.ng.html'"></div>
+</ul>

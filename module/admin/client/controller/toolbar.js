@@ -21,42 +21,42 @@ angular.module('admin').controller('ToolbarCtrl', [ '$scope', '$timeout', '$mdSi
             $mdSidenav('contact-list').toggle();
         }
 
-        //$scope.toggleChat = function(friendId){
+        //$scope.toggleChat = function(contactId){
         //    $mdSidenav('contact-list').close();
         //
         //
-        //    //this.friendId = friendId;
+        //    //this.contactId = contactId;
         //
-        //    return Messages.find(
+        //    return Message.find(
         //        {
         //            $or: [
         //                {
         //                    'userId' : Meteor.user()._id,
-        //                    'friendId' : $rootScope.friendId
+        //                    'contactId' : $rootScope.contactId
         //                }
         //                ,
         //                {
-        //                    'userId' : $rootScope.friendId,
-        //                    'friendId' : Meteor.user()._id
+        //                    'userId' : $rootScope.contactId,
+        //                    'contactId' : Meteor.user()._id
         //                }
         //            ]
         //        }
         //    );
         //    //this.currentUser.userId = Meteor.user()._id;
         //
-        //    //Meteor.subscribe('messages');
+        //    //Meteor.subscribe('message');
         //    //$scope.messages = $meteor.collection( function() {
-        //    //    return Messages.find(
+        //    //    return Message.find(
         //    //        {
         //    //            $or: [
         //    //                {
         //    //                    'userId' : Meteor.user()._id,
-        //    //                    'friendId' : friendId
+        //    //                    'contactId' : contactId
         //    //                }
         //    //                ,
         //    //                {
-        //    //                    'userId' : friendId,
-        //    //                    'friendId' : Meteor.user()._id
+        //    //                    'userId' : contactId,
+        //    //                    'contactId' : Meteor.user()._id
         //    //                }
         //    //            ]
         //    //        }
@@ -64,7 +64,7 @@ angular.module('admin').controller('ToolbarCtrl', [ '$scope', '$timeout', '$mdSi
         //    //});
         //
         //    $mdSidenav('chat').toggle();
-        //    //$scope.messages = $meteor.collection(Messages).subscribe('messages', friendId);
+        //    //$scope.messages = $meteor.collection(Messages).subscribe('message', contactId);
         //};
 
         $scope.menuItems = [

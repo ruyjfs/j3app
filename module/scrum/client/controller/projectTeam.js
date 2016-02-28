@@ -42,8 +42,8 @@ angular.module('scrum').controller('ProjectTeamCtrl', [ '$scope', '$mdDialog', '
                 //            ,
                 //            {
                 //                'members' : userId,
-                //                //'userId' : friendId,
-                //                //'friendId' : $rootScope.currentUser._id
+                //                //'userId' : contactId,
+                //                //'contactId' : $rootScope.currentUser._id
                 //            }
                 //        ]
                 //    }).map(function(team){

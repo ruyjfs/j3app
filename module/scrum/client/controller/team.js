@@ -25,8 +25,8 @@ angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdSide
                             ,
                             {
                                 'members' : userId,
-                                //'userId' : friendId,
-                                //'friendId' : $rootScope.currentUser._id
+                                //'userId' : contactId,
+                                //'contactId' : $rootScope.currentUser._id
                             }
                         ]
                     });

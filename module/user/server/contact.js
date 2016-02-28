@@ -1,6 +1,6 @@
-//Meteor.publish("messages", function (friendId) {
+//Meteor.publish("message", function (contactId) {
 Meteor.publish("contact", function (limit) {
-//    Messages.cancel();
+//    Message.cancel();
 
     if (limit) {
         limit = {limit: limit};
@@ -11,24 +11,24 @@ Meteor.publish("contact", function (limit) {
     result = Contact.find({
         //'owner' : $rootScope.currentUser._id,
         //'owner': this.userId,
-        //'friendId': friendId
+        //'contactId': contactId
     }, limit);
     //console.log('_____________________________________________________________________');
-    //console.log('Firend: ' + friendId);
+    //console.log('Firend: ' + contactId);
     //console.log('UserId: ' + this.userId);
     //console.log('Quantidade: ' + result);
 
     return result;
 
-    //return Messages.find({
+    //return Message.find({
     //    'owner': this.userId,
-    //    'friendId': friendId
+    //    'contactId': contactId
     //});
 
     //if (searchString == null)
     //    searchString = '';
     //
-    //Counts.publish(this, 'numberOfMessages', Messages.find({
+    //Counts.publish(this, 'numberOfMessages', Message.find({
     //    'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
     //    $or:[
     //        //{$and:[
@@ -45,7 +45,7 @@ Meteor.publish("contact", function (limit) {
     //        //]}
     //    ]}), { noReady: true });
     //
-    //return Messages.find({
+    //return Message.find({
     //    'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
     //    $or:[
     //    //    //{$and:[

@@ -1,33 +1,53 @@
 <div ng-controller="ContactListCtrl as vm">
-    <md-toolbar class="md-theme-light">
-        <div class="md-toolbar-tools">
-            <md-button ng-click="close()">
-                <md-icon md-svg-icon="communication:ic_contacts_24px" aria-label="Contact"></md-icon>
-                Contatos
+    <md-toolbar class="md-theme-light fixed-top">
+        <div class="md-toolbar-tools" >
+            <md-button ng-click="hideNavContactList()">
+                <md-icon md-svg-icon="social:ic_people_24px" aria-label="Contact"></md-icon>
+                Contacts
             </md-button>
         </div>
     </md-toolbar>
-    <md-content layout-padding>
-        <form>
-            <md-input-container>
-                <label for="testInput">Procurar amigo</label>
-                <input type="text" id="testInput" ng-model="vm.data" md-autofocus>
-            </md-input-container>
-        </form>
-        <div>
-            <md-list ng-cloak>
-                <!--<md-divider></md-divider>-->
-                <!--<md-subheader class="md-no-sticky">Avatar with Secondary Action Icon</md-subheader>-->
-                <md-list-item ng-repeat="user in users" ng-click="toggleChat(user._id)">
-                    <img alt="" ng-src="" class="md-avatar" />
-                    <p>{{user.emails[0].address}}</p>
-                    <!--<md-icon md-svg-icon="communication:messenger" ng-click="doSecondaryAction($event)" aria-label="Open Chat" class="md-secondary md-hue-3" ng-class="{'md-primary': person.newMessage}"></md-icon>-->
-                    <md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>
-                </md-list-item>
-            </md-list>
+    <md-toolbar class="md-theme-light">
+        <div class="md-toolbar-tools" >
+            <md-button ng-click="hideNavContactList()">
+                <md-icon md-svg-icon="social:ic_people_24px" aria-label="Contact"></md-icon>
+                Contacts
+            </md-button>
         </div>
+    </md-toolbar>
+    <!--<md-content layout-padding>-->
+        <!--<form>-->
+            <!--<md-input-container>-->
+                <!--<label for="testInput">Procurar amigo</label>-->
+                <!--<input type="text" id="testInput" ng-model="vm.data" md-autofocus>-->
+            <!--</md-input-container>-->
+        <!--</form>-->
+        <!--<li class="waves-effect waves-orange" ng-repeat="user in vm.users"  layout="row">-->
+
+        <li ng-repeat="user in vm.users" >
+            <!--<img alt="" ng-src="" class="md-avatar" />-->
+            <a href="#" ng-click="showNavChat(user._id)"  style="width: 100%;" class="waves-effect waves-orange" >
+                {{user.name}} {{user.lastName}}
+                <!--<md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>-->
+            </a>
+            <span class="alertSidNav">{{user.messagesNotVisualized}}</span>
+        </li>
+        <!--<div>-->
+            <!--<md-list ng-cloak>-->
+                <!--&lt;!&ndash;<md-divider></md-divider>&ndash;&gt;-->
+                <!--&lt;!&ndash;<md-subheader class="md-no-sticky">Avatar with Secondary Action Icon</md-subheader>&ndash;&gt;-->
+                <!--&lt;!&ndash;<md-list-item ng-repeat="user in vm.users" ng-click="toggleChat(user._id)">&ndash;&gt;-->
+                <!--<md-list-item ng-repeat="user in vm.users" layout="row" data-activates="nav-chat" class="button-collapse nav-button-right">-->
+                    <!--<img alt="" ng-src="" class="md-avatar" />-->
+                    <!--&lt;!&ndash;<p>{{user.emails[0].address}}</p>&ndash;&gt;-->
+                    <!--{{user.name}} {{user.lastName}}-->
+                    <!--&lt;!&ndash;<md-icon md-svg-icon="communication:messenger" ng-click="doSecondaryAction($event)" aria-label="Open Chat" class="md-secondary md-hue-3" ng-class="{'md-primary': person.newMessage}"></md-icon>&ndash;&gt;-->
+                    <!--<md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>-->
+                <!--</md-list-item>-->
+            <!--</md-list>-->
+        <!--</div>-->
         <!--<md-button ng-click="close()" class="md-primary">-->
         <!--Close Sidenav Right-->
         <!--</md-button>-->
-    </md-content>
+    <!--</md-content>-->
 </div>

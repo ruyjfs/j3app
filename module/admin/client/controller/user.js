@@ -24,8 +24,8 @@
                 //            ,
                 //            {
                 //                'members' : Meteor.user()._id,
-                //                //'userId' : friendId,
-                //                //'friendId' : $rootScope.currentUser._id
+                //                //'userId' : contactId,
+                //                //'contactId' : $rootScope.currentUser._id
                 //            }
                 //        ]
                 //    });
@@ -38,12 +38,12 @@
         //                    //$or: [
         //                    //    {
         //                    //        'userId' : $rootScope.currentUser._id,
-        //                    //        'friendId' : friendId
+        //                    //        'contactId' : contactId
         //                    //    }
         //                    //    ,
         //                    //    {
-        //                    //        'userId' : friendId,
-        //                    //        'friendId' : $rootScope.currentUser._id
+        //                    //        'userId' : contactId,
+        //                    //        'contactId' : $rootScope.currentUser._id
         //                    //    }
         //                    //]
         //                }
@@ -57,12 +57,12 @@
         //            //$or: [
         //            //    {
         //            //        'userId' : $rootScope.currentUser._id,
-        //            //        'friendId' : friendId
+        //            //        'contactId' : contactId
         //            //    }
         //            //    ,
         //            //    {
-        //            //        'userId' : friendId,
-        //            //        'friendId' : $rootScope.currentUser._id
+        //            //        'userId' : contactId,
+        //            //        'contactId' : $rootScope.currentUser._id
         //            //    }
         //            //]
         //        }

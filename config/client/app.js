@@ -12,8 +12,12 @@ if (Meteor.isClient) {
                 'scrum',
             ]);
 
-        $('.button-collapse').sideNav({
+        $('.nav-button-left').sideNav({
             closeOnClick: true
+        });
+        $('.nav-button-right').sideNav({
+            closeOnClick: true,
+            edge: 'right'
         });
     }
 

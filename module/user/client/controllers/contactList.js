@@ -4,119 +4,75 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
     function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $reactive, $rootScope) {
         $reactive(this).attach($scope);
 
-        $scope.users = [];
-        Meteor.subscribe('users');
-        $scope.helpers({
-            users: function () {
-                var users =  Meteor.users.find(
-                    {
-                        //$or: [
-                        //    {
-                        //        'userId' : $rootScope.currentUser._id,
-                        //        'friendId' : friendId
-                        //    }
-                        //    ,
-                        //    {
-                        //        'userId' : friendId,
-                        //        'friendId' : $rootScope.currentUser._id
-                        //    }
-                        //]
-                    }
-                ).fetch();
-                $scope.users = users;
-                return users;
-            },
-            users2: function () {
-                var users =  '1234'
+        $rootScope.showNavContactList = function () {
+            $('.nav-button-chat').sideNav('hide');
+            $('.nav-button-contact').sideNav('hide');
+            $('.nav-button-contact').sideNav('show');
+        };
 
+        $rootScope.hideNavContactList = function () {
+            $('.nav-button-chat').sideNav('hide');
+            $('.nav-button-contact').sideNav('hide');
+        };
+
+        Meteor.subscribe('users');
+        this.helpers({
+            users: function () {
+                users = Meteor.users.find().map(function (user) {
+                        user.messagesNotVisualized = Message.find(
+                            {
+                                $and: [
+                                    {
+                                        'userId': user._id,
+                                        'contactId': Meteor.userId(),
+                                        $or: [
+                                            {visualized: ''},
+                                            {visualized: null}
+                                        ]
+                                    },
+                                ]
+                            }
+                        ).fetch().length;
+console.log(user.messagesNotVisualized);
+                        if (user.messagesNotVisualized == 0){
+                            user.messagesNotVisualized = '';
+                        } else {
+                            var s = new buzz.sound('/sound/message-msn.mp3');
+                            s.play();
+                        }
+
+                        return user;
+                    },
+                    {
+                        sort: {name: 1, lastName: 1}
+                    }
+                );
+                //var users = Meteor.users.find(
+                //    {
+                //        //$or: [
+                //        //    {
+                //        //        'userId' : $rootScope.currentUser._id,
+                //        //        'contactId' : contactId
+                //        //    }
+                //        //    ,
+                //        //    {
+                //        //        'userId' : contactId,
+                //        //        'contactId' : $rootScope.currentUser._id
+                //        //    }
+                //        //]
+                //    },
+                //    {
+                //        sort: {name: 1, lastName: 1, email: 1}
+                //        //[
+                //        //    name, 'asc'
+                //        //    //[name, 'asc'],
+                //        //    //[email, 'asc'],
+                //        //]
+                //    }
+                //).fetch();
+                //console.log(users);
                 return users;
             }
         });
-
-        $scope.toggleChat = function (friendId) {
-            $mdSidenav('contact-list').close();
-            $rootScope.friendId = friendId;
-
-            //this.currentUser.userId = Meteor.user()._id;
-
-            $rootScope.messages = [];
-            Meteor.subscribe('users');
-            Meteor.subscribe('messages');
-            $scope.helpers({
-                messagess: function() {
-                    messages = Messages.find(
-                        {
-                            $or: [
-                                {
-                                    'userId' : Meteor.user()._id,
-                                    'friendId' : $rootScope.friendId
-                                }
-                                ,
-                                {
-                                    'userId' : $rootScope.friendId,
-                                    'friendId' : Meteor.user()._id
-                                }
-                            ]
-                        }
-                    ).map(function(message){
-                        if (message.userId == Meteor.user()._id) {
-                            message.owner = 'You';
-                        } else {
-                            user = Meteor.users.findOne(message.userId);
-                            message.owner = user.name;
-                        }
-
-                        if (message.userId == Meteor.user()._id) {
-                            message.style = "margin-top: 15px; padding: 0.1px 15px 0.1px 15px; text-align: right; background-color: #FFECB3;";
-                        } else {
-                            message.style = "margin-top: 15px; padding: 0.1px 15px 0.1px 15px; text-align: left; background-color: #FFF8E1;";
-                        }
-
-                        return message;
-                    });
-
-                    $rootScope.messages = messages;
-                    return messages;
-                }
-            });
-
-            $rootScope.messages = this.messages;
-
-            $scope.helpers({
-                messages: function () {
-                    return Messages.find(
-                        {
-                            //$or: [
-                            //    {
-                            //        'userId' : $rootScope.currentUser._id,
-                            //        'friendId' : friendId
-                            //    }
-                            //    ,
-                            //    {
-                            //        'userId' : friendId,
-                            //        'friendId' : $rootScope.currentUser._id
-                            //    }
-                            //]
-                        }
-                    );
-                }
-            });
-
-            $mdSidenav('chat').toggle();
-            //$scope.messages = $meteor.collection(Messages).subscribe('messages', friendId);
-        };
-
-        //$scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
-        //$scope.teste = 'teste 1';
-        //$log.debug($scope.users[0]);
-        //$log.debug($scope.teste);
-
-
-        $scope.close = function () {
-            $mdSidenav('contact-list').close()
-                .then(function () {
-                    $log.debug("close CONTACTss is done");
-                });
-        };
-
-    }]);
+    }
+]);

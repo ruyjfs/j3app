@@ -7,7 +7,7 @@ angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor', '
         //$log.debug('parties 1');
         //$log.debug($scope.parties);
         //$scope.messages = $meteor.collection(function() {
-        //    return Messages.find({});
+        //    return Message.find({});
         //});
         //$log.debug('parties 2');
         //$log.debug($scope.messages);

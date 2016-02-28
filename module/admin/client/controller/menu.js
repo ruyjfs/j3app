@@ -15,7 +15,7 @@ angular.module('admin').controller('MenuCtrl', [ '$scope', '$timeout', '$mdSiden
     //$mdSidenav('menu')
     //    .then(function () {
     //        //$scope.teste = 'AEEEEEEEEEEEE';
-    //        //$scope.messages = $meteor.collection(Messages, false).subscribe('messages');
+    //        //$scope.messages = $meteor.collection(Messages, false).subscribe('message');
     //        $log.debug('hahahaah');
     //    });
     //$scope.nameModule = 'Brotherhood';
