@@ -4,9 +4,10 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
 
         $scope.messages = [];
         $rootScope.showNavChat = function(contactId){
-            $rootScope.contactId = contactId;
             $('.nav-button-contact').sideNav('hide');
             $('.nav-button-chat').sideNav('show');
+            $rootScope.contactId = contactId;
+            $rootScope.chatIsOpen = true;
 
             $scope.helpers({
                 messages: function () {
@@ -56,8 +57,10 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
                             ]
                         }
                     ).map(function(message){
-                            Meteor.call('changeMessageVisualized', {messageId: message._id}, function (error) {
-                            });
+                            if($rootScope.chatIsOpen) {
+                                Meteor.call('changeMessageVisualized', {messageId: message._id}, function (error) {
+                                });
+                            }
                         return message;
                     });
 

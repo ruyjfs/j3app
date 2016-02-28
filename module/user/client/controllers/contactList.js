@@ -4,6 +4,11 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
     function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $reactive, $rootScope) {
         $reactive(this).attach($scope);
 
+        $('body').on('click', '#sidenav-overlay', function(){
+            $rootScope.chatIsOpen = false;
+            console.log('clicou fora')
+        })
+
         $rootScope.showNavContactList = function () {
             $('.nav-button-chat').sideNav('hide');
             $('.nav-button-contact').sideNav('hide');
@@ -37,8 +42,10 @@ console.log(user.messagesNotVisualized);
                         if (user.messagesNotVisualized == 0){
                             user.messagesNotVisualized = '';
                         } else {
-                            var s = new buzz.sound('/sound/message-msn.mp3');
-                            s.play();
+                            //if ($rootScope.chat) {
+                                var s = new buzz.sound('/sound/message-msn.mp3');
+                                s.play();
+                            //}
                         }
 
                         return user;

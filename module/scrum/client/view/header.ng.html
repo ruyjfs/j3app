@@ -21,7 +21,15 @@
                             <a href="#" ng-click="showNavContactList()">
                                 <!--<i class="material-icons">question_answer</i>-->
                                 <i class="material-icons">chat</i>
-                                <span class="alert">{{vm.totalMessagesNotVisualized}}</span>
+                                <md-button class="md-fab md-mini hoverable alert2" aria-label="Use Android">
+                                    {{vm.totalMessagesNotVisualized}}
+                                </md-button>
+                                <!--<span class="alert">-->
+                                      <!--<a class="btn-floating btn-large waves-effect waves-light alert2">{{vm.totalMessagesNotVisualized}}</a>-->
+                                    <!--<div class="chip" style="background-color: rgb(239,108,0); color: #ffffff">-->
+                                        <!--{{vm.totalMessagesNotVisualized}}-->
+                                    <!--</div>-->
+                                <!--</span>-->
                             </a>
                         </li>
                         <li><a class="dropdown-button" href="#" data-activates="dropdown1"><i class="material-icons">language</i></a></li>
