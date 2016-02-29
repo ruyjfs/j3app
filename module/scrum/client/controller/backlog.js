@@ -123,17 +123,24 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
             },
             sprintNext: function() {
                 sprint = Sprint.findOne({_id: $stateParams.sprintId});
-                sprintNext = {};
+                sprintNext = false;
                 if (sprint) {
                     sprintNextNumber = sprint.number + 1;
                     sprintNext = Sprint.findOne({projectId: $stateParams.id, number: sprintNextNumber});
                     if (sprintNext) {
                         sprintNext.dateStartTreated = moment(sprintNext.dateStart, 'x').format('L');
                         sprintNext.dateEndTreated = moment(sprintNext.dateEnd, 'x').format('L');
+                        $scope.sprintNext = sprintNext;
                     }
                 }
-                $scope.sprintNext = sprintNext;
-                return sprintNext;
+
+                if (!sprintNext) {
+                    $scope.sprintNext = {};
+                    Meteor.call('sprintFindNext', {projectId: $stateParams.id, sprintId: $stateParams.sprintId}, function(error, result){
+                        $scope.sprintNext = result;
+                    });
+                }
+                return $scope.sprintNext;
             },
         });
 }]);

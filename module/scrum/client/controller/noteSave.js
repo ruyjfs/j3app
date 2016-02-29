@@ -29,12 +29,14 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id'
             $scope.projectIdOwd = $scope.form.projectId;
         } else {
             $scope.form.projectId = $stateParams.id;
+            $scope.form.time = 1;
         }
 
         if (storyId) {
             $scope.form.story = storyId;
             if ($stateParams.sprintId != 1) {
                 $scope.form.sprintId = $stateParams.sprintId;
+                $scope.form.owner = Meteor.userId();
             }
         }
 

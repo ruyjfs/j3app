@@ -27,7 +27,6 @@ angular.module('scrum').controller('ProjectTeamCtrl', [ '$scope', '$mdDialog', '
                 if (project) {
                     teams = Team.find({_id: {$in: project.teams}}).fetch().map(function(team){
                         team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
-                        console.log(team.members);
                         return team;
                     });
                 }

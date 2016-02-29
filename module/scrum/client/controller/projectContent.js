@@ -17,14 +17,26 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                 return Project.findOne($stateParams.id);
             },
             sprint: function() {
-                //project = Project.findOne($stateParams.id);
-            //    //sprint = [];
-            //    //Meteor.call('sprintCurrent', $stateParams.id, function (error, result) {sprint = result; return result;});
-            //    //console.log(sprint);
                 this.subscribe('sprint');
                 dateNow = moment().format('x');
 
-                if ($stateParams.sprintId == '1') {
+                if ($stateParams.sprintId == '1' || $stateParams.sprintId == '') {
+
+                    Meteor.call('sprintCreate', $stateParams.id, function (error, result) {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            //console.log('Saved!');
+                            //$scope.form = '';
+                            //$mdDialog.hide();
+                        }
+                        //$rootScope.titleMiddle = result.dateStart + ' - ' + result.dateEnd + ' (' + result.number + ')';
+                        $rootScope.titleMiddle = moment(result.dateStart, 'x').format('L') + ' - ' + moment(result.dateEnd, 'x').format('L');
+
+                        if ($stateParams.sprintId == 1 || $stateParams.sprintId == '') {
+                            $state.go('scrum/content', {id:$stateParams.id, sprintId:result._id})
+                        }
+                    });
                     sprint = Sprint.findOne(
                         {
                             $and: [
@@ -37,33 +49,10 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                     sprint = Sprint.findOne($stateParams.sprintId);
                 }
 
-                if (!sprint) {
-                    Meteor.call('sprintCreate', $stateParams.id, function (error, result) {
-                        if (error) {
-                            console.log(error);
-                        } else {
-                            //console.log('Saved!');
-                            //$scope.form = '';
-                            //$mdDialog.hide();
-                        }
-                        //$rootScope.titleMiddle = result.dateStart + ' - ' + result.dateEnd + ' (' + result.number + ')';
-                        $rootScope.titleMiddle = moment(result.dateStart, 'x').format('L') + ' - ' + moment(result.dateEnd, 'x').format('L');
-
-                        if ($stateParams.sprintId == 1) {
-                            $state.go('scrum/content', {id:$stateParams.id, sprintId:result._id})
-                        }
-                    });
-                } else {
+                if (sprint) {
                     $rootScope.titleMiddle = moment(sprint.dateStart, 'x').format('L')  + ' - ' + moment(sprint.dateEnd, 'x').format('L');
-                    //sprint.dateStartTreated = moment(sprint.dateStart).format('L');
-                    //sprint.dateEndTreated = moment(sprint.dateEnd).format('L');
                 }
-
                 $rootScope.sprint = sprint;
-
-                //Session.set('sprintCurrent', sprint);
-                //console.log(Session.get('sprintCurrent'));
-                //console.log('aqui');
                 return sprint;
             }
         });

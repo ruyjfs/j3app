@@ -107,7 +107,7 @@ Meteor.methods({
         //    Status.insert(dataForm);
         //}
     },
-    sprintNext: function(param){
+    sprintFindNext: function(param){
         dateNow = moment().format('x');
         if (param.sprintId != '1') {
             sprint = Sprint.findOne({projectId: param.projectId, _id: param.sprintId});
@@ -142,7 +142,6 @@ Meteor.methods({
                 Sprint.insert(sprintNext);
             }
         }
-
         return sprintNext;
     },
     //sprintCurrent: function(projectId){
