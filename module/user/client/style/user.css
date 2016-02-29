@@ -66,12 +66,12 @@ span.alertSidNav{
     text-align: center;
     position: relative;
     display: block;
-    bottom: 35px;
-    min-height: 0px;
-    padding: 0px;
+    bottom: 32px;
+    min-height: 0;
+    padding: 0;
     line-height: 20px !important;
     width: 20px !important;
     height: 20px !important;
-    left: -25px;
+    left: -28px;
     font-size: 11px;
 }
