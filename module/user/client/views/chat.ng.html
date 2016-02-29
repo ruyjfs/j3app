@@ -7,14 +7,6 @@
             </md-button>
         </div>
     </md-toolbar>
-    <md-toolbar class="md-theme-light">
-        <div class="md-toolbar-tools">
-            <md-button ng-click="showNavContactList()">
-                <md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>
-                Chat
-            </md-button>
-        </div>
-    </md-toolbar>
     <md-content layout-padding>
         <!--<md-list>-->
             <!--<md-list-item class="md-whiteframe-2dp md-2-line" ng-repeat="message in messages" >-->
@@ -43,6 +35,16 @@
                     <!--<p><b>{{getOwnerMessage(message)}}</b></p>-->
                 <!--</li>-->
             <!--</ul>-->
+            <!--<div class="text-right md-whiteframe-2dp">-->
+                <!--<p>-->
+                    <!--Menu-->
+                <!--</p>-->
+                <!--<p style="color:rgba(0,0,0,0.54);">-->
+                    <!--Menu-->
+                <!--</p>-->
+            <!--</div>-->
+
+            <div style="height: 60px;"></div>
             <div ng-repeat="message in vm.messages" class="text-right md-whiteframe-2dp"  style="{{message.style}};">
                 <p>
                     {{message.text}}
