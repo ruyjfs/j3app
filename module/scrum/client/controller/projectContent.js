@@ -11,6 +11,9 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
         }
 
         moment.locale('pt-BR');
+
+        isInt = function(n) { return parseInt(n) === n };
+
         $scope.helpers({
             project: function () {
                 this.subscribe('project');
@@ -50,8 +53,66 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                 }
 
                 if (sprint) {
+                    sprint.days = moment(sprint.dateEnd, 'x').diff(moment(sprint.dateStart, 'x'), 'days');
+
+                    project = Project.findOne($stateParams.id);
+                    teams = Team.find({_id: {$in: project.teams}}).fetch().map(function(team){
+                        team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
+                        team.membersTotal = team.members.length;
+                        team.timeTotal = team.membersTotal*team.time;
+                        return team;
+                    });
+
+                    if (teams) {
+                        timeTotal = 0;
+                        teams.forEach(function(value){
+                            timeTotal = value.timeTotal + timeTotal;
+                        });
+
+                        sprint.timeTotal = timeTotal * sprint.days;
+                    } else {
+                        sprint.timeTotal = 0;
+                    }
+
+                    notes = Note.find({$and: [{sprintId: $stateParams.sprintId}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
+                    notes.map(function(note){
+                        note.story = Story.findOne(note.story);
+                        note.owner = Meteor.users.findOne(note.owner);
+                        if (note.statusId == '1') {
+                            note.color = '#dbdbdb';
+                        } else {
+                            if (note.story) {
+                                note.color = note.story.color;
+                            } else {
+                                note.story = '#000';
+                            }
+                        }
+                        return note;
+                    });
+
+                    if (notes) {
+                        timeTotal = 0;
+                        notes.forEach(function(value){
+                            console.log(value);
+                            if (isInt(parseInt(value.time))) {
+                                timeTotal = parseInt(value.time) + timeTotal;
+                            }
+                        });
+                        console.log(notes);
+                        sprint.timeTotalNotes = timeTotal;
+                    } else {
+                        sprint.timeTotalNotes = 0;
+                    }
+
+                    //console.log(sprint.timeTotal);
+                    //console.log(sprint.timeTotalNotes);
+
+                    sprint.progress = sprint.timeTotal*sprint.timeTotalNotes/100;
+                    console.log(sprint.progress);
                     $rootScope.titleMiddle = moment(sprint.dateStart, 'x').format('L')  + ' - ' + moment(sprint.dateEnd, 'x').format('L');
+                    //sprint.hoursMember = project.ti;
                 }
+
                 $rootScope.sprint = sprint;
                 return sprint;
             }
