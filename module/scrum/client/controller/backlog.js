@@ -13,7 +13,11 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                     if (note.statusId == '1') {
                         note.color = '#dbdbdb';
                     } else {
-                        note.color = note.story.color;
+                        if (note.story) {
+                            note.color = note.story.color;
+                        } else {
+                            note.story = '#000';
+                        }
                     }
                     return note;
                 });
@@ -35,7 +39,11 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                             if (note.statusId == 1) {
                                 note.color = '#dbdbdb';
                             } else {
-                                note.color = note.story.color;
+                                if (note.story) {
+                                    note.color = note.story.color;
+                                } else {
+                                    note.story = '#000';
+                                }
                             }
 
                             return note;
@@ -52,7 +60,11 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                     if (note.statusId == 1) {
                         note.color = '#dbdbdb';
                     } else {
-                        note.color = note.story.color;
+                        if (note.story) {
+                            note.color = note.story.color;
+                        } else {
+                            note.story = '#000';
+                        }
                     }
                     return note;
                 });
@@ -74,7 +86,11 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                             if (note.statusId == 1) {
                                 note.color = '#dbdbdb';
                             } else {
-                                note.color = note.story.color;
+                                if (note.story) {
+                                    note.color = note.story.color;
+                                } else {
+                                    note.story = '#000';
+                                }
                             }
                             return note;
                         });
