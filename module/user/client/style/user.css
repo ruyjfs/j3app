@@ -37,7 +37,7 @@ span.alertSidNav{
 }
 
 .alert2 {
-    background-color: rgb(239,108,0);
+    background-color: rgb(239,108,0) !important;
     /* top: 20px; */
     /* right: 1px; */
     /* padding-left: 0px; */
@@ -53,5 +53,25 @@ span.alertSidNav{
     width: 20px !important;
     height: 20px !important;
     left: 4px;
+    font-size: 11px;
+}
+
+.alert3{
+    background-color: rgb(239,108,0) !important;
+    /* top: 20px; */
+    /* right: 1px; */
+    /* padding-left: 0px; */
+    color: orange;
+    /* height: 10px; */
+    text-align: center;
+    position: relative;
+    display: block;
+    bottom: 35px;
+    min-height: 0px;
+    padding: 0px;
+    line-height: 20px !important;
+    width: 20px !important;
+    height: 20px !important;
+    left: -25px;
     font-size: 11px;
 }

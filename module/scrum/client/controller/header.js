@@ -32,7 +32,13 @@ angular.module('scrum').controller('HeaderCtrl', ['$scope', '$timeout', '$mdSide
                         return (user.messagesNotVisualized > 0);
                     });
 
-                    return (user.length > 0)? user.length: '';
+                    if (user.length > 99) {
+                        return '99+'
+                    } else if (user.length > 0) {
+                        return user.length;
+                    } else {
+                        return '';
+                    }
                 }
             }
         );
@@ -46,7 +52,7 @@ angular.module('scrum').controller('HeaderCtrl', ['$scope', '$timeout', '$mdSide
         };
 
         this.showModulesGrid = function ($event) {
-            console.log($mdBottomSheet);
+            //console.log($mdBottomSheet);
             $scope.alert = '';
             $mdBottomSheet.show({
                 module: 'user',

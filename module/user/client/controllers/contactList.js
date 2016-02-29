@@ -38,7 +38,12 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                                 ]
                             }
                         ).fetch().length;
-console.log(user.messagesNotVisualized);
+
+
+                        if (user.messagesNotVisualized > 99) {
+                            user.messagesNotVisualized = '99+'
+                        }
+
                         if (user.messagesNotVisualized == 0){
                             user.messagesNotVisualized = '';
                         } else {

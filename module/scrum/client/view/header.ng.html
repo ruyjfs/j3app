@@ -18,10 +18,10 @@
                         <!--<li><a href="#" ng-click="toggleContactList()"><i class="material-icons">chat</i></a></li>-->
                         <!--<li><a href="#" data-activates="nav-contact" ng-click="vm.toggleContactList()"><i class="material-icons">question_answer</i></a></li>-->
                         <li>
-                            <a href="#" ng-click="showNavContactList()">
+                            <a href="#" ng-click="showNavContactList()" style="height: 60px;">
                                 <!--<i class="material-icons">question_answer</i>-->
                                 <i class="material-icons">chat</i>
-                                <md-button class="md-fab md-mini hoverable alert2" aria-label="Use Android">
+                                <md-button ng-if="vm.totalMessagesNotVisualized" class="md-fab md-mini hoverable alert2" aria-label="Use Android">
                                     {{vm.totalMessagesNotVisualized}}
                                 </md-button>
                                 <!--<span class="alert">-->
@@ -85,10 +85,24 @@
                 </ul>
                 <a href="#" class="button-collapse nav-button-left"><i class="material-icons">menu</i></a>
                 <!--<a href="#" data-activates="nav-mobile" class="button-collapse nav-button-left"><i class="material-icons">menu</i></a>-->
-                <a href="#" ng-click="showNavContactList()" class="button-collapse right" ng-hide="!$auth.currentUser">
+                <!--<a href="#" ng-click="showNavContactList()" class="button-collapse right" ng-hide="!$auth.currentUser">-->
+                    <!--<i class="material-icons">chat</i>-->
+                    <!--<span class="alert">{{vm.totalMessagesNotVisualized}}</span>-->
+                <!--</a>-->
+                <a href="#" ng-click="showNavContactList()" class="button-collapse right" style="height: 60px;" ng-hide="!$auth.currentUser">
+                    <!--<i class="material-icons">question_answer</i>-->
                     <i class="material-icons">chat</i>
-                    <span class="alert">{{vm.totalMessagesNotVisualized}}</span>
+                    <md-button ng-if="vm.totalMessagesNotVisualized" class="md-fab md-mini hoverable alert2" aria-label="Use Android">
+                        {{vm.totalMessagesNotVisualized}}
+                    </md-button>
+                    <!--<span class="alert">-->
+                    <!--<a class="btn-floating btn-large waves-effect waves-light alert2">{{vm.totalMessagesNotVisualized}}</a>-->
+                    <!--<div class="chip" style="background-color: rgb(239,108,0); color: #ffffff">-->
+                    <!--{{vm.totalMessagesNotVisualized}}-->
+                    <!--</div>-->
+                    <!--</span>-->
                 </a>
+
                 <a href="#" style="display:none;" data-activates="nav-contact" class="nav-button-contact button-collapse nav-button-right right" ng-hide="!$auth.currentUser"><i class="material-icons">question_answer</i></a>
                 <a href="#" style="display: none;" data-activates="nav-chat" class="nav-button-chat button-collapse nav-button-right right" ng-hide="!$auth.currentUser"><i class="material-icons">question_answer</i></a>
                 <!--<ul ng-hide="!$auth.currentUser" class="right hide-on-large-only">-->
