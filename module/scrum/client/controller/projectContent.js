@@ -66,7 +66,9 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                     if (teams) {
                         timeTotal = 0;
                         teams.forEach(function(value){
-                            timeTotal = value.timeTotal + timeTotal;
+                            if (isInt(parseInt(value.timeTotal))) {
+                                timeTotal = parseInt(value.timeTotal) + timeTotal;
+                            }
                         });
 
                         sprint.timeTotal = timeTotal * sprint.days;
