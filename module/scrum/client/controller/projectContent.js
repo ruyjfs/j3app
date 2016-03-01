@@ -126,8 +126,11 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                     //console.log(sprint.timeTotal);
                     //console.log(sprint.timeTotalNotes);
 
-                    sprint.progressDone = sprint.timeTotal*sprint.timeTotalNotesDone/100;
-                    sprint.progress = sprint.timeTotal*sprint.timeTotalNotes/100;
+                    sprint.progressDone = sprint.timeTotalNotesDone*100/sprint.timeTotal;
+                    sprint.progress = sprint.timeTotalNotes*100/sprint.timeTotal;
+
+                    console.log(sprint.progressDone);
+                    console.log(sprint.progress);
                     //console.log(sprint.progress);
                     $rootScope.titleMiddle = moment(sprint.dateStart, 'x').format('L')  + ' - ' + moment(sprint.dateEnd, 'x').format('L');
                     //sprint.hoursMember = project.ti;

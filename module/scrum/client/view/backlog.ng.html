@@ -41,7 +41,7 @@
                 <th id="header-sprintAtual" class="header">
                     <span>Current sprint</span> <br>
                     {{sprintCurrent.dateStartTreated}} - {{sprintCurrent.dateEndTreated}} ({{sprintCurrent.number}})<br>
-                    (<span class="sprintHorasGastas">0hs</span>/ hs )
+                    (<span class="sprintHorasGastas">{{sprint.timeTotalNotes}}h</span>/ {{sprint.timeTotal}}h )
                     <a href="#" class="select-all" style="display: none">Select All</a>
                 </th>
                 <th id="header-proximaSprint" class="header">
