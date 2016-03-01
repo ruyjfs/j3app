@@ -3,97 +3,111 @@
         <!--<md-content>-->
         <table id="scrumy-board" cellspacing="0" class="live scrum" style="min-height: 300px;">
             <tbody id="scrumy-board-body" ng-sortable="{animation:150}">
-                <tr id="scrumy-board-header" style="position: relative;">
-                    <th id="story-header">
-                        <span>Story</span>
-                    </th>
-                    <th id="plus-header">
-                    </th>
-                    <th class="plus-header" ng-repeat="status in vm.states">
-                        <span>{{status.name}}</span> <br>
-                        <a href="#" class="select-all" style="display: none">Select All</a>
-                    </th>
-                </tr>
-                <tr class="story-task-row" ng-repeat="story in vm.stories">
-                    <td rowspan="" id="story-915989-title" class="stories">
-                        <div id="story_editor_915989" >
-                            <div class="story-handle">
+            <tr id="scrumy-board-header" style="position: relative;">
+                <th id="story-header">
+                    <span>Story</span>
+                </th>
+                <th id="plus-header">
+                </th>
+                <th class="plus-header" ng-repeat="status in vm.states">
+                    <span>{{status.name}}</span> <br>
+                    <a href="#" class="select-all" style="display: none">Select All</a>
+                </th>
+            </tr>
+            <tr class="story-task-row" ng-repeat="story in vm.stories">
+                <td rowspan="" id="story-915989-title" class="stories">
+                    <div id="story_editor_915989">
+                        <div class="story-handle">
                                 <span class="title">
                                     {{story.name}}
                                 </span>
-                            </div>
                         </div>
-                    </td>
-                    <td class="verify centered" style="display: grid; vertical-align: middle;">
-                        <md-button class="md-fab md-mini hoverable" aria-label="Edit" ng-click="modalNoteSave($event, '', story._id)">
-                            <md-tooltip md-direction="left">Add note</md-tooltip>
-                            <md-icon md-svg-icon="content:ic_add_24px" aria-label="Edit"></md-icon>
-                            <!--<i title="" class="material-icons ng-scope">add</i>-->
-                        </md-button>
-                    </td>
-                    <td data-sortable-row="{{story._id}}" data-statusId="{{status._id}}" class="status_1 containerStatus" sprintid="" sprinthorasgastas="" sprinthoras="" ng-repeat="status in story.states">
-                        <!--{{status._id}}-->
-                        <div data-sortable-row="{{story._id}}" data-noteId="{{note._id}}" class="card hoverable containerNote" style="background-color: {{story.color}}; width: 120px; height: 90px; float: left; margin: 10px;  line-height: 1.2;" ng-repeat="note in status.notes">
-                            <div class="card-content white-text note">
-                                <span class="note-notHandle text-darken-4">{{note.owner.name}}<i class=" activator material-icons right" style="">more_vert</i></span>
-                                <p>{{note.description}}</p>
-                                <p></p>
-                            </div>
-                            <div class="card-reveal" layout="row" style="padding: 5px;">
-                                <div style="height: 25px;">
-                                    <!--<span class="card-title grey-text text-darken-4">{{note.story.name}}<i class="material-icons right">close</i></span>-->
+                    </div>
+                </td>
+                <td class="verify centered" style="display: grid; vertical-align: middle;">
+                    <md-button class="md-fab md-mini hoverable" aria-label="Edit"
+                               ng-click="modalNoteSave($event, '', story._id)">
+                        <md-tooltip md-direction="left">Add note</md-tooltip>
+                        <md-icon md-svg-icon="content:ic_add_24px" aria-label="Edit"></md-icon>
+                        <!--<i title="" class="material-icons ng-scope">add</i>-->
+                    </md-button>
+                </td>
+                <td data-sortable-row="{{story._id}}" data-statusId="{{status._id}}" class="status_1 containerStatus"
+                    sprintid="" sprinthorasgastas="" sprinthoras="" ng-repeat="status in story.states">
+                    <!--{{status._id}}-->
+                    <div data-sortable-row="{{story._id}}" data-noteId="{{note._id}}"
+                         class="card hoverable containerNote"
+                         style="background-color: {{story.color}}; width: 120px; height: 90px; float: left; margin: 10px;  line-height: 1.2;"
+                         ng-repeat="note in status.notes">
+                        <div class="card-content white-text note">
+                            <md-button ng-if="note.time" class="md-fab md-mini hoverable alertNoteMini"
+                                       aria-label="Time">
+                                {{note.time}}
+                            </md-button>
+                            <span class="note-notHandle text-darken-4">{{note.owner.name}}<i
+                                    class=" activator material-icons right" style="">more_vert</i></span>
+
+                            <p>{{note.description}}</p>
+
+                            <p></p>
+                        </div>
+                        <div class="card-reveal" layout="row" style="padding: 5px;">
+                            <div style="height: 25px;">
+                                <!--<span class="card-title grey-text text-darken-4">{{note.story.name}}<i class="material-icons right">close</i></span>-->
                                 <span class="card-title grey-text text-darken-4">
                                     <i class="note-notHandle material-icons right">close</i>
                                 </span>
-                                </div>
-                                <div layout="row"  layout-align="center center" >
-                                    <a href="#" ng-click="modalStorySave($event, story._id)" title="Add story" class="note-notHandle btn-floating green hoverable" style="margin: 5px;">
-                                        <i class="material-icons">content_paste</i>
-                                    </a>
-                                    <a href="#" ng-click="modalNoteSave($event, note._id)" title="Add note" class="note-notHandle btn-floating amber accent-4 hoverable" style="margin: 5px;">
-                                        <i class="material-icons">mode_edit</i>
-                                    </a>
-                                </div>
-                                <!--<p>{{note.story.name}}</p>-->
-                                <!--<p>{{note.description}}</p>-->
                             </div>
-                            <!--<div class="card-action center">-->
-                            <!--&lt;!&ndash;<a href="#">{{_ 'Delete'}}</a>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<a href="#projectSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<a href="/project/save/{{_id}}">{{_ 'Edit'}}</a>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<a href="/scrum/kanban">{{_ 'Enter'}}</a>&ndash;&gt;-->
-                            <!--<a href="#" ng-click="remove(project._id)">Delete</a>-->
-                            <!--<a href="#" ng-click="modalSave($event, project._id)" >Edit</a>-->
-                            <!--&lt;!&ndash;<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<a href="/scrum/content/{{backLogNote._id}}">Enter</a>&ndash;&gt;-->
-                            <!--</div>-->
+                            <div layout="row" layout-align="center center">
+                                <a href="#" ng-click="modalStorySave($event, story._id)" title="Add story"
+                                   class="note-notHandle btn-floating green hoverable" style="margin: 5px;">
+                                    <i class="material-icons">content_paste</i>
+                                </a>
+                                <a href="#" ng-click="modalNoteSave($event, note._id)" title="Add note"
+                                   class="note-notHandle btn-floating amber accent-4 hoverable" style="margin: 5px;">
+                                    <i class="material-icons">mode_edit</i>
+                                </a>
+                            </div>
+                            <!--<p>{{note.story.name}}</p>-->
+                            <!--<p>{{note.description}}</p>-->
                         </div>
-                    </td>
-                    <!--<td id="sprintAnterior" class="linha status_1" sprintid="" sprinthorasgastas="0" sprinthoras="">-->
-                        <!--<div class="task-kanban hoverable" id="task_{{note._id}}" style="background-color: {{backLogNote.story.color}}"  ng-repeat="note in story.notes">-->
-                            <!--<div class="handle"> {{note.owner.name}} </div>-->
-                            <!--<div class="title" title="{{note.name}}" >-->
-    <!--<pre class="title_inner" style="text-align: left;">{{note.description}}</pre>-->
-                            <!--</div>-->
-
-                            <!--<div class="iconEdit" sprintPostitId=">">-->
-                                <!--<i class="glyphicon glyphicon-search"></i>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash;unassigned&ndash;&gt;-->
-                            <!--<div class="assignment">-->
-                                <!--{{note.time}}h-->
-                            <!--</div>-->
-                            <!--<img class="overflow_indicator" src="/images/overflow_indicator.gif">-->
+                        <!--<div class="card-action center">-->
+                        <!--&lt;!&ndash;<a href="#">{{_ 'Delete'}}</a>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<a href="#projectSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<a href="/project/save/{{_id}}">{{_ 'Edit'}}</a>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<a href="/scrum/kanban">{{_ 'Enter'}}</a>&ndash;&gt;-->
+                        <!--<a href="#" ng-click="remove(project._id)">Delete</a>-->
+                        <!--<a href="#" ng-click="modalSave($event, project._id)" >Edit</a>-->
+                        <!--&lt;!&ndash;<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<a href="/scrum/content/{{backLogNote._id}}">Enter</a>&ndash;&gt;-->
                         <!--</div>-->
-                    <!--</td>-->
-                </tr>
+                    </div>
+                </td>
+                <!--<td id="sprintAnterior" class="linha status_1" sprintid="" sprinthorasgastas="0" sprinthoras="">-->
+                <!--<div class="task-kanban hoverable" id="task_{{note._id}}" style="background-color: {{backLogNote.story.color}}"  ng-repeat="note in story.notes">-->
+                <!--<div class="handle"> {{note.owner.name}} </div>-->
+                <!--<div class="title" title="{{note.name}}" >-->
+                <!--<pre class="title_inner" style="text-align: left;">{{note.description}}</pre>-->
+                <!--</div>-->
+
+                <!--<div class="iconEdit" sprintPostitId=">">-->
+                <!--<i class="glyphicon glyphicon-search"></i>-->
+                <!--</div>-->
+                <!--&lt;!&ndash;unassigned&ndash;&gt;-->
+                <!--<div class="assignment">-->
+                <!--{{note.time}}h-->
+                <!--</div>-->
+                <!--<img class="overflow_indicator" src="/images/overflow_indicator.gif">-->
+                <!--</div>-->
+                <!--</td>-->
+            </tr>
             </tbody>
         </table>
     </md-content>
 </div>
 <script>
-    $(function() {
-        setTimeout(function(){
+    $(function () {
+        setTimeout(function () {
 //            $( ".containerStatus" ).sortable({
 //                connectWith: "td.containerStatus",
 //                items: ".containerNote"
@@ -103,14 +117,14 @@
 
         }, 500);
 
-        sortableKanban = function (){
-            $('div[data-sortable-row]').each(function(elementKey, elementValue){
+        sortableKanban = function () {
+            $('div[data-sortable-row]').each(function (elementKey, elementValue) {
                 element = $(elementValue);
                 row = element.attr('data-sortable-row');
-                $('td[data-sortable-row='+row+']').sortable({
-                    connectWith: 'td[data-sortable-row='+row+']',
+                $('td[data-sortable-row=' + row + ']').sortable({
+                    connectWith: 'td[data-sortable-row=' + row + ']',
                     cancel: ".note-notHandle",
-                    beforeStop: function(event, ui) {
+                    beforeStop: function (event, ui) {
                         console.log(event);
                         statusId = $(ui.item.context).closest('td').attr('data-statusId');
                         noteId = $(ui.item.context).attr('data-noteId');
@@ -118,7 +132,7 @@
                         form = {};
                         form.statusId = statusId;
                         form.noteId = noteId;
-                        Meteor.call('noteChangeStatus', form, function(error, result){
+                        Meteor.call('noteChangeStatus', form, function (error, result) {
                             if (error) {
 //                                console.log(error);
                             } else {
@@ -191,45 +205,43 @@
 <script>
 
 
-
-
-//    $(function() {
-//        $('<?php echo implode(' , ', $classStatus) ?>').sortable({
-//            connectWith: ".linha_<?php echo $keyFilhosSubprogramas ?>",
-//            beforeStop: function(event, ui) {
-//                var arrStatus = $(ui.item.context).parent('td').attr('class').split(' ');
-//                var arrStatus = arrStatus[0].split('_');
-//                var idStatus = arrStatus[1];
-//
-//                var arrPostit = ui.item.context.id.split('_')
-//                var idPostit = arrPostit[1];
-//
-//                //                                                                console.log('Postit: ' + idPostit);
-//                //                                                                console.log('Status: ' + idStatus);
-//
-//                dataPost = {controller : 'kanban', action: 'tramitSprint', idpostit: idPostit, idstatus: idStatus}
-//
-//                $.post(window.location, dataPost, function(result) {
-//                    console.log(result);
-//                });
-//            }
-//        }).disableSelection();
-//    });
-//
-//    $(function() {
-//        setTimeout(function(){
-//            $( ".containerStatus" ).sortable({
-//                connectWith: "td.containerStatus",
-//                items: ".containerNote"
-//            });
-//        }, 500);
-//        $( ".containerStatus" ).disableSelection();
-//
-////        $( "ul.dropfalse" ).sortable({
-////            connectWith: "ul",
-////            dropOnEmpty: false
-////        });
-//
-////        $( "#sortable1, #sortable2, #sortable3" ).disableSelection();
-//    });
+    //    $(function() {
+    //        $('<?php echo implode(' , ', $classStatus) ?>').sortable({
+    //            connectWith: ".linha_<?php echo $keyFilhosSubprogramas ?>",
+    //            beforeStop: function(event, ui) {
+    //                var arrStatus = $(ui.item.context).parent('td').attr('class').split(' ');
+    //                var arrStatus = arrStatus[0].split('_');
+    //                var idStatus = arrStatus[1];
+    //
+    //                var arrPostit = ui.item.context.id.split('_')
+    //                var idPostit = arrPostit[1];
+    //
+    //                //                                                                console.log('Postit: ' + idPostit);
+    //                //                                                                console.log('Status: ' + idStatus);
+    //
+    //                dataPost = {controller : 'kanban', action: 'tramitSprint', idpostit: idPostit, idstatus: idStatus}
+    //
+    //                $.post(window.location, dataPost, function(result) {
+    //                    console.log(result);
+    //                });
+    //            }
+    //        }).disableSelection();
+    //    });
+    //
+    //    $(function() {
+    //        setTimeout(function(){
+    //            $( ".containerStatus" ).sortable({
+    //                connectWith: "td.containerStatus",
+    //                items: ".containerNote"
+    //            });
+    //        }, 500);
+    //        $( ".containerStatus" ).disableSelection();
+    //
+    ////        $( "ul.dropfalse" ).sortable({
+    ////            connectWith: "ul",
+    ////            dropOnEmpty: false
+    ////        });
+    //
+    ////        $( "#sortable1, #sortable2, #sortable3" ).disableSelection();
+    //    });
 </script>

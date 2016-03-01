@@ -113,35 +113,35 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                 $scope.sprintPrevious = sprintPrevious;
                 return sprintPrevious;
             },
-            sprintCurrent: function() {
-                sprint = Sprint.findOne({_id: $stateParams.sprintId});
-                if (sprint) {
-                    sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('L');
-                    sprint.dateEndTreated = moment(sprint.dateEnd, 'x').format('L');
-                }
-                $scope.sprintCurrent = sprint;
-                return sprint;
-            },
-            sprintNext: function() {
-                sprint = Sprint.findOne({_id: $stateParams.sprintId});
-                sprintNext = false;
-                if (sprint) {
-                    sprintNextNumber = sprint.number + 1;
-                    sprintNext = Sprint.findOne({projectId: $stateParams.id, number: sprintNextNumber});
-                    if (sprintNext) {
-                        sprintNext.dateStartTreated = moment(sprintNext.dateStart, 'x').format('L');
-                        sprintNext.dateEndTreated = moment(sprintNext.dateEnd, 'x').format('L');
-                        $scope.sprintNext = sprintNext;
-                    }
-                }
-
-                if (!sprintNext) {
-                    $scope.sprintNext = {};
-                    Meteor.call('sprintFindNext', {projectId: $stateParams.id, sprintId: $stateParams.sprintId}, function(error, result){
-                        $scope.sprintNext = result;
-                    });
-                }
-                return $scope.sprintNext;
-            },
+            //sprintCurrent: function() {
+            //    sprint = Sprint.findOne({_id: $stateParams.sprintId});
+            //    if (sprint) {
+            //        sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('L');
+            //        sprint.dateEndTreated = moment(sprint.dateEnd, 'x').format('L');
+            //    }
+            //    $scope.sprintCurrent = sprint;
+            //    return sprint;
+            //},
+            //sprintNext: function() {
+            //    sprint = Sprint.findOne({_id: $stateParams.sprintId});
+            //    sprintNext = false;
+            //    if (sprint) {
+            //        sprintNextNumber = sprint.number + 1;
+            //        sprintNext = Sprint.findOne({projectId: $stateParams.id, number: sprintNextNumber});
+            //        if (sprintNext) {
+            //            sprintNext.dateStartTreated = moment(sprintNext.dateStart, 'x').format('L');
+            //            sprintNext.dateEndTreated = moment(sprintNext.dateEnd, 'x').format('L');
+            //            $scope.sprintNext = sprintNext;
+            //        }
+            //    }
+            //
+            //    if (!sprintNext) {
+            //        $scope.sprintNext = {};
+            //        Meteor.call('sprintFindNext', {projectId: $stateParams.id, sprintId: $stateParams.sprintId}, function(error, result){
+            //            $scope.sprintNext = result;
+            //        });
+            //    }
+            //    return $scope.sprintNext;
+            //},
         });
 }]);
