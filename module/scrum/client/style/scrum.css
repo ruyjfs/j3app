@@ -29,6 +29,10 @@ table#scrumy-board{border-style:solid;border-color:#f0f0f0;border-width:1px 1px 
     /*background: radial-gradient(rgb(158,158,158) 0%, rgb(158,158,158) 16%, rgb(158,158,158) 42%);*/
 /*}*/
 
+md-progress-linear.md-scrum-theme[md-mode=buffer].md-accent .md-dashed:before {
+    background: radial-gradient(rgb(255,224,178) 0%, rgb(255,224,178) 16%, rgba(158, 158, 158, 0.62) 42%);
+}
+
 /*.md-content{*/
     /*height: 100%;*/
 /*}*/
