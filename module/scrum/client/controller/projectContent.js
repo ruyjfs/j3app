@@ -95,22 +95,40 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                     if (notes) {
                         timeTotal = 0;
                         notes.forEach(function(value){
-                            console.log(value);
+                            //console.log(value);
                             if (isInt(parseInt(value.time))) {
                                 timeTotal = parseInt(value.time) + timeTotal;
                             }
                         });
-                        console.log(notes);
                         sprint.timeTotalNotes = timeTotal;
                     } else {
                         sprint.timeTotalNotes = 0;
                     }
 
+
+                    notesDone = Note.find({$and: [{sprintId: $stateParams.sprintId}, {statusId: '1'}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
+                    //console.log(notesDone);
+                    if (notesDone) {
+                        timeTotal = 0;
+                        notesDone.forEach(function(value){
+                            //console.log(value);
+                            if (isInt(parseInt(value.time))) {
+                                timeTotal = parseInt(value.time) + timeTotal;
+                            }
+                        });
+                        sprint.timeTotalNotesDone = timeTotal;
+                    } else {
+                        sprint.timeTotalNotesDone = 0;
+                    }
+
+                    //console.log('sprint.timeTotalNotesDone');
+                    //console.log(sprint.timeTotalNotesDone);
                     //console.log(sprint.timeTotal);
                     //console.log(sprint.timeTotalNotes);
 
+                    sprint.progressDone = sprint.timeTotal*sprint.timeTotalNotesDone/100;
                     sprint.progress = sprint.timeTotal*sprint.timeTotalNotes/100;
-                    console.log(sprint.progress);
+                    //console.log(sprint.progress);
                     $rootScope.titleMiddle = moment(sprint.dateStart, 'x').format('L')  + ' - ' + moment(sprint.dateEnd, 'x').format('L');
                     //sprint.hoursMember = project.ti;
                 }
