@@ -3,11 +3,12 @@
         <nav class="brown darken-3" role="navigation">
             <div class="nav-wrapper container">
                 <a id="logo-container" href="#" class="brand-logo">{{nameModule}}</a>
-                <a id="logo-middle" ng-click="modalSprintChange($event)" href="#" class="brand-logo center hide-on-med-and-down" style="font-size: 20px;">
+                <a id="logo-middle" ng-click="modalSprintChange($event)" href="#"
+                   class="brand-logo center hide-on-med-and-down" style="font-size: 20px;">
                     {{titleMiddle}}
                 </a>
                 <!--<a id="logo-container" href="#" class="brand-logo">-->
-                    <!--<md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>-->
+                <!--<md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>-->
                 <!--</a>-->
 
                 <ul class="right hide-on-med-and-down">
@@ -21,34 +22,39 @@
                             <a href="#" ng-click="showNavContactList()" style="height: 60px;">
                                 <!--<i class="material-icons">question_answer</i>-->
                                 <i class="material-icons">chat</i>
-                                <md-button ng-if="vm.totalMessagesNotVisualized" class="md-fab md-mini hoverable alert2" aria-label="Use Android">
+                                <md-button ng-if="vm.totalMessagesNotVisualized" class="md-fab md-mini hoverable alert2"
+                                           aria-label="Use Android">
                                     {{vm.totalMessagesNotVisualized}}
                                 </md-button>
                                 <!--<span class="alert">-->
-                                      <!--<a class="btn-floating btn-large waves-effect waves-light alert2">{{vm.totalMessagesNotVisualized}}</a>-->
-                                    <!--<div class="chip" style="background-color: rgb(239,108,0); color: #ffffff">-->
-                                        <!--{{vm.totalMessagesNotVisualized}}-->
-                                    <!--</div>-->
+                                <!--<a class="btn-floating btn-large waves-effect waves-light alert2">{{vm.totalMessagesNotVisualized}}</a>-->
+                                <!--<div class="chip" style="background-color: rgb(239,108,0); color: #ffffff">-->
+                                <!--{{vm.totalMessagesNotVisualized}}-->
+                                <!--</div>-->
                                 <!--</span>-->
                             </a>
                         </li>
-                        <li><a class="dropdown-button" href="#" data-activates="dropdown1"><i class="material-icons">language</i></a></li>
+                        <li><a class="dropdown-button" href="#" data-activates="dropdown1"><i class="material-icons">language</i></a>
+                        </li>
                         <!-- Dropdown Structure -->
                         <ul id="dropdown1" class="dropdown-content">
                             <li><a href="#" onclick="javascript:setUserLanguage('en-US')">English</a></li>
                             <li><a href="#" onclick="javascript:setUserLanguage('pt-BR')">Portuguese</a></li>
                         </ul>
                         <!--<li><a href="#" ng-click="showModulesGrid($event)"><i class="material-icons">settings</i></a></li>-->
-                        <li><a href="#" ng-click="vm.showModulesGrid($event)"><i class="material-icons">view_module</i></a></li>
+                        <li><a href="#" ng-click="vm.showModulesGrid($event)"><i class="material-icons">view_module</i></a>
+                        </li>
                         <!--<li><a href="/user"><i class="material-icons"><i class="material-icons">person</i></i></a></li>-->
-                        <li><a href="/user/logout" class="logout"><i class="material-icons">power_settings_new</i></a></li>
+                        <li><a href="/user/logout" class="logout"><i class="material-icons">power_settings_new</i></a>
+                        </li>
                     </div>
                     <div ng-hide="$auth.currentUser">
                         <li><a href="/"><i class="material-icons">home</i></a></li>
                         <!--<li><a class="modal-trigger" href="#modalLogin"><i class="material-icons">person</i></a></li>-->
                         <!--<li><i class="material-icons left">person</i>{{> loginButtons}}</li>-->
                         <li><a href="#" ng-click="vm.modalLogin($event)"><i class="material-icons">person</i></a></li>
-                        <li><a class="dropdown-button" href="#" data-activates="dropdown1"><i class="material-icons">language</i></a></li>
+                        <li><a class="dropdown-button" href="#" data-activates="dropdown1"><i class="material-icons">language</i></a>
+                        </li>
                         <!-- Dropdown Structure -->
                         <ul id="dropdown1" class="dropdown-content">
                             <!--<li><a href="#" onclick="javascript:setUserLanguage('en-US')">{{_ 'English'}} </a></li>-->
@@ -56,43 +62,18 @@
                         </ul>
                     </div>
                 </ul>
-                <ul id="nav-mobile" class="side-nav">
-                    <div ng-if="$auth.currentUser">
-                            <!--{{#if currentUser}}-->
-                        <li><a href="/scrum/project" class="waves-effect waves-orange"><i class="material-icons left">business_center</i>Project</a></li>
-                        <!--<li><a href="/scrum/team" class="waves-effect waves-orange"><i class="material-icons left">group_work</i>Team</a></li>-->
-                        <!--<li><a href="#" class="waves-effect waves-orange" ng-click="toggleContactList()"><i class="material-icons">chat</i>Chat</a></li>-->
-                        <li><a href="#" class="waves-effect waves-orange dropdown-button" data-activates="dropdown2"><i class="material-icons left">language</i>Language</a></li>
-                        <ul id='dropdown2' class='dropdown-content' style="min-width: 200px;">
-                            <li><a href="#" onclick="javascript:setUserLanguage('en-US')">English</a></li>
-                            <li><a href="#" onclick="javascript:setUserLanguage('pt-BR')">Portuguese</a></li>
-                        </ul>
-                        <li><a href="#" ng-click="vm.showModulesGrid($event)" class="waves-effect waves-orange"><i class="material-icons left">view_module</i>Options</a></li>
-                        <li><a href="/user/logout" class="waves-effect waves-orange"><i class="material-icons left">power_settings_new</i>Exit</a></li>
-                            <!--{{else}}-->
-                    </div>
-                    <div ng-if="!$auth.currentUser">
-                        <li><a href="/" class="waves-effect waves-orange"><i class="material-icons left">home</i>Home</a></li>
-                        <li><a href="#" ng-click="vm.modalLogin($event, project._id)" class="waves-effect waves-orange"><i class="material-icons left">person</i>Login</a></li>
-                        <li><a href="#" class="waves-effect waves-orange dropdown-button" data-activates="dropdown2"><i class="material-icons left">language</i>Language</a></li>
-                        <ul id='dropdown2' class='dropdown-content' style="min-width: 200px;">
-                            <li><a href="#!" onclick="javascript:setUserLanguage('en-US')">English</a></li>
-                            <li><a href="#!" onclick="javascript:setUserLanguage('pt-BR')">Portuguese</a></li>
-                        </ul>
-                            <!--{{/if}}-->
-                        <!--</div>-->
-                    </div>
-                </ul>
-                <a href="#" class="button-collapse nav-button-left"><i class="material-icons">menu</i></a>
+                <a href="#" data-activates="nav-mobile" class="button-collapse nav-button-left"><i class="material-icons">menu</i></a>
                 <!--<a href="#" data-activates="nav-mobile" class="button-collapse nav-button-left"><i class="material-icons">menu</i></a>-->
                 <!--<a href="#" ng-click="showNavContactList()" class="button-collapse right" ng-hide="!$auth.currentUser">-->
-                    <!--<i class="material-icons">chat</i>-->
-                    <!--<span class="alert">{{vm.totalMessagesNotVisualized}}</span>-->
+                <!--<i class="material-icons">chat</i>-->
+                <!--<span class="alert">{{vm.totalMessagesNotVisualized}}</span>-->
                 <!--</a>-->
-                <a href="#" ng-click="showNavContactList()" class="button-collapse right" style="height: 60px;" ng-hide="!$auth.currentUser">
+                <a href="#" ng-click="showNavContactList()" class="button-collapse right" style="height: 60px;"
+                   ng-hide="!$auth.currentUser">
                     <!--<i class="material-icons">question_answer</i>-->
                     <i class="material-icons">chat</i>
-                    <md-button ng-if="vm.totalMessagesNotVisualized" class="md-fab md-mini hoverable alert2" aria-label="Use Android">
+                    <md-button ng-if="vm.totalMessagesNotVisualized" class="md-fab md-mini hoverable alert2"
+                               aria-label="Use Android">
                         {{vm.totalMessagesNotVisualized}}
                     </md-button>
                     <!--<span class="alert">-->
@@ -102,26 +83,67 @@
                     <!--</div>-->
                     <!--</span>-->
                 </a>
-
-                <a href="#" style="display:none;" data-activates="nav-contact" class="nav-button-contact button-collapse nav-button-right right" ng-hide="!$auth.currentUser"><i class="material-icons">question_answer</i></a>
-                <a href="#" style="display: none;" data-activates="nav-chat" class="nav-button-chat button-collapse nav-button-right right" ng-hide="!$auth.currentUser"><i class="material-icons">question_answer</i></a>
+                <a href="#" style="display:none;" data-activates="nav-contact"
+                   class="nav-button-contact button-collapse nav-button-right right" ng-hide="!$auth.currentUser"><i
+                        class="material-icons">question_answer</i></a>
+                <a href="#" style="display: none;" data-activates="nav-chat"
+                   class="nav-button-chat button-collapse nav-button-right right" ng-hide="!$auth.currentUser"><i
+                        class="material-icons">question_answer</i></a>
                 <!--<ul ng-hide="!$auth.currentUser" class="right hide-on-large-only">-->
-                    <!--<li><a href="#" ng-click="vm.toggleContactList()"><i class="material-icons">chat</i></a></li>-->
+                <!--<li><a href="#" ng-click="vm.toggleContactList()"><i class="material-icons">chat</i></a></li>-->
                 <!--</ul>-->
             </div>
         </nav>
     </div>
     <!--<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="chat">-->
-        <!--<div ng-include="'module/user/client/views/chat.ng.html'"></div>-->
+    <!--<div ng-include="'module/user/client/views/chat.ng.html'"></div>-->
     <!--</md-sidenav>-->
     <!--<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="contact-list">-->
-        <!--<div ng-include="'module/user/client/views/contact-list.ng.html'"></div>-->
+    <!--<div ng-include="'module/user/client/views/contact-list.ng.html'"></div>-->
     <!--</md-sidenav>-->
-</div>
 
-<ul id="nav-contact" class="side-nav">
-    <div ng-include="'module/user/client/views/contact-list.ng.html'"></div>
-</ul>
-<ul id="nav-chat" class="side-nav">
-    <div ng-include="'module/user/client/views/chat.ng.html'"></div>
-</ul>
+
+    <ul id="nav-mobile" class="side-nav">
+    <div ng-if="$auth.currentUser">
+            <!--{{#if currentUser}}-->
+        <li>
+            <a href="/scrum/project" class="waves-effect waves-orange"><i class="material-icons left">business_center</i>Project</a>
+        </li>
+        <li>
+            <a href="#" ng-if="titleMiddle"  ng-click="modalSprintChange($event)" class="waves-effect waves-orange"><i class="material-icons left">date_range</i>Sprint</a>
+        </li>
+        <!--<li><a href="/scrum/team" class="waves-effect waves-orange"><i class="material-icons left">group_work</i>Team</a></li>-->
+        <!--<li><a href="#" class="waves-effect waves-orange" ng-click="toggleContactList()"><i class="material-icons">chat</i>Chat</a></li>-->
+        <li><a href="#" class="waves-effect waves-orange dropdown-button" data-activates="dropdown2"><i
+                class="material-icons left">language</i>Language</a></li>
+        <ul id='dropdown2' class='dropdown-content' style="min-width: 200px;">
+            <li><a href="#" onclick="javascript:setUserLanguage('en-US')">English</a></li>
+            <li><a href="#" onclick="javascript:setUserLanguage('pt-BR')">Portuguese</a></li>
+        </ul>
+        <li><a href="#" ng-click="vm.showModulesGrid($event)" class="waves-effect waves-orange"><i
+                class="material-icons left">view_module</i>Options</a></li>
+        <li><a href="/user/logout" class="waves-effect waves-orange"><i class="material-icons left">power_settings_new</i>Exit</a>
+        </li>
+            <!--{{else}}-->
+    </div>
+    <div ng-if="!$auth.currentUser">
+        <li><a href="/" class="waves-effect waves-orange"><i class="material-icons left">home</i>Home</a></li>
+        <li><a href="#" ng-click="vm.modalLogin($event, project._id)" class="waves-effect waves-orange"><i
+                class="material-icons left">person</i>Login</a></li>
+        <li><a href="#" class="waves-effect waves-orange dropdown-button" data-activates="dropdown2"><i
+                class="material-icons left">language</i>Language</a></li>
+        <ul id='dropdown2' class='dropdown-content' style="min-width: 200px;">
+            <li><a href="#!" onclick="javascript:setUserLanguage('en-US')">English</a></li>
+            <li><a href="#!" onclick="javascript:setUserLanguage('pt-BR')">Portuguese</a></li>
+        </ul>
+            <!--{{/if}}-->
+        <!--</div>-->
+    </div>
+    </ul>
+    <ul id="nav-contact" class="side-nav">
+        <div ng-include="'module/user/client/views/contact-list.ng.html'"></div>
+    </ul>
+    <ul id="nav-chat" class="side-nav">
+        <div ng-include="'module/user/client/views/chat.ng.html'"></div>
+    </ul>
+</div>
