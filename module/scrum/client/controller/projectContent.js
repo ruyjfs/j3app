@@ -57,10 +57,10 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
 
                     sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('L');
                     sprint.dateEndTreated = moment(sprint.dateEnd, 'x').format('L');
-                    sprint.days = moment(sprint.dateEnd, 'x').diff(moment(sprint.dateStart, 'x'), 'days');
+                    sprint.days = moment(sprint.dateEnd, 'x').diff(moment(sprint.dateStart, 'x'), 'days') + 1;
 
                     if (project.skipWeekend) {
-                        sprint.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days');
+                        sprint.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days') +1;
                         sprint.days = sprint.daysBusiness;
                     }
 
@@ -157,7 +157,7 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                     if (sprintNext) {
                         sprintNext.dateStartTreated = moment(sprintNext.dateStart, 'x').format('L');
                         sprintNext.dateEndTreated = moment(sprintNext.dateEnd, 'x').format('L');
-                        sprintNext.days = moment(sprint.dateEnd, 'x').diff(moment(sprintNext.dateStart, 'x'), 'days');
+                        sprintNext.days = moment(sprint.dateEnd, 'x').diff(moment(sprintNext.dateStart, 'x'), 'days') + 1;
                         $rootScope.sprintNext = sprintNext;
                     }
                 }
@@ -170,10 +170,9 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                 }
 
                 if ($rootScope.sprintNext) {
-                    $rootScope.sprintNext.days = moment($rootScope.sprintNext.dateEnd, 'x').diff(moment($rootScope.sprintNext.dateStart, 'x'), 'days');
                     project = Project.findOne($stateParams.id);
                     if (project.skipWeekend) {
-                        $rootScope.sprintNext.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days');
+                        $rootScope.sprintNext.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days') +1;
                         $rootScope.sprintNext.days = $rootScope.sprintNext.daysBusiness;
                     }
                     if (project) {
@@ -252,11 +251,11 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
 
 
                 if ($rootScope.sprintPrevious) {
-                    $rootScope.sprintPrevious.days = moment($rootScope.sprintPrevious.dateEnd, 'x').diff(moment($rootScope.sprintPrevious.dateStart, 'x'), 'days');
+                    $rootScope.sprintPrevious.days = moment($rootScope.sprintPrevious.dateEnd, 'x').diff(moment($rootScope.sprintPrevious.dateStart, 'x'), 'days') + 1;
                     project = Project.findOne($stateParams.id);
 
                     if (project.skipWeekend) {
-                        $rootScope.sprintPrevious.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days');
+                        $rootScope.sprintPrevious.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days') + 1;
                         $rootScope.sprintPrevious.days = $rootScope.sprintPrevious.daysBusiness;
                     }
 
