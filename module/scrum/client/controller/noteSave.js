@@ -26,7 +26,7 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id'
         $scope.form = {};
         if (id) {
             $scope.form = Note.findOne(id);
-            $scope.projectIdOwd = $scope.form.projectId;
+            $scope.projectIdOld = $scope.form.projectId;
         } else {
             $scope.form.projectId = $stateParams.id;
             $scope.form.time = 1;
@@ -43,9 +43,10 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id'
         $scope.save = function () {
             Meteor.call('noteSave', $scope.form, function (error) {
 
-                if ($scope.projectIdOwd != $scope.form.projectId) {
+                if ($scope.projectIdOld != $scope.form.projectId) {
                     $scope.form.story = '';
                     $scope.form.sprintId = '';
+                    $scope.form.statusId = '';
                 }
 
                 if (error) {
