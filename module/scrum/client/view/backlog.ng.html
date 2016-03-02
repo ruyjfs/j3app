@@ -35,7 +35,7 @@
                     <span>Previous sprint Backlog</span> <br>
                     <!--10/10/2010 - 10/10/2010 <br>-->
                     ({{sprintPrevious.number}}) {{sprintPrevious.dateStartTreated}} - {{sprintPrevious.dateEndTreated}}<br>
-                    (<span class="sprintHorasGastas">0hs</span>/ hs )
+                    (<span class="sprintHorasGastas">{{sprintPrevious.timeTotalNotes}}h</span>/ {{sprintPrevious.timeTotal}}h )
                     <a href="#" class="select-all" style="display: none">Select All</a>
                 </th>
                 <th id="header-sprintAtual" class="header">
@@ -59,7 +59,7 @@
                         <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px;  line-height: 1.2;">
                             <div class="card-content white-text note">
                                 <md-button ng-if="backLogNote.time" class="md-fab md-mini hoverable alertNote" aria-label="Time">
-                                    {{backLogNote.time}}
+                                    {{backLogNote.time}}h
                                 </md-button>
                                 <span class="card-title activator text-darken-4 note-notHandle">{{backLogNote.owner.name}}<i class="material-icons right">more_vert</i></span>
                                 <p>{{backLogNote.description}}</p>
@@ -147,7 +147,7 @@
                         <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px;  line-height: 1.2;">
                             <div class="card-content white-text note">
                                 <md-button ng-if="backLogNote.time" class="md-fab md-mini hoverable alertNote" aria-label="Time">
-                                    {{backLogNote.time}}
+                                    {{backLogNote.time}}h
                                 </md-button>
                                 <span class="card-title activator text-darken-4 note-notHandle">{{backLogNote.owner.name}}<i class="material-icons right">more_vert</i></span>
                                 <p>{{backLogNote.description}}</p>
@@ -180,12 +180,12 @@
                         </div>
                     </div>
                 </td>
-                <td id="sprintCurrent" class="linha status_5 containerSprint  row" data-sprintId="{{sprintCurrent._id}}" sprinthorasgastas="0" sprinthoras="">
+                <td id="sprintCurrent" class="linha status_5 containerSprint  row" data-sprintId="{{sprint._id}}" sprinthorasgastas="0" sprinthoras="">
                     <div class="col containerNote" ng-repeat="backLogNote in vm.notesSprintCurrent" data-noteId="{{backLogNote._id}}">
                         <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px;  line-height: 1.2;">
                             <div class="card-content white-text note">
                                 <md-button ng-if="backLogNote.time" class="md-fab md-mini hoverable alertNote" aria-label="Time">
-                                    {{backLogNote.time}}
+                                    {{backLogNote.time}}h
                                 </md-button>
                                 <span class="card-title activator text-darken-4 note-notHandle">{{backLogNote.owner.name}}<i class="material-icons right">more_vert</i></span>
                                 <p>{{backLogNote.description}}</p>
@@ -223,7 +223,7 @@
                         <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px; line-height: 1.2;">
                             <div class="card-content white-text note">
                                 <md-button ng-if="backLogNote.time" class="md-fab md-mini hoverable alertNote" aria-label="Time">
-                                    {{backLogNote.time}}
+                                    {{backLogNote.time}}h
                                 </md-button>
                                 <span class="card-title activator text-darken-4 note-notHandle">{{backLogNote.owner.name}}<i class="material-icons right">more_vert</i></span>
                                 <p>{{backLogNote.description}}</p>
@@ -418,7 +418,7 @@
                         form.noteId = noteId;
                         Meteor.call('noteChangeSprint', form, function(error, result){
                             if (error) {
-                                    console.log(error);
+//                                    console.log(error);
                             } else {
     //                                console.log(statusId);
     //                                console.log(noteId);

@@ -9,13 +9,15 @@
         <md-dialog-content style="min-width:400px;max-width:800px;max-height:810px; ">
             <div  ng-show="$root.currentUser">
                 <md-input-container>
-                    <md-select ng-model="form.projectId" id="owner" aria-label="Owner"  placeholder="Project" required>
+                    <label>Product</label>
+                    <md-select ng-model="form.projectId" id="owner" aria-label="Owner"  placeholder="Product" required>
                         <md-option  ng-repeat="project in projects" value="{{project._id}}">
                             {{project.name}}
                         </md-option>
                     </md-select>
                 </md-input-container>
                 <md-input-container>
+                    <label>Story</label>
                     <md-select ng-model="form.story" id="story" aria-label="Story"  placeholder="Story" required>
                         <md-option  ng-repeat="story in stories" value="{{story._id}}">
                             {{story.name}}
@@ -23,23 +25,22 @@
                     </md-select>
                 </md-input-container>
                 <md-input-container>
+                    <label>Owner</label>
                     <md-select ng-model="form.owner" id="owner" aria-label="Owner"  placeholder="Owner" required>
                         <md-option  ng-repeat="member in members" value="{{member._id}}">
-                            {{member.name}}
+                            {{member.name}} {{member.lastName}}
                         </md-option>
                     </md-select>
                 </md-input-container>
-                <md-input-container>
-                    <!--<label>Time</label>-->
-                    <!--<input ng-model="form.time" id="time" type="time" aria-label="Time">-->
-                    <!--<div layout>-->
-                    <div flex="10" layout layout-align="center center">
-                        <span class="md-body-1">Time: {{form.time}}h</span>
+                <md-input-container layout>
+                    <div flex="15" layout layout-align="center center">
+                        <span class="md-body-1">Time</span>
                     </div>
-                    <md-slider ng-model="form.time" id="time-slider" flex class="md-primary" md-discrete step="1" min="1" max="16" aria-label="rating">
-                    </md-slider>
-                    <!--</div>-->
-                </md-input-container>
+                    <md-slider ng-model="form.time" id="time-slider" flex md-discrete step="1" min="1" max="18" aria-label="Time"></md-slider>
+                    <div flex="10" layout layout-align="center center">
+                        <span class="md-body-1">{{form.time}}h </span>
+                    </div>
+                </div>
                 <md-input-container>
                     <label>Description</label>
                     <textarea ng-model="form.description" id="description" aria-label="Description"></textarea>

@@ -16,7 +16,7 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
                 teamsId = Team.find({$or: [{members: Meteor.userId()}, {userId: Meteor.userId()}]}).map(function(member){
                     return member._id;
                 });
-                projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}]}).map(function(project){
+                projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}, {scrumMaster: {$in: Meteor.userId()}}, {productOwner: {$in: Meteor.userId()}}]}).map(function(project){
                     if (project.teams) {
                         project.teams = Team.find({
                                 _id: { $in: project.teams},

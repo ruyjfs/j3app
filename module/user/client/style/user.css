@@ -98,6 +98,7 @@ span.alertSidNav{
     margin: 4px;
     z-index: 1 !important;
     border-radius: 0% !important;
+    text-transform: capitalize;
 }
 
 .alertNoteMini{
@@ -122,4 +123,5 @@ span.alertSidNav{
     margin: 4px;
     z-index: 1 !important;
     border-radius: 0% !important;
+    text-transform: capitalize;
 }

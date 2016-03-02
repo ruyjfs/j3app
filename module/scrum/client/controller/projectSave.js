@@ -11,6 +11,7 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$reactive', '$
             $scope.form = Project.findOne(id);
         } else {
             $scope.form = {};
+            $scope.userId = Meteor.userId();
         }
 
         Meteor.subscribe('team');

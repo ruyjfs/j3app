@@ -7,50 +7,80 @@
             </div>
         </md-toolbar>
         <md-dialog-content style="min-width:400px;max-width:800px;max-height:810px;">
+            <div layout-gt-sm="row">
                 <md-input-container>
                     <label>Name</label>
                     <input ng-model="form.name" type="text" aria-label="Name" required>
                 </md-input-container>
                 <md-input-container>
                     <label>Owner</label>
-                    <md-select ng-model="form.userId" aria-label=""  placeholder="Owner" required>
-                        <md-option  ng-repeat="user in users" value="{{user._id}}">
-                            {{user.name}}
+                    <md-select ng-model="form.userId" aria-label="" placeholder="Owner" required>
+                        <md-option ng-repeat="user in users" value="{{user._id}}">
+                            {{user.name}} {{user.lastName}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div layout-gt-sm="row">
+                <md-input-container>
+                    <label>Scrum Master</label>
+                    <md-select ng-model="form.scrumMaster" aria-label="" placeholder="Scrum Master" required
+                               multiple="true">
+                        <md-option ng-repeat="user in users" value="{{user._id}}">
+                            {{user.name}} {{user.lastName}}
                         </md-option>
                     </md-select>
                 </md-input-container>
                 <md-input-container>
+                    <label>Product Owner (PO)</label>
+                    <md-select ng-model="form.productOwner" aria-label="" placeholder="Product Owner (PO)" required
+                               multiple="true">
+                        <md-option ng-repeat="user in users" value="{{user._id}}">
+                            {{user.name}} {{user.lastName}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <md-input-container>
+                <label>Team</label>
+                <md-select ng-model="form.teams" id="teams" aria-label="" placeholder="Team" multiple="true"
+                           required>
+                    <md-option ng-repeat="team in teams" value="{{team._id}}">
+                        {{team.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <div layout-gt-sm="row">
+                <md-input-container>
                     <label>Week</label>
-                    <md-select ng-model="form.week" id="week" aria-label=""  placeholder="Week" required>
-                        <md-option  ng-repeat="week in weeks" value="{{week}}">
+                    <md-select ng-model="form.week" id="week" aria-label="" placeholder="Week" required>
+                        <md-option ng-repeat="week in weeks" value="{{week}}">
                             {{week}}
                         </md-option>
                     </md-select>
                 </md-input-container>
                 <md-input-container>
-                    <label>Team</label>
-                    <md-select ng-model="form.teams" id="teams" aria-label=""  placeholder="Team" multiple="true" required>
-                        <md-option  ng-repeat="team in teams" value="{{team._id}}">
-                            {{team.name}}
-                        </md-option>
-                    </md-select>
+                    <md-switch ng-model="form.wekend" aria-label="Weekend">
+                        Skip weekend
+                    </md-switch>
                 </md-input-container>
-                <md-input-container>
-                    <label>Description</label>
-                    <textarea ng-model="form.description" id="description" aria-label="Description"></textarea>
-                </md-input-container>
-                <!--<md-checkbox ng-model="newParty.public" id="public" aria-label="Public">-->
-                    <!--Public-->
-                <!--</md-checkbox>-->
+            </div>
+            <md-input-container>
+                <label>Description</label>
+                <textarea ng-model="form.description" id="description" aria-label="Description"></textarea>
+            </md-input-container>
+            <!--<md-checkbox ng-model="newParty.public" id="public" aria-label="Public">-->
+            <!--Public-->
+            <!--</md-checkbox>-->
         </md-dialog-content>
     </form>
     <div class="md-actions" layout="row" layout-align="center center">
         <!--<md-button class="md-raised hoverable" ng-click="close()">-->
-            <!--Cancel-->
+        <!--Cancel-->
         <!--</md-button>-->
         <!--<md-button class="md-raised hoverable md-accent" ng-click="save()">-->
-            <!--Save-->
-            <!--<i class="material-icons right">send</i>-->
+        <!--Save-->
+        <!--<i class="material-icons right">send</i>-->
         <!--</md-button>-->
         <button class="btn white waves-effect waves-orange hoverable" type="button" ng-click="close()">
             <!--<i class="material-icons right">close</i>-->

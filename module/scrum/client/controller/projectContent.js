@@ -140,6 +140,7 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                 return sprint;
             },
             sprintNext: function() {
+                this.subscribe('notes');
                 this.subscribe('project');
                 this.subscribe('sprint');
                 sprint = Sprint.findOne({_id: $stateParams.sprintId});
@@ -150,6 +151,7 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                     if (sprintNext) {
                         sprintNext.dateStartTreated = moment(sprintNext.dateStart, 'x').format('L');
                         sprintNext.dateEndTreated = moment(sprintNext.dateEnd, 'x').format('L');
+                        sprintNext.days = moment(sprint.dateEnd, 'x').diff(moment(sprintNext.dateStart, 'x'), 'days');
                         $rootScope.sprintNext = sprintNext;
                     }
                 }
@@ -181,7 +183,7 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                             }
                         });
 
-                        $rootScope.sprintNext.timeTotal = timeTotal * sprint.days;
+                        $rootScope.sprintNext.timeTotal = timeTotal * $rootScope.sprintNext.days;
                     } else {
                         $rootScope.sprintNext.timeTotal = 0;
                     }
@@ -204,7 +206,7 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                         timeTotal = 0;
                         notesDone.forEach(function(value){
                             if (isInt(parseInt(value.time))) {
-                                timeTotal = parseInt(value.time) + timeTotal;
+                                //timeTotal = parseInt(value.time) + timeTotal;
                             }
                         });
                         $rootScope.sprintNext.timeTotalNotesDone = timeTotal;
@@ -217,6 +219,84 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                 }
 
                 return $rootScope.sprintNext;
+            },
+            sprintPrevious: function() {
+                this.subscribe('notes');
+                this.subscribe('project');
+                this.subscribe('sprint');
+                sprint = Sprint.findOne({_id: $stateParams.sprintId});
+                sprintPrevious = {};
+                if (sprint) {
+                    sprint = Sprint.findOne({_id: $stateParams.sprintId});
+                    sprintPrevious = {};
+                    if (sprint) {
+                        sprintPreviousNumber = sprint.number - 1;
+                        sprintPrevious = Sprint.findOne({projectId: $stateParams.id, number: sprintPreviousNumber});
+                        if (sprintPrevious) {
+                            sprintPrevious.dateStartTreated = moment(sprintPrevious.dateStart, 'x').format('L');
+                            sprintPrevious.dateEndTreated = moment(sprintPrevious.dateEnd, 'x').format('L');
+                        }
+                    }
+                    $rootScope.sprintPrevious = sprintPrevious;
+                }
+
+
+                if ($rootScope.sprintPrevious) {
+                    $rootScope.sprintPrevious.days = moment($rootScope.sprintPrevious.dateEnd, 'x').diff(moment($rootScope.sprintPrevious.dateStart, 'x'), 'days');
+                    project = Project.findOne($stateParams.id);
+                    if (project) {
+                        teams = Team.find({_id: {$in: project.teams}}).fetch().map(function(team){
+                            team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
+                            team.membersTotal = team.members.length;
+                            team.timeTotal = team.membersTotal*team.time;
+                            return team;
+                        });
+                    }
+
+                    if (teams) {
+                        timeTotal = 0;
+                        teams.forEach(function(value){
+                            if (isInt(parseInt(value.timeTotal))) {
+                                timeTotal = parseInt(value.timeTotal) + timeTotal;
+                            }
+                        });
+
+                        $rootScope.sprintPrevious.timeTotal = timeTotal * $rootScope.sprintPrevious.days;
+                    } else {
+                        $rootScope.sprintPrevious.timeTotal = 0;
+                    }
+
+                    notes = Note.find({$and: [{sprintId: $rootScope.sprintPrevious._id}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
+                    if (notes) {
+                        timeTotal = 0;
+                        notes.forEach(function(value){
+                            if (isInt(parseInt(value.time))) {
+                                timeTotal = parseInt(value.time) + timeTotal;
+                            }
+                        });
+                        $rootScope.sprintPrevious.timeTotalNotes = timeTotal;
+                    } else {
+                        $rootScope.sprintPrevious.timeTotalNotes = 0;
+                    }
+
+                    notesDone = Note.find({$and: [{sprintId: $rootScope.sprintPrevious._id}, {statusId: '1'}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
+                    if (notesDone) {
+                        timeTotal = 0;
+                        notesDone.forEach(function(value){
+                            if (isInt(parseInt(value.time))) {
+                                //timeTotal = parseInt(value.time) + timeTotal;
+                            }
+                        });
+                        $rootScope.sprintPrevious.timeTotalNotesDone = timeTotal;
+                    } else {
+                        $rootScope.sprintPrevious.timeTotalNotesDone = 0;
+                    }
+
+                    $rootScope.sprintPrevious.progressDone = sprint.timeTotalNotesDone*100/sprint.timeTotal;
+                    $rootScope.sprintPrevious.progress = sprint.timeTotalNotes*100/sprint.timeTotal;
+                }
+
+                return $rootScope.sprintPrevious;
             }
         });
 

@@ -99,20 +99,20 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                 }
                 return notes;
             },
-            sprintPrevious: function() {
-                sprint = Sprint.findOne({_id: $stateParams.sprintId});
-                sprintPrevious = {};
-                if (sprint) {
-                    sprintPreviousNumber = sprint.number - 1;
-                    sprintPrevious = Sprint.findOne({projectId: $stateParams.id, number: sprintPreviousNumber});
-                    if (sprintPrevious) {
-                        sprintPrevious.dateStartTreated = moment(sprintPrevious.dateStart, 'x').format('L');
-                        sprintPrevious.dateEndTreated = moment(sprintPrevious.dateEnd, 'x').format('L');
-                    }
-                }
-                $scope.sprintPrevious = sprintPrevious;
-                return sprintPrevious;
-            },
+            //sprintPrevious: function() {
+            //    sprint = Sprint.findOne({_id: $stateParams.sprintId});
+            //    sprintPrevious = {};
+            //    if (sprint) {
+            //        sprintPreviousNumber = sprint.number - 1;
+            //        sprintPrevious = Sprint.findOne({projectId: $stateParams.id, number: sprintPreviousNumber});
+            //        if (sprintPrevious) {
+            //            sprintPrevious.dateStartTreated = moment(sprintPrevious.dateStart, 'x').format('L');
+            //            sprintPrevious.dateEndTreated = moment(sprintPrevious.dateEnd, 'x').format('L');
+            //        }
+            //    }
+            //    $scope.sprintPrevious = sprintPrevious;
+            //    return sprintPrevious;
+            //},
             //sprintCurrent: function() {
             //    sprint = Sprint.findOne({_id: $stateParams.sprintId});
             //    if (sprint) {
