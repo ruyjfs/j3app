@@ -53,11 +53,17 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                 }
 
                 if (sprint) {
+                    project = Project.findOne($stateParams.id);
+
                     sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('L');
                     sprint.dateEndTreated = moment(sprint.dateEnd, 'x').format('L');
                     sprint.days = moment(sprint.dateEnd, 'x').diff(moment(sprint.dateStart, 'x'), 'days');
 
-                    project = Project.findOne($stateParams.id);
+                    if (project.skipWeekend) {
+                        sprint.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days');
+                        sprint.days = sprint.daysBusiness;
+                    }
+
                     teams = Team.find({_id: {$in: project.teams}}).fetch().map(function(team){
                         team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
                         team.membersTotal = team.members.length;
@@ -166,6 +172,10 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                 if ($rootScope.sprintNext) {
                     $rootScope.sprintNext.days = moment($rootScope.sprintNext.dateEnd, 'x').diff(moment($rootScope.sprintNext.dateStart, 'x'), 'days');
                     project = Project.findOne($stateParams.id);
+                    if (project.skipWeekend) {
+                        $rootScope.sprintNext.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days');
+                        $rootScope.sprintNext.days = $rootScope.sprintNext.daysBusiness;
+                    }
                     if (project) {
                         teams = Team.find({_id: {$in: project.teams}}).fetch().map(function(team){
                             team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
@@ -244,6 +254,12 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                 if ($rootScope.sprintPrevious) {
                     $rootScope.sprintPrevious.days = moment($rootScope.sprintPrevious.dateEnd, 'x').diff(moment($rootScope.sprintPrevious.dateStart, 'x'), 'days');
                     project = Project.findOne($stateParams.id);
+
+                    if (project.skipWeekend) {
+                        $rootScope.sprintPrevious.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days');
+                        $rootScope.sprintPrevious.days = $rootScope.sprintPrevious.daysBusiness;
+                    }
+
                     if (project) {
                         teams = Team.find({_id: {$in: project.teams}}).fetch().map(function(team){
                             team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
