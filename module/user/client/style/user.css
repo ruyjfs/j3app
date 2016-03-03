@@ -64,15 +64,15 @@ span.alertSidNav{
     color: orange;
     /* height: 10px; */
     text-align: center;
-    position: relative;
+    position: fixed;
     display: block;
-    bottom: 32px;
+    bottom: 0px;
     min-height: 0;
     padding: 0;
     line-height: 20px !important;
     width: 20px !important;
     height: 20px !important;
-    left: -28px;
+    right: 153px;
     font-size: 11px;
 }
 
