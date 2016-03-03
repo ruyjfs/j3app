@@ -12,11 +12,11 @@ a{
     /*text-decoration: none;*/
  }
 
-.md-button{
-    width: 100%;
-    /*margin: 0;*/
-    /*padding: 0;*/
-}
+/*.md-button{*/
+    /*width: 100%;*/
+    /*/!*margin: 0;*!/*/
+    /*/!*padding: 0;*!/*/
+/*}*/
 
 #buttonSend{
     width: 100%;
@@ -24,9 +24,9 @@ a{
     padding: 0;
 }
 
-.navbar-fixed{
-    z-index: 1 !important;
-}
+/*.navbar-fixed{*/
+    /*z-index: 1 !important;*/
+/*}*/
 
 footer {
     color: #FFFFFF;
@@ -76,9 +76,9 @@ md-sidenav {
     z-index: 1000;
 }
 
-.md-button.md-fab {
-    z-index: 0 !important;
-}
+/*.md-button.md-fab {*/
+    /*z-index: 0 !important;*/
+/*}*/
 
 /*.navbar-fixed {*/
     /*position: relative;*/

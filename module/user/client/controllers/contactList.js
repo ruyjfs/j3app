@@ -56,13 +56,25 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
 
                         if (user.status) {
                             if (user.status.idle) {
-                                user.color = '#FFC107';
+                                user.status.color = ' #FFC107';
+                                user.status.name = ' Ausente';
                             } else {
-                                user.color = 'yellowgreen';
+                                user.status.color = ' #9ACD32';
+                                user.status.name = ' Online';
                             }
                         } else {
-                            user.color = '#FFFFFF';
+                            user.status = {};
+                            user.status.color = ' rgba(224, 224, 224, 0.77)';
+                            user.status.name = ' Offline';
                         }
+
+                        // Imagem do gravatar.
+                        if (user.email) {
+                            user.img = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(user.email).toString()+'?s=40';
+                        } else {
+                            user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
+                        }
+
 
 
 
