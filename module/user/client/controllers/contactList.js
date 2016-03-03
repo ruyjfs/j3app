@@ -7,24 +7,55 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
         $('body').on('click', '#sidenav-overlay', function(){
             $rootScope.chatIsOpen = false;
             console.log('clicou fora')
-        })
+        });
+
+        if (user && user.chat && user.chat.side && user.chat.side == 'left') {
+            chatSide = 'left';
+        } else {
+            chatSide = 'right';
+        }
 
         $rootScope.showNavContactList = function () {
-            $('.nav-button-chat').sideNav('hide');
-            $('.nav-button-contact').sideNav('hide');
-            $('.nav-button-contact').sideNav('show');
+            $('.nav-button-chat-'+chatSide).sideNav('hide');
+            $('.nav-button-contact-'+chatSide).sideNav('hide');
+            $('.nav-button-contact-'+chatSide).sideNav('show');
         };
 
         $rootScope.hideNavContactList = function () {
-            $('.nav-button-chat').sideNav('hide');
-            $('.nav-button-contact').sideNav('hide');
+            $('.nav-button-chat-'+chatSide).sideNav('hide');
+            $('.nav-button-contact-'+chatSide).sideNav('hide');
         };
 
         Meteor.subscribe('users');
         Meteor.subscribe('userStatus');
         this.helpers({
+            user: function(){
+                var user = Meteor.users.findOne(Meteor.userId());
+                if (user.status) {
+                    if (user.status.idle) {
+                        user.status.color = ' #FFC107';
+                        user.status.name = ' Ausente';
+                    } else {
+                        user.status.color = ' #9ACD32';
+                        user.status.name = ' Online';
+                    }
+                } else {
+                    user.status = {};
+                    user.status.color = ' rgba(224, 224, 224, 0.77)';
+                    user.status.name = ' Offline';
+                }
+
+                // Imagem do gravatar.
+                if (user.emails[0].address) {
+                    user.img = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(user.emails[0].address).toString()+'?s=40&d=mm';
+                } else {
+                    user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
+                }
+
+                return user;
+            },
             users: function () {
-                users = Meteor.users.find().map(function (user) {
+                users = Meteor.users.find({_id: { $not: Meteor.userId()}}).map(function (user) {
                         user.messagesNotVisualized = Message.find(
                             {
                                 $and: [
@@ -74,10 +105,6 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                         } else {
                             user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
                         }
-
-
-
-
 
                         return user;
                     },

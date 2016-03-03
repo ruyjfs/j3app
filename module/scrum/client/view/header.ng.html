@@ -62,7 +62,7 @@
                         </ul>
                     </div>
                 </ul>
-                <a href="#" data-activates="nav-mobile" class="button-collapse nav-button-left"><i class="material-icons">menu</i></a>
+                <a href="#" data-activates="nav-mobile" class="button-collapse nav-button-close-left"><i class="material-icons">menu</i></a>
                 <!--<a href="#" data-activates="nav-mobile" class="button-collapse nav-button-left"><i class="material-icons">menu</i></a>-->
                 <!--<a href="#" ng-click="showNavContactList()" class="button-collapse right" ng-hide="!$auth.currentUser">-->
                 <!--<i class="material-icons">chat</i>-->
@@ -84,10 +84,17 @@
                     <!--</span>-->
                 </a>
                 <a href="#" style="display:none;" data-activates="nav-contact"
-                   class="nav-button-contact button-collapse nav-button-right right" ng-hide="!$auth.currentUser"><i
+                   class="nav-button-contact-left button-collapse nav-button-left right" ng-hide="!$auth.currentUser"><i
                         class="material-icons">question_answer</i></a>
                 <a href="#" style="display: none;" data-activates="nav-chat"
-                   class="nav-button-chat button-collapse nav-button-right right" ng-hide="!$auth.currentUser"><i
+                   class="nav-button-chat-left button-collapse nav-button-left right" ng-hide="!$auth.currentUser"><i
+                        class="material-icons">question_answer</i></a>
+
+                <a href="#" style="display:none;" data-activates="nav-contact"
+                   class="nav-button-contact-right button-collapse nav-button-right right" ng-hide="!$auth.currentUser"><i
+                        class="material-icons">question_answer</i></a>
+                <a href="#" style="display: none;" data-activates="nav-chat"
+                   class="nav-button-chat-right button-collapse nav-button-right right" ng-hide="!$auth.currentUser"><i
                         class="material-icons">question_answer</i></a>
                 <!--<ul ng-hide="!$auth.currentUser" class="right hide-on-large-only">-->
                 <!--<li><a href="#" ng-click="vm.toggleContactList()"><i class="material-icons">chat</i></a></li>-->

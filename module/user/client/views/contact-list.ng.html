@@ -1,10 +1,54 @@
 <div ng-controller="ContactListCtrl as vm">
-    <md-toolbar class="md-theme-light fixed-top">
+    <md-toolbar class="md-theme-light fixed-top" style="width: 240px;">
         <div class="md-toolbar-tools" >
-            <md-button ng-click="hideNavContactList()">
-                <md-icon md-svg-icon="social:ic_people_24px" aria-label="Contact"></md-icon>
-                Contacts
-            </md-button>
+            <!--<md-button ng-click="hideNavContactList()">-->
+                <!--<md-icon md-svg-icon="social:ic_people_24px" aria-label="Contact"></md-icon>-->
+                <!--Contacts-->
+            <!--</md-button>-->
+            <img alt="{{vm.user.name}}" ng-src="{{vm.user.img}}" class="md-avatar md-whiteframe-3dp" style="
+                    display: block;
+                    position: absolute;
+                    padding-top: 0px;
+                    /*margin-top: 14px;*/
+                    background-color: {{vm.user.status.color}};
+                    border: solid 5px  {{vm.user.status.color}};
+
+                    /*width: 50px;*/
+                    /*height: 50px;*/
+                    /*margin-top: 4px;*/
+                    width: 40px;
+                    height: 40px;
+                    margin-top: 6px;
+
+                    margin-bottom: 8px;
+                    /* margin-right: 16px; */
+                    /* border-radius: 50%; */
+                    border-radius: 12%;
+                    box-sizing: content-box;
+                    "/>
+            <!--<a href="#" ng-click="showNavChat(user._id)"  style="width: 100%; padding: 0px 0px 0px 53px;" class="waves-effect waves-orange" >-->
+            <div style="width: 100%; padding: 0px 0px 0px 53px;" >
+                <p style="
+        /* height: 1px; */
+         margin: 0;
+         padding: 0;
+        position: absolute;
+        display: flex;
+        top: 3px;
+        color: #9E9E9E;">
+                    {{vm.user.status.name}}
+                </p>
+                <p style="
+        /* height: 1px; */
+        /* margin: 0; */
+        /* padding: 0; */
+        position: absolute;
+        display: flex;
+        top: 3px;
+        color: #FFFFFF">
+                    {{vm.user.name}} {{vm.user.lastName}}
+                </p>
+            </div>
         </div>
     </md-toolbar>
     <!--<md-toolbar class="md-theme-light">-->
@@ -25,6 +69,10 @@
         <!--<li class="waves-effect waves-orange" ng-repeat="user in vm.users"  layout="row">-->
 
         <li style="height: 60px;"></li>
+        <li style="border-bottom: solid 1px rgba(0,0,0,0.12);" >
+
+            <!--<span class="alertSidNav">{{user.messagesNotVisualized}}</span>-->
+        </li>
         <li ng-repeat="user in vm.users" style="border-bottom: solid 1px rgba(0,0,0,0.12);" >
             <img alt="{{user.name}}" ng-src="{{user.img}}" class="md-avatar md-whiteframe-3dp" style="
                     display: block;

@@ -13,11 +13,20 @@ if (Meteor.isClient) {
             ]);
 
         $('.nav-button-left').sideNav({
-            closeOnClick: true
+            closeOnClick: false,
+            edge: 'left'
         });
         $('.nav-button-right').sideNav({
+            closeOnClick: false,
+            edge: 'right',
+        });
+        $('.nav-button-close-left').sideNav({
             closeOnClick: true,
-            edge: 'right'
+            edge: 'left'
+        });
+        $('.nav-button-close-right').sideNav({
+            closeOnClick: true,
+            edge: 'right',
         });
     }
 

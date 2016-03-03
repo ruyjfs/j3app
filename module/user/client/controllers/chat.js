@@ -4,8 +4,15 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
 
         $scope.messages = [];
         $rootScope.showNavChat = function(contactId){
-            $('.nav-button-contact').sideNav('hide');
-            $('.nav-button-chat').sideNav('show');
+            this.subscribe('users');
+            user = Meteor.users.findOne(Meteor.userId());
+            if (user && user.chat && user.chat.side && user.chat.side == 'left') {
+                chatSide = 'left';
+            } else {
+                chatSide = 'right';
+            }
+            $('.nav-button-contact-'+chatSide).sideNav('hide');
+            $('.nav-button-chat-'+chatSide).sideNav('show');
             $rootScope.contactId = contactId;
             $rootScope.chatIsOpen = true;
 

@@ -75,6 +75,10 @@ md-card {
 md-sidenav {
     z-index: 1000;
 }
+/*@media only screen and (max-width: 959px) and (min-width: 0) and (orientation: landscape)*/
+md-toolbar {
+    min-height: 63px;
+}
 
 /*.md-button.md-fab {*/
     /*z-index: 0 !important;*/
