@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('HeaderCtrl', ['$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$reactive', '$mdDialog', '$mdBottomSheet', '$rootScope',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $reactive, $mdDialog, $mdBottomSheet, $rootScope) {
+angular.module('scrum').controller('HeaderCtrl', ['$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$reactive', '$mdDialog', '$mdBottomSheet', '$rootScope', '$mdToast',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $reactive, $mdDialog, $mdBottomSheet, $rootScope, $mdToast) {
         $reactive(this).attach($scope);
 
         //this.toggleMenu = buildToggler('menu');
@@ -11,13 +11,22 @@ angular.module('scrum').controller('HeaderCtrl', ['$scope', '$timeout', '$mdSide
         Meteor.subscribe('message');
         Meteor.users.find({ "status.online": true }).observe({
             added: function(id) {
-                console.log('online');
+                //console.log('online');
                 console.log(id);
+
+                Materialize.toast(id.name +' ' + id.lastName + ' is online;', 4000);
+                //$mdToast.show(
+                //    $mdToast.simple()
+                //        .textContent('Simple Toast!')
+                //        .position({bottom:true})
+                //        .hideDelay(3000)
+                //);
+
                 // id just came online
             },
             removed: function(id) {
-                console.log('offline');
-                console.log(id);
+                //console.log('offline');
+                Materialize.toast(id.name +' ' + id.lastName + ' is offline;', 4000);
                 // id just went offline
             }
         });
