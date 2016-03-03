@@ -40,13 +40,13 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                         user.status.name = ' Online';
                     }
                 } else {
-                    user.status = {};
+                    user = {status: {}};
                     user.status.color = ' rgba(224, 224, 224, 0.77)';
                     user.status.name = ' Offline';
                 }
 
                 // Imagem do gravatar.
-                if (user.emails[0].address) {
+                if (user.emails && user.emails[0].address) {
                     user.img = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(user.emails[0].address).toString()+'?s=40&d=mm';
                 } else {
                     user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
@@ -85,7 +85,7 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                             //}
                         }
 
-                        if (user.status) {
+                        if (user && user.status) {
                             if (user.status.idle) {
                                 user.status.color = ' #FFC107';
                                 user.status.name = ' Ausente';
@@ -100,7 +100,7 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                         }
 
                         // Imagem do gravatar.
-                        if (user.emails[0].address) {
+                        if (user.emails && user.emails[0].address) {
                             user.img = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(user.emails[0].address).toString()+'?s=40&d=mm';
                         } else {
                             user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';

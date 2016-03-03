@@ -16,7 +16,35 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
             $rootScope.contactId = contactId;
             $rootScope.chatIsOpen = true;
 
+            this.subscribe('users');
+            this.subscribe('message');
             $scope.helpers({
+                user: function(){
+                    var user = Meteor.users.findOne(Meteor.userId());
+                    if (user.status) {
+                        if (user.status.idle) {
+                            user.status.color = ' #FFC107';
+                            user.status.name = ' Ausente';
+                        } else {
+                            user.status.color = ' #9ACD32';
+                            user.status.name = ' Online';
+                        }
+                    } else {
+                        user = {status: {}};
+                        user.status = {};
+                        user.status.color = ' rgba(224, 224, 224, 0.77)';
+                        user.status.name = ' Offline';
+                    }
+
+                    // Imagem do gravatar.
+                    if (user.emails && user.emails[0].address) {
+                        user.img = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(user.emails[0].address).toString()+'?s=40&d=mm';
+                    } else {
+                        user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
+                    }
+
+                    return user;
+                },
                 messages: function () {
                     messages = Message.find(
                         {
@@ -91,9 +119,6 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
                 }
             });
         };
-
-        Meteor.subscribe('users');
-        Meteor.subscribe('message');
 
         $scope.newMessage = {};
         $scope.addNewMessage = function () {
