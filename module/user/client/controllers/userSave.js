@@ -13,7 +13,6 @@ angular.module('user').controller('UserSaveCtrl', [ '$scope', '$timeout', '$mdSi
         Meteor.subscribe('users');
         this.form = Meteor.users.findOne(Meteor.user()._id);
         this.form.email = this.form.emails[0].address;
-        console.log(this.form);
         this.saveUser = function (){
             Meteor.call('userSave', this.form, function (error) {
                 if (error) {
