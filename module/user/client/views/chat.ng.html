@@ -1,55 +1,103 @@
 <div ng-controller="ChatCtrl as vm">
     <md-toolbar class="md-theme-light fixed-top" style="width: 240px;">
-        <div class="md-toolbar-tools" >
-            <!--<md-button ng-click="hideNavContactList()">-->
-            <!--<md-icon md-svg-icon="social:ic_people_24px" aria-label="Contact"></md-icon>-->
-            <!--Contacts-->
-            <!--</md-button>-->
-            <img alt="{{vm.user.name}}" ng-src="{{vm.user.img}}" class="md-avatar md-whiteframe-3dp" style="
-                    display: block;
-                    position: absolute;
-                    padding-top: 0px;
-                    /*margin-top: 14px;*/
-                    background-color: {{vm.user.status.color}};
-                    border: solid 5px  {{vm.user.status.color}};
+        <!--<div class="md-toolbar-tools" >-->
+            <!--&lt;!&ndash;<md-button ng-click="hideNavContactList()">&ndash;&gt;-->
+            <!--&lt;!&ndash;<md-icon md-svg-icon="social:ic_people_24px" aria-label="Contact"></md-icon>&ndash;&gt;-->
+            <!--&lt;!&ndash;Contacts&ndash;&gt;-->
+            <!--&lt;!&ndash;</md-button>&ndash;&gt;-->
+            <!--<img alt="{{vm.user.name}}" ng-src="{{vm.user.img}}" class="md-avatar md-whiteframe-3dp" style="-->
+                    <!--display: block;-->
+                    <!--position: absolute;-->
+                    <!--padding-top: 0px;-->
+                    <!--/*margin-top: 14px;*/-->
+                    <!--background-color: {{vm.user.status.color}};-->
+                    <!--border: solid 5px  {{vm.user.status.color}};-->
 
-                    /*width: 50px;*/
-                    /*height: 50px;*/
-                    /*margin-top: 4px;*/
-                    width: 40px;
-                    height: 40px;
-                    margin-top: 6px;
+                    <!--/*width: 50px;*/-->
+                    <!--/*height: 50px;*/-->
+                    <!--/*margin-top: 4px;*/-->
+                    <!--width: 40px;-->
+                    <!--height: 40px;-->
+                    <!--margin-top: 6px;-->
 
-                    margin-bottom: 8px;
-                    /* margin-right: 16px; */
-                    /* border-radius: 50%; */
-                    border-radius: 12%;
-                    box-sizing: content-box;
-                    "/>
-            <!--<a href="#" ng-click="showNavChat(user._id)"  style="width: 100%; padding: 0px 0px 0px 53px;" class="waves-effect waves-orange" >-->
-            <div style="width: 100%; padding: 0px 0px 0px 53px;" >
-                <p style="
-        /* height: 1px; */
-         margin: 0;
-         padding: 0;
-        position: absolute;
-        display: flex;
-        top: 3px;
-        color: #9E9E9E;">
-                    {{vm.user.status.name}}
-                </p>
-                <p style="
-        /* height: 1px; */
-        /* margin: 0; */
-        /* padding: 0; */
-        position: absolute;
-        display: flex;
-        top: 3px;
-        color: #FFFFFF">
-                    {{vm.user.name}} {{vm.user.lastName}}
-                </p>
-            </div>
-        </div>
+                    <!--margin-bottom: 8px;-->
+                    <!--/* margin-right: 16px; */-->
+                    <!--/* border-radius: 50%; */-->
+                    <!--border-radius: 12%;-->
+                    <!--box-sizing: content-box;-->
+                    <!--"/>-->
+            <!--&lt;!&ndash;<a href="#" ng-click="showNavChat(user._id)"  style="width: 100%; padding: 0px 0px 0px 53px;" class="waves-effect waves-orange" >&ndash;&gt;-->
+            <!--<div style="width: 100%; padding: 0px 0px 0px 53px;" >-->
+                <!--<p style="-->
+    <!--position: absolute;-->
+    <!--/* display: flex; */-->
+    <!--top: 3px;-->
+    <!--color: #FFF;-->
+    <!--font-size: 13px;-->
+    <!--width: 107px;-->
+    <!--text-align: center;">-->
+                    <!--{{vm.user.status.name}}-->
+                <!--</p>-->
+                <!--<p style="-->
+    <!--margin: 0;-->
+    <!--padding: 0;-->
+    <!--position: inherit;-->
+    <!--/* display: block; */-->
+    <!--/* top: 31px; */-->
+    <!--color: #9E9E9E;-->
+    <!--font-size: 13px;-->
+    <!--text-align: right;-->
+    <!--width: 107px;">-->
+                    <!--{{vm.user.name}} {{vm.user.lastName}}-->
+                <!--</p>-->
+                <!--<p style="-->
+        <!--/* height: 1px; */-->
+         <!--margin: 0;-->
+         <!--padding: 0;-->
+        <!--position: absolute;-->
+        <!--/*display: flex;*/-->
+        <!--top: 3px;-->
+        <!--color: #9E9E9E;-->
+        <!--font-size: 13px;-->
+        <!--width: 107px;-->
+        <!--text-align: center;">-->
+                    <!--{{vm.user.status.name}}-->
+                <!--</p>-->
+                <!--<p style="-->
+        <!--/* height: 1px; */-->
+        <!--/* margin: 0; */-->
+        <!--/* padding: 0; */-->
+        <!--position: absolute;-->
+        <!--display: flex;-->
+        <!--top: 3px;-->
+        <!--color: #FFFFFF;-->
+        <!--font-size: 13px;">-->
+                    <!--{{vm.user.name}} {{vm.user.lastName}}-->
+                <!--</p>-->
+            <!--</div>-->
+            <!--<img alt="{{vm.user.name}}" ng-src="{{vm.user.img}}" class="md-avatar md-whiteframe-3dp" style="-->
+                    <!--display: block;-->
+                    <!--position: absolute;-->
+                    <!--padding-top: 0px;-->
+                    <!--/*margin-top: 14px;*/-->
+                    <!--background-color: {{vm.user.status.color}};-->
+                    <!--border: solid 5px  {{vm.user.status.color}};-->
+
+                    <!--/*width: 50px;*/-->
+                    <!--/*height: 50px;*/-->
+                    <!--/*margin-top: 4px;*/-->
+                    <!--width: 40px;-->
+                    <!--height: 40px;-->
+                    <!--margin-top: 6px;-->
+
+                    <!--margin-bottom: 8px;-->
+                    <!--/* margin-right: 16px; */-->
+                    <!--/* border-radius: 50%; */-->
+                    <!--border-radius: 12%;-->
+                    <!--box-sizing: content-box;-->
+                    <!--left: 178px;-->
+                    <!--"/>-->
+        <!--</div>-->
     </md-toolbar>
     <md-content layout-padding>
         <!--<md-list>-->
