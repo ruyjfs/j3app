@@ -12,6 +12,12 @@ a{
     /*text-decoration: none;*/
  }
 
+.md-button{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .navbar-fixed{
     z-index: 1 !important;
 }

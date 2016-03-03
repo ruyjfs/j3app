@@ -53,6 +53,17 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                             //}
                         }
 
+
+                        console.log(user.status);
+                        if (user.status) {
+                            user.color = 'yellowgreen';
+                        } else {
+                            user.color = '#FFFFFF';
+                        }
+
+
+
+
                         return user;
                     },
                     {

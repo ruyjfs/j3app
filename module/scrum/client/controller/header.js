@@ -9,6 +9,18 @@ angular.module('scrum').controller('HeaderCtrl', ['$scope', '$timeout', '$mdSide
 
         Meteor.subscribe('users');
         Meteor.subscribe('message');
+        Meteor.users.find({ "status.online": true }).observe({
+            added: function(id) {
+                console.log('online');
+                console.log(id);
+                // id just came online
+            },
+            removed: function(id) {
+                console.log('offline');
+                console.log(id);
+                // id just went offline
+            }
+        });
         this.helpers(
             {
                 totalMessagesNotVisualized: function () {

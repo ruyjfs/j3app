@@ -1,18 +1,19 @@
 <md-dialog aria-label="Mango (Fruit)">
     <form>
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2>Save product</h2>
-                <span flex></span>
-            </div>
-        </md-toolbar>
+        <!--<md-toolbar>-->
+            <!--<div class="md-toolbar-tools">-->
+                <!--<h2>Save product</h2>-->
+                <!--<span flex></span>-->
+            <!--</div>-->
+        <!--</md-toolbar>-->
         <md-dialog-content style="min-width:400px;max-width:800px;max-height:810px;">
+            <md-content layout-padding>
             <div layout-gt-sm="row">
-                <md-input-container>
+                <md-input-container class="md-block">
                     <label>Name</label>
                     <input ng-model="form.name" type="text" aria-label="Name" required>
                 </md-input-container>
-                <md-input-container>
+                <md-input-container class="md-block">
                     <label>Owner</label>
                     <md-select ng-model="form.userId" aria-label="" placeholder="Owner" required>
                         <md-option ng-repeat="user in users" value="{{user._id}}">
@@ -22,7 +23,7 @@
                 </md-input-container>
             </div>
             <div layout-gt-sm="row">
-                <md-input-container>
+                <md-input-container class="md-block">
                     <label>Scrum Master</label>
                     <md-select ng-model="form.scrumMaster" aria-label="" placeholder="Scrum Master" required
                                multiple="true">
@@ -31,7 +32,7 @@
                         </md-option>
                     </md-select>
                 </md-input-container>
-                <md-input-container>
+                <md-input-container class="md-block">
                     <label>Product Owner (PO)</label>
                     <md-select ng-model="form.productOwner" aria-label="" placeholder="Product Owner (PO)" required
                                multiple="true">
@@ -41,7 +42,7 @@
                     </md-select>
                 </md-input-container>
             </div>
-            <md-input-container>
+            <md-input-container class="md-block">
                 <label>Team</label>
                 <md-select ng-model="form.teams" id="teams" aria-label="" placeholder="Team" multiple="true"
                            required>
@@ -50,8 +51,8 @@
                     </md-option>
                 </md-select>
             </md-input-container>
-            <div layout-gt-sm="row">
-                <md-input-container>
+            <!--<div layout-gt-sm="row">-->
+                <md-input-container class="md-block">
                     <label>Week</label>
                     <md-select ng-model="form.week" id="week" aria-label="" placeholder="Week" required>
                         <md-option ng-repeat="week in weeks" value="{{week}}">
@@ -59,19 +60,20 @@
                         </md-option>
                     </md-select>
                 </md-input-container>
-                <md-input-container>
+                <md-input-container class="md-block">
                     <md-switch ng-model="form.skipWeekend" aria-label="Weekend">
                         Skip weekend
                     </md-switch>
                 </md-input-container>
-            </div>
-            <md-input-container>
+            <!--</div>-->
+            <md-input-container class="md-block">
                 <label>Description</label>
                 <textarea ng-model="form.description" id="description" aria-label="Description"></textarea>
             </md-input-container>
             <!--<md-checkbox ng-model="newParty.public" id="public" aria-label="Public">-->
             <!--Public-->
             <!--</md-checkbox>-->
+            </md-content>
         </md-dialog-content>
     </form>
     <div class="md-actions" layout="row" layout-align="center center">

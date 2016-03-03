@@ -26,7 +26,7 @@
 
         <li style="height: 60px;"></li>
         <li ng-repeat="user in vm.users" style="border-bottom: solid 1px rgba(0,0,0,0.12);" >
-            <img alt="" ng-src="" class="md-avatar" style=" display: block; position: absolute; padding-top: 5px;"/>
+            <img alt="" ng-src="" class="md-avatar" style=" display: block; position: absolute; padding-top: 5px; background-color: {{user.color}}"/>
             <a href="#" ng-click="showNavChat(user._id)"  style="width: 100%; padding: 0 46px;" class="waves-effect waves-orange" >
                 {{user.name}} {{user.lastName}}
                 <!--<md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>-->

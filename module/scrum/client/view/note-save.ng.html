@@ -1,14 +1,14 @@
 <md-dialog aria-label="Mango (Fruit)">
     <form>
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2>Save Note</h2>
-                <span flex></span>
-            </div>
-        </md-toolbar>
+        <!--<md-toolbar>-->
+            <!--<div class="md-toolbar-tools">-->
+                <!--<h2>Save Note</h2>-->
+                <!--<span flex></span>-->
+            <!--</div>-->
+        <!--</md-toolbar>-->
         <md-dialog-content style="min-width:400px;max-width:800px;max-height:810px; ">
             <div  ng-show="$root.currentUser">
-                <md-input-container>
+                <md-input-container class="md-block">
                     <label>Product</label>
                     <md-select ng-model="form.projectId" id="owner" aria-label="Owner"  placeholder="Product" required>
                         <md-option  ng-repeat="project in projects" value="{{project._id}}">
@@ -16,7 +16,7 @@
                         </md-option>
                     </md-select>
                 </md-input-container>
-                <md-input-container>
+                <md-input-container class="md-block">
                     <label>Story</label>
                     <md-select ng-model="form.story" id="story" aria-label="Story"  placeholder="Story" required>
                         <md-option  ng-repeat="story in stories" value="{{story._id}}">
@@ -24,7 +24,7 @@
                         </md-option>
                     </md-select>
                 </md-input-container>
-                <md-input-container>
+                <md-input-container class="md-block">
                     <label>Owner</label>
                     <md-select ng-model="form.owner" id="owner" aria-label="Owner"  placeholder="Owner" required>
                         <md-option  ng-repeat="member in members" value="{{member._id}}">
@@ -41,7 +41,7 @@
                         <span class="md-body-1">{{form.time}}h </span>
                     </div>
                 </div>
-                <md-input-container>
+                <md-input-container class="md-block">
                     <label>Description</label>
                     <textarea ng-model="form.description" id="description" aria-label="Description"></textarea>
                 </md-input-container>

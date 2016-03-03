@@ -1,29 +1,30 @@
 <md-dialog aria-label="Mango (Fruit)">
     <form>
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2>Save sprint</h2>
-                <span flex></span>
-            </div>
-        </md-toolbar>
+        <!--<md-toolbar>-->
+            <!--<div class="md-toolbar-tools">-->
+                <!--<h2>Save sprint</h2>-->
+                <!--<span flex></span>-->
+            <!--</div>-->
+        <!--</md-toolbar>-->
         <md-dialog-content style="min-width:400px;max-width:800px;max-height:810px;">
             <div  ng-show="$root.currentUser">
-                <md-input-container>
+                <md-input-container class="md-block">
                     <label>Number</label>
                     <input ng-model="form.number" type="number" aria-label="Name" required disabled>
                     <!--<div ng-messages="form.name.$error">-->
                         <!--<div ng-message="required">required</div>-->
                     <!--</div>-->
                 </md-input-container>
-                <md-input-container>
+                <md-input-container class="md-block">
                     <label>Date start</label>
                     <input ng-model="form.dateStart" type="text" aria-label="Date start" required>
+                    <!--<md-datepicker ng-model="form.dateStart" md-placeholder="Enter date"></md-datepicker>-->
                     <!--<md-datepicker ng-model="form.dateStart" md-placeholder="Date start" disabled></md-datepicker>-->
                     <!--<div ng-messages="form.name.$error">-->
                     <!--<div ng-message="required">required</div>-->
                     <!--</div>-->
                 </md-input-container>
-                <md-input-container>
+                <md-input-container class="md-block">
                     <label>Date end</label>
                     <input ng-model="form.dateEnd" type="text" aria-label="Date end" required>
                     <!--<md-datepicker ng-model="form.dateEnd" md-placeholder="Date end" disabled></md-datepicker>-->
@@ -31,7 +32,7 @@
                     <!--<div ng-message="required">required</div>-->
                     <!--</div>-->
                 </md-input-container>
-                <md-input-container>
+                <md-input-container class="md-block">
                     <label>Description</label>
                     <textarea ng-model="form.description" id="description" aria-label="Description"></textarea>
                 </md-input-container>
