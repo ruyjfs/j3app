@@ -1,4 +1,18 @@
-
+UserStatus = new Mongo.Collection("userStatus");
+UserStatus.allow({
+    insert: function (userId) {
+        //return userId && party.owner === userId;
+        return userId;
+    },
+    update: function (userId, party, fields, modifier) {
+        //return userId && party.owner === userId;
+        return userId;
+    },
+    remove: function (userId, party) {
+        //return userId && party.owner === userId;
+        return userId;
+    }
+});
 
 //Users = new Mongo.Collection("users");
 Meteor.users.allow({

@@ -14,6 +14,12 @@ a{
 
 .md-button{
     width: 100%;
+    /*margin: 0;*/
+    /*padding: 0;*/
+}
+
+#buttonSend{
+    width: 100%;
     margin: 0;
     padding: 0;
 }
@@ -68,6 +74,10 @@ md-card {
 
 md-sidenav {
     z-index: 1000;
+}
+
+.md-button.md-fab {
+    z-index: 0 !important;
 }
 
 /*.navbar-fixed {*/

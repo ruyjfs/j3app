@@ -21,6 +21,7 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
         };
 
         Meteor.subscribe('users');
+        Meteor.subscribe('userStatus');
         this.helpers({
             users: function () {
                 users = Meteor.users.find().map(function (user) {
@@ -56,7 +57,11 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
 
                         console.log(user.status);
                         if (user.status) {
-                            user.color = 'yellowgreen';
+                            if (user.status.idle) {
+                                user.color = '#FFC107';
+                            } else {
+                                user.color = 'yellowgreen';
+                            }
                         } else {
                             user.color = '#FFFFFF';
                         }
