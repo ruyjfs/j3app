@@ -69,8 +69,8 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                         }
 
                         // Imagem do gravatar.
-                        if (user.email) {
-                            user.img = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(user.email).toString()+'?s=40';
+                        if (user.emails[0].address) {
+                            user.img = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(user.emails[0].address).toString()+'?s=40&d=mm';
                         } else {
                             user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
                         }
