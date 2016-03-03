@@ -10,10 +10,7 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
             $state.go('scrum');
         }
 
-        moment.locale('pt-BR');
-
         isInt = function(n) { return parseInt(n) === n };
-
         $scope.helpers({
             project: function () {
                 this.subscribe('project');
