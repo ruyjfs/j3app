@@ -54,8 +54,6 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                             //}
                         }
 
-
-                        console.log(user.status);
                         if (user.status) {
                             if (user.status.idle) {
                                 user.color = '#FFC107';
