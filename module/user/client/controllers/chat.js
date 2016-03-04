@@ -90,15 +90,30 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
                     ).map(function(message){
                             if (message.userId == Meteor.user()._id) {
                                 message.owner = 'You';
+                                message.side = 'right';
                             } else {
                                 user = Meteor.users.findOne(message.userId);
                                 message.owner = user.name;
+                                message.side = 'left';
                             }
 
                             if (message.userId == Meteor.user()._id) {
                                 message.style = "margin-top: 0px; padding: 0px 5px 0px 5px; text-align: right; background-color: #FFECB3;";
                             } else {
                                 message.style = "margin-top: 0px; padding: 0px 5px 0px 5px; text-align: left; background-color: #FFF8E1;";
+                            }
+
+                            //message.dateTrated = message.date;
+                            message.dateTrated = moment(message.date).format('L LT');
+
+                            if (moment(new Date).diff(moment(message.date), 'days') > 2) {
+                                message.dateTrated = moment(message.date).format('L LT');
+                            } else {
+                                if (moment(new Date).diff(moment(message.date), 'days') >= 1) {
+                                    message.dateTrated = moment(message.date).endOf('day').fromNow(); // in 40 minutes
+                                } else {
+                                    message.dateTrated = moment(message.date).endOf('hour').fromNow(); // in 40 minutes
+                                }
                             }
 
                             return message;

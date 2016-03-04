@@ -135,12 +135,21 @@
             <!--</div>-->
 
             <div style="height: 60px;"></div>
-            <div ng-repeat="message in vm.messages" class="text-right md-whiteframe-2dp"  style="{{message.style}};">
+            <div ng-repeat="message in vm.messages" class="text-right md-whiteframe-2dp"  style="{{message.style}};
+                    margin-top: 25px;">
                 <p style="line-height: inherit;">
                     {{message.text}}
                 </p>
-                <p style="line-height: inherit; color:rgba(0,0,0,0.54);">
-                    {{message.owner}}
+                <p style="line-height: inherit;
+                color:rgba(0,0,0,0.54);
+                position: relative;
+                top: 19px;
+                /* color: #FFF; */
+                /* width: 93px; */
+                font-size: 13px;
+                text-align: {{message.side}};
+                display: block;">
+                    {{message.owner}} {{message.dateTrated}}
                 </p>
             </div>
         </div>
