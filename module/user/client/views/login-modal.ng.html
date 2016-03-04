@@ -30,7 +30,7 @@
                     <!--<md-button class="md-raised md-primary" ng-click="lc.login()"-->
                     <!--aria-label="login">Sign In-->
                     <!--</md-button>-->
-                    <md-button class="md-raised md-primary" ng-click="login()" aria-label="login">
+                    <md-button type="submit" class="md-raised md-primary" ng-click="login()" aria-label="login">
                         Sign In
                     </md-button>
                 </form>
@@ -72,7 +72,7 @@
                         <input type="password" ng-model="dataForm.confirmPassword"
                                placeholder="Confirm password" aria-label="confirmPassword"/>
                     </md-input-container>
-                    <md-button class="md-raised md-primary" ng-click="register()" flex>
+                    <md-button type="submit" class="md-raised md-primary" ng-click="register()" flex>
                         Create Account
                     </md-button>
                 </form>
@@ -94,7 +94,7 @@
                         <input type="text" ng-model="dataForm.email"
                                placeholder="Email" aria-label="email"/>
                     </md-input-container>
-                    <md-button class="md-raised md-primary"
+                    <md-button type="submit" class="md-raised md-primary"
                                ng-click="reset()" aria-label="login">Reset password
                     </md-button>
                 </form>

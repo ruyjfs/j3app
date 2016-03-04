@@ -158,9 +158,9 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
 
                 // set the location.hash to the id of
                 // the element you wish to scroll to.
-                $location.hash('buttonSend');
                 // call $anchorScroll()
                 $anchorScroll();
+                $location.hash('buttonSend');
 
                 //Message.save($scope.newMessage, false);
         //        $log.debug($scope.newMessage.text);
