@@ -42,6 +42,11 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
                         } else {
                             user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
                         }
+
+                        user.nameTreated = user.name + ' ' + user.lastName;
+                        if (user.nameTreated.length >= 13) {
+                            user.nameTreated = user.nameTreated.substr(0,12) + '...';
+                        }
                     }
 
                     return user;
@@ -68,9 +73,14 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
                         } else {
                             user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
                         }
+
+                        user.nameTreated = user.name + ' ' + user.lastName;
+                        if (user.nameTreated.length >= 13) {
+                            user.nameTreated = user.nameTreated.substr(0,12) + '...';
+                        }
                     }
 
-                    return user;
+                        return user;
                 },
                 messages: function () {
                     messages = Message.find(
