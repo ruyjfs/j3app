@@ -31,19 +31,19 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
         this.helpers({
             user: function(){
                 var user = Meteor.users.findOne(Meteor.userId());
-                user.statusColor = ' rgba(224, 224, 224, 0.77)';
-                user.statusName = ' Offline';
+                //user.statusColor = ' rgba(224, 224, 224, 0.77)';
+                //user.statusName = ' Offline';
                 if (user && user.status) {
                     if (user.status.idle) {
-                        user.statusColor = ' #FFC107';
-                        user.statusName = ' Ausente';
+                        //user.statusColor = ' #FFC107';
+                        //user.statusName = ' Ausente';
                     } else {
-                        user.statusColor = ' #9ACD32';
-                        user.statusName = ' Online';
+                        //user.statusColor = ' #9ACD32';
+                        //user.statusName = ' Online';
                     }
                 } else {
-                    user.statusColor = ' rgba(224, 224, 224, 0.77)';
-                    user.statusName = ' Offline';
+                    //user.statusColor = ' rgba(224, 224, 224, 0.77)';
+                    //user.statusName = ' Offline';
                 }
 
                 // Imagem do gravatar.
@@ -57,8 +57,8 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
             },
             users: function () {
                 users = Meteor.users.find({_id: { $not: Meteor.userId()}}).map(function (user) {
-                        user.statusColor = ' rgba(224, 224, 224, 0.77)';
-                        user.statusName = ' Offline';
+                        //user.statusColor = ' rgba(224, 224, 224, 0.77)';
+                        //user.statusName = ' Offline';
                         user.messagesNotVisualized = Message.find(
                             {
                                 $and: [
@@ -90,11 +90,11 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
 
                         if (user && user.status) {
                             if (user.status.idle) {
-                                user.statusColor = ' #FFC107';
-                                user.statusName = ' Ausente';
+                                //user.statusColor = ' #FFC107';
+                                //user.statusName = ' Ausente';
                             } else {
-                                user.statusColor = ' #9ACD32';
-                                user.statusName = ' Online';
+                                //user.statusColor = ' #9ACD32';
+                                //user.statusName = ' Online';
                             }
                         }
 
