@@ -23,17 +23,39 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
                     var user = Meteor.users.findOne(Meteor.userId());
                     if (user.status) {
                         if (user.status.idle) {
-                            user.status.color = ' #FFC107';
-                            user.status.name = ' Ausente';
+                            user.statusColor = ' #FFC107';
+                            user.statusName = ' Ausente';
                         } else {
-                            user.status.color = ' #9ACD32';
-                            user.status.name = ' Online';
+                            user.statusColor = ' #9ACD32';
+                            user.statusName = ' Online';
                         }
                     } else {
-                        user = {status: {}};
-                        user.status = {};
-                        user.status.color = ' rgba(224, 224, 224, 0.77)';
-                        user.status.name = ' Offline';
+                        user.statusColor = ' rgba(224, 224, 224, 0.77)';
+                        user.statusName = ' Offline';
+                    }
+
+                    // Imagem do gravatar.
+                    if (user.emails && user.emails[0].address) {
+                        user.img = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(user.emails[0].address).toString()+'?s=40&d=mm';
+                    } else {
+                        user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
+                    }
+
+                    return user;
+                },
+                userContact: function(){
+                    var user = Meteor.users.findOne($rootScope.contactId);
+                    if (user && user.status) {
+                        if (user.status.idle) {
+                            user.statusColor = ' #FFC107';
+                            user.statusName = ' Ausente';
+                        } else {
+                            user.statusColor = ' #9ACD32';
+                            user.statusName = ' Online';
+                        }
+                    } else {
+                        user.statusColor = ' rgba(224, 224, 224, 0.77)';
+                        user.statusName = ' Offline';
                     }
 
                     // Imagem do gravatar.

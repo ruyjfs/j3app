@@ -7,6 +7,16 @@ angular.module('scrum').controller('HeaderCtrl', ['$scope', '$timeout', '$mdSide
         //this.toggleMenu = buildToggler('menu');
         //this.toggleContactList = buildToggler('contact-list');
 
+        // Submetendo o formulario com enter.
+        //$('body').on('keypress', 'input',function(keyEvent, element){
+        //    if (keyEvent.keyCode === 13) {
+        //        console.log($(keyEvent.target).closest('form').submit());
+        //        console.log(keyEvent);
+        //        console.log('aeeeeee');
+        //        //cordova.plugins.Keyboard.close();
+        //    }
+        //})
+
         Meteor.subscribe('users');
         Meteor.subscribe('message');
         Meteor.users.find({ "status.online": true }).observe({
