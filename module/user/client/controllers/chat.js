@@ -141,6 +141,10 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
                     $location.hash('buttonSend');
                     // call $anchorScroll()
                     $anchorScroll();
+                    $('#chatText').focus();
+                    setTimeout(function() {
+                        $('#chatText').focus();
+                    },300);
 
                     return messages;
                 }
@@ -166,8 +170,11 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
                 // call $anchorScroll()
                 $location.hash('buttonSend');
                 $anchorScroll();
-                $location.hash('buttonSend');
-                $anchorScroll();
+
+                $('#chatText').focus();
+                setTimeout(function() {
+                    $('#chatText').focus();
+                },300);
 
 
                 //Message.save($scope.newMessage, false);
