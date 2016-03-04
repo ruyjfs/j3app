@@ -59,7 +59,6 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                 users = Meteor.users.find({_id: { $not: Meteor.userId()}}).map(function (user) {
                         user.statusColor = ' rgba(224, 224, 224, 0.77)';
                         user.statusName = ' Offline';
-
                         user.messagesNotVisualized = Message.find(
                             {
                                 $and: [
