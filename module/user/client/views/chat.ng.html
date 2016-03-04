@@ -5,13 +5,13 @@
             <!--<md-icon md-svg-icon="social:ic_people_24px" aria-label="Contact"></md-icon>-->
             <!--Contacts-->
             <!--</md-button>-->
-            <img alt="{{vm.user.name}}" ng-src="{{vm.user.img}}" class="md-avatar md-whiteframe-3dp" style="
+            <img alt="{{vm.userContact.name}}" ng-src="{{vm.userContact.img}}" class="md-avatar md-whiteframe-3dp" style="
                     display: block;
                     position: absolute;
                     padding-top: 0px;
                     /*margin-top: 14px;*/
-                    background-color: {{vm.user.statusColor}};
-                    border: solid 5px  {{vm.user.statusColor}};
+                    background-color: {{vm.userContact.statusColor}};
+                    border: solid 5px  {{vm.userContact.statusColor}};
 
                     /*width: 50px;*/
                     /*height: 50px;*/
@@ -39,7 +39,7 @@
     font-size: 13px;
     width: 93px;
     left: 60px;">
-                    {{vm.user.statusName}}
+                    {{vm.userContact.statusName}}
                 </p>
                 <p style="
 
@@ -50,7 +50,7 @@
     font-size: 13px;
     text-align: left;
     left: 60px;">
-                    {{vm.user.name}} {{vm.user.lastName}}
+                    {{vm.userContact.name}} {{vm.userContact.lastName}}
                 </p>
                 <p style="
     margin: 0;
@@ -61,7 +61,7 @@
     font-size: 13px;
     text-align: right;
     width: 93px;">
-                    {{vm.userContact.statusName}}
+                    {{vm.user.statusName}}
                 </p>
                 <p style="
     position: absolute;
@@ -70,16 +70,16 @@
     width: 93px;
     font-size: 13px;
     text-align: right;">
-                    {{vm.userContact.name}} {{vm.userContact.lastName}}
+                    {{vm.user.name}} {{vm.user.lastName}}
                 </p>
             </div>
-            <img alt="{{vm.userContact.name}}" ng-src="{{vm.userContact.img}}" class="md-avatar md-whiteframe-3dp" style="
+            <img alt="{{vm.user.name}}" ng-src="{{vm.user.img}}" class="md-avatar md-whiteframe-3dp" style="
                     display: block;
                     position: absolute;
                     padding-top: 0px;
                     /*margin-top: 14px;*/
-                    background-color: {{vm.userContact.statusColor}};
-                    border: solid 5px  {{vm.userContact.statusColor}};
+                    background-color: {{vm.user.statusColor}};
+                    border: solid 5px  {{vm.user.statusColor}};
 
                     /*width: 50px;*/
                     /*height: 50px;*/
