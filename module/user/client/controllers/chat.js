@@ -21,48 +21,53 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
             $scope.helpers({
                 user: function(){
                     var user = Meteor.users.findOne(Meteor.userId());
-                    if (user.status) {
-                        if (user.status.idle) {
-                            user.statusColor = ' #FFC107';
-                            user.statusName = ' Ausente';
-                        } else {
-                            user.statusColor = ' #9ACD32';
-                            user.statusName = ' Online';
-                        }
-                    } else {
-                        user.statusColor = ' rgba(224, 224, 224, 0.77)';
-                        user.statusName = ' Offline';
-                    }
 
-                    // Imagem do gravatar.
-                    if (user.emails && user.emails[0].address) {
-                        user.img = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(user.emails[0].address).toString()+'?s=40&d=mm';
-                    } else {
-                        user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
+                    if (user) {
+                        if (user.status) {
+                            if (user.status.idle) {
+                                user.statusColor = ' #FFC107';
+                                user.statusName = ' Ausente';
+                            } else {
+                                user.statusColor = ' #9ACD32';
+                                user.statusName = ' Online';
+                            }
+                        } else {
+                            user.statusColor = ' rgba(224, 224, 224, 0.77)';
+                            user.statusName = ' Offline';
+                        }
+
+                        // Imagem do gravatar.
+                        if (user.emails && user.emails[0].address) {
+                            user.img = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(user.emails[0].address).toString()+'?s=40&d=mm';
+                        } else {
+                            user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
+                        }
                     }
 
                     return user;
                 },
                 userContact: function(){
                     var user = Meteor.users.findOne($rootScope.contactId);
-                    if (user && user.status) {
-                        if (user.status.idle) {
-                            user.statusColor = ' #FFC107';
-                            user.statusName = ' Ausente';
+                    if (user){
+                        if (user.status) {
+                            if (user.status.idle) {
+                                user.statusColor = ' #FFC107';
+                                user.statusName = ' Ausente';
+                            } else {
+                                user.statusColor = ' #9ACD32';
+                                user.statusName = ' Online';
+                            }
                         } else {
-                            user.statusColor = ' #9ACD32';
-                            user.statusName = ' Online';
+                            user.statusColor = ' rgba(224, 224, 224, 0.77)';
+                            user.statusName = ' Offline';
                         }
-                    } else {
-                        user.statusColor = ' rgba(224, 224, 224, 0.77)';
-                        user.statusName = ' Offline';
-                    }
 
-                    // Imagem do gravatar.
-                    if (user.emails && user.emails[0].address) {
-                        user.img = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(user.emails[0].address).toString()+'?s=40&d=mm';
-                    } else {
-                        user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
+                        // Imagem do gravatar.
+                        if (user.emails && user.emails[0].address) {
+                            user.img = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(user.emails[0].address).toString()+'?s=40&d=mm';
+                        } else {
+                            user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
+                        }
                     }
 
                     return user;
@@ -159,8 +164,11 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
                 // set the location.hash to the id of
                 // the element you wish to scroll to.
                 // call $anchorScroll()
+                $location.hash('buttonSend');
                 $anchorScroll();
                 $location.hash('buttonSend');
+                $anchorScroll();
+
 
                 //Message.save($scope.newMessage, false);
         //        $log.debug($scope.newMessage.text);
