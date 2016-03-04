@@ -136,10 +136,10 @@
 
             <div style="height: 60px;"></div>
             <div ng-repeat="message in vm.messages" class="text-right md-whiteframe-2dp"  style="{{message.style}};">
-                <p>
+                <p style="line-height: inherit;">
                     {{message.text}}
                 </p>
-                <p style="color:rgba(0,0,0,0.54);">
+                <p style="line-height: inherit; color:rgba(0,0,0,0.54);">
                     {{message.owner}}
                 </p>
             </div>

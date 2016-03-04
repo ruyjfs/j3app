@@ -96,9 +96,9 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
                             }
 
                             if (message.userId == Meteor.user()._id) {
-                                message.style = "margin-top: 15px; padding: 0.1px 15px 0.1px 15px; text-align: right; background-color: #FFECB3;";
+                                message.style = "margin-top: 0px; padding: 0px 5px 0px 5px; text-align: right; background-color: #FFECB3;";
                             } else {
-                                message.style = "margin-top: 15px; padding: 0.1px 15px 0.1px 15px; text-align: left; background-color: #FFF8E1;";
+                                message.style = "margin-top: 0px; padding: 0px 5px 0px 5px; text-align: left; background-color: #FFF8E1;";
                             }
 
                             return message;
