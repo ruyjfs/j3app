@@ -44,8 +44,8 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
                         }
 
                         user.nameTreated = user.name + ' ' + user.lastName;
-                        if (user.nameTreated.length >= 13) {
-                            user.nameTreated = user.nameTreated.substr(0,12) + '...';
+                        if (user.nameTreated.length > 14) {
+                            user.nameTreated = user.nameTreated.substr(0,13) + '...';
                         }
                     }
 
@@ -75,8 +75,8 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
                         }
 
                         user.nameTreated = user.name + ' ' + user.lastName;
-                        if (user.nameTreated.length >= 13) {
-                            user.nameTreated = user.nameTreated.substr(0,12) + '...';
+                        if (user.nameTreated.length > 14) {
+                            user.nameTreated = user.nameTreated.substr(0,13) + '...';
                         }
                     }
 
