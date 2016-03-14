@@ -4,8 +4,15 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
     function ($scope, $mdDialog, $mdSidenav, $log, $reactive, $rootScope) {
         $reactive(this).attach($scope);
 
-        $scope.teste = '1';
-        this.teste2 = '2';
+        Materialize.toast(
+            'Hello, this screen you can view the products you created and the products that you participate, either in you being on the team linked to the project or standing as PO or Scrum Master.'+
+            20000
+        );
+        Materialize.toast(
+            'You can only edit projects that you are the owner.' +
+            'In all screens with the most (+) button you can add something, then add a team to the project elogo then the product linking the team in the registration of the product.',
+            20000
+        );
 
         //console.log(Meteor.user()._id);
         this.subscribe('project');
