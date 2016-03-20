@@ -61,7 +61,7 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                 return user;
             },
             users: function () {
-                users = Meteor.users.find({_id: { $not: Meteor.userId()}}).map(function (user) {
+                users = Meteor.users.find({_id: { $not: Meteor.userId()}}, { sort: {name: 1, lastName: 1} }).map(function (user) {
                         user.messagesNotVisualized = Message.find(
                             {
                                 $and: [
@@ -117,6 +117,7 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                         sort: {name: 1, lastName: 1}
                     }
                 );
+                console.log(users);
                 //var users = Meteor.users.find(
                 //    {
                 //        //$or: [
