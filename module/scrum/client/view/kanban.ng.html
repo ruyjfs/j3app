@@ -37,7 +37,7 @@
                     <!--{{status._id}}-->
                     <div data-sortable-row="{{story._id}}" data-noteId="{{note._id}}"
                          class="card hoverable containerNote"
-                         style="background-color: {{story.color}}; width: 120px; height: 90px; float: left; margin: 10px;  line-height: 1.2;"
+                         style="background-color: {{story.color}}; width: 120px; height: 90px; float: left; margin: 10px;  line-height: 1.2; cursor: move;"
                          ng-repeat="note in status.notes">
                         <div class="card-content white-text note">
                             <md-button ng-if="note.time" class="md-fab md-mini hoverable alertNoteMini"
@@ -124,10 +124,18 @@
                 $('td[data-sortable-row=' + row + ']').sortable({
                     connectWith: 'td[data-sortable-row=' + row + ']',
                     cancel: ".note-notHandle",
+                    delay: 350,
+                    tolerance: "pointer",
+                    over: function( event, ui ) {
+                        $(ui.item.context).addClass('hoverable2');
+                        $(ui.item.context).removeClass('hoverable');
+//                        $(ui.item.context).css('cursor: move');
+                    },
                     beforeStop: function (event, ui) {
-                        console.log(event);
                         statusId = $(ui.item.context).closest('td').attr('data-statusId');
                         noteId = $(ui.item.context).attr('data-noteId');
+                        $(ui.item.context).addClass('hoverable');
+                        $(ui.item.context).removeClass('hoverable2');
 
                         form = {};
                         form.statusId = statusId;
@@ -137,7 +145,7 @@
 //                                console.log(error);
                             } else {
 //                                console.log(statusId);
-//                                console.log(noteId);
+//                                console.log(noteId);zz
                             }
                         });
 

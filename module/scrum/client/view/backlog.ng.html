@@ -397,15 +397,25 @@
 <script>
     $(function() {
         setTimeout(function(){
+
             $( ".containerSprint" ).sortable({
                 connectWith: ".containerSprint",
                 items: ".containerNote",
                 cancel: ".note-notHandle",
+                delay: 350,
+                over: function( event, ui ) {
+                    $(ui.item.context).find('.card').addClass('hoverable2');
+                    $(ui.item.context).find('.card').removeClass('hoverable');
+//                        $(ui.item.context).css('cursor: move');
+                    console.log($(ui.item.context));
+                },
                 beforeStop: function(event, ui) {
                     sprint = $(ui.item.context).closest('td');
                     sprintId = sprint.attr('data-sprintId');
                     note = $(ui.item.context);
                     noteId = $(note).attr('data-noteId');
+                    $(ui.item.context).find('.card').addClass('hoverable');
+                    $(ui.item.context).find('.card').removeClass('hoverable2');
 
 
 
