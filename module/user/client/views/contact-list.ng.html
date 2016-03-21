@@ -156,13 +156,30 @@
             <a href="#" ng-click="showNavChat(user._id)"  style="width: 100%; padding: 0px 0px 0px 53px;" class="waves-effect waves-orange" >
                 <p style="
     /* height: 1px; */
+     /*margin: 0;*/
+     /*padding: 0;*/
+    /*position: absolute;*/
+    /*display: flex;*/
+    /*top: -10px;*/
+    /*color: #9E9E9E;*/
+    ">
+                    <div style="
+    /* height: 1px; */
      margin: 0;
      padding: 0;
     position: absolute;
     display: flex;
     top: -10px;
-    color: #9E9E9E;">
-                    {{user.statusName}}
+    color: #9E9E9E;">{{user.statusName}}</div>
+                <div style="
+     padding: 0;
+    position: absolute;
+    display: flex;
+    left: 98px;
+    top: -10px;
+    color: rgba(158, 158, 158, 0.44);
+    font-size: 12px;
+    ">{{user.statusLastLoginDate}}</div>
                 </p>
                 <p style="
     /* height: 1px; */

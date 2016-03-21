@@ -18,7 +18,7 @@ Meteor.publish("contact", function (limit) {
     //console.log('UserId: ' + this.userId);
     //console.log('Quantidade: ' + result);
 
-    return result;
+    return (result)? result : {};
 
     //return Message.find({
     //    'owner': this.userId,

@@ -19,7 +19,7 @@ Meteor.publish("status", function (limit) {
     //console.log('Quantidade: ' + result);
     //console.log('Quantidade: ' + result);
 
-    return result;
+    return (result)? result : {};
 
     //return Message.find({
     //    'owner': this.userId,

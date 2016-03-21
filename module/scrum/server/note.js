@@ -41,7 +41,7 @@ Meteor.publish("note", function (limit) {
 //console.log(result);
 
     result = Note.find({}, limit);
-    return result;
+    return (result)? result : {};
 
     //return Message.find({
     //    'owner': this.userId,

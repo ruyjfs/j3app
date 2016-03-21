@@ -18,7 +18,7 @@ Meteor.publish("project", function (limit) {
     //console.log('UserId: ' + this.userId);
     //console.log('Quantidade: ' + result);
     projectsNew = [];
-    projects = Project.find({});
+    result = Project.find({});
     //projects.forEach(function(project){
     //    console.log(project);
     //    //if (this.userId && this.userId != Meteor.user()._id) {
@@ -37,7 +37,7 @@ Meteor.publish("project", function (limit) {
     //        projectsNew.push(project);
     //    //}
     //});
-    return projects;
+    return (result)? result : {};
     //return Message.find({
     //    'owner': this.userId,
     //    'contactId': contactId

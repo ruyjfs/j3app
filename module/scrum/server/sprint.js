@@ -17,7 +17,7 @@ Meteor.publish("sprint", function (limit) {
     //console.log('Firend: ' + contactId);
     //console.log('UserId: ' + this.userId);
     //console.log('Quantidade: ' + result);
-    return result;
+    return (result)? result : {};
 
     //return Message.find({
     //    'owner': this.userId,

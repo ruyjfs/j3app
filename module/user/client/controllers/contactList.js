@@ -97,12 +97,15 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                         }
 
                         if (user && user.status) {
-                            if (user.status.idle) {
+                            if (user.status.idle == true) {
                                 user.statusColor = ' #FFC107';
                                 user.statusName = ' Ausente';
-                            } else {
+                            } else if(user.status.online == true) {
                                 user.statusColor = ' #9ACD32';
                                 user.statusName = ' Online';
+                            } else {
+                                user.statusColor = ' rgba(224, 224, 224, 0.77)';
+                                user.statusName = ' Offline';
                             }
                         } else {
                             user.statusColor = ' rgba(224, 224, 224, 0.77)';
@@ -219,12 +222,28 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                         }
 
                         if (user && user.status) {
-                            if (user.status.idle) {
+
+                            if (user.status.lastLogin) {
+
+                                if (moment(new Date).diff(moment(user.status.lastLogin.date), 'days') > 2) {
+                                    user.statusLastLoginDate = moment(user.status.lastLogin.date).format('L H[h]m');
+                                } else {
+                                    user.statusLastLoginDate = moment(user.status.lastLogin.date).fromNow(); // in 40 minutes
+                                }
+                            }
+                            console.log(user.status);
+                            //console.log(user.status.lastLogin.date);
+                            //moment(user.status.lastLogin.date).format('L LT')
+                            //user.status.lastLogin.dateTreated = '';
+                            if (user.status.idle == true) {
                                 user.statusColor = ' #FFC107';
                                 user.statusName = ' Ausente';
-                            } else {
+                            } else if(user.status.online == true) {
                                 user.statusColor = ' #9ACD32';
                                 user.statusName = ' Online';
+                            } else {
+                                user.statusColor = ' rgba(224, 224, 224, 0.77)';
+                                user.statusName = ' Offline';
                             }
                         } else {
                             user.statusColor = ' rgba(224, 224, 224, 0.77)';
