@@ -4,7 +4,7 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
     function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $reactive, $rootScope) {
         $reactive(this).attach($scope);
 
-        $('body').on('click', '#sidenav-overlay', function(){
+        $('body').on('click', '#sidenav-overlay', function () {
             $rootScope.chatIsOpen = false;
             console.log('clicou fora')
         });
@@ -16,20 +16,20 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
         }
 
         $rootScope.showNavContactList = function () {
-            $('.nav-button-chat-'+chatSide).sideNav('hide');
-            $('.nav-button-contact-'+chatSide).sideNav('hide');
-            $('.nav-button-contact-'+chatSide).sideNav('show');
+            $('.nav-button-chat-' + chatSide).sideNav('hide');
+            $('.nav-button-contact-' + chatSide).sideNav('hide');
+            $('.nav-button-contact-' + chatSide).sideNav('show');
         };
 
         $rootScope.hideNavContactList = function () {
-            $('.nav-button-chat-'+chatSide).sideNav('hide');
-            $('.nav-button-contact-'+chatSide).sideNav('hide');
+            $('.nav-button-chat-' + chatSide).sideNav('hide');
+            $('.nav-button-contact-' + chatSide).sideNav('hide');
         };
 
         Meteor.subscribe('users');
         Meteor.subscribe('userStatus');
         this.helpers({
-            user: function(){
+            user: function () {
                 var user = Meteor.users.findOne(Meteor.userId());
                 if (user) {
                     if (user && user.status) {
@@ -47,14 +47,14 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
 
                     // Imagem do gravatar.
                     if (user.emails && user.emails[0].address) {
-                        user.img = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(user.emails[0].address).toString()+'?s=40&d=mm';
+                        user.img = 'http://www.gravatar.com/avatar/' + CryptoJS.MD5(user.emails[0].address).toString() + '?s=40&d=mm';
                     } else {
                         user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
                     }
 
                     user.nameTreated = user.name + ' ' + user.lastName;
                     if (user.nameTreated.length > 16) {
-                        user.nameTreated = user.nameTreated.substr(0,13) + '...';
+                        user.nameTreated = user.nameTreated.substr(0, 13) + '...';
                     }
                 }
 
@@ -63,10 +63,10 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
             usersOnline: function () {
                 users = Meteor.users.find({
                     $and: [
-                        {_id: { $not: Meteor.userId()}},
+                        {_id: {$not: Meteor.userId()}},
                         {'status.online': true}
                     ]
-                }, { sort: {name: 1, lastName: 1} }).map(function (user) {
+                }, {sort: {name: 1, lastName: 1}}).map(function (user) {
                         user.messagesNotVisualized = Message.find(
                             {
                                 $and: [
@@ -86,12 +86,12 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                             user.messagesNotVisualized = '99+'
                         }
 
-                        if (user.messagesNotVisualized == 0){
+                        if (user.messagesNotVisualized == 0) {
                             user.messagesNotVisualized = '';
                         } else {
                             //if ($rootScope.chat) {
-                                var s = new buzz.sound('/sound/message-msn.mp3');
-                                s.play();
+                            var s = new buzz.sound('/sound/message-msn.mp3');
+                            s.play();
                             //}
                         }
 
@@ -99,7 +99,7 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                             if (user.status.idle == true) {
                                 user.statusColor = ' #FFC107';
                                 user.statusName = ' Away';
-                            } else if(user.status.online == true) {
+                            } else if (user.status.online == true) {
                                 user.statusColor = ' #9ACD32';
                                 user.statusName = ' Online';
                             } else {
@@ -113,7 +113,7 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
 
                         // Imagem do gravatar.
                         if (user.emails && user.emails[0].address) {
-                            user.img = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(user.emails[0].address).toString()+'?s=40&d=mm';
+                            user.img = 'http://www.gravatar.com/avatar/' + CryptoJS.MD5(user.emails[0].address).toString() + '?s=40&d=mm';
                         } else {
                             user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
                         }
@@ -150,22 +150,20 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                 //console.log(users);
                 return users;
             },
-            usersOnlineTotal: function()
-            {
+            usersOnlineTotal: function () {
                 users = Meteor.users.find({
                     $and: [
-                        {_id: { $not: Meteor.userId()}},
+                        {_id: {$not: Meteor.userId()}},
                         {'status.online': true}
                     ]
                 }).fetch();
 
                 return users.length;
             },
-            usersOfflineTotal: function()
-            {
+            usersOfflineTotal: function () {
                 users = Meteor.users.find({
                     $and: [
-                        {_id: { $not: Meteor.userId()}},
+                        {_id: {$not: Meteor.userId()}},
                         {
                             $or: [
                                 {'status.online': false},
@@ -181,7 +179,7 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
             usersOffline: function () {
                 users = Meteor.users.find({
                     $and: [
-                        {_id: { $not: Meteor.userId()}},
+                        {_id: {$not: Meteor.userId()}},
                         {
                             $or: [
                                 {'status.online': false},
@@ -190,7 +188,7 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                             ]
                         }
                     ]
-                }, { sort: {name: 1, lastName: 1} }).map(function (user) {
+                }, {sort: {name: 1, lastName: 1}}).map(function (user) {
                         user.messagesNotVisualized = Message.find(
                             {
                                 $and: [
@@ -211,7 +209,7 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                             user.messagesNotVisualized = '99+'
                         }
 
-                        if (user.messagesNotVisualized == 0){
+                        if (user.messagesNotVisualized == 0) {
                             user.messagesNotVisualized = '';
                         } else {
                             //if ($rootScope.chat) {
@@ -236,7 +234,7 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                             if (user.status.idle == true) {
                                 user.statusColor = ' #FFC107';
                                 user.statusName = ' Away';
-                            } else if(user.status.online == true) {
+                            } else if (user.status.online == true) {
                                 user.statusColor = ' #9ACD32';
                                 user.statusName = ' Online';
                             } else {
@@ -250,7 +248,7 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
 
                         // Imagem do gravatar.
                         if (user.emails && user.emails[0].address) {
-                            user.img = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(user.emails[0].address).toString()+'?s=40&d=mm';
+                            user.img = 'http://www.gravatar.com/avatar/' + CryptoJS.MD5(user.emails[0].address).toString() + '?s=40&d=mm';
                         } else {
                             user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
                         }

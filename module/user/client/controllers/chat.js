@@ -23,12 +23,15 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
 
                     if (user) {
                         if (user.status) {
-                            if (user.status.idle) {
+                            if (user.status.idle == true) {
                                 user.statusColor = ' #FFC107';
-                                user.statusName = ' Ausente';
-                            } else {
+                                user.statusName = ' Away';
+                            } else if (user.status.online == true) {
                                 user.statusColor = ' #9ACD32';
                                 user.statusName = ' Online';
+                            } else {
+                                user.statusColor = ' rgba(224, 224, 224, 0.77)';
+                                user.statusName = ' Offline';
                             }
                         } else {
                             user.statusColor = ' rgba(224, 224, 224, 0.77)';
@@ -54,12 +57,15 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
                     var user = Meteor.users.findOne($rootScope.contactId);
                     if (user){
                         if (user.status) {
-                            if (user.status.idle) {
+                            if (user.status.idle == true) {
                                 user.statusColor = ' #FFC107';
-                                user.statusName = ' Ausente';
-                            } else {
+                                user.statusName = ' Away';
+                            } else if (user.status.online == true) {
                                 user.statusColor = ' #9ACD32';
                                 user.statusName = ' Online';
+                            } else {
+                                user.statusColor = ' rgba(224, 224, 224, 0.77)';
+                                user.statusName = ' Offline';
                             }
                         } else {
                             user.statusColor = ' rgba(224, 224, 224, 0.77)';
