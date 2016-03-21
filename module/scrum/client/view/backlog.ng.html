@@ -56,7 +56,7 @@
                 <td id="backLog" class="linha status_1 containerSprint row" data-sprintId="" sprinthorasgastas="" sprinthoraslimite="">
                     <!--<div class="container col l4 s12 row">-->
                     <div class="col containerNote" ng-repeat="backLogNote in vm.notesBackLog" data-noteId="{{backLogNote._id}}">
-                        <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px;  line-height: 1.2;">
+                        <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px;  line-height: 1.2; cursor: move;">
                             <div class="card-content white-text note">
                                 <md-button ng-if="backLogNote.time" class="md-fab md-mini hoverable alertNote" aria-label="Time">
                                     {{backLogNote.time}}h
@@ -144,7 +144,7 @@
             </td>
                 <td id="sprintPrevious" class="linha status_3 containerSprint row" data-sprintId="{{sprintPrevious._id}}" sprinthorasgastas="0" sprinthoras="">
                     <div class="col containerNote" ng-repeat="backLogNote in vm.notesSprintPrevious" data-noteId="{{backLogNote._id}}">
-                        <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px;  line-height: 1.2;">
+                        <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px;  line-height: 1.2;  cursor: move;">
                             <div class="card-content white-text note">
                                 <md-button ng-if="backLogNote.time" class="md-fab md-mini hoverable alertNote" aria-label="Time">
                                     {{backLogNote.time}}h
@@ -182,7 +182,7 @@
                 </td>
                 <td id="sprintCurrent" class="linha status_5 containerSprint  row" data-sprintId="{{sprint._id}}" sprinthorasgastas="0" sprinthoras="">
                     <div class="col containerNote" ng-repeat="backLogNote in vm.notesSprintCurrent" data-noteId="{{backLogNote._id}}">
-                        <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px;  line-height: 1.2;">
+                        <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px;  line-height: 1.2; cursor: move;">
                             <div class="card-content white-text note">
                                 <md-button ng-if="backLogNote.time" class="md-fab md-mini hoverable alertNote" aria-label="Time">
                                     {{backLogNote.time}}h
@@ -220,7 +220,7 @@
                 </td>
                 <td id="sprintNext" class="linha status_2 containerSprint row" data-sprintId="{{sprintNext._id}}" sprinthorasgastas="6" sprinthoras="">
                     <div class="col containerNote" ng-repeat="backLogNote in vm.notesSprintNext" data-noteId="{{backLogNote._id}}">
-                        <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px; line-height: 1.2;">
+                        <div class="card hoverable" style="background-color: {{backLogNote.color}}; width: 200px; height: 140px; line-height: 1.2; cursor: move;">
                             <div class="card-content white-text note">
                                 <md-button ng-if="backLogNote.time" class="md-fab md-mini hoverable alertNote" aria-label="Time">
                                     {{backLogNote.time}}h
@@ -407,7 +407,6 @@
                     $(ui.item.context).find('.card').addClass('hoverable2');
                     $(ui.item.context).find('.card').removeClass('hoverable');
 //                        $(ui.item.context).css('cursor: move');
-                    console.log($(ui.item.context));
                 },
                 beforeStop: function(event, ui) {
                     sprint = $(ui.item.context).closest('td');
