@@ -64,9 +64,11 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                     }
                     if (project.teams) {
                         teams = Team.find({_id: {$in: project.teams}}).fetch().map(function (team) {
-                            team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
-                            team.membersTotal = team.members.length;
-                            team.timeTotal = team.membersTotal * team.time;
+                            if (team.members) {
+                                team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
+                                team.membersTotal = team.members.length;
+                                team.timeTotal = team.membersTotal * team.time;
+                            }
                             return team;
                         });
 
@@ -187,9 +189,11 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                     }
                     if (project && project.teams) {
                         teams = Team.find({_id: {$in: project.teams}}).fetch().map(function (team) {
-                            team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
-                            team.membersTotal = team.members.length;
-                            team.timeTotal = team.membersTotal * team.time;
+                            if (team.members) {
+                                team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
+                                team.membersTotal = team.members.length;
+                                team.timeTotal = team.membersTotal * team.time;
+                            }
                             return team;
                         });
                     }
@@ -277,9 +281,11 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
 
                     if (project && project.teams) {
                         teams = Team.find({_id: {$in: project.teams}}).fetch().map(function (team) {
-                            team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
-                            team.membersTotal = team.members.length;
-                            team.timeTotal = team.membersTotal * team.time;
+                            if (team.members) {
+                                team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
+                                team.membersTotal = team.members.length;
+                                team.timeTotal = team.membersTotal * team.time;
+                            }
                             return team;
                         });
                     }
