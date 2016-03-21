@@ -20,16 +20,16 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
         this.subscribe('users');
         this.helpers({
             projects: function () {
-                teamsId = Team.find({$or: [{members: Meteor.userId()}, {userId: Meteor.userId()}]}).map(function(member){
+                teamsId = Team.find({$or: [{members: Meteor.userId()}, {userId: Meteor.userId()}]}).map(function (member) {
                     return member._id;
                 });
-                projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}, {scrumMaster: {$in: [Meteor.userId()]}}, {productOwner: {$in: [Meteor.userId()]}}]}).map(function(project){
-                //projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}, {scrumMaster: {$in: [Meteor.userId()]}}]}).map(function(project){
+                projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}, {scrumMaster: {$in: [Meteor.userId()]}}, {productOwner: {$in: [Meteor.userId()]}}]}).map(function (project) {
+                    //projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}, {scrumMaster: {$in: [Meteor.userId()]}}]}).map(function(project){
                     if (project.teams) {
                         project.teams = Team.find({
-                                _id: { $in: project.teams},
-                                $or: [{'members' : Meteor.userId(), userId: Meteor.userId()}]
-                            }).fetch();
+                            _id: {$in: project.teams},
+                            $or: [{'members': Meteor.userId(), userId: Meteor.userId()}]
+                        }).fetch();
                     }
                     project.owner = Meteor.users.findOne(project.userId);
                     dateNow = moment().format('x');
@@ -43,7 +43,7 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
                     );
 
                     //if (sprint) {
-                        project.sprint = sprint;
+                    project.sprint = sprint;
                     //} else {
                     //    Meteor.call('sprintCreate', project._id, function (error, result) {
                     //        if (error) {
@@ -104,11 +104,11 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
 //console.log($rootScope.currentUser);
 
         this.items = [
-            { name: "Project", icon: "business_center", direction: "left", color: 'red' },
-            { name: "Team", icon: "group_work", direction: "top", color: 'blue' }
+            {name: "Project", icon: "business_center", direction: "left", color: 'red'},
+            {name: "Team", icon: "group_work", direction: "top", color: 'blue'}
         ];
 
-        this.isOwner = function(userId) {
+        this.isOwner = function (userId) {
             if (userId) {
                 return (Meteor.userId() == userId);
             } else {

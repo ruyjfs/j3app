@@ -24,11 +24,15 @@ angular.module('scrum').controller('ProjectTeamCtrl', [ '$scope', '$mdDialog', '
                 //    });
                 //}
 
-                if (project) {
+                if (project && project.teams) {
                     teams = Team.find({_id: {$in: project.teams}}).fetch().map(function(team){
-                        team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
+                        if (team.members) {
+                            team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
+                        }
                         return team;
                     });
+                } else {
+                    teams = {}
                 }
 
                 //teams = Team.find(

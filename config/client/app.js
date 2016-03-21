@@ -133,7 +133,7 @@ if (Meteor.isClient) {
         nameModule = $nameTheme;
         mdThemingProvider.setDefaultTheme($nameTheme);
     };
-console.log('pt');
+//console.log('pt');
     moment.locale('pt-BR');
     moment.createFromInputFallback = function(config) { config._d = new Date(config._i); };
     getUserLanguage = function () {

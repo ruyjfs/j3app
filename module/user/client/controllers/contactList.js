@@ -82,7 +82,6 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                             }
                         ).fetch().length;
 
-
                         if (user.messagesNotVisualized > 99) {
                             user.messagesNotVisualized = '99+'
                         }
@@ -99,7 +98,7 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                         if (user && user.status) {
                             if (user.status.idle == true) {
                                 user.statusColor = ' #FFC107';
-                                user.statusName = ' Ausente';
+                                user.statusName = ' Away';
                             } else if(user.status.online == true) {
                                 user.statusColor = ' #9ACD32';
                                 user.statusName = ' Online';
@@ -231,13 +230,12 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                                     user.statusLastLoginDate = moment(user.status.lastLogin.date).fromNow(); // in 40 minutes
                                 }
                             }
-                            console.log(user.status);
                             //console.log(user.status.lastLogin.date);
                             //moment(user.status.lastLogin.date).format('L LT')
                             //user.status.lastLogin.dateTreated = '';
                             if (user.status.idle == true) {
                                 user.statusColor = ' #FFC107';
-                                user.statusName = ' Ausente';
+                                user.statusName = ' Away';
                             } else if(user.status.online == true) {
                                 user.statusColor = ' #9ACD32';
                                 user.statusName = ' Online';

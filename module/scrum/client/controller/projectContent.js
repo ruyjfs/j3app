@@ -10,13 +10,15 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
             $state.go('scrum');
         }
 
-        isInt = function(n) { return parseInt(n) === n };
+        isInt = function (n) {
+            return parseInt(n) === n
+        };
         $scope.helpers({
             project: function () {
                 this.subscribe('project');
                 return Project.findOne($stateParams.id);
             },
-            sprint: function() {
+            sprint: function () {
                 this.subscribe('sprint');
                 dateNow = moment().format('x');
 
@@ -34,7 +36,7 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                         $rootScope.titleMiddle = moment(result.dateStart, 'x').format('L') + ' - ' + moment(result.dateEnd, 'x').format('L');
 
                         if ($stateParams.sprintId == 1 || $stateParams.sprintId == '') {
-                            $state.go('scrum/content', {id:$stateParams.id, sprintId:result._id})
+                            $state.go('scrum/content', {id: $stateParams.id, sprintId: result._id})
                         }
                     });
                     sprint = Sprint.findOne(
@@ -57,20 +59,22 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                     sprint.days = moment(sprint.dateEnd, 'x').diff(moment(sprint.dateStart, 'x'), 'days') + 1;
 
                     if (project.skipWeekend) {
-                        sprint.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days') +1;
+                        sprint.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days') + 1;
                         sprint.days = sprint.daysBusiness;
                     }
+                    if (project.teams) {
+                        teams = Team.find({_id: {$in: project.teams}}).fetch().map(function (team) {
+                            team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
+                            team.membersTotal = team.members.length;
+                            team.timeTotal = team.membersTotal * team.time;
+                            return team;
+                        });
 
-                    teams = Team.find({_id: {$in: project.teams}}).fetch().map(function(team){
-                        team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
-                        team.membersTotal = team.members.length;
-                        team.timeTotal = team.membersTotal*team.time;
-                        return team;
-                    });
+                    }
 
                     if (teams) {
                         timeTotal = 0;
-                        teams.forEach(function(value){
+                        teams.forEach(function (value) {
                             if (isInt(parseInt(value.timeTotal))) {
                                 timeTotal = parseInt(value.timeTotal) + timeTotal;
                             }
@@ -81,8 +85,11 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                         sprint.timeTotal = 0;
                     }
 
-                    notes = Note.find({$and: [{sprintId: $stateParams.sprintId}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
-                    notes.map(function(note){
+                    notes = Note.find({
+                        $and: [{sprintId: $stateParams.sprintId}],
+                        $or: [{projectId: $stateParams.id}, {projectId: null}]
+                    }).fetch();
+                    notes.map(function (note) {
                         note.story = Story.findOne(note.story);
                         note.owner = Meteor.users.findOne(note.owner);
                         if (note.statusId == '1') {
@@ -99,7 +106,7 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
 
                     if (notes) {
                         timeTotal = 0;
-                        notes.forEach(function(value){
+                        notes.forEach(function (value) {
                             //console.log(value);
                             if (isInt(parseInt(value.time))) {
                                 timeTotal = parseInt(value.time) + timeTotal;
@@ -111,11 +118,14 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                     }
 
 
-                    notesDone = Note.find({$and: [{sprintId: $stateParams.sprintId}, {statusId: '1'}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
+                    notesDone = Note.find({
+                        $and: [{sprintId: $stateParams.sprintId}, {statusId: '1'}],
+                        $or: [{projectId: $stateParams.id}, {projectId: null}]
+                    }).fetch();
                     //console.log(notesDone);
                     if (notesDone) {
                         timeTotal = 0;
-                        notesDone.forEach(function(value){
+                        notesDone.forEach(function (value) {
                             //console.log(value);
                             if (isInt(parseInt(value.time))) {
                                 timeTotal = parseInt(value.time) + timeTotal;
@@ -131,18 +141,18 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                     //console.log(sprint.timeTotal);
                     //console.log(sprint.timeTotalNotes);
 
-                    sprint.progressDone = sprint.timeTotalNotesDone*100/sprint.timeTotal;
-                    sprint.progress = sprint.timeTotalNotes*100/sprint.timeTotal;
+                    sprint.progressDone = sprint.timeTotalNotesDone * 100 / sprint.timeTotal;
+                    sprint.progress = sprint.timeTotalNotes * 100 / sprint.timeTotal;
 
                     //console.log(sprint.progress);
-                    $rootScope.titleMiddle = moment(sprint.dateStart, 'x').format('L')  + ' - ' + moment(sprint.dateEnd, 'x').format('L');
+                    $rootScope.titleMiddle = moment(sprint.dateStart, 'x').format('L') + ' - ' + moment(sprint.dateEnd, 'x').format('L');
                     //sprint.hoursMember = project.ti;
                 }
 
                 $rootScope.sprint = sprint;
                 return sprint;
             },
-            sprintNext: function() {
+            sprintNext: function () {
                 this.subscribe('notes');
                 this.subscribe('project');
                 this.subscribe('sprint');
@@ -161,7 +171,10 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
 
                 if (!sprintNext) {
                     $rootScope.sprintNext = {};
-                    Meteor.call('sprintFindNext', {projectId: $stateParams.id, sprintId: $stateParams.sprintId}, function(error, result){
+                    Meteor.call('sprintFindNext', {
+                        projectId: $stateParams.id,
+                        sprintId: $stateParams.sprintId
+                    }, function (error, result) {
                         $rootScope.sprintNext = result;
                     });
                 }
@@ -169,21 +182,21 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                 if ($rootScope.sprintNext) {
                     project = Project.findOne($stateParams.id);
                     if (project.skipWeekend) {
-                        $rootScope.sprintNext.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days') +1;
+                        $rootScope.sprintNext.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days') + 1;
                         $rootScope.sprintNext.days = $rootScope.sprintNext.daysBusiness;
                     }
-                    if (project) {
-                        teams = Team.find({_id: {$in: project.teams}}).fetch().map(function(team){
+                    if (project && project.teams) {
+                        teams = Team.find({_id: {$in: project.teams}}).fetch().map(function (team) {
                             team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
                             team.membersTotal = team.members.length;
-                            team.timeTotal = team.membersTotal*team.time;
+                            team.timeTotal = team.membersTotal * team.time;
                             return team;
                         });
                     }
 
                     if (teams) {
                         timeTotal = 0;
-                        teams.forEach(function(value){
+                        teams.forEach(function (value) {
                             if (isInt(parseInt(value.timeTotal))) {
                                 timeTotal = parseInt(value.timeTotal) + timeTotal;
                             }
@@ -194,10 +207,13 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                         $rootScope.sprintNext.timeTotal = 0;
                     }
 
-                    notes = Note.find({$and: [{sprintId: $rootScope.sprintNext._id}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
+                    notes = Note.find({
+                        $and: [{sprintId: $rootScope.sprintNext._id}],
+                        $or: [{projectId: $stateParams.id}, {projectId: null}]
+                    }).fetch();
                     if (notes) {
                         timeTotal = 0;
-                        notes.forEach(function(value){
+                        notes.forEach(function (value) {
                             if (isInt(parseInt(value.time))) {
                                 timeTotal = parseInt(value.time) + timeTotal;
                             }
@@ -207,10 +223,13 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                         $rootScope.sprintNext.timeTotalNotes = 0;
                     }
 
-                    notesDone = Note.find({$and: [{sprintId: $rootScope.sprintNext._id}, {statusId: '1'}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
+                    notesDone = Note.find({
+                        $and: [{sprintId: $rootScope.sprintNext._id}, {statusId: '1'}],
+                        $or: [{projectId: $stateParams.id}, {projectId: null}]
+                    }).fetch();
                     if (notesDone) {
                         timeTotal = 0;
-                        notesDone.forEach(function(value){
+                        notesDone.forEach(function (value) {
                             if (isInt(parseInt(value.time))) {
                                 //timeTotal = parseInt(value.time) + timeTotal;
                             }
@@ -220,13 +239,13 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                         $rootScope.sprintNext.timeTotalNotesDone = 0;
                     }
 
-                    $rootScope.sprintNext.progressDone = sprint.timeTotalNotesDone*100/sprint.timeTotal;
-                    $rootScope.sprintNext.progress = sprint.timeTotalNotes*100/sprint.timeTotal;
+                    $rootScope.sprintNext.progressDone = sprint.timeTotalNotesDone * 100 / sprint.timeTotal;
+                    $rootScope.sprintNext.progress = sprint.timeTotalNotes * 100 / sprint.timeTotal;
                 }
 
                 return $rootScope.sprintNext;
             },
-            sprintPrevious: function() {
+            sprintPrevious: function () {
                 this.subscribe('notes');
                 this.subscribe('project');
                 this.subscribe('sprint');
@@ -256,18 +275,18 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                         $rootScope.sprintPrevious.days = $rootScope.sprintPrevious.daysBusiness;
                     }
 
-                    if (project) {
-                        teams = Team.find({_id: {$in: project.teams}}).fetch().map(function(team){
+                    if (project && project.teams) {
+                        teams = Team.find({_id: {$in: project.teams}}).fetch().map(function (team) {
                             team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
                             team.membersTotal = team.members.length;
-                            team.timeTotal = team.membersTotal*team.time;
+                            team.timeTotal = team.membersTotal * team.time;
                             return team;
                         });
                     }
 
                     if (teams) {
                         timeTotal = 0;
-                        teams.forEach(function(value){
+                        teams.forEach(function (value) {
                             if (isInt(parseInt(value.timeTotal))) {
                                 timeTotal = parseInt(value.timeTotal) + timeTotal;
                             }
@@ -278,10 +297,13 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                         $rootScope.sprintPrevious.timeTotal = 0;
                     }
 
-                    notes = Note.find({$and: [{sprintId: $rootScope.sprintPrevious._id}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
+                    notes = Note.find({
+                        $and: [{sprintId: $rootScope.sprintPrevious._id}],
+                        $or: [{projectId: $stateParams.id}, {projectId: null}]
+                    }).fetch();
                     if (notes) {
                         timeTotal = 0;
-                        notes.forEach(function(value){
+                        notes.forEach(function (value) {
                             if (isInt(parseInt(value.time))) {
                                 timeTotal = parseInt(value.time) + timeTotal;
                             }
@@ -291,10 +313,13 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                         $rootScope.sprintPrevious.timeTotalNotes = 0;
                     }
 
-                    notesDone = Note.find({$and: [{sprintId: $rootScope.sprintPrevious._id}, {statusId: '1'}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
+                    notesDone = Note.find({
+                        $and: [{sprintId: $rootScope.sprintPrevious._id}, {statusId: '1'}],
+                        $or: [{projectId: $stateParams.id}, {projectId: null}]
+                    }).fetch();
                     if (notesDone) {
                         timeTotal = 0;
-                        notesDone.forEach(function(value){
+                        notesDone.forEach(function (value) {
                             if (isInt(parseInt(value.time))) {
                                 //timeTotal = parseInt(value.time) + timeTotal;
                             }
@@ -304,8 +329,8 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                         $rootScope.sprintPrevious.timeTotalNotesDone = 0;
                     }
 
-                    $rootScope.sprintPrevious.progressDone = sprint.timeTotalNotesDone*100/sprint.timeTotal;
-                    $rootScope.sprintPrevious.progress = sprint.timeTotalNotes*100/sprint.timeTotal;
+                    $rootScope.sprintPrevious.progressDone = sprint.timeTotalNotesDone * 100 / sprint.timeTotal;
+                    $rootScope.sprintPrevious.progress = sprint.timeTotalNotes * 100 / sprint.timeTotal;
                 }
 
                 return $rootScope.sprintPrevious;
