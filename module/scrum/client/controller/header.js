@@ -22,7 +22,7 @@ angular.module('scrum').controller('HeaderCtrl', ['$scope', '$timeout', '$mdSide
         Meteor.users.find({ "status.online": true }).observe({
             added: function(id) {
                 //console.log('online');
-                console.log(id);
+                //console.log(id);
 
                 Materialize.toast(id.name +' ' + id.lastName + ' is online;', 4000);
                 //$mdToast.show(
