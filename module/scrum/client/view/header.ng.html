@@ -147,10 +147,13 @@
         <!--</div>-->
     </div>
     </ul>
-    <ul id="nav-contact" class="side-nav">
-        <div ng-include="'module/user/client/views/contact-list.ng.html'"></div>
-    </ul>
-    <ul id="nav-chat" class="side-nav">
-        <div ng-include="'module/user/client/views/chat.ng.html'"></div>
-    </ul>
+
+    <div ng-if="$auth.currentUser">
+        <ul id="nav-contact" class="side-nav">
+            <div ng-include="'module/user/client/views/contact-list.ng.html'"></div>
+        </ul>
+        <ul id="nav-chat" class="side-nav">
+            <div ng-include="'module/user/client/views/chat.ng.html'"></div>
+        </ul>
+    </div>
 </div>
