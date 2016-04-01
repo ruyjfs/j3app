@@ -133,6 +133,15 @@ if (Meteor.isClient) {
         nameModule = $nameTheme;
         mdThemingProvider.setDefaultTheme($nameTheme);
     };
+
+    isPermission = function() {
+        if (Meteor.userId()) {
+            return false;
+        } else {
+            return false;
+        }
+    }
+
 //console.log('pt');
     moment.locale('pt-BR');
     moment.createFromInputFallback = function(config) { config._d = new Date(config._i); };

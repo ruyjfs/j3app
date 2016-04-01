@@ -5,13 +5,13 @@
                 <a id="logo-container" href="#" class="brand-logo">{{nameModule}}</a>
                 <a id="logo-middle" ng-click="modalSprintChange($event)" href="#"
                    class="brand-logo center hide-on-med-and-down" style="font-size: 20px;">
-                    {{titleMiddle}}
+                    {{titleMiddle}} -- {{isPermission()}} -- {{$auth}}
                 </a>
                 <!--<a id="logo-container" href="#" class="brand-logo">-->
                 <!--<md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>-->
                 <!--</a>-->
                 <ul class="right hide-on-med-and-down">
-                    <div ng-hide="!$auth.currentUser">
+                    <div ng-hide="vm.isGuest()">
                         <li><a href="/scrum/project"><i class="material-icons">business_center</i></a></li>
                         <!--<li><a href="/scrum/team"><i class="material-icons">group</i></a></li>-->
                         <!--<li><a href="/scrum/team"><i class="material-icons">group_work</i></a></li>-->
@@ -47,7 +47,7 @@
                         <li><a href="/user/logout" class="logout"><i class="material-icons">power_settings_new</i></a>
                         </li>
                     </div>
-                    <div ng-hide="$auth.currentUser">
+                    <div ng-hide="!vm.isGuest()">
                         <li><a href="/"><i class="material-icons">home</i></a></li>
                         <!--<li><a class="modal-trigger" href="#modalLogin"><i class="material-icons">person</i></a></li>-->
                         <!--<li><i class="material-icons left">person</i>{{> loginButtons}}</li>-->
@@ -68,7 +68,7 @@
                 <!--<span class="alert">{{vm.totalMessagesNotVisualized}}</span>-->
                 <!--</a>-->
                 <a href="#" ng-click="showNavContactList()" class="button-collapse right" style="height: 60px;"
-                   ng-hide="!$auth.currentUser">
+                   ng-hide="vm.isGuest()">
                     <!--<i class="material-icons">question_answer</i>-->
                     <i class="material-icons">chat</i>
                     <md-button ng-if="vm.totalMessagesNotVisualized" class="md-fab md-mini hoverable alert2"
@@ -110,7 +110,7 @@
 
 
     <ul id="nav-mobile" class="side-nav">
-    <div ng-show="$auth.currentUser">
+    <div ng-show="isPermission()">
             <!--{{#if currentUser}}-->
         <li>
             <a href="/scrum/project" class="waves-effect waves-orange"><i class="material-icons left">business_center</i>Project</a>
@@ -132,7 +132,7 @@
         </li>
             <!--{{else}}-->
     </div>
-    <div ng-hide="$auth.currentUser">
+    <div ng-hide="!vm.isGuest()">
         <li><a href="/" class="waves-effect waves-orange"><i class="material-icons left">home</i>Home</a></li>
         <li><a href="#" ng-click="vm.modalLogin($event, project._id)" class="waves-effect waves-orange"><i
                 class="material-icons left">person</i>Login</a></li>
@@ -147,7 +147,7 @@
     </div>
     </ul>
 
-    <div ng-if="$auth.currentUser">
+    <div ng-if="!vm.isGuest()">
         <ul id="nav-contact" class="side-nav">
             <div ng-include="'module/user/client/views/contact-list.ng.html'"></div>
         </ul>

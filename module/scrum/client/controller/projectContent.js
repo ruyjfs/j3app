@@ -269,7 +269,6 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                     $rootScope.sprintPrevious = sprintPrevious;
                 }
 
-
                 if ($rootScope.sprintPrevious) {
                     $rootScope.sprintPrevious.days = moment($rootScope.sprintPrevious.dateEnd, 'x').diff(moment($rootScope.sprintPrevious.dateStart, 'x'), 'days') + 1;
                     project = Project.findOne($stateParams.id);

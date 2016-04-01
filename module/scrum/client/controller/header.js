@@ -40,6 +40,7 @@ angular.module('scrum').controller('HeaderCtrl', ['$scope', '$timeout', '$mdSide
                 // id just went offline
             }
         });
+
         this.helpers(
             {
                 totalMessagesNotVisualized: function () {
@@ -73,6 +74,14 @@ angular.module('scrum').controller('HeaderCtrl', ['$scope', '$timeout', '$mdSide
                 }
             }
         );
+
+        this.isGuest = function() {
+            if (Meteor.userId()) {
+                return false;
+            } else {
+                return true;
+            }
+        }
 
         this.title = 'Brotherhood';
         this.redirect = function (route) {
