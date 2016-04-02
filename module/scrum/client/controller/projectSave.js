@@ -18,13 +18,13 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$reactive', '$
         if ($scope.form.teams) {
             $scope.teams = Team.find({
                 $or: [{members : Meteor.userId()}, {userId : Meteor.userId()}, {_id: {$in: $scope.form.teams}}]
-            }).fetch();
+            }, {sort: {name: 1}}).fetch();
         } else {
             $scope.teams =  Team.find({
                 $or: [{members : Meteor.userId()}, {userId : Meteor.userId()}]
             }).fetch();
         }
-        $scope.users = Meteor.users.find().fetch();
+        $scope.users = Meteor.users.find({}, {sort: {name: 1, lastName: 1}}).fetch();
         $scope.weeks = [
             1,
             2,

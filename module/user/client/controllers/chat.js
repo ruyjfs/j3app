@@ -4,6 +4,9 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
 
         $scope.messages = [];
         $rootScope.showNavChat = function(contactId){
+
+            this.teste = 'HAHAHA';
+
             this.subscribe('users');
             user = Meteor.users.findOne(Meteor.userId());
             if (user && user.chat && user.chat.side && user.chat.side == 'left') {

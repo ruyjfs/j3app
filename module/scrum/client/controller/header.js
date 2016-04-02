@@ -20,12 +20,9 @@ angular.module('scrum').controller('HeaderCtrl', ['$scope', '$timeout', '$mdSide
         Meteor.subscribe('users');
         Meteor.subscribe('message');
         Meteor.users.find({"status.online": true}).observe({
-            added: function (id) {
-                //console.log('online');
-                //console.log(id);
-
-                if (Meteor.userId()){
-                    Materialize.toast(id.name + ' ' + id.lastName + ' is online;', 4000);
+            added: function (user) {
+                if (Meteor.userId() && Meteor.userId() !== user._id){
+                    Materialize.toast(user.name + ' ' + user.lastName + ' is online;', 4000);
                 }
                 //$mdToast.show(
                 //    $mdToast.simple()
@@ -36,11 +33,11 @@ angular.module('scrum').controller('HeaderCtrl', ['$scope', '$timeout', '$mdSide
 
                 // id just came online
             },
-            removed: function (id) {
+            removed: function (user) {
                 //console.log('offline');
 
-                if (Meteor.userId()){
-                    Materialize.toast(id.name + ' ' + id.lastName + ' is offline;', 4000);
+                if (Meteor.userId() && Meteor.userId() !== user._id){
+                    Materialize.toast(user.name + ' ' + user.lastName + ' is offline;', 4000);
                 }
                 // id just went offline
             }

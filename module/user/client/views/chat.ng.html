@@ -5,13 +5,13 @@
             <!--<md-icon md-svg-icon="social:ic_people_24px" aria-label="Contact"></md-icon>-->
             <!--Contacts-->
             <!--</md-button>-->
-            <img alt="{{vm.userContact.name}}" ng-src="{{vm.userContact.img}}" class="md-avatar md-whiteframe-3dp" style="
+            <img alt="{{userContact.name}}" ng-src="{{userContact.img}}" class="md-avatar md-whiteframe-3dp" style="
                     display: block;
                     position: absolute;
                     padding-top: 0px;
                     /*margin-top: 14px;*/
-                    background-color: {{vm.userContact.statusColor}};
-                    border: solid 5px  {{vm.userContact.statusColor}};
+                    background-color: {{userContact.statusColor}};
+                    border: solid 5px  {{userContact.statusColor}};
 
                     /*width: 50px;*/
                     /*height: 50px;*/
@@ -39,7 +39,7 @@
     font-size: 13px;
     width: 93px;
     left: 60px;">
-                    {{vm.userContact.statusName}}
+                    {{userContact.statusName}}
                 </p>
                 <p style="
 
@@ -50,7 +50,7 @@
     font-size: 13px;
     text-align: left;
     left: 60px;">
-                    {{vm.userContact.nameTreated}}
+                    {{userContact.nameTreated}}
                 </p>
                 <p style="
     margin: 0;
@@ -61,7 +61,7 @@
     font-size: 13px;
     text-align: right;
     width: 93px;">
-                    {{vm.user.statusName}}
+                    {{user.statusName}}
                 </p>
                 <p style="
     position: absolute;
@@ -70,16 +70,16 @@
     width: 93px;
     font-size: 13px;
     text-align: right;">
-                    {{vm.user.nameTreated}}
+                    {{user.nameTreated}}
                 </p>
             </div>
-            <img alt="{{vm.user.name}}" ng-src="{{vm.user.img}}" class="md-avatar md-whiteframe-3dp" style="
+            <img alt="{{user.name}}" ng-src="{{user.img}}" class="md-avatar md-whiteframe-3dp" style="
                     display: block;
                     position: absolute;
                     padding-top: 0px;
                     /*margin-top: 14px;*/
-                    background-color: {{vm.user.statusColor}};
-                    border: solid 5px  {{vm.user.statusColor}};
+                    background-color: {{user.statusColor}};
+                    border: solid 5px  {{user.statusColor}};
 
                     /*width: 50px;*/
                     /*height: 50px;*/
@@ -135,7 +135,7 @@
             <!--</div>-->
 
             <div style="height: 60px;"></div>
-            <div ng-repeat="message in vm.messages" class="text-right md-whiteframe-2dp"  style="{{message.style}};">
+            <div ng-repeat="message in messages" class="text-right md-whiteframe-2dp"  style="{{message.style}};">
                 <p style="line-height: inherit; margin: 0px;">
                     {{message.text}}
                 </p>

@@ -7,24 +7,14 @@ angular.module('scrum').controller('TeamSaveCtrl', [ '$scope', '$rootScope', '$m
         Meteor.subscribe('users');
         Meteor.subscribe('team');
         //$scope.members = $meteor.collection(Meteor.users, false).subscribe('users');
-        $scope.members = Meteor.users.find().fetch();
-        $scope.times = [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9
-        ];
+        $scope.members = Meteor.users.find({}, {sort: {name: 1, lastName: 1}}).fetch();
 
         if (id) {
             //$scope.form = $meteor.object(Project, id, false);
             $scope.form = Team.findOne(id);
         } else {
             $scope.form = {};
+            $scope.form.time = 1;
         }
 
         $scope.save = function (){

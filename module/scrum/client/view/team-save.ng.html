@@ -15,14 +15,23 @@
                         <!--<div ng-message="required">required</div>-->
                     <!--</div>-->
                 </md-input-container>
-                <md-input-container class="md-block">
-                    <label>Time per member</label>
-                    <md-select ng-model="form.time" id="time" aria-label=""  placeholder="Time per member" required>
-                        <md-option  ng-repeat="time in times" value="{{time}}">
-                            {{time}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
+                <!--<md-input-container class="md-block">-->
+                    <!--<label>Time per member</label>-->
+                    <!--<md-select ng-model="form.time" id="time" aria-label=""  placeholder="Time per member" required>-->
+                        <!--<md-option  ng-repeat="time in times" value="{{time}}">-->
+                            <!--{{time}}-->
+                        <!--</md-option>-->
+                    <!--</md-select>-->
+                <!--</md-input-container>-->
+                <div layout>
+                    <div flex="40" layout layout-align="center center">
+                        <span class="md-body-1">Time per member</span>
+                    </div>
+                    <md-slider ng-model="form.time" id="time-slider" flex md-discrete step="1" min="1" max="9" aria-label="Time"></md-slider>
+                    <div flex="10" layout layout-align="center center">
+                        <span class="md-body-1">{{form.time}}h </span>
+                    </div>
+                </div>
                 <md-input-container class="md-block">
                     <label>Members</label>
                     <md-select ng-model="form.members" id="members" aria-label=""  placeholder="Members" multiple="true" required>
