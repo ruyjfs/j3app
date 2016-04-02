@@ -19,12 +19,14 @@ angular.module('scrum').controller('HeaderCtrl', ['$scope', '$timeout', '$mdSide
 
         Meteor.subscribe('users');
         Meteor.subscribe('message');
-        Meteor.users.find({ "status.online": true }).observe({
-            added: function(id) {
+        Meteor.users.find({"status.online": true}).observe({
+            added: function (id) {
                 //console.log('online');
                 //console.log(id);
 
-                Materialize.toast(id.name +' ' + id.lastName + ' is online;', 4000);
+                if (Meteor.userId()){
+                    Materialize.toast(id.name + ' ' + id.lastName + ' is online;', 4000);
+                }
                 //$mdToast.show(
                 //    $mdToast.simple()
                 //        .textContent('Simple Toast!')
@@ -34,9 +36,12 @@ angular.module('scrum').controller('HeaderCtrl', ['$scope', '$timeout', '$mdSide
 
                 // id just came online
             },
-            removed: function(id) {
+            removed: function (id) {
                 //console.log('offline');
-                Materialize.toast(id.name +' ' + id.lastName + ' is offline;', 4000);
+
+                if (Meteor.userId()){
+                    Materialize.toast(id.name + ' ' + id.lastName + ' is offline;', 4000);
+                }
                 // id just went offline
             }
         });
@@ -60,7 +65,7 @@ angular.module('scrum').controller('HeaderCtrl', ['$scope', '$timeout', '$mdSide
                             }
                         ).fetch().length;
                         return user;
-                    }).filter(function(user){
+                    }).filter(function (user) {
                         return (user.messagesNotVisualized > 0);
                     });
 
@@ -71,17 +76,17 @@ angular.module('scrum').controller('HeaderCtrl', ['$scope', '$timeout', '$mdSide
                     } else {
                         return '';
                     }
+                },
+                isGuest: function () {
+                    if (Meteor.userId()) {
+                        return false;
+                    } else {
+                        return true;
+                    }
                 }
             }
         );
 
-        this.isGuest = function() {
-            if (Meteor.userId()) {
-                return false;
-            } else {
-                return true;
-            }
-        }
 
         this.title = 'Brotherhood';
         this.redirect = function (route) {
