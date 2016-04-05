@@ -6,7 +6,7 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
 
         $('body').on('click', '#sidenav-overlay', function () {
             $rootScope.chatIsOpen = false;
-            console.log('clicou fora')
+            //console.log('clicou fora')
         });
 
         if (user && user.chat && user.chat.side && user.chat.side == 'left') {
