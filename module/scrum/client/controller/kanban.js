@@ -71,17 +71,17 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
             }
         });
 
-        $scope.showCustomToast = function() {
-            $mdToast.show({
-                hideDelay   : 300000,
-                //position    : 'right',
-                module: 'user',
-                controller  : 'ToastUserCtrl',
-                templateUrl: 'module/user/client/views/toast-user.ng.html',
-                locals: {
-                    id: 123
-                },
-            });
+        //$scope.showCustomToast = function() {
+        //    $mdToast.show({
+        //        hideDelay   : 300000,
+        //        //position    : 'right',
+        //        module: 'user',
+        //        controller  : 'ToastUserCtrl',
+        //        templateUrl: 'module/user/client/views/toast-user.ng.html',
+        //        locals: {
+        //            id: 123
+        //        },
+        //    });
             //var toast = $mdToast.simple()
             //    .textContent('Marked as read')
             //    .action('UNDO')
@@ -95,8 +95,8 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
             //});
 
             //$mdToast.show($mdToast.simple().textContent('Hello!'));
-            console.log('asd');
-        };
+            //console.log('asd');
+        //};
 
         //$scope.modalSave = function(ev, id){
         //    console.log('teste');
