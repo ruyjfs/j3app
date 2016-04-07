@@ -177,6 +177,12 @@ md-icon{
 }
 
 
+.md-toast-content {
+    height: 62px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
+
 /*form md-datepicker .md-datepicker-input-container, form md-datepicker  .md-datepicker-button.md-icon-button{*/
               /*margin-left: 0;*/
           /*}*/

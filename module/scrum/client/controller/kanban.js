@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$stateParams', '$reactive',
-    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $stateParams, $reactive) {
+angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$stateParams', '$reactive', '$mdToast',
+    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $stateParams, $reactive, $mdToast) {
         $reactive(this).attach($scope);
 
         //this.call('statusFindByProject', {projectId: $stateParams.id}, function(error, result){
@@ -70,6 +70,33 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                 return states;
             }
         });
+
+        $scope.showCustomToast = function() {
+            $mdToast.show({
+                hideDelay   : 300000,
+                //position    : 'right',
+                module: 'user',
+                controller  : 'ToastUserCtrl',
+                templateUrl: 'module/user/client/views/toast-user.ng.html',
+                locals: {
+                    id: 123
+                },
+            });
+            //var toast = $mdToast.simple()
+            //    .textContent('Marked as read')
+            //    .action('UNDO')
+            ////    //.highlightAction(true)
+            ////    //.highlightClass('md-accent')// Accent is used by default, this just demonstrates the usage.
+            //    .position('top');
+            //$mdToast.show(toast).then(function(response) {
+            //    if ( response == 'ok' ) {
+            //        alert('You clicked the \'UNDO\' action.');
+            //    }
+            //});
+
+            //$mdToast.show($mdToast.simple().textContent('Hello!'));
+            console.log('asd');
+        };
 
         //$scope.modalSave = function(ev, id){
         //    console.log('teste');
