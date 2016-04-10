@@ -7,22 +7,6 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id'
         Meteor.subscribe('story');
         Meteor.subscribe('users');
 
-        $scope.helpers({
-            stories: function () {
-                return Story.find({projectId: $stateParams.id});
-            },
-            members: function () {
-                return Meteor.users.find({});
-            },
-            projects: function () {
-                teamsId = Team.find({$or: [{members: Meteor.userId()}, {userId: Meteor.userId()}]}).map(function(member){
-                    return member._id;
-                });
-                projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}]})
-                return projects;
-            }
-        });
-
         $scope.form = {};
         if (id) {
             $scope.form = Note.findOne(id);
@@ -40,6 +24,38 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id'
             }
         }
 
+        $scope.helpers({
+            stories: function () {
+                return Story.find({projectId: $stateParams.id});
+            },
+            members: function () {
+
+                project = Project.findOne($stateParams.id);
+                usersId = [];
+                if (project && project.teams) {
+                    teams = Team.find({_id: {$in: project.teams}}).fetch().map(function(team){
+                        if (team.members) {
+                            team.members.map(function(userId){
+                                usersId.push(userId);
+                            });
+                        }
+                        return team.members;
+                    });
+                }
+                if ($scope.form && $scope.form.owner){
+                    usersId.push($scope.form.owner);
+                }
+                users = Meteor.users.find({_id: {$in: usersId}}, {sort: {name: 1, lastName: 1}});
+                return users;
+            },
+            projects: function () {
+                teamsId = Team.find({$or: [{members: Meteor.userId()}, {userId: Meteor.userId()}]}).map(function(member){
+                    return member._id;
+                });
+                projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}]})
+                return projects;
+            }
+        });
         $scope.save = function () {
             Meteor.call('noteSave', $scope.form, function (error) {
 
