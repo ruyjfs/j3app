@@ -118,18 +118,19 @@ md-bottom-sheet {
     transition-property: transform;
 }
 
-md-card .md-actions {
-    border-top: 1px solid rgba(160,160,160,0.2);
-    background-color: #ffcc80;
+md-card .md-dialog-actions {
+    /*border-top: 1px solid rgba(160,160,160,0.2);*/
+    /*background-color: #ffcc80;*/
 
-    color: #ffab40;
-    /*margin-right: 20px;*/
-    -webkit-transition: color .3s ease;
-    -moz-transition: color .3s ease;
-    -o-transition: color .3s ease;
-    -ms-transition: color .3s ease;
-    transition: color .3s ease;
-    text-transform: uppercase;
+    /*color: #ffab40;*/
+    /*/!*margin-right: 20px;*!/*/
+    /*-webkit-transition: color .3s ease;*/
+    /*-moz-transition: color .3s ease;*/
+    /*-o-transition: color .3s ease;*/
+    /*-ms-transition: color .3s ease;*/
+    /*transition: color .3s ease;*/
+    /*text-transform: uppercase;*/
+    margin: 10px;
 }
 md-card-content {
 /*md-card {*/

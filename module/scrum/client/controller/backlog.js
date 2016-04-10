@@ -4,6 +4,8 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
 
         Meteor.subscribe('note');
         Meteor.subscribe('sprint');
+        Meteor.subscribe('users');
+        Meteor.subscribe('story');
         this.helpers({
             notesBackLog: function () {
                 notes = Note.find({$and: [{$or: [{sprintId: null}, {sprintId: ''}]}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();

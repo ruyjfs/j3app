@@ -16,7 +16,8 @@
     <!--<md-progress-linear md-mode="determinate" class="md-accent" value="{{sprint.progress}}"></md-progress-linear>-->
     <md-progress-linear class="md-accent" md-mode="buffer" value="{{sprint.progressDone}}"
                         md-buffer-value="{{sprint.progress}}"></md-progress-linear>
-    <md-tabs md-center-tabs md-dynamic-height md-border-bottom md-selected="1" md-enable-disconnect md-swipe-content>
+    <!--<md-tabs md-center-tabs md-dynamic-height md-border-bottom md-selected="1" md-enable-disconnect md-swipe-content>-->
+    <md-tabs md-center-tabs md-dynamic-height md-border-bottom md-selected="1">
         <md-tab label="Burndown">
             <md-content class="md-padding">
                 <div ng-include="'module/scrum/client/view/burndown.ng.html'"></div>
@@ -34,22 +35,22 @@
         </md-tab>
         <md-tab label="Team">
             <md-content class="md-padding">
-                <div ng-include="'module/scrum/client/view/project-team.ng.html'"></div>
+                <!--<div ng-include="'module/scrum/client/view/project-team.ng.html'"></div>-->
             </md-content>
         </md-tab>
         <md-tab label="Story">
             <md-content class="md-padding">
-                <div ng-include="'module/scrum/client/view/story.ng.html'"></div>
+                <!--<div ng-include="'module/scrum/client/view/story.ng.html'"></div>-->
             </md-content>
         </md-tab>
         <md-tab label="Status">
             <md-content class="md-padding">
-                <div ng-include="'module/scrum/client/view/status.ng.html'"></div>
+                <!--<div ng-include="'module/scrum/client/view/status.ng.html'"></div>-->
             </md-content>
         </md-tab>
         <md-tab label="Sprint">
             <md-content class="md-padding">
-                <div ng-include="'module/scrum/client/view/sprint.ng.html'"></div>
+                <!--<div ng-include="'module/scrum/client/view/sprint.ng.html'"></div>-->
             </md-content>
         </md-tab>
     </md-tabs>

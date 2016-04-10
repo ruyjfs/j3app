@@ -53,7 +53,11 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                     tasks = [sprint.daysTotal];
                     daysCorrect = [sprint.daysTotal];
                     for ($i = 1; $i <= sprint.daysTotal; $i++) {
-                        sprint.days[$i] = moment(sprint.dateStart).add($i, 'days').format('DD/MM dd');
+                        if (typeof(sprint.dateStart) === 'string') {
+                            sprint.days[$i] = moment(sprint.dateStart, 'x').add($i, 'days').format('DD/MM dd');
+                        } else {
+                            sprint.days[$i] = moment(sprint.dateStart).add($i, 'days').format('DD/MM dd');
+                        }
                         daysCorrect[$i] = sprint.daysTotal - $i;
                         tasks[$i] = sprint.daysTotal - $i;
                     }
