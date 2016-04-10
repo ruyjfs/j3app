@@ -21,10 +21,10 @@ Meteor.methods({
             param.userId = Meteor.userId();
         }
 
-        moment.locale('pt-BR');
-        param.dateStart = moment(param.dateStart, 'L').format('x');
+        //moment.locale('pt-BR');
+        //param.dateStart = moment(param.dateStart, 'L').format('x');
         //console.log(param.dateEnd);
-        param.dateEnd = moment(param.dateEnd, 'L').format('x');
+        //param.dateEnd = moment(param.dateEnd, 'L').format('x');
         //console.log(param.dateEnd);
         //console.log(moment(param.dateEnd, 'L').format('x'));
         //console.log(param);
@@ -33,10 +33,8 @@ Meteor.methods({
             id = param._id;
             delete param._id;
             Sprint.update(id, { $set: param});
-            console.log('u');
         } else {
             Sprint.insert(param);
-            console.log('i');
         }
     },
     sprintCreate: function(projectId){
@@ -51,13 +49,13 @@ Meteor.methods({
                 sprint = {};
                 //sprint.dateStart = moment().startOf('week').format('DD/MM/YYYY, HH:mm:ss');
                 //sprint.dateStart = moment().startOf('week').format('DD/MM/YYYY');
-                sprint.dateStart = moment().startOf('week').format('x');
+                sprint.dateStart = moment().startOf('week')._d;
 
                 //week = project.week;
                 //if (week == 1) {
                 //    week = week - 1;
                 //}
-                sprint.dateEnd = moment().endOf('week').add(project.week - 1, 'week').format('x');
+                sprint.dateEnd = moment().endOf('week').add(project.week - 1, 'week')._d;
                 //console.log(project.week);
                 //console.log(moment().startOf('week'));
                 //console.log(new Date());
@@ -65,7 +63,7 @@ Meteor.methods({
                 sprint.projectId = projectId;
                 sprint.number = 1;
                 sprint.time = 0;
-
+console.log(sprint);
                 //console.log(sprint);
                 Sprint.insert(sprint);
 
@@ -80,8 +78,14 @@ Meteor.methods({
                 sprintNext = {};
                 //sprint.dateStart = moment().startOf('week').format('DD/MM/YYYY, HH:mm:ss');
                 //sprint.dateStart = moment().startOf('week').format('DD/MM/YYYY');
-                sprintNext.dateStart = moment(sprint.dateEnd, 'x').startOf('week').add(1, 'week').format('x');
-                sprintNext.dateEnd = moment(sprint.dateEnd, 'x').endOf('week').add(project.week, 'week').format('x');
+
+                if (typeof(sprintNext.dateStart) === 'string') {
+                    sprintNext.dateStart = moment(sprint.dateEnd, 'x').startOf('week').add(1, 'week')._d;
+                    sprintNext.dateEnd = moment(sprint.dateEnd, 'x').endOf('week').add(project.week, 'week')._d;
+                } else {
+                    sprintNext.dateStart = moment(sprint.dateEnd).startOf('week').add(1, 'week')._d;
+                    sprintNext.dateEnd = moment(sprint.dateEnd).endOf('week').add(project.week, 'week')._d;
+                }
                 //console.log(project.week);
                 //console.log(moment().startOf('week'));
                 //console.log(new Date());
@@ -90,6 +94,7 @@ Meteor.methods({
                 sprintNext.projectId = projectId;
                 sprintNext.number = sprintNextNumber;
                 //console.log(sprint);
+                console.log(sprintNext);
                 Sprint.insert(sprintNext);
             }
 
@@ -108,7 +113,8 @@ Meteor.methods({
         //}
     },
     sprintFindNext: function(param){
-        dateNow = moment().format('x');
+        dateNowX = moment().format('x');
+        dateNow = new Date();
         if (param.sprintId != '1') {
             sprint = Sprint.findOne({projectId: param.projectId, _id: param.sprintId});
         } else {
@@ -116,7 +122,9 @@ Meteor.methods({
                 {
                     $and: [
                         {projectId: param.projectId},
-                        {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
+                        {
+                            $or: [{dateStart: {$lte: dateNowX}, dateEnd: {$gte: dateNowX}}, {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}]
+                        }
                     ]
                 }
             );
@@ -127,14 +135,24 @@ Meteor.methods({
             sprintNext = Sprint.findOne({projectId: param.projectId, number: sprintNextNumber});
 
             if (sprintNext) {
-                sprintNext.dateStartTreated = moment(sprintNext.dateStart, 'x').format('L');
-                sprintNext.dateEndTreated = moment(sprintNext.dateEnd, 'x').format('L');
+                if (typeof(sprintNext.dateStart) === 'string') {
+                    sprintNext.dateStartTreated = moment(sprintNext.dateStart, 'x').format('L');
+                    sprintNext.dateEndTreated = moment(sprintNext.dateEnd, 'x').format('L');
+                } else {
+                    sprintNext.dateStartTreated = moment(sprintNext.dateStart).format('L');
+                    sprintNext.dateEndTreated = moment(sprintNext.dateEnd).format('L');
+                }
             } else {
                 moment.locale('pt-BR');
                 sprintNext = {};
                 project = Project.findOne(param.projectId);
-                sprintNext.dateStart = moment(sprint.dateEnd, 'x').startOf('week').add(1, 'week').format('x');
-                sprintNext.dateEnd = moment(sprint.dateEnd, 'x').endOf('week').add(project.week, 'week').format('x');
+                if (typeof(sprintNext.dateStart) === 'string') {
+                    sprintNext.dateStart = moment(sprint.dateEnd, 'x').startOf('week').add(1, 'week')._d;
+                    sprintNext.dateEnd = moment(sprint.dateEnd, 'x').endOf('week').add(project.week, 'week')._d;
+                } else {
+                    sprintNext.dateStart = moment(sprint.dateEnd).startOf('week').add(1, 'week')._d;
+                    sprintNext.dateEnd = moment(sprint.dateEnd).endOf('week').add(project.week, 'week')._d;
+                }
                 sprintNext.userId = Meteor.userId();
                 sprintNext.projectId = param.projectId;
                 sprintNext.number = sprintNextNumber;

@@ -33,7 +33,7 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                             //$mdDialog.hide();
                         }
                         //$rootScope.titleMiddle = result.dateStart + ' - ' + result.dateEnd + ' (' + result.number + ')';
-                        $rootScope.titleMiddle = moment(result.dateStart, 'x').format('L') + ' - ' + moment(result.dateEnd, 'x').format('L');
+                        $rootScope.titleMiddle = ' (' + result.number + ') ' + moment(result.dateStart).format('L') + ' - ' + moment(result.dateEnd).format('L');
 
                         if ($stateParams.sprintId == 1 || $stateParams.sprintId == '') {
                             $state.go('scrum/content', {id: $stateParams.id, sprintId: result._id})
@@ -54,12 +54,23 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                 if (sprint) {
                     project = Project.findOne($stateParams.id);
 
-                    sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('L');
-                    sprint.dateEndTreated = moment(sprint.dateEnd, 'x').format('L');
-                    sprint.days = moment(sprint.dateEnd, 'x').diff(moment(sprint.dateStart, 'x'), 'days') + 1;
+                    if (typeof(sprint.dateStart) === 'string') {
+                        sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('L');
+                        sprint.dateEndTreated = moment(sprint.dateEnd, 'x').format('L');
+                        sprint.days = moment(sprint.dateEnd, 'x').diff(moment(sprint.dateStart, 'x'), 'days') + 1;
+                    } else {
+                        sprint.dateStartTreated = moment(sprint.dateStart).format('L');
+                        sprint.dateEndTreated = moment(sprint.dateEnd).format('L');
+                        sprint.days = moment(sprint.dateEnd).diff(moment(sprint.dateStart), 'days') + 1;
+                    }
+
 
                     if (project.skipWeekend) {
-                        sprint.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days') + 1;
+                        if (typeof(sprint.dateStart) === 'string') {
+                            sprint.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days') + 1;
+                        } else {
+                            sprint.daysBusiness = moment(sprint.dateEnd).businessDiff(moment(sprint.dateStart), 'days') + 1;
+                        }
                         sprint.days = sprint.daysBusiness;
                     }
                     if (project.teams) {
@@ -119,7 +130,6 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                         sprint.timeTotalNotes = 0;
                     }
 
-
                     notesDone = Note.find({
                         $and: [{sprintId: $stateParams.sprintId}, {statusId: '1'}],
                         $or: [{projectId: $stateParams.id}, {projectId: null}]
@@ -147,7 +157,11 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                     sprint.progress = sprint.timeTotalNotes * 100 / sprint.timeTotal;
 
                     //console.log(sprint.progress);
-                    $rootScope.titleMiddle = moment(sprint.dateStart, 'x').format('L') + ' - ' + moment(sprint.dateEnd, 'x').format('L');
+                    if (typeof(sprint.dateStart) === 'string') {
+                        $rootScope.titleMiddle = ' (' + sprint.number + ') ' + moment(sprint.dateStart, 'x').format('L') + ' - ' + moment(sprint.dateEnd, 'x').format('L');
+                    } else {
+                        $rootScope.titleMiddle = ' (' + sprint.number + ') ' + moment(sprint.dateStart).format('L') + ' - ' + moment(sprint.dateEnd).format('L');
+                    }
                     //sprint.hoursMember = project.ti;
                 }
 
@@ -164,9 +178,15 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                     sprintNextNumber = sprint.number + 1;
                     sprintNext = Sprint.findOne({projectId: $stateParams.id, number: sprintNextNumber});
                     if (sprintNext) {
-                        sprintNext.dateStartTreated = moment(sprintNext.dateStart, 'x').format('L');
-                        sprintNext.dateEndTreated = moment(sprintNext.dateEnd, 'x').format('L');
-                        sprintNext.days = moment(sprint.dateEnd, 'x').diff(moment(sprintNext.dateStart, 'x'), 'days') + 1;
+                        if (typeof(sprintNext.dateStart) === 'string') {
+                            sprintNext.dateStartTreated = moment(sprintNext.dateStart, 'x').format('L');
+                            sprintNext.dateEndTreated = moment(sprintNext.dateEnd, 'x').format('L');
+                            sprintNext.days = moment(sprintNext.dateEnd, 'x').diff(moment(sprintNext.dateStart, 'x'), 'days') + 1;
+                        } else {
+                            sprintNext.dateStartTreated = moment(sprint.dateStart).format('L');
+                            sprintNext.dateEndTreated = moment(sprint.dateEnd).format('L');
+                            sprintNext.days = moment(sprintNext.dateEnd).diff(moment(sprintNext.dateStart), 'days') + 1;
+                        }
                         $rootScope.sprintNext = sprintNext;
                     }
                 }
@@ -184,7 +204,11 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                 if ($rootScope.sprintNext) {
                     project = Project.findOne($stateParams.id);
                     if (project.skipWeekend) {
-                        $rootScope.sprintNext.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days') + 1;
+                        if (typeof (sprintNext.dateStart) === 'string') {
+                            $rootScope.sprintNext.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days') + 1;
+                        } else {
+                            $rootScope.sprintNext.daysBusiness = moment(sprint.dateEnd).businessDiff(moment(sprint.dateStart), 'days') + 1;
+                        }
                         $rootScope.sprintNext.days = $rootScope.sprintNext.daysBusiness;
                     }
                     if (project && project.teams) {
@@ -262,19 +286,32 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                         sprintPreviousNumber = sprint.number - 1;
                         sprintPrevious = Sprint.findOne({projectId: $stateParams.id, number: sprintPreviousNumber});
                         if (sprintPrevious) {
-                            sprintPrevious.dateStartTreated = moment(sprintPrevious.dateStart, 'x').format('L');
-                            sprintPrevious.dateEndTreated = moment(sprintPrevious.dateEnd, 'x').format('L');
+                            if (typeof (sprintNext.dateStart) === 'string') {
+                                sprintPrevious.dateStartTreated = moment(sprintPrevious.dateStart, 'x').format('L');
+                                sprintPrevious.dateEndTreated = moment(sprintPrevious.dateEnd, 'x').format('L');
+                            } else {
+                                sprintPrevious.dateStartTreated = moment(sprintPrevious.dateStart).format('L');
+                                sprintPrevious.dateEndTreated = moment(sprintPrevious.dateEnd).format('L');
+                            }
                         }
                     }
                     $rootScope.sprintPrevious = sprintPrevious;
                 }
 
                 if ($rootScope.sprintPrevious) {
-                    $rootScope.sprintPrevious.days = moment($rootScope.sprintPrevious.dateEnd, 'x').diff(moment($rootScope.sprintPrevious.dateStart, 'x'), 'days') + 1;
-                    project = Project.findOne($stateParams.id);
 
+                    if (typeof ($rootScope.sprintPrevious.dateStart) === 'string') {
+                        $rootScope.sprintPrevious.days = moment($rootScope.sprintPrevious.dateEnd, 'x').diff(moment($rootScope.sprintPrevious.dateStart, 'x'), 'days') + 1;
+                    } else {
+                        $rootScope.sprintPrevious.days = moment($rootScope.sprintPrevious.dateEnd).diff(moment($rootScope.sprintPrevious.dateStart), 'days') + 1;
+                    }
+                    project = Project.findOne($stateParams.id);
                     if (project.skipWeekend) {
-                        $rootScope.sprintPrevious.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days') + 1;
+                        if (typeof (sprintNext.dateStart) === 'string') {
+                            $rootScope.sprintPrevious.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days') + 1;
+                        } else {
+                            $rootScope.sprintPrevious.daysBusiness = moment(sprint.dateEnd).businessDiff(moment(sprint.dateStart), 'days') + 1;
+                        }
                         $rootScope.sprintPrevious.days = $rootScope.sprintPrevious.daysBusiness;
                     }
 

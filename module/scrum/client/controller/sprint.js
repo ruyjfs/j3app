@@ -17,8 +17,18 @@ angular.module('scrum').controller('SprintCtrl', [ '$scope', '$mdDialog', '$mdSi
                     //console.log(sprint.dateStart);
                     //sprint.dateStartTreated = moment(new Date(1454205600000)).format('L');
                     //sprint.dateEndTreated = moment(new Date(sprint.dateEnd)).format('L');
-                    sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('L');
-                    sprint.dateEndTreated = moment(sprint.dateEnd, 'x').format('L');
+
+                    if (typeof(sprint.dateStart) === 'string') {
+                        sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('L');
+                    } else {
+                        sprint.dateStartTreated = moment(sprint.dateStart).format('L');
+                    }
+                    if (typeof(sprint.dateEnd) === 'string') {
+                        sprint.dateEndTreated = moment(sprint.dateEnd, 'x').format('L');
+                    } else {
+                        sprint.dateEndTreated = moment(sprint.dateEnd).format('L');
+                    }
+
                     //$log.debug(sprint.dateEnd);
                     //sprint.dateStartTreated = moment(sprint.dateEnd).calendar('L');
                     //sprint.dateEndTreated = moment.unix(sprint.dateEnd).calendar('L');

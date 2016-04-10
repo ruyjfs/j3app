@@ -27,8 +27,16 @@ angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$rootScope',
         //});
         $scope.form = [];
         $scope.sprints =  Sprint.find({$and: [{projectId: $stateParams.id}]}).map(function(sprint){
-            sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('L');
-            sprint.dateEndTreated = moment(sprint.dateEnd, 'x').format('L');
+            if (typeof(sprint.dateStart) === 'string') {
+                sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('L');
+            } else {
+                sprint.dateStartTreated = moment(sprint.dateStart).format('L');
+            }
+            if (typeof(sprint.dateEnd) === 'string') {
+                sprint.dateEndTreated = moment(sprint.dateEnd, 'x').format('L');
+            } else {
+                sprint.dateEndTreated = moment(sprint.dateEnd).format('L');
+            }
             return sprint;
         });
 

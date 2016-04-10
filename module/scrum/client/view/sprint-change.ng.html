@@ -8,7 +8,7 @@
         </md-toolbar>
         <md-dialog-content style="min-width:400px;max-width:800px;max-height:810px; ">
             <div  ng-show="$root.currentUser">
-                <md-input-container>
+                <md-input-container class="md-block">
                     <md-select ng-model="form.sprintId" id="sprintId" aria-label=""  placeholder="Sprint" required >
                         <md-option  ng-repeat="sprint in sprints" value="{{sprint._id}}" ng-click="change(sprint._id)">
                             ({{sprint.number}}) {{sprint.dateStartTreated}} - {{sprint.dateEndTreated}}

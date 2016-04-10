@@ -5,7 +5,7 @@
         <!--</md-button>-->
         <!--<md-content>-->
         <table id="scrumy-board" cellspacing="0" class="live scrum" style="min-height: 300px;">
-            <tbody id="scrumy-board-body" ng-sortable="{animation:150}">
+            <tbody id="scrumy-board-body">
             <tr id="scrumy-board-header" style="position: relative; text-align: center;">
                 <th id="story-header" style="text-align: center;">
                     <span>Story</span>
@@ -49,9 +49,7 @@
                             </md-button>
                             <span class="note-notHandle text-darken-4">{{note.owner.name}}<i
                                     class=" activator material-icons right" style="">more_vert</i></span>
-
                             <p>{{note.description}}</p>
-
                             <p></p>
                         </div>
                         <div class="card-reveal" layout="row" style="padding: 5px;">

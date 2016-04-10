@@ -30,8 +30,16 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                     sprintPreviousNumber = sprint.number - 1;
                     sprintPrevious = Sprint.findOne({projectId: $stateParams.id, number: sprintPreviousNumber});
                     if (sprintPrevious) {
-                        sprintPrevious.dateStartTreated = moment(sprintPrevious.dateStart, 'x').format('L');
-                        sprintPrevious.dateEndTreated = moment(sprintPrevious.dateEnd, 'x').format('L');
+                        if (typeof(sprintPrevious.dateStart) === 'string') {
+                            sprintPrevious.dateStartTreated = moment(sprintPrevious.dateStart, 'x').format('L');
+                        } else {
+                            sprintPrevious.dateStartTreated = moment(sprintPrevious.dateStart).format('L');
+                        }
+                        if (typeof(sprintPrevious.dateEnd) === 'string') {
+                            sprintPrevious.dateEndTreated = moment(sprintPrevious.dateEnd, 'x').format('L');
+                        } else {
+                            sprintPrevious.dateEndTreated = moment(sprintPrevious.dateEnd).format('L');
+                        }
                         notes = Note.find({$and: [{sprintId: sprintPrevious._id}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
                         notes.map(function(note){
                             note.story = Story.findOne(note.story);
@@ -77,8 +85,13 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                     sprintNextNumber = sprint.number + 1;
                     sprintNext = Sprint.findOne({projectId: $stateParams.id, number: sprintNextNumber});
                     if (sprintNext) {
-                        sprintNext.dateStartTreated = moment(sprintNext.dateStart, 'x').format('L');
-                        sprintNext.dateEndTreated = moment(sprintNext.dateEnd, 'x').format('L');
+                        if (typeof(sprintNext.dateStart) === 'string') {
+                            sprintNext.dateStartTreated = moment(sprintNext.dateStart, 'x').format('L');
+                            sprintNext.dateEndTreated = moment(sprintNext.dateEnd, 'x').format('L');
+                        } else {
+                            sprintNext.dateStartTreated = moment(sprintNext.dateStart).format('L');
+                            sprintNext.dateEndTreated = moment(sprintNext.dateEnd).format('L');
+                        }
                         notes = Note.find({$and: [{sprintId: sprintNext._id}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
                         notes.map(function(note){
                             note.story = Story.findOne(note.story);

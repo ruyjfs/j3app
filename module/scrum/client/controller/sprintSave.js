@@ -8,8 +8,16 @@ angular.module('scrum').controller('SprintSaveCtrl', [ '$scope', '$mdDialog', 'i
             //console.log(moment($scope.dateStart, 'x').format('L'));
             //console.log($scope.dateStart);
             //console.log(moment($scope.dateStart, 'x').format('L'));
-            $scope.form.dateStart = moment($scope.form.dateStart, 'x').format('L');
-            $scope.form.dateEnd = moment($scope.form.dateEnd, 'x').format('L');
+            //$scope.form.dateStart = moment($scope.dateStart, 'x');
+            //$scope.form.dateEnd = moment($scope.dateEnd, 'x');
+
+            if (typeof($scope.form.dateStart) === 'string') {
+                $scope.form.dateStart = new Date(moment($scope.form.dateStart, 'x').format());
+            }
+
+            if (typeof($scope.form.dateEnd) === 'string') {
+                $scope.form.dateEnd = new Date(moment($scope.form.dateEnd, 'x').format());
+            }
         } else {
             $scope.form = {};
         }

@@ -171,7 +171,6 @@ angular.module('scrum').controller('HeaderCtrl', ['$scope', '$timeout', '$mdSide
             }
         );
 
-
         this.title = 'Brotherhood';
         this.redirect = function (route) {
             arrTitle = route.split('/');
