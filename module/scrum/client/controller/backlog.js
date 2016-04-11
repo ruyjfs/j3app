@@ -30,12 +30,9 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                     if (sprintPrevious) {
                         if (typeof(sprintPrevious.dateStart) === 'string') {
                             sprintPrevious.dateStartTreated = moment(sprintPrevious.dateStart, 'x').format('L');
-                        } else {
-                            sprintPrevious.dateStartTreated = moment(sprintPrevious.dateStart).format('L');
-                        }
-                        if (typeof(sprintPrevious.dateEnd) === 'string') {
                             sprintPrevious.dateEndTreated = moment(sprintPrevious.dateEnd, 'x').format('L');
                         } else {
+                            sprintPrevious.dateStartTreated = moment(sprintPrevious.dateStart).format('L');
                             sprintPrevious.dateEndTreated = moment(sprintPrevious.dateEnd).format('L');
                         }
                         notes = Note.find({$and: [{sprintId: sprintPrevious._id}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
