@@ -63,7 +63,7 @@ Meteor.methods({
                 sprint.projectId = projectId;
                 sprint.number = 1;
                 sprint.time = 0;
-console.log(sprint);
+//console.log(sprint);
                 //console.log(sprint);
                 Sprint.insert(sprint);
 
@@ -94,7 +94,7 @@ console.log(sprint);
                 sprintNext.projectId = projectId;
                 sprintNext.number = sprintNextNumber;
                 //console.log(sprint);
-                console.log(sprintNext);
+                //console.log(sprintNext);
                 Sprint.insert(sprintNext);
             }
 

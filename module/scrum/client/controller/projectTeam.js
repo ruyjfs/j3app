@@ -3,29 +3,6 @@
 angular.module('scrum').controller('ProjectTeamCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$reactive', '$stateParams',
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive, $stateParams) {
         $reactive(this).attach($scope);
-
-        this.perPage = 10;
-        this.page = 1;
-        this.sort = {
-            name: 1
-        };
-
-        this.searchText = '';
-        this.subscribe('team', function(){
-                return [
-                    {
-                        limit: parseInt(this.getReactively('perPage')),
-                        skip: parseInt((this.getReactively('page') - 1) * this.getReactively('perPage')),
-                        sort: this.getReactively('sort')
-                    }, this.getReactively('searchText')
-                ]
-            }
-        );
-
-        this.subscribe('project');
-        //this.subscribe('team');
-        this.subscribe('users');
-
         this.helpers({
             teams: function() {
                 project = Project.findOne($stateParams.id);

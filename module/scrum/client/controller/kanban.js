@@ -29,7 +29,6 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
         //    console.log('asd');
         //    this.stories = result
         //});
-        this.subscribe('note', function(){return [$stateParams.id]});
         this.helpers({
             stories: function() {
                 var stories = Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]}).map(function(story){

@@ -13,13 +13,35 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
         isInt = function (n) {
             return parseInt(n) === n
         };
+        this.subscribe('project');
+
+        this.perPage = 10;
+        this.page = 1;
+        this.sort = {
+            name: 1
+        };
+
+        this.searchText = '';
+        this.subscribe('team', function(){
+                return [
+                    {
+                        limit: parseInt(this.getReactively('perPage')),
+                        skip: parseInt((this.getReactively('page') - 1) * this.getReactively('perPage')),
+                        sort: this.getReactively('sort')
+                    }, this.getReactively('searchText')
+                ]
+            }
+        );
+
+        this.subscribe('status', function(){return [$stateParams.id]});
+        this.subscribe('note', function(){return [$stateParams.id]});
+        this.subscribe('story', function(){return [$stateParams.id]});
+        this.subscribe('sprint', function(){return [$stateParams.id]});
         $scope.helpers({
             project: function () {
-                this.subscribe('project');
                 return Project.findOne($stateParams.id);
             },
             sprint: function () {
-                this.subscribe('sprint');
                 dateNow = moment().format('x');
 
                 if ($stateParams.sprintId == '1' || $stateParams.sprintId == '') {
@@ -169,9 +191,6 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                 return sprint;
             },
             sprintNext: function () {
-                this.subscribe('notes');
-                this.subscribe('project');
-                this.subscribe('sprint');
                 sprint = Sprint.findOne({_id: $stateParams.sprintId});
                 sprintNext = {};
                 if (sprint) {
@@ -201,7 +220,7 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                     });
                 }
 
-                if ($rootScope.sprintNext) {
+                if (sprint && $rootScope.sprintNext) {
                     project = Project.findOne($stateParams.id);
                     if (project.skipWeekend) {
                         if (typeof (sprintNext.dateStart) === 'string') {
@@ -267,16 +286,13 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                         $rootScope.sprintNext.timeTotalNotesDone = 0;
                     }
 
-                    $rootScope.sprintNext.progressDone = sprint.timeTotalNotesDone * 100 / sprint.timeTotal;
-                    $rootScope.sprintNext.progress = sprint.timeTotalNotes * 100 / sprint.timeTotal;
+                    $rootScope.sprintNext.progressDone = $rootScope.sprintNext.timeTotalNotesDone * 100 / sprint.timeTotal;
+                    $rootScope.sprintNext.progress = $rootScope.sprintNext.timeTotalNotesDone * 100 / sprint.timeTotal;
                 }
 
                 return $rootScope.sprintNext;
             },
             sprintPrevious: function () {
-                this.subscribe('notes');
-                this.subscribe('project');
-                this.subscribe('sprint');
                 sprint = Sprint.findOne({_id: $stateParams.sprintId});
                 sprintPrevious = {};
                 if (sprint) {
