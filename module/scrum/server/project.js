@@ -1,5 +1,31 @@
 //Meteor.publish("message", function (contactId) {
-Meteor.publish("project", function (limit) {
+Meteor.publish("project", function (options) {
+    if (this.userId){
+        teamsId = Team.find({$or: [{members: this.userId}, {userId: this.userId}]}).map(function (member) {
+            return member._id;
+        });
+        selector = {
+            $or: [
+                {userId: this.userId},
+                {teams: {$in: teamsId}},
+                {scrumMaster: {$in: [this.userId]}},
+                {productOwner: {$in: [this.userId]}}
+            ]
+        };
+        Counts.publish(this, 'total', Team.find(selector), {
+            noReady: true
+        });
+        result = Project.find(selector, options);
+        return (result)? result : [];
+    } else {
+        return [];
+    }
+
+
+
+
+
+
 //    Message.cancel();
 
     //if (limit) {
@@ -17,8 +43,8 @@ Meteor.publish("project", function (limit) {
     //console.log('Firend: ' + contactId);
     //console.log('UserId: ' + this.userId);
     //console.log('Quantidade: ' + result);
-    projectsNew = [];
-    result = Project.find({});
+    //projectsNew = [];
+    //result = Project.find({});
     //projects.forEach(function(project){
     //    console.log(project);
     //    //if (this.userId && this.userId != Meteor.user()._id) {
@@ -37,7 +63,7 @@ Meteor.publish("project", function (limit) {
     //        projectsNew.push(project);
     //    //}
     //});
-    return (result)? result : {};
+    //return (result)? result : {};
     //return Message.find({
     //    'owner': this.userId,
     //    'contactId': contactId

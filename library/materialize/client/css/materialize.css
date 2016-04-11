@@ -2046,7 +2046,7 @@ blockquote {
 i {
   line-height: inherit; }
   i.left {
-    float: left;
+    /*float: left;*/
     margin-right: 15px; }
   i.right {
     float: right;
@@ -2075,8 +2075,12 @@ img.responsive-img, video.responsive-video {
     color: #444; }
   .pagination li.active a {
     color: #fff; }
+
   .pagination li.active {
-    background-color: #ee6e73; }
+    background-color: #EF6C00; }
+  /*.pagination li.active {*/
+    /*background-color: #ee6e73; }*/
+
   .pagination li.disabled a {
     cursor: default;
     color: #999; }
@@ -2565,7 +2569,8 @@ nav ul a span.badge {
   text-align: center; }
 
 .left {
-  float: left !important; }
+  /*float: left !important; */
+}
 
 .right {
   float: right !important; }

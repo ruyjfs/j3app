@@ -6,7 +6,8 @@ if (Meteor.isClient) {
         'angularUtils.directives.dirPagination',
         'uiGmapgoogle-maps',
         //'ngCookies',
-        'ngMaterial'
+        'ngMaterial',
+        //'utilsPagination'
     ]).directive('teste', function () {
             return 'asdasdasdasdasd';
             //return {
@@ -17,7 +18,9 @@ if (Meteor.isClient) {
                 //    })
                 //}
             //};
-        });
+        }).config(function(paginationTemplateProvider){
+        paginationTemplateProvider.setPath('library/directives/pagination.tpl.html');
+    });
 
 
     //angular.module('scrum')

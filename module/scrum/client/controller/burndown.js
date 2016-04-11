@@ -29,8 +29,6 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
         sprint = {};
         this.helpers({
             sprint: function () {
-                Meteor.subscribe('project');
-                Meteor.subscribe('sprint');
                 project = Project.findOne($stateParams.id);
                 sprint = Sprint.findOne({_id: $stateParams.sprintId});
 

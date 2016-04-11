@@ -1,25 +1,31 @@
 //Meteor.publish("message", function (contactId) {
-Meteor.publish("team", function (limit) {
-//    Message.cancel();
+Meteor.publish("team", function (options, searchString) {
+    if (this.userId){
+        selector = {
+            $or: [
+                {'userId' : this.userId},
+                {'members' : this.userId}
+            ]
+        };
 
-    if (limit) {
-        limit = {limit: limit};
-    } else {
-        limit = {};
+        if (typeof searchString === 'string' && searchString.length) {
+            console.log(searchString);
+            selector.name = {
+                $regex:  `.*${searchString}.*`,
+            $options : 'i'
+        };
     }
 
-    result = Team.find({
-        //'owner' : $rootScope.currentUser._id,
-        //'owner': this.userId,
-        //'contactId': contactId
-    }, limit);
-    //console.log('_____________________________________________________________________');
-    //console.log('Firend: ' + contactId);
-    //console.log('UserId: ' + this.userId);
-    //console.log('Quantidade: ' + result);
-    //console.log('Quantidade: ' + result);
+        Counts.publish(this, 'total', Team.find(selector), {
+            noReady: true
+        });
 
-    return (result)? result : {};
+        result = Team.find(selector, options);
+        return (result)? result : [];
+    } else {
+        return [];
+    }
+
 
     //return Message.find({
     //    'owner': this.userId,

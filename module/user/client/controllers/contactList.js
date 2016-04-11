@@ -259,32 +259,8 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                         sort: {name: 1, lastName: 1}
                     }
                 );
-                //console.log(users);
-                //var users = Meteor.users.find(
-                //    {
-                //        //$or: [
-                //        //    {
-                //        //        'userId' : $rootScope.currentUser._id,
-                //        //        'contactId' : contactId
-                //        //    }
-                //        //    ,
-                //        //    {
-                //        //        'userId' : contactId,
-                //        //        'contactId' : $rootScope.currentUser._id
-                //        //    }
-                //        //]
-                //    },
-                //    {
-                //        sort: {name: 1, lastName: 1, email: 1}
-                //        //[
-                //        //    name, 'asc'
-                //        //    //[name, 'asc'],
-                //        //    //[email, 'asc'],
-                //        //]
-                //    }
-                //).fetch();
-                //console.log(users);
                 return users;
+                //return [];
             }
         });
     }

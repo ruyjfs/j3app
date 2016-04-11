@@ -4,8 +4,8 @@ angular.module('scrum').controller('TeamSaveCtrl', [ '$scope', '$rootScope', '$m
     function ($scope, $rootScope, $mdDialog, id) {
 
         $scope.title = 'Scrum';
-        Meteor.subscribe('users');
-        Meteor.subscribe('team');
+        //Meteor.subscribe('users');
+        //Meteor.subscribe('team');
         //$scope.members = $meteor.collection(Meteor.users, false).subscribe('users');
         $scope.members = Meteor.users.find({}, {sort: {name: 1, lastName: 1}}).fetch();
 

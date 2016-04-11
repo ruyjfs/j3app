@@ -29,6 +29,7 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
         //    console.log('asd');
         //    this.stories = result
         //});
+        this.subscribe('note', function(){return [$stateParams.id]});
         this.helpers({
             stories: function() {
                 var stories = Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]}).map(function(story){
@@ -116,9 +117,6 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
         //    });
         //};
 
-
-
-
         //$scope.items = ['item 1', 'item 2'];
         //$scope.foo = ['foo 1', '..'];
         //$scope.bar = ['bar 1', '..'];
@@ -129,7 +127,6 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
         //        // @see https://github.com/RubaXa/Sortable/blob/master/ng-sortable.js#L18-L24
         //    }
         //};
-
 
         //$meteor.subscribe('team');
         //$scope.team = $meteor.collection( function() {

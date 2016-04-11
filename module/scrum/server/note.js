@@ -1,11 +1,11 @@
 //Meteor.publish("message", function (contactId) {
-Meteor.publish("note", function (limit) {
-//    Message.cancel();
-
-    if (limit) {
-        limit = {limit: limit};
+Meteor.publish("note", function (projectId, options) {
+    if (this.userId && projectId){
+        selector = {$or: [{projectId: projectId}, {projectId: null}]};
+        result = Note.find(selector, options);
+        return (result)? result : [];
     } else {
-        limit = {};
+        return [];
     }
 
     //var result = [];

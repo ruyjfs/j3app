@@ -6,10 +6,10 @@ angular.module('scrum').controller('StatusCtrl', [ '$scope', '$mdDialog', '$reac
             $state.go('scrum');
         }
 
-        Meteor.subscribe('status');
+        this.subscribe('status', function(){return [$stateParams.id]});
         this.helpers({
             states: function () {
-                return Status.find({$or: [{projectId: $stateParams.id}, {projectId: null}]});
+                return Status.find({});
             }
         });
     }

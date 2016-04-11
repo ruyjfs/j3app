@@ -4,10 +4,10 @@ angular.module('scrum').controller('SprintCtrl', [ '$scope', '$mdDialog', '$mdSi
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive, $stateParams) {
         $reactive(this).attach($scope);
 
-        Meteor.subscribe('sprint');
+        this.subscribe('sprint', function(){return [$stateParams.id]});
         this.helpers({
             sprints: function () {
-                return Sprint.find({$or: [{projectId: $stateParams.id}, {projectId: null}]}).map(function(sprint){
+                return Sprint.find({}).map(function(sprint){
                     //sprint.dateStartTreated = moment(sprint.dateStart).format('x');
                     //sprint.dateEndTreated = moment.unix(sprint.dateStart).calendar('L');
                     //sprint.dateStartTreated = moment(new Date(sprint.dateStart)).format('L');

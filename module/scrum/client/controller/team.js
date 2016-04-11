@@ -1,43 +1,55 @@
-//angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
-//    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$reactive',
-    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive) {
+angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdUtil', '$log', '$reactive',
+    function ($scope, $mdDialog, $mdUtil, $log, $reactive) {
         $reactive(this).attach($scope);
 
-        this.subscribe('team');
+        this.perPage = 5;
+        this.page = 1;
+        this.sort = {
+            name: 1
+        };
+
+        this.searchText = '';
+        this.subscribe('team', function(){
+                return [
+                    {
+                        limit: parseInt(this.getReactively('perPage')),
+                        skip: parseInt((this.getReactively('page') - 1) * this.getReactively('perPage')),
+                        sort: this.getReactively('sort')
+                    }, this.getReactively('searchText')
+                ]
+            }
+        );
         this.helpers({
             teams: function() {
-
-                if (Meteor.user()){
-                    userId = Meteor.user()._id;
-                } else {
-                    userId = '';
-                }
-
-                teams = Team.find(
-                    {
-                        //$or: [{userId: Meteor.user()._id}, {members : Meteor.user()._id}]
-
-                        $or: [
-                            {
-                                'userId' : userId,
-                            }
-                            ,
-                            {
-                                'members' : userId,
-                                //'userId' : contactId,
-                                //'contactId' : $rootScope.currentUser._id
-                            }
-                        ]
-                    });
-                return teams;
+                return Team.find({}, {
+                    //limit: parseInt(this.getReactively('perPage')),
+                    //skip: parseInt((this.getReactively('page') - 1) * this.getReactively('perPage')),
+                    sort : this.getReactively('sort')
+                });
             }
         });
+
+        this.total = function() {
+            return Counts.get('total');
+        };
+
+        this.pageChanged = function(newPage) {
+            this.page = newPage;
+            console.log(this.getReactively('page'));
+        };
+
+
+        this.sortChange = function(sort) {
+            console.log(typeof sort);
+            this.sort = {
+                name: parseInt(sort)
+            };
+        };
 
         $scope.remove = function(team) {
             console.log(this.getReactively('teams'));
             this.teams.remove(team);
-        }
+        };
 
         $scope.modalSave = function(ev, id){
             $mdDialog.show({

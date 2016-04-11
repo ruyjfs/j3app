@@ -1,23 +1,27 @@
 //Meteor.publish("message", function (contactId) {
-Meteor.publish("sprint", function (limit) {
-//    Message.cancel();
+Meteor.publish("sprint", function (projectId, options) {
 
-    if (limit) {
-        limit = {limit: limit};
+    if (this.userId && projectId){
+        selector = {$or: [{projectId: projectId}, {projectId: null}]};
+        result = Sprint.find(selector, options);
+        return (result)? result : [];
     } else {
-        limit = {};
+        return [];
     }
 
-    result = Sprint.find({
+//    Message.cancel();
+
+
+    //result = Sprint.find({
         //'owner' : $rootScope.currentUser._id,
         //'owner': this.userId,
         //'contactId': contactId
-    }, limit);
+    //}, limit);
     //console.log('_____________________________________________________________________');
     //console.log('Firend: ' + contactId);
     //console.log('UserId: ' + this.userId);
     //console.log('Quantidade: ' + result);
-    return (result)? result : {};
+    //return (result)? result : {};
 
     //return Message.find({
     //    'owner': this.userId,

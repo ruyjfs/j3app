@@ -1,25 +1,14 @@
 //Meteor.publish("message", function (contactId) {
-Meteor.publish("status", function (limit) {
+Meteor.publish("status", function (projectId, options) {
 //    Message.cancel();
 
-    if (limit) {
-        limit = {limit: limit};
+    if (this.userId && projectId){
+        selector = {$or: [{projectId: projectId}, {projectId: null}]};
+        result = Status.find(selector, options);
+        return (result)? result : [];
     } else {
-        limit = {};
+        return [];
     }
-
-    result = Status.find({
-        //'owner' : $rootScope.currentUser._id,
-        //'owner': this.userId,
-        //'contactId': contactId
-    }, limit);
-    //console.log('_____________________________________________________________________');
-    //console.log('Firend: ' + contactId);
-    //console.log('UserId: ' + this.userId);
-    //console.log('Quantidade: ' + result);
-    //console.log('Quantidade: ' + result);
-
-    return (result)? result : {};
 
     //return Message.find({
     //    'owner': this.userId,

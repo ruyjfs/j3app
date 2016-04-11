@@ -118,6 +118,11 @@ md-bottom-sheet {
     transition-property: transform;
 }
 
+
+a i.material-icons{
+    vertical-align: middle;
+}
+
 md-card .md-dialog-actions {
     /*border-top: 1px solid rgba(160,160,160,0.2);*/
     /*background-color: #ffcc80;*/

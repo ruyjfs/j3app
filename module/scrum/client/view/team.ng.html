@@ -1,24 +1,19 @@
 <div ng-controller="TeamCtrl as vm" flex>
-    <!--<div flex-sm>-->
-        <!--<div>-->
-            <!--<div layout-padding layout="row" layout-align="center">-->
-                <!--<md-input-container style="width:50%;margin-right:10px;">-->
-                    <!--<label>Search</label>-->
-                    <!--<input type="text" ng-model="search"/>-->
-                <!--</md-input-container>-->
-                <!--<md-select ng-model="orderProperty" placeholder="Sort Order" >-->
-                    <!--<md-option value="1">Crescente</md-option>-->
-                    <!--<md-option value="-1">Decrescente</md-option>-->
-                <!--</md-select>-->
-                <!--<md-button class="md-fab" aria-label="New Team" ng-click="modalSave($event)">-->
-                    <!--<md-icon md-svg-icon="content:ic_add_24px" aria-label="New"></md-icon>-->
-                <!--</md-button>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Search</label>
+            <input type="text" ng-model="vm.searchText"/>
+        </md-input-container>
+        <md-input-container >
+            <md-select ng-model="order" placeholder="Sort Order" >
+                <md-option ng-click="vm.sortChange('1')" value="1">Ascending</md-option>
+                <md-option ng-click="vm.sortChange('-1')" value="-1">Descending</md-option>
+            </md-select>
+        </md-input-container>
+    </div>
     <md-content>
         <md-list>
-            <md-list-item class="md-3-line" ng-repeat="team in vm.teams">
+            <md-list-item class="md-3-line" dir-paginate="team in vm.teams | itemsPerPage: vm.perPage" total-items="vm.total()">
                 <div class="md-list-item-text" layout="column" layout-align="center center">
                     <h3>{{team.name}}</h3>
                     <!--<h4>{{item.who}}</h4>-->
@@ -63,6 +58,7 @@
             <!--</tbody>-->
         <!--</table>-->
     </md-content>
+    <dir-pagination-controls on-page-change="vm.pageChanged(newPageNumber)"></dir-pagination-controls>
 
     <!--<h1 class="md-display-2">Team</h1> {{test}}-->
     <!--<p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>-->

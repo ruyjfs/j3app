@@ -4,10 +4,10 @@ angular.module('scrum').controller('StoryCtrl', [ '$scope', '$reactive', '$state
     function ($scope, $reactive, $stateParams) {
         $reactive(this).attach($scope);
 
-        Meteor.subscribe('story');
+        this.subscribe('story', function(){return [$stateParams.id]});
         this.helpers({
             stories: function () {
-                return Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]});
+                return Story.find({});
             }
         });
 }]);
