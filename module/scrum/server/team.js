@@ -9,7 +9,6 @@ Meteor.publish("team", function (options, searchString) {
         };
 
         if (typeof searchString === 'string' && searchString.length) {
-            console.log(searchString);
             selector.name = {
                 $regex:  `.*${searchString}.*`,
             $options : 'i'
