@@ -56,6 +56,12 @@ angular.module('scrum').controller('ProjectTeamCtrl', [ '$scope', '$mdDialog', '
                                 } else {
                                     user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=60&d=mm&f=y';
                                 }
+
+                                user.nameTreated = user.name + ' ' + user.lastName;
+                                if (user.nameTreated.length > 14) {
+                                    user.nameTreated = user.nameTreated.substr(0,13) + '...';
+                                }
+
                                 return user;
                             });
 
