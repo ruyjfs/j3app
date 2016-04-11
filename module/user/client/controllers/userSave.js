@@ -10,8 +10,40 @@ angular.module('user').controller('UserSaveCtrl', [ '$scope', '$timeout', '$mdSi
         //$scope.dataForm = $meteor.object(Meteor.users, Meteor.user()._id, false);
         //$scope.dataForm = Meteor.users().findOne(Meteor.user()._id);
 
-        Meteor.subscribe('users');
+        //this.subscribe('users');
         this.form = Meteor.users.findOne(Meteor.user()._id);
+
+        user = Meteor.users.findOne(Meteor.user()._id);
+        if (user.status) {
+            if (user.status.idle == true) {
+                user.statusColor = ' #FFC107';
+                user.statusName = ' Away';
+            } else if (user.status.online == true) {
+                user.statusColor = ' #9ACD32';
+                user.statusName = ' Online';
+            } else {
+                user.statusColor = ' rgba(224, 224, 224, 0.77)';
+                user.statusName = ' Offline';
+            }
+        } else {
+            user.statusColor = ' rgba(224, 224, 224, 0.77)';
+            user.statusName = ' Offline';
+        }
+
+        // Imagem do gravatar.
+        if (user.emails && user.emails[0].address) {
+            user.img = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(user.emails[0].address).toString()+'?s=40&d=mm';
+        } else {
+            user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
+        }
+
+        user.nameTreated = user.name + ' ' + user.lastName;
+        if (user.nameTreated.length > 14) {
+            user.nameTreated = user.nameTreated.substr(0,13) + '...';
+        }
+        this.user = user;
+
+
         this.form.email = this.form.emails[0].address;
         this.saveUser = function (){
             Meteor.call('userSave', this.form, function (error) {
