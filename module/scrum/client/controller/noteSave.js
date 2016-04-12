@@ -3,9 +3,9 @@
 angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id', 'storyId', '$stateParams',
     function ($scope, $mdDialog, id, storyId, $stateParams) {
 
-        Meteor.subscribe('note');
-        Meteor.subscribe('story');
-        Meteor.subscribe('users');
+        //Meteor.subscribe('note');
+        //Meteor.subscribe('story');
+        //Meteor.subscribe('users');
 
         $scope.form = {};
         if (id) {

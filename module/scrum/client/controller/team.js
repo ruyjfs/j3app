@@ -30,15 +30,12 @@ angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdUtil
         });
 
         this.total = function() {
-            return Counts.get('total');
+            return Counts.get('totalTeam');
         };
-
         this.pageChanged = function(newPage) {
             this.page = newPage;
             console.log(this.getReactively('page'));
         };
-
-
         this.sortChange = function(sort) {
             console.log(typeof sort);
             this.sort = {

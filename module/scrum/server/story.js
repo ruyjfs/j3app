@@ -1,9 +1,18 @@
 //Meteor.publish("message", function (contactId) {
-Meteor.publish("story", function (projectId, options) {
+Meteor.publish("story", function (projectId, options, searchString) {
 //    Message.cancel();
 
     if (this.userId && projectId){
         selector = {$or: [{projectId: projectId}, {projectId: null}]};
+        if (typeof searchString === 'string' && searchString.length) {
+            selector.name = {
+                $regex:  `.*${searchString}.*`,
+                $options : 'i'
+            };
+        }
+        Counts.publish(this, 'totalStory', Story.find(selector), {
+            noReady: true
+        });
         result = Story.find(selector, options);
         return (result)? result : [];
     } else {

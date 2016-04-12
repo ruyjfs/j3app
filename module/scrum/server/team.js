@@ -9,13 +9,13 @@ Meteor.publish("team", function (options, searchString) {
         };
 
         if (typeof searchString === 'string' && searchString.length) {
-            selector.name = {
-                $regex:  `.*${searchString}.*`,
-            $options : 'i'
-        };
-    }
+                selector.name = {
+                    $regex:  `.*${searchString}.*`,
+                $options : 'i'
+            };
+        }
 
-        Counts.publish(this, 'total', Team.find(selector), {
+        Counts.publish(this, 'totalTeam', Team.find(selector), {
             noReady: true
         });
 

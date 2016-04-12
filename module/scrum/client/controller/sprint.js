@@ -4,10 +4,40 @@ angular.module('scrum').controller('SprintCtrl', [ '$scope', '$mdDialog', '$mdSi
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive, $stateParams) {
         $reactive(this).attach($scope);
 
-        this.subscribe('sprint', function(){return [$stateParams.id]});
+        this.perPage = 5;
+        this.page = 1;
+        this.sort = {
+            number: 1
+        };
+
+        this.searchText = '';
+        this.subscribe('sprint', function(){
+                return [
+                    $stateParams.id,
+                    {},
+                    this.getReactively('searchText')
+                ]
+            }
+        );
+        this.total = function() {
+            return Counts.get('totalSprint');
+        };
+        this.pageChanged = function(newPage) {
+            this.page = newPage;
+        };
+        this.sortChange = function(sort) {
+            this.sort = {
+                number: parseInt(sort)
+            };
+        };
         this.helpers({
             sprints: function () {
-                return Sprint.find({}).map(function(sprint){
+                return Sprint.find({},
+                    {
+                        limit: parseInt(this.getReactively('perPage')),
+                        skip: parseInt((this.getReactively('page') - 1) * this.getReactively('perPage')),
+                        sort: this.getReactively('sort')
+                    }).map(function(sprint){
                     //sprint.dateStartTreated = moment(sprint.dateStart).format('x');
                     //sprint.dateEndTreated = moment.unix(sprint.dateStart).calendar('L');
                     //sprint.dateStartTreated = moment(new Date(sprint.dateStart)).format('L');
@@ -36,23 +66,6 @@ angular.module('scrum').controller('SprintCtrl', [ '$scope', '$mdDialog', '$mdSi
                 });
             }
         });
-        //$scope.sprints =  Sprint.find({$and: [{projectId: $stateParams.id}]}).map(function(sprint){
-        //    sprint.dateStartTreated = moment.unix(sprint.dateStart).calendar('L');
-        //    sprint.dateEndTreated = moment.unix(sprint.dateEnd).calendar('L');
-        //    return sprint;
-        //});
-
-        //this.sprints = function () {
-        //    teste = Sprint.find({$or: [{projectId: $stateParams.id}, {projectId: null}]});
-        //    console.log(teste.fetch());
-        //    console.log('aqui');
-        //    return teste;
-        //}
-
-//        $scope.subscribe('sprint');
-//        sprints = Sprint.find({$or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
-//console.log(sprints);
-//console.log('sprints');
 
         this.modalSave = function(ev, id){
             $mdDialog.show({

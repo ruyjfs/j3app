@@ -1,8 +1,14 @@
 //Meteor.publish("message", function (contactId) {
-Meteor.publish("sprint", function (projectId, options) {
+Meteor.publish("sprint", function (projectId, options, searchString) {
 
     if (this.userId && projectId){
         selector = {$or: [{projectId: projectId}, {projectId: null}]};
+        if (typeof searchString === 'string' && searchString.length) {
+            selector.number = parseInt(searchString);
+        }
+        Counts.publish(this, 'totalSprint', Sprint.find(selector), {
+            noReady: true
+        });
         result = Sprint.find(selector, options);
         return (result)? result : [];
     } else {

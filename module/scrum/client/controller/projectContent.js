@@ -15,28 +15,10 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
         };
         this.subscribe('project');
 
-        this.perPage = 10;
-        this.page = 1;
-        this.sort = {
-            name: 1
-        };
-
-        this.searchText = '';
-        this.subscribe('team', function(){
-                return [
-                    {
-                        limit: parseInt(this.getReactively('perPage')),
-                        skip: parseInt((this.getReactively('page') - 1) * this.getReactively('perPage')),
-                        sort: this.getReactively('sort')
-                    }, this.getReactively('searchText')
-                ]
-            }
-        );
-
-        this.subscribe('status', function(){return [$stateParams.id]});
+        //this.subscribe('status', function(){return [$stateParams.id]});
         this.subscribe('note', function(){return [$stateParams.id]});
-        this.subscribe('story', function(){return [$stateParams.id]});
-        this.subscribe('sprint', function(){return [$stateParams.id]});
+        //this.subscribe('story', function(){return [$stateParams.id]});
+        //this.subscribe('sprint', function(){return [$stateParams.id]});
         $scope.helpers({
             project: function () {
                 return Project.findOne($stateParams.id);

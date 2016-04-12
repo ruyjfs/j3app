@@ -3,6 +3,15 @@
 angular.module('scrum').controller('ProjectTeamCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$reactive', '$stateParams',
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive, $stateParams) {
         $reactive(this).attach($scope);
+
+        this.searchText = '';
+        this.subscribe('team', function(){
+                return [
+                    {},
+                    this.getReactively('searchText')
+                ]
+            }
+        );
         this.helpers({
             teams: function() {
                 project = Project.findOne($stateParams.id);
