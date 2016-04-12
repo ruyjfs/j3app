@@ -85,7 +85,6 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
                             }
                             return team;
                         });
-
                     }
 
                     if (teams) {

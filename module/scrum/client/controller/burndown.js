@@ -38,27 +38,124 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                     if (typeof(sprint.dateStart) === 'string') {
                         sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('DD/MM dd');
                         sprint.dateEndTreated = moment(sprint.dateEnd, 'x').format('DD/MM dd');
-                        sprint.daysTotal = moment(sprint.dateEnd, 'x').diff(moment(sprint.dateStart, 'x'), 'days') + 1;
+                        sprint.daysTotal = moment(sprint.dateEnd, 'x').diff(moment(sprint.dateStart, 'x'), 'days');
                     } else {
                         sprint.dateStartTreated = moment(sprint.dateStart).format('DD/MM dd');
                         sprint.dateEndTreated = moment(sprint.dateEnd).format('DD/MM dd');
-                        sprint.daysTotal = moment(sprint.dateEnd).diff(moment(sprint.dateStart), 'days') + 1;
+                        sprint.daysTotal = moment(sprint.dateEnd).diff(moment(sprint.dateStart), 'days');
+                    }
+                    if (project.teams) {
+                        teams = Team.find({_id: {$in: project.teams}}).fetch().map(function (team) {
+                            if (team.members) {
+                                team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
+                                team.membersTotal = team.members.length;
+                                team.timeTotal = team.membersTotal * team.time;
+                            }
+                            return team;
+                        });
                     }
 
-                    sprint.days = [];
-                    sprint.days[0] = sprint.dateStartTreated;
+                    timeTotal = 0;
+                    if (teams) {
+                        teams.forEach(function (value) {
+                            if (isInt(parseInt(value.timeTotal))) {
+                                timeTotal = parseInt(value.timeTotal) + timeTotal;
+                            }
+                        });
 
-                    tasks = [sprint.daysTotal];
-                    daysCorrect = [sprint.daysTotal];
+                        sprint.timeTotal = timeTotal * sprint.days;
+                    } else {
+                        sprint.timeTotal = 0;
+                    }
+                    timeTotalTeams = timeTotal;
+
+                    //console.log(sprint.days);
+                    notes = Note.find({
+                        $and: [{sprintId: $stateParams.sprintId}],
+                        $or: [{projectId: $stateParams.id}, {projectId: null}]
+                    }).fetch();
+                    notes.map(function (note) {
+                        note.story = Story.findOne(note.story);
+                        note.owner = Meteor.users.findOne(note.owner);
+                        if (note.statusId == '1') {
+                            note.color = '#dbdbdb';
+                        } else {
+                            if (note.story) {
+                                note.color = note.story.color;
+                            } else {
+                                note.story = '#000';
+                            }
+                        }
+                        return note;
+                    });
+
+                    if (notes) {
+                        timeTotal = 0;
+                        notes.forEach(function (value) {
+                            //console.log(value);
+                            if (isInt(parseInt(value.time))) {
+                                timeTotal = parseInt(value.time) + timeTotal;
+                            }
+                        });
+                        sprint.timeTotalNotes = timeTotal;
+                    } else {
+                        sprint.timeTotalNotes = 0;
+                    }
+
+                    notesDone = Note.find({
+                        $and: [{sprintId: $stateParams.sprintId}, {statusId: '1'}],
+                        $or: [{projectId: $stateParams.id}, {projectId: null}]
+                    }).fetch();
+                    //console.log(notesDone);
+                    if (notesDone) {
+                        timeTotal = 0;
+                        notesDone.forEach(function (value) {
+                            //console.log(value);
+                            if (isInt(parseInt(value.time))) {
+                                timeTotal = parseInt(value.time) + timeTotal;
+                            }
+                        });
+                        sprint.timeTotalNotesDone = timeTotal;
+                    } else {
+                        sprint.timeTotalNotesDone = 0;
+                    }
+                    //
+                    //sprint.progressDone = sprint.timeTotalNotesDone * 100 / sprint.timeTotal;
+                    //sprint.progress = sprint.timeTotalNotes * 100 / sprint.timeTotal;
+
+                    //console.log(sprint.timeTotalNotes);
+                    //console.log(sprint.timeTotalNotesDone);
+
+                    sprint.days = [sprint.dateStartTreated];
+                    tasks = [sprint.timeTotalNotes];
+                    daysCorrect = [sprint.timeTotalNotes];
+                    timeTotalNotes = sprint.timeTotalNotes;
+                    booTimeTotalNotes = true;
+                    //timeTotalTeams = timeTotalTeams
                     for ($i = 1; $i <= sprint.daysTotal; $i++) {
                         if (typeof(sprint.dateStart) === 'string') {
                             sprint.days[$i] = moment(sprint.dateStart, 'x').add($i, 'days').format('DD/MM dd');
                         } else {
                             sprint.days[$i] = moment(sprint.dateStart).add($i, 'days').format('DD/MM dd');
                         }
-                        daysCorrect[$i] = sprint.daysTotal - $i;
-                        tasks[$i] = sprint.daysTotal - $i;
+
+                        console.log(sprint.days[$i]);
+                        console.log(moment(sprint.dateStart, 'x').add($i, 'days').weekday());
+                        console.log(moment(sprint.dateStart, 'x').add($i, 'days').isoWeekday());
+                        if (project.skipWeekend && (moment(sprint.dateStart, 'x').add($i, 'days').isoWeekday() == 2+1 || moment(sprint.dateStart, 'x').add($i, 'days').isoWeekday() == 3+1)) {
+                            //timeTotalNotes = timeTotalNotes + timeTotalTeams;
+                        } else {
+                            timeTotalNotes = timeTotalNotes - timeTotalTeams;
+                        }
+                        if (timeTotalNotes > 0) {
+                            daysCorrect[$i] = timeTotalNotes;
+                        } else if(booTimeTotalNotes) {
+                            daysCorrect[$i] = 0;
+                            booTimeTotalNotes = false;
+                        }
+                        //tasks[$i] = sprint.daysTotal - $i;
                     }
+                    console.log(daysCorrect);
                     //
                     //console.log(sprint.days);
 
@@ -72,11 +169,6 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                     //}
                     //
                 }
-                //console.log(sprint);
-                //console.log(project);
-
-                //console.log(sprint.days);
-
 
                 if (sprint) {
                     labels = sprint.days;

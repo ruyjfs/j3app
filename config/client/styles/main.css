@@ -1,4 +1,5 @@
-body {
+body.md-toast-animating {
+    overflow: visible !important;
     /*background-color: rgba(0,0,0,.04);*/
 }
 
@@ -122,6 +123,8 @@ md-bottom-sheet {
 a i.material-icons{
     vertical-align: middle;
 }
+
+
 
 md-card .md-dialog-actions {
     /*border-top: 1px solid rgba(160,160,160,0.2);*/
