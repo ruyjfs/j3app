@@ -2,6 +2,14 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive, $stateParams, $rootScope) {
         $reactive(this).attach($scope);
 
+        this.id = $stateParams.id;
+        this.sprintId = $stateParams.sprintId;
+
+        this.subscribe('project');
+        this.subscribe('status', function(){return [$stateParams.id]});
+        this.subscribe('note', function(){return [$stateParams.id]});
+        this.subscribe('story', function(){return [$stateParams.id]});
+        this.subscribe('sprint', function(){return [$stateParams.id]});
         this.helpers({
             notesBackLog: function () {
                 notes = Note.find({$and: [{$or: [{sprintId: null}, {sprintId: ''}]}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();

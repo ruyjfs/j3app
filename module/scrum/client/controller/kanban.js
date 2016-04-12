@@ -4,6 +4,8 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $stateParams, $reactive, $mdToast) {
         $reactive(this).attach($scope);
 
+        this.id = $stateParams.id;
+        this.sprintId = $stateParams.sprintId;
         //this.call('statusFindByProject', {projectId: $stateParams.id}, function(error, result){
         //    this.states = result;
         //});
@@ -29,6 +31,12 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
         //    console.log('asd');
         //    this.stories = result
         //});
+
+        this.subscribe('project');
+        this.subscribe('status', function(){return [$stateParams.id]});
+        this.subscribe('note', function(){return [$stateParams.id]});
+        this.subscribe('story', function(){return [$stateParams.id]});
+        this.subscribe('sprint', function(){return [$stateParams.id]});
         this.helpers({
             stories: function() {
                 var stories = Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]}).map(function(story){

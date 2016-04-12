@@ -10,6 +10,9 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
             $state.go('scrum');
         }
 
+        this.id = $stateParams.id;
+        this.sprintId = $stateParams.sprintId;
+
         isInt = function (n) {
             return parseInt(n) === n
         };

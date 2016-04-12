@@ -1,27 +1,49 @@
 <div ng-controller="BacklogCtrl as vm" flex>
-    <!--{{vm.teste}} 1-->
-    <!--{{teste2}} 2-->
-    <!--{{vm.sprintCurrent}} 3-->
-    <!--{{sprint}} 4-->
-    <!--{{notesBackLog}} 4-->
-    <!--<div flex-sm>-->
-    <!--<div>-->
-    <!--<div layout-padding layout="row" layout-align="center">-->
-    <!--<md-input-container style="width:50%;margin-right:10px;">-->
-    <!--<label>Search</label>-->
-    <!--<md-select ng-model="orderProperty" placeholder="Project" >-->
-    <!--&lt;!&ndash;<md-option value="-1">Decrescente</md-option>&ndash;&gt;-->
-    <!--</md-select>-->
-    <!--</md-input-container>-->
-    <!--<md-select ng-model="orderProperty" style="width:50%;margin-right:10px;" placeholder="Sprint" >-->
-    <!--<md-option value="1">Crescente</md-option>-->
-    <!--</md-select>-->
-    <!--<md-button class="md-fab" aria-label="New Note" ng-click="modalSave($event)">-->
-    <!--<md-icon md-svg-icon="content:ic_add_24px" aria-label="New"></md-icon>-->
-    <!--</md-button>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
+    <md-progress-linear class="md-accent" md-mode="buffer" value="{{sprint.progressDone}}" md-buffer-value="{{sprint.progress}}"></md-progress-linear>
+    <md-fab-toolbar count="3" md-direction="left">
+        <md-fab-trigger class="align-with-text">
+            <md-button aria-label="menu" class="md-fab md-primary btn-floating btn-large">
+                <!--<md-button aria-label="menu" class="md-fab md-primary ">-->
+                <i class="material-icons">menu</i>
+            </md-button>
+        </md-fab-trigger>
+        <md-toolbar>
+            <md-fab-actions class="md-toolbar-tools">
+                <md-button aria-label="comment" class="md-icon-button">
+                    <md-tooltip md-direction="top" md-autohide="false"> Product </md-tooltip>
+                    <a href="/scrum/project" class="waves-effect waves-orange"><i class="material-icons">business_center</i></a>
+                </md-button>
+                <md-button aria-label="comment" class="md-icon-button">
+                    <md-tooltip md-direction="top" md-autohide="false"> Sprint </md-tooltip>
+                    <a href="/scrum/sprint/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">history</i></a>
+                </md-button>
+                <md-button aria-label="label" class="md-icon-button">
+                    <md-tooltip md-direction="top" md-autohide="false"> Status </md-tooltip>
+                    <a href="/scrum/status/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">style</i></a>
+                </md-button>
+                <md-button aria-label="label" class="md-icon-button">
+                    <md-tooltip md-direction="top" md-autohide="false"> Story </md-tooltip>
+                    <a href="/scrum/story/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">content_paste</i></a>
+                </md-button>
+                <md-button aria-label="label" class="md-icon-button">
+                    <md-tooltip md-direction="top" md-autohide="false"> Team </md-tooltip>
+                    <a href="/scrum/project-team/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">group_work</i></a>
+                </md-button>
+                <md-button aria-label="photo" class="md-icon-button">
+                    <md-tooltip md-direction="top" md-autohide="false"> Backlog </md-tooltip>
+                    <a href="/scrum/backlog/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">view_column</i></a>
+                </md-button>
+                <md-button aria-label="label" class="md-icon-button">
+                    <md-tooltip md-direction="top" md-autohide="false"> Kanban </md-tooltip>
+                    <a href="/scrum/kanban/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">developer_board</i></a>
+                </md-button>
+                <md-button aria-label="comment" class="md-icon-button">
+                    <md-tooltip md-direction="top" md-autohide="false"> Burndown </md-tooltip>
+                    <a href="/scrum/burndown/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">equalizer</i></a>
+                </md-button>
+            </md-fab-actions>
+        </md-toolbar>
+    </md-fab-toolbar>
     <md-content layout-padding>
         <!--<md-content>-->
         <table id="scrumy-board" cellspacing="0" class="live scrum" style="min-height: 300px;">

@@ -43,15 +43,45 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                 templateUrl: 'module/scrum/client/view/team.ng.html',
                 //controller: 'TeamCtrl'
             })
-            .state('scrum/kanban', {
-                url: '/scrum/kanban/:id',
-                templateUrl: 'module/scrum/client/view/kanban.ng.html',
-                //controller: 'KanbanCtrl'
-            })
             .state('scrum/content', {
                 url: '/scrum/content/:id/:sprintId',
                 templateUrl: 'module/scrum/client/view/project-content.ng.html',
                 //controller: 'ProjectContentCtrl'
+            })
+            .state('scrum/sprint', {
+                url: '/scrum/sprint/:id/:sprintId',
+                templateUrl: 'module/scrum/client/view/sprint.ng.html',
+                //controller: 'ProjectCtrl'
+            })
+            .state('scrum/status', {
+                url: '/scrum/status/:id/:sprintId',
+                templateUrl: 'module/scrum/client/view/status.ng.html',
+                //controller: 'ProjectCtrl'
+            })
+            .state('scrum/story', {
+                url: '/scrum/story/:id/:sprintId',
+                templateUrl: 'module/scrum/client/view/story.ng.html',
+                //controller: 'ProjectCtrl'
+            })
+            .state('scrum/project-team', {
+                url: '/scrum/project-team/:id/:sprintId',
+                templateUrl: 'module/scrum/client/view/project-team.ng.html',
+                //controller: 'ProjectCtrl'
+            })
+            .state('scrum/backlog', {
+                url: '/scrum/backlog/:id/:sprintId',
+                templateUrl: 'module/scrum/client/view/backlog.ng.html',
+                //controller: 'ProjectCtrl'
+            })
+            .state('scrum/kanban', {
+                url: '/scrum/kanban/:id/:sprintId',
+                templateUrl: 'module/scrum/client/view/kanban.ng.html',
+                //controller: 'ProjectCtrl'
+            })
+            .state('scrum/burndown', {
+                url: '/scrum/burndown/:id/:sprintId',
+                templateUrl: 'module/scrum/client/view/burndown.ng.html',
+                //controller: 'ProjectCtrl'
             });
 
         if (Meteor.userId()) {

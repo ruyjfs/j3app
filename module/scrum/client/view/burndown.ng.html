@@ -1,5 +1,43 @@
 <div ng-controller="BurndownCtrl as vm" flex>
     <md-content layout="row" layout-align="center center">
+        <md-progress-linear class="md-accent" md-mode="buffer" value="{{sprint.progressDone}}" md-buffer-value="{{sprint.progress}}"></md-progress-linear>
+        <md-fab-toolbar count="3" md-direction="left">
+            <md-fab-trigger class="align-with-text">
+                <md-button aria-label="menu" class="md-fab md-primary btn-floating btn-large">
+                    <!--<md-button aria-label="menu" class="md-fab md-primary ">-->
+                    <i class="material-icons">menu</i>
+                </md-button>
+            </md-fab-trigger>
+            <md-toolbar>
+                <md-fab-actions class="md-toolbar-tools">
+                    <md-button aria-label="comment" class="md-icon-button">
+                        <md-tooltip md-direction="top" md-autohide="false"> Product </md-tooltip>
+                        <a href="/scrum/project" class="waves-effect waves-orange"><i class="material-icons">business_center</i></a>
+                    </md-button>
+                    <md-button aria-label="comment" class="md-icon-button">
+                        <a href="/scrum/sprint/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">history</i></a>
+                    </md-button>
+                    <md-button aria-label="label" class="md-icon-button">
+                        <a href="/scrum/status/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">style</i></a>
+                    </md-button>
+                    <md-button aria-label="label" class="md-icon-button">
+                        <a href="/scrum/story/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">content_paste</i></a>
+                    </md-button>
+                    <md-button aria-label="label" class="md-icon-button">
+                        <a href="/scrum/project-team/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">group_work</i></a>
+                    </md-button>
+                    <md-button aria-label="photo" class="md-icon-button">
+                        <a href="/scrum/backlog/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">view_column</i></a>
+                    </md-button>
+                    <md-button aria-label="label" class="md-icon-button">
+                        <a href="/scrum/kanban/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">developer_board</i></a>
+                    </md-button>
+                    <md-button aria-label="comment" class="md-icon-button">
+                        <a href="/scrum/burndown/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">equalizer</i></a>
+                    </md-button>
+                </md-fab-actions>
+            </md-toolbar>
+        </md-fab-toolbar>
         <style>
             @keyframes width-pulse {
                 0% {
