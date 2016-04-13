@@ -4,6 +4,9 @@ angular.module('scrum').controller('ProjectTeamCtrl', [ '$scope', '$mdDialog', '
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive, $stateParams) {
         $reactive(this).attach($scope);
 
+        this.id = $stateParams.id;
+        this.sprintId = $stateParams.sprintId;
+
         this.searchText = '';
         this.subscribe('team', function(){
                 return [

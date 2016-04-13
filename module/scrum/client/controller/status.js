@@ -5,6 +5,10 @@ angular.module('scrum').controller('StatusCtrl', [ '$scope', '$mdDialog', '$reac
             $state.go('scrum');
         }
 
+        this.id = $stateParams.id;
+        this.sprintId = $stateParams.sprintId;
+
+
         this.perPage = 5;
         this.page = 1;
         this.sort = {

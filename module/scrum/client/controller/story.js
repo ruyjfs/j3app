@@ -4,6 +4,10 @@ angular.module('scrum').controller('StoryCtrl', [ '$scope', '$reactive', '$state
     function ($scope, $reactive, $stateParams) {
         $reactive(this).attach($scope);
 
+
+        this.id = $stateParams.id;
+        this.sprintId = $stateParams.sprintId;
+
         this.perPage = 5;
         this.page = 1;
         this.sort = {
