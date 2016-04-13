@@ -1,97 +1,5 @@
 <div ng-controller="BacklogCtrl as vm" flex>
-    <nav class="brown darken-2" role="navigation">
-        <!--<div class="nav-wrapper container center">-->
-        <div class="nav-wrapper container center">
-            <ul class="brand-logo center">
-                <li class="waves-effect">
-                    <md-tooltip md-direction="botom" md-autohide="false"> Product</md-tooltip>
-                    <a href="/scrum/project">
-                        <i class="material-icons">business_center</i>
-                    </a>
-                </li>
-                <li class="waves-effect">
-                    <md-tooltip md-direction="botom" md-autohide="false"> Burndown</md-tooltip>
-                    <a href="/scrum/burndown/{{vm.id}}/{{vm.sprintId}}">
-                        <i class="material-icons">equalizer</i>
-                    </a>
-                </li>
-                <li class="waves-effect">
-                    <md-tooltip md-direction="botom" md-autohide="false"> Kanban </md-tooltip>
-                    <a href="/scrum/kanban/{{vm.id}}/{{vm.sprintId}}">
-                        <i class="material-icons">view_column</i>
-                    </a>
-                </li>
-                <li class="waves-effect">
-                    <md-tooltip md-direction="botom" md-autohide="false"> Backlog</md-tooltip>
-                    <a href="/scrum/backlog/{{vm.id}}/{{vm.sprintId}}">
-                        <i class="material-icons">developer_board</i>
-                    </a>
-                </li>
-                <li class="waves-effect">
-                    <md-tooltip md-direction="botom" md-autohide="false"> Story</md-tooltip>
-                    <a href="/scrum/story/{{vm.id}}/{{vm.sprintId}}">
-                        <i class="material-icons">content_paste</i>
-                    </a>
-                </li>
-                <li class="waves-effect">
-                    <md-tooltip md-direction="botom" md-autohide="false"> Team </md-tooltip>
-                    <a href="/scrum/project-team/{{vm.id}}/{{vm.sprintId}}">
-                        <i class="material-icons">group_work</i>
-                    </a>
-                </li>
-                <li class="waves-effect">
-                    <md-tooltip md-direction="botom" md-autohide="false"> Status </md-tooltip>
-                    <a href="/scrum/status/{{vm.id}}/{{vm.sprintId}}">
-                        <i class="material-icons">style</i>
-                    </a>
-                </li>
-                <li class="waves-effect">
-                    <md-tooltip md-direction="botom" md-autohide="false"> Sprint</md-tooltip>
-                    <a href="/scrum/sprint/{{vm.id}}/{{vm.sprintId}}">
-                        <i class="material-icons">history</i>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <!--<md-toolbar  layout="row" layout-align="center center">-->
-    <!--<div class="navbar-text">-->
-    <!--<md-button ng-href="/scrum/project" aria-label="comment" class="md-icon-button">-->
-    <!--<md-tooltip md-direction="botom" md-autohide="false"> Product </md-tooltip>-->
-    <!--<i class="material-icons">business_center</i>-->
-    <!--</md-button>-->
-    <!--<md-button ng-href="/scrum/sprint/{{vm.id}}/{{vm.sprintId}}" aria-label="comment" class="md-icon-button">-->
-    <!--<md-tooltip md-direction="botom" md-autohide="false"> Sprint </md-tooltip>-->
-    <!--<i class="material-icons">history</i>-->
-    <!--</md-button>-->
-    <!--<md-button ng-href="/scrum/status/{{vm.id}}/{{vm.sprintId}}" aria-label="label" class="md-icon-button">-->
-    <!--<md-tooltip md-direction="botom" md-autohide="false"> Status </md-tooltip>-->
-    <!--<i class="material-icons">style</i>-->
-    <!--</md-button>-->
-    <!--<md-button ng-href="/scrum/story/{{vm.id}}/{{vm.sprintId}}" aria-label="label" class="md-icon-button">-->
-    <!--<md-tooltip md-direction="botom" md-autohide="false"> Story </md-tooltip>-->
-    <!--<i class="material-icons">content_paste</i>-->
-    <!--</md-button>-->
-    <!--<md-button ng-href="/scrum/project-team/{{vm.id}}/{{vm.sprintId}}" aria-label="label" class="md-icon-button">-->
-    <!--<md-tooltip md-direction="botom" md-autohide="false"> Team </md-tooltip>-->
-    <!--<i class="material-icons">group_work</i>-->
-    <!--</md-button>-->
-    <!--<md-button ng-href="/scrum/backlog/{{vm.id}}/{{vm.sprintId}}" aria-label="photo" class="md-icon-button">-->
-    <!--<md-tooltip md-direction="botom" md-autohide="false"> Backlog </md-tooltip>-->
-    <!--<i class="material-icons">view_column</i>-->
-    <!--</md-button>-->
-    <!--<md-button ng-href="/scrum/kanban/{{vm.id}}/{{vm.sprintId}}" aria-label="label" class="md-icon-button">-->
-    <!--<md-tooltip md-direction="botom" md-autohide="false"> Kanban </md-tooltip>-->
-    <!--<i class="material-icons">developer_board</i>-->
-    <!--</md-button>-->
-    <!--<md-button ng-href="/scrum/burndown/{{vm.id}}/{{vm.sprintId}}" aria-label="comment" class="md-icon-button">-->
-    <!--<md-tooltip md-direction="botom" md-autohide="false"> Burndown </md-tooltip>-->
-    <!--<i class="material-icons">equalizer</i>-->
-    <!--</md-button>-->
-    <!--</div>-->
-    <!--</md-toolbar>-->
-    <md-progress-linear class="md-accent" md-mode="buffer" value="{{sprint.progressDone}}"
-                        md-buffer-value="{{sprint.progress}}"></md-progress-linear>
+    <div ng-include="'module/scrum/client/view/product-toolbar.ng.html'"></div>
     <md-content layout-padding>
         <!--<md-content>-->
         <table id="scrumy-board" cellspacing="0" class="live scrum" style="min-height: 300px;">
@@ -506,7 +414,7 @@
         <!--</tbody>-->
         <!--</table>-->
     </md-content>
-
+    <div ng-include="'module/scrum/client/view/product-fab.ng.html'"></div>
     <!--<h1 class="md-display-2">Team</h1> {{test}}-->
     <!--<p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>-->
 

@@ -5411,7 +5411,8 @@ nav  ul {
 .navbar-fixed {
   position: relative;
   height: 56px;
-  z-index: 998; }
+  z-index: 2;
+}
   .navbar-fixed nav {
     position: fixed; }
 

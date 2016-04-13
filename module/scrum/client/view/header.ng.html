@@ -7,7 +7,6 @@
                    class="brand-logo center hide-on-med-and-down" style="font-size: 20px;">
                     {{titleMiddle}}
                 </a>
-
                 <!--<a id="logo-container" href="#" class="brand-logo">-->
                 <!--<md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>-->
                 <!--</a>-->
@@ -108,16 +107,14 @@
     <!--<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="contact-list">-->
     <!--<div ng-include="'module/user/client/views/contact-list.ng.html'"></div>-->
     <!--</md-sidenav>-->
-
-
     <ul id="nav-mobile" class="side-nav">
     <div ng-hide="vm.isGuest">
             <!--{{#if currentUser}}-->
         <li>
             <a href="/scrum/project" class="waves-effect waves-orange"><i class="material-icons left">business_center</i>Project</a>
         </li>
-        <li>
-            <a href="#" ng-if="titleMiddle"  ng-click="modalSprintChange($event)" class="waves-effect waves-orange"><i class="material-icons left">date_range</i>Sprint</a>
+        <li ng-if="titleMiddle">
+            <a href="#" ng-click="modalSprintChange($event)" class="waves-effect waves-orange"><i class="material-icons left">date_range</i>Sprint</a>
         </li>
         <!--<li><a href="/scrum/team" class="waves-effect waves-orange"><i class="material-icons left">group_work</i>Team</a></li>-->
         <!--<li><a href="#" class="waves-effect waves-orange" ng-click="toggleContactList()"><i class="material-icons">chat</i>Chat</a></li>-->

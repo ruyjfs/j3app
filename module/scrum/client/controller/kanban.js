@@ -32,7 +32,10 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
         //    this.stories = result
         //});
 
+        //Meteor.subscribe('project');
+        this.subscribe('users');
         this.subscribe('project');
+        this.subscribe('team');
         this.subscribe('status', function(){return [$stateParams.id]});
         this.subscribe('note', function(){return [$stateParams.id]});
         this.subscribe('story', function(){return [$stateParams.id]});
@@ -78,6 +81,31 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                 return states;
             }
         });
+        $scope.modalStorySave = function (ev, id) {
+            $mdDialog.show({
+                controller: 'StorySaveCtrl',
+                templateUrl: 'module/scrum/client/view/story-save.ng.html',
+                clickOutsideToClose: true,
+                locals: {id: id},
+                targetEvent: ev
+            });
+        };
+        $scope.modalNoteSave = function (ev, id, storyId) {
+            $mdDialog.show({
+                controller: 'NoteSaveCtrl',
+                templateUrl: 'module/scrum/client/view/note-save.ng.html',
+                clickOutsideToClose: true,
+                targetEvent: ev,
+                locals: {
+                    id: id,
+                    storyId: storyId
+                }
+            }).then(function (answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
+        };
 
         //$scope.showCustomToast = function() {
         //    $mdToast.show({

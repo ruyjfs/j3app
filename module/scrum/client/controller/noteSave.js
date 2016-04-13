@@ -1,11 +1,9 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id', 'storyId', '$stateParams',
-    function ($scope, $mdDialog, id, storyId, $stateParams) {
+angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id', 'storyId', '$stateParams', '$reactive',
+    function ($scope, $mdDialog, id, storyId, $stateParams, $reactive) {
+        //$reactive(this).attach($scope);
 
-        //Meteor.subscribe('note');
-        //Meteor.subscribe('story');
-        //Meteor.subscribe('users');
 
         $scope.form = {};
         if (id) {
@@ -24,6 +22,12 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id'
             }
         }
 
+        //this.subscribe('users');
+        Meteor.subscribe('project');
+        Meteor.subscribe('team');
+        Meteor.subscribe('note');
+        Meteor.subscribe('story');
+        Meteor.subscribe('users');
         $scope.helpers({
             stories: function () {
                 return Story.find({projectId: $stateParams.id});

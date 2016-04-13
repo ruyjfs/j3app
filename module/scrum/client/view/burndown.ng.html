@@ -1,172 +1,85 @@
+<style>
+    @keyframes width-pulse {
+        0% {
+            stroke-width: 6px
+        }
+        50% {
+            stroke-width: 14px;
+        }
+        100% {
+            stroke-width: 6px;
+        }
+    }
+    @keyframes dashoffset-seven {
+        0% {
+            stroke-dashoffset: 7px;
+        }
+        100% {
+            stroke-dashoffset: 0px;
+        }
+    }
+    @keyframes dasharray-craziness {
+        0% {
+            stroke-dasharray: 7px 2px;
+        }
+        80% {
+            stroke-dasharray: 7px 100px;
+            stroke-width: 10px
+        }
+        100% {
+            stroke-dasharray: 7px 2px;
+        }
+    }
+    /*.ct-chart .ct-label.ct-vertical,*/
+    /*.ct-chart .ct-label.ct-horizontal {*/
+    /*color: rgba(255, 255, 255, 0.5);*/
+    /*}*/
+    /*.ct-chart .ct-grid.ct-vertical,*/
+    /*.ct-chart .ct-grid.ct-horizontal {*/
+    /*stroke: rgba(255, 255, 255, 0.1);*/
+    /*stroke-dasharray: 2px;*/
+    /*shape-rendering: crispEdges;*/
+    /*}*/
+    .ct-chart .ct-series.ct-series-a .ct-line {
+        stroke: #FF6B6B;
+        stroke-width: 10px;
+        stroke-linecap: round;
+        animation: width-pulse 2s infinite;
+    }
+    .ct-chart .ct-series.ct-series-b .ct-line {
+        /*stroke: #4ECDC4;*/
+        stroke: rgba(240, 91, 79, 0.7);
+        stroke-width: 2px;
+        stroke-dasharray: 5px 2px;
+        animation: dashoffset-seven 200ms infinite linear;
+    }
+    .ct-chart .ct-series.ct-series-c .ct-line {
+        /*stroke: #C7F464;*/
+        stroke: rgba(244, 198, 61, 0.73);
+        stroke-width: 3px;
+        stroke-linecap: round;
+        stroke-dasharray: 30px 5px;
+        animation: dasharray-craziness 10s infinite linear;
+    }
+</style>
 <div ng-controller="BurndownCtrl as vm" flex>
-    <md-content layout="row" layout-align="center center">
-        <md-progress-linear class="md-accent" md-mode="buffer" value="{{sprint.progressDone}}" md-buffer-value="{{sprint.progress}}"></md-progress-linear>
-        <md-fab-toolbar count="3" md-direction="left">
-            <md-fab-trigger class="align-with-text">
-                <md-button aria-label="menu" class="md-fab md-primary btn-floating btn-large">
-                    <!--<md-button aria-label="menu" class="md-fab md-primary ">-->
-                    <i class="material-icons">menu</i>
-                </md-button>
-            </md-fab-trigger>
-            <md-toolbar>
-                <md-fab-actions class="md-toolbar-tools">
-                    <md-button aria-label="comment" class="md-icon-button">
-                        <md-tooltip md-direction="top" md-autohide="false"> Product </md-tooltip>l
-                        <a href="/scrum/project" class="waves-effect waves-orange"><i class="material-icons">business_center</i></a>
-                    </md-button>
-                    <md-button aria-label="comment" class="md-icon-button">
-                        <a href="/scrum/sprint/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">history</i></a>
-                    </md-button>
-                    <md-button aria-label="label" class="md-icon-button">
-                        <a href="/scrum/status/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">style</i></a>
-                    </md-button>
-                    <md-button aria-label="label" class="md-icon-button">
-                        <a href="/scrum/story/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">content_paste</i></a>
-                    </md-button>
-                    <md-button aria-label="label" class="md-icon-button">
-                        <a href="/scrum/project-team/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">group_work</i></a>
-                    </md-button>
-                    <md-button aria-label="photo" class="md-icon-button">
-                        <a href="/scrum/backlog/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">view_column</i></a>
-                    </md-button>
-                    <md-button aria-label="label" class="md-icon-button">
-                        <a href="/scrum/kanban/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">developer_board</i></a>
-                    </md-button>
-                    <md-button aria-label="comment" class="md-icon-button">
-                        <a href="/scrum/burndown/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">equalizer</i></a>
-                    </md-button>
-                </md-fab-actions>
-            </md-toolbar>
-        </md-fab-toolbar>
-        <style>
-            @keyframes width-pulse {
-                0% {
-                    stroke-width: 6px
-                }
-                50% {
-                    stroke-width: 14px;
-                }
-                100% {
-                    stroke-width: 6px;
-                }
-            }
-            @keyframes dashoffset-seven {
-                0% {
-                    stroke-dashoffset: 7px;
-                }
-                100% {
-                    stroke-dashoffset: 0px;
-                }
-            }
-            @keyframes dasharray-craziness {
-                0% {
-                    stroke-dasharray: 7px 2px;
-                }
-                80% {
-                    stroke-dasharray: 7px 100px;
-                    stroke-width: 10px
-                }
-                100% {
-                    stroke-dasharray: 7px 2px;
-                }
-            }
-            /*.ct-chart .ct-label.ct-vertical,*/
-            /*.ct-chart .ct-label.ct-horizontal {*/
-                /*color: rgba(255, 255, 255, 0.5);*/
-            /*}*/
-            /*.ct-chart .ct-grid.ct-vertical,*/
-            /*.ct-chart .ct-grid.ct-horizontal {*/
-                /*stroke: rgba(255, 255, 255, 0.1);*/
-                /*stroke-dasharray: 2px;*/
-                /*shape-rendering: crispEdges;*/
-            /*}*/
-            .ct-chart .ct-series.ct-series-a .ct-line {
-                stroke: #FF6B6B;
-                stroke-width: 10px;
-                stroke-linecap: round;
-                animation: width-pulse 2s infinite;
-            }
-            .ct-chart .ct-series.ct-series-b .ct-line {
-                /*stroke: #4ECDC4;*/
-                stroke: rgba(240, 91, 79, 0.7);
-                stroke-width: 2px;
-                stroke-dasharray: 5px 2px;
-                animation: dashoffset-seven 200ms infinite linear;
-            }
-            .ct-chart .ct-series.ct-series-c .ct-line {
-                /*stroke: #C7F464;*/
-                stroke: rgba(244, 198, 61, 0.73);
-                stroke-width: 3px;
-                stroke-linecap: round;
-                stroke-dasharray: 30px 5px;
-                animation: dasharray-craziness 10s infinite linear;
-            }
-        </style>
-        <div class="ct-chart ct-perfect-fourth" style="width: 1000px;"></div>
-        <script>
+    <div ng-include="'module/scrum/client/view/product-toolbar.ng.html'"></div>
+    <div class="ct-chart ct-perfect-fourth" style="width: 1000px;"></div>
+    <div ng-include="'module/scrum/client/view/product-fab.ng.html'"></div>
+    <script>
+    // For the sake of the example we update the chart every time it's created with a delay of 10 seconds
+    //            chart.on('created', function() {
+    //                if(window.__exampleAnimateTimeout) {
+    //                    clearTimeout(window.__exampleAnimateTimeout);
+    //                    window.__exampleAnimateTimeout = null;
+    //                }
+    //                window.__exampleAnimateTimeout = setTimeout(chart.update.bind(chart), 22000);
+    //            });
 
-            // For the sake of the example we update the chart every time it's created with a delay of 10 seconds
-//            chart.on('created', function() {
-//                if(window.__exampleAnimateTimeout) {
-//                    clearTimeout(window.__exampleAnimateTimeout);
-//                    window.__exampleAnimateTimeout = null;
-//                }
-//                window.__exampleAnimateTimeout = setTimeout(chart.update.bind(chart), 22000);
-//            });
+    //            $('body').on('click', 'md-tab-item:first', function(){
+    //                alert('teste');
+    //                chart.update.bind(chart);
+    //            });
 
-//            $('body').on('click', 'md-tab-item:first', function(){
-//                alert('teste');
-//                chart.update.bind(chart);
-//            });
-
-        </script>
-        <!--<md-list>-->
-            <!--<md-list-item class="md-3-line" ng-repeat="team in vm.teams">-->
-                <!--<div class="md-list-item-text" layout="column" layout-align="center center">-->
-                    <!--<h3>{{team.name}}</h3>-->
-                    <!--&lt;!&ndash;<h4>{{item.who}}</h4>&ndash;&gt;-->
-                    <!--<p>{{team.description}}</p>-->
-                <!--</div>-->
-                <!--<div class="md-list-item-text" layout="row" layout-align="center center">-->
-                    <!--<md-button class="md-fab md-mini hoverable" aria-label="Edit" ng-click="modalSave($event, team._id)">-->
-                        <!--<md-icon md-svg-icon="content:ic_create_24px" aria-label="Edit"></md-icon>-->
-                    <!--</md-button>-->
-                    <!--<md-button class="md-fab md-mini hoverable" aria-label="Remove" ng-click="remove(team._id)">-->
-                        <!--<md-icon md-svg-icon="content:ic_clear_24px" aria-label="Remove"></md-icon>-->
-                    <!--</md-button>-->
-                <!--</div>-->
-                <!--<md-divider ng-if="!$last"></md-divider>-->
-            <!--</md-list-item>-->
-        <!--</md-list>-->
-        <!--<table class="table table-hover table-mc-light-blue" flex>-->
-            <!--<thead>-->
-            <!--<tr>-->
-                <!--<th data-field="id">Name</th>-->
-                <!--<th data-field="name">Item Name</th>-->
-                <!--<th data-field="price">Item Price</th>-->
-            <!--</tr>-->
-            <!--</thead>-->
-
-            <!--<tbody>-->
-            <!--<tr>-->
-                <!--<td>Alvin</td>-->
-                <!--<td>Eclair</td>-->
-                <!--<td>$0.87</td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td>Alan</td>-->
-                <!--<td>Jellybean</td>-->
-                <!--<td>$3.76</td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td>Jonathan</td>-->
-                <!--<td>Lollipop</td>-->
-                <!--<td>$7.00</td>-->
-            <!--</tr>-->
-            <!--</tbody>-->
-        <!--</table>-->
-    </md-content>
-
-    <!--<h1 class="md-display-2">Team</h1> {{test}}-->
-    <!--<p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>-->
+</script>
 </div>

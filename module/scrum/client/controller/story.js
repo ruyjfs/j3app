@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('StoryCtrl', [ '$scope', '$reactive', '$stateParams',
-    function ($scope, $reactive, $stateParams) {
+angular.module('scrum').controller('StoryCtrl', [ '$scope', '$reactive', '$stateParams', '$mdDialog',
+    function ($scope, $reactive, $stateParams, $mdDialog) {
         $reactive(this).attach($scope);
 
 
@@ -45,4 +45,14 @@ angular.module('scrum').controller('StoryCtrl', [ '$scope', '$reactive', '$state
                 );
             }
         });
+
+        $scope.modalStorySave = function (ev, id) {
+            $mdDialog.show({
+                controller: 'StorySaveCtrl',
+                templateUrl: 'module/scrum/client/view/story-save.ng.html',
+                clickOutsideToClose: true,
+                locals: {id: id},
+                targetEvent: ev
+            });
+        };
 }]);
