@@ -43,7 +43,7 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
                         $rootScope.titleMiddle = ' (' + result.number + ') ' + moment(result.dateStart).format('L') + ' - ' + moment(result.dateEnd).format('L');
 
                         if ($stateParams.sprintId == 1 || $stateParams.sprintId == '') {
-                            $state.go('scrum/kanban', {id: $stateParams.id, sprintId: result._id})
+                            $state.go('scrum/productkanban', {id: $stateParams.id, sprintId: result._id})
                         }
                     });
                     sprint = Sprint.findOne(

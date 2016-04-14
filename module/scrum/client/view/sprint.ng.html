@@ -1,5 +1,4 @@
 <div ng-controller="SprintCtrl as vm" flex>
-    <div ng-include="'module/scrum/client/view/product-toolbar.ng.html'"></div>
     <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
             <label>Search</label>
@@ -33,5 +32,4 @@
         </md-list>
         <dir-pagination-controls on-page-change="vm.pageChanged(newPageNumber)" pagination-id="sprint"></dir-pagination-controls>
     </md-content>
-    <div ng-include="'module/scrum/client/view/product-fab.ng.html'"></div>
 </div>

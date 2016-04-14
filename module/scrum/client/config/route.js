@@ -23,65 +23,169 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
         $stateProvider
             .state('scrum', {
                 url: '/scrum',
-                templateUrl: 'module/scrum/client/view/default.ng.html',
-                controller: 'DefaultCtrl',
                 resolve: {
                     paralax: function(){
                         setTimeout(function(){
                             $('.parallax').parallax();
                         }, 200);
                     }
+                },
+                views: {
+                    "viewA": {
+                        templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
+                    },
+                    "viewB": {
+                        templateUrl: 'module/scrum/client/view/default.ng.html',
+                        controller: 'DefaultCtrl',
+                    }
                 }
             })
             .state('scrum/project', {
                 url: '/scrum/project',
-                templateUrl: 'module/scrum/client/view/project.ng.html',
+                views: {
+                    "viewA": {
+                        //templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
+                    },
+                    "viewZoom": {
+                        templateUrl: 'module/scrum/client/view/project.ng.html',
+                    },
+                    "viewC": {
+                        templateUrl: 'module/scrum/client/view/product-fab.ng.html',
+                    }
+                }
                 //controller: 'ProjectCtrl'
+            })
+            .state('scrum/productkanban', {
+                url: '/scrum/productkanban/:id/:sprintId',
+                views: {
+                    "viewA": {
+                        templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
+                    },
+                    "viewZoom": {
+                        templateUrl: 'module/scrum/client/view/kanban.ng.html',
+                    },
+                    "viewC": {
+                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                    }
+                }
+            })
+            .state('scrum/kanban', {
+                url: '/scrum/kanban/:id/:sprintId',
+                views: {
+                    "viewA": {
+                        templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
+                    },
+                    "viewBounce": {
+                        templateUrl: 'module/scrum/client/view/kanban.ng.html',
+                    },
+                    "viewC": {
+                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                    }
+                }
             })
             .state('scrum/team', {
                 url: '/scrum/team',
-                templateUrl: 'module/scrum/client/view/team.ng.html',
+                views: {
+                    "viewA": {
+                        //templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
+                    },
+                    "viewBounce": {
+                        templateUrl: 'module/scrum/client/view/team.ng.html',
+                    }
+                }
                 //controller: 'TeamCtrl'
             })
             .state('scrum/content', {
                 url: '/scrum/content/:id/:sprintId',
-                templateUrl: 'module/scrum/client/view/project-content.ng.html',
-                //controller: 'ProjectContentCtrl'
+                views: {
+                    "viewBounce": {
+                        templateUrl: 'module/scrum/client/view/project-content.ng.html',
+                    },
+                }
             })
             .state('scrum/sprint', {
                 url: '/scrum/sprint/:id/:sprintId',
-                templateUrl: 'module/scrum/client/view/sprint.ng.html',
-                //controller: 'ProjectCtrl'
+                views: {
+                    "viewA": {
+                        templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
+                    },
+                    "viewBounce": {
+                        templateUrl: 'module/scrum/client/view/sprint.ng.html',
+                    },
+                    "viewC": {
+                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                    }
+                }
             })
             .state('scrum/status', {
                 url: '/scrum/status/:id/:sprintId',
-                templateUrl: 'module/scrum/client/view/status.ng.html',
-                //controller: 'ProjectCtrl'
+                views: {
+                    "viewA": {
+                        templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
+                    },
+                    "viewBounce": {
+                        templateUrl: 'module/scrum/client/view/status.ng.html',
+                    },
+                    "viewC": {
+                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                    }
+                }
             })
             .state('scrum/story', {
                 url: '/scrum/story/:id/:sprintId',
-                templateUrl: 'module/scrum/client/view/story.ng.html',
-                //controller: 'ProjectCtrl'
+                views: {
+                    "viewA": {
+                        templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
+                    },
+                    "viewBounce": {
+                        templateUrl: 'module/scrum/client/view/story.ng.html',
+                    },
+                    "viewC": {
+                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                    }
+                }
             })
             .state('scrum/project-team', {
                 url: '/scrum/project-team/:id/:sprintId',
-                templateUrl: 'module/scrum/client/view/project-team.ng.html',
-                //controller: 'ProjectCtrl'
+                views: {
+                    "viewA": {
+                        templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
+                    },
+                    "viewBounce": {
+                        templateUrl: 'module/scrum/client/view/project-team.ng.html',
+                    },
+                    "viewC": {
+                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                    }
+                }
             })
             .state('scrum/backlog', {
                 url: '/scrum/backlog/:id/:sprintId',
-                templateUrl: 'module/scrum/client/view/backlog.ng.html',
-                //controller: 'ProjectCtrl'
-            })
-            .state('scrum/kanban', {
-                url: '/scrum/kanban/:id/:sprintId',
-                templateUrl: 'module/scrum/client/view/kanban.ng.html',
-                //controller: 'ProjectCtrl'
+                views: {
+                    "viewA": {
+                        templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
+                    },
+                    "viewBounce": {
+                        templateUrl: 'module/scrum/client/view/backlog.ng.html',
+                    },
+                    "viewC": {
+                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                    }
+                }
             })
             .state('scrum/burndown', {
                 url: '/scrum/burndown/:id/:sprintId',
-                templateUrl: 'module/scrum/client/view/burndown.ng.html',
-                //controller: 'ProjectCtrl'
+                views: {
+                    "viewA": {
+                        templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
+                    },
+                    "viewBounce": {
+                        templateUrl: 'module/scrum/client/view/burndown.ng.html',
+                    },
+                    "viewC": {
+                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                    }
+                }
             });
 
         if (Meteor.userId()) {
