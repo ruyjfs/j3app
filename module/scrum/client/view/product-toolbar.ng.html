@@ -1,5 +1,5 @@
 <div ng-controller="ProductToolbarCtrl as vm" flex style="height: 100%;">
-    <nav class="navbar-fixed brown darken-2 hide-on-med-and-down" role="navigation">
+    <nav class="navbar-fixed brown darken-2 hide-on-med-and-down" role="navigation" style="z-index: 1;">
         <!--<div class="nav-wrapper container center">-->
         <div class="nav-wrapper container center">
             <ul class="brand-logo center">
@@ -28,15 +28,15 @@
                     </a>
                 </li>
                 <li class="waves-effect">
-                    <md-tooltip md-direction="botom" md-autohide="false"> Story</md-tooltip>
-                    <a href="/scrum/story/{{vm.id}}/{{vm.sprintId}}">
-                        <i class="material-icons">content_paste</i>
-                    </a>
-                </li>
-                <li class="waves-effect">
                     <md-tooltip md-direction="botom" md-autohide="false"> Team</md-tooltip>
                     <a href="/scrum/project-team/{{vm.id}}/{{vm.sprintId}}">
                         <i class="material-icons">group_work</i>
+                    </a>
+                </li>
+                <li class="waves-effect">
+                    <md-tooltip md-direction="botom" md-autohide="false"> Story</md-tooltip>
+                    <a href="/scrum/story/{{vm.id}}/{{vm.sprintId}}">
+                        <i class="material-icons">content_paste</i>
                     </a>
                 </li>
                 <li class="waves-effect">
@@ -82,15 +82,15 @@
                     </a>
                 </li>
                 <li class="waves-effect">
-                    <md-tooltip md-direction="botom" md-autohide="false"> Story</md-tooltip>
-                    <a href="/scrum/story/{{vm.id}}/{{vm.sprintId}}">
-                        <i class="material-icons">content_paste</i>
-                    </a>
-                </li>
-                <li class="waves-effect">
                     <md-tooltip md-direction="botom" md-autohide="false"> Team</md-tooltip>
                     <a href="/scrum/project-team/{{vm.id}}/{{vm.sprintId}}">
                         <i class="material-icons">group_work</i>
+                    </a>
+                </li>
+                <li class="waves-effect">
+                    <md-tooltip md-direction="botom" md-autohide="false"> Story</md-tooltip>
+                    <a href="/scrum/story/{{vm.id}}/{{vm.sprintId}}">
+                        <i class="material-icons">content_paste</i>
                     </a>
                 </li>
                 <li class="waves-effect">
