@@ -44,4 +44,45 @@ angular.module('scrum').controller('ProductFabCtrl', ['$scope', '$mdDialog', '$s
                 $scope.status = 'You cancelled the dialog.';
             });
         };
+
+        this.modalProjectSave = function (ev, id) {
+            $mdDialog.show({
+                controller: 'ProjectSaveCtrl',
+                templateUrl: 'module/scrum/client/view/project-save.ng.html',
+                clickOutsideToClose: true,
+                locals: {
+                    id: id
+                },
+                targetEvent: ev
+            }).then(function (answer) {
+                this.status = 'You said the information was "' + answer + '".';
+            }, function () {
+                this.status = 'You cancelled the dialog.';
+            });
+        };
+
+        this.modalTeamSave = function (ev, id) {
+            //$mdDialog.alert()
+            //    .parent(angular.element(document.querySelector('#popupContainer')))
+            //    .clickOutsideToClose(true)
+            //    .title('This is an alert title')
+            //    .content('You can specify some description text in here.')
+            //    .ariaLabel('Alert Dialog Demo')
+            //    .ok('Got it!')
+            //    .targetEvent(ev)
+
+            $mdDialog.show({
+                controller: 'TeamSaveCtrl',
+                templateUrl: 'module/scrum/client/view/team-save.ng.html',
+                clickOutsideToClose: true,
+                locals: {
+                    id: id
+                },
+                targetEvent: ev
+            }).then(function (answer) {
+                this.status = 'You said the information was "' + answer + '".';
+            }, function () {
+                this.status = 'You cancelled the dialog.';
+            });
+        };
     }]);
