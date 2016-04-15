@@ -15,7 +15,7 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
         if (sprint) {
             $rootScope.titleMiddle = ' (' + sprint.number + ') ' + moment(sprint.dateStart).format('L') + ' - ' + moment(sprint.dateEnd).format('L');
         }
-
+        console.info(sprint);
 
         $scope.modalNoteSave = function (ev, id, storyId) {
             $mdDialog.show({
