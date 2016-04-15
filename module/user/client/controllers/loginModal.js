@@ -22,7 +22,7 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
                     Materialize.toast('User not found!', 4000);
                 } else {
                     $mdDialog.hide();
-                    $state.go('scrum/project');
+                    $state.go('scrum/product');
                 }
             });
         };
@@ -34,7 +34,7 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
                         Materialize.toast('Error sending forgot password email - ' + err, 4000);
                     } else {
                         $mdDialog.hide();
-                        $state.go('scrum/project');
+                        $state.go('scrum/product');
 
                     }
                 }
@@ -63,7 +63,7 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
                                     Materialize.toast(error, 4000);
                                 } else {
                                     $mdDialog.hide();
-                                    $state.go('scrum/project');
+                                    $state.go('scrum/product');
                                     console.log('Saved!');
                                 }
                             });

@@ -12,11 +12,24 @@ angular.module('gamer').config(['$urlRouterProvider', '$stateProvider', '$locati
     function($urlRouterProvider, $stateProvider, $locationProvider){
         $locationProvider.html5Mode(true);
 
+        var $header = 'module/gamer/client/view/header.ng.html';
+        var $footer = 'module/gamer/client/view/footer.ng.html';
+
         $stateProvider
             .state('gamer', {
                 url: '/gamer',
-                templateUrl: 'module/gamer/client/view/default.ng.html',
-                controller: 'DefaultCtrl'
+                views: {
+                    "header": {
+                        templateUrl: $header,
+                    },
+                    "main": {
+                        templateUrl: 'module/gamer/client/view/default.ng.html',
+                        controller: 'DefaultCtrl'
+                    },
+                    "footer": {
+                        templateUrl: $footer,
+                    }
+                }
             });
 
         //$urlRouterProvider.otherwise("/gamer");

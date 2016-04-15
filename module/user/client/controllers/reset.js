@@ -1,4 +1,4 @@
-angular.module("socially").controller("ResetCtrl", ['$scope', '$reactive', '$state',
+angular.module("user").controller("ResetCtrl", ['$scope', '$reactive', '$state',
     function ($scope, $reactive, $state) {
         $reactive(this).attach($scope);
 
@@ -13,7 +13,7 @@ angular.module("socially").controller("ResetCtrl", ['$scope', '$reactive', '$sta
                 if (err) {
                     $scope.error = 'Error sending forgot password email - ' + err;
                 } else {
-                    $state.go('scrum/project');
+                    $state.go('scrum/product');
                 }
             });
         };

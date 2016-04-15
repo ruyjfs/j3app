@@ -2,11 +2,24 @@ angular.module('admin').config(['$urlRouterProvider', '$stateProvider', '$locati
     function($urlRouterProvider, $stateProvider, $locationProvider){
         $locationProvider.html5Mode(true);
 
+        var $header = 'module/admin/client/view/header.ng.html';
+        var $footer = 'module/admin/client/view/footer.ng.html';
+
         $stateProvider
             .state('admin', {
                 url: '/admin',
-                templateUrl: 'module/admin/client/view/default.ng.html',
-                controller: 'DefaultAdminCtrl'
+                views: {
+                    "header": {
+                        templateUrl: $header,
+                    },
+                    "main": {
+                        templateUrl: 'module/admin/client/view/default.ng.html',
+                        controller: 'DefaultAdminCtrl'
+                    },
+                    "footer": {
+                        templateUrl: $footer,
+                    }
+                }
             });
 
         $urlRouterProvider.otherwise("/admin");

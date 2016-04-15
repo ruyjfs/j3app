@@ -2,11 +2,25 @@ angular.module('user').config(['$urlRouterProvider', '$stateProvider', '$locatio
     function($urlRouterProvider, $stateProvider, $locationProvider){
         $locationProvider.html5Mode(true);
 
+        //var $header = 'module/admin/client/view/toolbar.ng.html';
+        var $header = 'module/user/client/views/header.ng.html';
+        var $footer = 'module/user/client/views/footer.ng.html';
+
         $stateProvider
             .state('user', {
                 url: '/user',
-                templateUrl: 'module/user/client/views/default.ng.html',
-                controller: 'DefaultCtrl'
+                views: {
+                    "header": {
+                        templateUrl: $header,
+                    },
+                    "main": {
+                        templateUrl: 'module/user/client/views/default.ng.html',
+                        controller: 'DefaultCtrl',
+                    },
+                    "footer": {
+                        templateUrl: $footer,
+                    }
+                }
             })
             .state('user/login', {
                 url: '/user/login',
@@ -32,7 +46,7 @@ angular.module('user').config(['$urlRouterProvider', '$stateProvider', '$locatio
                     "logout": ['$meteor', '$state', function($meteor, $state) {
                         return $meteor.logout().then(function(){
                             //$state.go('parties');
-                            $state.go('scrum').then(function() {
+                            $state.go('user').then(function() {
                                 // Get in a spaceship and fly to Jupiter, or whatever your callback does.
                                 $('.parallax').parallax();
                             });

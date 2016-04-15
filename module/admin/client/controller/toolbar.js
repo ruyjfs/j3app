@@ -70,7 +70,7 @@ angular.module('admin').controller('ToolbarCtrl', [ '$scope', '$timeout', '$mdSi
         $scope.menuItems = [
             {
                 name: 'Project',
-                link: '/scrum/project',
+                link: '/scrum/product',
                 icon: 'business_center',
             },
             {

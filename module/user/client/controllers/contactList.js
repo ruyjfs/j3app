@@ -19,6 +19,7 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
             $('.nav-button-chat-' + chatSide).sideNav('hide');
             $('.nav-button-contact-' + chatSide).sideNav('hide');
             $('.nav-button-contact-' + chatSide).sideNav('show');
+            console.log(chatSide);
         };
 
         $rootScope.hideNavContactList = function () {

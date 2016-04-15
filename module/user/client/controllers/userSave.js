@@ -10,10 +10,13 @@ angular.module('user').controller('UserSaveCtrl', [ '$scope', '$timeout', '$mdSi
         //$scope.dataForm = $meteor.object(Meteor.users, Meteor.user()._id, false);
         //$scope.dataForm = Meteor.users().findOne(Meteor.user()._id);
 
-        //this.subscribe('users');
-        this.form = Meteor.users.findOne(Meteor.user()._id);
+        this.subscribe('users');
+        this.form = Meteor.users.findOne(Meteor.userId());
+        console.log(Meteor.userId());
+        console.log(this.form);
 
-        user = Meteor.users.findOne(Meteor.user()._id);
+        user = Meteor.users.findOne(Meteor.userId());
+        console.log(user);
         if (user.status) {
             if (user.status.idle == true) {
                 user.statusColor = ' #FFC107';

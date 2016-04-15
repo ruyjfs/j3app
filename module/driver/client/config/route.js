@@ -12,11 +12,24 @@ angular.module('driver').config(['$urlRouterProvider', '$stateProvider', '$locat
     function($urlRouterProvider, $stateProvider, $locationProvider){
         $locationProvider.html5Mode(true);
 
+        var $header = 'module/driver/client/view/header.ng.html';
+        var $footer = 'module/driver/client/view/footer.ng.html';
+
         $stateProvider
             .state('driver', {
                 url: '/driver',
-                templateUrl: 'module/driver/client/view/default.ng.html',
-                controller: 'DefaultCtrl'
+                views: {
+                    "header": {
+                        templateUrl: $header,
+                    },
+                    "main": {
+                        templateUrl: 'module/driver/client/view/default.ng.html',
+                        controller: 'DefaultCtrl'
+                    },
+                    "footer": {
+                        templateUrl: $footer,
+                    }
+                }
             });
 
         //$urlRouterProvider.otherwise("/driver");

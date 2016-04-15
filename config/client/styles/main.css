@@ -24,6 +24,12 @@ a{
     margin: 0;
     padding: 0;
 }
+.md-button.md-fab{
+    z-index: 1;
+}
+fab {
+    z-index: 1;
+}
 
 /*.navbar-fixed{*/
     /*z-index: 1 !important;*/

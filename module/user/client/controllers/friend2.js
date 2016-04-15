@@ -1,6 +1,6 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('Friend2Ctrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$reactive',
+angular.module('user').controller('Friend2Ctrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$reactive',
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive) {
         $reactive(this).attach($scope);
         this.subscribe('team');
