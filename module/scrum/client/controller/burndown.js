@@ -27,10 +27,19 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
         //};
 
         sprint = {};
+        this.subscribe('users');
+        this.subscribe('message');
+        this.subscribe('project');
+        this.subscribe('team');
+        this.subscribe('status', function(){return [$stateParams.id]});
+        this.subscribe('note', function(){return [$stateParams.id]});
+        this.subscribe('story', function(){return [$stateParams.id]});
+        this.subscribe('sprint', function(){return [$stateParams.id]});
         this.helpers({
             sprint: function () {
                 project = Project.findOne($stateParams.id);
                 sprint = Sprint.findOne({_id: $stateParams.sprintId});
+                console.info(sprint);
 
                 tasks = ['1'];
                 daysCorrect = ['1'];
@@ -155,7 +164,7 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                         }
                         //tasks[$i] = sprint.daysTotal - $i;
                     }
-                    console.log(daysCorrect);
+                    //console.log(daysCorrect);
                     //
                     //console.log(sprint.days);
 

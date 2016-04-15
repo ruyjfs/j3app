@@ -18,6 +18,7 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
         this.subscribe('project');
         //this.subscribe('team');
         this.subscribe('users');
+        this.subscribe('sprint');
         this.helpers({
             projects: function () {
                 projects = Project.find({}).map(function (project) {
@@ -40,26 +41,38 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
                     );
 
                     if (!sprint) {
-                        Meteor.call('sprintCreate', project._id, function (error, result) {
-                            if (error) {
-                                console.log(error);
-                            } else {
+                        dateNow = moment()._d;
+                        sprint = Sprint.findOne(
+                            {
+                                $and: [
+                                    {projectId: project._id},
+                                    {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
+                                ]
+                            }
+                        );
+                    }
+                    console.info(sprint);
+
+                    //if (!sprint) {
+                    //    Meteor.call('sprintCreate', project._id, function (error, result) {
+                    //        if (error) {
+                    //            console.log(error);
+                    //        } else {
                                 //console.log('Saved!');
                                 //$scope.form = '';
                                 //$mdDialog.hide();
-                            }
+                            //}
                             //$rootScope.titleMiddle = result.dateStart + ' - ' + result.dateEnd + ' (' + result.number + ')';
 
                             //if ($stateParams.sprintId == 1 || $stateParams.sprintId == '') {
                                 //$state.go('scrum/productkanban', {id: $stateParams.id, sprintId: result._id})
                             //}
-
-                            sprint = result;
-                            console.info(result);
-
-                        });
-
-                    }
+                    //        sprint = result;
+                    //        console.info(result);
+                    //
+                    //    });
+                    //
+                    //}
 
                     //if (sprint) {
                     project.sprint = sprint;

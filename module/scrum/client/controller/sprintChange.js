@@ -12,7 +12,6 @@ angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$rootScope',
         //    $scope.form = {};
         //}
 
-        Meteor.subscribe('sprint');
         //$scope.helpers({
         //    sprints: function () {
         //        return Sprint.find({$and: [{projectId: $stateParams.id}]}).map(function(sprint){
@@ -25,6 +24,7 @@ angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$rootScope',
         //        return Sprint.findOne({$and: [{projectId: $stateParams.id}]});
         //    }
         //});
+        this.subscribe('sprint');
         $scope.form = [];
         $scope.sprints =  Sprint.find({$and: [{projectId: $stateParams.id}]}).map(function(sprint){
             if (typeof(sprint.dateStart) === 'string') {
@@ -41,7 +41,6 @@ angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$rootScope',
         });
 
         dateNow = moment().format('x');
-
         if ($stateParams.sprintId == '1') {
             var sprint = Sprint.findOne(
                 {
@@ -51,7 +50,17 @@ angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$rootScope',
                     ]
                 }
             );
-            console.log(sprint);
+            if (!sprint) {
+                dateNow = moment()._d;
+                var sprint = Sprint.findOne(
+                    {
+                        $and: [
+                            {projectId: $stateParams.id},
+                            {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
+                        ]
+                    }
+                );
+            }
             if (sprint) {
                 $scope.form.sprintId = sprint._id;
             }
@@ -78,6 +87,19 @@ angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$rootScope',
         $scope.change = function (sprintId) {
             $mdDialog.hide();
             var link = 'scrum/productkanban';
+            param = {};
+            param.projectId = $stateParams.id;
+            param.sprintId = sprintId;
+            console.info(param);
+            Meteor.call('sprintFindNext', param, function (error) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Saved!');
+                    $scope.form = '';
+                    $mdDialog.hide();
+                }
+            });
             $state.go(link, {id: $stateParams.id, sprintId: sprintId});
         }
     }
