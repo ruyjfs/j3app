@@ -7,6 +7,13 @@ angular.module('scrum').controller('HeaderCtrl',
     function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $reactive, $mdDialog, $mdBottomSheet, $rootScope, $mdToast, $stateParams, $state) {
         $reactive(this).attach($scope);
 
+        //$rootScope.$on('$stateChangeStart',
+        //    function(event, toState, toParams, fromState, fromParams, options){
+        //        event.preventDefault();
+                // transitionTo() promise will be rejected with
+                // a 'transition prevented' error
+            //});
+
         //this.toggleMenu = buildToggler('menu');
         //this.toggleContactList = buildToggler('contact-list');
 
@@ -19,8 +26,21 @@ angular.module('scrum').controller('HeaderCtrl',
         //        //cordova.plugins.Keyboard.close();
         //    }
         //})
-        this.id = $stateParams.id;
-        this.sprintId = $stateParams.sprintId;
+
+        if ($location.path()) {
+            arrUrl = $location.path().split('/');
+            //console.info(arrUrl);
+            //console.info(arrUrl[1]);
+            //console.info(arrUrl[3]);
+            //console.info(arrUrl[4]);
+            //console.info($location.path());
+            this.id = arrUrl[3];
+            this.sprintId = arrUrl[4];
+        }
+
+        //$urlRouterProvider, $stateProvider, $locationProvider
+        //console.info(route);
+        //console.info('route');
 
         //$('.nav-button-left').sideNav({
         //    closeOnClick: true

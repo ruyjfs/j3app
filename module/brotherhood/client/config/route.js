@@ -19,16 +19,16 @@ angular.module('brotherhood').config(['$urlRouterProvider', '$stateProvider', '$
             .state('brotherhood', {
                 url: '/brotherhood',
                 views: {
-                    "header": {
-                        templateUrl: $header,
-                    },
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
                     "main": {
                         templateUrl: 'module/brotherhood/client/view/default.ng.html',
                         controller: 'DefaultCtrl'
                     },
-                    "footer": {
-                        templateUrl: $footer,
-                    }
+                    //"footer": {
+                    //    templateUrl: $footer,
+                    //}
                 }
             });
 

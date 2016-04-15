@@ -19,16 +19,16 @@ angular.module('gamer').config(['$urlRouterProvider', '$stateProvider', '$locati
             .state('gamer', {
                 url: '/gamer',
                 views: {
-                    "header": {
-                        templateUrl: $header,
-                    },
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
                     "main": {
                         templateUrl: 'module/gamer/client/view/default.ng.html',
                         controller: 'DefaultCtrl'
                     },
-                    "footer": {
-                        templateUrl: $footer,
-                    }
+                    //"footer": {
+                    //    templateUrl: $footer,
+                    //}
                 }
             });
 

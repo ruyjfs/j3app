@@ -9,16 +9,16 @@ angular.module('admin').config(['$urlRouterProvider', '$stateProvider', '$locati
             .state('admin', {
                 url: '/admin',
                 views: {
-                    "header": {
-                        templateUrl: $header,
-                    },
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
                     "main": {
                         templateUrl: 'module/admin/client/view/default.ng.html',
                         controller: 'DefaultAdminCtrl'
                     },
-                    "footer": {
-                        templateUrl: $footer,
-                    }
+                    //"footer": {
+                    //    templateUrl: $footer,
+                    //}
                 }
             });
 
@@ -43,12 +43,33 @@ angular.module("admin").run(['$rootScope', '$state', function($rootScope, $state
         }
     });
 
-
-    //var nameModule = '';
     $rootScope.$on("$stateChangeStart",
         function (event, toState) {
             nameModule = toState.name.split('/')[0];
             $rootScope.nameModule = 'j3' + nameModule;
+            switch (nameModule){
+                case 'user' :
+                    $rootScope.themeMaterialize = 'orange darken-3';
+                    break;
+                case 'admin' :
+                    $rootScope.themeMaterialize = 'grey darken-4';
+                    break;
+                case 'brotherhood' :
+                    $rootScope.themeMaterialize = 'grey darken-4';
+                    break;
+                case 'scrum' :
+                    $rootScope.themeMaterialize = 'brown darken-3';
+                    break;
+                case 'gamer' :
+                    $rootScope.themeMaterialize = 'red darken-3';
+                    break;
+                case 'driver' :
+                    $rootScope.themeMaterialize = 'grey';
+                    break;
+                default:
+                    $rootScope.themeMaterialize = 'orange darken-3';
+                    break;
+            }
             setTheme(nameModule);
         }
     );

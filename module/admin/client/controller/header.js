@@ -6,22 +6,22 @@ angular.module('admin').controller('HeaderCtrl',
         '$stateParams', '$state',
     function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $reactive, $mdDialog, $mdBottomSheet, $rootScope, $mdToast, $stateParams, $state) {
         $reactive(this).attach($scope);
-        $('.nav-button-left').sideNav({
-            closeOnClick: false,
-            edge: 'left'
-        });
-        $('.nav-button-right').sideNav({
-            closeOnClick: false,
-            edge: 'right',
-        });
-        $('.nav-button-close-left').sideNav({
-            closeOnClick: true,
-            edge: 'left'
-        });
-        $('.nav-button-close-right').sideNav({
-            closeOnClick: true,
-            edge: 'right',
-        });
+        //$('.nav-button-left').sideNav({
+        //    closeOnClick: false,
+        //    edge: 'left'
+        //});
+        //$('.nav-button-right').sideNav({
+        //    closeOnClick: false,
+        //    edge: 'right',
+        //});
+        //$('.nav-button-close-left').sideNav({
+        //    closeOnClick: true,
+        //    edge: 'left'
+        //});
+        //$('.nav-button-close-right').sideNav({
+        //    closeOnClick: true,
+        //    edge: 'right',
+        //});
 
         this.subscribe('users');
         this.subscribe('message');

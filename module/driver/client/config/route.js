@@ -19,16 +19,16 @@ angular.module('driver').config(['$urlRouterProvider', '$stateProvider', '$locat
             .state('driver', {
                 url: '/driver',
                 views: {
-                    "header": {
-                        templateUrl: $header,
-                    },
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
                     "main": {
                         templateUrl: 'module/driver/client/view/default.ng.html',
                         controller: 'DefaultCtrl'
                     },
-                    "footer": {
-                        templateUrl: $footer,
-                    }
+                    //"footer": {
+                    //    templateUrl: $footer,
+                    //}
                 }
             });
 

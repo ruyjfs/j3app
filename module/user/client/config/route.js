@@ -10,16 +10,16 @@ angular.module('user').config(['$urlRouterProvider', '$stateProvider', '$locatio
             .state('user', {
                 url: '/user',
                 views: {
-                    "header": {
-                        templateUrl: $header,
-                    },
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
                     "main": {
                         templateUrl: 'module/user/client/views/default.ng.html',
                         controller: 'DefaultCtrl',
                     },
-                    "footer": {
-                        templateUrl: $footer,
-                    }
+                    //"footer": {
+                    //    templateUrl: $footer,
+                    //}
                 }
             })
             .state('user/login', {

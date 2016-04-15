@@ -35,9 +35,9 @@ angular.module('user').controller('UserSaveCtrl', [ '$scope', '$timeout', '$mdSi
 
         // Imagem do gravatar.
         if (user.emails && user.emails[0].address) {
-            user.img = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(user.emails[0].address).toString()+'?s=40&d=mm';
+            user.img = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(user.emails[0].address).toString()+'?s=60&d=mm';
         } else {
-            user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
+            user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=60&d=mm&f=y';
         }
 
         user.nameTreated = user.name + ' ' + user.lastName;

@@ -34,42 +34,36 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     }
                 },
                 views: {
-                    "header": {
-                        templateUrl: $header,
-                    },
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
                     "main": {
                         templateUrl: 'module/scrum/client/view/default.ng.html',
                         controller: 'DefaultCtrl',
                     },
-                    "footer": {
-                        templateUrl: $footer,
-                    }
                 }
             })
             .state('scrum/product', {
                 url: '/scrum/product',
                 views: {
-                    "header": {
-                        templateUrl: $header,
-                    },
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
                     "mainZoom": {
                         templateUrl: 'module/scrum/client/view/project.ng.html',
                     },
                     "main2": {
                         templateUrl: 'module/scrum/client/view/product-fab.ng.html',
                     },
-                    "footer": {
-                        templateUrl: $footer,
-                    }
                 }
                 //controller: 'ProjectCtrl'
             })
             .state('scrum/productkanban', {
                 url: '/scrum/productkanban/:id/:sprintId',
                 views: {
-                    "header": {
-                        templateUrl: $header,
-                    },
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
                     "header2": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
@@ -79,17 +73,14 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     "main2": {
                         templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
                     },
-                    "footer": {
-                        templateUrl: $footer,
-                    }
                 }
             })
             .state('scrum/kanban', {
                 url: '/scrum/kanban/:id/:sprintId',
                 views: {
-                    "header": {
-                        templateUrl: $header,
-                    },
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
                     "header2": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
@@ -99,49 +90,40 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     "main2": {
                         templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
                     },
-                    "footer": {
-                        templateUrl: $footer,
-                    }
                 }
             })
             .state('scrum/team', {
                 url: '/scrum/team',
                 views: {
-                    "header": {
-                        templateUrl: $header,
-                    },
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
                     "header2": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
                     "mainBounce": {
                         templateUrl: 'module/scrum/client/view/team.ng.html',
                     },
-                    "footer": {
-                        templateUrl: $footer,
-                    }
                 }
                 //controller: 'TeamCtrl'
             })
             .state('scrum/content', {
                 url: '/scrum/content/:id/:sprintId',
                 views: {
-                    "header": {
-                        templateUrl: $header,
-                    },
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
                     "mainBounce": {
                         templateUrl: 'module/scrum/client/view/project-content.ng.html',
                     },
-                    "footer": {
-                        templateUrl: $footer,
-                    }
                 }
             })
             .state('scrum/sprint', {
                 url: '/scrum/sprint/:id/:sprintId',
                 views: {
-                    "header": {
-                        templateUrl: $header,
-                    },
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
                     "header2": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
@@ -151,17 +133,14 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     "main2": {
                         templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
                     },
-                    "footer": {
-                        templateUrl: $footer,
-                    }
                 }
             })
             .state('scrum/status', {
                 url: '/scrum/status/:id/:sprintId',
                 views: {
-                    "header": {
-                        templateUrl: $header,
-                    },
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
                     "header2": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
@@ -171,17 +150,14 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     "main2": {
                         templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
                     },
-                    "footer": {
-                        templateUrl: $footer,
-                    }
                 }
             })
             .state('scrum/story', {
                 url: '/scrum/story/:id/:sprintId',
                 views: {
-                    "header": {
-                        templateUrl: $header,
-                    },
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
                     "header2": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
@@ -191,17 +167,14 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     "main2": {
                         templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
                     },
-                    "footer": {
-                        templateUrl: $footer,
-                    }
                 }
             })
             .state('scrum/product-team', {
                 url: '/scrum/product-team/:id/:sprintId',
                 views: {
-                    "header": {
-                        templateUrl: $header,
-                    },
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
                     "header2": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
@@ -211,17 +184,14 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     "main2": {
                         templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
                     },
-                    "footer": {
-                        templateUrl: $footer,
-                    }
                 }
             })
             .state('scrum/backlog', {
                 url: '/scrum/backlog/:id/:sprintId',
                 views: {
-                    "header": {
-                        templateUrl: $header,
-                    },
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
                     "header2": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
@@ -231,17 +201,14 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     "main2": {
                         templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
                     },
-                    "footer": {
-                        templateUrl: $footer,
-                    }
                 }
             })
             .state('scrum/burndown', {
                 url: '/scrum/burndown/:id/:sprintId',
                 views: {
-                    "header": {
-                        templateUrl: $header,
-                    },
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
                     "header2": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
@@ -251,9 +218,6 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     "main2": {
                         templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
                     },
-                    "footer": {
-                        templateUrl: $footer,
-                    }
                 }
             });
 

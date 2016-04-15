@@ -12,22 +12,22 @@ if (Meteor.isClient) {
                 'scrum',
             ]);
 
-        //$('.nav-button-left').sideNav({
-        //    closeOnClick: false,
-        //    edge: 'left'
-        //});
-        //$('.nav-button-right').sideNav({
-        //    closeOnClick: false,
-        //    edge: 'right',
-        //});
-        //$('.nav-button-close-left').sideNav({
-        //    closeOnClick: true,
-        //    edge: 'left'
-        //});
-        //$('.nav-button-close-right').sideNav({
-        //    closeOnClick: true,
-        //    edge: 'right',
-        //});
+        $('.nav-button-left').sideNav({
+            closeOnClick: false,
+            edge: 'left'
+        });
+        $('.nav-button-right').sideNav({
+            closeOnClick: false,
+            edge: 'right',
+        });
+        $('.nav-button-close-left').sideNav({
+            closeOnClick: true,
+            edge: 'left'
+        });
+        $('.nav-button-close-right').sideNav({
+            closeOnClick: true,
+            edge: 'right',
+        });
     }
 
     mdThemingProvider = '';
@@ -129,9 +129,33 @@ if (Meteor.isClient) {
 
     nameModule = '';
     titleMiddle = '';
+    themeMaterialize = 'orange darken-4';
     setTheme = function ($nameTheme){
         nameModule = $nameTheme;
         mdThemingProvider.setDefaultTheme($nameTheme);
+        switch (nameModule){
+            case 'user' :
+                themeMaterialize = 'orange darken-3';
+                break;
+            case 'admin' :
+                themeMaterialize = 'grey darken-4';
+                break;
+            case 'brotherhood' :
+                themeMaterialize = 'grey darken-4';
+                break;
+            case 'scrum' :
+                themeMaterialize = 'brown darken-3';
+                break;
+            case 'gamer' :
+                themeMaterialize = 'red darken-3';
+                break;
+            case 'driver' :
+                themeMaterialize = 'grey';
+                break;
+            default:
+                themeMaterialize = 'orange darken-3';
+                break;
+        }
     };
 
     isPermission = function() {
