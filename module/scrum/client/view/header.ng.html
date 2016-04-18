@@ -124,28 +124,28 @@
         <li>
             <a href="/scrum/product" class="waves-effect waves-orange"><i class="material-icons left">business_center</i>Product</a>
         </li>
-        <li ng-if="titleMiddle">
+        <li ng-if="vm.sprintId">
             <a href="#" ng-click="modalSprintChange($event)" class="waves-effect waves-orange"><i class="material-icons left">date_range</i>Change sprint</a>
         </li>
-        <li ng-if="titleMiddle">
+        <li ng-if="vm.sprintId">
             <a href="/scrum/burndown/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons left">equalizer</i>Burndown</a>
         </li>
-        <li ng-if="titleMiddle">
+        <li ng-if="vm.sprintId">
             <a href="/scrum/kanban/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons left">view_column</i>Kanban</a>
         </li>
-        <li ng-if="titleMiddle">
+        <li ng-if="vm.sprintId">
             <a href="/scrum/backlog/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons left">developer_board</i>Backlog</a>
         </li>
-        <li ng-if="titleMiddle">
+        <li ng-if="vm.sprintId">
             <a href="/scrum/product-team/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons left">group</i>Team</a>
         </li>
-        <li ng-if="titleMiddle">
+        <li ng-if="vm.sprintId">
             <a href="/scrum/story/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons left">content_paste</i>Story</a>
         </li>
-        <li ng-if="titleMiddle">
+        <li ng-if="vm.sprintId">
             <a href="/scrum/status/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons left">style</i>Status</a>
         </li>
-        <li ng-if="titleMiddle">
+        <li ng-if="vm.sprintId">
             <a href="/scrum/sprint/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons left">date_range</i>Sprint</a>
         </li>
 

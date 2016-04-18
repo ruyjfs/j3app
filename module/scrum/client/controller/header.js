@@ -38,6 +38,9 @@ angular.module('scrum').controller('HeaderCtrl',
             this.sprintId = arrUrl[4];
         }
 
+console.info(this.id);
+console.info(this.sprintId);
+
         //$urlRouterProvider, $stateProvider, $locationProvider
         //console.info(route);
         //console.info('route');
@@ -55,24 +58,6 @@ angular.module('scrum').controller('HeaderCtrl',
         //$('.nav-button-rigth').sideNav({
         //    closeOnClick: true,
         //});
-
-        $('.nav-button-left').sideNav({
-            closeOnClick: false,
-            edge: 'left'
-        });
-        $('.nav-button-right').sideNav({
-            closeOnClick: false,
-            edge: 'right',
-        });
-        $('.nav-button-close-left').sideNav({
-            closeOnClick: true,
-            edge: 'left'
-        });
-        $('.nav-button-close-right').sideNav({
-            closeOnClick: true,
-            edge: 'right',
-        });
-
 
         isInt = function (n) {
             return parseInt(n) === n

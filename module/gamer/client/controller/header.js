@@ -36,24 +36,6 @@ angular.module('gamer').controller('HeaderCtrl',
         //    closeOnClick: true,
         //});
 
-        $('.nav-button-left').sideNav({
-            closeOnClick: false,
-            edge: 'left'
-        });
-        $('.nav-button-right').sideNav({
-            closeOnClick: false,
-            edge: 'right',
-        });
-        $('.nav-button-close-left').sideNav({
-            closeOnClick: true,
-            edge: 'left'
-        });
-        $('.nav-button-close-right').sideNav({
-            closeOnClick: true,
-            edge: 'right',
-        });
-
-
         isInt = function (n) {
             return parseInt(n) === n
         };
