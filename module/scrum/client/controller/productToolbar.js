@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog', '$stateParams', '$reactive', '$state', '$timeout', '$rootScope',
-    function ($scope, $mdDialog, $stateParams, $reactive, $state, $timeout, $rootScope) {
+angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog', '$stateParams', '$reactive', '$state', '$timeout', '$rootScope', '$location',
+    function ($scope, $mdDialog, $stateParams, $reactive, $state, $timeout, $rootScope, $location) {
         $reactive(this).attach($scope);
 
         if (!$stateParams.id) {
@@ -38,7 +38,6 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
 
                     Meteor.call('sprintCreate', $stateParams.id, function (error, result) {
                         if (error) {
-                            console.log(error);
                         } else {
                             //console.log('Saved!');
                             //$scope.form = '';
@@ -196,6 +195,27 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
             },
         });
 
+        this.menus = [
+            {name: 'Sprint',    link: '/scrum/sprint/'+this.id+'/'+this.sprintId,   icon: 'date_range',      class: ''},
+            {name: 'Story',     link: '/scrum/story/'+this.id+'/'+this.sprintId,    icon: 'content_paste',   class: ''},
+            {name: 'Status',    link: '/scrum/status/'+this.id+'/'+this.sprintId,   icon: 'style',           class: ''},
+            {name: 'Backlog',   link: '/scrum/backlog/'+this.id+'/'+this.sprintId,  icon: 'developer_board', class: ''},
+            {name: 'Kanban',    link: '/scrum/kanban/'+this.id+'/'+this.sprintId,   icon: 'view_column',     class: ''},
+            {name: 'Burndown',  link: '/scrum/burndown/'+this.id+'/'+this.sprintId, icon: 'equalizer',       class: ''},
+            {name: 'Team',      link: '/scrum/product-team/'+this.id+'/'+this.sprintId,     icon: 'group',   class: ''},
+            {name: 'Product',   link: '/scrum/project', icon: 'business_center'}
+        ];
+        if ($location.path()) {
+            arrUrl = $location.path().split('/');
+            urlModule = arrUrl[2];
+        }
+        this.menus.map(function(menu){
+            links = menu.link.split('/');
+            if (urlModule == links[2] || (urlModule == 'productkanban' && links[2] == 'kanban')) {
+                menu.class = 'active'
+            }
+            return menu;
+        });
 
         $scope.modalNoteSave = function (ev, id, storyId) {
             $mdDialog.show({

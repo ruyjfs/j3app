@@ -39,7 +39,6 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
             sprint: function () {
                 project = Project.findOne($stateParams.id);
                 sprint = Sprint.findOne({_id: $stateParams.sprintId});
-                console.info(sprint);
 
                 tasks = ['1'];
                 daysCorrect = ['1'];
@@ -148,9 +147,6 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                             sprint.days[$i] = moment(sprint.dateStart).add($i, 'days').format('DD/MM dd');
                         }
 
-                        console.log(sprint.days[$i]);
-                        console.log(moment(sprint.dateStart, 'x').add($i, 'days').weekday());
-                        console.log(moment(sprint.dateStart, 'x').add($i, 'days').isoWeekday());
                         if (project.skipWeekend && (moment(sprint.dateStart, 'x').add($i, 'days').isoWeekday() == 2+1 || moment(sprint.dateStart, 'x').add($i, 'days').isoWeekday() == 3+1)) {
                             //timeTotalNotes = timeTotalNotes + timeTotalTeams;
                         } else {

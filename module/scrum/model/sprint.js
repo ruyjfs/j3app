@@ -45,7 +45,6 @@ Meteor.methods({
             );
 
             if (!sprint) {
-                console.info('salvando');
                 moment.locale('pt-BR');
                 sprint = {};
                 //sprint.dateStart = moment().startOf('week').format('DD/MM/YYYY, HH:mm:ss');
@@ -97,9 +96,7 @@ Meteor.methods({
                 //console.log(sprint);
                 //console.log(sprintNext);
                 Sprint.insert(sprintNext);
-                console.info('INSERINDO PROXIMO');
             }
-            console.info(sprint);
 
             return sprint;
         } else {

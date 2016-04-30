@@ -71,9 +71,7 @@ angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$rootScope',
         $scope.save = function () {
             Meteor.call('storySave', $scope.form, function (error) {
                 if (error) {
-                    console.log(error);
                 } else {
-                    console.log('Saved!');
                     $scope.form = '';
                     $mdDialog.hide();
                 }
@@ -90,12 +88,9 @@ angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$rootScope',
             param = {};
             param.projectId = $stateParams.id;
             param.sprintId = sprintId;
-            console.info(param);
             Meteor.call('sprintFindNext', param, function (error) {
                 if (error) {
-                    console.log(error);
                 } else {
-                    console.log('Saved!');
                     $scope.form = '';
                     $mdDialog.hide();
                 }

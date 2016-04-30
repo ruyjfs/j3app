@@ -5,7 +5,6 @@ angular.module("scrum").run(['$rootScope', '$state', function($rootScope, $state
         if (error === 'AUTH_REQUIRED') {
 
             $state.go('scrum');
-            console.log(toState);
         }
     });
 

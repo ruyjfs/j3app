@@ -38,9 +38,6 @@ angular.module('scrum').controller('HeaderCtrl',
             this.sprintId = arrUrl[4];
         }
 
-console.info(this.id);
-console.info(this.sprintId);
-
         //$urlRouterProvider, $stateProvider, $locationProvider
         //console.info(route);
         //console.info('route');

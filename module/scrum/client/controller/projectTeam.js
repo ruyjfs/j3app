@@ -107,7 +107,6 @@ angular.module('scrum').controller('ProjectTeamCtrl', [ '$scope', '$mdDialog', '
         });
 
         $scope.remove = function(team) {
-            console.log(this.getReactively('teams'));
             this.teams.remove(team);
         }
 

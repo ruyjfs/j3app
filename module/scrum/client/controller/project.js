@@ -21,7 +21,7 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
         this.subscribe('sprint');
         this.helpers({
             projects: function () {
-                projects = Project.find({}).map(function (project) {
+                projects = Project.find({}, {sort: {name: 1}}).map(function (project) {
                     //projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}, {scrumMaster: {$in: [Meteor.userId()]}}]}).map(function(project){
                     if (project.teams) {
                         project.teams = Team.find({
@@ -51,7 +51,6 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
                             }
                         );
                     }
-                    console.info(sprint);
 
                     //if (!sprint) {
                     //    Meteor.call('sprintCreate', project._id, function (error, result) {

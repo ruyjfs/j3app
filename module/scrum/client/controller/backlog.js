@@ -121,7 +121,6 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
 
                     Meteor.call('sprintCreate', $stateParams.id, function (error, result) {
                         if (error) {
-                            console.log(error);
                         } else {
                             //console.log('Saved!');
                             //$scope.form = '';

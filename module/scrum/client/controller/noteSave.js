@@ -30,14 +30,14 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id'
         Meteor.subscribe('users');
         $scope.helpers({
             stories: function () {
-                return Story.find({projectId: $stateParams.id});
+                return Story.find({projectId: $stateParams.id}, {sort: {name: 1}});
             },
             members: function () {
 
                 project = Project.findOne($stateParams.id);
                 usersId = [];
                 if (project && project.teams) {
-                    teams = Team.find({_id: {$in: project.teams}}).fetch().map(function(team){
+                    teams = Team.find({_id: {$in: project.teams}}, {sort: {name: 1}}).fetch().map(function(team){
                         if (team.members) {
                             team.members.map(function(userId){
                                 usersId.push(userId);
@@ -53,10 +53,10 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id'
                 return users;
             },
             projects: function () {
-                teamsId = Team.find({$or: [{members: Meteor.userId()}, {userId: Meteor.userId()}]}).map(function(member){
+                teamsId = Team.find({$or: [{members: Meteor.userId()}, {userId: Meteor.userId()}]}, {sort: {name: 1}}).map(function(member){
                     return member._id;
                 });
-                projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}]})
+                projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}]}, {sort: {name: 1}});
                 return projects;
             }
         });

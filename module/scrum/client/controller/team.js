@@ -34,17 +34,14 @@ angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdUtil
         };
         this.pageChanged = function(newPage) {
             this.page = newPage;
-            console.log(this.getReactively('page'));
         };
         this.sortChange = function(sort) {
-            console.log(typeof sort);
             this.sort = {
                 name: parseInt(sort)
             };
         };
 
         $scope.remove = function(team) {
-            console.log(this.getReactively('teams'));
             this.teams.remove(team);
         };
 
