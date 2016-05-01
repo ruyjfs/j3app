@@ -17,6 +17,43 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                 notes.map(function(note){
                     note.story = Story.findOne(note.story);
                     note.owner = Meteor.users.findOne(note.owner);
+                    if (note.owner.status) {
+                        if (note.owner.status.lastLogin) {
+
+                            if (moment(new Date).diff(moment(note.owner.status.lastLogin.date), 'days') > 2) {
+                                note.owner.statusLastLoginDate = moment(note.owner.status.lastLogin.date).format('L H[h]m');
+                            } else {
+                                note.owner.statusLastLoginDate = moment(note.owner.status.lastLogin.date).fromNow(); // in 40 minutes
+                            }
+                        }
+                        //console.log(note.owner.status.lastLogin.date);
+                        //moment(note.owner.status.lastLogin.date).format('L LT')
+                        //note.owner.status.lastLogin.dateTreated = '';
+                        if (note.owner.status.idle == true) {
+                            note.owner.statusColor = ' #FFC107';
+                            note.owner.statusName = ' Away';
+                        } else if (note.owner.status.online == true) {
+                            note.owner.statusColor = ' #9ACD32';
+                            note.owner.statusName = ' Online';
+                        } else {
+                            note.owner.statusColor = ' rgba(224, 224, 224, 0.77)';
+                            note.owner.statusName = ' Offline';
+                        }
+                    } else {
+                        note.owner.statusColor = ' rgba(224, 224, 224, 0.77)';
+                        note.owner.statusName = ' Offline';
+                    }
+                    // Imagem do gravatar.
+                    if (note.owner.emails && note.owner.emails[0].address) {
+                        note.owner.img = 'http://www.gravatar.com/avatar/' + CryptoJS.MD5(note.owner.emails[0].address).toString() + '?s=60&d=mm';
+                    } else {
+                        note.owner.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=60&d=mm&f=y';
+                    }
+
+                    note.owner.nameTreated = note.owner.name + ' ' + note.owner.lastName;
+                    if (note.owner.nameTreated.length > 14) {
+                        note.owner.nameTreated = note.owner.nameTreated.substr(0,13) + '...';
+                    }
                     if (note.statusId == '1') {
                         note.color = '#dbdbdb';
                     } else {
@@ -57,6 +94,43 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                                     note.story = '#000';
                                 }
                             }
+                            if (note.owner.status) {
+                                if (note.owner.status.lastLogin) {
+
+                                    if (moment(new Date).diff(moment(note.owner.status.lastLogin.date), 'days') > 2) {
+                                        note.owner.statusLastLoginDate = moment(note.owner.status.lastLogin.date).format('L H[h]m');
+                                    } else {
+                                        note.owner.statusLastLoginDate = moment(note.owner.status.lastLogin.date).fromNow(); // in 40 minutes
+                                    }
+                                }
+                                //console.log(note.owner.status.lastLogin.date);
+                                //moment(note.owner.status.lastLogin.date).format('L LT')
+                                //note.owner.status.lastLogin.dateTreated = '';
+                                if (note.owner.status.idle == true) {
+                                    note.owner.statusColor = ' #FFC107';
+                                    note.owner.statusName = ' Away';
+                                } else if (note.owner.status.online == true) {
+                                    note.owner.statusColor = ' #9ACD32';
+                                    note.owner.statusName = ' Online';
+                                } else {
+                                    note.owner.statusColor = ' rgba(224, 224, 224, 0.77)';
+                                    note.owner.statusName = ' Offline';
+                                }
+                            } else {
+                                note.owner.statusColor = ' rgba(224, 224, 224, 0.77)';
+                                note.owner.statusName = ' Offline';
+                            }
+                            // Imagem do gravatar.
+                            if (note.owner.emails && note.owner.emails[0].address) {
+                                note.owner.img = 'http://www.gravatar.com/avatar/' + CryptoJS.MD5(note.owner.emails[0].address).toString() + '?s=60&d=mm';
+                            } else {
+                                note.owner.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=60&d=mm&f=y';
+                            }
+
+                            note.owner.nameTreated = note.owner.name + ' ' + note.owner.lastName;
+                            if (note.owner.nameTreated.length > 14) {
+                                note.owner.nameTreated = note.owner.nameTreated.substr(0,13) + '...';
+                            }
 
                             return note;
                         });
@@ -77,6 +151,43 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                         } else {
                             note.story = '#000';
                         }
+                    }
+                    if (note.owner.status) {
+                        if (note.owner.status.lastLogin) {
+
+                            if (moment(new Date).diff(moment(note.owner.status.lastLogin.date), 'days') > 2) {
+                                note.owner.statusLastLoginDate = moment(note.owner.status.lastLogin.date).format('L H[h]m');
+                            } else {
+                                note.owner.statusLastLoginDate = moment(note.owner.status.lastLogin.date).fromNow(); // in 40 minutes
+                            }
+                        }
+                        //console.log(note.owner.status.lastLogin.date);
+                        //moment(note.owner.status.lastLogin.date).format('L LT')
+                        //note.owner.status.lastLogin.dateTreated = '';
+                        if (note.owner.status.idle == true) {
+                            note.owner.statusColor = ' #FFC107';
+                            note.owner.statusName = ' Away';
+                        } else if (note.owner.status.online == true) {
+                            note.owner.statusColor = ' #9ACD32';
+                            note.owner.statusName = ' Online';
+                        } else {
+                            note.owner.statusColor = ' rgba(224, 224, 224, 0.77)';
+                            note.owner.statusName = ' Offline';
+                        }
+                    } else {
+                        note.owner.statusColor = ' rgba(224, 224, 224, 0.77)';
+                        note.owner.statusName = ' Offline';
+                    }
+                    // Imagem do gravatar.
+                    if (note.owner.emails && note.owner.emails[0].address) {
+                        note.owner.img = 'http://www.gravatar.com/avatar/' + CryptoJS.MD5(note.owner.emails[0].address).toString() + '?s=60&d=mm';
+                    } else {
+                        note.owner.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=60&d=mm&f=y';
+                    }
+
+                    note.owner.nameTreated = note.owner.name + ' ' + note.owner.lastName;
+                    if (note.owner.nameTreated.length > 14) {
+                        note.owner.nameTreated = note.owner.nameTreated.substr(0,13) + '...';
                     }
                     return note;
                 });
@@ -108,6 +219,43 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                                 } else {
                                     note.story = '#000';
                                 }
+                            }
+                            if (note.owner.status) {
+                                if (note.owner.status.lastLogin) {
+
+                                    if (moment(new Date).diff(moment(note.owner.status.lastLogin.date), 'days') > 2) {
+                                        note.owner.statusLastLoginDate = moment(note.owner.status.lastLogin.date).format('L H[h]m');
+                                    } else {
+                                        note.owner.statusLastLoginDate = moment(note.owner.status.lastLogin.date).fromNow(); // in 40 minutes
+                                    }
+                                }
+                                //console.log(note.owner.status.lastLogin.date);
+                                //moment(note.owner.status.lastLogin.date).format('L LT')
+                                //note.owner.status.lastLogin.dateTreated = '';
+                                if (note.owner.status.idle == true) {
+                                    note.owner.statusColor = ' #FFC107';
+                                    note.owner.statusName = ' Away';
+                                } else if (note.owner.status.online == true) {
+                                    note.owner.statusColor = ' #9ACD32';
+                                    note.owner.statusName = ' Online';
+                                } else {
+                                    note.owner.statusColor = ' rgba(224, 224, 224, 0.77)';
+                                    note.owner.statusName = ' Offline';
+                                }
+                            } else {
+                                note.owner.statusColor = ' rgba(224, 224, 224, 0.77)';
+                                note.owner.statusName = ' Offline';
+                            }
+                            // Imagem do gravatar.
+                            if (note.owner.emails && note.owner.emails[0].address) {
+                                note.owner.img = 'http://www.gravatar.com/avatar/' + CryptoJS.MD5(note.owner.emails[0].address).toString() + '?s=60&d=mm';
+                            } else {
+                                note.owner.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=60&d=mm&f=y';
+                            }
+
+                            note.owner.nameTreated = note.owner.name + ' ' + note.owner.lastName;
+                            if (note.owner.nameTreated.length > 14) {
+                                note.owner.nameTreated = note.owner.nameTreated.substr(0,13) + '...';
                             }
                             return note;
                         });
@@ -466,6 +614,23 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
             $mdDialog.show({
                 controller: 'NoteSaveCtrl',
                 templateUrl: 'module/scrum/client/view/note-save.ng.html',
+                clickOutsideToClose: true,
+                targetEvent: ev,
+                locals: {
+                    id: id,
+                    storyId: storyId
+                }
+            }).then(function (answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
+        };
+
+        $scope.modalNoteView = function (ev, id, storyId) {
+            $mdDialog.show({
+                controller: 'NoteViewCtrl',
+                templateUrl: 'module/scrum/client/view/note-view.ng.html',
                 clickOutsideToClose: true,
                 targetEvent: ev,
                 locals: {

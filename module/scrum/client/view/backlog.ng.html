@@ -52,23 +52,54 @@
 
                                 <p></p>
                             </div>
-                            <div class="card-reveal">
+                            <div class="card-reveal" style="padding: 0px;">
                                 <!--<span class="card-title grey-text text-darken-4">{{backLogNote.story.name}}<i class="material-icons right">close</i></span>-->
                                     <span class="card-title grey-text text-darken-4">
                                         <i class="note-notHandle material-icons right">close</i>
-                                        <a href="#" ng-click="modalStorySave($event, backLogNote.story._id)"
-                                           title="Add story" class="note-notHandle btn-floating green hoverable">
-                                            <i class="material-icons">content_paste</i>
-                                        </a>
-                                        <a href="#" ng-click="modalNoteSave($event, backLogNote._id)" title="Add note"
-                                           class="note-notHandle btn-floating amber accent-4 hoverable">
-                                            <i class="material-icons">mode_edit</i>
-                                        </a>
                                     </span>
+                                <div style="height: 109px;">
+                                    <img alt="{{backLogNote.owner.name}}" ng-src="{{backLogNote.owner.img}}" class="md-avatar md-whiteframe-3dp" style="
+                                            display: block;
+                                            position: absolute;
+                                            padding-top: 0;
+                                            background-color: {{backLogNote.owner.statusColor}};
+                                            border: solid 6px  {{backLogNote.owner.statusColor}};
+                                            width: 60px;
+                                            height: 60px;
+                                            margin-top: 6px;
+                                            margin-bottom: 8px;
+                                            border-radius: 12%;
+                                            box-sizing: content-box;
+                                            top: 13px;
+                                            left: 61px;
+                                            "/>
+                                </div>
+                                <div class="card-action" layout="row" style="padding: 0px;text-align: center;display: inherit;">
+                                    <a href="#" ng-click="modalNoteSave($event, backLogNote._id)"
+                                       class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal; height: 30px; width: 30px; color: #757575;">
+                                        <md-tooltip md-direction="botom" md-autohide="false">Delete task</md-tooltip>
+                                        <i class="material-icons">delete</i>
+                                    </a>
+                                    <a href="#" ng-click="modalStorySave($event, backLogNote.story._id)"
+                                       class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
+                                        <md-tooltip md-direction="botom" md-autohide="false">Edit history</md-tooltip>
+                                        <i class="material-icons">content_paste</i>
+                                    </a>
+                                    <a href="#" ng-click="modalNoteSave($event, backLogNote._id)"
+                                       class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
+                                        <md-tooltip md-direction="botom" md-autohide="false">Edit task</md-tooltip>
+                                        <i class="material-icons">mode_edit</i>
+                                    </a>
+                                    <a href="#" ng-click="modalNoteView($event, backLogNote._id)"
+                                       class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
+                                        <md-tooltip md-direction="botom" md-autohide="false">Visualize</md-tooltip>
+                                        <i class="material-icons">search</i>
+                                    </a>
+                                </div>
 
-                                <p>{{backLogNote.story.name}}</p>
+                                <!--<p>{{backLogNote.story.name}}</p>-->
 
-                                <p>{{backLogNote.description}}</p>
+                                <!--<p>{{backLogNote.description}}</p>-->
                             </div>
                             <!--<div class="card-action center">-->
                             <!--&lt;!&ndash;<a href="#">{{_ 'Delete'}}</a>&ndash;&gt;-->
@@ -136,38 +167,67 @@
                 <td id="sprintPrevious" class="linha status_3 containerSprint row"
                     data-sprintId="{{sprintPrevious._id}}" sprinthorasgastas="0" sprinthoras="">
                     <div class="col containerNote" ng-repeat="backLogNote in vm.notesSprintPrevious"
-                         data-noteId="{{backLogNote._id}}">
+                         data-noteId="{{sprintPrevious._id}}">
                         <div class="card hoverable"
                              style="background-color: {{backLogNote.color}}; width: 200px; height: 140px;  line-height: 1.2;  cursor: move;">
                             <div class="card-content white-text note">
                                 <md-button ng-if="backLogNote.time" class="md-fab md-mini hoverable alertNote"
                                            aria-label="Time">
-                                    {{backLogNote.time}}h
+                                    {{sprintPrevious.time}}h
                                 </md-button>
-                                <span class="card-title activator text-darken-4 note-notHandle">{{backLogNote.owner.name}}
+                                <span class="card-title activator text-darken-4 note-notHandle">{{sprintPrevious.owner.name}}
                                     <i class="material-icons right">more_vert</i></span>
 
-                                <p>{{backLogNote.description}}</p>
+                                <p>{{sprintPrevious.description}}</p>
 
                                 <p></p>
                             </div>
-                            <div class="card-reveal">
+                            <div class="card-reveal"  style="padding: 0px;">
                                 <!--<span class="card-title grey-text text-darken-4">{{backLogNote.story.name}}<i class="material-icons right">close</i></span>-->
                                     <span class="card-title grey-text text-darken-4">
                                         <i class="note-notHandle material-icons right">close</i>
-                                        <a href="#" ng-click="modalStorySave($event, backLogNote.story._id)"
-                                           title="Add story" class="note-notHandle btn-floating green hoverable">
-                                            <i class="material-icons">content_paste</i>
-                                        </a>
-                                        <a href="#" ng-click="modalNoteSave($event, backLogNote._id)" title="Add note"
-                                           class="note-notHandle btn-floating amber accent-4 hoverable">
-                                            <i class="material-icons">mode_edit</i>
-                                        </a>
                                     </span>
-
-                                <p>{{backLogNote.story.name}}</p>
-
-                                <p>{{backLogNote.description}}</p>
+                                <div style="height: 109px;">
+                                    <img alt="{{backLogNote.owner.name}}" ng-src="{{backLogNote.owner.img}}" class="md-avatar md-whiteframe-3dp" style="
+                                            display: block;
+                                            position: absolute;
+                                            padding-top: 0;
+                                            background-color: {{backLogNote.owner.statusColor}};
+                                            border: solid 6px  {{backLogNote.owner.statusColor}};
+                                            width: 60px;
+                                            height: 60px;
+                                            margin-top: 6px;
+                                            margin-bottom: 8px;
+                                            border-radius: 12%;
+                                            box-sizing: content-box;
+                                            top: 13px;
+                                            left: 61px;
+                                            "/>
+                                </div>
+                                <div class="card-action" layout="row" style="padding: 0px;text-align: center;display: inherit;">
+                                    <a href="#" ng-click="modalNoteSave($event, backLogNote._id)"
+                                       class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal; height: 30px; width: 30px; color: #757575;">
+                                        <md-tooltip md-direction="botom" md-autohide="false">Delete task</md-tooltip>
+                                        <i class="material-icons">delete</i>
+                                    </a>
+                                    <a href="#" ng-click="modalStorySave($event, backLogNote.story._id)"
+                                       class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
+                                        <md-tooltip md-direction="botom" md-autohide="false">Edit history</md-tooltip>
+                                        <i class="material-icons">content_paste</i>
+                                    </a>
+                                    <a href="#" ng-click="modalNoteSave($event, backLogNote._id)"
+                                       class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
+                                        <md-tooltip md-direction="botom" md-autohide="false">Edit task</md-tooltip>
+                                        <i class="material-icons">mode_edit</i>
+                                    </a>
+                                    <a href="#" ng-click="modalNoteView($event, backLogNote._id)"
+                                       class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
+                                        <md-tooltip md-direction="botom" md-autohide="false">Visualize</md-tooltip>
+                                        <i class="material-icons">search</i>
+                                    </a>
+                                </div>
+                                <!--<p>{{backLogNote.story.name}}</p>-->
+                                <!--<p>{{backLogNote.description}}</p>-->
                             </div>
                             <!--<div class="card-action center">-->
                             <!--&lt;!&ndash;<a href="#">{{_ 'Delete'}}</a>&ndash;&gt;-->
@@ -200,23 +260,52 @@
 
                                 <p></p>
                             </div>
-                            <div class="card-reveal">
+                            <div class="card-reveal" style="padding: 0px;">
                                 <!--<span class="card-title grey-text text-darken-4">{{backLogNote.story.name}}<i class="material-icons right">close</i></span>-->
                                     <span class="card-title grey-text text-darken-4">
                                         <i class="note-notHandle material-icons right">close</i>
-                                        <a href="#" ng-click="modalStorySave($event, backLogNote.story._id)"
-                                           title="Add story" class="note-notHandle btn-floating green hoverable">
-                                            <i class="material-icons">content_paste</i>
-                                        </a>
-                                        <a href="#" ng-click="modalNoteSave($event, backLogNote._id)" title="Add note"
-                                           class="note-notHandle btn-floating amber accent-4 hoverable">
-                                            <i class="material-icons">mode_edit</i>
-                                        </a>
                                     </span>
-
-                                <p>{{backLogNote.story.name}}</p>
-
-                                <p>{{backLogNote.description}}</p>
+                                <div style="height: 109px;">
+                                    <img alt="{{backLogNote.owner.name}}" ng-src="{{backLogNote.owner.img}}" class="md-avatar md-whiteframe-3dp" style="
+                                            display: block;
+                                            position: absolute;
+                                            padding-top: 0;
+                                            background-color: {{backLogNote.owner.statusColor}};
+                                            border: solid 6px  {{backLogNote.owner.statusColor}};
+                                            width: 60px;
+                                            height: 60px;
+                                            margin-top: 6px;
+                                            margin-bottom: 8px;
+                                            border-radius: 12%;
+                                            box-sizing: content-box;
+                                            top: 13px;
+                                            left: 61px;
+                                            "/>
+                                </div>
+                                <div class="card-action" layout="row" style="padding: 0px;text-align: center;display: inherit;">
+                                    <a href="#" ng-click="modalNoteSave($event, backLogNote._id)"
+                                       class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal; height: 30px; width: 30px; color: #757575;">
+                                        <md-tooltip md-direction="botom" md-autohide="false">Delete task</md-tooltip>
+                                        <i class="material-icons">delete</i>
+                                    </a>
+                                    <a href="#" ng-click="modalStorySave($event, backLogNote.story._id)"
+                                       class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
+                                        <md-tooltip md-direction="botom" md-autohide="false">Edit history</md-tooltip>
+                                        <i class="material-icons">content_paste</i>
+                                    </a>
+                                    <a href="#" ng-click="modalNoteSave($event, backLogNote._id)"
+                                       class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
+                                        <md-tooltip md-direction="botom" md-autohide="false">Edit task</md-tooltip>
+                                        <i class="material-icons">mode_edit</i>
+                                    </a>
+                                    <a href="#" ng-click="modalNoteView($event, backLogNote._id)"
+                                       class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
+                                        <md-tooltip md-direction="botom" md-autohide="false">Visualize</md-tooltip>
+                                        <i class="material-icons">search</i>
+                                    </a>
+                                </div>
+                                <!--<p>{{backLogNote.story.name}}</p>-->
+                                <!--<p>{{backLogNote.description}}</p>-->
                             </div>
                             <!--<div class="card-action center">-->
                             <!--&lt;!&ndash;<a href="#">{{_ 'Delete'}}</a>&ndash;&gt;-->
@@ -249,23 +338,53 @@
 
                                 <p></p>
                             </div>
-                            <div class="card-reveal">
+                            <div class="card-reveal" style="padding: 0px;">
                                 <!--<span class="card-title grey-text text-darken-4">{{backLogNote.story.name}}<i class="material-icons right">close</i></span>-->
                                     <span class="card-title grey-text text-darken-4">
                                         <i class="note-notHandle material-icons right">close</i>
-                                        <a href="#" ng-click="modalStorySave($event, backLogNote.story._id)"
-                                           title="Add story" class="note-notHandle btn-floating green hoverable">
-                                            <i class="material-icons">content_paste</i>
-                                        </a>
-                                        <a href="#" ng-click="modalNoteSave($event, backLogNote._id)" title="Add note"
-                                           class="note-notHandle btn-floating amber accent-4 hoverable">
-                                            <i class="material-icons">mode_edit</i>
-                                        </a>
                                     </span>
+                                <div style="height: 109px;">
+                                    <img alt="{{backLogNote.owner.name}}" ng-src="{{backLogNote.owner.img}}" class="md-avatar md-whiteframe-3dp" style="
+                                            display: block;
+                                            position: absolute;
+                                            padding-top: 0;
+                                            background-color: {{backLogNote.owner.statusColor}};
+                                            border: solid 6px  {{backLogNote.owner.statusColor}};
+                                            width: 60px;
+                                            height: 60px;
+                                            margin-top: 6px;
+                                            margin-bottom: 8px;
+                                            border-radius: 12%;
+                                            box-sizing: content-box;
+                                            top: 13px;
+                                            left: 61px;
+                                            "/>
+                                </div>
+                                <div class="card-action" layout="row" style="padding: 0px;text-align: center;display: inherit;">
+                                    <a href="#" ng-click="modalNoteSave($event, backLogNote._id)"
+                                       class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal; height: 30px; width: 30px; color: #757575;">
+                                        <md-tooltip md-direction="botom" md-autohide="false">Delete task</md-tooltip>
+                                        <i class="material-icons">delete</i>
+                                    </a>
+                                    <a href="#" ng-click="modalStorySave($event, backLogNote.story._id)"
+                                       class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
+                                        <md-tooltip md-direction="botom" md-autohide="false">Edit history</md-tooltip>
+                                        <i class="material-icons">content_paste</i>
+                                    </a>
+                                    <a href="#" ng-click="modalNoteSave($event, backLogNote._id)"
+                                       class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
+                                        <md-tooltip md-direction="botom" md-autohide="false">Edit task</md-tooltip>
+                                        <i class="material-icons">mode_edit</i>
+                                    </a>
+                                    <a href="#" ng-click="modalNoteView($event, backLogNote._id)"
+                                       class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
+                                        <md-tooltip md-direction="botom" md-autohide="false">Visualize</md-tooltip>
+                                        <i class="material-icons">search</i>
+                                    </a>
+                                </div>
 
-                                <p>{{backLogNote.story.name}}</p>
-
-                                <p>{{backLogNote.description}}</p>
+                                <!--<p>{{backLogNote.story.name}}</p>-->
+                                <!--<p>{{backLogNote.description}}</p>-->
                             </div>
                             <!--<div class="card-action center">-->
                             <!--&lt;!&ndash;<a href="#">{{_ 'Delete'}}</a>&ndash;&gt;-->
