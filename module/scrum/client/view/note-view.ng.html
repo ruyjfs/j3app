@@ -1,0 +1,32 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <form>
+        <!--<md-toolbar>-->
+            <!--<div class="md-toolbar-tools">-->
+                <!--<h2>Task description</h2>-->
+                <!--<span flex></span>-->
+            <!--</div>-->
+        <!--</md-toolbar>-->
+        <md-dialog-content style="min-width:400px;max-width:800px;max-height:810px; ">
+            <h5>Description</h5>
+            <div  ng-show="$root.currentUser">
+                <!--<md-input-container class="md-block">-->
+                <!--<label>Story</label>-->
+                <!--<md-select ng-model="form.story" id="story" aria-label="Story"  placeholder="Story" disabled>-->
+                <!--<md-option  ng-repeat="story in stories" value="{{story._id}}">-->
+                <!--{{story.name}}-->
+                <!--</md-option>-->
+                <!--</md-select>-->
+                <!--</md-input-container>-->
+                <md-input-container class="md-block">
+                    {{form.description}}
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+    </form>
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <button class="btn orange darken-3 waves-effect waves-light hoverable" type="button" ng-click="close()">
+            Close
+        </button>
+    </md-dialog-actions>
+</md-dialog>

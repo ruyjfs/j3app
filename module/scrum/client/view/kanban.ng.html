@@ -47,27 +47,59 @@
                                        aria-label="Time">
                                 {{note.time}}h
                             </md-button>
-                            <span class="note-notHandle text-darken-4">{{note.owner.name}}<i
-                                    class=" activator material-icons right" style="">more_vert</i></span>
+                            <span class="note-notHandle text-darken-4">{{note.owner.name}}
+                                <i class=" activator material-icons right" style="">more_vert</i>
+                            </span>
                             <p>{{note.description}}</p>
                             <p></p>
                         </div>
-                        <div class="card-reveal" layout="row" style="padding: 5px;">
+                        <div class="card-reveal" layout="row" style="padding: 0px;" layout-align="end end">
                             <div style="height: 25px;">
                                 <!--<span class="card-title grey-text text-darken-4">{{note.story.name}}<i class="material-icons right">close</i></span>-->
                                 <span class="card-title grey-text text-darken-4">
                                     <i class="note-notHandle material-icons right">close</i>
                                 </span>
                             </div>
-                            <div layout="row" layout-align="center center">
-                                <a href="#" ng-click="modalStorySave($event, story._id)" title="Add story"
-                                   class="note-notHandle btn-floating green hoverable" style="margin: 5px;">
+                            <div style="height: 33px;">
+                                <img alt="{{note.owner.name}}" ng-src="{{note.owner.img}}" class="md-avatar md-whiteframe-3dp" style="
+                                        display: block;
+                                        position: absolute;
+                                        padding-top: 0;
+                                        background-color: {{note.owner.statusColor}};
+                                        border: solid 4px  {{note.owner.statusColor}};
+                                        width: 35px;
+                                        height: 35px;
+                                        margin-top: 4px;
+                                        margin-bottom: 4px;
+                                        border-radius: 12%;
+                                        box-sizing: content-box;
+                                        top: 3px;
+                                        left: 37px;
+                                        "/>
+                            </div>
+                            <div class="card-action" layout="row" style="padding: 0px;">
+                                <a href="#" ng-click="modalNoteSave($event, note._id)"
+                                   class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal; height: 30px; width: 30px; color: #757575;">
+                                    <md-tooltip md-direction="botom" md-autohide="false">Delete task</md-tooltip>
+                                    <i class="material-icons">delete</i>
+                                </a>
+                                <a href="#" ng-click="modalStorySave($event, story._id)"
+                                   class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
+                                    <md-tooltip md-direction="botom" md-autohide="false">Edit history</md-tooltip>
                                     <i class="material-icons">content_paste</i>
                                 </a>
-                                <a href="#" ng-click="modalNoteSave($event, note._id)" title="Add note"
-                                   class="note-notHandle btn-floating amber accent-4 hoverable" style="margin: 5px;">
+                                <a href="#" ng-click="modalNoteSave($event, note._id)"
+                                   class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
+                                    <md-tooltip md-direction="botom" md-autohide="false">Edit task</md-tooltip>
                                     <i class="material-icons">mode_edit</i>
                                 </a>
+                                <a href="#" ng-click="modalNoteView($event, note._id)"
+                                   class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
+                                    <md-tooltip md-direction="botom" md-autohide="false">Visualize</md-tooltip>
+                                    <i class="material-icons">search</i>
+                                </a>
+                            </div>
+                            <div layout="row" layout-align="center end">
                             </div>
                             <!--<p>{{note.story.name}}</p>-->
                             <!--<p>{{note.description}}</p>-->
