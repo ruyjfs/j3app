@@ -4,6 +4,7 @@ angular.module('scrum').controller('HelpPageModalCtrl', [ '$scope', '$mdDialog',
     function ($scope, $mdDialog, $stateParams, $reactive, $location) {
         //$reactive(this).attach($scope);
 
+
         var arrHelpMessagePage = [
             {link: 'scrum/product', title: 'Product and Team', msg:
                 'Olá, nessa tela você pode visualizar os produtos que você criou e os produtos que ' +
