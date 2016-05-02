@@ -167,18 +167,18 @@
                 <td id="sprintPrevious" class="linha status_3 containerSprint row"
                     data-sprintId="{{sprintPrevious._id}}" sprinthorasgastas="0" sprinthoras="">
                     <div class="col containerNote" ng-repeat="backLogNote in vm.notesSprintPrevious"
-                         data-noteId="{{sprintPrevious._id}}">
+                         data-noteId="{{backLogNote._id}}">
                         <div class="card hoverable"
                              style="background-color: {{backLogNote.color}}; width: 200px; height: 140px;  line-height: 1.2;  cursor: move;">
                             <div class="card-content white-text note">
                                 <md-button ng-if="backLogNote.time" class="md-fab md-mini hoverable alertNote"
                                            aria-label="Time">
-                                    {{sprintPrevious.time}}h
+                                    {{backLogNote.time}}h
                                 </md-button>
-                                <span class="card-title activator text-darken-4 note-notHandle">{{sprintPrevious.owner.name}}
+                                <span class="card-title activator text-darken-4 note-notHandle">{{backLogNote.owner.name}}
                                     <i class="material-icons right">more_vert</i></span>
 
-                                <p>{{sprintPrevious.description}}</p>
+                                <p>{{backLogNote.description}}</p>
 
                                 <p></p>
                             </div>

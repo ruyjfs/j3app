@@ -252,6 +252,19 @@ angular.module('scrum').controller('HeaderCtrl',
             });
         };
 
+        this.modalHelpPage = function (ev) {
+            $mdDialog.show({
+                controller: 'HelpPageModalCtrl',
+                templateUrl: 'module/scrum/client/view/help-page-modal.ng.html',
+                clickOutsideToClose: true,
+                targetEvent: ev
+            }).then(function (answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
+        };
+
         this.modalLogin = function (ev, id) {
             //$mdDialog.alert()
             //    .parent(angular.element(document.querySelector('#popupContainer')))
