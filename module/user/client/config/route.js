@@ -40,13 +40,17 @@ angular.module('user').config(['$urlRouterProvider', '$stateProvider', '$locatio
                 controller: 'ResetCtrl',
                 controllerAs: 'rpc'
             })
+
+            /**
+             * @todo Redirecionar conforme o modulo, por exemplo se a pessoa deslogou no modulo scrum, redirecionar para a tela principal do scrum se for outro modulo redirecionar para a tela principal do outro modulo.
+             **/
             .state('user/logout', {
                 url: '/user/logout',
                 resolve: {
                     "logout": ['$meteor', '$state', function($meteor, $state) {
                         return $meteor.logout().then(function(){
                             //$state.go('parties');
-                            $state.go('user').then(function() {
+                            $state.go('scrum').then(function() {
                                 // Get in a spaceship and fly to Jupiter, or whatever your callback does.
                                 $('.parallax').parallax();
                             });

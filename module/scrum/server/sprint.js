@@ -1,6 +1,5 @@
 //Meteor.publish("message", function (contactId) {
 Meteor.publish("sprint", function (projectId, options, searchString) {
-
     if (this.userId && projectId){
         selector = {$or: [{projectId: projectId}, {projectId: null}]};
         if (typeof searchString === 'string' && searchString.length) {
@@ -11,6 +10,9 @@ Meteor.publish("sprint", function (projectId, options, searchString) {
         });
         result = Sprint.find(selector, options);
         return (result)? result : [];
+    } else if (this.userId) {
+        //result = Sprint.find(selector, options);
+        //return result;
     } else {
         return [];
     }

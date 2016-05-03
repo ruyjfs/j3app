@@ -6,6 +6,13 @@ angular.module('scrum').controller('HelpPageModalCtrl', [ '$scope', '$mdDialog',
 
 
         var arrHelpMessagePage = [
+            {link: 'scrum', title: 'Scrum', msg:
+                'j3scrum é um sistema totalmente gratuito focado na metodogia SCRUM, que atualmente é muito utilizada pela TI, porém pode ser utilizado em outras areas também. ' +
+                'No j3scrum você pode cadastrar os integrantes da sua equipe, montar e dividir as suas equipes, criar seu projeto, criar as estorias do projeto e os postits ficarem bem organizados. Você pode escolher as cores dos postits de cada projeto, assim ficando mais visivel no Kanban de todas as suas equipes. ' +
+                'Experimente, ele é totalmente gratuito mesmo, não custa nada. ' +
+                'Estamos à disposição para melhorias, ajustes e novas idéias também. ' +
+                'Não sabe o que é a metodoliga SCRUM acesse: <a href="www.desenvolvimentoagil.com.br" target="_blank">www.desenvolvimentoagil.com.br</a> e saiba muito mais. '
+            },
             {link: 'scrum/product', title: 'Product and Team', msg:
                 'Olá, nessa tela você pode visualizar os produtos que você criou e os produtos que ' +
                 'você participa, seja você estando no time vinculado ao projeto ou estando como PO ou Scrum Master. ' +
@@ -69,21 +76,27 @@ angular.module('scrum').controller('HelpPageModalCtrl', [ '$scope', '$mdDialog',
         if ($location.path()) {
             arrUrl = $location.path().split('/');
             strModule = arrUrl[1];
-            strController = arrUrl[2];
 
-            var title = '';
-            var msg = '';
+            if (arrUrl[2]) {
+                strController = arrUrl[2];
+            } else {
+                strController = '';
+            }
+
+            var helpTitle = '';
+            var helpMsg = '';
             arrHelpMessagePage.forEach(function(arrValue, intKey){
                 strLink = arrValue.link;
                 strTitle = arrValue.title;
                 strMsg = arrValue.msg;
-                if (strModule+'/'+strController == strLink) {
+                if ((strController && strModule+'/'+strController == strLink) || strModule == strLink) {
                     title = strTitle;
                     msg = strMsg;
                 }
             });
-            $scope.title = title;
-            $scope.msg = msg;
+            $scope.helpTitle = title;
+            $scope.helpMsg = msg;
+            console.info($scope.helpMsg );
         }
 
 

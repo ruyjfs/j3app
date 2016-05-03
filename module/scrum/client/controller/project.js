@@ -18,10 +18,10 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
         this.subscribe('project');
         //this.subscribe('team');
         this.subscribe('users');
-        this.subscribe('sprint');
         this.helpers({
             projects: function () {
                 projects = Project.find({}, {sort: {name: 1}}).map(function (project) {
+                    Meteor.subscribe('sprint', project._id);
                     //projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}, {scrumMaster: {$in: [Meteor.userId()]}}]}).map(function(project){
                     if (project.teams) {
                         project.teams = Team.find({
