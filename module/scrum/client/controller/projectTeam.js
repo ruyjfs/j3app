@@ -4,17 +4,24 @@ angular.module('scrum').controller('ProjectTeamCtrl', [ '$scope', '$mdDialog', '
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive, $stateParams) {
         $reactive(this).attach($scope);
 
-        this.id = $stateParams.id;
-        this.sprintId = $stateParams.sprintId;
+        //this.id = $stateParams.id;
+        //this.sprintId = $stateParams.sprintId;
 
-        this.searchText = '';
-        this.subscribe('team', function(){
-                return [
-                    {},
-                    this.getReactively('searchText')
-                ]
-            }
-        );
+        //this.searchText = '';
+        //this.subscribe('team', function(){
+        //        return [
+        //            {},
+        //            this.getReactively('searchText')
+        //        ]
+        //    }
+        //);
+        this.subscribe('users');
+        this.subscribe('project');
+        this.subscribe('team');
+        this.subscribe('status', function(){return [$stateParams.id]});
+        this.subscribe('note', function(){return [$stateParams.id]});
+        this.subscribe('story', function(){return [$stateParams.id]});
+        this.subscribe('sprint', function(){return [$stateParams.id]});
         this.helpers({
             teams: function() {
                 project = Project.findOne($stateParams.id);
@@ -106,23 +113,23 @@ angular.module('scrum').controller('ProjectTeamCtrl', [ '$scope', '$mdDialog', '
             }
         });
 
-        $scope.remove = function(team) {
-            this.teams.remove(team);
-        }
+        //$scope.remove = function(team) {
+        //    this.teams.remove(team);
+        //}
 
-        $scope.modalSave = function(ev, id){
-            $mdDialog.show({
-                controller: 'TeamSaveCtrl',
-                templateUrl: 'module/scrum/client/view/team-save.ng.html',
-                clickOutsideToClose:true,
-                locals : {
-                    id: id
-                },
-                targetEvent: ev
-            }).then(function(answer) {
-                $scope.status = 'You said the information was "' + answer + '".';
-            }, function() {
-                $scope.status = 'You cancelled the dialog.';
-            });
-        };
+        //$scope.modalSave = function(ev, id){
+        //    $mdDialog.show({
+        //        controller: 'TeamSaveCtrl',
+        //        templateUrl: 'module/scrum/client/view/team-save.ng.html',
+        //        clickOutsideToClose:true,
+        //        locals : {
+        //            id: id
+        //        },
+        //        targetEvent: ev
+        //    }).then(function(answer) {
+        //        $scope.status = 'You said the information was "' + answer + '".';
+        //    }, function() {
+        //        $scope.status = 'You cancelled the dialog.';
+        //    });
+        //};
 }]);
