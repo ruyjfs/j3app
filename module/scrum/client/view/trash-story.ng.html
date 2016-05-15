@@ -1,4 +1,4 @@
-<div ng-controller="StoryCtrl as vm" flex>
+<div ng-controller="TrashStoryCtrl as vm" flex>
     <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
             <label>Search</label>
@@ -19,12 +19,15 @@
                     <p>{{story.description}}</p>
                 </div>
                 <div class="md-list-item-text" layout="row" layout-align="center center">
-                    <md-button class="md-fab md-mini hoverable" aria-label="Edit" ng-click="vm.modalStorySave($event, story._id)">
-                        <md-icon md-svg-icon="content:ic_create_24px" aria-label="Edit"></md-icon>
+                    <md-button class="md-fab md-mini hoverable" aria-label="Restore" ng-click="vm.trash(story._id)"
+                               style="line-height: 0px;">
+                        <i class="material-icons">restore</i>
                     </md-button>
-                    <md-button class="md-fab md-mini hoverable" aria-label="Remove" ng-click="vm.trash(story._id)" style="line-height: 0px;">
-                        <i class="material-icons">delete</i>
-                    </md-button>
+                    <!--<md-button class="md-fab md-mini hoverable" aria-label="Edit"-->
+                               <!--ng-click="vm.modalSave($event, status._id)" style="line-height: 0px;">-->
+                        <!--<md-icon md-svg-icon="content:ic_create_24px" aria-label="Edit"></md-icon>-->
+                        <!--<i class="material-icons">delete_forever</i>-->
+                    <!--</md-button>-->
                 </div>
                 <!--<md-divider ng-if="!$last"></md-divider>-->
                 <md-divider></md-divider>

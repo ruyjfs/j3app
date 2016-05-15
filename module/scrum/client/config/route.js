@@ -134,6 +134,20 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     },
                 }
             })
+            .state('scrum/trash', {
+                url: '/scrum/trash/:id/:sprintId',
+                views: {
+                    "header2": {
+                        templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
+                    },
+                    "mainBounce": {
+                        templateUrl: 'module/scrum/client/view/trash.ng.html',
+                    },
+                    "main2": {
+                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                    },
+                }
+            })
             .state('scrum/status', {
                 url: '/scrum/status/:id/:sprintId',
                 views: {
@@ -179,6 +193,23 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     },
                     "mainBounce": {
                         templateUrl: 'module/scrum/client/view/project-team.ng.html',
+                    },
+                    "main2": {
+                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                    },
+                }
+            })
+            .state('scrum/planning-poker', {
+                url: '/scrum/planning-poker/:id/:sprintId',
+                views: {
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
+                    "header2": {
+                        templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
+                    },
+                    "mainBounce": {
+                        templateUrl: 'module/scrum/client/view/planning-poker.ng.html',
                     },
                     "main2": {
                         templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',

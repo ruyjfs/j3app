@@ -1,0 +1,42 @@
+<div ng-controller="TrashStatusCtrl as vm" flex>
+    <div style="padding: 15px;">
+        <md-content>
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Search</label>
+                    <input type="text" ng-model="vm.searchText"/>
+                </md-input-container>
+                <md-input-container>
+                    <md-select ng-model="order" placeholder="Sort Order">
+                        <md-option ng-click="vm.sortChange('1')" value="1">Ascending</md-option>
+                        <md-option ng-click="vm.sortChange('-1')" value="-1">Descending</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <md-list>
+                <md-list-item class="md-3-line" pagination-id="status-trash"
+                              dir-paginate="status in vm.states | itemsPerPage: vm.perPage" total-items="vm.total()">
+                    <div class="md-list-item-text" layout="column" layout-align="center center">
+                        <h3>{{status.name}}</h3>
+                        <!--<h4>{{item.who}}</h4>-->
+                        <p>{{status.description}}</p>
+                    </div>
+                    <div class="md-list-item-text" layout="row" layout-align="center center">
+                        <md-button class="md-fab md-mini hoverable" aria-label="Restore" ng-click="vm.trash(status._id)"
+                                   style="line-height: 0px;">
+                            <i class="material-icons">restore</i>
+                        </md-button>
+                        <!--<md-button class="md-fab md-mini hoverable" aria-label="Edit"-->
+                                   <!--ng-click="vm.modalSave($event, status._id)" style="line-height: 0px;">-->
+                            <!--<md-icon md-svg-icon="content:ic_create_24px" aria-label="Edit"></md-icon>-->
+                            <!--<i class="material-icons">delete_forever</i>-->
+                        <!--</md-button>-->
+                    </div>
+                    <md-divider></md-divider>
+                </md-list-item>
+            </md-list>
+            <dir-pagination-controls pagination-id="status-trash"
+                                     on-page-change="vm.pageChanged(newPageNumber)"></dir-pagination-controls>
+        </md-content>
+    </div>
+</div>

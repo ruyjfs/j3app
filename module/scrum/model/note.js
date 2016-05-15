@@ -60,6 +60,22 @@ Meteor.methods({
         });
         return notes;
     },
+    noteTrash: function(param){
+        var arrData = Note.findOne(param.id);
+        arrData.trash = param.trash;
+        arrData.sprintId = null;
+        delete arrData._id;
+        Note.update(param.id, { $set: arrData});
+    },
+    noteDelete: function(param){
+        notes = Note.find({$or: [{projectId: param.projectId}, {projectId: null}]}).fetch();
+        notes.map(function(note){
+            note.story = Story.findOne(note.story);
+            note.owner = Meteor.users.findOne(note.owner);
+            return note;
+        });
+        return notes;
+    },
     //teamSave: function (dataForm) {
         //console.log(dataForm);
         //check(partyId, String);

@@ -1,6 +1,6 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('StoryCtrl', [ '$scope', '$reactive', '$stateParams', '$mdDialog',
+angular.module('scrum').controller('TrashTaskCtrl', [ '$scope', '$reactive', '$stateParams', '$mdDialog',
     function ($scope, $reactive, $stateParams, $mdDialog) {
         $reactive(this).attach($scope);
 
@@ -15,12 +15,12 @@ angular.module('scrum').controller('StoryCtrl', [ '$scope', '$reactive', '$state
         };
 
         this.searchText = '';
-        this.subscribe('story', function(){
+        this.subscribe('note', function(){
                 return [
                     $stateParams.id,
                     {},
                     this.getReactively('searchText'),
-                    false
+                    true
                 ]
             }
         );
@@ -36,8 +36,8 @@ angular.module('scrum').controller('StoryCtrl', [ '$scope', '$reactive', '$state
             };
         };
         this.helpers({
-            stories: function () {
-                return Story.find({},
+            notes: function () {
+                return Note.find({trash: true},
                     {
                         limit: parseInt(this.getReactively('perPage')),
                         skip: parseInt((this.getReactively('page') - 1) * this.getReactively('perPage')),
@@ -47,22 +47,12 @@ angular.module('scrum').controller('StoryCtrl', [ '$scope', '$reactive', '$state
             }
         });
 
-        this.modalStorySave = function (ev, id) {
-            $mdDialog.show({
-                controller: 'StorySaveCtrl',
-                templateUrl: 'module/scrum/client/view/story-save.ng.html',
-                clickOutsideToClose: true,
-                locals: {id: id},
-                targetEvent: ev
-            });
-        };
-
         this.trash = function($id){
-            Meteor.call('storyTrash', {id: $id, trash: true}, function (error) {
+            Meteor.call('noteTrash', {id: $id, trash: false}, function (error) {
                 if (error) {
                     Materialize.toast('Erro: ' + error, 4000);
                 } else {
-                    Materialize.toast('Deleted successfully!', 4000);
+                    Materialize.toast('Restored successfully!', 4000);
                 }
             });
         };

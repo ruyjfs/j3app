@@ -1,12 +1,13 @@
-//angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
-//    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('StoryCtrl', [ '$scope', '$reactive', '$stateParams', '$mdDialog',
-    function ($scope, $reactive, $stateParams, $mdDialog) {
+angular.module('scrum').controller('TrashStatusCtrl', [ '$scope', '$mdDialog', '$reactive', '$stateParams',
+    function ($scope, $mdDialog, $reactive, $stateParams) {
         $reactive(this).attach($scope);
-
+        if (!$stateParams.id) {
+            $state.go('scrum');
+        }
 
         this.id = $stateParams.id;
         this.sprintId = $stateParams.sprintId;
+
 
         this.perPage = 5;
         this.page = 1;
@@ -15,17 +16,17 @@ angular.module('scrum').controller('StoryCtrl', [ '$scope', '$reactive', '$state
         };
 
         this.searchText = '';
-        this.subscribe('story', function(){
+        this.subscribe('status', function(){
                 return [
                     $stateParams.id,
                     {},
                     this.getReactively('searchText'),
-                    false
+                    true
                 ]
             }
         );
         this.total = function() {
-            return Counts.get('totalStory');
+            return Counts.get('totalStatus');
         };
         this.pageChanged = function(newPage) {
             this.page = newPage;
@@ -36,8 +37,8 @@ angular.module('scrum').controller('StoryCtrl', [ '$scope', '$reactive', '$state
             };
         };
         this.helpers({
-            stories: function () {
-                return Story.find({},
+            states: function () {
+                return Status.find({trash: true},
                     {
                         limit: parseInt(this.getReactively('perPage')),
                         skip: parseInt((this.getReactively('page') - 1) * this.getReactively('perPage')),
@@ -47,23 +48,14 @@ angular.module('scrum').controller('StoryCtrl', [ '$scope', '$reactive', '$state
             }
         });
 
-        this.modalStorySave = function (ev, id) {
-            $mdDialog.show({
-                controller: 'StorySaveCtrl',
-                templateUrl: 'module/scrum/client/view/story-save.ng.html',
-                clickOutsideToClose: true,
-                locals: {id: id},
-                targetEvent: ev
-            });
-        };
-
         this.trash = function($id){
-            Meteor.call('storyTrash', {id: $id, trash: true}, function (error) {
+            Meteor.call('statusTrash', {id: $id, trash: false}, function (error) {
                 if (error) {
                     Materialize.toast('Erro: ' + error, 4000);
                 } else {
-                    Materialize.toast('Deleted successfully!', 4000);
+                    Materialize.toast('Restored successfully!', 4000);
                 }
             });
         };
-}]);
+    }
+]);

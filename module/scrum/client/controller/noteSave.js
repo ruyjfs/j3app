@@ -4,7 +4,6 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id'
     function ($scope, $mdDialog, id, storyId, $stateParams, $reactive) {
         //$reactive(this).attach($scope);
 
-
         $scope.form = {};
         if (id) {
             $scope.form = Note.findOne(id);
@@ -30,10 +29,9 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id'
         Meteor.subscribe('users');
         $scope.helpers({
             stories: function () {
-                return Story.find({projectId: $stateParams.id}, {sort: {name: 1}});
+                return Story.find({projectId: $stateParams.id, $or: [{trash: false}, {trash: null}, {_id: $scope.form.story}]}, {sort: {name: 1}});
             },
             members: function () {
-
                 project = Project.findOne($stateParams.id);
                 usersId = [];
                 if (project && project.teams) {

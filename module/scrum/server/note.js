@@ -1,7 +1,20 @@
 //Meteor.publish("message", function (contactId) {
-Meteor.publish("note", function (projectId, options) {
+Meteor.publish("note", function (projectId, options, searchString, trash) {
     if (this.userId && projectId){
-        selector = {$or: [{projectId: projectId}, {projectId: null}]};
+        if (trash == true) {
+            selector = {trash: true, $or: [{projectId: projectId}, {projectId: null}]};
+        } else if (trash == false) {
+            selector = {$and: [{$or: [{projectId: projectId}, {projectId: null}]}, {$or: [{trash: false}, {trash: null}]}]};
+        } else {
+            selector = {$or: [{projectId: projectId}, {projectId: null}]};
+        }
+
+        if (typeof searchString === 'string' && searchString.length) {
+            selector.description = {
+                $regex:  `.*${searchString}.*`,
+                $options: 'i'
+            }
+        }
         result = Note.find(selector, options);
         return (result)? result : [];
     } else {

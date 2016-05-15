@@ -28,6 +28,12 @@ Meteor.methods({
             Story.insert(dataForm);
         }
     },
+    storyTrash: function(param){
+        var arrData = Story.findOne(param.id);
+        arrData.trash = param.trash;
+        delete arrData._id;
+        Story.update(param.id, { $set: arrData});
+    },
     storyFindByProject: function(param){
         stories = Story.find({$or: [{projectId: param.projectId}, {projectId: null}]}).map(function(story){
             var states = Status.find({projectId: param.projectId}).fetch();

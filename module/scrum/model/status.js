@@ -28,6 +28,12 @@ Meteor.methods({
             Status.insert(dataForm);
         }
     },
+    statusTrash: function(param){
+        var arrData = Status.findOne(param.id);
+        arrData.trash = param.trash;
+        delete arrData._id;
+        Status.update(param.id, { $set: arrData});
+    },
     statusFindByProject: function(param){
         var states = Status.find({projectId: param.projectId}).fetch();
         states.unshift({name: 'BackLog', _id: null});

@@ -13,13 +13,12 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
         this.subscribe('sprint', function(){return [$stateParams.id]});
         this.helpers({
             notesBackLog: function () {
-                notes = Note.find({$and: [{$or: [{sprintId: null}, {sprintId: ''}]}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
+                notes = Note.find({$and: [{$or: [{sprintId: null}, {sprintId: ''}]}], $or: [{projectId: $stateParams.id}, {projectId: null}], $or: [{trash: false}, {trash: null}]}).fetch();
                 notes.map(function(note){
                     note.story = Story.findOne(note.story);
                     note.owner = Meteor.users.findOne(note.owner);
-                    if (note.owner.status) {
+                    if (note.owner && note.owner.status) {
                         if (note.owner.status.lastLogin) {
-
                             if (moment(new Date).diff(moment(note.owner.status.lastLogin.date), 'days') > 2) {
                                 note.owner.statusLastLoginDate = moment(note.owner.status.lastLogin.date).format('L H[h]m');
                             } else {
@@ -40,6 +39,9 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                             note.owner.statusName = ' Offline';
                         }
                     } else {
+                        if (!note.owner) {
+                            note.owner = {};
+                        }
                         note.owner.statusColor = ' rgba(224, 224, 224, 0.77)';
                         note.owner.statusName = ' Offline';
                     }
@@ -94,7 +96,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                                     note.story = '#000';
                                 }
                             }
-                            if (note.owner.status) {
+                            if (note.owner && note.owner.status) {
                                 if (note.owner.status.lastLogin) {
 
                                     if (moment(new Date).diff(moment(note.owner.status.lastLogin.date), 'days') > 2) {
@@ -117,6 +119,9 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                                     note.owner.statusName = ' Offline';
                                 }
                             } else {
+                                if (!note.owner){
+                                    note.owner = {};
+                                }
                                 note.owner.statusColor = ' rgba(224, 224, 224, 0.77)';
                                 note.owner.statusName = ' Offline';
                             }
@@ -152,7 +157,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                             note.story = '#000';
                         }
                     }
-                    if (note.owner.status) {
+                    if (note.owner && note.owner.status) {
                         if (note.owner.status.lastLogin) {
 
                             if (moment(new Date).diff(moment(note.owner.status.lastLogin.date), 'days') > 2) {
@@ -175,6 +180,9 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                             note.owner.statusName = ' Offline';
                         }
                     } else {
+                        if (!note.owner) {
+                            note.owner = {};
+                        }
                         note.owner.statusColor = ' rgba(224, 224, 224, 0.77)';
                         note.owner.statusName = ' Offline';
                     }
@@ -220,7 +228,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                                     note.story = '#000';
                                 }
                             }
-                            if (note.owner.status) {
+                            if (note.owner && note.owner.status) {
                                 if (note.owner.status.lastLogin) {
 
                                     if (moment(new Date).diff(moment(note.owner.status.lastLogin.date), 'days') > 2) {
@@ -243,6 +251,9 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                                     note.owner.statusName = ' Offline';
                                 }
                             } else {
+                                if (!note.owner){
+                                    note.owner = {};
+                                }
                                 note.owner.statusColor = ' rgba(224, 224, 224, 0.77)';
                                 note.owner.statusName = ' Offline';
                             }
@@ -626,7 +637,6 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                 $scope.status = 'You cancelled the dialog.';
             });
         };
-
         $scope.modalNoteView = function (ev, id, storyId) {
             $mdDialog.show({
                 controller: 'NoteViewCtrl',
@@ -641,6 +651,16 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                 $scope.status = 'You said the information was "' + answer + '".';
             }, function () {
                 $scope.status = 'You cancelled the dialog.';
+            });
+        };
+
+        this.noteTrash = function($id){
+            Meteor.call('noteTrash', {id: $id, trash: true}, function (error) {
+                if (error) {
+                    Materialize.toast('Erro: ' + error, 4000);
+                } else {
+                    Materialize.toast('Deleted successfully!', 4000);
+                }
             });
         };
 }]);

@@ -1,8 +1,8 @@
 <div ng-controller="ProductToolbarCtrl as vm" flex style="height: 100%;">
     <nav class="navbar-fixed brown darken-2 hide-on-med-and-down" role="navigation" style="z-index: 1;">
         <!--<div class="nav-wrapper container center">-->
-        <div class="nav-wrapper container center">
-            <ul class="brand-logo center" >
+        <div class="nav-wrapper center">
+            <ul class="row center center" layout="row"       layout-align="center start">
                 <li ng-repeat="menu in vm.menus" class="{{menu.class}}">
                     <md-tooltip md-direction="botom" md-autohide="false"> {{menu.name}}</md-tooltip>
                     <a href="{{menu.link}}">

@@ -6,17 +6,21 @@
         <!--<md-content>-->
         <table id="scrumy-board" cellspacing="0" class="live scrum" style="min-height: 300px;">
             <tbody id="scrumy-board-body">
-            <tr id="scrumy-board-header" style="position: relative; text-align: center;">
-                <th id="story-header" style="text-align: center;">
-                    <span>Story</span>
-                </th>
-                <th id="plus-header">
-                </th>
-                <th class="plus-header" ng-repeat="status in vm.states">
-                    <span>{{status.name}}</span> <br>
-                    <a href="#" class="select-all" style="display: none">Select All</a>
-                </th>
-            </tr>
+
+            <section>
+            <md-subheader class="md-primary">
+                <tr id="scrumy-board-header" style="position: relative; text-align: center;">
+                    <th id="story-header" style="text-align: center;">
+                        <span>Story</span>
+                    </th>
+                    <th id="plus-header">
+                    </th>
+                    <th class="plus-header" ng-repeat="status in vm.states">
+                        <span>{{status.name}}</span> <br>
+                        <a href="#" class="select-all" style="display: none">Select All</a>
+                    </th>
+                </tr>
+            </md-subheader>
             <tr class="story-task-row" ng-repeat="story in vm.stories">
                 <td rowspan="" id="story-915989-title" class="stories">
                     <div id="story_editor_915989">
@@ -78,7 +82,7 @@
                                         "/>
                             </div>
                             <div class="card-action" layout="row" style="padding: 0px;">
-                                <a href="#" ng-click="modalNoteSave($event, note._id)"
+                                <a href="#" ng-click="vm.noteTrash(note._id)"
                                    class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal; height: 30px; width: 30px; color: #757575;">
                                     <md-tooltip md-direction="botom" md-autohide="false">Delete task</md-tooltip>
                                     <i class="material-icons">delete</i>
@@ -134,6 +138,8 @@
                 <!--</div>-->
                 <!--</td>-->
             </tr>
+
+            </section>
             </tbody>
         </table>
     </md-content>

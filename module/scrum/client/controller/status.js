@@ -20,7 +20,8 @@ angular.module('scrum').controller('StatusCtrl', [ '$scope', '$mdDialog', '$reac
                 return [
                     $stateParams.id,
                     {},
-                    this.getReactively('searchText')
+                    this.getReactively('searchText'),
+                    false
                 ]
             }
         );
@@ -57,6 +58,16 @@ angular.module('scrum').controller('StatusCtrl', [ '$scope', '$mdDialog', '$reac
                 $scope.status = 'You said the information was "' + answer + '".';
             }, function () {
                 $scope.status = 'You cancelled the dialog.';
+            });
+        };
+
+        this.trash = function($id){
+            Meteor.call('statusTrash', {id: $id, trash: true}, function (error) {
+                if (error) {
+                    Materialize.toast('Erro: ' + error, 4000);
+                } else {
+                    Materialize.toast('Deleted successfully!', 4000);
+                }
             });
         };
     }
