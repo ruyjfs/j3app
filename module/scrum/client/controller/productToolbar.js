@@ -12,13 +12,12 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
         this.sprintId = $stateParams.sprintId;
 
         this.subscribe('users');
-        this.subscribe('message');
         this.subscribe('project');
         this.subscribe('team');
-        this.subscribe('status', function(){return [$stateParams.id]});
-        this.subscribe('note', function(){return [$stateParams.id]});
-        this.subscribe('story', function(){return [$stateParams.id]});
-        this.subscribe('sprint');
+        //this.subscribe('status', function(){return [$stateParams.id]});
+        //this.subscribe('note', function(){return [$stateParams.id]});
+        //this.subscribe('story', function(){return [$stateParams.id]});
+        this.subscribe('sprint', function(){return [$stateParams.id]});
         $scope.helpers({
             sprint: function () {
                 dateNow = moment().format('x');
