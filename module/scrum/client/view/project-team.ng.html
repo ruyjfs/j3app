@@ -59,9 +59,24 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <md-button>9</md-button>
-                        <md-button>15</md-button>
-                        <md-button>0</md-button>
+                        <md-button ng-click="vm.modalNoteUserSprint($event, user.sprintIdPrevious)">
+                            {{user.sprintPrevious.taskRemaining}}/{{user.sprintPrevious.taskTotal}}
+                            <md-tooltip md-direction="bottom" md-autohide="false">
+                                Task amount previous sprint (before/after)
+                            </md-tooltip>
+                        </md-button>
+                        <md-button ng-click="vm.modalNoteUserSprint($event, user.sprintIdCurrent)">
+                            {{user.sprintCurrent.taskRemaining}}/{{user.sprintCurrent.taskTotal}}
+                            <md-tooltip md-direction="bottom" md-autohide="false">
+                                Task amount current sprint (before/after)
+                            </md-tooltip>
+                        </md-button>
+                        <md-button ng-click="vm.modalNoteUserSprint($event, user.sprintIdNext)">
+                            {{user.sprintNext.taskRemaining}}/{{user.sprintNext.taskTotal}}
+                            <md-tooltip md-direction="bottom" md-autohide="false">
+                                Task amount next sprint (before/after)
+                            </md-tooltip>
+                        </md-button>
                     </md-card-actions>
                 </md-card>
             </div>

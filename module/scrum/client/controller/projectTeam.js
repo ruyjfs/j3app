@@ -43,9 +43,7 @@ angular.module('scrum').controller('ProjectTeamCtrl', [ '$scope', '$mdDialog', '
                         if (team.members) {
                             team.members = Meteor.users.find({_id: {$in: team.members}}).map(function(user){
                                 if (user.status) {
-
                                     if (user.status.lastLogin) {
-
                                         if (moment(new Date).diff(moment(user.status.lastLogin.date), 'days') > 2) {
                                             user.statusLastLoginDate = moment(user.status.lastLogin.date).format('L H[h]m');
                                         } else {
@@ -75,11 +73,32 @@ angular.module('scrum').controller('ProjectTeamCtrl', [ '$scope', '$mdDialog', '
                                 } else {
                                     user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=60&d=mm&f=y';
                                 }
-
                                 user.nameTreated = user.name + ' ' + user.lastName;
                                 if (user.nameTreated.length > 14) {
                                     user.nameTreated = user.nameTreated.substr(0,13) + '...';
                                 }
+
+                                sprint = Sprint.findOne({_id: $stateParams.sprintId});
+                                sprintPreviousNumber = sprint.number - 1;
+                                sprintNextNumber = sprint.number + 1;
+                                sprintPrevious = Sprint.findOne({projectId: $stateParams.id, number: sprintPreviousNumber});
+                                sprintNext = Sprint.findOne({projectId: $stateParams.id, number: sprintNextNumber});
+
+                                notesPrevious = Note.find({sprintId: sprintPrevious._id, owner: user._id}).fetch();
+                                notesCurrent = Note.find({sprintId: sprint._id, owner: user._id}).fetch();
+                                notesNext = Note.find({sprintId: sprintNext._id, owner: user._id}).fetch();
+
+                                notesDonePrevious = Note.find({sprintId: sprintPrevious._id, owner: user._id, statusId: '1'}).fetch();
+                                notesDoneCurrent = Note.find({sprintId: sprint._id, owner: user._id, statusId: '1'}).fetch();
+                                notesDoneNext = Note.find({sprintId: sprintNext._id, owner: user._id, statusId: '1'}).fetch();
+
+                                user.sprintIdPrevious = sprintPrevious._id;
+                                user.sprintIdCurrent = sprint._id;
+                                user.sprintIdNext = sprintNext._id;
+
+                                user.sprintPrevious = {taskRemaining: notesDonePrevious.length, taskTotal: notesPrevious.length};
+                                user.sprintCurrent = {taskRemaining: notesDoneCurrent.length, taskTotal: notesCurrent.length};
+                                user.sprintNext = {taskRemaining: notesDoneNext.length, taskTotal: notesNext.length};
 
                                 return user;
                             });
@@ -113,23 +132,19 @@ angular.module('scrum').controller('ProjectTeamCtrl', [ '$scope', '$mdDialog', '
             }
         });
 
-        //$scope.remove = function(team) {
-        //    this.teams.remove(team);
-        //}
-
-        //$scope.modalSave = function(ev, id){
-        //    $mdDialog.show({
-        //        controller: 'TeamSaveCtrl',
-        //        templateUrl: 'module/scrum/client/view/team-save.ng.html',
-        //        clickOutsideToClose:true,
-        //        locals : {
-        //            id: id
-        //        },
-        //        targetEvent: ev
-        //    }).then(function(answer) {
-        //        $scope.status = 'You said the information was "' + answer + '".';
-        //    }, function() {
-        //        $scope.status = 'You cancelled the dialog.';
-        //    });
-        //};
+        this.modalNoteUserSprint = function (ev, sprintId) {
+            $mdDialog.show({
+                controller: 'NoteUserSprintCtrl',
+                templateUrl: 'module/scrum/client/view/note-user-sprint.ng.html',
+                clickOutsideToClose: true,
+                targetEvent: ev,
+                locals: {
+                    sprintId: sprintId
+                }
+            }).then(function (answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
+        };
 }]);
