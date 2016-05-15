@@ -317,7 +317,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                         sprint.days = moment(sprint.dateEnd).diff(moment(sprint.dateStart), 'days') + 1;
                     }
 
-                    if (project.skipWeekend) {
+                    if (project && project.skipWeekend) {
                         if (typeof(sprint.dateStart) === 'string') {
                             sprint.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days');
                         } else {
@@ -325,7 +325,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                         }
                         sprint.days = sprint.daysBusiness;
                     }
-                    if (project.teams) {
+                    if (project && project.teams) {
                         teams = Team.find({_id: {$in: project.teams}}).fetch().map(function (team) {
                             if (team.members) {
                                 team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();
@@ -446,7 +446,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
 
                 if ($rootScope.sprintNext) {
                     project = Project.findOne($stateParams.id);
-                    if (project.skipWeekend) {
+                    if (project && project.skipWeekend) {
                         if (typeof (sprintNext.dateStart) === 'string') {
                             $rootScope.sprintNext.daysBusiness = moment($rootScope.sprintNext.dateEnd, 'x').businessDiff(moment($rootScope.sprintNext.dateStart, 'x'), 'days');
                         } else {
@@ -543,7 +543,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                         $rootScope.sprintPrevious.days = moment($rootScope.sprintPrevious.dateEnd).diff(moment($rootScope.sprintPrevious.dateStart), 'days') + 1;
                     }
                     project = Project.findOne($stateParams.id);
-                    if (project.skipWeekend) {
+                    if (project && project.skipWeekend) {
                         if (typeof ($rootScope.sprintPrevious.dateStart) === 'string') {
                             $rootScope.sprintPrevious.daysBusiness = moment($rootScope.sprintPrevious.dateEnd, 'x').businessDiff(moment($rootScope.sprintPrevious.dateStart, 'x'), 'days');
                         } else {

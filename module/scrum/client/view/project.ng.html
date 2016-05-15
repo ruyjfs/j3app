@@ -21,30 +21,30 @@
                     <div class="row">
                         <!--<div class="container col l4 s12 row">-->
                         <div class="col l4 s12" ng-repeat="project in vm.projects">
-                                <div ng-if="project" class="card small orange lighten-3 hoverable">
-                                    <div class="card-content white-text">
-                                        <span class="card-title activator text-darken-4">{{project.name}}<i
-                                                class="material-icons right">more_vert</i></span>
-                                        <p>{{project.description}}</p>
-                                    </div>
-                                    <div class="card-reveal">
-                                        <span class="card-title grey-text text-darken-4">{{project.name}}<i
-                                                class="material-icons right">close</i></span>
-                                        <p>{{project.owner.name}}</p>
-                                        <p>{{project.description}}</p>
-                                    </div>
-                                    <div class="card-action center orange lighten-3">
-                                        <!--<a href="#">{{_ 'Delete'}}</a>-->
-                                        <!--<a href="#projectSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>-->
-                                        <!--<a href="/project/save/{{_id}}">{{_ 'Edit'}}</a>-->
-                                        <!--<a href="/scrum/kanban">{{_ 'Enter'}}</a>-->
-                                        <a href="#" ng-if="vm.isOwner(project.userId)" ng-click="vm.remove(project._id)">Delete</a>
-                                        <a href="#" ng-if="vm.isOwner(project.userId)" ng-click="vm.modalProjectSave($event, project._id)">Edit</a>
-                                        <!--<a href="#" ng-click="vm.modalProjectSave($event, project._id)">Edit</a>-->
-                                        <!--<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>-->
-                                        <a href="/scrum/productkanban/{{project._id}}/{{project.sprint._id}}">Enter</a>
-                                    </div>
+                            <div ng-if="project" class="card small orange lighten-3 hoverable">
+                                <div class="card-content white-text">
+                                    <span class="card-title activator text-darken-4">{{project.name}}<i
+                                            class="material-icons right">more_vert</i></span>
+                                    <p>{{project.description}}</p>
                                 </div>
+                                <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4">{{project.name}}<i
+                                            class="material-icons right">close</i></span>
+                                    <p>{{project.owner.name}}</p>
+                                    <p>{{project.description}}</p>
+                                </div>
+                                <div class="card-action center orange lighten-3">
+                                    <!--<a href="#">{{_ 'Delete'}}</a>-->
+                                    <!--<a href="#projectSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>-->
+                                    <!--<a href="/project/save/{{_id}}">{{_ 'Edit'}}</a>-->
+                                    <!--<a href="/scrum/kanban">{{_ 'Enter'}}</a>-->
+                                    <!--<a href="#" ng-if="vm.isOwner(project.userId)" ng-click="vm.remove(project._id)">Delete</a>-->
+                                    <a href="#" ng-if="vm.isOwner(project.userId)" ng-click="vm.modalProjectSave($event, project._id)">Edit</a>
+                                    <!--<a href="#" ng-click="vm.modalProjectSave($event, project._id)">Edit</a>-->
+                                    <!--<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>-->
+                                    <a href="/scrum/productkanban/{{project._id}}/{{project.sprint._id}}">Enter</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </md-content>
