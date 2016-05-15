@@ -42,15 +42,15 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
         this.subscribe('sprint', function(){return [$stateParams.id]});
         this.helpers({
             stories: function() {
-                var stories = Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]}).map(function(story){
+                var stories = Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]}, {sort: {order: 1, name: 1}}).map(function(story){
                     var states = Status.find({projectId: $stateParams.id, $or: [{trash: false}, {trash: null}]}, {sort: {order: 1, name: 1}}).fetch();
                     states.unshift({name: 'To do', _id: null});
                     states.push({name: 'Done', _id: '1'});
                     story.states = states.map(function(status) {
-                        if (status._id) {
+                        if (status && status._id) {
                             var notes = Note.find({story: story._id, statusId: status._id, sprintId: $stateParams.sprintId}).map(function(note) {
                                 note.owner = Meteor.users.findOne(note.owner);
-                                if (note.owner.status) {
+                                if (note.owner && note.owner.status) {
                                     if (note.owner.status.lastLogin) {
 
                                         if (moment(new Date).diff(moment(note.owner.status.lastLogin.date), 'days') > 2) {
@@ -73,6 +73,9 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                                         note.owner.statusName = ' Offline';
                                     }
                                 } else {
+                                    if (!note.owner) {
+                                        note.owner = {};
+                                    }
                                     note.owner.statusColor = ' rgba(224, 224, 224, 0.77)';
                                     note.owner.statusName = ' Offline';
                                 }
@@ -154,7 +157,7 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                 return stories;
             },
             states: function(){
-                var states = Status.find({projectId: $stateParams.id, $or: [{trash: false}, {trash: null}]}).fetch();
+                var states = Status.find({projectId: $stateParams.id, $or: [{trash: false}, {trash: null}]}, {sort: {order: 1, name: 1}}).fetch();
                 states.unshift({name: 'To do', _id: null});
                 states.push({name: 'Done', _id: 1});
                 return states;

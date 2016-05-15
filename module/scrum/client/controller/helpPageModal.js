@@ -71,6 +71,12 @@ angular.module('scrum').controller('HelpPageModalCtrl', [ '$scope', '$mdDialog',
                 'Essas qualificações serão informadas com estrelas de 1 à 5 estrelas. ' +
                 'Lembrando que não foi implementado ainda mas é uma idéia que logo será implementada, aceitamos sugestões, opiniões e criticass. ' +
                 'Basta falar com o Ruy Ferreira pelo chat, criador do j3scrum. '
+            },
+            {link: 'scrum/trash', title: 'Trash of product', msg:
+                'Esta é a lixeira do produto. Tudo que você excluir ficará nesta lixeira. Cada produto tem sua própria lixeira.'
+            },
+            {link: 'scrum/planning-poker', title: 'Planning pokker of sprint and product', msg:
+                'Aqui toda a equipe pontua as tarefas medindo os esforços e no final a equipe entra em um consenso para os prazos. '
             }
         ];
         if ($location.path()) {
