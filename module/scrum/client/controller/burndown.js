@@ -3,28 +3,6 @@
 angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$reactive',
     function ($scope, $stateParams, $reactive) {
         $reactive(this).attach($scope);
-        //$scope.modalLogin = function(ev){
-        //    //$mdDialog.alert()
-        //    //    .parent(angular.element(document.querySelector('#popupContainer')))
-        //    //    .clickOutsideToClose(true)
-        //    //    .title('This is an alert title')
-        //    //    .content('You can specify some description text in here.')
-        //    //    .ariaLabel('Alert Dialog Demo')
-        //    //    .ok('Got it!')
-        //    //    .targetEvent(ev)
-        //
-        //    $mdDialog.show({
-        //        module: 'user',
-        //        controller: 'LoginModalCtrl',
-        //        templateUrl: 'module/user/client/views/login-modal.ng.html',
-        //        clickOutsideToClose:true,
-        //        targetEvent: ev
-        //    }).then(function(answer) {
-        //        $scope.status = 'You said the information was "' + answer + '".';
-        //    }, function() {
-        //        $scope.status = 'You cancelled the dialog.';
-        //    });
-        //};
 
         sprint = {};
         this.subscribe('users');
@@ -43,6 +21,8 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                 tasks = ['1'];
                 daysCorrect = ['1'];
                 if (sprint) {
+
+                    // Tratando as datas.
                     if (typeof(sprint.dateStart) === 'string') {
                         sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('DD/MM dd');
                         sprint.dateEndTreated = moment(sprint.dateEnd, 'x').format('DD/MM dd');
@@ -52,6 +32,9 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                         sprint.dateEndTreated = moment(sprint.dateEnd).format('DD/MM dd');
                         sprint.daysTotal = moment(sprint.dateEnd).diff(moment(sprint.dateStart), 'days');
                     }
+
+                    // Calculando quantidade de pessoas em cada time.
+                    // Calculando o tempo total conforme a quantidade de pessoas no time.
                     if (project.teams) {
                         teams = Team.find({_id: {$in: project.teams}}).fetch().map(function (team) {
                             if (team.members) {
@@ -63,6 +46,7 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                         });
                     }
 
+                    // Calculando o total de tempo de todos os times juntos.
                     timeTotal = 0;
                     if (teams) {
                         teams.forEach(function (value) {
@@ -77,26 +61,12 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                     }
                     timeTotalTeams = timeTotal;
 
-                    //console.log(sprint.days);
                     notes = Note.find({
                         $and: [{sprintId: $stateParams.sprintId}],
                         $or: [{projectId: $stateParams.id}, {projectId: null}]
                     }).fetch();
-                    notes.map(function (note) {
-                        note.story = Story.findOne(note.story);
-                        note.owner = Meteor.users.findOne(note.owner);
-                        if (note.statusId == '1') {
-                            note.color = '#dbdbdb';
-                        } else {
-                            if (note.story) {
-                                note.color = note.story.color;
-                            } else {
-                                note.story = '#000';
-                            }
-                        }
-                        return note;
-                    });
 
+                    // Calculando a quantidade de tempo das tarefas.
                     if (notes) {
                         timeTotal = 0;
                         notes.forEach(function (value) {
@@ -110,11 +80,11 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                         sprint.timeTotalNotes = 0;
                     }
 
+                    // Calculando aquantidade de tarefas prontas.
                     notesDone = Note.find({
                         $and: [{sprintId: $stateParams.sprintId}, {statusId: '1'}],
                         $or: [{projectId: $stateParams.id}, {projectId: null}]
                     }).fetch();
-                    //console.log(notesDone);
                     if (notesDone) {
                         timeTotal = 0;
                         notesDone.forEach(function (value) {
@@ -140,24 +110,37 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                     timeTotalNotes = sprint.timeTotalNotes;
                     booTimeTotalNotes = true;
                     //timeTotalTeams = timeTotalTeams
+
+                    //console.log(sprint.daysTotal);
                     for ($i = 1; $i <= sprint.daysTotal; $i++) {
+                        // Adicionando dia a data conforme a quantidade de dias e loop.
                         if (typeof(sprint.dateStart) === 'string') {
                             sprint.days[$i] = moment(sprint.dateStart, 'x').add($i, 'days').format('DD/MM dd');
                         } else {
                             sprint.days[$i] = moment(sprint.dateStart).add($i, 'days').format('DD/MM dd');
                         }
 
+                        // Se for final de semana nao disconta os dias.
                         if (project.skipWeekend && (moment(sprint.dateStart, 'x').add($i, 'days').isoWeekday() == 2+1 || moment(sprint.dateStart, 'x').add($i, 'days').isoWeekday() == 3+1)) {
                             //timeTotalNotes = timeTotalNotes + timeTotalTeams;
+                            console.log('FINAL DE SEMANA - BEGINING');
+                            console.log(sprint.days[$i]);
+                            console.log('FINAL DE SEMANA END');
                         } else {
                             timeTotalNotes = timeTotalNotes - timeTotalTeams;
                         }
+
+                        // Adicionando o tempo total que resta.
                         if (timeTotalNotes > 0) {
                             daysCorrect[$i] = timeTotalNotes;
                         } else if(booTimeTotalNotes) {
                             daysCorrect[$i] = 0;
                             booTimeTotalNotes = false;
                         }
+
+                        //console.log(sprint.days[$i]);
+                        //console.log(daysCorrect[$i]);
+
                         //tasks[$i] = sprint.daysTotal - $i;
                     }
                     //console.log(daysCorrect);
@@ -180,6 +163,10 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                 } else {
                     labels = ['1'];
                 }
+
+                console.log(labels);
+                console.log(daysCorrect);
+                console.log(tasks);
                 var chart = new Chartist.Line('.ct-chart', {
                     labels: labels,
                     series: [

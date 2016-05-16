@@ -11,7 +11,7 @@ angular.module('scrum').controller('SprintCtrl', [ '$scope', '$mdDialog', '$mdSi
         this.perPage = 5;
         this.page = 1;
         this.sort = {
-            number: 1
+            number: -1
         };
 
         this.searchText = '';
