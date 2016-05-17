@@ -85,31 +85,37 @@ angular.module('scrum').controller('ProjectTeamCtrl', [ '$scope', '$mdDialog', '
                                     sprintNextNumber = sprint.number + 1;
                                     sprintPrevious = Sprint.findOne({projectId: $stateParams.id, number: sprintPreviousNumber});
                                     sprintNext = Sprint.findOne({projectId: $stateParams.id, number: sprintNextNumber});
+
+                                    if (sprintPrevious) {
+                                        notesPrevious = Note.find({sprintId: sprintPrevious._id, owner: user._id}).fetch();
+                                    } else {
+                                        notesPrevious = [];
+                                    }
+                                    notesCurrent = Note.find({sprintId: sprint._id, owner: user._id}).fetch();
+                                    notesNext = Note.find({sprintId: sprintNext._id, owner: user._id}).fetch();
+                                    if (sprintPrevious) {
+                                        notesDonePrevious = Note.find({sprintId: sprintPrevious._id, owner: user._id, statusId: '1'}).fetch();
+                                    } else {
+                                        notesDonePrevious = [];
+                                    }
+                                    notesDoneCurrent = Note.find({sprintId: sprint._id, owner: user._id, statusId: '1'}).fetch();
+                                    notesDoneNext = Note.find({sprintId: sprintNext._id, owner: user._id, statusId: '1'}).fetch();
                                 } else {
                                     sprintPreviousNumber = 0;
                                     sprintPrevious = {};
                                     sprintNextNumber = 2;
                                     sprintNext = Sprint.findOne({projectId: $stateParams.id, number: sprintNextNumber});
-                                }
-
-                                if (sprintPrevious) {
-                                    notesPrevious = Note.find({sprintId: sprintPrevious._id, owner: user._id}).fetch();
-                                } else {
-                                    notesPrevious = [];
-                                }
-                                notesCurrent = Note.find({sprintId: sprint._id, owner: user._id}).fetch();
-                                notesNext = Note.find({sprintId: sprintNext._id, owner: user._id}).fetch();
-                                if (sprintPrevious) {
-                                    notesDonePrevious = Note.find({sprintId: sprintPrevious._id, owner: user._id, statusId: '1'}).fetch();
-                                } else {
                                     notesDonePrevious = [];
+                                    notesDoneCurrent = [];
+                                    notesDoneNext = [];
+                                    notesPrevious = [];
+                                    notesCurrent = [];
+                                    notesNext = [];
                                 }
-                                notesDoneCurrent = Note.find({sprintId: sprint._id, owner: user._id, statusId: '1'}).fetch();
-                                notesDoneNext = Note.find({sprintId: sprintNext._id, owner: user._id, statusId: '1'}).fetch();
 
                                 user.sprintIdPrevious = (sprintPrevious)? sprintPrevious._id : '';
-                                user.sprintIdCurrent = sprint._id;
-                                user.sprintIdNext = sprintNext._id;
+                                user.sprintIdCurrent = (sprint) ? sprint._id: '';
+                                user.sprintIdNext = (sprintNext) ? sprintNext._id : '';
 
                                 user.sprintPrevious = {taskRemaining: notesDonePrevious.length, taskTotal: notesPrevious.length};
                                 user.sprintCurrent = {taskRemaining: notesDoneCurrent.length, taskTotal: notesCurrent.length};
