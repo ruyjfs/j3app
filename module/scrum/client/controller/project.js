@@ -52,26 +52,24 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
                         );
                     }
 
-                    //if (!sprint) {
-                    //    Meteor.call('sprintCreate', project._id, function (error, result) {
-                    //        if (error) {
-                    //            console.log(error);
-                    //        } else {
+                    if (!sprint) {
+                        Meteor.call('sprintCreate', project._id, function (error, result) {
+                            if (error) {
+                                //console.log(error);
+                            } else {
                                 //console.log('Saved!');
-                                //$scope.form = '';
-                                //$mdDialog.hide();
-                            //}
+                                $scope.form = '';
+                                $mdDialog.hide();
+                            }
                             //$rootScope.titleMiddle = result.dateStart + ' - ' + result.dateEnd + ' (' + result.number + ')';
 
-                            //if ($stateParams.sprintId == 1 || $stateParams.sprintId == '') {
-                                //$state.go('scrum/productkanban', {id: $stateParams.id, sprintId: result._id})
-                            //}
-                    //        sprint = result;
-                    //        console.info(result);
-                    //
-                    //    });
-                    //
-                    //}
+                            if ($stateParams.sprintId == 1 || $stateParams.sprintId == '') {
+                                $state.go('scrum/productkanban', {id: $stateParams.id, sprintId: result._id})
+                            }
+                            sprint = result;
+                            //console.info(result);
+                        });
+                    }
 
                     //if (sprint) {
                     project.sprint = sprint;
