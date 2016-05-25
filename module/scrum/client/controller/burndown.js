@@ -112,7 +112,7 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                     timeTotalNotes = sprint.timeTotalNotes;
                     booTimeTotalNotes = true;
                     //timeTotalTeams = timeTotalTeams
-                    sprint.daysTotal = sprint.daysTotal + 1;
+                    sprint.daysTotal = sprint.daysTotal;
                     //console.log(sprint.daysTotal);
                     burndown = [];
                     timeTotalNotesDone = [sprint.timeTotalNotes];
@@ -130,9 +130,11 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                     for ($i = 1; $i <= sprint.daysTotal; $i++) {
                         // Adicionando dia a data conforme a quantidade de dias e loop.
                         if (typeof(sprint.dateStart) === 'string') {
+                            date = moment(sprint.dateStart, 'x').add($i, 'days');
                             sprint.days[$i] = moment(sprint.dateStart, 'x').add($i, 'days').format('DD/MM dd');
                             sprint.date[$i] = moment(sprint.dateStart, 'x').add($i, 'days').format('YYYY-MM-DD');
                         } else {
+                            date = moment(sprint.dateStart).add($i, 'days');
                             sprint.days[$i] = moment(sprint.dateStart).add($i, 'days').format('DD/MM dd');
                             sprint.date[$i] = moment(sprint.dateStart).add($i, 'days').format('YYYY-MM-DD');
                         }
@@ -150,13 +152,18 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                         }
 
                         // Se for final de semana nao disconta os dias.
-                        if (project.skipWeekend && (moment(sprint.dateStart, 'x').add($i, 'days').isoWeekday() == 1 || moment(sprint.dateStart, 'x').add($i, 'days').isoWeekday() == 7)) {
+                        if (project.skipWeekend && (date.isoWeekday() == 1 || date.isoWeekday() == 7)) {
                             //timeTotalNotes = timeTotalNotes + timeTotalTeams;
                             //console.log('FINAL DE SEMANA - BEGINING');
+                            //console.log(date.isoWeekday());
+                            //console.log(date);
+                            //console.log(sprint.days[$i]);
                             //console.log($i);
+                            //console.log(moment(sprint.dateStart, 'x').add($i, 'days').format('DD/MM dd'));
+                            //console.log(moment(sprint.dateStart, 'x').add($i, 'days').format('DD/MM dd'));
+                            //console.log(moment(sprint.dateStart, 'x').add($i, 'days').isoWeekday());
                             //console.log(moment(sprint.dateStart, 'x').add($i, 'days').isoWeekday());
                             //console.log(project.skipWeekend);
-                            //console.log(sprint.days[$i]);
                             //console.log('FINAL DE SEMANA END');
                         } else {
                             timeTotalNotes = timeTotalNotes - timeTotalTeams;
