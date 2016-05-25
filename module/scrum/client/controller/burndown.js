@@ -9,6 +9,7 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
         this.subscribe('message');
         this.subscribe('project');
         this.subscribe('team');
+        this.subscribe('burndown', function(){return [$stateParams.id]});
         this.subscribe('status', function(){return [$stateParams.id]});
         this.subscribe('note', function(){return [$stateParams.id]});
         this.subscribe('story', function(){return [$stateParams.id]});
@@ -104,28 +105,59 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                     //console.log(sprint.timeTotalNotes);
                     //console.log(sprint.timeTotalNotesDone);
 
+
                     sprint.days = [sprint.dateStartTreated];
                     tasks = [sprint.timeTotalNotes];
                     daysCorrect = [sprint.timeTotalNotes];
                     timeTotalNotes = sprint.timeTotalNotes;
                     booTimeTotalNotes = true;
                     //timeTotalTeams = timeTotalTeams
-
+                    sprint.daysTotal = sprint.daysTotal + 1;
                     //console.log(sprint.daysTotal);
+                    burndown = [];
+                    timeTotalNotesDone = [sprint.timeTotalNotes];
+                    if (sprint) {
+                        burndown = Burndown.find({
+                            sprintId: sprint._id,
+                            'date': {
+                                $gte: sprint.dateStart,
+                                $lte: sprint.dateEnd
+                            }
+                        }).fetch();
+                    }
+                    sprint.date = [];
+                    timeTotalNotesDoneLast = sprint.timeTotalNotes;
                     for ($i = 1; $i <= sprint.daysTotal; $i++) {
                         // Adicionando dia a data conforme a quantidade de dias e loop.
                         if (typeof(sprint.dateStart) === 'string') {
                             sprint.days[$i] = moment(sprint.dateStart, 'x').add($i, 'days').format('DD/MM dd');
+                            sprint.date[$i] = moment(sprint.dateStart, 'x').add($i, 'days').format('YYYY-MM-DD');
                         } else {
                             sprint.days[$i] = moment(sprint.dateStart).add($i, 'days').format('DD/MM dd');
+                            sprint.date[$i] = moment(sprint.dateStart).add($i, 'days').format('YYYY-MM-DD');
+                        }
+
+                        if (sprint.date[$i] <= moment().format('YYYY-MM-DD')) {
+                            burndown.forEach(function(value){
+                                if (moment(value.date).format('YYYY-MM-DD') == sprint.date[$i]) {
+                                    timeTotalNotesDone[$i+1] = value.timeTotalNotes - value.timeTotalNotesDone;
+                                    timeTotalNotesDoneLast = timeTotalNotesDone[$i+1];
+                                } else {
+                                    timeTotalNotesDone[$i+1] = timeTotalNotesDoneLast;
+                                }
+                            });
+                            //console.log(sprint.date[$i]);
                         }
 
                         // Se for final de semana nao disconta os dias.
-                        if (project.skipWeekend && (moment(sprint.dateStart, 'x').add($i, 'days').isoWeekday() == 2+1 || moment(sprint.dateStart, 'x').add($i, 'days').isoWeekday() == 3+1)) {
+                        if (project.skipWeekend && (moment(sprint.dateStart, 'x').add($i, 'days').isoWeekday() == 1 || moment(sprint.dateStart, 'x').add($i, 'days').isoWeekday() == 7)) {
                             //timeTotalNotes = timeTotalNotes + timeTotalTeams;
-                            console.log('FINAL DE SEMANA - BEGINING');
-                            console.log(sprint.days[$i]);
-                            console.log('FINAL DE SEMANA END');
+                            //console.log('FINAL DE SEMANA - BEGINING');
+                            //console.log($i);
+                            //console.log(moment(sprint.dateStart, 'x').add($i, 'days').isoWeekday());
+                            //console.log(project.skipWeekend);
+                            //console.log(sprint.days[$i]);
+                            //console.log('FINAL DE SEMANA END');
                         } else {
                             timeTotalNotes = timeTotalNotes - timeTotalTeams;
                         }
@@ -158,22 +190,33 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                     //
                 }
 
+
+                //{dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
+
                 if (sprint) {
                     labels = sprint.days;
                 } else {
                     labels = ['1'];
+                    timeTotalNotesDone = ['1'];
                 }
 
-                console.log(labels);
-                console.log(daysCorrect);
-                console.log(tasks);
+                //timeTotalNotesDone = [];
+                //console.log(labels);
+                //console.log(sprint);
+                //console.log(daysCorrect);
+                //console.log(burndown);
+                //console.log(timeTotalNotesDone);
+                //console.log(tasks);
                 var chart = new Chartist.Line('.ct-chart', {
                     labels: labels,
                     series: [
                         daysCorrect,
-                        tasks,
-//                    [12,  12, 11, 8, 7, 8, 6, 4, 2, 4,  3, 1, 0],
-//                    [12,  10, 9, 10, 11, 5, 6, 7, 3, 2,  4, 1, 0],
+                        //tasks,
+                        //[0],
+                        timeTotalNotesDone
+                        //[200,  150, 130, 100, 7, 8, 6, 4, 2, 4,  3, 1, 0],
+                        //[12,  12, 11, 8, 7, 8, 6, 4, 2, 4,  3, 1, 0],
+                        //[12,  10, 9, 10, 11, 5, 6, 7, 3, 2,  4, 1, 0],
                     ],
 //                onlyInteger: true,
                 }, {

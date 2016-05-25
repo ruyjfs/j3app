@@ -36,6 +36,7 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
         this.subscribe('users');
         this.subscribe('project');
         this.subscribe('team');
+        this.subscribe('burndown', function(){return [$stateParams.id]});
         this.subscribe('status', function(){return [$stateParams.id]});
         this.subscribe('note', function(){return [$stateParams.id]});
         this.subscribe('story', function(){return [$stateParams.id]});

@@ -29,11 +29,85 @@ Meteor.methods({
         }
     },
     noteChangeStatus: function(form){
-        var formNew = Note.findOne(form.noteId);
+        var formNew = Note.findOne(form.noteId, {reactive: false});
+        var formOld = Note.findOne(form.noteId, {reactive: false});
         formNew.statusId = form.statusId;
         id = form.noteId;
         delete formNew._id;
         Note.update(id, { $set: formNew});
+
+        Meteor.call('burndownSave', form, function (error, result) {
+            if (error) {
+//                                console.log(error);
+            } else {
+//                                console.log(statusId);
+//                                console.log(noteId);zz
+            }
+        });
+        if ( (formNew.statusId == 1 && formOld.statusId != 1) || (formNew.statusId != 1 && formOld.statusId == 1) ) {
+            var burndownNew = Burndown.findOne({
+                sprintId: formNew.sprintId,
+                'date': {
+                    $lt: new Date(),
+                    $gte: new Date(new Date().setDate(new Date().getDate()-1))
+                }
+            });
+
+            // Calculando a quantidade total de tarefas e a quantidade total de tarefas prontas.
+            isInt = function (n) {
+                return parseInt(n) === n
+            };
+            notes = Note.find({
+                $and: [{sprintId: formNew.sprintId}]
+            }).fetch();
+            if (notes) {
+                timeTotal = 0;
+                notes.forEach(function (value) {
+                    //console.log(value);
+                    if (isInt(parseInt(value.time))) {
+                        timeTotal = parseInt(value.time) + timeTotal;
+                    }
+                });
+                timeTotalNotes = timeTotal;
+            } else {
+                timeTotalNotes = 0;
+            }
+            notesDone = Note.find({
+                $and: [{sprintId: formNew.sprintId}, {statusId: '1'}]
+            }).fetch();
+            if (notesDone) {
+                timeTotal = 0;
+                notesDone.forEach(function (value) {
+                    //console.log(value);
+                    if (isInt(parseInt(value.time))) {
+                        timeTotal = parseInt(value.time) + timeTotal;
+                    }
+                });
+                timeTotalNotesDone = timeTotal;
+            } else {
+                timeTotalNotesDone = 0;
+            }
+
+            if (burndownNew) {
+                idBurndown = burndownNew._id;
+                delete burndownNew._id;
+                burndownNew.sprintId = formNew.sprintId;
+                burndownNew.date = new Date();
+                burndownNew.timeTotalNotes = timeTotalNotes;
+                burndownNew.timeTotalNotesDone = timeTotalNotesDone;
+                Burndown.update(idBurndown, { $set: burndownNew});
+                console.log('Update');
+            } else {
+                burndownNew = {};
+                burndownNew.createdAt = new Date();
+                burndownNew.sprintId = formNew.sprintId;
+                burndownNew.date = new Date();
+                burndownNew.timeTotalNotes = timeTotalNotes;
+                burndownNew.timeTotalNotesDone = timeTotalNotesDone;
+                Burndown.insert(burndownNew);
+                console.log('Insert');
+            }
+        }
     },
     noteFindBackLog: function(param){
         notes = Note.find({$or: [{projectId: param.projectId}, {projectId: null}]}).fetch();
