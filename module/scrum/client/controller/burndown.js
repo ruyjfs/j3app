@@ -112,7 +112,7 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                     timeTotalNotes = sprint.timeTotalNotes;
                     booTimeTotalNotes = true;
                     //timeTotalTeams = timeTotalTeams
-                    sprint.daysTotal = sprint.daysTotal;
+                    sprint.daysTotal = sprint.daysTotal + 1;
                     //console.log(sprint.daysTotal);
                     burndown = [];
                     timeTotalNotesDone = [sprint.timeTotalNotes];
