@@ -4,7 +4,7 @@
         <div class="nav-wrapper center">
             <ul class="row center center" layout="row"       layout-align="center start">
                 <li ng-repeat="menu in vm.menus" class="{{menu.class}}">
-                    <md-tooltip md-direction="botom" md-autohide="false"> {{menu.name}}</md-tooltip>
+                    <md-tooltip md-direction="botom" md-autohide="false"> {{ menu.name | translate }}</md-tooltip>
                     <a href="{{menu.link}}">
                         <i class="material-icons">{{menu.icon}}</i>
                     </a>

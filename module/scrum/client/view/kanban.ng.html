@@ -11,13 +11,13 @@
             <md-subheader class="md-primary">
                 <tr id="scrumy-board-header" style="position: relative; text-align: center;">
                     <th id="story-header" style="text-align: center;">
-                        <span>Story</span>
+                        <span>{{ 'Story' | translate}}</span>
                     </th>
                     <th id="plus-header">
                     </th>
                     <th class="plus-header" ng-repeat="status in vm.states">
-                        <span>{{status.name}}</span> <br>
-                        <a href="#" class="select-all" style="display: none">Select All</a>
+                        <span>{{ status.name | translate}}</span> <br>
+                        <a href="#" class="select-all" style="display: none">{{ 'Select All' | translate}}</a>
                     </th>
                 </tr>
             </md-subheader>
@@ -84,22 +84,22 @@
                             <div class="card-action" layout="row" style="padding: 0px;">
                                 <a href="#" ng-click="vm.noteTrash(note._id)"
                                    class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal; height: 30px; width: 30px; color: #757575;">
-                                    <md-tooltip md-direction="botom" md-autohide="false">Delete task</md-tooltip>
+                                    <md-tooltip md-direction="botom" md-autohide="false">{{ 'Delete task' | translate}}</md-tooltip>
                                     <i class="material-icons">delete</i>
                                 </a>
                                 <a href="#" ng-click="modalStorySave($event, story._id)"
                                    class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
-                                    <md-tooltip md-direction="botom" md-autohide="false">Edit history</md-tooltip>
+                                    <md-tooltip md-direction="botom" md-autohide="false">{{ 'Edit story' | translate}}</md-tooltip>
                                     <i class="material-icons">content_paste</i>
                                 </a>
                                 <a href="#" ng-click="modalNoteSave($event, note._id)"
                                    class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
-                                    <md-tooltip md-direction="botom" md-autohide="false">Edit task</md-tooltip>
+                                    <md-tooltip md-direction="botom" md-autohide="false">{{ 'Edit task' | translate}}</md-tooltip>
                                     <i class="material-icons">mode_edit</i>
                                 </a>
                                 <a href="#" ng-click="modalNoteView($event, note._id)"
                                    class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
-                                    <md-tooltip md-direction="botom" md-autohide="false">Visualize</md-tooltip>
+                                    <md-tooltip md-direction="botom" md-autohide="false">{{ 'Visualize' | translate}}</md-tooltip>
                                     <i class="material-icons">search</i>
                                 </a>
                             </div>

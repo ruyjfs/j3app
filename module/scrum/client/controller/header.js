@@ -2,10 +2,13 @@
 //    function($scope, $stateParams, $meteor){
 angular.module('scrum').controller('HeaderCtrl',
     [
-        '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$reactive', '$mdDialog', '$mdBottomSheet', '$rootScope', '$mdToast',
-        '$stateParams', '$state',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $reactive, $mdDialog, $mdBottomSheet, $rootScope, $mdToast, $stateParams, $state) {
+        '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$reactive', '$mdDialog', '$mdBottomSheet', '$rootScope', '$mdToast', '$translate',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $reactive, $mdDialog, $mdBottomSheet, $rootScope, $mdToast, $translate) {
         $reactive(this).attach($scope);
+
+        this.setUserLanguage = function (strLanguage) {
+            $translate.use(strLanguage);
+        };
 
         //$rootScope.$on('$stateChangeStart',
         //    function(event, toState, toParams, fromState, fromParams, options){

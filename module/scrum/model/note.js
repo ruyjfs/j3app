@@ -96,7 +96,6 @@ Meteor.methods({
                 burndownNew.timeTotalNotes = timeTotalNotes;
                 burndownNew.timeTotalNotesDone = timeTotalNotesDone;
                 Burndown.update(idBurndown, { $set: burndownNew});
-                console.log('Update');
             } else {
                 burndownNew = {};
                 burndownNew.createdAt = new Date();
@@ -105,7 +104,6 @@ Meteor.methods({
                 burndownNew.timeTotalNotes = timeTotalNotes;
                 burndownNew.timeTotalNotesDone = timeTotalNotesDone;
                 Burndown.insert(burndownNew);
-                console.log('Insert');
             }
         }
     },

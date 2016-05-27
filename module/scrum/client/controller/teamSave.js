@@ -12,9 +12,11 @@ angular.module('scrum').controller('TeamSaveCtrl', [ '$scope', '$rootScope', '$m
         if (id) {
             //$scope.form = $meteor.object(Project, id, false);
             $scope.form = Team.findOne(id);
+            $scope.action = 'Edit';
         } else {
             $scope.form = {};
             $scope.form.time = 1;
+            $scope.action = 'Insert';
         }
 
         $scope.save = function (){

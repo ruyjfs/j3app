@@ -12,11 +12,10 @@
 <!--<md-button ng-href="{{project.link}}">Enter</md-button>-->
 <!--</div>-->
 <!--</md-card>-->
-
 <div ng-controller="ProjectCtrl as vm">
     <div class="container">
         <md-tabs md-center-tabs md-dynamic-height md-border-bottom>
-            <md-tab label="Product">
+            <md-tab label="{{ 'Product' | translate }}">
                 <md-content class="md-padding">
                     <div class="row">
                         <!--<div class="container col l4 s12 row">-->
@@ -39,17 +38,17 @@
                                     <!--<a href="/project/save/{{_id}}">{{_ 'Edit'}}</a>-->
                                     <!--<a href="/scrum/kanban">{{_ 'Enter'}}</a>-->
                                     <!--<a href="#" ng-if="vm.isOwner(project.userId)" ng-click="vm.remove(project._id)">Delete</a>-->
-                                    <a href="#" ng-if="vm.isOwner(project.userId)" ng-click="vm.modalProjectSave($event, project._id)">Edit</a>
+                                    <a href="#" ng-if="vm.isOwner(project.userId)" ng-click="vm.modalProjectSave($event, project._id)">{{ 'Edit' | translate }}</a>
                                     <!--<a href="#" ng-click="vm.modalProjectSave($event, project._id)">Edit</a>-->
                                     <!--<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>-->
-                                    <a href="/scrum/productkanban/{{project._id}}/{{project.sprint._id}}">Enter</a>
+                                    <a href="/scrum/productkanban/{{project._id}}/{{project.sprint._id}}">{{ 'Enter' | translate }}</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </md-content>
             </md-tab>
-            <md-tab label="Team">
+            <md-tab label="{{ 'Team' | translate }}">
                 <md-content class="md-padding">
                     <div ng-include="'module/scrum/client/view/team.ng.html'"></div>
                 </md-content>

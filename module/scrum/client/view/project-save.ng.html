@@ -10,11 +10,11 @@
             <md-content layout-padding>
             <div layout-gt-sm="row">
                 <md-input-container class="md-block">
-                    <label>Name</label>
+                    <label>{{ 'Name' | translate }}</label>
                     <input ng-model="form.name" type="text" aria-label="Name" required>
                 </md-input-container>
                 <md-input-container class="md-block">
-                    <label>Owner</label>
+                    <label>{{ 'Owner' | translate }}</label>
                     <md-select ng-model="form.userId" aria-label="" placeholder="Owner" required>
                         <md-option ng-repeat="user in users" value="{{user._id}}">
                             {{user.name}} {{user.lastName}}
@@ -43,7 +43,7 @@
                 </md-input-container>
             </div>
             <md-input-container class="md-block">
-                <label>Team</label>
+                <label>{{ 'Team' | translate }}</label>
                 <md-select ng-model="form.teams" id="teams" aria-label="" placeholder="Team" multiple="true"
                            required>
                     <md-option ng-repeat="team in teams" value="{{team._id}}">
@@ -62,7 +62,7 @@
                 <!--</md-input-container>-->
                 <div layout>
                     <div flex="15" layout layout-align="center center">
-                        <span class="md-body-1">Week</span>
+                        <span class="md-body-1">{{ 'Week' | translate }}</span>
                     </div>
                     <md-slider ng-model="form.week" id="time-slider" flex md-discrete step="1" min="1" max="4" aria-label="Time"></md-slider>
                     <div flex="10" layout layout-align="center center">
@@ -71,12 +71,12 @@
                 </div>
                 <md-input-container class="md-block">
                     <md-switch ng-model="form.skipWeekend" aria-label="Weekend">
-                        Skip weekend
+                        {{ 'Skip weekend' | translate }}
                     </md-switch>
                 </md-input-container>
             <!--</div>-->
             <md-input-container class="md-block">
-                <label>Description</label>
+                <label>{{ 'Description' | translate }}</label>
                 <textarea ng-model="form.description" id="description" aria-label="Description"></textarea>
             </md-input-container>
             <!--<md-checkbox ng-model="newParty.public" id="public" aria-label="Public">-->
@@ -95,11 +95,11 @@
         <!--</md-button>-->
         <button class="btn white waves-effect waves-orange hoverable" type="button" ng-click="close()">
             <!--<i class="material-icons right">close</i>-->
-            Cancel
+            {{ 'Cancel' | translate }}
         </button>
         <button class="btn orange darken-3 waves-effect waves-light hoverable" type="button" ng-click="save()">
             <!--<i class="material-icons right">check</i>-->
-            Save
+            {{ action | translate }}
         </button>
     </md-dialog-actions>
 </md-dialog>

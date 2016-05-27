@@ -5,31 +5,31 @@
             <tbody id="scrumy-board-body">
             <tr id="scrumy-board-header" style="position: relative;">
                 <th id="header-backLog" class="header">
-                    <span>Product Backlog</span>
+                    <span>{{ 'Product backlog' | translate}}</span>
                     <a href="#" class="select-all" style="display: none">Select All</a>
                 </th>
                 <th id="header-sprintAnterior" class="header">
-                    <span>Previous sprint Backlog</span> <br>
+                    <span>{{ 'Previous sprint backlog' | translate }}</span> <br>
                     <!--10/10/2010 - 10/10/2010 <br>-->
                     ({{sprintPrevious.number}}) {{sprintPrevious.dateStartTreated}} - {{sprintPrevious.dateEndTreated}}
                     <br>
                     (<span class="sprintHorasGastas">{{sprintPrevious.timeTotalNotes}}
                     h</span>/ {{sprintPrevious.timeTotal}}h )
-                    <a href="#" class="select-all" style="display: none">Select All</a>
+                    <a href="#" class="select-all" style="display: none">{{'Select All' | translate}}</a>
                 </th>
                 <th id="header-sprintAtual" class="header">
-                    <span>Current sprint Backlog</span> <br>
+                    <span>{{'Current sprint backlog' | translate}}</span> <br>
                     ({{sprint.number}}) {{sprint.dateStartTreated}} - {{sprint.dateEndTreated}}<br>
                     (<span class="sprintHorasGastas">{{sprint.timeTotalNotes}}h</span>/ {{sprint.timeTotal}}h )
-                    <a href="#" class="select-all" style="display: none">Select All</a>
+                    <a href="#" class="select-all" style="display: none">{{'Select All' | translate}}</a>
                 </th>
                 <th id="header-proximaSprint" class="header">
-                    <span>Next sprint Backlog</span> <br>
+                    <span>{{'Next sprint backlog' | translate}}</span> <br>
                     <!--10/10/2010 - 10/10/2010 <br>-->
                     ({{sprintNext.number}}) {{sprintNext.dateStartTreated}} - {{sprintNext.dateEndTreated}}<br>
                     (<span class="sprintHorasGastas">{{sprintNext.timeTotalNotes}}hs</span>/ {{sprintNext.timeTotal}}hs
                     )
-                    <a href="#" class="select-all" style="display: none">Select All</a>
+                    <a href="#" class="select-all" style="display: none">{{'Select All' | translate}}</a>
                 </th>
             </tr>
             <tr class="backlogContainer">
@@ -77,22 +77,22 @@
                                 <div class="card-action" layout="row" style="padding: 0px;text-align: center;display: inherit;">
                                     <a href="#" ng-click="vm.noteTrash(backLogNote._id)"
                                        class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal; height: 30px; width: 30px; color: #757575;">
-                                        <md-tooltip md-direction="botom" md-autohide="false">Delete task</md-tooltip>
+                                        <md-tooltip md-direction="botom" md-autohide="false">{{'Delete task'| translate}}</md-tooltip>
                                         <i class="material-icons">delete</i>
                                     </a>
                                     <a href="#" ng-click="modalStorySave($event, backLogNote.story._id)"
                                        class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
-                                        <md-tooltip md-direction="botom" md-autohide="false">Edit history</md-tooltip>
+                                        <md-tooltip md-direction="botom" md-autohide="false">{{'Edit history' | translate}}</md-tooltip>
                                         <i class="material-icons">content_paste</i>
                                     </a>
                                     <a href="#" ng-click="modalNoteSave($event, backLogNote._id)"
                                        class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
-                                        <md-tooltip md-direction="botom" md-autohide="false">Edit task</md-tooltip>
+                                        <md-tooltip md-direction="botom" md-autohide="false">{{'Edit task' | translate}}</md-tooltip>
                                         <i class="material-icons">mode_edit</i>
                                     </a>
                                     <a href="#" ng-click="modalNoteView($event, backLogNote._id)"
                                        class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
-                                        <md-tooltip md-direction="botom" md-autohide="false">Visualize</md-tooltip>
+                                        <md-tooltip md-direction="botom" md-autohide="false">{{'Visualize' | translate}}</md-tooltip>
                                         <i class="material-icons">search</i>
                                     </a>
                                 </div>
@@ -207,22 +207,22 @@
                                 <div class="card-action" layout="row" style="padding: 0px;text-align: center;display: inherit;">
                                     <a href="#" ng-click="vm.noteTrash(backLogNote._id)"
                                        class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal; height: 30px; width: 30px; color: #757575;">
-                                        <md-tooltip md-direction="botom" md-autohide="false">Delete task</md-tooltip>
+                                        <md-tooltip md-direction="botom" md-autohide="false">{{'Delete task'| translate}}</md-tooltip>
                                         <i class="material-icons">delete</i>
                                     </a>
                                     <a href="#" ng-click="modalStorySave($event, backLogNote.story._id)"
                                        class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
-                                        <md-tooltip md-direction="botom" md-autohide="false">Edit history</md-tooltip>
+                                        <md-tooltip md-direction="botom" md-autohide="false">{{'Edit history' | translate}}</md-tooltip>
                                         <i class="material-icons">content_paste</i>
                                     </a>
                                     <a href="#" ng-click="modalNoteSave($event, backLogNote._id)"
                                        class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
-                                        <md-tooltip md-direction="botom" md-autohide="false">Edit task</md-tooltip>
+                                        <md-tooltip md-direction="botom" md-autohide="false">{{'Edit task' | translate}}</md-tooltip>
                                         <i class="material-icons">mode_edit</i>
                                     </a>
                                     <a href="#" ng-click="modalNoteView($event, backLogNote._id)"
                                        class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
-                                        <md-tooltip md-direction="botom" md-autohide="false">Visualize</md-tooltip>
+                                        <md-tooltip md-direction="botom" md-autohide="false">{{'Visualize' | translate}}</md-tooltip>
                                         <i class="material-icons">search</i>
                                     </a>
                                 </div>
@@ -285,22 +285,22 @@
                                 <div class="card-action" layout="row" style="padding: 0px;text-align: center;display: inherit;">
                                     <a href="#" ng-click="vm.noteTrash(backLogNote._id)"
                                        class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal; height: 30px; width: 30px; color: #757575;">
-                                        <md-tooltip md-direction="botom" md-autohide="false">Delete task</md-tooltip>
+                                        <md-tooltip md-direction="botom" md-autohide="false">{{'Delete task'| translate}}</md-tooltip>
                                         <i class="material-icons">delete</i>
                                     </a>
                                     <a href="#" ng-click="modalStorySave($event, backLogNote.story._id)"
                                        class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
-                                        <md-tooltip md-direction="botom" md-autohide="false">Edit history</md-tooltip>
+                                        <md-tooltip md-direction="botom" md-autohide="false">{{'Edit history' | translate}}</md-tooltip>
                                         <i class="material-icons">content_paste</i>
                                     </a>
                                     <a href="#" ng-click="modalNoteSave($event, backLogNote._id)"
                                        class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
-                                        <md-tooltip md-direction="botom" md-autohide="false">Edit task</md-tooltip>
+                                        <md-tooltip md-direction="botom" md-autohide="false">{{'Edit task' | translate}}</md-tooltip>
                                         <i class="material-icons">mode_edit</i>
                                     </a>
                                     <a href="#" ng-click="modalNoteView($event, backLogNote._id)"
                                        class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
-                                        <md-tooltip md-direction="botom" md-autohide="false">Visualize</md-tooltip>
+                                        <md-tooltip md-direction="botom" md-autohide="false">{{'Visualize' | translate}}</md-tooltip>
                                         <i class="material-icons">search</i>
                                     </a>
                                 </div>
@@ -363,22 +363,22 @@
                                 <div class="card-action" layout="row" style="padding: 0px;text-align: center;display: inherit;">
                                     <a href="#" ng-click="vm.noteTrash(backLogNote._id)"
                                        class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal; height: 30px; width: 30px; color: #757575;">
-                                        <md-tooltip md-direction="botom" md-autohide="false">Delete task</md-tooltip>
+                                        <md-tooltip md-direction="botom" md-autohide="false">{{'Delete task'| translate}}</md-tooltip>
                                         <i class="material-icons">delete</i>
                                     </a>
                                     <a href="#" ng-click="modalStorySave($event, backLogNote.story._id)"
                                        class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
-                                        <md-tooltip md-direction="botom" md-autohide="false">Edit history</md-tooltip>
+                                        <md-tooltip md-direction="botom" md-autohide="false">{{'Edit history' | translate}}</md-tooltip>
                                         <i class="material-icons">content_paste</i>
                                     </a>
                                     <a href="#" ng-click="modalNoteSave($event, backLogNote._id)"
                                        class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
-                                        <md-tooltip md-direction="botom" md-autohide="false">Edit task</md-tooltip>
+                                        <md-tooltip md-direction="botom" md-autohide="false">{{'Edit task' | translate}}</md-tooltip>
                                         <i class="material-icons">mode_edit</i>
                                     </a>
                                     <a href="#" ng-click="modalNoteView($event, backLogNote._id)"
                                        class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
-                                        <md-tooltip md-direction="botom" md-autohide="false">Visualize</md-tooltip>
+                                        <md-tooltip md-direction="botom" md-autohide="false">{{'Visualize' | translate}}</md-tooltip>
                                         <i class="material-icons">search</i>
                                     </a>
                                 </div>

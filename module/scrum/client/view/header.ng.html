@@ -18,7 +18,7 @@
                         <!--<li><a href="#" ng-click="toggleContactList()"><i class="material-icons">chat</i></a></li>-->
                         <!--<li><a href="#" data-activates="nav-contact" ng-click="vm.toggleContactList()"><i class="material-icons">question_answer</i></a></li>-->
                         <li>
-                            <md-tooltip md-direction="botom" md-autohide="false">Chat</md-tooltip>
+                            <md-tooltip md-direction="botom" md-autohide="false">{{ 'Chat' | translate }}</md-tooltip>
                             <a href="#" ng-click="showNavContactList()" style="height: 60px;">
                                 <!--<i class="material-icons">question_answer</i>-->
                                 <i class="material-icons">chat</i>
@@ -35,56 +35,65 @@
                             </a>
                         </li>
                         <li>
-                            <md-tooltip md-direction="botom" md-autohide="false">Language</md-tooltip>
-                            <a class="dropdown-button" href="#" data-activates="dropdown1"><i class="material-icons">language</i>
-                            </a>
+                            <md-tooltip md-direction="botom" md-autohide="false">{{ 'Language' | translate }}</md-tooltip>
+                            <md-menu md-offset="15 30">
+                                <a class="md-icon-button" href="#" ng-click="$mdOpenMenu($event)">
+                                    <i class="material-icons">language</i>
+                                </a>
+                                <md-menu-content width="4">
+                                    <md-menu-item>
+                                        <md-button ng-click="vm.setUserLanguage('en-US')"> <span md-menu-align-target>{{ 'English' | translate }}</span></md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-click="vm.setUserLanguage('pt-BR')"> <span md-menu-align-target>{{ 'Portuguese' | translate }}</span></md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
                         </li>
-                        <!-- Dropdown Structure -->
-                        <ul id="dropdown1" class="dropdown-content">
-                            <li><a href="#" onclick="javascript:setUserLanguage('en-US')">English</a></li>
-                            <li><a href="#" onclick="javascript:setUserLanguage('pt-BR')">Portuguese</a></li>
-                        </ul>
                         <!--<li><a href="#" ng-click="showModulesGrid($event)"><i class="material-icons">settings</i></a></li>-->
                         <li>
-                            <md-tooltip md-direction="botom" md-autohide="false">Options</md-tooltip>
+                            <md-tooltip md-direction="botom" md-autohide="false">{{ 'Options' | translate }}</md-tooltip>
                             <a href="#" ng-click="vm.showModulesGrid($event)"><i class="material-icons">view_module</i></a>
                         </li>
                         <!--<li><a href="/user"><i class="material-icons"><i class="material-icons">person</i></i></a></li>-->
                         <li>
-                            <md-tooltip md-direction="botom" md-autohide="true">About this page</md-tooltip>
-                            <a class="dropdown-button" href="#"  ng-click="vm.modalHelpPage($event)"><i class="material-icons">help_outline</i></a>
+                            <md-tooltip md-direction="botom" md-autohide="true">{{ 'About this page' | translate }}</md-tooltip>
+                            <a class="dropdown-button" href="#" ng-click="vm.modalHelpPage($event)"><i
+                                    class="material-icons">help_outline</i></a>
                         </li>
                         <li>
-                            <md-tooltip md-direction="botom" md-autohide="false">Exit</md-tooltip>
+                            <md-tooltip md-direction="botom" md-autohide="false">{{ 'Exit' | translate }}</md-tooltip>
                             <a href="/user/logout" class="logout"><i class="material-icons">power_settings_new</i></a>
                         </li>
                     </div>
                     <div ng-hide="!vm.isGuest">
                         <li>
-                            <md-tooltip md-direction="botom" md-autohide="false">Home</md-tooltip>
+                            <md-tooltip md-direction="botom" md-autohide="false">{{ 'Home' | translate }}</md-tooltip>
                             <a href="/"><i class="material-icons">home</i></a>
                         </li>
                         <!--<li><a class="modal-trigger" href="#modalLogin"><i class="material-icons">person</i></a></li>-->
                         <!--<li><i class="material-icons left">person</i>{{> loginButtons}}</li>-->
                         <li><a href="#" ng-click="vm.modalLogin($event)"><i class="material-icons">person</i></a></li>
                         <li>
-                            <md-tooltip md-direction="botom" md-autohide="false">Language</md-tooltip>
+                            <md-tooltip md-direction="botom" md-autohide="false">{{ 'Language' | translate }}</md-tooltip>
                             <!--<a class="dropdown-button" href="#" data-activates="dropdown1"><i class="material-icons">translate</i>-->
                             <a class="dropdown-button" href="#" data-activates="dropdown1"><i class="material-icons">language</i>
                             </a>
                         </li>
                         <li>
-                            <md-tooltip md-direction="botom" md-autohide="true">About this page</md-tooltip>
-                            <a class="dropdown-button" href="#"  ng-click="vm.modalHelpPage($event)"><i class="material-icons">help_outline</i></a>
+                            <md-tooltip md-direction="botom" md-autohide="true">About this page{{ 'Cancel' | translate }}</md-tooltip>
+                            <a class="dropdown-button" href="#" ng-click="vm.modalHelpPage($event)"><i
+                                    class="material-icons">help_outline</i></a>
                         </li>
                         <!-- Dropdown Structure -->
                         <ul id="dropdown1" class="dropdown-content">
-                            <!--<li><a href="#" onclick="javascript:setUserLanguage('en-US')">{{_ 'English'}} </a></li>-->
-                            <!--<li><a href="#" onclick="javascript:setUserLanguage('pt-BR')">{{_ 'Portuguese'}}</a></li>-->
+                            <li><a href="#" onclick="javascript:setUserLanguage('en-US')">{{ 'English' | translate }}</a></li>
+                            <li><a href="#" onclick="javascript:setUserLanguage('pt-BR')">{{ 'Portuguese' | translate }}</a></li>
                         </ul>
                     </div>
                 </ul>
-                <a href="#" data-activates="nav-mobile" class="button-collapse nav-button-close-left"><i class="material-icons">menu</i></a>
+                <a href="#" data-activates="nav-mobile" class="button-collapse nav-button-close-left"><i
+                        class="material-icons">menu</i></a>
                 <!--<a href="#" data-activates="nav-mobile" class="button-collapse nav-button-left"><i class="material-icons">menu</i></a>-->
                 <!--<a href="#" ng-click="showNavContactList()" class="button-collapse right" ng-hide="!$auth.currentUser">-->
                 <!--<i class="material-icons">chat</i>-->
@@ -145,33 +154,41 @@
         </md-toolbar>
         <li style="height: 63px;"></li>
         <li>
-            <a href="/scrum/product" class="waves-effect waves-orange"><i class="material-icons left">business_center</i>Product</a>
+            <a href="/scrum/product" class="waves-effect waves-orange"><i
+                    class="material-icons left">business_center</i>Product</a>
         </li>
         <li ng-if="vm.sprintId">
-            <a href="#" ng-click="modalSprintChange($event)" class="waves-effect waves-orange"><i class="material-icons left">date_range</i>Change sprint</a>
+            <a href="#" ng-click="modalSprintChange($event)" class="waves-effect waves-orange"><i
+                    class="material-icons left">date_range</i>Change sprint</a>
         </li>
         <li ng-if="vm.sprintId">
-            <a href="/scrum/burndown/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons left">equalizer</i>Burndown</a>
+            <a href="/scrum/burndown/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i
+                    class="material-icons left">equalizer</i>Burndown</a>
         </li>
         <li ng-if="vm.sprintId">
-            <a href="/scrum/kanban/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons left">view_column</i>Kanban</a>
+            <a href="/scrum/kanban/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i
+                    class="material-icons left">view_column</i>Kanban</a>
         </li>
         <li ng-if="vm.sprintId">
-            <a href="/scrum/backlog/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons left">developer_board</i>Backlog</a>
+            <a href="/scrum/backlog/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i
+                    class="material-icons left">developer_board</i>Backlog</a>
         </li>
         <li ng-if="vm.sprintId">
-            <a href="/scrum/product-team/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons left">group</i>Team</a>
+            <a href="/scrum/product-team/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i
+                    class="material-icons left">group</i>Team</a>
         </li>
         <li ng-if="vm.sprintId">
-            <a href="/scrum/story/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons left">content_paste</i>Story</a>
+            <a href="/scrum/story/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i
+                    class="material-icons left">content_paste</i>Story</a>
         </li>
         <li ng-if="vm.sprintId">
-            <a href="/scrum/status/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons left">style</i>Status</a>
+            <a href="/scrum/status/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i
+                    class="material-icons left">style</i>Status</a>
         </li>
         <li ng-if="vm.sprintId">
-            <a href="/scrum/sprint/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons left">date_range</i>Sprint</a>
+            <a href="/scrum/sprint/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i
+                    class="material-icons left">date_range</i>Sprint</a>
         </li>
-
 
 
         <!--<li><a href="/scrum/team" class="waves-effect waves-orange"><i class="material-icons left">group_work</i>Team</a></li>-->
@@ -184,7 +201,8 @@
         </ul>
         <li><a href="#" ng-click="vm.showModulesGrid($event)" class="waves-effect waves-orange"><i
                 class="material-icons left">view_module</i>Options</a></li>
-        <li><a href="/user/logout" class="waves-effect waves-orange"><i class="material-icons left">power_settings_new</i>Exit</a>
+        <li><a href="/user/logout" class="waves-effect waves-orange"><i
+                class="material-icons left">power_settings_new</i>Exit</a>
         </li>
             <!--{{else}}-->
     </div>

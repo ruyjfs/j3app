@@ -1,13 +1,13 @@
 <div ng-controller="StoryCtrl as vm" flex>
     <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
-            <label>Search</label>
+            <label>{{ 'Search' | translate}}</label>
             <input type="text" ng-model="vm.searchText"/>
         </md-input-container>
         <md-input-container >
-            <md-select ng-model="order" placeholder="Sort Order" >
-                <md-option ng-click="vm.sortChange('1')" value="1">Ascending</md-option>
-                <md-option ng-click="vm.sortChange('-1')" value="-1">Descending</md-option>
+            <md-select ng-model="order" placeholder="{{ 'Sort order' | translate }}" >
+                <md-option ng-click="vm.sortChange('1')" value="1">{{ 'Ascending' | translate}}</md-option>
+                <md-option ng-click="vm.sortChange('-1')" value="-1">{{ 'Descending' | translate}}</md-option>
             </md-select>
         </md-input-container>
     </div>

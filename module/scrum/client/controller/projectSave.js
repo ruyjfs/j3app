@@ -9,9 +9,11 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$reactive', '$
         if (id) {
             //$scope.form = $meteor.object(Project, id, false);
             $scope.form = Project.findOne(id);
+            $scope.action = 'Edit';
         } else {
             $scope.form = {};
             $scope.userId = Meteor.userId();
+            $scope.action = 'Insert';
         }
 
         Meteor.subscribe('team');

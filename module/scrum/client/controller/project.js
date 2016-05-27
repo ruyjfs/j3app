@@ -63,9 +63,6 @@ angular.module('scrum').controller('ProjectCtrl', ['$scope', '$mdDialog', '$mdSi
                             }
                             //$rootScope.titleMiddle = result.dateStart + ' - ' + result.dateEnd + ' (' + result.number + ')';
 
-                            if ($stateParams.sprintId == 1 || $stateParams.sprintId == '') {
-                                $state.go('scrum/productkanban', {id: $stateParams.id, sprintId: result._id})
-                            }
                             sprint = result;
                             //console.info(result);
                         });

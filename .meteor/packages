@@ -16,7 +16,7 @@ es5-shim                # ECMAScript 5 compatibility for older browsers.
 accounts-ui
 service-configuration
 angular
-angular:angular-material@=1.0.6
+angular:angular-material
 angularui:angular-ui-router
 accounts-password
 urigo:angular-blaze-template
@@ -40,3 +40,4 @@ mfpierre:chartist-js
 brentjanderson:buzz
 mizzao:user-status
 jparker:crypto-md5
+planettraining:angular-translate

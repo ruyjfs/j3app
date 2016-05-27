@@ -18,8 +18,10 @@ angular.module('scrum').controller('SprintSaveCtrl', [ '$scope', '$mdDialog', 'i
             if (typeof($scope.form.dateEnd) === 'string') {
                 $scope.form.dateEnd = new Date(moment($scope.form.dateEnd, 'x').format());
             }
+            $scope.action = 'Edit';
         } else {
             $scope.form = {};
+            $scope.action = 'Insert';
         }
         $scope.form.projectId = $stateParams.id;
 

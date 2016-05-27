@@ -8,9 +8,11 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id'
         if (id) {
             $scope.form = Note.findOne(id);
             $scope.projectIdOld = $scope.form.projectId;
+            $scope.action = 'Edit';
         } else {
             $scope.form.projectId = $stateParams.id;
             $scope.form.time = 1;
+            $scope.action = 'Insert';
         }
 
         if (storyId) {

@@ -3,9 +3,11 @@ angular.module('scrum').controller('StorySaveCtrl', [ '$scope', '$mdDialog', 'id
 
         if (id) {
             $scope.form = Story.findOne(id);
+            $scope.action = 'Edit';
         } else {
             $scope.form = {};
             $scope.form.color = '#000000';
+            $scope.action = 'Insert';
         }
         $scope.form.projectId = $stateParams.id;
 

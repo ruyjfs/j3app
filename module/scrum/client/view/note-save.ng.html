@@ -9,24 +9,24 @@
         <md-dialog-content style="min-width:400px;max-width:800px;max-height:810px; ">
             <div  ng-show="$root.currentUser">
                 <md-input-container class="md-block">
-                    <label>Product</label>
-                    <md-select ng-model="form.projectId" id="owner" aria-label="Owner"  placeholder="Product" required>
+                    <label>{{'Product' | translate}}</label>
+                    <md-select ng-model="form.projectId" id="owner" aria-label="{{'Product' | translate}}"  placeholder="{{'Product' | translate}}" required>
                         <md-option  ng-repeat="project in projects" value="{{project._id}}">
                             {{project.name}}
                         </md-option>
                     </md-select>
                 </md-input-container>
                 <md-input-container class="md-block">
-                    <label>Story</label>
-                    <md-select ng-model="form.story" id="story" aria-label="Story"  placeholder="Story" required>
+                    <label>{{'Story' | translate}}</label>
+                    <md-select ng-model="form.story" id="story" aria-label="{{'Story' | translate}}"  placeholder="{{'Story' | translate}}" required>
                         <md-option  ng-repeat="story in stories" value="{{story._id}}">
                             {{story.name}}
                         </md-option>
                     </md-select>
                 </md-input-container>
                 <md-input-container class="md-block">
-                    <label>Owner</label>
-                    <md-select ng-model="form.owner" id="owner" aria-label="Owner"  placeholder="Owner" required>
+                    <label>{{'Owner' | translate}}</label>
+                    <md-select ng-model="form.owner" id="owner" aria-label="{{'Owner' | translate}}"  placeholder="{{'Owner' | translate}}" required>
                         <md-option  ng-repeat="member in members" value="{{member._id}}">
                             {{member.name}} {{member.lastName}}
                         </md-option>
@@ -34,7 +34,7 @@
                 </md-input-container>
                 <div layout>
                     <div flex="15" layout layout-align="center center">
-                        <span class="md-body-1">Time</span>
+                        <span class="md-body-1">{{'Time' | translate}}</span>
                     </div>
                     <md-slider ng-model="form.time" id="time-slider" flex md-discrete step="1" min="1" max="18" aria-label="Time"></md-slider>
                     <div flex="10" layout layout-align="center center">
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <md-input-container class="md-block">
-                    <label>Description</label>
+                    <label>{{'Description' | translate}}</label>
                     <textarea ng-model="form.description" id="description" aria-label="Description"></textarea>
                 </md-input-container>
                 <!--<md-checkbox ng-model="newParty.public" id="public" aria-label="Public">-->
@@ -54,10 +54,10 @@
     <md-dialog-actions layout="row">
         <span flex></span>
         <button class="btn white waves-effect waves-orange hoverable" type="button" ng-click="close()">
-            Cancel
+            {{'Cancel' | translate}}
         </button>
         <button class="btn orange darken-3 waves-effect waves-light hoverable" type="button" ng-click="save()">
-            Save
+            {{action | translate}}
         </button>
     </md-dialog-actions>
 </md-dialog>

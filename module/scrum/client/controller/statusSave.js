@@ -4,8 +4,10 @@ angular.module('scrum').controller('StatusSaveCtrl', [ '$scope', '$mdDialog', 'i
     function ($scope, $mdDialog, id, $stateParams) {
         if (id) {
             $scope.form = Status.findOne(id);
+            $scope.action = 'Edit';
         } else {
             $scope.form = {};
+            $scope.action = 'Insert';
         }
         $scope.form.projectId = $stateParams.id;
 
