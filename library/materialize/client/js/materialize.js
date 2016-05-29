@@ -3855,8 +3855,8 @@ $(document).ready(function(){
 
               if (windowScroll > (elementOffset + offset)) {
                 if (value.done !== true) {
-                  var callbackFunc = new Function(callback);
-                  callbackFunc();
+                  //var callbackFunc = new Function(callback);
+                    callback();
                   value.done = true;
                 }
               }
@@ -3866,7 +3866,7 @@ $(document).ready(function(){
     }, 100);
   };
 
-})(jQuery);;/*!
+})(jQuery);/*!
  * pickadate.js v3.5.0, 2014/04/13
  * By Amsul, http://amsul.ca
  * Hosted on http://amsul.github.io/pickadate.js

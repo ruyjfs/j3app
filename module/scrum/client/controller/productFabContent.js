@@ -2,6 +2,7 @@
 //    function($scope, $stateParams, $meteor){
 angular.module('scrum').controller('ProductFabContentCtrl', ['$scope', '$mdDialog', '$stateParams', '$reactive', '$state', '$timeout', '$rootScope',
     function ($scope, $mdDialog, $stateParams, $reactive, $state, $timeout, $rootScope) {
+        $('#logo-middle').show();
         $reactive(this).attach($scope);
 
         $scope.modalNoteSave = function (ev, id, storyId) {

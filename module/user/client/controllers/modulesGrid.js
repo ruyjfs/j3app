@@ -33,6 +33,9 @@ angular.module("user").controller("ModulesGridCtrl", ['$scope', '$state', '$mdDi
             $state.go($link);
             var clickedItem = $scope.items[$index];
             $mdBottomSheet.hide(clickedItem);
+            $('.brand-logo').removeClass('animated flip').hide().show().addClass('animated flip');
+            $('#logo-middle').hide();
+            titleMiddle = '';
         };
     }
 ]);

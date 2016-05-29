@@ -1,5 +1,5 @@
-angular.module("user").controller("LoginCtrl", ['$meteor', '$state',
-    function ($meteor, $state) {
+angular.module("user").controller("LoginCtrl", ['$state',
+    function ($state) {
         var vm = this;
 
         vm.credentials = {

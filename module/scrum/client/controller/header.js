@@ -7,6 +7,12 @@ angular.module('scrum').controller('HeaderCtrl',
         $reactive(this).attach($scope);
 
         this.setUserLanguage = function (strLanguage) {
+            if (Meteor.userId()) {
+                objUser = Meteor.users.findOne(Meteor.userId());
+                Meteor.call('userSave', {_id: objUser._id, language: strLanguage}, function (error) {});
+                console.log('salvo');
+                console.log(objUser);
+            }
             $translate.use(strLanguage);
         };
 

@@ -2103,7 +2103,7 @@ img.responsive-img, video.responsive-video {
 .parallax-container {
   position: relative;
   overflow: hidden;
-  height: 500px; }
+  height: 450px; }
 
 .parallax {
   position: absolute;
@@ -5465,6 +5465,7 @@ html {
       font-size: 14.5px; } }
   @media only screen and (min-width: 1200px) {
     html {
+      /*font-size: 18px; } }*/
       font-size: 15px; } }
 
 h1, h2, h3, h4, h5, h6 {

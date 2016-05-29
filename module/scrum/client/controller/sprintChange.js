@@ -83,7 +83,6 @@ angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$rootScope',
         };
 
         $scope.change = function (sprintId) {
-            $mdDialog.hide();
             var link = 'scrum/productkanban';
             param = {};
             param.projectId = $stateParams.id;
@@ -92,10 +91,12 @@ angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$rootScope',
                 if (error) {
                 } else {
                     $scope.form = '';
-                    $mdDialog.hide();
+                    //$mdDialog.hide();
                 }
             });
             $state.go(link, {id: $stateParams.id, sprintId: sprintId});
-        }
+            $('#logo-middle').removeClass('animated flip').hide().show().addClass('animated flip');
+            $mdDialog.hide();
+    }
     }
 ]);
