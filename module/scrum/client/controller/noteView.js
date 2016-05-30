@@ -8,6 +8,11 @@ angular.module('scrum').controller('NoteViewCtrl', [ '$scope', '$mdDialog', 'id'
         if (id) {
             $scope.form = Note.findOne(id);
             $scope.projectIdOld = $scope.form.projectId;
+            if ($scope.form.createdAt) {
+                $scope.form.createdAt = moment($scope.form.createdAt).format('L H[h]m');
+            } else {
+                $scope.form.createdAt = '';
+            }
         } else {
             $scope.form.projectId = $stateParams.id;
             $scope.form.time = 1;

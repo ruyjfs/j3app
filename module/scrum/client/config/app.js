@@ -69,6 +69,7 @@ if (Meteor.isClient) {
 
         'Week': 'Semana',
         'Skip weekend': 'Pular finais de semana',
+        'Created at': 'Criado em',
 
         // Team
         'Time per member': 'Tempo por membro',

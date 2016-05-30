@@ -74,6 +74,40 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     },
                 }
             })
+            .state('scrum/productkanbanprev', {
+                url: '/scrum/productkanbanprev/:id/:sprintId',
+                views: {
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
+                    "header2": {
+                        templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
+                    },
+                    "mainFadeInLeftBig": {
+                        templateUrl: 'module/scrum/client/view/kanban.ng.html',
+                    },
+                    "main2": {
+                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                    },
+                }
+            })
+            .state('scrum/productkanbannext', {
+                url: '/scrum/productkanbannext/:id/:sprintId',
+                views: {
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
+                    "header2": {
+                        templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
+                    },
+                    "mainFadeInRightBig": {
+                        templateUrl: 'module/scrum/client/view/kanban.ng.html',
+                    },
+                    "main2": {
+                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                    },
+                }
+            })
             .state('scrum/kanban', {
                 url: '/scrum/kanban/:id/:sprintId',
                 views: {

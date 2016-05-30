@@ -58,7 +58,7 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
                         sprint.days = moment(sprint.dateEnd).diff(moment(sprint.dateStart), 'days') + 1;
                     }
 
-                    if (project.skipWeekend) {
+                    if (project && project.skipWeekend) {
                         if (typeof(sprint.dateStart) === 'string') {
                             sprint.daysBusiness = moment(sprint.dateEnd, 'x').businessDiff(moment(sprint.dateStart, 'x'), 'days');
                         } else {
@@ -66,7 +66,7 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
                         }
                         sprint.days = sprint.daysBusiness;
                     }
-                    if (project.teams) {
+                    if (project && project.teams) {
                         teams = Team.find({_id: {$in: project.teams}}).fetch().map(function (team) {
                             if (team.members) {
                                 team.members = Meteor.users.find({_id: {$in: team.members}}).fetch();

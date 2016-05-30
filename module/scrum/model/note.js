@@ -25,6 +25,7 @@ Meteor.methods({
             delete form._id;
             Note.update(id, { $set: form});
         } else {
+            form.createdAt = new Date();
             Note.insert(form);
         }
     },

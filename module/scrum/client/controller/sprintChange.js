@@ -1,6 +1,6 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$rootScope', '$mdDialog', '$stateParams', '$reactive', '$state',
+angular.module('scrum').controller('SprintChangeCtrl', ['$scope', '$rootScope', '$mdDialog', '$stateParams', '$reactive', '$state',
     function ($scope, $rootScope, $mdDialog, $stateParams, $reactive, $state) {
         $reactive(this).attach($scope);
         //projectId = $stateParams.id;
@@ -26,7 +26,7 @@ angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$rootScope',
         //});
         this.subscribe('sprint');
         $scope.form = [];
-        $scope.sprints =  Sprint.find({$and: [{projectId: $stateParams.id}]}).map(function(sprint){
+        $scope.sprints = Sprint.find({$and: [{projectId: $stateParams.id}]}).map(function (sprint) {
             if (typeof(sprint.dateStart) === 'string') {
                 sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('L');
             } else {
@@ -97,6 +97,7 @@ angular.module('scrum').controller('SprintChangeCtrl', [ '$scope', '$rootScope',
             $state.go(link, {id: $stateParams.id, sprintId: sprintId});
             $('#logo-middle').removeClass('animated flip').hide().show().addClass('animated flip');
             $mdDialog.hide();
-    }
+            $rootScope.$emit('someEvent', param);
+        }
     }
 ]);

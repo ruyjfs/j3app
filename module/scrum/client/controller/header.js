@@ -2,9 +2,24 @@
 //    function($scope, $stateParams, $meteor){
 angular.module('scrum').controller('HeaderCtrl',
     [
-        '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$reactive', '$mdDialog', '$mdBottomSheet', '$rootScope', '$mdToast', '$translate',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $reactive, $mdDialog, $mdBottomSheet, $rootScope, $mdToast, $translate) {
+        '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$reactive', '$mdDialog', '$mdBottomSheet', '$rootScope', '$mdToast', '$translate', '$state',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $reactive, $mdDialog, $mdBottomSheet, $rootScope, $mdToast, $translate, $state) {
         $reactive(this).attach($scope);
+
+        if ($location.path()) {
+            arrUrl = $location.path().split('/');
+            //console.info(arrUrl);
+            //console.info(arrUrl[1]);
+            //console.info(arrUrl[3]);
+            //console.info(arrUrl[4]);
+            //console.info($location.path());
+            this.id = arrUrl[3];
+            this.sprintId = arrUrl[4];
+        }
+        $rootScope.$on('someEvent', function(event, args) {
+            this.sprintId = args.sprintId;
+            console.log('aee');
+        });
 
         this.setUserLanguage = function (strLanguage) {
             if (Meteor.userId()) {
@@ -35,17 +50,6 @@ angular.module('scrum').controller('HeaderCtrl',
         //        //cordova.plugins.Keyboard.close();
         //    }
         //})
-
-        if ($location.path()) {
-            arrUrl = $location.path().split('/');
-            //console.info(arrUrl);
-            //console.info(arrUrl[1]);
-            //console.info(arrUrl[3]);
-            //console.info(arrUrl[4]);
-            //console.info($location.path());
-            this.id = arrUrl[3];
-            this.sprintId = arrUrl[4];
-        }
 
         //$urlRouterProvider, $stateProvider, $locationProvider
         //console.info(route);
@@ -180,8 +184,45 @@ angular.module('scrum').controller('HeaderCtrl',
             }
         });
 
+        this.subscribe('sprint', function(){return [this.id]});
         this.helpers(
             {
+                sprintIdPrev: function(){
+                    projectId = this.getReactively('id');
+                    sprintId = this.getReactively('sprintId');
+                    sprint = Sprint.findOne({_id: sprintId});
+                    if (sprint) {
+                        sprintPreviousNumber = sprint.number - 1;
+                        sprintPrevious = Sprint.findOne({projectId: projectId, number: sprintPreviousNumber});
+                        if (sprintPrevious) {
+                            sprintIdPrev = sprintPrevious._id;
+                        } else {
+                            $('#titleMiddlePrev').removeClass('fadeInDown').addClass('fadeOutUp');
+                            sprintIdPrev = '';
+                        }
+                    } else {
+                        sprintIdPrev = '';
+                    }
+                    return sprintIdPrev;
+                },
+                sprintIdNext: function(){
+                    projectId = this.getReactively('id');
+                    sprintId = this.getReactively('sprintId');
+                    sprint = Sprint.findOne({_id: sprintId});
+                    if (sprint) {
+                        sprintNextNumber = sprint.number + 1;
+                        sprintNext = Sprint.findOne({projectId: projectId, number: sprintNextNumber});
+                        if (sprintNext) {
+                            sprintIdNext = sprintNext._id;
+                        } else {
+                            $('#titleMiddleNext').removeClass('fadeInDown').addClass('fadeOutUp');
+                            sprintIdNext = '';
+                        }
+                    } else {
+                        sprintIdNext = '';
+                    }
+                    return sprintIdNext;
+                },
                 totalMessagesNotVisualized: function () {
                     user = Meteor.users.find().map(function (user) {
                         user.messagesNotVisualized = Message.find(
@@ -220,6 +261,26 @@ angular.module('scrum').controller('HeaderCtrl',
                 }
             }
         );
+
+        this.goToPrevSprint = function(sprintId){
+            var link = 'scrum/productkanbanprev';
+            param = {};
+            param.id = this.id;
+            param.sprintId = sprintId;
+            this.sprintId = sprintId;
+            $state.go(link, param);
+            $('#logo-middle').removeClass('animated flip fadeInLeft fadeInRight').hide().show().addClass('animated fadeInLeft');
+        };
+        this.goToNextSprint = function(sprintId){
+            var link = 'scrum/productkanbannext';
+            param = {};
+            param.id = this.id;
+            param.sprintId = sprintId;
+            this.sprintId = sprintId;
+            $state.go(link, param);
+            $('#logo-middle').removeClass('animated flip fadeInLeft fadeInRight').hide().show().addClass('animated fadeInRight');
+            $location.path(link+'/' + param.id +'/' + param.sprintId);
+        };
 
         this.title = 'Brotherhood';
         this.redirect = function (route) {

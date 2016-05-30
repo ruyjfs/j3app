@@ -1,7 +1,5 @@
 angular.module("user").controller("ModulesGridCtrl", ['$scope', '$state', '$mdDialog', '$mdBottomSheet',
     function($scope, $state, $mdDialog,  $mdBottomSheet){
-
-        console.log();
         if (Meteor.user().email == 'ruyjfs@gmail.com') {
             $scope.items = [
                 { name: 'Admin', icon: 'tune', link: 'admin'},
@@ -30,6 +28,7 @@ angular.module("user").controller("ModulesGridCtrl", ['$scope', '$state', '$mdDi
 
         }
         $scope.listItemClick = function($index, $link) {
+            titleMiddle = '';
             $state.go($link);
             var clickedItem = $scope.items[$index];
             $mdBottomSheet.hide(clickedItem);

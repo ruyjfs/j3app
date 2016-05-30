@@ -3,9 +3,24 @@
         <nav class="{{themeMaterialize}}" role="navigation">
             <div class="nav-wrapper container">
                 <a id="logo-container" href="#" class="brand-logo animated fadeInDown">{{nameModule}}</a>
-                <p ng-hide="vm.isGuest" id="logo-middle" class="brand-logo animated fadeInDown" style="font-size: 20px; text-align: center;width: 100%;line-height: 25px;">
-                    <a ng-click="modalSprintChange($event)"  href="#">{{titleMiddle}}</a>
-                </p>
+                <ul ng-hide="vm.isGuest" class="center center-align hide-on-med-and-down brand-logo">
+                    <li ng-if="vm.sprintIdPrev && titleMiddle" >
+                        <a id="titleMiddlePrev" class="animated fadeInDown" ng-click="vm.goToPrevSprint(vm.sprintIdPrev)"  href="#"><i class="material-icons">keyboard_arrow_left</i></a>
+                    </li>
+                    <li ng-if="titleMiddle">
+                        <a id="logo-middle" class="animated fadeInDown" ng-click="modalSprintChange($event)"  href="#" style="font-size: 20px;">{{titleMiddle}}</a>
+                    </li>
+                    <li ng-if="vm.sprintIdNext && titleMiddle">
+                        <a id="titleMiddleNext" class="animated fadeInDown" ng-click="vm.goToNextSprint(vm.sprintIdNext)"  href="#"><i class="material-icons">keyboard_arrow_right</i></a>
+                    </li>
+                </ul>
+                <!--<p ng-hide="vm.isGuest" id="logo-middle" class="brand-logo animated fadeInDown row" style="font-size: 20px; text-align: center;width: 100%;line-height: 25px; margin: 0;" layout="row">-->
+                    <!--<a ng-click="modalSprintChange($event)"  href="#"><i class="material-icons">keyboard_arrow_left</i></a>-->
+                <!--</p>-->
+                <!--<p ng-hide="vm.isGuest" id="logo-middle" class="brand-logo animated fadeInDown" style="font-size: 20px; text-align: center;width: 100%;line-height: 25px;">-->
+                    <!--<a ng-click="modalSprintChange($event)"  href="#">{{titleMiddle}}</a>-->
+                    <!--<a ng-click="modalSprintChange($event)"  href="#"><i class="material-icons">keyboard_arrow_right</i></a>-->
+                <!--</p>-->
                 <!--<a id="logo-container" href="#" class="brand-logo">-->
                 <!--<md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>-->
                 <!--</a>-->

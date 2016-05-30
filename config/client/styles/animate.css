@@ -15,7 +15,7 @@
   /*animation-name: bounceOutDown;*/
 /*}*/
 
-.bounce.ng-leave, .fade.ng-leave, .zoom.ng-leave {
+.bounce.ng-leave, .fade.ng-leave, .zoom.ng-leave, .fadeLeftBig, .fadeTightBig {
   -webkit-animation-duration: 0s;
   animation-duration: 0s;
 }
@@ -36,6 +36,18 @@
   animation-duration: 1s;
   -webkit-animation-name: zoomIn;
   animation-name: zoomIn;
+}
+.fadeLeftBig.ng-enter {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-name: fadeInLeftBig;
+  animation-name: fadeInLeftBig;
+}
+.fadeRightBig.ng-enter {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-name: fadeInRightBig;
+  animation-name: fadeInRightBig;
 }
 
 /*!

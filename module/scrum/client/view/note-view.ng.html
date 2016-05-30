@@ -18,8 +18,13 @@
                 <!--</md-select>-->
                 <!--</md-input-container>-->
                 <md-input-container class="md-block">
+                    <!--<label>{{'Description' | translate}}</label>-->
                     {{form.description}}
                 </md-input-container>
+                <!--<label></label>-->
+                <!--<md-input-container class="md-block">-->
+                    <p ng-if="form.createdAt"><b>{{'Created at' | translate}}</b> {{form.createdAt}}</p>
+                <!--</md-input-container>-->
             </div>
         </md-dialog-content>
     </form>
