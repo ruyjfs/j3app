@@ -80,6 +80,9 @@ if (Meteor.isClient) {
         'Insert': 'Inserir',
         'Cancel': 'Cancelar',
         'Description': 'Descrição',
+        'You': 'Você',
+        'Type the message': 'Digite a mensagem',
+        'Send': 'Enviar',
 
         'Name': 'Nome',
         'Last name': 'Sobrenome',

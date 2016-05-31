@@ -148,7 +148,7 @@
                         font-size: 13px;
                         text-align: {{message.side}};
                         display: block;">
-                    {{message.owner}}
+                    {{message.owner | translate}}
                 </p>
                 <p style="line-height: inherit;
                         color:rgba(0,0,0,0.54);
@@ -169,14 +169,14 @@
         <div>
             <form>
                 <md-input-container class="md-block">
-                    <label for="testInput">Enter message...</label>
+                    <label for="testInput">{{'Type the message' | translate}}...</label>
                     <input ng-keydown="typing(this)" ng-model="newMessage.text" id="chatText" type="text" aria-label="Text" class="ui-focus md-autofocus" autocomplete="off">
                     <!--<textarea ng-keyup="typing($event)" ng-model="newMessage.text" id="text" md-autofocus></textarea>-->
                 </md-input-container>
-                <md-input-container class="md-block">
-                    <md-button  type="submit" ng-click="addNewMessage()" class="md-raised md-primary" id="buttonSend">
+                <md-input-container class="md-block" style="padding-left: 0;">
+                    <md-button type="submit" ng-click="addNewMessage()" class="md-raised md-primary" id="buttonSend">
                         <md-icon md-svg-icon="content:ic_send_24px" aria-label="Send"></md-icon>
-                        Send
+                        {{'Send' | translate}}
                     </md-button>
                 </md-input-container>
             </form>
