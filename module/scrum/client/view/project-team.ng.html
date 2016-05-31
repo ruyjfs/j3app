@@ -1,51 +1,51 @@
 <div ng-controller="ProjectTeamCtrl as vm" flex>
-    <md-content class="md-padding" layout-xs="column" layout="row">
-        <div ng-repeat="team in vm.teams">
-            <div class=".md-display-2">
-                {{team.name}}
-            </div>
-            <!--<div flex-xs flex-gt-xs="50" layout="row">-->
-            <div flex-xs layout="row">
-                <!--<md-card ng-repeat="user in team.members" flex-gt-xs="50" class="orange lighten-3 hoverable" style="margin: 10px; width: 250.734px; height: 144px;">-->
-                <md-card ng-repeat="user in team.members" class="orange lighten-3 hoverable" style="margin: 10px; width: 306px; height: 144px;">
-                    <md-card-title>
-                        <md-card-title-media>
-                            <div class="md-media-sm card-media">
-                                <img alt="{{user.name}}" ng-src="{{user.img}}" class="md-avatar md-whiteframe-3dp" style="
-                                        display: block;
-                                        position: absolute;
-                                        padding-top: 0px;
-                                        /*margin-top: 14px;*/
-                                        background-color: {{user.statusColor}};
-                                        border: solid 6px  {{user.statusColor}};
+    <md-content class="md-padding" layout-xs="column" layout="column" ng-repeat="team in vm.teams">
+        <div class=".md-display-2">
+            {{team.name}}
+        </div>
+        <!--<div  layout-gt-sm="row" flex-gt-xs="50">-->
+        <!--<div  layout-gt-sm="row" flex-gt-xs="50">-->
+        <div >
+            <md-card  ng-repeat="user in team.members" class="orange lighten-3 hoverable" style="margin: 10px; min-width: 306px; height: 144px;
+    display: inline-flex;">
+                <md-card-title>
+                    <md-card-title-media>
+                        <div class="md-media-sm card-media">
+                            <img alt="{{user.name}}" ng-src="{{user.img}}" class="md-avatar md-whiteframe-3dp" style="
+                                    display: block;
+                                    position: absolute;
+                                    padding-top: 0px;
+                                    /*margin-top: 14px;*/
+                                    background-color: {{user.statusColor}};
+                                    border: solid 6px  {{user.statusColor}};
 
-                                        width: 60px;
-                                        height: 60px;
-                                        /*margin-top: 4px;*/
-                                        /*width: 40px;*/
-                                        /*height: 40px;*/
-                                        margin-top: 6px;
+                                    width: 60px;
+                                    height: 60px;
+                                    /*margin-top: 4px;*/
+                                    /*width: 40px;*/
+                                    /*height: 40px;*/
+                                    margin-top: 6px;
 
-                                        margin-bottom: 8px;
-                                        /* margin-right: 16px; */
-                                        /* border-radius: 50%; */
-                                        border-radius: 12%;
-                                        box-sizing: content-box;
-                                        "/>
-                            </div>
-                        </md-card-title-media>
-                        <md-card-title-text>
-                            <span class="md-headline" style="color: #FFFFFF;">{{user.nameTreated}}</span>
-                            <!--<span class="md-headline" style="color: #FFFFFF;">-->
-                                <!--<i class="material-icons">star</i>-->
-                                <!--<i class="material-icons">star</i>-->
-                                <!--<i class="material-icons">star</i>-->
-                                <!--<i class="material-icons">star_half</i>-->
-                                <!--<i class="material-icons">star_border</i>-->
-                            <!--</span>-->
-                            <!--<span class="md-headline" style="color: #FFFFFF;">-->
-                                <!--Master-->
-                            <!--</span>-->
+                                    margin-bottom: 8px;
+                                    /* margin-right: 16px; */
+                                    /* border-radius: 50%; */
+                                    border-radius: 12%;
+                                    box-sizing: content-box;
+                                    "/>
+                        </div>
+                    </md-card-title-media>
+                    <md-card-title-text>
+                        <span class="md-headline" style="color: #FFFFFF;">{{user.nameTreated}}</span>
+                        <!--<span class="md-headline" style="color: #FFFFFF;">-->
+                        <!--<i class="material-icons">star</i>-->
+                        <!--<i class="material-icons">star</i>-->
+                        <!--<i class="material-icons">star</i>-->
+                        <!--<i class="material-icons">star_half</i>-->
+                        <!--<i class="material-icons">star_border</i>-->
+                        <!--</span>-->
+                        <!--<span class="md-headline" style="color: #FFFFFF;">-->
+                        <!--Master-->
+                        <!--</span>-->
                             <span class="md-subhead">
                                 <i class="material-icons">star</i>
                                 <i class="material-icons">star</i>
@@ -53,33 +53,32 @@
                                 <i class="material-icons">star_half</i>
                                 <i class="material-icons">star_border</i>
                             </span>
-                            <!--<span class="md-subhead">-->
-                                <!--Master-->
-                            <!--</span>-->
-                        </md-card-title-text>
-                    </md-card-title>
-                    <md-card-actions layout="row" layout-align="end center">
-                        <md-button ng-click="vm.modalNoteUserSprint($event, user.sprintIdPrevious)">
-                            {{user.sprintPrevious.taskRemaining}}/{{user.sprintPrevious.taskTotal}}
-                            <md-tooltip md-direction="bottom" md-autohide="false">
-                                {{ 'Task amount previous sprint (Remaining/Total)' | translate}}
-                            </md-tooltip>
-                        </md-button>
-                        <md-button ng-click="vm.modalNoteUserSprint($event, user.sprintIdCurrent)">
-                            {{user.sprintCurrent.taskRemaining}}/{{user.sprintCurrent.taskTotal}}
-                            <md-tooltip md-direction="bottom" md-autohide="false">
-                                {{ 'Task amount current sprint (Remaining/Total)' | translate}}
-                            </md-tooltip>
-                        </md-button>
-                        <md-button ng-click="vm.modalNoteUserSprint($event, user.sprintIdNext)">
-                            {{user.sprintNext.taskRemaining}}/{{user.sprintNext.taskTotal}}
-                            <md-tooltip md-direction="bottom" md-autohide="false">
-                                {{ 'Task amount next sprint (Remaining/Total)' | translate}}
-                            </md-tooltip>
-                        </md-button>
-                    </md-card-actions>
-                </md-card>
-            </div>
+                        <!--<span class="md-subhead">-->
+                        <!--Master-->
+                        <!--</span>-->
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ng-click="vm.modalNoteUserSprint($event, user.sprintIdPrevious)">
+                        {{user.sprintPrevious.taskRemaining}}/{{user.sprintPrevious.taskTotal}}
+                        <md-tooltip md-direction="bottom" md-autohide="false">
+                            {{ 'Task amount previous sprint (Remaining/Total)' | translate}}
+                        </md-tooltip>
+                    </md-button>
+                    <md-button ng-click="vm.modalNoteUserSprint($event, user.sprintIdCurrent)">
+                        {{user.sprintCurrent.taskRemaining}}/{{user.sprintCurrent.taskTotal}}
+                        <md-tooltip md-direction="bottom" md-autohide="false">
+                            {{ 'Task amount current sprint (Remaining/Total)' | translate}}
+                        </md-tooltip>
+                    </md-button>
+                    <md-button ng-click="vm.modalNoteUserSprint($event, user.sprintIdNext)">
+                        {{user.sprintNext.taskRemaining}}/{{user.sprintNext.taskTotal}}
+                        <md-tooltip md-direction="bottom" md-autohide="false">
+                            {{ 'Task amount next sprint (Remaining/Total)' | translate}}
+                        </md-tooltip>
+                    </md-button>
+                </md-card-actions>
+            </md-card>
         </div>
     </md-content>
 </div>
