@@ -75,6 +75,8 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
                             }
                             return team;
                         });
+                    } else {
+                        teams = [];
                     }
 
                     if (teams) {

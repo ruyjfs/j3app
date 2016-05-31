@@ -6,6 +6,7 @@ angular.module('scrum').controller('HeaderCtrl',
     function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $reactive, $mdDialog, $mdBottomSheet, $rootScope, $mdToast, $translate, $state) {
         $reactive(this).attach($scope);
 
+        this.subscribe('message');
         if ($location.path()) {
             arrUrl = $location.path().split('/');
             //console.info(arrUrl);
