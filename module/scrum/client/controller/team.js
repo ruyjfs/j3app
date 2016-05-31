@@ -10,21 +10,17 @@ angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdUtil
 
         this.searchText = '';
         this.subscribe('team', function(){
-                return [
-                    {
-                        limit: parseInt(this.getReactively('perPage')),
-                        skip: parseInt((this.getReactively('page') - 1) * this.getReactively('perPage')),
-                        sort: this.getReactively('sort')
-                    }, this.getReactively('searchText')
+                return [{}, this.getReactively('searchText')
                 ]
             }
         );
         this.helpers({
             teams: function() {
                 return Team.find({}, {
-                    //limit: parseInt(this.getReactively('perPage')),
-                    //skip: parseInt((this.getReactively('page') - 1) * this.getReactively('perPage')),
-                    sort : this.getReactively('sort')
+
+                    limit: parseInt(this.getReactively('perPage')),
+                    skip: parseInt((this.getReactively('page') - 1) * this.getReactively('perPage')),
+                    sort: this.getReactively('sort')
                 });
             }
         });
