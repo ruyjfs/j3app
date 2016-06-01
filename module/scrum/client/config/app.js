@@ -11,7 +11,7 @@ if (Meteor.isClient) {
         'About this page': 'Sobre esta página',
 
         // Home
-        'SCRUM in an easy, fast and free way that fits in your pocket, to where you are and on any device': 'SCRUM em uma forma fácil, rápida e gratuíta que cabe no seu bolso, a onde você for e em qualquer dispositivo',
+        'SCRUM in an easy, fast and free you take your pocket to wherever you go with any device': 'SCRUM em uma forma fácil, rápida e gratuíta que você leva seu bolso, a onde você for com qualquer dispositivo',
         'In J3scrum you can create tasks, set them by history / category and puts them into a product which is composed of a team': 'No j3scrum você pode criar as suas tarefas, defini-las por história/categoria e coloca-las em um produto, que será composto por uma ou várias equipes',
         'Log in or sing up to access': 'Entre ou se cadastre para ter acesso',
         'Enjoy is free and always will be': 'Aproveite é gratuito e sempre será',

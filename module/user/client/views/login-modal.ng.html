@@ -46,49 +46,35 @@
                 <div ng-show="error" class="md-warn">
                     <small>{{ error }}</small>
                 </div>
-                <form>
-                    <div class="row">
-                        <div class="col s12 m12" layout="column">
-                            <md-input-container>
-                                <label>{{ 'Email' | translate }}</label>
-                                <md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
-                                <input type="text" ng-model="dataForm.email" aria-label="email"/>
-                            </md-input-container>
-                        </div>
-                        <div class="col s12 m6" layout="column">
-                            <md-input-container>
-                                <label>{{ 'Name' | translate }}</label>
-                                <md-icon md-svg-icon="action:ic_face_24px"></md-icon>
-                                <input type="text" ng-model="dataForm.name" aria-label="name"/>
-                            </md-input-container>
-                        </div>
-                        <div class="col s12 m6" layout="column">
-                            <md-input-container>
-                                <label>{{ 'Last name' | translate }}</label>
-                                <md-icon md-svg-icon="action:ic_face_24px"></md-icon>
-                                <input type="text" ng-model="dataForm.lastName" aria-label="lastName"/>
-                            </md-input-container>
-                        </div>
-                        <div class="col s12 m6" layout="column">
-                            <md-input-container>
-                                <label>{{ 'Password' | translate }}</label>
-                                <md-icon md-svg-icon="action:ic_lock_open_24px"></md-icon>
-                                <input type="password" ng-model="dataForm.password" aria-label="password"/>
-                            </md-input-container>
-                        </div>
-                        <div class="col s12 m6" layout="column">
-                            <md-input-container>
-                                <label>{{ 'Confirm password' | translate }}</label>
-                                <md-icon md-svg-icon="action:ic_lock_open_24px"></md-icon>
-                                <input type="password" ng-model="dataForm.confirmPassword" aria-label="confirmPassword"/>
-                            </md-input-container>
-                        </div>
-                        <div class="col s12 m12" layout="column">
-                            <md-button type="submit" class="md-raised md-primary" ng-click="register()" flex>
-                                {{'Create account' | translate}}
-                            </md-button>
-                        </div>
-                    </div>
+                <form layout="column">
+                    <md-input-container>
+                        <label>{{ 'Name' | translate }}</label>
+                        <md-icon md-svg-icon="action:ic_face_24px"></md-icon>
+                        <input type="text" ng-model="dataForm.name" aria-label="name"/>
+                    </md-input-container>
+                    <md-input-container>
+                        <label>{{ 'Last name' | translate }}</label>
+                        <md-icon md-svg-icon="content:ic_face_24px"></md-icon>
+                        <input type="text" ng-model="dataForm.lastName" aria-label="lastName"/>
+                    </md-input-container>
+                    <md-input-container>
+                        <label>{{ 'Email' | translate }}</label>
+                        <md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
+                        <input type="text" ng-model="dataForm.email" aria-label="email"/>
+                    </md-input-container>
+                    <md-input-container>
+                        <label>{{ 'Password' | translate }}</label>
+                        <md-icon md-svg-icon="action:ic_lock_open_24px"></md-icon>
+                        <input type="password" ng-model="dataForm.password" aria-label="password"/>
+                    </md-input-container>
+                    <md-input-container>
+                        <label>{{ 'Confirm password' | translate }}</label>
+                        <md-icon md-svg-icon="action:ic_lock_open_24px"></md-icon>
+                        <input type="password" ng-model="dataForm.confirmPassword" aria-label="confirmPassword"/>
+                    </md-input-container>
+                    <md-button type="submit" class="md-raised md-primary" ng-click="register()" flex>
+                        {{'Create account' | translate}}
+                    </md-button>
                 </form>
             </md-content>
         </md-tab>

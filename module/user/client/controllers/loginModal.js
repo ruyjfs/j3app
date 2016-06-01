@@ -28,14 +28,17 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
         };
 
         $scope.reset = function () {
-            Accounts.forgotPassword($scope.dataForm.email, function(err) {
+            $scope.credentials = {
+                email: $scope.dataForm.email
+            };
+
+
+            Accounts.forgotPassword($scope.credentials, function(err) {
                     if (err) {
-                        //$scope.error = 'Error sending forgot password email - ' + err;
                         Materialize.toast('Error sending forgot password email - ' + err, 4000);
                     } else {
+                        Materialize.toast('Check the link in your email to reset the password.', 4000);
                         $mdDialog.hide();
-                        $state.go('scrum/product');
-
                     }
                 }
             );
