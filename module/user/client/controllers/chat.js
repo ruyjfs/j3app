@@ -8,6 +8,7 @@ angular.module('user').controller('ChatCtrl', [ '$scope', '$timeout', '$mdSidena
             this.teste = 'HAHAHA';
 
             this.subscribe('users');
+            //mongo.findBy({id: '15'})
             user = Meteor.users.findOne(Meteor.userId());
             if (user && user.chat && user.chat.side && user.chat.side == 'left') {
                 chatSide = 'left';

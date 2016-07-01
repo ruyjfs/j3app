@@ -1,6 +1,5 @@
-//if (Meteor.isClient) {
-//  ptBR = {
-////  Menu
+//  Menu
+// {
 //    "Language": "Linguagem",
 //    "Settings": "Configuração",
 //    "Exit": "Sair",
@@ -40,6 +39,4 @@
 //    "Chat": "Bate-papo",
 //    "Login": "Realizar Login",
 //    "Sign up": "Cadastrar",
-//    "Sign in": "Entrar"
-//  }
-//}
+//    "Sign in": "Entrar"}
