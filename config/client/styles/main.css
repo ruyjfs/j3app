@@ -3,6 +3,8 @@ body.md-toast-animating {
     /*background-color: rgba(0,0,0,.04);*/
 }
 
+
+
 /*md-toolbar:not(.md-menu-toolbar){*/
     /*background-color: #212121;*/
 /*}*/
@@ -49,6 +51,7 @@ body {
     min-height: 100vh;
     flex-direction: column;
      background: transparent;
+    width: 100%;
 }
 
 /*i.material-icons{*/
