@@ -3,36 +3,6 @@
         <md-content class="md-padding">
         <form layout="column">
             <md-input-container>
-                <img alt="{{vm.user.name}}" ng-src="{{vm.user.img}}" class="md-avatar md-whiteframe-3dp" style="
-                        display: block;
-                        position: absolute;
-                        padding-top: 0px;
-                        /*margin-top: 14px;*/
-                        background-color: {{vm.user.statusColor}};
-                        border: solid 6px  {{vm.user.statusColor}};
-
-                        width: 60px;
-                        height: 60px;
-                        /*margin-top: 4px;*/
-                        /*width: 40px;*/
-                        /*height: 40px;*/
-                        margin-top: 6px;
-
-                        margin-bottom: 8px;
-                        /* margin-right: 16px; */
-                        /* border-radius: 50%; */
-                        border-radius: 12%;
-                        box-sizing: content-box;
-                        "/>
-            </md-input-container>
-            <br />
-            <br />
-            <br />
-            <span>Troque sua foto pelo site gravatar <a href="http://pt.gravatar.com/" target="_blank" src="">clicando aqui</a>.</span>
-            <span>Gravatar é um lugar onde você centralizar sua foto para que ela fique com você indepedente do site/sistema/aplicativo/jogo que você use.</span>
-            <br />
-            <div flex></div>
-            <md-input-container>
                 <md-icon md-svg-icon="action:ic_face_24px"></md-icon>
                 <input type="text" ng-model="vm.form.name"
                        placeholder="Name" aria-label="name"/>

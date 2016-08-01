@@ -80,13 +80,80 @@
 <main>
     <!--<md-content>-->
         <!--<div ui-view class="fadeIn"></div>-->
-    <div ui-view="main"></div>
-    <div ui-view="mainFade" class="fade"></div>
-    <div ui-view="mainFadeInLeftBig" class="fadeLeftBig"></div>
-    <div ui-view="mainFadeInRightBig" class="fadeRightBig"></div>
-    <div ui-view="mainBounce" class="bounce"></div>
-    <div ui-view="mainZoom" class="zoom"></div>
-    <div ui-view="main2"></div>
+    <div layout="row">
+        <!--<div>-->
+            <!--<div flex>-->
+                <!--<section layout="row" flex>-->
+                <!--<md-sidenav class="md-sidenav-left" md-component-id="left"-->
+                            <!--md-disable-backdrop md-whiteframe="4">-->
+                    <!--<md-toolbar class="md-theme-indigo">-->
+                        <!--<h1 class="md-toolbar-tools">Disabled Backdrop</h1>-->
+                    <!--</md-toolbar>-->
+                    <!--<md-content layout-margin>-->
+                        <!--<p>-->
+                            <!--This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.-->
+                        <!--</p>-->
+                        <!--<md-button ng-click="toggleLeft()" class="md-accent">-->
+                            <!--Close this Sidenav-->
+                        <!--</md-button>-->
+                    <!--</md-content>-->
+                <!--</md-sidenav>-->
+                <!--<md-content flex layout-padding>-->
+                    <!--<div layout="column" layout-align="top center">-->
+                        <!--<p>-->
+                            <!--Developers can also disable the backdrop of the sidenav.<br/>-->
+                            <!--This will disable the functionality to click outside to close the sidenav.-->
+                        <!--</p>-->
+                        <!--<div>-->
+                            <!--<md-button ng-click="toggleLeft()" class="md-raised">-->
+                                <!--Toggle Sidenav-->
+                            <!--</md-button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</md-content>-->
+            <!--</section>-->
+            <!--</div>-->
+            <!--<div>-->
+                <!--<md-sidenav-->
+                        <!--class="md-sidenav-left"-->
+                        <!--md-component-id="left"-->
+                        <!--md-is-locked-open=""-->
+                        <!--md-whiteframe="4">-->
+                    <!--<md-toolbar class="md-theme-indigo">-->
+                        <!--<h1 class="md-toolbar-tools">Sidenav Left</h1>-->
+                    <!--</md-toolbar>-->
+                    <!--<md-content layout-padding >-->
+                        <!--<ul class="column center center side-nav right-aligned" layout="column"       layout-align="center start">-->
+                            <!--<li class="">-->
+                                <!--<md-tooltip md-direction="botom" md-autohide="false"> teste </md-tooltip>-->
+                                <!--<a href="">-->
+                                    <!--<i class="material-icons"></i>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                        <!--<md-button ng-click="close()" class="md-primary" hide-gt-md>-->
+                            <!--Close Sidenav Left-->
+                        <!--</md-button>-->
+                        <!--<p hide show-gt-md>-->
+                            <!--This sidenav is locked open on your device. To go back to the default behavior,-->
+                            <!--narrow your display.-->
+                        <!--</p>-->
+                    <!--</md-content>-->
+                <!--</md-sidenav>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div flex>
+            <md-content flex layout-margin>
+            <div ui-view="main"></div>
+            <div ui-view="mainFade" class="fade"></div>
+            <div ui-view="mainFadeInLeftBig" class="fadeLeftBig"></div>
+            <div ui-view="mainFadeInRightBig" class="fadeRightBig"></div>
+            <div ui-view="mainBounce" class="bounce"></div>
+            <div ui-view="mainZoom" class="zoom"></div>
+            <div ui-view="main2"></div>
+            </md-content>
+        </div>
+    </div>
     <!--</md-content>-->
     <!--<div layout="row" style="min-height: 100%;">-->
         <!--<div layout="column" style="min-height: 100%;">-->
