@@ -59,7 +59,7 @@ angular.module('user').config(['$urlRouterProvider', '$stateProvider', '$locatio
                                      || 'j3game.com'
                                      || 'j3drive.com'
                                 :
-                                    strModule = strDomain;
+                                    strModule = strDomain.replace('.com', '');
                                     break;
                                 default:
                                     strModule = 'brotherhood';
