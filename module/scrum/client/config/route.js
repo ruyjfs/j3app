@@ -290,7 +290,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
             || 'j3tec.com'
             || 'j3drive.com'
             :
-                strModule = strDomain;
+                strModule = strDomain.replace('.com', '');
                 break;
             default:
                 strModule = 'brotherhood';
