@@ -54,11 +54,10 @@ angular.module('user').config(['$urlRouterProvider', '$stateProvider', '$locatio
                         return $meteor.logout().then(function(){
 
                             switch (strDomain) {
-                                case 'localhost'
-                                     || 'j3scrum'
-                                     || 'j3scrum'
-                                     || 'j3game'
-                                     || 'j3drive'
+                                case 'j3scrum.com'
+                                     || 'j3tec.com'
+                                     || 'j3game.com'
+                                     || 'j3drive.com'
                                 :
                                     strModule = strDomain;
                                     break;
