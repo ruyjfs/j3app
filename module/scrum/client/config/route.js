@@ -3,14 +3,13 @@ angular.module("scrum").run(['$rootScope', '$state', function($rootScope, $state
         // We can catch the error thrown when the $requireUser promise is rejected
         // and redirect the user back to the main page
         if (error === 'AUTH_REQUIRED') {
-
-            $state.go('scrum');
+            //$state.go('scrum');
         }
     });
 
-    if (!Meteor.userId() && $state.current.url !== '/scrum') {
-        $state.go('scrum');
-    }
+    //if (!Meteor.userId() && $state.current.url !== '/scrum') {
+    //    $state.go('scrum');
+    //}
 
 }]);
 
@@ -284,11 +283,23 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     },
                 }
             });
-
+        var strDomain = window.location.hostname;
+        switch (strDomain) {
+            case  'j3scrum'
+            || 'j3game'
+            || 'j3drive'
+            :
+                strModule = strDomain;
+                break;
+            default:
+                strModule = 'brotherhood';
+                break;
+        }
         if (Meteor.userId()) {
-            $urlRouterProvider.otherwise("/scrum/product");
+            $urlRouterProvider.otherwise( '/' + strModule + "/product");
         } else {
-            $urlRouterProvider.otherwise("/scrum");
+            console.log(strModule);
+            $urlRouterProvider.otherwise('/' + strModule);
         }
     }
 ]);

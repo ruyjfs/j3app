@@ -6,6 +6,10 @@ angular.module('scrum').controller('HeaderCtrl',
     function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $location, $reactive, $mdDialog, $mdBottomSheet, $rootScope, $mdToast, $translate, $state) {
         $reactive(this).attach($scope);
 
+        if ($rootScope.nameModule === 'j3brotherhood') {
+            $rootScope.nameModule = 'j3rotherhood';
+        }
+
         this.subscribe('message');
         if ($location.path()) {
             arrUrl = $location.path().split('/');

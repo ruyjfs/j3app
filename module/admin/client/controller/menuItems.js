@@ -13,12 +13,12 @@ angular.module('admin').controller('MenuItemsCtrl', [ '$scope', '$timeout', '$md
         //        link: '/brotherhood',
         //    },
         //    {
-        //        name: 'Driver',
-        //        link: '/driver',
+        //        name: 'Drive',
+        //        link: '/drive',
         //    },
         //    {
-        //        name: 'Gamer',
-        //        link: '/gamer',
+        //        name: 'game',
+        //        link: '/game',
         //    },
         //    {
         //        name: 'Scrum',
@@ -51,7 +51,7 @@ angular.module('admin').controller('MenuItemsCtrl', [ '$scope', '$timeout', '$md
             },
             {
                 name: 'Language',
-                //link: '/driver',
+                //link: '/drive',
                 icon: 'language',
             },
             {

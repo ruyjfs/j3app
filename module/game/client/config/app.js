@@ -1,5 +1,5 @@
 if (Meteor.isClient) {
-    angular.module('gamer',[
+    angular.module('game',[
         'angular-meteor',
         'ui.router',
         'angularUtils.directives.dirPagination',
@@ -8,9 +8,9 @@ if (Meteor.isClient) {
     ]);
 
 
-    //angular.module('gamer')
+    //angular.module('game')
     //    .config(function($mdThemingProvider){
-    //        $mdThemingProvider.theme('gamer')
+    //        $mdThemingProvider.theme('game')
     //            .primaryPalette('red', {
     //                'default': '900',
     //            })
@@ -21,7 +21,7 @@ if (Meteor.isClient) {
     //                'default': 'A700',
     //            });
     //
-    //        //$mdThemingProvider.setDefaultTheme('gamer');
+    //        //$mdThemingProvider.setDefaultTheme('game');
     //        //
     //        //$mdThemingProvider.alwaysWatchTheme(true);
     //    });

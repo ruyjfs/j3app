@@ -46,7 +46,6 @@ angular.module("admin").run(['$rootScope', '$state', function($rootScope, $state
     $rootScope.$on("$stateChangeStart",
         function (event, toState) {
             nameModule = toState.name.split('/')[0];
-            $rootScope.nameModule = 'j3' + nameModule;
             switch (nameModule){
                 case 'user' :
                     $rootScope.themeMaterialize = 'orange darken-3';
@@ -60,17 +59,25 @@ angular.module("admin").run(['$rootScope', '$state', function($rootScope, $state
                 case 'scrum' :
                     $rootScope.themeMaterialize = 'brown darken-3';
                     break;
-                case 'gamer' :
+                case 'game' :
                     $rootScope.themeMaterialize = 'red darken-3';
                     break;
-                case 'driver' :
+                case 'drive' :
                     $rootScope.themeMaterialize = 'grey';
+                    break;
+                case 'tec' :
+                    $rootScope.themeMaterialize = 'blue';
                     break;
                 default:
                     $rootScope.themeMaterialize = 'orange darken-3';
                     break;
             }
             setTheme(nameModule);
+            $rootScope.nameModule = 'j3' + nameModule;
+
+            if ($rootScope.nameModule === 'j3brotherhood') {
+                $rootScope.nameModule = 'j3rotherhood';
+            }
         }
     );
 //console.log(nameModule);

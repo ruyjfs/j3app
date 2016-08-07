@@ -1,6 +1,6 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('gamer').controller('HeaderCtrl',
+angular.module('game').controller('HeaderCtrl',
     [
         '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$location', '$reactive', '$mdDialog', '$mdBottomSheet', '$rootScope', '$mdToast',
         '$stateParams', '$state',

@@ -105,6 +105,9 @@ if (Meteor.isClient) {
         'Forgot password?': 'Esqueceu a senha?',
         'Confirm password': 'Confirmar senha',
         'Reset password': 'Resetar senha',
+
+        'Channel': 'Canal',
+        'of': 'do',
     };
 
     angular.module('scrum', [

@@ -85,7 +85,7 @@ angular.module('admin').controller('ToolbarCtrl', [ '$scope', '$timeout', '$mdSi
             },
             {
                 name: 'Language',
-                //link: '/driver',
+                //link: '/drive',
                 icon: 'language',
             },
             {

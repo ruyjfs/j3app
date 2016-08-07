@@ -18,6 +18,13 @@ angular.module('brotherhood').config(['$urlRouterProvider', '$stateProvider', '$
         $stateProvider
             .state('brotherhood', {
                 url: '/brotherhood',
+                resolve: {
+                    paralax: function(){
+                        setTimeout(function(){
+                            $('.parallax').parallax();
+                        }, 200);
+                    }
+                },
                 views: {
                     //"header": {
                     //    templateUrl: $header,

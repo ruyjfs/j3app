@@ -1,5 +1,5 @@
 if (Meteor.isClient) {
-    angular.module('driver',[
+    angular.module('drive',[
         'angular-meteor',
         'ui.router',
         'angularUtils.directives.dirPagination',
@@ -8,9 +8,9 @@ if (Meteor.isClient) {
     ]);
 //
 //
-//    //angular.module('driver')
+//    //angular.module('drive')
 //    //    .config(function($mdThemingProvider){
-//    //        $mdThemingProvider.theme('driver')
+//    //        $mdThemingProvider.theme('drive')
 //    //            .primaryPalette('grey', {
 //    //                'default': '500',
 //    //            })
@@ -21,7 +21,7 @@ if (Meteor.isClient) {
 //    //                'default': 'A700',
 //    //            });
 //    //
-//    //        //$mdThemingProvider.setDefaultTheme('driver');
+//    //        //$mdThemingProvider.setDefaultTheme('drive');
 //    //        //
 //    //        //$mdThemingProvider.alwaysWatchTheme(true);
 //    //    });

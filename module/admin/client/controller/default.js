@@ -11,14 +11,14 @@ angular.module("admin").controller("DefaultAdminCtrl", ['$scope', '$state', '$md
                 'link': '/scrum'
             },
             {
-                'name': 'j3gamer',
+                'name': 'j3game',
                 'description': 'Uma biblioteca incrível de jogos.as asd as dasd asd asd asdasdas dasd as ',
-                'link': '/gamer'
+                'link': '/game'
             },
             {
-                'name': 'j3driver',
+                'name': 'j3drive',
                 'description': 'Saiba tudo sobre o seu futuro carro. as dasd as das d',
-                'link': '/driver'
+                'link': '/drive'
             }
         ];
 

@@ -5,9 +5,10 @@ if (Meteor.isClient) {
             [
                 'user',
                 'admin',
-                'gamer',
-                'driver',
+                'game',
+                'drive',
                 'socially',
+                'tec',
                 'brotherhood',
                 'scrum',
             ]);
@@ -65,7 +66,7 @@ if (Meteor.isClient) {
             });
 
 
-        $mdThemingProvider.theme('driver')
+        $mdThemingProvider.theme('drive')
             .primaryPalette('grey', {
                 'default': '500',
             })
@@ -76,7 +77,7 @@ if (Meteor.isClient) {
                 'default': 'A700',
             });
 
-        $mdThemingProvider.theme('gamer')
+        $mdThemingProvider.theme('game')
             .primaryPalette('red', {
                 'default': '800',
             })
@@ -106,6 +107,17 @@ if (Meteor.isClient) {
                 'default': '900',
             })
             .accentPalette('green', {
+                'default': '700',
+            });
+
+        $mdThemingProvider.theme('tec')
+            .primaryPalette('blue', {
+                'default': '800',
+            })
+            .warnPalette('red', {
+                'default': '900',
+            })
+            .accentPalette('orange', {
                 'default': '700',
             });
 
@@ -146,16 +158,20 @@ if (Meteor.isClient) {
             case 'scrum' :
                 themeMaterialize = 'brown darken-3';
                 break;
-            case 'gamer' :
+            case 'game' :
                 themeMaterialize = 'red darken-3';
                 break;
-            case 'driver' :
+            case 'drive' :
                 themeMaterialize = 'grey';
+                break;
+            case 'tec' :
+                themeMaterialize = 'blue';
                 break;
             default:
                 themeMaterialize = 'orange darken-3';
                 break;
         }
+        console.log(themeMaterialize);
     };
 
     isPermission = function() {
@@ -201,7 +217,7 @@ if (Meteor.isClient) {
     //angular.module('user').config(themeIcons);
     //angular.module('user')
     //    .config(function($mdThemingProvider){
-    //        $mdThemingProvider.theme('driver')
+    //        $mdThemingProvider.theme('drive')
     //            .primaryPalette('grey', {
     //                'default': '500',
     //            })
@@ -212,7 +228,7 @@ if (Meteor.isClient) {
     //                'default': 'A700',
     //            });
     //
-    //        $mdThemingProvider.setDefaultTheme('driver');
+    //        $mdThemingProvider.setDefaultTheme('drive');
     //        //
     //        //$mdThemingProvider.alwaysWatchTheme(true);
     //    });

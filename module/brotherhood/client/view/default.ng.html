@@ -1,16 +1,313 @@
-<div class="container" ng-module="brotherhood" ng-controller="DefaultCtrl">
-    asdadasdas
-    <md-content class="md-padding" ng-repeat="project in projects">
-        <md-card>
-            <!--<img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">-->
-            <md-card-content>
-                <h2 class="md-title">{{project.name}}</h2>
-                <p>{{project.description}}</p>
-            </md-card-content>
-            <div class="md-dialog-actions" layout="row" layout-align="end center">
-                <md-button ng-href="{{project.link}}">Ir</md-button>
+<div ng-module="brotherhood" ng-controller="DefaultCtrl">
+    <!--<div class="container">-->
+    <div class="parallax-container  animated fadeIn">
+        <!--<div class="parallax"><img src="img/38737768-scrum-agile-methodology-software-development-illustration-project-management-Stock-Vector.jpg"></div>-->
+        <div class="parallax">
+            <img src="img/scrum_medicando.jpg">
+            <!--<video preload="auto" loop="loop" id="pretzel-video" class="video-playing" style="width: 100%;" autoplay>-->
+            <!--<source src="https://a0.muscache.com/airbnb/static/P1-background-vid-compressed-2.mp4" type="ty">-->
+            <!--<source src="https://a0.muscache.com/airbnb/static/P1-background-vid-compressed-2.webm" type="video/webm">-->
+            <!--</video>-->
+            <!--<video preload="auto" loop="loop" id="pretzel-video" class="video-playing" style="width: 100%;" autoplay  src="www.youtube.com/watch?v=3bGNuRtlqAQ" type="video/mp4">-->
+            <!--<source src="https://youtu.be/cfO-gaVspyg">-->
+            <!--<source src="https://a0.muscache.com/airbnb/static/P1-background-vid-compressed-2.webm" type="video/webm">-->
+            <!--</video>-->
+            <!--<video preload="auto" loop="loop" id="pretzel-video" class="video-playing" style="width: 100%;" autoplay controls="true">-->
+            <!--<source src="https://youtu.be/cfO-gaVspyg" type="video/mp4" />-->
+            <!--</video>-->
+            <!--<iframe type="text/html"-->
+            <!--width="640"-->
+            <!--height="385"-->
+            <!--src="https://youtu.be/cfO-gaVspyg"-->
+            <!--frameborder="0">-->
+            <!--</iframe>-->
+        </div>
+    </div>
+    <div class="section grey darken-4">
+        <div class="row container">
+            <h1 class="header center orange-text animated fadeInDown">j3rotherhood</h1>
+            <!--<div class="row center">-->
+            <!--<h5 class="header col s12 light" style="color: rgba(255, 255, 255, 0.8);">{{'A modern way and fast of using the agile development methodology SCRUM' | translate}}</h5>-->
+            <!--</div>-->
+            <!--<h2 class="header">Scrum</h2>-->
+            <!--<p class="grey-text text-darken-3 lighten-3">No j3scrum você pode criar o seu próprio produto/projeto, criar o seu time para os produtos/projetos -->
+            <!--cadastrar uma história/categoria para .</p>-->
+            <div class="row center">
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;" class="animated fadeInDown">
+                    {{'SCRUM in an easy, fast and free you take your pocket to wherever you go with any device' | translate}}.
+                </p>
+                <!--<p style="color: rgba(255, 255, 255, 0.8);">-->
+                <!--{{"In J3scrum you can create tasks, set them by history / category and puts them into a product which is composed of a team" | translate}}.-->
+                <!--</p>-->
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;"  class="animated fadeInDown">
+                    {{'Log in or sing up to access' | translate}}.
+                </p>
+
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;" class="animated fadeInDown">
+                    {{'Enjoy is free and always will be' | translate}}!
+                </p>
             </div>
-        </md-card>
-        <br/>
-    </md-content>
+            <div class="row center">
+                <a href="#" ng-click="modalLogin($event)"
+                   class="btn-large waves-effect waves-light orange hoverable modal-trigger animated fadeInDown">
+                    <i class="material-icons left">person</i>
+                    {{'Login or Register' | translate}}
+                </a>
+            </div>
+            <div class="row center animated zoomIn">
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;" class="animated fadeInDown">
+                    {{'With only one account you will have access to all the j3rotherhood offers' | translate}}!
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="parallax-container animated fadeIn">
+        <!--<div class="parallax"><img src="img/44258047-Scrum-project-development-and-managemet-with-presentation-board-illustrated-Stock-Vector.jpg"></div>-->
+        <div class="parallax">
+            <img src="img/scrum_medicando.jpg">
+        </div>
+    </div>
+    <div class="section brown darken-3">
+        <div class="row container">
+            <h1 class="header center orange-text animated fadeInDown">j3scrum</h1>
+            <!--<div class="row center">-->
+            <!--<h5 class="header col s12 light" style="color: rgba(255, 255, 255, 0.8);">{{'A modern way and fast of using the agile development methodology SCRUM' | translate}}</h5>-->
+            <!--</div>-->
+            <!--<h2 class="header">Scrum</h2>-->
+            <!--<p class="grey-text text-darken-3 lighten-3">No j3scrum você pode criar o seu próprio produto/projeto, criar o seu time para os produtos/projetos -->
+            <!--cadastrar uma história/categoria para .</p>-->
+            <div class="row center">
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;" class="animated fadeInDown">
+                    {{'SCRUM in an easy, fast and free you take your pocket to wherever you go with any device' | translate}}.
+                </p>
+                <!--<p style="color: rgba(255, 255, 255, 0.8);">-->
+                <!--{{"In J3scrum you can create tasks, set them by history / category and puts them into a product which is composed of a team" | translate}}.-->
+                <!--</p>-->
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;"  class="animated fadeInDown">
+                    {{'Log in or sing up to access' | translate}}.
+                </p>
+
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;" class="animated fadeInDown">
+                    {{'Enjoy is free and always will be' | translate}}!
+                </p>
+            </div>
+            <div class="row center">
+                <a href="#" ng-click="modalLogin($event)"
+                   class="btn-large waves-effect waves-light orange hoverable modal-trigger animated fadeInDown">
+                    <i class="material-icons left">person</i>
+                    {{'Login or Register' | translate}}
+                </a>
+            </div>
+            <div class="row center animated zoomIn">
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;" class="animated fadeInDown">
+                    {{'With only one account you will have access to all the j3rotherhood offers' | translate}}!
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="parallax-container animated fadeIn">
+        <!--<div class="parallax"><img src="img/44258047-Scrum-project-development-and-managemet-with-presentation-board-illustrated-Stock-Vector.jpg"></div>-->
+        <div class="parallax">
+            <img src="img/scrum_medicando.jpg">
+        </div>
+    </div>
+    <div class="section red darken-3">
+        <div class="row container">
+            <h1 class="header center orange-text animated fadeInDown">j3game</h1>
+            <!--<div class="row center">-->
+            <!--<h5 class="header col s12 light" style="color: rgba(255, 255, 255, 0.8);">{{'A modern way and fast of using the agile development methodology SCRUM' | translate}}</h5>-->
+            <!--</div>-->
+            <!--<h2 class="header">Scrum</h2>-->
+            <!--<p class="grey-text text-darken-3 lighten-3">No j3scrum você pode criar o seu próprio produto/projeto, criar o seu time para os produtos/projetos -->
+            <!--cadastrar uma história/categoria para .</p>-->
+            <div class="row center">
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;" class="animated fadeInDown">
+                    {{'SCRUM in an easy, fast and free you take your pocket to wherever you go with any device' | translate}}.
+                </p>
+                <!--<p style="color: rgba(255, 255, 255, 0.8);">-->
+                <!--{{"In J3scrum you can create tasks, set them by history / category and puts them into a product which is composed of a team" | translate}}.-->
+                <!--</p>-->
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;"  class="animated fadeInDown">
+                    {{'Log in or sing up to access' | translate}}.
+                </p>
+
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;" class="animated fadeInDown">
+                    {{'Enjoy is free and always will be' | translate}}!
+                </p>
+            </div>
+            <div class="row center">
+                <a href="#" ng-click="modalLogin($event)"
+                   class="btn-large waves-effect waves-light orange hoverable modal-trigger animated fadeInDown">
+                    <i class="material-icons left">person</i>
+                    {{'Login or Register' | translate}}
+                </a>
+            </div>
+            <div class="row center animated zoomIn">
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;" class="animated fadeInDown">
+                    {{'With only one account you will have access to all the j3rotherhood offers' | translate}}!
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="parallax-container animated fadeIn">
+        <!--<div class="parallax"><img src="img/44258047-Scrum-project-development-and-managemet-with-presentation-board-illustrated-Stock-Vector.jpg"></div>-->
+        <div class="parallax">
+            <img src="img/scrum_medicando.jpg">
+        </div>
+    </div>
+    <div class="section blue darken-3">
+        <div class="row container">
+            <h1 class="header center orange-text animated fadeInDown">j3tec</h1>
+            <!--<div class="row center">-->
+            <!--<h5 class="header col s12 light" style="color: rgba(255, 255, 255, 0.8);">{{'A modern way and fast of using the agile development methodology SCRUM' | translate}}</h5>-->
+            <!--</div>-->
+            <!--<h2 class="header">Scrum</h2>-->
+            <!--<p class="grey-text text-darken-3 lighten-3">No j3scrum você pode criar o seu próprio produto/projeto, criar o seu time para os produtos/projetos -->
+            <!--cadastrar uma história/categoria para .</p>-->
+            <div class="row center">
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;" class="animated fadeInDown">
+                    {{'Canal de tecnologia da informação' | translate}}.
+                </p>
+            </div>
+            <div class="row center">
+                <!--<a href="#" ng-click="modalLogin($event)"-->
+                   <!--class="btn-large waves-effect waves-light orange hoverable modal-trigger animated fadeInDown">-->
+                    <!--<i class="material-icons left">person</i>-->
+                    <!--{{'Login or Register' | translate}}-->
+                <!--</a>-->
+            </div>
+            <div class="row center animated zoomIn">
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;" class="animated fadeInDown">
+                    {{'With only one account you will have access to all the j3rotherhood offers' | translate}}!
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="parallax-container animated fadeIn">
+        <!--<div class="parallax"><img src="img/44258047-Scrum-project-development-and-managemet-with-presentation-board-illustrated-Stock-Vector.jpg"></div>-->
+        <div class="parallax">
+            <img src="img/scrum_medicando.jpg">
+        </div>
+    </div>
+    <div class="section brown darken-4 description3" style="min-height: 380px;">
+        <div class="row container">
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center orange-text accent-3 description3Icon"><i class="material-icons">flash_on</i></h2>
+                    <h5 class="center white-text description3Title">{{'Agility and flexibility' | translate}}</h5>
+                    <p class="listDescription " style="color: rgba(255, 255, 255, 0.8);font-size: 18px;">We did most of the heavy lifting for you to provide a
+                        default stylings that incorporate our custom components. Additionally, we refined animations and
+                        transitions to provide a smoother experience for developers.</p>
+                </div>
+            </div>
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center orange-text accent-3 description3Icon"><i class="material-icons">group</i></h2>
+                    <h5 class="center white-text description3Title">{{'Transparency and a team focused' | translate}}</h5>
+
+                    <p class="listDescription" style="color: rgba(255, 255, 255, 0.8);font-size: 18px;">By utilizing elements and principles of Material Design, we
+                        were able to create a framework that incorporates components and animations that provide more
+                        feedback to users. Additionally, a single underlying responsive system across all platforms allow
+                        for a more unified user experience.</p>
+                </div>
+            </div>
+
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center orange-text accent-3 description3Icon"><i class="material-icons">settings</i></h2>
+                    <h5 class="center white-text description3Title">{{'Easy to work with' | translate}}</h5>
+
+                    <p class="listDescription" style="color: rgba(255, 255, 255, 0.8);font-size: 18px;">We have provided detailed documentation as well as specific
+                        code examples to help new users get started. We are also always open to feedback and can answer any
+                        questions a user may have about Materialize.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="parallax-container animated fadeIn">
+        <!--<div class="parallax"><img src="img/44258047-Scrum-project-development-and-managemet-with-presentation-board-illustrated-Stock-Vector.jpg"></div>-->
+        <div class="parallax">
+            <img src="img/scrum_medicando.jpg">
+            <!--<video class="videoScrum" loop="loop" style="width: 100%;height: 600px; background-color: #737373;">-->
+            <!--<source src="video/scrum_animation.mp4" type="video/mp4">-->
+            <!--</video>-->
+        </div>
+    </div>
+    <div class="section brown darken-4 description4" style="min-height: 400px">
+        <div class="row container">
+            <div class="col s12 m12">
+                <h5 class="center white-text listDescription4">{{'On the methodology' | translate}}</h5>
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;" class="listDescription4">
+                    {{'Scrum is an agile method for management and planning software projects' | translate}}.
+                </p>
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;" class="listDescription4">
+                    {{'In Scrum, projects are divided into cycles (typically monthly) called Sprints. Sprint represents a Box Time within which a set of activities to be executed. Agile software development is iterative, the work is divided into iterations, which are Sprint calls when Scrum' | translate}}.
+                </p>
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;" class="listDescription4">
+                    {{'The features to be implemented in a project are kept in a list which is known as Product Backlog. At the beginning of each sprint, it is a Sprint Planning Meeting, ie a planning meeting in which the Product Owner prioritizes the Product Backlog items and the team selects the activities she will be able to implement during the Sprint begins . The tasks allocated on a Sprint are transferred from the Product Backlog to the Sprint Backlog' | translate}}.
+                </p>
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;" class="listDescription4">
+                    {{'Every day of a sprint, the team makes a brief meeting (usually in the morning), called Daily Scrum. The aim is to disseminate knowledge about what was done the day before, identify impediments and prioritize the day\'s work begins' | translate}}.
+                </p>
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;" class="listDescription4">
+                    {{'At the end of a sprint, the team has the features implemented in a Sprint Review Meeting' | translate}}.
+                </p>
+                <p style="color: rgba(255, 255, 255, 0.8);font-size: 18px;" class="listDescription4">
+                    {{'Finally, it is a Sprint Retrospective and the team of planning the next sprint' | translate}}.
+                </p>
+            </div>
+        </div>
+    </div>
+    <style>
+        .listDescription, .description3Icon, .description3Title, .listDescription4{
+            display: none;
+        }
+    </style>
+    <script>
+
+        //    var options = [ {selector: '.videoScrum', offset: 50, callback: function() { Materialize.toast("This is our ScrollFire Demo!", 1500 ); } } ];
+        //    Materialize.scrollFire(options);
+
+        //    var elementOffset = $('.videoScrum')[0].getBoundingClientRect().top + window.pageYOffset;
+        //    console.log(window.pageYOffset);
+
+        var options = [
+            {
+                selector: '.videoScrum',
+                offset: 350,
+                callback: function(){
+                    $('.videoScrum')[0].load();
+                    $('.videoScrum')[0].play();
+                    console.log('aee 1');
+                }
+            },
+            {
+                selector: '.description3',
+                offset: 400,
+                callback: function(){
+                    $('.listDescription').hide().show().removeClass('fadeInDown').addClass('animated fadeInDown');
+                    $('.description3Icon').hide().show().removeClass('fadeInDown').addClass('animated fadeInDown');
+                    $('.description3Title').hide().show().removeClass('fadeInDown').addClass('animated fadeInDown');
+                }
+            },
+            {
+                selector: '.description4',
+                offset: 200,
+                callback: function(){
+                    $('.listDescription4').hide().show().removeClass('fadeInDown').addClass('animated fadeInDown');
+                }
+            }
+        ];
+        Materialize.scrollFire(options);
+    </script>
+    <!--<div class="parallax-container">-->
+    <!--<div class="parallax"><img src="img/44520803-Scrum-agile-board-with-scrum-board-agile-and-workspace-Stock-Vector.jpg"></div>-->
+    <!--<div class="parallax"><img src="img/38752664-scrum-board-agile-methodology-software-development-illustration-project-management-Stock-Vector.jpg"></div>-->
+    <!--<div class="parallax"><img src="img/scrum_medicando.jpg"></div>-->
+    <!--<div class="parallax"><img src="img/38752668-scrum-agile-methodology-software-development-illustration-burn-down-project-management-Stock-Vector.jpg"></div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--Modal Struct-->
+    <div id="modalLogin" class="modal modal-fixed-footer">
+    </div>
 </div>

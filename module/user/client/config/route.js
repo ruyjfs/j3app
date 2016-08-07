@@ -2,6 +2,9 @@ angular.module('user').config(['$urlRouterProvider', '$stateProvider', '$locatio
     function($urlRouterProvider, $stateProvider, $locationProvider){
         $locationProvider.html5Mode(true);
 
+        //$urlRouterProvider.otherwise("/user");
+        strDomain = window.location.hostname;
+
         //var $header = 'module/admin/client/view/toolbar.ng.html';
         var $header = 'module/user/client/views/header.ng.html';
         var $footer = 'module/user/client/views/footer.ng.html';
@@ -49,8 +52,23 @@ angular.module('user').config(['$urlRouterProvider', '$stateProvider', '$locatio
                 resolve: {
                     "logout": ['$meteor', '$state', function($meteor, $state) {
                         return $meteor.logout().then(function(){
+
+                            switch (strDomain) {
+                                case 'localhost'
+                                     || 'j3scrum'
+                                     || 'j3scrum'
+                                     || 'j3game'
+                                     || 'j3drive'
+                                :
+                                    strModule = strDomain;
+                                    break;
+                                default:
+                                    strModule = 'brotherhood';
+                                    break;
+                            }
+
                             //$state.go('parties');
-                            $state.go('scrum').then(function() {
+                            $state.go(strModule).then(function() {
                                 // Get in a spaceship and fly to Jupiter, or whatever your callback does.
                                 $('.parallax').parallax();
                             });
@@ -61,7 +79,11 @@ angular.module('user').config(['$urlRouterProvider', '$stateProvider', '$locatio
                 }
             });
 
-        $urlRouterProvider.otherwise("/user");
+        //if (Meteor.userId()) {
+        //    $urlRouterProvider.otherwise("/user");
+        //} else {
+        //    $urlRouterProvider.otherwise("/user");
+        //}
     }
 ]);
 
