@@ -285,12 +285,17 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
             });
         var strDomain = window.location.hostname;
         switch (strDomain) {
-            case  'j3scrum.com'
-            || 'j3game.com'
-            || 'j3tec.com'
-            || 'j3drive.com'
-            :
-                strModule = strDomain.replace('.com', '');
+            case  'j3scrum.com':
+                strModule = 'scrum';
+                break;
+            case  'j3game.com':
+                strModule = 'game';
+                break;
+            case  'j3tec.com':
+                strModule = 'tec';
+                break;
+            case  'j3drive.com':
+                strModule = 'drive';
                 break;
             default:
                 strModule = 'brotherhood';
