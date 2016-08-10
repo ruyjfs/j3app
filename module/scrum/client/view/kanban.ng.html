@@ -1,143 +1,155 @@
 <div ng-controller="KanbanCtrl as vm" flex>
     <md-content class="md-padding">
         <!--<md-button ng-click="showCustomToast()" class="md-raised" style="padding-left: 10px;padding-right: 10px;">-->
-            <!--Show Custom Toast-->
+        <!--Show Custom Toast-->
         <!--</md-button>-->
         <!--<md-content>-->
         <table id="scrumy-board" cellspacing="0" class="live scrum" style="min-height: 300px;">
             <tbody id="scrumy-board-body">
 
             <section>
-            <md-subheader class="md-primary">
-                <tr id="scrumy-board-header" style="position: relative; text-align: center;">
-                    <th id="story-header" style="text-align: center;">
-                        <span>{{ 'Story' | translate}}</span>
-                    </th>
-                    <th id="plus-header">
-                    </th>
-                    <th class="plus-header" ng-repeat="status in vm.states">
-                        <span>{{ status.name | translate}}</span> <br>
-                        <a href="#" class="select-all" style="display: none">{{ 'Select All' | translate}}</a>
-                    </th>
-                </tr>
-            </md-subheader>
-            <tr class="story-task-row" ng-repeat="story in vm.stories">
-                <td rowspan="" id="story-915989-title" class="stories">
-                    <div id="story_editor_915989">
-                        <div class="story-handle">
+                <!--<md-subheader class="md-primary">-->
+                    <!--<tr id="scrumy-board-header" style="position: relative; text-align: center;">-->
+                        <!--<th id="story-header" style="text-align: center;">-->
+                            <!--<span>{{ 'Story' | translate}}</span>-->
+                        <!--</th>-->
+                        <!--<th id="plus-header">-->
+                        <!--</th>-->
+                        <!--<th class="plus-header" ng-repeat="status in vm.states">-->
+                            <!--<span>{{ status.name | translate}}</span> <br>-->
+                            <!--<a href="#" class="select-all" style="display: none">{{ 'Select All' | translate}}</a>-->
+                        <!--</th>-->
+                    <!--</tr>-->
+                <!--</md-subheader>-->
+                <tr class="story-task-row" ng-repeat="story in vm.stories">
+                    <td rowspan="" id="story-915989-title" class="stories">
+                        <div id="story_editor_915989">
+                            <div class="story-handle">
                                 <span class="title">
                                     {{story.name}}
                                 </span>
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td class="verify centered" style="display: grid; vertical-align: middle;">
-                    <md-button class="md-fab md-mini hoverable" aria-label="Edit"
-                               ng-click="modalNoteSave($event, '', story._id)">
-                        <md-tooltip md-direction="left">Add task</md-tooltip>
-                        <md-icon md-svg-icon="content:ic_add_24px" aria-label="Edit"></md-icon>
-                        <!--<i title="" class="material-icons ng-scope">add</i>-->
-                    </md-button>
-                </td>
-                <td data-sortable-row="{{story._id}}" data-statusId="{{status._id}}" class="status_1 containerStatus"
-                    sprintid="" sprinthorasgastas="" sprinthoras="" ng-repeat="status in story.states">
-                    <!--{{status._id}}-->
-                    <div data-sortable-row="{{story._id}}" data-noteId="{{note._id}}"
-                         class="card hoverable containerNote"
-                         style="background-color: {{story.color}}; width: 120px; height: 90px; float: left; margin: 10px;  line-height: 1.2; cursor: move;"
-                         ng-repeat="note in status.notes">
-                        <div class="card-content white-text note">
-                            <md-button ng-if="note.time" class="md-fab md-mini hoverable alertNoteMini"
-                                       aria-label="Time">
-                                {{note.time}}h
-                            </md-button>
+                    </td>
+                    <td class="verify centered" style="display: grid; vertical-align: middle;">
+                        <md-button class="md-fab md-mini hoverable" aria-label="Edit"
+                                   ng-click="modalNoteSave($event, '', story._id)">
+                            <md-tooltip md-direction="left">Add task</md-tooltip>
+                            <md-icon md-svg-icon="content:ic_add_24px" aria-label="Edit"></md-icon>
+                            <!--<i title="" class="material-icons ng-scope">add</i>-->
+                        </md-button>
+                    </td>
+                    <td data-sortable-row="{{story._id}}" data-statusId="{{status._id}}"
+                        class="status_1 containerStatus"
+                        sprintid="" sprinthorasgastas="" sprinthoras="" ng-repeat="status in story.states">
+                        <!--{{status._id}}-->
+                        <div data-sortable-row="{{story._id}}" data-noteId="{{note._id}}"
+                             class="card hoverable containerNote"
+                             style="background-color: {{story.color}}; width: 120px; height: 90px; float: left; margin: 10px;  line-height: 1.2; cursor: move;"
+                             ng-repeat="note in status.notes">
+                            <div class="card-content white-text note">
+                                <md-button ng-if="note.time" class="md-fab md-mini hoverable alertNoteMini"
+                                           aria-label="Time">
+                                    {{note.time}}h
+                                </md-button>
                             <span class="note-notHandle text-darken-4">{{note.owner.name}}
                                 <i class=" activator material-icons right" style="">more_vert</i>
                             </span>
-                            <p>{{note.description}}</p>
-                            <p></p>
-                        </div>
-                        <div class="card-reveal" layout="row" style="padding: 0px;" layout-align="end end">
-                            <div style="height: 25px;">
-                                <!--<span class="card-title grey-text text-darken-4">{{note.story.name}}<i class="material-icons right">close</i></span>-->
+
+                                <p>{{note.description}}</p>
+
+                                <p></p>
+                            </div>
+                            <div class="card-reveal" layout="row" style="padding: 0px;" layout-align="end end">
+                                <div style="height: 25px;">
+                                    <!--<span class="card-title grey-text text-darken-4">{{note.story.name}}<i class="material-icons right">close</i></span>-->
                                 <span class="card-title grey-text text-darken-4">
                                     <i class="note-notHandle material-icons right">close</i>
                                 </span>
+                                </div>
+                                <div style="height: 33px;">
+                                    <img alt="{{note.owner.name}}" ng-src="{{note.owner.img}}"
+                                         class="md-avatar md-whiteframe-3dp" style="
+                                            display: block;
+                                            position: absolute;
+                                            padding-top: 0;
+                                            background-color: {{note.owner.statusColor}};
+                                            border: solid 4px  {{note.owner.statusColor}};
+                                            width: 35px;
+                                            height: 35px;
+                                            margin-top: 4px;
+                                            margin-bottom: 4px;
+                                            border-radius: 12%;
+                                            box-sizing: content-box;
+                                            top: 3px;
+                                            left: 37px;
+                                            "/>
+                                </div>
+                                <div class="card-action" layout="row" style="padding: 0px;">
+                                    <a href="#" ng-click="vm.noteTrash(note._id)"
+                                       class="note-notHandle waves-effect"
+                                       style="margin: 0px; padding: 3px; line-height: normal; height: 30px; width: 30px; color: #757575;">
+                                        <md-tooltip md-direction="botom"
+                                                    md-autohide="false">{{ 'Delete task' | translate}}</md-tooltip>
+                                        <i class="material-icons">delete</i>
+                                    </a>
+                                    <a href="#" ng-click="modalStorySave($event, story._id)"
+                                       class="note-notHandle waves-effect"
+                                       style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
+                                        <md-tooltip md-direction="botom"
+                                                    md-autohide="false">{{ 'Edit story' | translate}}</md-tooltip>
+                                        <i class="material-icons">content_paste</i>
+                                    </a>
+                                    <a href="#" ng-click="modalNoteSave($event, note._id)"
+                                       class="note-notHandle waves-effect"
+                                       style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
+                                        <md-tooltip md-direction="botom"
+                                                    md-autohide="false">{{ 'Edit task' | translate}}</md-tooltip>
+                                        <i class="material-icons">mode_edit</i>
+                                    </a>
+                                    <a href="#" ng-click="modalNoteView($event, note._id)"
+                                       class="note-notHandle waves-effect"
+                                       style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
+                                        <md-tooltip md-direction="botom"
+                                                    md-autohide="false">{{ 'Visualize' | translate}}</md-tooltip>
+                                        <i class="material-icons">search</i>
+                                    </a>
+                                </div>
+                                <div layout="row" layout-align="center end">
+                                </div>
+                                <!--<p>{{note.story.name}}</p>-->
+                                <!--<p>{{note.description}}</p>-->
                             </div>
-                            <div style="height: 33px;">
-                                <img alt="{{note.owner.name}}" ng-src="{{note.owner.img}}" class="md-avatar md-whiteframe-3dp" style="
-                                        display: block;
-                                        position: absolute;
-                                        padding-top: 0;
-                                        background-color: {{note.owner.statusColor}};
-                                        border: solid 4px  {{note.owner.statusColor}};
-                                        width: 35px;
-                                        height: 35px;
-                                        margin-top: 4px;
-                                        margin-bottom: 4px;
-                                        border-radius: 12%;
-                                        box-sizing: content-box;
-                                        top: 3px;
-                                        left: 37px;
-                                        "/>
-                            </div>
-                            <div class="card-action" layout="row" style="padding: 0px;">
-                                <a href="#" ng-click="vm.noteTrash(note._id)"
-                                   class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal; height: 30px; width: 30px; color: #757575;">
-                                    <md-tooltip md-direction="botom" md-autohide="false">{{ 'Delete task' | translate}}</md-tooltip>
-                                    <i class="material-icons">delete</i>
-                                </a>
-                                <a href="#" ng-click="modalStorySave($event, story._id)"
-                                   class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
-                                    <md-tooltip md-direction="botom" md-autohide="false">{{ 'Edit story' | translate}}</md-tooltip>
-                                    <i class="material-icons">content_paste</i>
-                                </a>
-                                <a href="#" ng-click="modalNoteSave($event, note._id)"
-                                   class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
-                                    <md-tooltip md-direction="botom" md-autohide="false">{{ 'Edit task' | translate}}</md-tooltip>
-                                    <i class="material-icons">mode_edit</i>
-                                </a>
-                                <a href="#" ng-click="modalNoteView($event, note._id)"
-                                   class="note-notHandle waves-effect" style="margin: 0px; padding: 3px; line-height: normal;height: 30px; width: 30px;color: #757575;">
-                                    <md-tooltip md-direction="botom" md-autohide="false">{{ 'Visualize' | translate}}</md-tooltip>
-                                    <i class="material-icons">search</i>
-                                </a>
-                            </div>
-                            <div layout="row" layout-align="center end">
-                            </div>
-                            <!--<p>{{note.story.name}}</p>-->
-                            <!--<p>{{note.description}}</p>-->
+                            <!--<div class="card-action center">-->
+                            <!--&lt;!&ndash;<a href="#">{{_ 'Delete'}}</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="#projectSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="/project/save/{{_id}}">{{_ 'Edit'}}</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="/scrum/kanban">{{_ 'Enter'}}</a>&ndash;&gt;-->
+                            <!--<a href="#" ng-click="remove(project._id)">Delete</a>-->
+                            <!--<a href="#" ng-click="modalSave($event, project._id)" >Edit</a>-->
+                            <!--&lt;!&ndash;<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="/scrum/content/{{backLogNote._id}}">Enter</a>&ndash;&gt;-->
+                            <!--</div>-->
                         </div>
-                        <!--<div class="card-action center">-->
-                        <!--&lt;!&ndash;<a href="#">{{_ 'Delete'}}</a>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<a href="#projectSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<a href="/project/save/{{_id}}">{{_ 'Edit'}}</a>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<a href="/scrum/kanban">{{_ 'Enter'}}</a>&ndash;&gt;-->
-                        <!--<a href="#" ng-click="remove(project._id)">Delete</a>-->
-                        <!--<a href="#" ng-click="modalSave($event, project._id)" >Edit</a>-->
-                        <!--&lt;!&ndash;<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<a href="/scrum/content/{{backLogNote._id}}">Enter</a>&ndash;&gt;-->
-                        <!--</div>-->
-                    </div>
-                </td>
-                <!--<td id="sprintAnterior" class="linha status_1" sprintid="" sprinthorasgastas="0" sprinthoras="">-->
-                <!--<div class="task-kanban hoverable" id="task_{{note._id}}" style="background-color: {{backLogNote.story.color}}"  ng-repeat="note in story.notes">-->
-                <!--<div class="handle"> {{note.owner.name}} </div>-->
-                <!--<div class="title" title="{{note.name}}" >-->
-                <!--<pre class="title_inner" style="text-align: left;">{{note.description}}</pre>-->
-                <!--</div>-->
+                    </td>
+                    <!--<td id="sprintAnterior" class="linha status_1" sprintid="" sprinthorasgastas="0" sprinthoras="">-->
+                    <!--<div class="task-kanban hoverable" id="task_{{note._id}}" style="background-color: {{backLogNote.story.color}}"  ng-repeat="note in story.notes">-->
+                    <!--<div class="handle"> {{note.owner.name}} </div>-->
+                    <!--<div class="title" title="{{note.name}}" >-->
+                    <!--<pre class="title_inner" style="text-align: left;">{{note.description}}</pre>-->
+                    <!--</div>-->
 
-                <!--<div class="iconEdit" sprintPostitId=">">-->
-                <!--<i class="glyphicon glyphicon-search"></i>-->
-                <!--</div>-->
-                <!--&lt;!&ndash;unassigned&ndash;&gt;-->
-                <!--<div class="assignment">-->
-                <!--{{note.time}}h-->
-                <!--</div>-->
-                <!--<img class="overflow_indicator" src="/images/overflow_indicator.gif">-->
-                <!--</div>-->
-                <!--</td>-->
-            </tr>
+                    <!--<div class="iconEdit" sprintPostitId=">">-->
+                    <!--<i class="glyphicon glyphicon-search"></i>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;unassigned&ndash;&gt;-->
+                    <!--<div class="assignment">-->
+                    <!--{{note.time}}h-->
+                    <!--</div>-->
+                    <!--<img class="overflow_indicator" src="/images/overflow_indicator.gif">-->
+                    <!--</div>-->
+                    <!--</td>-->
+                </tr>
 
             </section>
             </tbody>
@@ -164,7 +176,7 @@
                     connectWith: 'td[data-sortable-row=' + row + ']',
                     cancel: ".note-notHandle",
                     delay: 500,
-                    over: function( event, ui ) {
+                    over: function (event, ui) {
                         $(ui.item.context).addClass('hoverable2');
                         $(ui.item.context).removeClass('hoverable');
 //                        $(ui.item.context).css('cursor: move');

@@ -1,35 +1,41 @@
 <div ng-controller="SprintCtrl as vm" flex>
-    <div layout-gt-sm="row">
-        <md-input-container class="md-block" flex-gt-sm>
-            <label>{{ 'Search' | translate}}</label>
-            <input type="text" ng-model="vm.searchText"/>
-        </md-input-container>
-        <md-input-container >
-            <md-select ng-model="order" placeholder="{{ 'Sort order' | translate }}" >
-                <md-option ng-click="vm.sortChange('1')" value="1">{{ 'Ascending' | translate}}</md-option>
-                <md-option ng-click="vm.sortChange('-1')" value="-1">{{ 'Descending' | translate}}</md-option>
-            </md-select>
-        </md-input-container>
-    </div>
-    <md-content>
-        <md-list>
-            <md-list-item class="md-3-line" dir-paginate="sprint in vm.sprints | itemsPerPage: vm.perPage" pagination-id="sprint" total-items="vm.total()">
-                <div class="md-list-item-text" layout="column" layout-align="center center">
-                    <h3>{{sprint.number}}</h3>
-                    <p>{{sprint.dateStartTreated}} - {{sprint.dateEndTreated}}</p>
-                </div>
-                <div class="md-list-item-text" layout="row" layout-align="center center">
-                    <md-button class="md-fab md-mini hoverable" aria-label="Edit" ng-click="vm.modalSave($event, sprint._id)">
-                        <md-icon md-svg-icon="content:ic_create_24px" aria-label="Edit"></md-icon>
-                    </md-button>
-                    <!--<md-button class="md-fab md-mini hoverable" aria-label="Remove" ng-click="remove(team._id)" style="line-height: 0px;">-->
+    <md-content class="md-padding">
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>{{ 'Search' | translate}}</label>
+                <input type="text" ng-model="vm.searchText"/>
+            </md-input-container>
+            <md-input-container>
+                <md-select ng-model="order" placeholder="{{ 'Sort order' | translate }}">
+                    <md-option ng-click="vm.sortChange('1')" value="1">{{ 'Ascending' | translate}}</md-option>
+                    <md-option ng-click="vm.sortChange('-1')" value="-1">{{ 'Descending' | translate}}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <md-content>
+            <md-list>
+                <md-list-item class="md-3-line" dir-paginate="sprint in vm.sprints | itemsPerPage: vm.perPage"
+                              pagination-id="sprint" total-items="vm.total()">
+                    <div class="md-list-item-text" layout="column" layout-align="center center">
+                        <h3>{{sprint.number}}</h3>
+
+                        <p>{{sprint.dateStartTreated}} - {{sprint.dateEndTreated}}</p>
+                    </div>
+                    <div class="md-list-item-text" layout="row" layout-align="center center">
+                        <md-button class="md-fab md-mini hoverable" aria-label="Edit"
+                                   ng-click="vm.modalSave($event, sprint._id)">
+                            <md-icon md-svg-icon="content:ic_create_24px" aria-label="Edit"></md-icon>
+                        </md-button>
+                        <!--<md-button class="md-fab md-mini hoverable" aria-label="Remove" ng-click="remove(team._id)" style="line-height: 0px;">-->
                         <!--<i class="material-icons">delete</i>-->
-                    <!--</md-button>-->
-                </div>
-                <md-divider></md-divider>
-                <!--<md-divider ng-if="!$last"></md-divider>-->
-            </md-list-item>
-        </md-list>
-        <dir-pagination-controls on-page-change="vm.pageChanged(newPageNumber)" pagination-id="sprint"></dir-pagination-controls>
+                        <!--</md-button>-->
+                    </div>
+                    <md-divider></md-divider>
+                    <!--<md-divider ng-if="!$last"></md-divider>-->
+                </md-list-item>
+            </md-list>
+            <dir-pagination-controls on-page-change="vm.pageChanged(newPageNumber)"
+                                     pagination-id="sprint"></dir-pagination-controls>
+        </md-content>
     </md-content>
 </div>

@@ -1,4 +1,5 @@
 <div ng-controller="StoryCtrl as vm" flex>
+    <md-content class="md-padding">
     <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
             <label>{{ 'Search' | translate}}</label>
@@ -31,5 +32,6 @@
             </md-list-item>
         </md-list>
         <dir-pagination-controls pagination-id="story" on-page-change="vm.pageChanged(newPageNumber)"></dir-pagination-controls>
+    </md-content>
     </md-content>
 </div>
