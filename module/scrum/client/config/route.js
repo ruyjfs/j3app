@@ -47,14 +47,17 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
+                    "header2": {
+                        templateUrl: 'module/scrum/client/view/header-toolbar.ng.html',
+                    },
                     "mainZoom": {
-                        templateUrl: 'module/scrum/client/view/project.ng.html',
+                        templateUrl: 'module/scrum/client/view/product.ng.html',
                     },
                     "main2": {
                         templateUrl: 'module/scrum/client/view/product-fab.ng.html',
                     },
                 }
-                //controller: 'ProjectCtrl'
+                //controller: 'ProductCtrl'
             })
             .state('scrum/productkanban', {
                 url: '/scrum/productkanban/:id/:sprintId',
@@ -131,7 +134,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //    templateUrl: $header,
                     //},
                     "header2": {
-                        templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
+                        templateUrl: 'module/scrum/client/view/header-toolbar.ng.html',
                     },
                     "mainBounce": {
                         templateUrl: 'module/scrum/client/view/team.ng.html',

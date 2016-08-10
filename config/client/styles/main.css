@@ -3,7 +3,12 @@ body.md-toast-animating {
     /*background-color: rgba(0,0,0,.04);*/
 }
 
-
+.active-margin{
+    /*border-left: solid 3px rgb(239,108,0);*/
+    /*border-right: solid 3px rgb(239,108,0);*/
+    /*background-color: #FFFFFF !important;*/
+    /*color: #3d2824 !important;*/
+}
 
 /*md-toolbar:not(.md-menu-toolbar){*/
     /*background-color: #212121;*/

@@ -12,11 +12,11 @@
 <!--<md-button ng-href="{{project.link}}">Enter</md-button>-->
 <!--</div>-->
 <!--</md-card>-->
-<div ng-controller="ProjectCtrl as vm">
-    <div class="container">
-        <md-tabs md-center-tabs md-dynamic-height md-border-bottom>
-            <md-tab label="{{ 'Product' | translate }}">
-                <md-content class="md-padding">
+<div ng-controller="ProductCtrl as vm">
+    <md-content>
+        <!--<md-tabs md-center-tabs md-dynamic-height md-border-bottom>-->
+            <!--<md-tab label="{{ 'Product' | translate }}">-->
+                <!--<md-content class="md-padding">-->
                     <div class="row">
                         <!--<div class="container col l4 s12 row">-->
                         <div class="col l4 s12" ng-repeat="project in vm.projects">
@@ -46,13 +46,13 @@
                             </div>
                         </div>
                     </div>
-                </md-content>
-            </md-tab>
-            <md-tab label="{{ 'Team' | translate }}">
-                <md-content class="md-padding">
-                    <div ng-include="'module/scrum/client/view/team.ng.html'"></div>
-                </md-content>
-            </md-tab>
-        </md-tabs>
-    </div>
+                <!--</md-content>-->
+            <!--</md-tab>-->
+            <!--<md-tab label="{{ 'Team' | translate }}">-->
+                <!--<md-content class="md-padding">-->
+                    <!--<div ng-include="'module/scrum/client/view/team.ng.html'"></div>-->
+                <!--</md-content>-->
+            <!--</md-tab>-->
+        <!--</md-tabs>-->
+    </md-content>
 </div>

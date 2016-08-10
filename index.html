@@ -142,14 +142,14 @@
                 <!--</md-sidenav>-->
             <!--</div>-->
         <!--</div>-->
-        <div flex>
+        <div flex >
             <!--<md-content flex layout-margin>-->
             <div ui-view="main"></div>
             <div ui-view="mainFade" class="fade"></div>
             <div ui-view="mainFadeInLeftBig" class="fadeLeftBig"></div>
             <div ui-view="mainFadeInRightBig" class="fadeRightBig"></div>
-            <div ui-view="mainBounce" class="bounce"></div>
-            <div ui-view="mainZoom" class="zoom"></div>
+            <div ui-view="mainBounce" class="bounce" style="padding-left: 40px;"></div>
+            <div ui-view="mainZoom" class="zoom" style="padding-left: 40px;"></div>
             <div ui-view="main2"></div>
             <!--</md-content>-->
         </div>
@@ -161,7 +161,7 @@
         <!--</div>-->
     <!--</div>-->
 </main>
-<footer class="page-footer" style="margin-top: 0px; padding-top: 0px; ">
+<footer class="page-footer" style="margin-top: 0px; padding-top: 0px; z-index: 2;">
     <div ui-view="footer" ></div>
     <div ng-include="'module/scrum/client/view/footer.ng.html'"></div>
 </footer>
