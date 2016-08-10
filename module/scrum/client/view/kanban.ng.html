@@ -8,19 +8,19 @@
             <tbody id="scrumy-board-body">
 
             <section>
-                <!--<md-subheader class="md-primary">-->
-                    <!--<tr id="scrumy-board-header" style="position: relative; text-align: center;">-->
-                        <!--<th id="story-header" style="text-align: center;">-->
-                            <!--<span>{{ 'Story' | translate}}</span>-->
-                        <!--</th>-->
-                        <!--<th id="plus-header">-->
-                        <!--</th>-->
-                        <!--<th class="plus-header" ng-repeat="status in vm.states">-->
-                            <!--<span>{{ status.name | translate}}</span> <br>-->
-                            <!--<a href="#" class="select-all" style="display: none">{{ 'Select All' | translate}}</a>-->
-                        <!--</th>-->
-                    <!--</tr>-->
-                <!--</md-subheader>-->
+                <md-subheader class="md-primary">
+                    <tr id="scrumy-board-header" style="position: relative; text-align: center;">
+                        <th id="story-header" style="text-align: center;">
+                            <span>{{ 'Story' | translate}}</span>
+                        </th>
+                        <th id="plus-header">
+                        </th>
+                        <th class="plus-header" ng-repeat="status in vm.states">
+                            <span>{{ status.name | translate}}</span> <br>
+                            <a href="#" class="select-all" style="display: none">{{ 'Select All' | translate}}</a>
+                        </th>
+                    </tr>
+                </md-subheader>
                 <tr class="story-task-row" ng-repeat="story in vm.stories">
                     <td rowspan="" id="story-915989-title" class="stories">
                         <div id="story_editor_915989">
