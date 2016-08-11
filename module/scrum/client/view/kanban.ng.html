@@ -175,7 +175,7 @@
                 $('td[data-sortable-row=' + row + ']').sortable({
                     connectWith: 'td[data-sortable-row=' + row + ']',
                     cancel: ".note-notHandle",
-                    delay: 500,
+                    delay: 0,
                     over: function (event, ui) {
                         $(ui.item.context).addClass('hoverable2');
                         $(ui.item.context).removeClass('hoverable');

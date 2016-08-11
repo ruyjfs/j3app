@@ -26,7 +26,7 @@ angular.module('scrum').controller('SprintChangeCtrl', ['$scope', '$rootScope', 
         //});
         this.subscribe('sprint');
         $scope.form = [];
-        $scope.sprints = Sprint.find({$and: [{projectId: $stateParams.id}]}).map(function (sprint) {
+        $scope.sprints = Sprint.find({$and: [{projectId: $stateParams.id}]}, {sort: {number: 1}}).map(function (sprint) {
             if (typeof(sprint.dateStart) === 'string') {
                 sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('L');
             } else {
@@ -39,7 +39,7 @@ angular.module('scrum').controller('SprintChangeCtrl', ['$scope', '$rootScope', 
             }
             return sprint;
         });
-
+        // tel 01143260351
         dateNow = moment().format('x');
         if ($stateParams.sprintId == '1') {
             var sprint = Sprint.findOne(

@@ -1,5 +1,7 @@
 if (Meteor.isClient) {
 
+    teste = 'aqui';
+    console.log('aaa1');
     function onReady() {
         angular.bootstrap(document,
             [
@@ -29,6 +31,7 @@ if (Meteor.isClient) {
             closeOnClick: true,
             edge: 'right',
         });
+        console.log('aaa2');
     }
 
     mdThemingProvider = '';
@@ -200,6 +203,10 @@ if (Meteor.isClient) {
                 console.log(error_message);
             });
     });
+
+
+    //indicator.show();
+    //Meteor.call().then(function(){ console.log('Entrou');},function(error){console.log('terminou');});
 
 
     //
