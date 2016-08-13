@@ -1,4 +1,49 @@
 if (Meteor.isClient) {
+    angular.module('admin').run(function($rootScope){
+
+        var booSucess = false;
+        var time2 = 0;
+        $rootScope
+            .$on('$stateChangeStart',
+            function(event, toState, toParams, fromState, fromParams){
+                $("#ui-view").html("");
+                //$(".page-loading").removeClass("hidden");
+                //$(".container-loading").show();
+                //console.log($(".container-loading"));
+                //$(".page-loading").removeClass("animated fadeOutUp");
+                //$(".container-loading").addClass('animated fadeInDown');
+                //$(".container-loading").show
+                //setTimeout(function(){
+                    if(booSucess) {
+                        booSucess = false;
+                    } else {
+                        $(".container-loading").hide().show().removeClass('fadeOutUp').addClass('fadeInDown');
+                        console.log(booSucess);
+                    }
+                //}, 1);
+            });
+
+        $rootScope
+            .$on('$stateChangeSuccess',
+            function(event, toState, toParams, fromState, fromParams){
+                //$(".page-loading").addClass("hidden");
+                //$(".container-loading").hide();
+                //setTimeout(function(){
+                    //$(".page-loading").removeClass("animated fadeInDown");
+                    //$(".container-loading").addClass('animated fadeOutUp');
+                    //$(".container-loading").hide();();
+
+                    //console.log(555);
+                //}, 2000);
+                //$(".page-loading").removeClass("hidden");
+                //$(".container-loading").addClass('animated fadeInDown');
+                //setTimeout(function(){
+                    $(".container-loading").hide().show().removeClass('fadeInDown').addClass('fadeOutUp');
+                    booSucess = true;
+                //}, 3000);
+            });
+
+    });
 
     teste = 'aqui';
     console.log('aaa1');

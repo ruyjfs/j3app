@@ -7,6 +7,13 @@ angular.module("scrum").run(['$rootScope', '$state', function($rootScope, $state
         }
     });
 
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+        if (toState.name == 'state.with.resolve') {
+            $scope.showSpinner();  //this is a function you created to show the loading animation
+            console.log('aquui');
+        }
+    })
+
     //if (!Meteor.userId() && $state.current.url !== '/scrum') {
     //    $state.go('scrum');
     //}
@@ -29,7 +36,12 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                         setTimeout(function(){
                             $('.parallax').parallax();
                         }, 200);
+                        console.log('aaaa');
                     }
+                },
+                waitOn: function(){
+                    // waitOn makes sure that this publication is ready before rendering your template
+                    //return Meteor.subscribe("publication");
                 },
                 views: {
                     //"header": {

@@ -5,6 +5,21 @@
   /*animation-duration: 1s;*/
 /*}*/
 
+.fadeInDown.ng-enter, .fadeInDown.ng-leave, .fadeOutUp.ng-enter, .fadeOutUp.ng-leave {
+  position: absolute;
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+}
+.fadeInDown.ng-enter {
+-webkit-animation-name: fadeInDown;
+animation-name: fadeInDown;
+}
+
+.fadeInDown.ng-leave {
+-webkit-animation-name: fadeInUp;
+animation-name: fadeInUp;
+}
+
 /*.bounce.ng-enter {*/
   /*-webkit-animation-name: bounceInDown;*/
   /*animation-name: bounceInDown;*/
