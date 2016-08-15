@@ -106,6 +106,12 @@ if (Meteor.isClient) {
         'Confirm password': 'Confirmar senha',
         'Reset password': 'Resetar senha',
 
+        // Organization
+        'Organization': 'Organização',
+        'Organization full name': 'Nome completo da organização',
+        'No organization': 'Sem organização',
+        'No organization projects': 'Projetos sem organização',
+
         'Channel': 'Canal',
         'of': 'do',
     };

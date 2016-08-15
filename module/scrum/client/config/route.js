@@ -53,6 +53,24 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     },
                 }
             })
+            .state('scrum/organization', {
+                url: '/scrum/organization',
+                views: {
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
+                    "header2": {
+                        templateUrl: 'module/scrum/client/view/header-toolbar-organization.ng.html',
+                    },
+                    "mainZoom": {
+                        templateUrl: 'module/scrum/client/view/organization.ng.html',
+                    },
+                    "main2": {
+                        templateUrl: 'module/scrum/client/view/organization-fab.ng.html',
+                    },
+                }
+                //controller: 'ProductCtrl'
+            })
             .state('scrum/product', {
                 url: '/scrum/product',
                 views: {

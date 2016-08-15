@@ -1,0 +1,85 @@
+<!--<md-content class="md-padding">-->
+<!--<md-content layout-padding ng-repeat="project in projects" >-->
+<!--<md-card ng-repeat="project in projects" class="hoverable">-->
+<!--&lt;!&ndash;<img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">&ndash;&gt;-->
+<!--<md-card-content>-->
+<!--<h2 class="md-title">{{organization.name}}</h2>-->
+<!--<p>{{organization.description}}</p>-->
+<!--</md-card-content>-->
+<!--<div class="md-dialog-actions" layout="row" layout-align="center center">-->
+<!--<md-button ng-href="{{organization.link}}">Delete</md-button>-->
+<!--<md-button ng-href="{{organization.link}}">Edit</md-button>-->
+<!--<md-button ng-href="{{organization.link}}">Enter</md-button>-->
+<!--</div>-->
+<!--</md-card>-->
+<div ng-controller="OrganizationCtrl as vm">
+    <!--<md-content>-->
+        <!--<md-tabs md-center-tabs md-dynamic-height md-border-bottom>-->
+            <!--<md-tab label="{{ 'Product' | translate }}">-->
+                <md-content class="md-padding">
+                    <div class="row">
+                        <!--<div class="container col l4 s12 row">-->
+                        <div class="col l4 s12" ng-repeat="organization in vm.organisations">
+                            <div ng-if="organization" class="card small orange lighten-3 hoverable">
+                                <div class="card-content white-text">
+                                    <span class="card-title activator text-darken-4">{{organization.name}}<i
+                                            class="material-icons right">more_vert</i></span>
+                                    <p>{{organization.description}}</p>
+                                </div>
+                                <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4">{{organization.name}}<i
+                                            class="material-icons right">close</i></span>
+                                    <p>{{organization.name}}</p>
+                                    <p>{{organization.namespace}}</p>
+                                    <p>{{organization.description}}</p>
+                                </div>
+                                <div class="card-action center orange lighten-3" >
+                                    <!--<a href="#">{{_ 'Delete'}}</a>-->
+                                    <!--<a href="#organizationSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>-->
+                                    <!--<a href="/organization/save/{{_id}}">{{_ 'Edit'}}</a>-->
+                                    <!--<a href="/scrum/kanban">{{_ 'Enter'}}</a>-->
+                                    <!--<a href="#" ng-if="vm.isOwner(organization.userId)" ng-click="vm.remove(organization._id)">Delete</a>-->
+                                    <a href="#" ng-if="vm.isOwner(organization.userId)" ng-click="vm.modalOrganizationSave($event, organization._id)">{{ 'Edit' | translate }}</a>
+                                    <!--<a href="#" ng-click="vm.modalProjectSave($event, organization._id)">Edit</a>-->
+                                    <!--<a href="#" ng-click="redirect('scrum/kanban/organization._id')">Enter</a>-->
+                                    <a href="/scrum/organization/product/{{organization._id}}">{{ 'Enter' | translate }}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col l4 s12">
+                            <div class="card small orange lighten-3 hoverable">
+                                <div class="card-content white-text">
+                                    <span class="card-title activator text-darken-4">{{ 'No organization' | translate }}<i
+                                            class="material-icons right">more_vert</i></span>
+                                    <p>{{ 'No organization projects' | translate }}.</p>
+                                </div>
+                                <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4">{{ 'No organization' | translate }}<i
+                                            class="material-icons right">close</i></span>
+                                    <!--<p>{{organization.name}}</p>-->
+                                    <!--<p>{{organization.namespace}}</p>-->
+                                    <!--<p>{{organization.description}}</p>-->
+                                </div>
+                                <div class="card-action center orange lighten-3" >
+                                    <!--<a href="#">{{_ 'Delete'}}</a>-->
+                                    <!--<a href="#organizationSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>-->
+                                    <!--<a href="/organization/save/{{_id}}">{{_ 'Edit'}}</a>-->
+                                    <!--<a href="/scrum/kanban">{{_ 'Enter'}}</a>-->
+                                    <!--<a href="#" ng-if="vm.isOwner(organization.userId)" ng-click="vm.remove(organization._id)">Delete</a>-->
+                                    <!--<a href="#" ng-click="vm.modalProjectSave($event, organization._id)">Edit</a>-->
+                                    <!--<a href="#" ng-click="redirect('scrum/kanban/organization._id')">Enter</a>-->
+                                    <a href="/scrum/product">{{ 'Enter' | translate }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </md-content>
+            <!--</md-tab>-->
+            <!--<md-tab label="{{ 'Team' | translate }}">-->
+                <!--<md-content class="md-padding">-->
+                    <!--<div ng-include="'module/scrum/client/view/team.ng.html'"></div>-->
+                <!--</md-content>-->
+            <!--</md-tab>-->
+        <!--</md-tabs>-->
+    <!--</md-content>-->
+</div>

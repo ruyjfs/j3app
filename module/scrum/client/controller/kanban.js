@@ -42,6 +42,9 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
         this.subscribe('story', function(){return [$stateParams.id]});
         this.subscribe('sprint', function(){return [$stateParams.id]});
         this.helpers({
+            showLoading: function() {
+                return Session.get('showLoading');
+            },
             stories: function() {
                 var stories = Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]}, {sort: {order: 1, name: 1}}).map(function(story){
                     var states = Status.find({projectId: $stateParams.id, $or: [{trash: false}, {trash: null}]}, {sort: {order: 1, name: 1}}).fetch();

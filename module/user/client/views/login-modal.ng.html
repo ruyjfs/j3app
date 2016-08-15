@@ -48,6 +48,11 @@
                 </div>
                 <form layout="column">
                     <md-input-container>
+                        <label>{{ 'Username' | translate }}</label>
+                        <md-icon md-svg-icon="action:ic_face_24px"></md-icon>
+                        <input type="text" ng-model="dataForm.username" aria-label="username"/>
+                    </md-input-container>
+                    <md-input-container>
                         <label>{{ 'Name' | translate }}</label>
                         <md-icon md-svg-icon="action:ic_face_24px"></md-icon>
                         <input type="text" ng-model="dataForm.name" aria-label="name"/>

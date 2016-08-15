@@ -53,38 +53,46 @@ angular.module('user').controller('UserSaveCtrl', [ '$scope', '$timeout', '$mdSi
         });
 
         this.saveUser = function (){
-            Meteor.call('userSave', this.form, function (error) {
-                if (error) {
-                    //console.log('Oops, unable to invite!');
-                    Materialize.toast('Erro: ' + error, 4000);
+            if (this.form.username == '' || this.form.username.length < 3 ) {
+                Materialize.toast('Erro: ' + 'Invalid username', 4000);
+            } else {
+                usernameExist = Meteor.users.findOne({$and: [{username: this.form.username}], _id: {$not: Meteor.userId()}});
+                if (usernameExist) {
+                    Materialize.toast('Erro: ' + 'Username already exists', 4000);
                 } else {
-                    this.form = Meteor.users.findOne(Meteor.user()._id);
-                    //console.log(this.form);
-                    //console.log('aqui');
-                    Materialize.toast('Saved successfully!', 4000);
+                    Meteor.call('userSave', this.form, function (error) {
+                        if (error) {
+                            //console.log('Oops, unable to invite!');
+                            Materialize.toast('Erro: ' + error, 4000);
+                        } else {
+                            this.form = Meteor.users.findOne(Meteor.user()._id);
+                            //console.log(this.form);
+                            //console.log('aqui');
+                            Materialize.toast('Saved successfully!', 4000);
+                        }
+                    });
                 }
-            });
 
-            //this.form.save().then(function (numberOfDocs) {
-            //    console.log('save success doc affected ', numberOfDocs);
-            //    //$scope.dataForm = $meteor.object(Meteor.users, $rootScope.currentUser._id, false);
-            //}, function (error) {
-            //    console.log('save error', error);
-            //});
+                //this.form.save().then(function (numberOfDocs) {
+                //    console.log('save success doc affected ', numberOfDocs);
+                //    //$scope.dataForm = $meteor.object(Meteor.users, $rootScope.currentUser._id, false);
+                //}, function (error) {
+                //    console.log('save error', error);
+                //});
 
-            //$meteor.call('teamSave', $scope.teamForm).then(
-            //    function(data){
-            //        console.log('success inviting', data);
-            //    },
-            //    function(err){
-            //        console.log('failed', err);
-            //    }
-            //);
-            //if(
-            //    this.dataForm.name,
-            //        this.dataForm.lastName,
-            //        this.dataForm.email
-            //){
+                //$meteor.call('teamSave', $scope.teamForm).then(
+                //    function(data){
+                //        console.log('success inviting', data);
+                //    },
+                //    function(err){
+                //        console.log('failed', err);
+                //    }
+                //);
+                //if(
+                //    this.dataForm.name,
+                //        this.dataForm.lastName,
+                //        this.dataForm.email
+                //){
                 //if (id) {
                 //this.form.save().then(function(numberOfDocs){
                 //    console.log('save success doc affected ', numberOfDocs);
@@ -99,7 +107,8 @@ angular.module('user').controller('UserSaveCtrl', [ '$scope', '$timeout', '$mdSi
                 //}
                 //$scope.teamForm = '';
                 //$mdDialog.hide();
-            //}
+                //}
+            }
         }
     }
 ]);

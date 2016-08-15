@@ -1,0 +1,125 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <form>
+        <!--<md-toolbar>-->
+        <!--<div class="md-toolbar-tools">-->
+        <!--<h2>Save product</h2>-->
+        <!--<span flex></span>-->
+        <!--</div>-->
+        <!--</md-toolbar>-->
+        <md-dialog-content style="min-width:400px;max-width:800px;max-height:810px;">
+            <md-content layout-padding>
+                <md-input-container class="md-block">
+                    <label>{{ 'Organization full name' | translate }}</label>
+                    <input ng-model="form.name" type="text" aria-label="Name" required>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>{{ 'Namespace' | translate }}</label>
+                    <input ng-model="form.namespace" type="text" aria-label="Name" required>
+                </md-input-container>
+                <!--<md-input-container class="md-block">-->
+                    <!--<label>{{ 'Company' | translate }}</label>-->
+                    <!--<input ng-model="form.name" type="text" aria-label="Name">-->
+                <!--</md-input-container>-->
+                <!--<md-input-container class="md-block">-->
+                    <!--<label>{{ 'Gravatar Email' | translate }}</label>-->
+                    <!--<input ng-model="form.name" type="text" aria-label="Name">-->
+                <!--</md-input-container>-->
+                <md-input-container class="md-block">
+                    <label>{{ 'Websit URL' | translate }}</label>
+                    <input ng-model="form.url" type="text" aria-label="Name">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>{{ 'Description' | translate }}</label>
+                    <textarea ng-model="form.description" id="description" aria-label="Description"></textarea>
+                </md-input-container>
+                <!--<md-input-container class="md-block">-->
+                <!--<label>{{ 'Owner' | translate }}</label>-->
+                <!--<md-select ng-model="form.userId" aria-label="" placeholder="Owner" required>-->
+                <!--<md-option ng-repeat="user in users" value="{{user._id}}">-->
+                <!--{{user.name}} {{user.lastName}}-->
+                <!--</md-option>-->
+                <!--</md-select>-->
+                <!--</md-input-container>-->
+                <!--<div layout-gt-sm="row">-->
+                <!--<md-input-container class="md-block">-->
+                <!--<label>{{ 'Organization full name' | translate }}</label>-->
+                <!--<input ng-model="form.name" type="text" aria-label="Name" required>-->
+                <!--</md-input-container>-->
+                <!--</div>-->
+                <!--<div layout-gt-sm="row">-->
+                <!--<md-input-container class="md-block">-->
+                <!--<label>Scrum Master</label>-->
+                <!--<md-select ng-model="form.scrumMaster" aria-label="" placeholder="Scrum Master" required-->
+                <!--multiple="true">-->
+                <!--<md-option ng-repeat="user in users" value="{{user._id}}">-->
+                <!--{{user.name}} {{user.lastName}}-->
+                <!--</md-option>-->
+                <!--</md-select>-->
+                <!--</md-input-container>-->
+                <!--<md-input-container class="md-block">-->
+                <!--<label>Product Owner (PO)</label>-->
+                <!--<md-select ng-model="form.productOwner" aria-label="" placeholder="Product Owner (PO)" required-->
+                <!--multiple="true">-->
+                <!--<md-option ng-repeat="user in users" value="{{user._id}}">-->
+                <!--{{user.name}} {{user.lastName}}-->
+                <!--</md-option>-->
+                <!--</md-select>-->
+                <!--</md-input-container>-->
+                <!--</div>-->
+                <!--<md-input-container class="md-block">-->
+                <!--<label>{{ 'Team' | translate }}</label>-->
+                <!--<md-select ng-model="form.teams" id="teams" aria-label="" placeholder="Team" multiple="true"-->
+                <!--required>-->
+                <!--<md-option ng-repeat="team in teams" value="{{team._id}}">-->
+                <!--{{team.name}}-->
+                <!--</md-option>-->
+                <!--</md-select>-->
+                <!--</md-input-container>-->
+                <!--<div layout-gt-sm="row">-->
+                <!--<md-input-container class="md-block">-->
+                <!--<label>Week</label>-->
+                <!--<md-select ng-model="form.week" id="week" aria-label="" placeholder="Week" required>-->
+                <!--<md-option ng-repeat="week in weeks" value="{{week}}">-->
+                <!--{{week}}-->
+                <!--</md-option>-->
+                <!--</md-select>-->
+                <!--</md-input-container>-->
+                <!--<div layout>-->
+                <!--<div flex="15" layout layout-align="center center">-->
+                <!--<span class="md-body-1">{{ 'Week' | translate }}</span>-->
+                <!--</div>-->
+                <!--<md-slider ng-model="form.week" id="time-slider" flex md-discrete step="1" min="1" max="4" aria-label="Time"></md-slider>-->
+                <!--<div flex="10" layout layout-align="center center">-->
+                <!--<span class="md-body-1">{{form.week}}</span>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<md-input-container class="md-block">-->
+                <!--<md-switch ng-model="form.skipWeekend" aria-label="Weekend">-->
+                <!--{{ 'Skip weekend' | translate }}-->
+                <!--</md-switch>-->
+                <!--</md-input-container>-->
+                <!--</div>-->
+                <!--<md-checkbox ng-model="newParty.public" id="public" aria-label="Public">-->
+                <!--Public-->
+                <!--</md-checkbox>-->
+            </md-content>
+        </md-dialog-content>
+    </form>
+    <md-dialog-actions layout="row">
+        <!--<md-button class="md-raised hoverable" ng-click="close()">-->
+        <!--Cancel-->
+        <!--</md-button>-->
+        <!--<md-button class="md-raised hoverable md-accent" ng-click="save()">-->
+        <!--Save-->
+        <!--<i class="material-icons right">send</i>-->
+        <!--</md-button>-->
+        <button class="btn white waves-effect waves-orange hoverable" type="button" ng-click="close()">
+            <!--<i class="material-icons right">close</i>-->
+            {{ 'Cancel' | translate }}
+        </button>
+        <button class="btn orange darken-3 waves-effect waves-light hoverable" type="button" ng-click="save()">
+            <!--<i class="material-icons right">check</i>-->
+            {{ action | translate }}
+        </button>
+    </md-dialog-actions>
+</md-dialog>

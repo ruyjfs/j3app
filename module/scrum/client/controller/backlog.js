@@ -23,7 +23,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                                 note.owner.statusLastLoginDate = moment(note.owner.status.lastLogin.date).format('L H[h]m');
                             } else {
                                 note.owner.statusLastLoginDate = moment(note.owner.status.lastLogin.date).fromNow(); // in 40 minutes
-                            }
+                            } 
                         }
                         //console.log(note.owner.status.lastLogin.date);
                         //moment(note.owner.status.lastLogin.date).format('L LT')

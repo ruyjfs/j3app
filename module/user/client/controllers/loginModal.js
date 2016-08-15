@@ -3,6 +3,7 @@
 angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$mdDialog', '$state', '$reactive',
     function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $mdDialog, $state, $reactive) {
         $reactive(this).attach($scope);
+        this.subscribe('users');
 
         $scope.dataForm = {
             name: '',
@@ -50,34 +51,47 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
                 //$scope.error = 'Registration error - Inform you name';
                 Materialize.toast('Registration error - Inform you name', 4000);
             } else if ($scope.dataForm.password == $scope.dataForm.confirmPassword) {
-                Accounts.createUser($scope.dataForm, function (err) {
-                        if (err) {
-                            //$scope.error = 'Registration error - ' + err;
-                            error = 'Registration error - ' + err;
-                            Materialize.toast(error, 4000);
-                        } else {
-                            var form = Meteor.users.findOne(Meteor.user()._id);
-                            form.name = $scope.dataForm.name;
-                            form.lastName = $scope.dataForm.lastName;
 
-                            Meteor.call('userSave', form, function (error) {
-                                if (error) {
-                                    //console.log('Oops!');
+                if ($scope.dataForm.username == '' || $scope.dataForm.username.length < 3 ) {
+                    Materialize.toast('Erro: ' + 'Invalid username', 4000);
+                } else {
+
+                    usernameExist = Meteor.users.findOne({$and: [{username: $scope.dataForm.username}], _id: {$not: Meteor.userId()}});
+                    if (usernameExist) {
+                        Materialize.toast('Erro: ' + 'Username already exists', 4000);
+                    } else {
+                        Accounts.createUser($scope.dataForm, function (err) {
+                                if (err) {
+                                    //$scope.error = 'Registration error - ' + err;
+                                    error = 'Registration error - ' + err;
                                     Materialize.toast(error, 4000);
                                 } else {
-                                    $mdDialog.hide();
-                                    $state.go('scrum/product');
-                                    console.log('Saved!');
+                                    var form = Meteor.users.findOne(Meteor.user()._id);
+                                    form.name = $scope.dataForm.name;
+                                    form.lastName = $scope.dataForm.lastName;
+
+                                    Meteor.call('userSave', form, function (error) {
+                                        if (error) {
+                                            //console.log('Oops!');
+                                            Materialize.toast(error, 4000);
+                                        } else {
+                                            $mdDialog.hide();
+                                            $state.go('scrum/product');
+                                            console.log('Saved!');
+                                        }
+                                    });
                                 }
-                            });
-                        }
-                    },
-                    function (err) {
-                        //$scope.error = 'Registration error - ' + err;
-                        error = 'Registration error - ' + err;
-                        Materialize.toast(error, 4000);
+                            },
+                            function (err) {
+                                //$scope.error = 'Registration error - ' + err;
+                                error = 'Registration error - ' + err;
+                                Materialize.toast(error, 4000);
+                            }
+                        );
                     }
-                );
+                }
+
+
             } else {
                 error = 'Registration error - Confirm password!';
                 Materialize.toast(error, 4000);

@@ -6,7 +6,7 @@ if (Meteor.isClient) {
         $rootScope
             .$on('$stateChangeStart',
             function(event, toState, toParams, fromState, fromParams){
-                $("#ui-view").html("");
+                //$("#ui-view").html("");
                 //$(".page-loading").removeClass("hidden");
                 //$(".container-loading").show();
                 //console.log($(".container-loading"));
@@ -14,12 +14,12 @@ if (Meteor.isClient) {
                 //$(".container-loading").addClass('animated fadeInDown');
                 //$(".container-loading").show
                 //setTimeout(function(){
-                    if(booSucess) {
-                        booSucess = false;
-                    } else {
-                        $(".container-loading").hide().show().removeClass('fadeOutUp').addClass('fadeInDown');
-                        console.log(booSucess);
-                    }
+                //    if(booSucess) {
+                //        booSucess = false;
+                //    } else {
+                //        $(".container-loading").hide().show().removeClass('fadeOutUp').addClass('fadeInDown');
+                //        console.log(booSucess);
+                //    }
                 //}, 1);
             });
 
@@ -38,8 +38,8 @@ if (Meteor.isClient) {
                 //$(".page-loading").removeClass("hidden");
                 //$(".container-loading").addClass('animated fadeInDown');
                 //setTimeout(function(){
-                    $(".container-loading").hide().show().removeClass('fadeInDown').addClass('fadeOutUp');
-                    booSucess = true;
+                //    $(".container-loading").hide().show().removeClass('fadeInDown').addClass('fadeOutUp');
+                //    booSucess = true;
                 //}, 3000);
             });
 
@@ -238,10 +238,10 @@ if (Meteor.isClient) {
         return "pt-BR";
     };
     Meteor.startup(function () {
-        Session.set("showLoadingIndicator", true);
+        Session.set("showLoading", true);
         TAPi18n.setLanguage(getUserLanguage())
             .done(function () {
-                Session.set("showLoadingIndicator", false);
+                Session.set("showLoading", false);
             })
             .fail(function (error_message) {
                 // Handle the situation

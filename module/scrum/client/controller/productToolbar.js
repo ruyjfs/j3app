@@ -171,7 +171,7 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
 
 
         this.menus = [
-            //{name: 'Organization', link: '/scrum/organization', icon: 'location_city',   class: ''},
+            {name: 'Organization', link: '/scrum/organization', icon: 'location_city',   class: ''},
             {name: 'Team',         link: '/scrum/team',         icon: 'group_work', class: ''},
             {name: 'Product',      link: '/scrum/product',      icon: 'business_center',      class: ''},
             {name: 'Members',      link: '/scrum/product-team/'+this.id+'/'+this.sprintId,     icon: 'group',   class: ''},

@@ -1,14 +1,12 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('HeaderToolbarCtrl', ['$scope', '$mdDialog', '$stateParams', '$reactive', '$state', '$timeout', '$rootScope', '$location',
+angular.module('scrum').controller('HeaderToolbarOrganizationCtrl', ['$scope', '$mdDialog', '$stateParams', '$reactive', '$state', '$timeout', '$rootScope', '$location',
     function ($scope, $mdDialog, $stateParams, $reactive, $state, $timeout, $rootScope, $location) {
         $reactive(this).attach($scope);
 
         this.menus = [
             //{name: 'Home',         link: '/scrum',              icon: 'home',            class: ''},
             {name: 'Organization', link: '/scrum/organization', icon: 'location_city',   class: ''},
-            {name: 'Team',         link: '/scrum/team',         icon: 'group_work', class: ''},
-            {name: 'Product',      link: '/scrum/product',      icon: 'business_center',      class: ''},
         ];
         if ($location.path()) {
             arrUrl = $location.path().split('/');
