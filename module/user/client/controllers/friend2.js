@@ -6,8 +6,8 @@ angular.module('user').controller('Friend2Ctrl', [ '$scope', '$mdDialog', '$mdSi
         this.subscribe('team');
         this.helpers({
             friend: function() {
-                Meteor.subscribe('users');
-                friends = Friend.find({userId: Meteor.user()._id});
+                //Meteor.subscribe('users');
+                //friends = Friend.find({userId: Meteor.user()._id});
                 //teams = Team.find(
                 //    {
                 //        //$or: [{userId: Meteor.user()._id}, {members : Meteor.user()._id}]
@@ -23,9 +23,24 @@ angular.module('user').controller('Friend2Ctrl', [ '$scope', '$mdDialog', '$mdSi
                 //            }
                 //        ]
                 //    });
-                return friends;
+                //return friends;
             },
             contacts: function(){
+                //users = Meteor.users.find({}).fetch();
+                //return users.map(function (user, index) {
+                //    //user.image =
+                //    //contact._lowername = contact.name.toLowerCase();
+                //
+                //    // Imagem do gravatar.
+                //    if (user.emails && user.emails[0].address) {
+                //        user.image = 'http://www.gravatar.com/avatar/' + CryptoJS.MD5(user.emails[0].address).toString() + '?s=40&d=mm';
+                //    } else {
+                //        user.image = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
+                //    }
+                //    return user;
+                //});
+                //return users;
+
                 contacts = [
                     'Marina Augustine',
                     'Oddr Sarno',
@@ -95,7 +110,6 @@ angular.module('user').controller('Friend2Ctrl', [ '$scope', '$mdDialog', '$mdSi
                     return (contact._lowername.indexOf(lowercaseQuery) != -1);;
                 };
             }
-            console.log('asd');
             var results = query ?
                 this.getReactively('allContacts').filter(createFilterFor(query)) : [];
             return results;

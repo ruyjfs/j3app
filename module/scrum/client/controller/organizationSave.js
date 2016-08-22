@@ -1,10 +1,11 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('OrganizationSaveCtrl', ['$scope', '$reactive', '$mdDialog', 'id',
-    function ($scope, $reactive, $mdDialog, id) {
+angular.module('scrum').controller('OrganizationSaveCtrl', ['$scope', '$reactive', '$mdDialog', '$rootScope', 'id',
+    function ($scope, $reactive, $mdDialog, $rootScope, id) {
         $reactive(this).attach($scope);
         this.title = 'Organization';
         Meteor.subscribe('users');
+        $rootScope.organizationId = id;
 
         if (id) {
             //$scope.form = $meteor.object(Organization, id, false);
@@ -43,5 +44,56 @@ angular.module('scrum').controller('OrganizationSaveCtrl', ['$scope', '$reactive
         $scope.close = function () {
             $mdDialog.hide();
         }
+
+        this.perPage = 5;
+        this.page = 1;
+        this.sort = {
+            name: 1
+        };
+
+        this.searchText = '';
+        //this.subscribe('team', function(){
+        //        return [{}, this.getReactively('searchText')
+        //        ]
+        //    }
+        //);
+        this.helpers({
+            teams: function() {
+                return Team.find({}, {
+
+                    limit: parseInt(this.getReactively('perPage')),
+                    skip: parseInt((this.getReactively('page') - 1) * this.getReactively('perPage')),
+                    sort: this.getReactively('sort')
+                });
+            },
+            users: function() {
+                 var users = Meteor.users.find({}, {
+
+                    //limit: parseInt(this.getReactively('perPage')),
+                    //skip: parseInt((this.getReactively('page') - 1) * this.getReactively('perPage')),
+                    //sort: this.getReactively('sort')
+                });
+
+                console.log(users);
+
+                return users;
+            }
+        });
+
+        this.total = function() {
+            return Counts.get('totalTeam');
+        };
+        this.pageChanged = function(newPage) {
+            this.page = newPage;
+        };
+        this.sortChange = function(sort) {
+            this.sort = {
+                name: parseInt(sort)
+            };
+        };
+
+        $scope.remove = function(team) {
+            this.teams.remove(team);
+        };
     }
 ]);

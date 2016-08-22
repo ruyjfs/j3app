@@ -45,8 +45,8 @@ if (Meteor.isClient) {
 
     });
 
-    teste = 'aqui';
-    console.log('aaa1');
+    //teste = 'aqui';
+    //console.log('aaa1');
     function onReady() {
         angular.bootstrap(document,
             [
@@ -76,7 +76,7 @@ if (Meteor.isClient) {
             closeOnClick: true,
             edge: 'right',
         });
-        console.log('aaa2');
+        //console.log('aaa2');
     }
 
     mdThemingProvider = '';
@@ -219,7 +219,7 @@ if (Meteor.isClient) {
                 themeMaterialize = 'orange darken-3';
                 break;
         }
-        console.log(themeMaterialize);
+        //console.log(themeMaterialize);
     };
 
     isPermission = function() {

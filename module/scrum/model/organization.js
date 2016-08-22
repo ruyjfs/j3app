@@ -29,6 +29,18 @@ Meteor.methods({
             Organization.insert(dataForm);
         }
     },
+    organizationSaveMembers: function(dataFormNew)
+    {
+        id = dataFormNew._id;
+        dataForm = Organization.findOne(id);
+        if (typeof(dataForm.members) !== 'undefined') {
+            dataForm.members = dataFormNew.members.concat(dataForm.members).unique();
+        } else {
+            dataForm.members = dataFormNew.members;
+        }
+        delete dataForm._id;
+        Organization.update(id, { $set: dataForm});
+    },
     organizationDelete: function(id){
         Organization.remove(id);
     },

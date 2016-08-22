@@ -3,6 +3,15 @@ body.md-toast-animating {
     /*background-color: rgba(0,0,0,.04);*/
 }
 
+.md-chips .md-chip-input-container {
+    display: block;
+    line-height: 32px;
+    margin: 8px 8px 0 0;
+    padding: 0;
+    float: left;
+    width: 100%;
+}
+
 .container-loading {
     background-color: #3e2723;
     width: 100%;

@@ -1,0 +1,132 @@
+<div ng-controller="OrganizationMemberCtrl as vm" flex>
+    <!--<md-content class="md-padding">-->
+
+    <md-content>
+        <!--<md-list>-->
+            <!--<md-list-item class="md-3-line" ng-repeat="team in vm.teams">-->
+                <!--<div class="md-list-item-text" layout="column" layout-align="center center">-->
+                    <!--<h3>{{team.name}}</h3>-->
+                    <!--&lt;!&ndash;<h4>{{item.who}}</h4>&ndash;&gt;-->
+                    <!--<p>{{team.description}}</p>-->
+                <!--</div>-->
+                <!--<div class="md-list-item-text" layout="row" layout-align="center center">-->
+                    <!--<md-button class="md-fab md-mini hoverable" aria-label="Edit" ng-click="modalSave($event, team._id)">-->
+                        <!--<md-icon md-svg-icon="content:ic_create_24px" aria-label="Edit"></md-icon>-->
+                    <!--</md-button>-->
+                    <!--<md-button class="md-fab md-mini hoverable" aria-label="Remove" ng-click="remove(team._id)">-->
+                        <!--<md-icon md-svg-icon="content:ic_clear_24px" aria-label="Remove"></md-icon>-->
+                    <!--</md-button>-->
+                <!--</div>-->
+                <!--<md-divider ng-if="!$last"></md-divider>-->
+            <!--</md-list-item>-->
+        <!--</md-list>-->
+
+
+        <!--<table class="table table-hover table-mc-light-blue" flex>-->
+        <!--<thead>-->
+        <!--<tr>-->
+        <!--<th data-field="id">Name</th>-->
+        <!--<th data-field="name">Item Name</th>-->
+        <!--<th data-field="price">Item Price</th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+
+        <!--<tbody>-->
+        <!--<tr>-->
+        <!--<td>Alvin</td>-->
+        <!--<td>Eclair</td>-->
+        <!--<td>$0.87</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td>Alan</td>-->
+        <!--<td>Jellybean</td>-->
+        <!--<td>$3.76</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td>Jonathan</td>-->
+        <!--<td>Lollipop</td>-->
+        <!--<td>$7.00</td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+        <!--</table>-->
+    </md-content>
+    <div layout-gt-sm="row">
+        <md-content class="md-padding autocomplete md-block" flex-gt-sm>
+            <md-contact-chips
+                    ng-model="vm.formAdd.members"
+                    md-contacts="vm.querySearch($query)"
+                    md-contact-name="name"
+                    md-contact-image="image"
+                    md-contact-email="email"
+                    md-require-match="true"
+                    md-highlight-flags="i"
+                    filter-selected="true"
+                    placeholder="{{ 'Type the name or email to search' | translate }}">
+            </md-contact-chips>
+            <div ng-messages="vm.formAdd.members.$error" ng-if="vm.formAdd.members.$touched">
+                <div ng-message="minlength">{{'Your entry is not long enough' | translate }}.</div>
+            </div>
+        </md-content>
+        <!--<md-input-container class="md-block" flex-gt-sm>-->
+            <!--<label>{{ 'Type the name or email to add' | translate }}</label>-->
+            <!--<md-contact-chips-->
+                    <!--ng-model="vm.asyncContacts"-->
+                    <!--md-contacts="vm.allContacts($query)"-->
+                    <!--md-contact-name="name"-->
+                    <!--md-contact-image="image"-->
+                    <!--md-contact-email="email"-->
+                    <!--md-require-match="true"-->
+                    <!--md-highlight-flags="i"-->
+                    <!--filter-selected="vm.filterSelected"-->
+                    <!--placeholder="">-->
+            <!--</md-contact-chips>-->
+            <!--&lt;!&ndash;<div ng-messages="form.name.$error">&ndash;&gt;-->
+            <!--&lt;!&ndash;<div ng-message="required">required</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--</md-input-container>-->
+        <md-input-container>
+            <md-button class="md-fab md-mini hoverable" aria-label="Edit" ng-click="vm.save()">
+                <md-icon md-svg-icon="content:ic_add_24px" aria-label="Add"></md-icon>
+            </md-button>
+        </md-input-container>
+    </div>
+    <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>{{ 'Type the name or email to search' | translate }}</label>
+            <input type="text" ng-model="vm.searchText"/>
+        </md-input-container>
+        <md-input-container>
+            <md-select ng-model="order" placeholder="{{ 'Sort order' | translate }}">
+                <md-option ng-click="vm.sortChange('1')" value="1">{{ 'Ascending' | translate }}</md-option>
+                <md-option ng-click="vm.sortChange('-1')" value="-1">{{ 'Descending' | translate }}</md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+    <md-content>
+        <md-list>
+            <md-list-item class="md-3-line" pagination-id="team"
+                          dir-paginate="team in vm.members | itemsPerPage: vm.perPage" total-items="vm.total()">
+                <div class="md-list-item-text" layout="column" layout-align="center center">
+                    <h3>{{team.name}}</h3>
+                    <!--<h4>{{item.who}}</h4>-->
+                    <p>{{team.email}}</p>
+                </div>
+                <!--<div class="md-list-item-text" layout="row" layout-align="center center">-->
+                    <!--<md-button class="md-fab md-mini hoverable" aria-label="Edit"-->
+                               <!--ng-click="modalSave($event, team._id)">-->
+                        <!--<md-icon md-svg-icon="content:ic_create_24px" aria-label="Edit"></md-icon>-->
+                    <!--</md-button>-->
+                    <!--<md-button class="md-fab md-mini hoverable" aria-label="Remove" ng-click="remove(team._id)" style="line-height: 0px;">-->
+                    <!--<i class="material-icons">delete</i>-->
+                    <!--</md-button>-->
+                <!--</div>-->
+                <md-divider></md-divider>
+            </md-list-item>
+        </md-list>
+    </md-content>
+    <!--<dir-pagination-controls pagination-id="team"-->
+                             <!--on-page-change="vm.pageChanged(newPageNumber)"></dir-pagination-controls>-->
+    <!--<h1 class="md-display-2">Team</h1> {{test}}-->
+    <!--<p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>-->
+    <!--</md-content>-->
+</div>

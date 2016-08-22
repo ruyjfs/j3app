@@ -37,6 +37,21 @@ angular.module('user').config(['$urlRouterProvider', '$stateProvider', '$locatio
                 controller: 'RegisterCtrl',
                 controllerAs: 'rc'
             })
+            .state('user/friend',{
+                url: '/user/friend',
+                views: {
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
+                    "main": {
+                        templateUrl: 'module/user/client/views/friend2.ng.html',
+                        controller: 'Friend2Ctrl'
+                    },
+                    //"footer": {
+                    //    templateUrl: $footer,
+                    //}
+                }
+            })
             .state('user/resetpw', {
                 url: '/user/resetpw',
                 templateUrl: 'module/user/views/client/reset-password.ng.html',

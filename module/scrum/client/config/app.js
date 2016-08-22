@@ -112,6 +112,9 @@ if (Meteor.isClient) {
         'No organization': 'Sem organização',
         'No organization projects': 'Projetos sem organização',
 
+        'Type the name or email to add': 'Digite o nome ou email para adicionar',
+        'Type the name or email to search': 'Digite o nome ou email para procurar',
+
         'Channel': 'Canal',
         'of': 'do',
     };
