@@ -71,8 +71,8 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                 }
                 //controller: 'ProductCtrl'
             })
-            .state('scrum/product', {
-                url: '/scrum/product',
+            .state('scrum/organization/product', {
+                url: '/scrum/organization/:organization/product',
                 views: {
                     //"header": {
                     //    templateUrl: $header,
@@ -89,8 +89,26 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                 }
                 //controller: 'ProductCtrl'
             })
-            .state('scrum/team', {
-                url: '/scrum/team',
+            //.state('scrum/product', {
+            //    url: '/scrum/product',
+            //    views: {
+            //        //"header": {
+            //        //    templateUrl: $header,
+            //        //},
+            //        "header2": {
+            //            templateUrl: 'module/scrum/client/view/header-toolbar.ng.html',
+            //        },
+            //        "mainZoom": {
+            //            templateUrl: 'module/scrum/client/view/product.ng.html',
+            //        },
+            //        "main2": {
+            //            templateUrl: 'module/scrum/client/view/product-fab.ng.html',
+            //        },
+            //    }
+                //controller: 'ProductCtrl'
+            //})
+            .state('scrum/organization/team', {
+                url: '/scrum/organization/:organization/team',
                 views: {
                     //"header": {
                     //    templateUrl: $header,

@@ -1,9 +1,9 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams'',
 //    function($scope, $stateParams){
-angular.module('scrum').controller('ProductCtrl', ['$scope', '$mdDialog', '$mdSidenav', '$log', '$reactive', '$rootScope',
-    function ($scope, $mdDialog, $mdSidenav, $log, $reactive, $rootScope) {
+angular.module('scrum').controller('ProductCtrl', ['$scope', '$mdDialog', '$mdSidenav', '$log', '$reactive', '$rootScope', '$stateParams',
+    function ($scope, $mdDialog, $mdSidenav, $log, $reactive, $rootScope, $stateParams) {
         $reactive(this).attach($scope);
-
+        //
         //Materialize.toast(
         //    'Hello, this screen you can view the products you created and the products that you participate, either in you being on the team linked to the project or standing as PO or Scrum Master.'+
         //    20000
@@ -14,13 +14,29 @@ angular.module('scrum').controller('ProductCtrl', ['$scope', '$mdDialog', '$mdSi
         //    20000
         //);
 
-        //console.log(Meteor.user()._id);
-        this.subscribe('project');
-        //this.subscribe('team');
+        //console.log(Meteor.userId());
         this.subscribe('users');
-        this.helpers({
+        this.subscribe('project');
+        this.subscribe('team');
+        this.subscribe('organization');
+
+
+        var organizationNamespace = $stateParams.organization;
+
+            this.helpers({
             projects: function () {
-                projects = Project.find({}, {sort: {name: 1}}).map(function (project) {
+                var organization = Organization.findOne({namespace: organizationNamespace});
+                var organizationId = '';
+                if (organization) {
+                    organizationId = organization._id;
+                }
+
+                if (organizationNamespace == 0) {
+                    projects = Project.find({$or: [{organization: ''}, {organization: null}]}, {sort: {name: 1}});
+                } else {
+                    projects = Project.find({organization: organizationId}, {sort: {name: 1}});
+                }
+                projects = projects.map(function (project) {
                     Meteor.subscribe('sprint', project._id);
                     //projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}, {scrumMaster: {$in: [Meteor.userId()]}}]}).map(function(project){
                     if (project.teams) {

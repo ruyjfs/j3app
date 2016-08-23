@@ -42,7 +42,7 @@
                                     <a href="#" ng-if="vm.isOwner(organization.userId)" ng-click="vm.modalOrganizationSave($event, organization._id)">{{ 'Edit' | translate }}</a>
                                     <!--<a href="#" ng-click="vm.modalProjectSave($event, organization._id)">Edit</a>-->
                                     <!--<a href="#" ng-click="redirect('scrum/kanban/organization._id')">Enter</a>-->
-                                    <a href="/scrum/organization/product/{{organization._id}}">{{ 'Enter' | translate }}</a>
+                                    <a href="/scrum/organization/{{organization.namespace}}/product">{{ 'Enter' | translate }}</a>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                                     <!--<a href="#" ng-if="vm.isOwner(organization.userId)" ng-click="vm.remove(organization._id)">Delete</a>-->
                                     <!--<a href="#" ng-click="vm.modalProjectSave($event, organization._id)">Edit</a>-->
                                     <!--<a href="#" ng-click="redirect('scrum/kanban/organization._id')">Enter</a>-->
-                                    <a href="/scrum/product">{{ 'Enter' | translate }}</a>
+                                    <a href="/scrum/organization/0/product">{{ 'Enter' | translate }}</a>
                                 </div>
                             </div>
                         </div>

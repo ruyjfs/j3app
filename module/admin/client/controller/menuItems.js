@@ -36,7 +36,7 @@ angular.module('admin').controller('MenuItemsCtrl', [ '$scope', '$timeout', '$md
         $scope.menuItems = [
             {
                 name: 'Project',
-                link: '/scrum/product',
+                link: '/scrum/organization',
                 icon: 'business_center',
             },
             {

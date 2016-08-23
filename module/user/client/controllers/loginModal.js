@@ -23,7 +23,7 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
                     Materialize.toast('User not found!', 4000);
                 } else {
                     $mdDialog.hide();
-                    $state.go('scrum/product');
+                    $state.go('scrum/organization');
                 }
             });
         };
@@ -76,7 +76,7 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
                                             Materialize.toast(error, 4000);
                                         } else {
                                             $mdDialog.hide();
-                                            $state.go('scrum/product');
+                                            $state.go('scrum/organization');
                                             console.log('Saved!');
                                         }
                                     });

@@ -8,6 +8,14 @@
         <!--</md-toolbar>-->
         <md-dialog-content style="min-width:400px;max-width:800px;max-height:810px;">
             <md-content layout-padding>
+                <md-input-container class="md-block">
+                    <label>{{ 'Organization' | translate }}</label>
+                    <md-select ng-model="form.organization" aria-label="" placeholder="{{ 'Organization' | translate }}" required>
+                        <md-option ng-repeat="organization in organizations" value="{{organization._id}}">
+                            {{organization.name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
             <div layout-gt-sm="row">
                 <md-input-container class="md-block">
                     <label>{{ 'Name' | translate }}</label>

@@ -7,7 +7,7 @@ Meteor.publish("organization", function (options) {
         selector = {
             $or: [
                 {userId: this.userId},
-        //        {teams: {$in: teamsId}},
+                {members: this.userId},
         //        {scrumMaster: {$in: [this.userId]}},
         //        {productOwner: {$in: [this.userId]}}
             ]

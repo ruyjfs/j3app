@@ -4,19 +4,29 @@ angular.module('scrum').controller('HeaderToolbarCtrl', ['$scope', '$mdDialog', 
     function ($scope, $mdDialog, $stateParams, $reactive, $state, $timeout, $rootScope, $location) {
         $reactive(this).attach($scope);
 
+
+        var organization = $stateParams.organization;
+        //var organization = Organization.findOne({namespace: organizationNamespace});
+        //var organizationId = organization._id;
+
         this.menus = [
             //{name: 'Home',         link: '/scrum',              icon: 'home',            class: ''},
             {name: 'Organization', link: '/scrum/organization', icon: 'location_city',   class: ''},
-            {name: 'Team',         link: '/scrum/team',         icon: 'group_work', class: ''},
-            {name: 'Product',      link: '/scrum/product',      icon: 'business_center',      class: ''},
+            {name: 'Product',      link: '/scrum/organization/' + organization + '/product',      icon: 'business_center',      class: ''},
+            {name: 'Team',         link: '/scrum/organization/' + organization + '/team',         icon: 'group_work', class: ''},
+            //{name: 'Product',      link: '/scrum/product',      icon: 'business_center',      class: ''},
         ];
         if ($location.path()) {
             arrUrl = $location.path().split('/');
             urlModule = arrUrl[2];
+            urlModule2 = arrUrl[4];
         }
         this.menus.map(function(menu){
             links = menu.link.split('/');
-            if (urlModule == links[2] || (urlModule == 'productkanban' && links[2] == 'kanban')) {
+            //console.log(links);
+            //console.log(urlModule);
+            //console.log(arrUrl);
+            if ((urlModule == links[2] && urlModule2 == links[4]) || (urlModule == 'productkanban' && links[2] == 'kanban')) {
                 menu.class = 'active active-margin'
             }
             return menu;
