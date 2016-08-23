@@ -170,10 +170,11 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
         });
 
 
+        var organization = $stateParams.organization;
         this.menus = [
             {name: 'Organization', link: '/scrum/organization', icon: 'location_city',   class: ''},
-            {name: 'Team',         link: '/scrum/team',         icon: 'group_work', class: ''},
-            {name: 'Product',      link: '/scrum/product',      icon: 'business_center',      class: ''},
+            {name: 'Product',      link: '/scrum/organization/' + organization + '/product',      icon: 'business_center',      class: ''},
+            {name: 'Team',         link: '/scrum/organization/' + organization + '/team',         icon: 'group_work', class: ''},
             {name: 'Members',      link: '/scrum/product-team/'+this.id+'/'+this.sprintId,     icon: 'group',   class: ''},
             {name: 'Burndown',  link: '/scrum/burndown/'+this.id+'/'+this.sprintId, icon: 'trending_down',       class: ''},
             {name: 'Planning Poker',   link: '/scrum/planning-poker/'+this.id+'/'+this.sprintId,  icon: 'style', class: ''},
