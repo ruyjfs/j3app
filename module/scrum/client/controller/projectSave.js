@@ -16,6 +16,7 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$reactive', '$
             $scope.action = 'Edit';
         } else {
             $scope.form = {};
+            $scope.form.color = '#ffcc80';
             $scope.userId = Meteor.userId();
             $scope.action = 'Insert';
         }

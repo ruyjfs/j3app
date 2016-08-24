@@ -6,7 +6,7 @@ angular.module('scrum').controller('StorySaveCtrl', [ '$scope', '$mdDialog', 'id
             $scope.action = 'Edit';
         } else {
             $scope.form = {};
-            $scope.form.color = '#000000';
+            $scope.form.color = '#ffcc80';
             $scope.action = 'Insert';
         }
         $scope.form.projectId = $stateParams.id;

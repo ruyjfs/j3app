@@ -20,7 +20,7 @@
                     <div class="row">
                         <!--<div class="container col l4 s12 row">-->
                         <div class="col l4 s12" ng-repeat="organization in vm.organisations">
-                            <div ng-if="organization" class="card small orange lighten-3 hoverable">
+                            <div ng-if="organization" class="card small orange lighten-3 hoverable" style="background-color: {{organization.color}} !important;">
                                 <div class="card-content white-text">
                                     <span class="card-title activator text-darken-4">{{organization.name}}<i
                                             class="material-icons right">more_vert</i></span>
@@ -33,7 +33,7 @@
                                     <p>{{organization.namespace}}</p>
                                     <p>{{organization.description}}</p>
                                 </div>
-                                <div class="card-action center orange lighten-3" >
+                                <div class="card-action center orange lighten-3" style="background-color: {{organization.color}} !important;">
                                     <!--<a href="#">{{_ 'Delete'}}</a>-->
                                     <!--<a href="#organizationSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>-->
                                     <!--<a href="/organization/save/{{_id}}">{{_ 'Edit'}}</a>-->

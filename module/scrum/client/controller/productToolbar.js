@@ -171,6 +171,11 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
 
 
         var organization = $stateParams.organization;
+
+        if (typeof organization == 'undefined') {
+            organization = 0;
+        }
+
         this.menus = [
             {name: 'Organization', link: '/scrum/organization', icon: 'location_city',   class: ''},
             {name: 'Product',      link: '/scrum/organization/' + organization + '/product',      icon: 'business_center',      class: ''},
