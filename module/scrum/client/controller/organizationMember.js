@@ -1,10 +1,15 @@
-angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDialog', '$mdUtil', '$log', '$reactive', '$rootScope',
-    function ($scope, $mdDialog, $mdUtil, $log, $reactive, $rootScope) {
+angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDialog', '$mdUtil', '$log', '$reactive', '$rootScope', '$stateParams',
+    function ($scope, $mdDialog, $mdUtil, $log, $reactive, $rootScope, $stateParams) {
         $reactive(this).attach($scope);
         this.subscribe('users');
-        id = $rootScope.organizationId;
         this.formAdd = {};
-        this.formAdd._id = id;
+        this.subscribe('organization',  function(){}, function(){
+            var organization = Organization.findOne({namespace: organizationNamespace});
+            id = organization._id;
+            this.formAdd._id = id;
+        });
+        var organizationNamespace = $stateParams.organization;
+
         this.formAdd.members = [];
         $scope.filterSelected = true;
         this.querySearch = function(strSearch) {
@@ -69,7 +74,7 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
         this.searchText = '';
         this.helpers({
             members: function() {
-                var arrOrganization = Organization.findOne(id);
+                arrOrganization = Organization.findOne({namespace: organizationNamespace});
                 var searchString = this.getReactively('searchText');
                 selector = {};
                 if (typeof searchString === 'string' && searchString.length) {
@@ -82,7 +87,7 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
                     };
                 }
 
-                if (arrOrganization.members) {
+                if (arrOrganization) {
                     selector._id = { $in: arrOrganization.members }
                 }
 
@@ -92,7 +97,7 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
                     sort: this.getReactively('sort')
                 });
                 return users;
-            },
+            }
         });
 
         this.total = function() {

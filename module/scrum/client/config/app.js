@@ -112,8 +112,16 @@ if (Meteor.isClient) {
         'No organization': 'Sem organização',
         'No organization projects': 'Projetos sem organização',
 
+        'Private - Only product members': 'Privado - Apenas membros do produto',
+        'Private - Only organization members': 'Privado - Apenas membros da organização',
+        'Internal - Everyone in the organization': 'Interno - Todos da organização',
+        'Public - Everyone can see': 'Público - Todos podem ver',
+
         'Type the name or email to add': 'Digite o nome ou email para adicionar',
         'Type the name or email to search': 'Digite o nome ou email para procurar',
+
+        // Form
+        'Select': 'Selecione',
 
         'Channel': 'Canal',
         'of': 'do',

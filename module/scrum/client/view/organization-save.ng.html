@@ -1,8 +1,6 @@
 <md-dialog aria-label="Mango (Fruit)">
     <!--<md-tabs md-dynamic-height md-border-bottom style="min-width:550px;max-width:800px;max-height:810px; ">-->
-    <md-tabs md-dynamic-height md-border-bottom style="min-width:550px;max-height:810px; ">
-        <md-tab label="{{'Organization' | translate}}">
-            <md-content class="md-padding">
+            <!--<md-content class="md-padding">-->
                 <form>
                     <!--<md-toolbar>-->
                     <!--<div class="md-toolbar-tools">-->
@@ -24,18 +22,14 @@
                                 <label>{{ 'Namespace' | translate }}</label>
                                 <input ng-model="form.namespace" type="text" aria-label="Name" required>
                             </md-input-container>
-                            <!--<md-input-container class="md-block">-->
-                            <!--<label>{{ 'Company' | translate }}</label>-->
-                            <!--<input ng-model="form.name" type="text" aria-label="Name">-->
-                            <!--</md-input-container>-->
-                            <!--<md-input-container class="md-block">-->
-                            <!--<label>{{ 'Gravatar Email' | translate }}</label>-->
-                            <!--<input ng-model="form.name" type="text" aria-label="Name">-->
-                            <!--</md-input-container>-->
                             <md-input-container class="md-block">
                                 <label>{{ 'Websit URL' | translate }}</label>
                                 <input ng-model="form.url" type="text" aria-label="Name">
                             </md-input-container>
+                            <md-radio-group ng-model="form.visibility">
+                                <md-radio-button value="1" class="md-primary"> <i class="material-icons">security</i> {{ 'Private - Only organization members' | translate }}</md-radio-button>
+                                <md-radio-button value="3" > <i class="material-icons">public</i> {{ 'Public - Everyone can see' | translate }}</md-radio-button>
+                            </md-radio-group>
                             <md-input-container class="md-block">
                                 <label>{{ 'Description' | translate }}</label>
                                 <textarea ng-model="form.description" id="description" aria-label="Description"></textarea>
@@ -110,25 +104,10 @@
                             <!--<md-checkbox ng-model="newParty.public" id="public" aria-label="Public">-->
                             <!--Public-->
                             <!--</md-checkbox>-->
-                            <button class="btn white waves-effect waves-orange hoverable" type="button" ng-click="close()">
-                                <!--<i class="material-icons right">close</i>-->
-                                {{ 'Cancel' | translate }}
-                            </button>
-                            <button class="btn orange darken-3 waves-effect waves-light hoverable" type="button" ng-click="save()">
-                                <!--<i class="material-icons right">check</i>-->
-                                {{ action | translate }}
-                            </button>
                         </md-content>
                     </md-dialog-content>
                 </form>
-            </md-content>
-        </md-tab>
-        <md-tab label="{{'Members' | translate}}">
-            <md-content class="md-padding">
-                <div ng-include="'module/scrum/client/view/organization-member.ng.html'"></div>
-            </md-content>
-        </md-tab>
-    </md-tabs>
+            <!--</md-content>-->
     <md-dialog-actions layout="row">
         <!--<md-button class="md-raised hoverable" ng-click="close()">-->
         <!--Cancel-->
@@ -137,5 +116,13 @@
         <!--Save-->
         <!--<i class="material-icons right">send</i>-->
         <!--</md-button>-->
+        <button class="btn white waves-effect waves-orange hoverable" type="button" ng-click="close()">
+        <!--<i class="material-icons right">close</i>-->
+        {{ 'Cancel' | translate }}
+        </button>
+        <button class="btn orange darken-3 waves-effect waves-light hoverable" type="button" ng-click="save()">
+        <!--<i class="material-icons right">check</i>-->
+        {{ action | translate }}
+        </button>
     </md-dialog-actions>
 </md-dialog>

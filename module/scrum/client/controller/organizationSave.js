@@ -16,6 +16,7 @@ angular.module('scrum').controller('OrganizationSaveCtrl', ['$scope', '$reactive
             $scope.form.color = '#ffcc80';
             $scope.userId = Meteor.userId();
             $scope.action = 'Insert';
+            $scope.form.visibility = 1;
         }
 
         //Meteor.subscribe('team');

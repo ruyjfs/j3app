@@ -1,39 +1,54 @@
 <div ng-controller="TeamCtrl as vm" flex>
     <md-content class="md-padding">
-    <div layout-gt-sm="row">
-        <md-input-container class="md-block" flex-gt-sm>
-            <label>{{ 'Search' | translate }}</label>
-            <input type="text" ng-model="vm.searchText"/>
-        </md-input-container>
-        <md-input-container >
-            <md-select ng-model="order" placeholder="{{ 'Sort order' | translate }}" >
-                <md-option ng-click="vm.sortChange('1')" value="1">{{ 'Ascending' | translate }}</md-option>
-                <md-option ng-click="vm.sortChange('-1')" value="-1">{{ 'Descending' | translate }}</md-option>
-            </md-select>
-        </md-input-container>
-    </div>
-    <md-content>
-        <md-list>
-            <md-list-item class="md-3-line" pagination-id="team" dir-paginate="team in vm.teams | itemsPerPage: vm.perPage" total-items="vm.total()">
-                <div class="md-list-item-text" layout="column" layout-align="center center">
-                    <h3>{{team.name}}</h3>
-                    <!--<h4>{{item.who}}</h4>-->
-                    <p>{{team.description}}</p>
+        <md-tabs md-dynamic-height md-border-bottom style="min-width:550px;max-height:810px; ">
+            <md-tab label="{{'Teams' | translate}}">
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>{{ 'Search' | translate }}</label>
+                        <input type="text" ng-model="vm.searchText"/>
+                    </md-input-container>
+                    <md-input-container>
+                        <md-select ng-model="order" placeholder="{{ 'Sort order' | translate }}">
+                            <md-option ng-click="vm.sortChange('1')" value="1">{{ 'Ascending' | translate }}</md-option>
+                            <md-option ng-click="vm.sortChange('-1')"
+                                       value="-1">{{ 'Descending' | translate }}</md-option>
+                        </md-select>
+                    </md-input-container>
                 </div>
-                <div class="md-list-item-text" layout="row" layout-align="center center">
-                    <md-button class="md-fab md-mini hoverable" aria-label="Edit" ng-click="modalSave($event, team._id)">
-                        <md-icon md-svg-icon="content:ic_create_24px" aria-label="Edit"></md-icon>
-                    </md-button>
-                    <!--<md-button class="md-fab md-mini hoverable" aria-label="Remove" ng-click="remove(team._id)" style="line-height: 0px;">-->
-                        <!--<i class="material-icons">delete</i>-->
-                    <!--</md-button>-->
-                </div>
-                <md-divider></md-divider>
-            </md-list-item>
-        </md-list>
+                <md-content>
+                    <md-list>
+                        <md-list-item class="md-3-line" pagination-id="team"
+                                      dir-paginate="team in vm.teams | itemsPerPage: vm.perPage"
+                                      total-items="vm.total()">
+                            <div class="md-list-item-text" layout="column" layout-align="center center">
+                                <h3>{{team.name}}</h3>
+                                <!--<h4>{{item.who}}</h4>-->
+                                <p>{{team.description}}</p>
+                            </div>
+                            <div class="md-list-item-text" layout="row" layout-align="center center">
+                                <md-button class="md-fab md-mini hoverable" aria-label="Edit"
+                                           ng-click="modalSave($event, team._id)">
+                                    <md-icon md-svg-icon="content:ic_create_24px" aria-label="Edit"></md-icon>
+                                </md-button>
+                                <!--<md-button class="md-fab md-mini hoverable" aria-label="Remove" ng-click="remove(team._id)" style="line-height: 0px;">-->
+                                <!--<i class="material-icons">delete</i>-->
+                                <!--</md-button>-->
+                            </div>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+                <dir-pagination-controls pagination-id="team"
+                                         on-page-change="vm.pageChanged(newPageNumber)"></dir-pagination-controls>
+                <!--</md-content>-->
+            </md-tab>
+            <md-tab label="{{'Members' | translate}}">
+                <md-content class="md-padding">
+                    <div ng-include="'module/scrum/client/view/organization-member.ng.html'"></div>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+        <!--<h1 class="md-display-2">Team</h1> {{test}}-->
+        <!--<p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>-->
     </md-content>
-    <dir-pagination-controls pagination-id="team" on-page-change="vm.pageChanged(newPageNumber)"></dir-pagination-controls>
-    <!--<h1 class="md-display-2">Team</h1> {{test}}-->
-    <!--<p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>-->
-        </md-content>
 </div>

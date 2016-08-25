@@ -20,6 +20,10 @@
                         </md-option>
                     </md-select>
                 </md-input-container>
+                <md-input-container class="md-block">
+                    <label>{{ 'Namespace' | translate}}</label>
+                    <input ng-model="form.namespace" type="text" aria-label="Namespace" required>
+                </md-input-container>
             <div layout-gt-sm="row">
                 <md-input-container class="md-block">
                     <label>{{ 'Name' | translate }}</label>
@@ -86,6 +90,11 @@
                         {{ 'Skip weekend' | translate }}
                     </md-switch>
                 </md-input-container>
+                <md-radio-group ng-model="form.visibility">
+                    <md-radio-button value="1" class="md-warn"> <i class="material-icons">security</i> {{ 'Private - Only product members' | translate }}</md-radio-button>
+                    <md-radio-button value="2" class="md-primary"> <i class="material-icons ng-binding" style="height:40px;line-height:40px">group</i> {{ 'Internal - Everyone in the organization' | translate }}</md-radio-button>
+                    <md-radio-button value="3" > <i class="material-icons">public</i> {{ 'Public - Everyone can see' | translate }}</md-radio-button>
+                </md-radio-group>
             <!--</div>-->
             <md-input-container class="md-block">
                 <label>{{ 'Description' | translate }}</label>

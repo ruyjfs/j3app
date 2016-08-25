@@ -5,10 +5,17 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$reactive', '$
         $reactive(this).attach($scope);
         //this.title = 'Project';
 
-        var organizationId = $stateParams.organizationId;
-        console.log(organizationId);
+        var organizationNamespace = $stateParams.organization;
+        organizationId = '';
+        if (organizationNamespace != '0') {
+            var organization = Organization.findOne({namespace: organizationNamespace});
+            if (organization) {
+                organizationId = organization._id;
+            }
+        }
         //this.subscribe('team');
         //this.subscribe('users');
+        this.subscribe('organization');
 
         if (id) {
             //$scope.form = $meteor.object(Project, id, false);
@@ -19,6 +26,8 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$reactive', '$
             $scope.form.color = '#ffcc80';
             $scope.userId = Meteor.userId();
             $scope.action = 'Insert';
+            $scope.form.visibility = 2;
+            $scope.form.organization = organizationId;
         }
 
         if ($scope.form.teams) {
