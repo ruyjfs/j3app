@@ -54,7 +54,7 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
             formAddNew.members = this.formAdd.members.map(function(member){
                 return member._id;
             });
-            this.formAdd.members = [];
+            this.getReactively('formAdd').members  = [];
             Meteor.call('organizationSaveMembers', formAddNew, function (error) {
                 if (error) {
                     Materialize.toast('Erro: ' + error, 4000);
@@ -87,7 +87,7 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
                     };
                 }
 
-                if (arrOrganization) {
+                if (arrOrganization && arrOrganization.members) {
                     selector._id = { $in: arrOrganization.members }
                 }
 

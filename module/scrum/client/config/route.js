@@ -119,6 +119,9 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     "mainZoom": {
                         templateUrl: 'module/scrum/client/view/team.ng.html',
                     },
+                    "main2": {
+                        templateUrl: 'module/scrum/client/view/product-fab.ng.html',
+                    },
                 }
                 //controller: 'TeamCtrl'
             })
