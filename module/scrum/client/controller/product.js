@@ -20,23 +20,24 @@ angular.module('scrum').controller('ProductCtrl', ['$scope', '$mdDialog', '$mdSi
         this.subscribe('team');
         this.subscribe('organization');
 
-
         var organizationNamespace = $stateParams.organization;
-
             this.helpers({
             projects: function () {
-                var organization = Organization.findOne({namespace: organizationNamespace});
                 var organizationId = '';
-                if (organization) {
-                    organizationId = organization._id;
-                }
-
-                if (organizationNamespace == 0) {
+                if ($stateParams.organization == 'organization') {
                     projects = Project.find({$or: [{organization: ''}, {organization: null}]}, {sort: {name: 1}});
                 } else {
+                    organization = Organization.findOne({namespace: $stateParams.organization});
+                    if (organization) {
+                        organizationId = organization._id;
+                    }
                     projects = Project.find({organization: organizationId}, {sort: {name: 1}});
                 }
+
                 projects = projects.map(function (project) {
+                    if (!project.namespace || $stateParams.organization == 'organization') {
+                        project.namespace = project._id;
+                    }
                     Meteor.subscribe('sprint', project._id);
                     //projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}, {scrumMaster: {$in: [Meteor.userId()]}}]}).map(function(project){
                     if (project.teams) {
@@ -98,6 +99,11 @@ angular.module('scrum').controller('ProductCtrl', ['$scope', '$mdDialog', '$mdSi
                     //        }
                     //    });
                     //}
+                    if (project.organization) {
+                        project.organizationNamespace = organization.namespace;
+                    } else {
+                        project.organizationNamespace = 'organization';
+                    }
 
                     return project;
                 });

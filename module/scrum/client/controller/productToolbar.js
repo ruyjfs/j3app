@@ -3,29 +3,71 @@
 angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog', '$stateParams', '$reactive', '$state', '$timeout', '$rootScope', '$location',
     function ($scope, $mdDialog, $stateParams, $reactive, $state, $timeout, $rootScope, $location) {
         $reactive(this).attach($scope);
-
-        if (!$stateParams.id) {
+        if (!$stateParams.product) {
             $state.go('scrum');
         }
 
-        this.id = $stateParams.id;
-        this.sprintId = $stateParams.sprintId;
-
         this.subscribe('users');
+        this.subscribe('organization');
         this.subscribe('project');
         this.subscribe('team');
-        //this.subscribe('status', function(){return [$stateParams.id]});
-        //this.subscribe('note', function(){return [$stateParams.id]});
-        //this.subscribe('story', function(){return [$stateParams.id]});
-        this.subscribe('sprint', function(){return [$stateParams.id]});
+        //this.subscribe('status', function(){return [$stateParams.product]});
+        //this.subscribe('note', function(){return [$stateParams.product]});
+        //this.subscribe('story', function(){return [$stateParams.product]});
+        this.subscribe('sprint', function(){return [$stateParams.product]});
         $scope.helpers({
+            organizationId: function(){
+                var id = 'organization';
+                if ($stateParams.organization !== 'organization') {
+                    var organization = Organization.findOne({$or: [{_id: $stateParams.organization}, {namespace: $stateParams.organization}]});
+                    if (organization) {
+                        id = organization._id;
+                    } else {
+                        id = $stateParams.organization;
+                    }
+                }
+                return id;
+            },
+            productId: function(){
+                var organizationId = this.getReactively('organizationId');
+                var id = 0;
+                if (organizationId) {
+                    if (organizationId === 'organization') {
+                        product = Project.findOne($stateParams.product);
+                    } else {
+                        product = Project.findOne({$or: [{$and: [{organization: organizationId}, {namespace: $stateParams.product}]}, {_id: $stateParams.product}]});
+                    }
+                    if (product) {
+                        id = $stateParams.id = product._id;
+                    } else {
+                        id = $stateParams.id;
+                    }
+                }
+                return id;
+            },
+            sprintId: function() {
+                var id = 0;
+                var productId = this.getReactively('productId');
+                if (productId) {
+                    var sprint = Sprint.findOne({$or: [{$and: [{projectId: productId}, {number: parseInt($stateParams.sprint)}]}, {_id: $stateParams.sprint}]});
+                    if (sprint) {
+                        id = sprint._id;
+                    } else {
+                        id = $stateParams.sprint;
+                    }
+                }
+                return id;
+            },
             sprint: function () {
+                var productId = this.getReactively('productId');
+                console.log(productId);
+                var sprintId = this.getReactively('sprintId');
                 dateNow = moment().format('x');
-                if ($stateParams.sprintId == '1' || $stateParams.sprintId == '') {
+                if (sprintId == '1' || sprintId == '') {
                     sprint = Sprint.findOne(
                         {
                             $and: [
-                                {projectId: $stateParams.id},
+                                {projectId: productId},
                                 {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
                             ]
                         }
@@ -35,18 +77,17 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
                         sprint = Sprint.findOne(
                             {
                                 $and: [
-                                    {projectId: $stateParams.id},
+                                    {projectId: productId},
                                     {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
                                 ]
                             }
                         );
                     }
                 } else {
-                    sprint = Sprint.findOne($stateParams.sprintId);
+                    sprint = Sprint.findOne(sprintId);
                 }
-
                 if (sprint) {
-                    project = Project.findOne($stateParams.id);
+                    project = Project.findOne(productId);
 
                     if (typeof(sprint.dateStart) === 'string') {
                         sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('L');
@@ -93,8 +134,8 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
                     }
 
                     notes = Note.find({
-                        $and: [{sprintId: $stateParams.sprintId}],
-                        $or: [{projectId: $stateParams.id}, {projectId: null}]
+                        $and: [{sprintId: sprintId}],
+                        $or: [{projectId: productId}, {projectId: null}]
                     }).fetch();
                     notes.map(function (note) {
                         note.story = Story.findOne(note.story);
@@ -125,8 +166,8 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
                     }
 
                     notesDone = Note.find({
-                        $and: [{sprintId: $stateParams.sprintId}, {statusId: '1'}],
-                        $or: [{projectId: $stateParams.id}, {projectId: null}]
+                        $and: [{sprintId: sprintId}, {statusId: '1'}],
+                        $or: [{projectId: productId}, {projectId: null}]
                     }).fetch();
                     //console.log(notesDone);
                     if (notesDone) {
@@ -171,24 +212,26 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
 
 
         var organization = $stateParams.organization;
+        var product = $stateParams.product;
+        var sprint = $stateParams.sprint;
 
         if (typeof organization == 'undefined') {
             organization = 0;
         }
 
         this.menus = [
-            {name: 'Organization', link: '/scrum/organization', icon: 'location_city',   class: ''},
-            {name: 'Product',      link: '/scrum/organization/' + organization + '/product',      icon: 'business_center',      class: ''},
-            {name: 'Team',         link: '/scrum/organization/' + organization + '/team',         icon: 'group_work', class: ''},
-            {name: 'Members',      link: '/scrum/product-team/'+this.id+'/'+this.sprintId,     icon: 'group',   class: ''},
-            {name: 'Burndown',  link: '/scrum/burndown/'+this.id+'/'+this.sprintId, icon: 'trending_down',       class: ''},
-            {name: 'Planning Poker',   link: '/scrum/planning-poker/'+this.id+'/'+this.sprintId,  icon: 'style', class: ''},
-            {name: 'Kanban',    link: '/scrum/kanban/'+this.id+'/'+this.sprintId,   icon: 'view_column',     class: ''},
-            {name: 'Backlog',   link: '/scrum/backlog/'+this.id+'/'+this.sprintId,  icon: 'developer_board', class: ''},
-            {name: 'Story',     link: '/scrum/story/'+this.id+'/'+this.sprintId,    icon: 'content_paste',   class: ''},
-            {name: 'Status',    link: '/scrum/status/'+this.id+'/'+this.sprintId,   icon: 'flag',           class: ''},
-            {name: 'Sprint',    link: '/scrum/sprint/'+this.id+'/'+this.sprintId,   icon: 'date_range',      class: ''},
-            {name: 'Trash',     link: '/scrum/trash/'+this.id+'/'+this.sprintId,   icon: 'delete',      class: ''},
+            {name: 'Organization',     link: '/scrum/organization', icon: 'location_city',   class: ''},
+            {name: 'Product',          link: '/scrum/' + organization + '/product',      icon: 'business_center',      class: ''},
+            {name: 'Team',             link: '/scrum/' + organization + '/team',         icon: 'group_work', class: ''},
+            {name: 'Members',          link: '/scrum/' + organization + '/' + product +'/product-team'+ sprint,     icon: 'group',   class: ''},
+            {name: 'Burndown',         link: '/scrum/' + organization + '/' + product +'/burndown/'+ sprint, icon: 'trending_down',       class: ''},
+            {name: 'Planning Poker',   link: '/scrum/' + organization + '/' + product +'/planning-poker/'+ sprint,  icon: 'style', class: ''},
+            {name: 'Kanban',           link: '/scrum/' + organization + '/' + product +'/kanban/'+ sprint,   icon: 'view_column',     class: ''},
+            {name: 'Backlog',          link: '/scrum/' + organization + '/' + product +'/backlog/'+ sprint,  icon: 'developer_board', class: ''},
+            {name: 'Story',            link: '/scrum/' + organization + '/' + product +'/story/'+ sprint,    icon: 'content_paste',   class: ''},
+            {name: 'Status',           link: '/scrum/' + organization + '/' + product +'/status/'+ sprint,   icon: 'flag',           class: ''},
+            {name: 'Sprint',           link: '/scrum/' + organization + '/' + product +'/sprint/'+ sprint,   icon: 'date_range',      class: ''},
+            {name: 'Trash',            link: '/scrum/' + organization + '/' + product +'/trash/'+ sprint,   icon: 'delete',      class: ''},
             //{name: 'Burndown',  link: '/scrum/burndown/'+this.id+'/'+this.sprintId, icon: 'show_chart',       class: ''},
             //{name: 'Product',   link: '/scrum/product', icon: 'business_center'}
         ];
@@ -198,7 +241,7 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
         }
         this.menus.map(function(menu){
             links = menu.link.split('/');
-            if (urlModule == links[2] || (urlModule == 'productkanban' && links[2] == 'kanban')) {
+            if (arrUrl[2] == links[2] && arrUrl[3] == links[3] && arrUrl[4] == links[4] ) {
                 menu.class = 'active active-margin'
             }
             return menu;

@@ -1,6 +1,11 @@
 //Meteor.publish("message", function (contactId) {
 Meteor.publish("sprint", function (projectId, options, searchString) {
     if (this.userId && projectId){
+        var project = Project.findOne({'namespace': projectId});
+        if (project) {
+            projectId = project._id;
+        }
+
         selector = {$or: [{projectId: projectId}, {projectId: null}]};
         if (typeof searchString === 'string' && searchString.length) {
             selector.number = parseInt(searchString);
@@ -14,6 +19,7 @@ Meteor.publish("sprint", function (projectId, options, searchString) {
         //result = Sprint.find(selector, options);
         //return result;
     } else {
+        console.log('sem permissao');
         return [];
     }
 

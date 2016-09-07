@@ -11,9 +11,9 @@ angular.module('scrum').controller('HeaderToolbarCtrl', ['$scope', '$mdDialog', 
 
         this.menus = [
             //{name: 'Home',         link: '/scrum',              icon: 'home',            class: ''},
-            {name: 'Organization', link: '/scrum/organization', icon: 'location_city',   class: ''},
-            {name: 'Product',      link: '/scrum/organization/' + organization + '/product',      icon: 'business_center',      class: ''},
-            {name: 'Team',         link: '/scrum/organization/' + organization + '/team',         icon: 'group_work', class: ''},
+            {name: 'Organization',     link: '/scrum/organization', icon: 'location_city',   class: ''},
+            {name: 'Product',          link: '/scrum/' + organization,      icon: 'business_center',      class: ''},
+            {name: 'Team',             link: '/scrum/' + organization + '/team',         icon: 'group_work', class: ''},
             //{name: 'Product',      link: '/scrum/product',      icon: 'business_center',      class: ''},
         ];
         if ($location.path()) {
@@ -26,7 +26,7 @@ angular.module('scrum').controller('HeaderToolbarCtrl', ['$scope', '$mdDialog', 
             //console.log(links);
             //console.log(urlModule);
             //console.log(arrUrl);
-            if ((urlModule == links[2] && urlModule2 == links[4]) || (urlModule == 'productkanban' && links[2] == 'kanban')) {
+            if (arrUrl[2] == links[2] && arrUrl[3] == links[3] && arrUrl[4] == links[4] ) {
                 menu.class = 'active active-margin'
             }
             return menu;

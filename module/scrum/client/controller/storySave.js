@@ -1,5 +1,9 @@
 angular.module('scrum').controller('StorySaveCtrl', [ '$scope', '$mdDialog', 'id', '$stateParams',
     function ($scope, $mdDialog, id, $stateParams) {
+        project = Project.findOne({'namespace': $stateParams.id});
+        if (project) {
+            $stateParams.id = project._id;
+        }
 
         if (id) {
             $scope.form = Story.findOne(id);

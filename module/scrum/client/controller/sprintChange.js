@@ -3,6 +3,7 @@
 angular.module('scrum').controller('SprintChangeCtrl', ['$scope', '$rootScope', '$mdDialog', '$stateParams', '$reactive', '$state',
     function ($scope, $rootScope, $mdDialog, $stateParams, $reactive, $state) {
         $reactive(this).attach($scope);
+        this.subscribe('sprint');
         //projectId = $stateParams.id;
         //$scope.form.projectId = projectId;
         //$scope.sprints = Meteor.call('sprintFindAllByProject', projectId, function(erro, result){return result;});
@@ -24,9 +25,17 @@ angular.module('scrum').controller('SprintChangeCtrl', ['$scope', '$rootScope', 
         //        return Sprint.findOne({$and: [{projectId: $stateParams.id}]});
         //    }
         //});
-        this.subscribe('sprint');
+
+        var product = {};
+        if ($stateParams.organization == 'organization') {
+            product = Project.findOne($stateParams.product);
+        } else {
+            organization = Organization.findOne({$or: [{_id: $stateParams.organization}, {namespace: $stateParams.organization}]});
+            product = Project.findOne({$or: [{$and: [{organization: organization._id}, {namespace: $stateParams.product}]}, {_id: $stateParams.product}]});
+        }
+        //$stateParams.sprintId = sprint._id;
         $scope.form = [];
-        $scope.sprints = Sprint.find({$and: [{projectId: $stateParams.id}]}, {sort: {number: 1}}).map(function (sprint) {
+        $scope.sprints = Sprint.find({$and: [{projectId: product._id}]}, {sort: {number: 1}}).map(function (sprint) {
             if (typeof(sprint.dateStart) === 'string') {
                 sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('L');
             } else {
@@ -40,61 +49,57 @@ angular.module('scrum').controller('SprintChangeCtrl', ['$scope', '$rootScope', 
             return sprint;
         });
         // tel 01143260351
-        dateNow = moment().format('x');
-        if ($stateParams.sprintId == '1') {
-            var sprint = Sprint.findOne(
-                {
-                    $and: [
-                        {projectId: $stateParams.id},
-                        {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
-                    ]
-                }
-            );
-            if (!sprint) {
-                dateNow = moment()._d;
-                var sprint = Sprint.findOne(
-                    {
-                        $and: [
-                            {projectId: $stateParams.id},
-                            {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
-                        ]
-                    }
-                );
-            }
-            if (sprint) {
-                $scope.form.sprintId = sprint._id;
-            }
-        } else {
-            $scope.form.sprintId = $stateParams.sprintId;
-        }
-
-        $scope.save = function () {
-            Meteor.call('storySave', $scope.form, function (error) {
-                if (error) {
-                } else {
-                    $scope.form = '';
-                    $mdDialog.hide();
-                }
-            });
-        };
+        //dateNow = moment().format('x');
+        //if ($stateParams.sprintId == '1') {
+        //    var sprint = Sprint.findOne(
+        //        {
+        //            $and: [
+        //                {projectId: $stateParams.id},
+        //                {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
+        //            ]
+        //        }
+        //    );
+        //    if (!sprint) {
+        //        dateNow = moment()._d;
+        //        var sprint = Sprint.findOne(
+        //            {
+        //                $and: [
+        //                    {projectId: $stateParams.id},
+        //                    {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
+        //                ]
+        //            }
+        //        );
+        //    }
+        //    if (sprint) {
+        //        $scope.form.sprintId = sprint._id;
+        //    }
+        //} else {
+            $scope.form.sprintNumber = $stateParams.sprint;
+        //}
 
         $scope.close = function () {
             $mdDialog.hide();
         };
 
-        $scope.change = function (sprintId) {
-            var link = 'scrum/productkanban';
+        $scope.change = function (sprintNumber) {
+            var link = 'scrum/organization/product/kanban';
             param = {};
-            param.projectId = $stateParams.id;
-            param.sprintId = sprintId;
-            Meteor.call('sprintFindNext', param, function (error) {
+            param.organization = $stateParams.organization;
+            param.product = $stateParams.product;
+            param.sprint = sprintNumber;
+
+            sprint = Sprint.findOne({projectId: product._id, number: parseInt($stateParams.sprint)});
+            paramForm = {};
+            paramForm.projectId = product._id;
+            paramForm.sprintId = sprint._id;
+            Meteor.call('sprintFindNext', paramForm, function (error) {
                 if (error) {
                 } else {
                     $scope.form = '';
                     //$mdDialog.hide();
                 }
             });
-            $state.go(link, {id: $stateParams.id, sprintId: sprintId});
+            $state.go(link, param);
             $('#logo-middle').removeClass('animated flip').hide().show().addClass('animated flip');
             $mdDialog.hide();
             $rootScope.$emit('someEvent', param);

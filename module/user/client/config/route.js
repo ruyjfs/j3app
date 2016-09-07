@@ -70,7 +70,7 @@ angular.module('user').config(['$urlRouterProvider', '$stateProvider', '$locatio
 
                             switch (strDomain) {
                                 case 'j3scrum.com' :
-                                    strModule = 'j3scrum.com';
+                                    strModule = 'j3scrum.com/scrum';
                                     break;
                                 case  'j3game.com':
                                     strModule = 'game';

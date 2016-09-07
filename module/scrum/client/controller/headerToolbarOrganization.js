@@ -14,7 +14,7 @@ angular.module('scrum').controller('HeaderToolbarOrganizationCtrl', ['$scope', '
         }
         this.menus.map(function(menu){
             links = menu.link.split('/');
-            if (urlModule == links[2] || (urlModule == 'productkanban' && links[2] == 'kanban')) {
+            if (arrUrl[2] == links[2] && arrUrl[3] == links[3] && arrUrl[4] == links[4] ) {
                 menu.class = 'active active-margin'
             }
             return menu;

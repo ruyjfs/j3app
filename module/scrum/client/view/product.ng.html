@@ -41,7 +41,7 @@
                                     <a href="#" ng-if="vm.isOwner(project.userId)" ng-click="vm.modalProjectSave($event, project._id)">{{ 'Edit' | translate }}</a>
                                     <!--<a href="#" ng-click="vm.modalProjectSave($event, project._id)">Edit</a>-->
                                     <!--<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>-->
-                                    <a href="/scrum/productkanban/{{project._id}}/{{project.sprint._id}}">{{ 'Enter' | translate }}</a>
+                                    <a href="/scrum/{{project.organizationNamespace}}/{{project.namespace}}/kanban/{{project.sprint.number}}">{{ 'Enter' | translate }}</a>
                                 </div>
                             </div>
                         </div>

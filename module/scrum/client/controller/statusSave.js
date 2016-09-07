@@ -2,6 +2,10 @@
 //    function($scope, $stateParams, $meteor){
 angular.module('scrum').controller('StatusSaveCtrl', [ '$scope', '$mdDialog', 'id', '$stateParams',
     function ($scope, $mdDialog, id, $stateParams) {
+        project = Project.findOne({'namespace': $stateParams.id});
+        if (project) {
+            $stateParams.id = project._id;
+        }
         if (id) {
             $scope.form = Status.findOne(id);
             $scope.action = 'Edit';

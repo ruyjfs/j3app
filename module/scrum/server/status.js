@@ -3,6 +3,11 @@ Meteor.publish("status", function (projectId, options, searchString, trash) {
 //    Message.cancel();
 
     if (this.userId && projectId){
+        var project = Project.findOne({'namespace': projectId});
+        if (project) {
+            projectId = project._id;
+        }
+
         if (trash == true) {
             selector = {trash: true, $or: [{projectId: projectId}, {projectId: null}]};
         } else if (trash == false) {

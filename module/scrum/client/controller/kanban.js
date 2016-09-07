@@ -4,12 +4,13 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $stateParams, $reactive, $mdToast) {
         $reactive(this).attach($scope);
 
-        this.id = $stateParams.id;
-        this.sprintId = $stateParams.sprintId;
-        //this.call('statusFindByProject', {projectId: $stateParams.id}, function(error, result){
+        this.organization = $stateParams.organization;
+        this.product = $stateParams.product;
+        this.sprint = $stateParams.sprint;
+        //this.call('statusFindByProject', {productId: $stateParams.id}, function(error, result){
         //    this.states = result;
         //});
-        //Meteor.call('storyFindByProject', {projectId: $stateParams.id}, function(error, result){
+        //Meteor.call('storyFindByProject', {productId: $stateParams.id}, function(error, result){
         //    Session.set('stories', result);
         //    //this.stories = result;
         //    console.log('story');
@@ -27,32 +28,78 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
 
         //Meteor.subscribe('note');
         //Meteor.subscribe('users');
-        //this.call('storyFindByProject', {projectId: $stateParams.id}, function(error, result){
+        //this.call('storyFindByProject', {productId: $stateParams.id}, function(error, result){
         //    console.log('asd');
         //    this.stories = result
         //});
 
         //Meteor.subscribe('project');
         this.subscribe('users');
+        this.subscribe('organization');
         this.subscribe('project');
         this.subscribe('team');
-        this.subscribe('burndown', function(){return [$stateParams.id]});
-        this.subscribe('status', function(){return [$stateParams.id]});
-        this.subscribe('note', function(){return [$stateParams.id]});
-        this.subscribe('story', function(){return [$stateParams.id]});
-        this.subscribe('sprint', function(){return [$stateParams.id]});
+        this.subscribe('burndown', function(){return [$stateParams.product]});
+        this.subscribe('status', function(){return [$stateParams.product]});
+        this.subscribe('note', function(){return [$stateParams.product]});
+        this.subscribe('story', function(){return [$stateParams.product]});
+        this.subscribe('sprint', function(){return [$stateParams.product]});
         this.helpers({
+            organizationId: function(){
+                var id = 'organization';
+                if ($stateParams.organization !== 'organization') {
+                    var organization = Organization.findOne({$or: [{_id: $stateParams.organization}, {namespace: $stateParams.organization}]});
+                    if (organization) {
+                        id = organization._id;
+                    } else {
+                        id = $stateParams.organization;
+                    }
+                }
+                return id;
+            },
+            productId: function(){
+                var organizationId = this.getReactively('organizationId');
+                var id = 0;
+                if (organizationId) {
+                    if (organizationId === 'organization') {
+                        product = Project.findOne($stateParams.product);
+                    } else {
+                        product = Project.findOne({$or: [{$and: [{organization: organizationId}, {namespace: $stateParams.product}]}, {_id: $stateParams.product}]});
+                    }
+                    if (product) {
+                        id = $stateParams.id = product._id;
+                    } else {
+                        id = $stateParams.id;
+                    }
+                }
+                return id;
+            },
+            sprintId: function() {
+                var id = 0;
+                var productId = this.getReactively('productId');
+                if (productId) {
+                    var sprint = Sprint.findOne({$or: [{$and: [{projectId: productId}, {number: parseInt($stateParams.sprint)}]}, {_id: $stateParams.sprint}]});
+                    if (sprint) {
+                        id = sprint._id;
+                    } else {
+                        id = $stateParams.sprint;
+                    }
+                }
+                return id;
+            },
             showLoading: function() {
                 return Session.get('showLoading');
             },
             stories: function() {
-                var stories = Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]}, {sort: {order: 1, name: 1}}).map(function(story){
-                    var states = Status.find({projectId: $stateParams.id, $or: [{trash: false}, {trash: null}]}, {sort: {order: 1, name: 1}}).fetch();
+                var productId = this.getReactively('productId');
+                var sprintId = this.getReactively('sprintId');
+                var stories = Story.find({$or: [{projectId: productId}, {projectId: null}]}, {sort: {order: 1, name: 1}}).map(function(story){
+                    var states = Status.find({projectId: productId, $or: [{trash: false}, {trash: null}]}, {sort: {order: 1, name: 1}}).fetch();
                     states.unshift({name: 'To-do', _id: null});
                     states.push({name: 'Done', _id: '1'});
                     story.states = states.map(function(status) {
+                        var notes = [];
                         if (status && status._id) {
-                            var notes = Note.find({story: story._id, statusId: status._id, sprintId: $stateParams.sprintId}).map(function(note) {
+                            notes = Note.find({story: story._id, statusId: status._id, sprintId: sprintId}).map(function(note) {
                                 note.owner = Meteor.users.findOne(note.owner);
                                 if (note.owner && note.owner.status) {
                                     if (note.owner.status.lastLogin) {
@@ -97,7 +144,7 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                                 return note;
                             });
                         } else {
-                            var notes = Note.find({story:story._id, sprintId: $stateParams.sprintId, $or: [{statusId: status._id}, {statusId: ''}]}).map(function(note) {
+                            notes = Note.find({story:story._id, sprintId: sprintId, $or: [{statusId: status._id}, {statusId: ''}]}).map(function(note) {
                                 note.owner = Meteor.users.findOne(note.owner);
                                 if (note.owner && note.owner.status) {
 
@@ -150,7 +197,7 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
 
                     return story;
                 }).filter(function(story){
-                    var notes = Note.find({story:story._id, sprintId: $stateParams.sprintId}).fetch();
+                    var notes = Note.find({story:story._id, sprintId: sprintId}).fetch();
                     return (notes.length > 0);
                 });
 
@@ -161,7 +208,7 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                 return stories;
             },
             states: function(){
-                var states = Status.find({projectId: $stateParams.id, $or: [{trash: false}, {trash: null}]}, {sort: {order: 1, name: 1}}).fetch();
+                var states = Status.find({projectId: this.getReactively('productId'), $or: [{trash: false}, {trash: null}]}, {sort: {order: 1, name: 1}}).fetch();
                 states.unshift({name: 'To-do', _id: null});
                 states.push({name: 'Done', _id: 1});
                 return states;

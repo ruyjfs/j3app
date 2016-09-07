@@ -4,6 +4,11 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id'
     function ($scope, $mdDialog, id, storyId, $stateParams, $reactive) {
         //$reactive(this).attach($scope);
 
+        project = Project.findOne({'namespace': $stateParams.id});
+        if (project) {
+            $stateParams.id = project._id;
+        }
+
         $scope.form = {};
         if (id) {
             $scope.form = Note.findOne(id);

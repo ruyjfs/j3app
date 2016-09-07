@@ -1,19 +1,59 @@
 angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$reactive', '$stateParams', '$rootScope',
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive, $stateParams, $rootScope) {
         $reactive(this).attach($scope);
-
-        this.id = $stateParams.id;
-        this.sprintId = $stateParams.sprintId;
-
         this.subscribe('users');
+        this.subscribe('organization');
         this.subscribe('project');
-        this.subscribe('status', function(){return [$stateParams.id]});
-        this.subscribe('note', function(){return [$stateParams.id]});
-        this.subscribe('story', function(){return [$stateParams.id]});
-        this.subscribe('sprint', function(){return [$stateParams.id]});
+        this.subscribe('status', function(){return [$stateParams.product]});
+        this.subscribe('note', function(){return [$stateParams.product]});
+        this.subscribe('story', function(){return [$stateParams.product]});
+        this.subscribe('sprint', function(){return [$stateParams.product]});
         this.helpers({
+            organizationId: function(){
+                var id = 'organization';
+                if ($stateParams.organization !== 'organization') {
+                    var organization = Organization.findOne({$or: [{_id: $stateParams.organization}, {namespace: $stateParams.organization}]});
+                    if (organization) {
+                        id = organization._id;
+                    } else {
+                        id = $stateParams.organization;
+                    }
+                }
+                return id;
+            },
+            productId: function(){
+                var organizationId = this.getReactively('organizationId');
+                var id = 0;
+                if (organizationId) {
+                    if (organizationId === 'organization') {
+                        product = Project.findOne($stateParams.product);
+                    } else {
+                        product = Project.findOne({$or: [{$and: [{organization: organizationId}, {namespace: $stateParams.product}]}, {_id: $stateParams.product}]});
+                    }
+                    if (product) {
+                        id = $stateParams.id = product._id;
+                    } else {
+                        id = $stateParams.id;
+                    }
+                }
+                return id;
+            },
+            sprintId: function() {
+                var id = 0;
+                var productId = this.getReactively('productId');
+                if (productId) {
+                    var sprint = Sprint.findOne({$or: [{$and: [{projectId: productId}, {number: parseInt($stateParams.sprint)}]}, {_id: $stateParams.sprint}]});
+                    if (sprint) {
+                        id = sprint._id;
+                    } else {
+                        id = $stateParams.sprint;
+                    }
+                }
+                return id;
+            },
             notesBackLog: function () {
-                notes = Note.find({$and: [{$or: [{sprintId: null}, {sprintId: ''}]}], $or: [{projectId: $stateParams.id}, {projectId: null}], $or: [{trash: false}, {trash: null}]}).fetch();
+                var productId = this.getReactively('productId');
+                notes = Note.find({$and: [{$or: [{sprintId: null}, {sprintId: ''}]}], $or: [{projectId: productId}, {projectId: null}], $or: [{trash: false}, {trash: null}]}).fetch();
                 notes.map(function(note){
                     note.story = Story.findOne(note.story);
                     note.owner = Meteor.users.findOne(note.owner);
@@ -70,11 +110,13 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                 return notes;
             },
             notesSprintPrevious: function () {
-                sprint = Sprint.findOne({_id: $stateParams.sprintId});
+                var productId = this.getReactively('productId');
+                var sprintId = this.getReactively('sprintId');
+                sprint = Sprint.findOne({_id: sprintId});
                 notes = [];
                 if (sprint) {
                     sprintPreviousNumber = sprint.number - 1;
-                    sprintPrevious = Sprint.findOne({projectId: $stateParams.id, number: sprintPreviousNumber});
+                    sprintPrevious = Sprint.findOne({projectId: productId, number: sprintPreviousNumber});
                     if (sprintPrevious) {
                         if (typeof(sprintPrevious.dateStart) === 'string') {
                             sprintPrevious.dateStartTreated = moment(sprintPrevious.dateStart, 'x').format('L');
@@ -83,7 +125,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                             sprintPrevious.dateStartTreated = moment(sprintPrevious.dateStart).format('L');
                             sprintPrevious.dateEndTreated = moment(sprintPrevious.dateEnd).format('L');
                         }
-                        notes = Note.find({$and: [{sprintId: sprintPrevious._id}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
+                        notes = Note.find({$and: [{sprintId: sprintPrevious._id}], $or: [{projectId: productId}, {projectId: null}]}).fetch();
                         notes.map(function(note){
                             note.story = Story.findOne(note.story);
                             note.owner = Meteor.users.findOne(note.owner);
@@ -144,7 +186,9 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                 return notes;
             },
             notesSprintCurrent: function () {
-                notes = Note.find({$and: [{sprintId: $stateParams.sprintId}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
+                var productId = this.getReactively('productId');
+                var sprintId = this.getReactively('sprintId');
+                notes = Note.find({$and: [{sprintId: sprintId}], $or: [{projectId: productId}, {projectId: null}]}).fetch();
                 notes.map(function(note){
                     note.story = Story.findOne(note.story);
                     note.owner = Meteor.users.findOne(note.owner);
@@ -202,11 +246,13 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                 return notes;
             },
             notesSprintNext: function () {
-                sprint = Sprint.findOne({_id: $stateParams.sprintId});
+                var productId = this.getReactively('productId');
+                var sprintId = this.getReactively('sprintId');
+                sprint = Sprint.findOne({_id: sprintId});
                 notes = [];
                 if (sprint) {
                     sprintNextNumber = sprint.number + 1;
-                    sprintNext = Sprint.findOne({projectId: $stateParams.id, number: sprintNextNumber});
+                    sprintNext = Sprint.findOne({projectId: productId, number: sprintNextNumber});
                     if (sprintNext) {
                         if (typeof(sprintNext.dateStart) === 'string') {
                             sprintNext.dateStartTreated = moment(sprintNext.dateStart, 'x').format('L');
@@ -215,7 +261,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                             sprintNext.dateStartTreated = moment(sprintNext.dateStart).format('L');
                             sprintNext.dateEndTreated = moment(sprintNext.dateEnd).format('L');
                         }
-                        notes = Note.find({$and: [{sprintId: sprintNext._id}], $or: [{projectId: $stateParams.id}, {projectId: null}]}).fetch();
+                        notes = Note.find({$and: [{sprintId: sprintNext._id}], $or: [{projectId: productId}, {projectId: null}]}).fetch();
                         notes.map(function(note){
                             note.story = Story.findOne(note.story);
                             note.owner = Meteor.users.findOne(note.owner);
@@ -273,12 +319,15 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                     }
                 }
                 return notes;
-            },sprint: function () {
+            },
+            sprint: function () {
+                var productId = this.getReactively('productId');
+                var sprintId = this.getReactively('sprintId');
                 dateNow = moment().format('x');
 
-                if ($stateParams.sprintId == '1' || $stateParams.sprintId == '') {
+                if ( productId && (sprintId == '1' || sprintId == '')) {
 
-                    Meteor.call('sprintCreate', $stateParams.id, function (error, result) {
+                    Meteor.call('sprintCreate', productId, function (error, result) {
                         if (error) {
                         } else {
                             //console.log('Saved!');
@@ -288,24 +337,26 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                         //$rootScope.titleMiddle = result.dateStart + ' - ' + result.dateEnd + ' (' + result.number + ')';
                         $rootScope.titleMiddle = ' (' + result.number + ') ' + moment(result.dateStart).format('L') + ' - ' + moment(result.dateEnd).format('L');
 
-                        if ($stateParams.sprintId == 1 || $stateParams.sprintId == '') {
-                            $state.go('scrum/content', {id: $stateParams.id, sprintId: result._id})
+                        if (sprintId == 1 || sprintId == '') {
+                            /* @todo arrumar depois */
+                            //console.log('Arrumar');
+                            //$state.go('scrum/content', {product: productId, sprint: result._id})
                         }
                     });
                     sprint = Sprint.findOne(
                         {
                             $and: [
-                                {projectId: $stateParams.id},
+                                {projectId: productId},
                                 {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
                             ]
                         }
                     );
                 } else {
-                    sprint = Sprint.findOne($stateParams.sprintId);
+                    sprint = Sprint.findOne(sprintId);
                 }
 
                 if (sprint) {
-                    project = Project.findOne($stateParams.id);
+                    project = Project.findOne(productId);
 
                     if (typeof(sprint.dateStart) === 'string') {
                         sprint.dateStartTreated = moment(sprint.dateStart, 'x').format('L');
@@ -350,8 +401,8 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                     }
 
                     notes = Note.find({
-                        $and: [{sprintId: $stateParams.sprintId}],
-                        $or: [{projectId: $stateParams.id}, {projectId: null}]
+                        $and: [{sprintId: sprintId}],
+                        $or: [{projectId: productId}, {projectId: null}]
                     }).fetch();
                     notes.map(function (note) {
                         note.story = Story.findOne(note.story);
@@ -382,8 +433,8 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                     }
 
                     notesDone = Note.find({
-                        $and: [{sprintId: $stateParams.sprintId}, {statusId: '1'}],
-                        $or: [{projectId: $stateParams.id}, {projectId: null}]
+                        $and: [{sprintId: sprintId}, {statusId: '1'}],
+                        $or: [{projectId: productId}, {projectId: null}]
                     }).fetch();
                     //console.log(notesDone);
                     if (notesDone) {
@@ -415,11 +466,13 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                 return sprint;
             },
             sprintNext: function () {
-                sprint = Sprint.findOne({_id: $stateParams.sprintId});
+                var productId = this.getReactively('productId');
+                var sprintId = this.getReactively('sprintId');
+                sprint = Sprint.findOne({_id: sprintId});
                 sprintNext = {};
                 if (sprint) {
                     sprintNextNumber = sprint.number + 1;
-                    sprintNext = Sprint.findOne({projectId: $stateParams.id, number: sprintNextNumber});
+                    sprintNext = Sprint.findOne({projectId: productId, number: sprintNextNumber});
                     if (sprintNext) {
                         if (typeof(sprintNext.dateStart) === 'string') {
                             sprintNext.dateStartTreated = moment(sprintNext.dateStart, 'x').format('L');
@@ -437,15 +490,15 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                 if (!sprintNext) {
                     $rootScope.sprintNext = {};
                     Meteor.call('sprintFindNext', {
-                        projectId: $stateParams.id,
-                        sprintId: $stateParams.sprintId
+                        projectId: productId,
+                        sprintId: sprintId
                     }, function (error, result) {
                         $rootScope.sprintNext = result;
                     });
                 }
 
                 if ($rootScope.sprintNext) {
-                    project = Project.findOne($stateParams.id);
+                    project = Project.findOne(productId);
                     if (project && project.skipWeekend) {
                         if (typeof (sprintNext.dateStart) === 'string') {
                             $rootScope.sprintNext.daysBusiness = moment($rootScope.sprintNext.dateEnd, 'x').businessDiff(moment($rootScope.sprintNext.dateStart, 'x'), 'days');
@@ -480,7 +533,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
 
                     notes = Note.find({
                         $and: [{sprintId: $rootScope.sprintNext._id}],
-                        $or: [{projectId: $stateParams.id}, {projectId: null}]
+                        $or: [{projectId: productId}, {projectId: null}]
                     }).fetch();
                     if (notes) {
                         timeTotal = 0;
@@ -496,7 +549,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
 
                     notesDone = Note.find({
                         $and: [{sprintId: $rootScope.sprintNext._id}, {statusId: '1'}],
-                        $or: [{projectId: $stateParams.id}, {projectId: null}]
+                        $or: [{projectId: productId}, {projectId: null}]
                     }).fetch();
                     if (notesDone) {
                         timeTotal = 0;
@@ -514,14 +567,16 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                 return $rootScope.sprintNext;
             },
             sprintPrevious: function () {
-                sprint = Sprint.findOne({_id: $stateParams.sprintId});
+                var productId = this.getReactively('productId');
+                var sprintId = this.getReactively('sprintId');
+                sprint = Sprint.findOne({_id: sprintId});
                 sprintPrevious = {};
                 if (sprint) {
-                    sprint = Sprint.findOne({_id: $stateParams.sprintId});
+                    sprint = Sprint.findOne({_id: sprintId});
                     sprintPrevious = {};
                     if (sprint) {
                         sprintPreviousNumber = sprint.number - 1;
-                        sprintPrevious = Sprint.findOne({projectId: $stateParams.id, number: sprintPreviousNumber});
+                        sprintPrevious = Sprint.findOne({projectId: productId, number: sprintPreviousNumber});
                         if (sprintPrevious) {
                             if (typeof (sprintPrevious.dateStart) === 'string') {
                                 sprintPrevious.dateStartTreated = moment(sprintPrevious.dateStart, 'x').format('L');
@@ -542,7 +597,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                     } else {
                         $rootScope.sprintPrevious.days = moment($rootScope.sprintPrevious.dateEnd).diff(moment($rootScope.sprintPrevious.dateStart), 'days') + 1;
                     }
-                    project = Project.findOne($stateParams.id);
+                    project = Project.findOne(productId);
                     if (project && project.skipWeekend) {
                         if (typeof ($rootScope.sprintPrevious.dateStart) === 'string') {
                             $rootScope.sprintPrevious.daysBusiness = moment($rootScope.sprintPrevious.dateEnd, 'x').businessDiff(moment($rootScope.sprintPrevious.dateStart, 'x'), 'days');
@@ -578,7 +633,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
 
                     notes = Note.find({
                         $and: [{sprintId: $rootScope.sprintPrevious._id}],
-                        $or: [{projectId: $stateParams.id}, {projectId: null}]
+                        $or: [{projectId: productId}, {projectId: null}]
                     }).fetch();
                     if (notes) {
                         timeTotal = 0;
@@ -594,7 +649,7 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
 
                     notesDone = Note.find({
                         $and: [{sprintId: $rootScope.sprintPrevious._id}, {statusId: '1'}],
-                        $or: [{projectId: $stateParams.id}, {projectId: null}]
+                        $or: [{projectId: productId}, {projectId: null}]
                     }).fetch();
                     if (notesDone) {
                         timeTotal = 0;

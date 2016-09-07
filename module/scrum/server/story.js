@@ -1,8 +1,11 @@
 //Meteor.publish("message", function (contactId) {
 Meteor.publish("story", function (projectId, options, searchString, trash) {
 //    Message.cancel();
-
     if (this.userId && projectId){
+        var project = Project.findOne({'namespace': projectId});
+        if (project) {
+            projectId = project._id;
+        }
         selector = {$or: [{projectId: projectId}, {projectId: null}]};
 
 

@@ -3,6 +3,10 @@
 angular.module('scrum').controller('TeamSaveCtrl', [ '$scope', '$rootScope', '$mdDialog', 'id',
     function ($scope, $rootScope, $mdDialog, id) {
 
+        project = Project.findOne({'namespace': $stateParams.id});
+        if (project) {
+            $stateParams.id = project._id;
+        }
         $scope.title = 'Scrum';
         //Meteor.subscribe('users');
         //Meteor.subscribe('team');
