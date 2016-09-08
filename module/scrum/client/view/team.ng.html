@@ -1,25 +1,24 @@
-<div ng-controller="TeamCtrl as vm" flex>
-    <md-content class="md-padding">
-        <md-tabs md-dynamic-height md-border-bottom style="min-width:550px;max-height:810px; ">
-            <md-tab label="{{'Teams' | translate}}">
+<md-content class="md-padding">
+    <md-tabs md-dynamic-height md-border-bottom style="min-width:550px;max-height:810px; ">
+        <md-tab label="{{'Teams' | translate}}" flex>
+            <div ng-controller="TeamCtrl as vmTeam">
                 <div layout-gt-sm="row">
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>{{ 'Search' | translate }}</label>
-                        <input type="text" ng-model="vm.searchText"/>
+                        <input type="text" ng-model="vmTeam.teamSearchText"/>
                     </md-input-container>
                     <md-input-container>
                         <md-select ng-model="order" placeholder="{{ 'Sort order' | translate }}">
-                            <md-option ng-click="vm.sortChange('1')" value="1">{{ 'Ascending' | translate }}</md-option>
-                            <md-option ng-click="vm.sortChange('-1')"
-                                       value="-1">{{ 'Descending' | translate }}</md-option>
+                            <md-option ng-click="vmTeam.sortChange('1')" value="1">{{ 'Ascending' | translate }}</md-option>
+                            <md-option ng-click="vmTeam.sortChange('-1')" value="-1">{{ 'Descending' | translate }}</md-option>
                         </md-select>
                     </md-input-container>
                 </div>
                 <md-content>
                     <md-list>
                         <md-list-item class="md-3-line" pagination-id="team"
-                                      dir-paginate="team in vm.teams | itemsPerPage: vm.perPage"
-                                      total-items="vm.total()">
+                                      dir-paginate="team in vmTeam.teams | itemsPerPage: vmTeam.perPage"
+                                      total-items="vmTeam.total()">
                             <div class="md-list-item-text" layout="column" layout-align="center center">
                                 <h3>{{team.name}}</h3>
                                 <!--<h4>{{item.who}}</h4>-->
@@ -39,16 +38,14 @@
                     </md-list>
                 </md-content>
                 <dir-pagination-controls pagination-id="team"
-                                         on-page-change="vm.pageChanged(newPageNumber)"></dir-pagination-controls>
+                                         on-page-change="vmTeam.pageChanged(newPageNumber)"></dir-pagination-controls>
                 <!--</md-content>-->
-            </md-tab>
-            <md-tab label="{{'Members' | translate}}">
-                <md-content class="md-padding">
-                    <div ng-include="'module/scrum/client/view/organization-member.ng.html'"></div>
-                </md-content>
-            </md-tab>
-        </md-tabs>
-        <!--<h1 class="md-display-2">Team</h1> {{test}}-->
-        <!--<p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>-->
-    </md-content>
-</div>
+            </div>
+        </md-tab>
+        <md-tab label="{{'Members' | translate}}">
+            <!--<div ng-include="'module/scrum/client/view/organization-member.ng.html'"></div>-->
+        </md-tab>
+    </md-tabs>
+    <!--<h1 class="md-display-2">Team</h1> {{test}}-->
+    <!--<p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>-->
+</md-content>

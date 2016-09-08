@@ -1,17 +1,36 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('TeamSaveCtrl', [ '$scope', '$rootScope', '$mdDialog', 'id',
-    function ($scope, $rootScope, $mdDialog, id) {
+angular.module('scrum').controller('TeamSaveCtrl', [ '$scope', '$rootScope', '$mdDialog', 'id', '$stateParams',
+    function ($scope, $rootScope, $mdDialog, id, $stateParams) {
 
-        project = Project.findOne({'namespace': $stateParams.id});
-        if (project) {
-            $stateParams.id = project._id;
-        }
+        //project = Project.findOne({'namespace': $stateParams.product});
+        //if (project) {
+        //    $stateParams.id = project._id;
+        //}
         $scope.title = 'Scrum';
         //Meteor.subscribe('users');
         //Meteor.subscribe('team');
         //$scope.members = $meteor.collection(Meteor.users, false).subscribe('users');
-        $scope.members = Meteor.users.find({}, {sort: {name: 1, lastName: 1}}).fetch();
+        var organization =  false;
+        var organizationId = false;
+        if ($stateParams.organization != 'organization') {
+            organization = Organization.findOne({'namespace': $stateParams.organization});
+            organizationId = organization._id;
+        }
+        if (organization) {
+            if (organization.members) {
+                whereUser = {_id: {$in: organization.members}};
+            } else {
+                whereUser = false;
+            }
+        } else {
+            whereUser = {};
+        }
+        if (whereUser) {
+            $scope.members = Meteor.users.find(whereUser, {sort: {name: 1, lastName: 1}}).fetch();
+        } else {
+            $scope.members = [];
+        }
 
         if (id) {
             //$scope.form = $meteor.object(Project, id, false);
@@ -21,6 +40,9 @@ angular.module('scrum').controller('TeamSaveCtrl', [ '$scope', '$rootScope', '$m
             $scope.form = {};
             $scope.form.time = 1;
             $scope.action = 'Insert';
+        }
+        if (organizationId) {
+            $scope.form.organization = organizationId;
         }
 
         $scope.save = function (){

@@ -1,5 +1,5 @@
-angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdUtil', '$log', '$reactive',
-    function ($scope, $mdDialog, $mdUtil, $log, $reactive) {
+angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdUtil', '$log', '$reactive', '$stateParams',
+    function ($scope, $mdDialog, $mdUtil, $log, $reactive, $stateParams) {
         $reactive(this).attach($scope);
 
         this.perPage = 5;
@@ -8,16 +8,47 @@ angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdUtil
             name: 1
         };
 
-        this.searchText = '';
-        this.subscribe('team', function(){
-                return [{}, this.getReactively('searchText')
-                ]
-            }
-        );
+        this.teamSearchText = '';
+        this.subscribe('organization');
+        this.subscribe('team');
         this.helpers({
+            organizationId: function(){
+                var id = 'organization';
+                if ($stateParams.organization !== 'organization') {
+                    var organization = Organization.findOne({$or: [{_id: $stateParams.organization}, {namespace: $stateParams.organization}]});
+                    if (organization) {
+                        id = organization._id;
+                    } else {
+                        id = $stateParams.organization;
+                    }
+                }
+                return id;
+            },
             teams: function() {
-                return Team.find({}, {
+                var organizationId = this.getReactively('organizationId');
+                if (organizationId) {
+                    where = {organization: organizationId};
+                } else {
+                    where = {$or: [{organization: null}, {organization: ''}]};
+                }
+                strSearch = this.getReactively('teamSearchText');
+                selector = {};
+                if (typeof strSearch === 'string' && strSearch.length) {
+                    selector = {
+                        $and: [
+                            where,
+                            {
+                                $or: [
+                                    {name: {$regex:  `.*${strSearch}.*`, $options : 'i' }},
+                                ]
+                            }
+                        ]
+                    }
+                } else {
+                    selector = where;
+                }
 
+                return Team.find(selector, {
                     limit: parseInt(this.getReactively('perPage')),
                     skip: parseInt((this.getReactively('page') - 1) * this.getReactively('perPage')),
                     sort: this.getReactively('sort')

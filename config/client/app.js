@@ -1,8 +1,11 @@
 if (Meteor.isClient) {
-    angular.module('admin').run(function($rootScope){
+    angular.module('admin').run(function($rootScope, $stateParams){
 
         var booSucess = false;
         var time2 = 0;
+
+        $rootScope.title = '';
+
         $rootScope
             .$on('$stateChangeStart',
             function(event, toState, toParams, fromState, fromParams){
@@ -26,6 +29,16 @@ if (Meteor.isClient) {
         $rootScope
             .$on('$stateChangeSuccess',
             function(event, toState, toParams, fromState, fromParams){
+                if ($stateParams.organization) {
+                    if ($stateParams.product) {
+                        $rootScope.title = ' .:j3' + nameModule + ':. ' + $stateParams.product + ' | ' + $stateParams.organization;
+                    } else {
+                        $rootScope.title = ' .:j3' + nameModule + ':. ' + $stateParams.organization;
+                    }
+                } else {
+                    $rootScope.title =  '.:j3' + nameModule + ':.';
+                }
+
                 //$(".page-loading").addClass("hidden");
                 //$(".container-loading").hide();
                 //setTimeout(function(){
@@ -34,7 +47,7 @@ if (Meteor.isClient) {
                     //$(".container-loading").hide();();
 
                     //console.log(555);
-                //}, 2000);
+                //}, 2000);w
                 //$(".page-loading").removeClass("hidden");
                 //$(".container-loading").addClass('animated fadeInDown');
                 //setTimeout(function(){
@@ -221,6 +234,7 @@ if (Meteor.isClient) {
         }
         //console.log(themeMaterialize);
     };
+
 
     isPermission = function() {
         if (Meteor.userId()) {

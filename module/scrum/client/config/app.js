@@ -73,7 +73,6 @@ if (Meteor.isClient) {
 
         // Team
         'Time per member': 'Tempo por membro',
-        'Members': 'Membros',
 
         // Outros
         'Save': 'Salvar',
@@ -110,7 +109,15 @@ if (Meteor.isClient) {
         'Organization': 'Organização',
         'Organization full name': 'Nome completo da organização',
         'No organization': 'Sem organização',
-        'No organization projects': 'Projetos sem organização',
+        'No organization products': 'Produtos sem organização',
+
+        'Teams': 'Times',
+        'Members': 'Membros',
+        'Products': 'Produtos',
+        'Visualization': 'Visualização',
+
+        'public': 'pública',
+        'private': 'privada',
 
         'Private - Only product members': 'Privado - Apenas membros do produto',
         'Private - Only organization members': 'Privado - Apenas membros da organização',

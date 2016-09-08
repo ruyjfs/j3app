@@ -16,11 +16,34 @@ angular.module('scrum').controller('OrganizationCtrl', ['$scope', '$mdDialog', '
 
         //console.log(Meteor.user()._id);
         this.subscribe('organization');
-        //this.subscribe('team');
+        this.subscribe('team');
+        this.subscribe('project');
         this.subscribe('users');
         this.helpers({
             organisations: function () {
                 var organisations = Organization.find({}, {sort: {name: 1}}).map(function (organization) {
+                    projectsId = [];
+                    var n = 0;
+                    organization.total = {};
+                    if (organization.members) {
+                        organization.total.members = organization.members.length;
+                    } else {
+                        organization.total.members = 0;
+                    }
+                    organization.total.projects = Project.find({organization: organization._id}).map(function(project){
+                        projectsId[n] = project._id;
+                        n++;
+                        return project._id;
+                    }).length;
+                    organization.total.teams = Team.find({organization: organization._id}).fetch().length;
+                    if (organization.visibility && organization.visibility == 3) {
+                        organization.visualization = 'public';
+                    } else {
+                        organization.visualization = 'private';
+                    }
+                    console.log(projectsId);
+                    console.log(organization.total);
+                    //organization.teams = Team.find()
                     //Meteor.subscribe('sprint', project._id);
                     ////projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}, {scrumMaster: {$in: [Meteor.userId()]}}]}).map(function(project){
                     //if (project.teams) {

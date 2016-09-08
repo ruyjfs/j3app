@@ -22,16 +22,16 @@
                         <div class="col l4 s12" ng-repeat="organization in vm.organisations">
                             <div ng-if="organization" class="card small orange lighten-3 hoverable" style="background-color: {{organization.color}} !important;">
                                 <div class="card-content white-text">
-                                    <span class="card-title activator text-darken-4">{{organization.name}}<i
-                                            class="material-icons right">more_vert</i></span>
+                                    <span class="card-title activator text-darken-4">{{organization.name}}<i class="material-icons right">more_vert</i></span>
                                     <p>{{organization.description}}</p>
                                 </div>
                                 <div class="card-reveal">
-                                    <span class="card-title grey-text text-darken-4">{{organization.name}}<i
-                                            class="material-icons right">close</i></span>
-                                    <p>{{organization.name}}</p>
-                                    <p>{{organization.namespace}}</p>
-                                    <p>{{organization.description}}</p>
+                                    <span class="card-title grey-text text-darken-4">{{organization.name}}<i class="material-icons right">close</i></span>
+                                    <p>- {{ 'Products' | translate }}: {{organization.total.projects}};</p>
+                                    <p>- {{ 'Teams' | translate }}: {{organization.total.teams}};</p>
+                                    <p>- {{ 'Members' | translate }}: {{organization.total.members}};</p>
+                                    <p>- {{ 'Visualization' | translate }} {{ organization.visualization | translate }}.</p>
+                                    <p><b>Descrição:</b> <br />{{organization.description}}</p>
                                 </div>
                                 <div class="card-action center orange lighten-3" style="background-color: {{organization.color}} !important;">
                                     <!--<a href="#">{{_ 'Delete'}}</a>-->

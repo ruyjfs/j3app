@@ -23,7 +23,7 @@ angular.module("user").controller("ResetCtrl", ['$scope', '$reactive', '$state',
                 if (err) {
                     $scope.error = 'Error sending forgot password email - ' + err;
                 } else {
-                    $state.go('scrum/product');
+                    $state.go('scrum/organization');
                 }
             });
         };

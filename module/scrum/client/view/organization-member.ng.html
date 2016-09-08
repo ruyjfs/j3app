@@ -22,6 +22,7 @@
         <!--</md-list>-->
 
 
+
         <!--<table class="table table-hover table-mc-light-blue" flex>-->
         <!--<thead>-->
         <!--<tr>-->
@@ -104,12 +105,12 @@
     </div>
     <md-content>
         <md-list>
-            <md-list-item class="md-3-line" pagination-id="team"
-                          dir-paginate="team in vm.members | itemsPerPage: vm.perPage" total-items="vm.total()">
+            <md-list-item class="md-3-line" pagination-id="member"
+                          dir-paginate="members in vm.members | itemsPerPage: vm.perPage" total-items="vm.total()">
                 <div class="md-list-item-text" layout="column" layout-align="center center">
-                    <h3>{{team.name}}</h3>
+                    <h3>{{members.name}}</h3>
                     <!--<h4>{{item.who}}</h4>-->
-                    <p>{{team.email}}</p>
+                    <p>{{members.email}}</p>
                 </div>
                 <!--<div class="md-list-item-text" layout="row" layout-align="center center">-->
                     <!--<md-button class="md-fab md-mini hoverable" aria-label="Edit"-->
