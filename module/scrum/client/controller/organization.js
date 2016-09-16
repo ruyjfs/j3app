@@ -41,8 +41,6 @@ angular.module('scrum').controller('OrganizationCtrl', ['$scope', '$mdDialog', '
                     } else {
                         organization.visualization = 'private';
                     }
-                    console.log(projectsId);
-                    console.log(organization.total);
                     //organization.teams = Team.find()
                     //Meteor.subscribe('sprint', project._id);
                     ////projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}, {scrumMaster: {$in: [Meteor.userId()]}}]}).map(function(project){

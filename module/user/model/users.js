@@ -31,6 +31,20 @@ Meteor.users.allow({
 });
 
 Meteor.methods({
+    model: function()
+    {
+        data = {
+            name: {required: true},
+            username: {required: true},
+            lastName: {required: true},
+            password: {required: true},
+        };
+        return data;
+    },
+    isValid: function(dataForm){
+        console.log(this.data);
+        return false;
+    },
     userSave: function(form){
         //form.userId = Meteor.userId();
         //if (form._id) {
@@ -43,6 +57,7 @@ Meteor.methods({
         //    Meteor.users.insert(form);
         //}
         //form.userId = Meteor.userId();
+        //if (this.isValid(form)) {
         var userId = form._id;
         if (form._id) {
             delete form._id;
@@ -50,6 +65,7 @@ Meteor.methods({
         } else {
             Meteor.users.insert(form);
         }
+        //}
     }
 
     //invite: function (partyId, userId) {

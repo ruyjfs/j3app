@@ -76,7 +76,7 @@ angular.module('scrum').controller('HelpPageModalCtrl', [ '$scope', '$mdDialog',
                 'Esta é a lixeira do produto. Tudo que você excluir ficará nesta lixeira. Cada produto tem sua própria lixeira.'
             },
             {link: 'scrum/organization', title: 'Organization', msg:
-                'Organizations can have multiple Teams. Teams can have differing permissions. Namespace is unique and this is where repositories for this organization will be created.'
+                'Here you register organizations or saying best companies within the companies you register people and products of it. It may be published for all people can sail. Note that the namespace is the organization\'s url to facilitate their direct access to a orgnização or if you want to disclose it. For example www.j3scrum.com/namespaceoforganization/namespaceofproduct/numberofsprint. Organizations can have multiple Teams. Teams can have Differing permissions. Namespace is unique and this is where repositories for this organization will be created.'
             },
             {link: 'scrum/planning-poker', title: 'Planning pokker of sprint and product', msg:
                 'Aqui toda a equipe pontua as tarefas medindo os esforços e no final a equipe entra em um consenso para os prazos. '

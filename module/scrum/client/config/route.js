@@ -20,7 +20,9 @@ angular.module("scrum").run(['$rootScope', '$state', function($rootScope, $state
 
 }]);
 
-
+/**
+ * @todo melhorar depois a rota default pra quem estiver logado.
+ */
 angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
     function($urlRouterProvider, $stateProvider, $locationProvider){
         $locationProvider.html5Mode(true);
@@ -31,6 +33,24 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
         $stateProvider
             .state('scrum/organization/all', {
                 url: '/scrum/organization',
+                views: {
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
+                    "header2": {
+                        templateUrl: 'module/scrum/client/view/header-toolbar-organization.ng.html',
+                    },
+                    "mainZoom": {
+                        templateUrl: 'module/scrum/client/view/organization.ng.html',
+                    },
+                    "main2": {
+                        templateUrl: 'module/scrum/client/view/organization-fab.ng.html',
+                    },
+                }
+                //controller: 'ProductCtrl'
+            })
+            .state('scrum/home', {
+                url: '/scrum/home',
                 views: {
                     //"header": {
                     //    templateUrl: $header,
@@ -391,7 +411,9 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                 break;
         }
         if (Meteor.userId()) {
-            $urlRouterProvider.otherwise( '/' + strModule + "/product");
+            //$urlRouterProvider.otherwise( '/' + strModule + "/product");
+            $urlRouterProvider.otherwise('/scrum/organization');
+            //$urlRouterProvider.otherwise('/' + strModule + '/home');
         } else {
             console.log(strModule);
             $urlRouterProvider.otherwise('/' + strModule);

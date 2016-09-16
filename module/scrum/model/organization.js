@@ -16,7 +16,16 @@ Organization.allow({
 //yemiX6y3u7vnqpS3n
 //92okH9HNck243cdQ5
 Meteor.methods({
+    organizationIsValid: function(dataNew) {
+        console.log(dataNew);
+        return false;
+    },
     organizationSave: function(dataForm){
+        //if (!this.organizationIsValid(dataForm)) {
+        //    throw new Meteor.Error('todos.updateText.unauthorized',
+        //        'Cannot edit todos in a private list that is not yours');
+        //}
+
         if (!dataForm.userId) {
             dataForm.userId = Meteor.userId();
         }

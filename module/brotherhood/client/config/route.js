@@ -37,6 +37,28 @@ angular.module('brotherhood').config(['$urlRouterProvider', '$stateProvider', '$
                     //    templateUrl: $footer,
                     //}
                 }
+            })
+            .state('brotherhood/home', {
+                url: '/brotherhood/home',
+                resolve: {
+                    paralax: function(){
+                        setTimeout(function(){
+                            $('.parallax').parallax();
+                        }, 200);
+                    }
+                },
+                views: {
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
+                    "main": {
+                        templateUrl: 'module/brotherhood/client/view/default.ng.html',
+                        controller: 'DefaultCtrl'
+                    },
+                    //"footer": {
+                    //    templateUrl: $footer,
+                    //}
+                }
             });
 
         //$urlRouterProvider.otherwise("/brotherhood");

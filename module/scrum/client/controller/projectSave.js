@@ -57,15 +57,27 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$reactive', '$
 
         $scope.save = function () {
 
-            Meteor.call('projectSave', $scope.form, function (error) {
-                if (error) {
-                    Materialize.toast('Erro: ' + error, 4000);
-                } else {
-                    Materialize.toast('Saved successfully!', 4000);
-                    $scope.form = '';
-                    $mdDialog.hide();
-                }
-            });
+            isValid = true;
+            if (id) {
+                where = {$and: [{namespace: $scope.form.namespace}, {organization: organizationId}], _id: {$not: id}};
+            } else {
+                where = {$and: [{namespace: $scope.form.namespace}, {organization: organizationId}]};
+            }
+            spacenameExist = Project.findOne(where);
+
+            if (spacenameExist) {
+                Materialize.toast('Erro: ' + 'Namespace already exists for a product in this organization', 4000);
+            } else {
+                Meteor.call('projectSave', $scope.form, function (error) {
+                    if (error) {
+                        Materialize.toast('Erro: ' + error, 4000);
+                    } else {
+                        Materialize.toast('Saved successfully!', 4000);
+                        $scope.form = '';
+                        $mdDialog.hide();
+                    }
+                });
+            }
         };
 
         $scope.close = function () {
