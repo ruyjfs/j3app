@@ -26,7 +26,8 @@ angular.module('scrum').controller('TeamCtrl', [ '$scope', '$mdDialog', '$mdUtil
             },
             teams: function() {
                 var organizationId = this.getReactively('organizationId');
-                if (organizationId) {
+                console.log(organizationId);
+                if (organizationId && organizationId != 'organization') {
                     where = {organization: organizationId};
                 } else {
                     where = {$or: [{organization: null}, {organization: ''}]};
