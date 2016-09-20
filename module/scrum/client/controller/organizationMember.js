@@ -34,6 +34,7 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
 
             users = Meteor.users.find(selector).fetch();
             return users.map(function (user, index) {
+                user.name = user.name + ' ' + user.lastName;
                 // Imagem do gravatar.
                 if (user.emails && user.emails[0].address) {
                     user.image = 'http://www.gravatar.com/avatar/' + CryptoJS.MD5(user.emails[0].address).toString() + '?s=40&d=mm';
