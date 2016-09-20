@@ -18,6 +18,7 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
                 selector = {
                     $or: [
                         {name: {$regex:  `.*${strSearch}.*`, $options : 'i' }},
+                        {lastName: {$regex:  `.*${strSearch}.*`, $options : 'i' }},
                         {email: {$regex:  `.*${strSearch}.*`, $options : 'i' }},
                         {emails: {address: {$regex:  `.*${strSearch}.*`, $options : 'i' }}},
                     ]
