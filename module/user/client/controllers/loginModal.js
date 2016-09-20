@@ -23,6 +23,7 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
                     Materialize.toast('User not found!', 4000);
                 } else {
                     $mdDialog.hide();
+                    // console.info('scrum/organization');
                     $state.go('scrum/organization');
                 }
             });
