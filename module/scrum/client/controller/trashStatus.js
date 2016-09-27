@@ -5,8 +5,8 @@ angular.module('scrum').controller('TrashStatusCtrl', [ '$scope', '$mdDialog', '
             $state.go('scrum');
         }
 
-        this.id = $stateParams.id;
-        this.sprintId = $stateParams.sprintId;
+        this.id = $stateParams.product;
+        this.sprintId = Sprint.findOne({projectId: $stateParams.id, number: parseInt($stateParams.sprint)})._id;
 
 
         this.perPage = 5;

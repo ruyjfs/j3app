@@ -9,16 +9,61 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
         this.subscribe('message');
         this.subscribe('project');
         this.subscribe('team');
-        this.subscribe('burndown', function(){return [$stateParams.id]});
-        this.subscribe('status', function(){return [$stateParams.id]});
-        this.subscribe('note', function(){return [$stateParams.id]});
-        this.subscribe('story', function(){return [$stateParams.id]});
-        this.subscribe('sprint', function(){return [$stateParams.id]});
+        this.subscribe('burndown', function(){return [this.productId]});
+        this.subscribe('status', function(){return [this.productId]});
+        this.subscribe('note', function(){return [this.productId]});
+        this.subscribe('story', function(){return [this.productId]});
+        this.subscribe('sprint', function(){return [this.productId]});
         this.helpers({
+            organizationId: function(){
+                var id = 'organization';
+                if ($stateParams.organization !== 'organization') {
+                    var organization = Organization.findOne({$or: [{_id: $stateParams.organization}, {namespace: $stateParams.organization}]});
+                    if (organization) {
+                        id = organization._id;
+                    } else {
+                        id = $stateParams.organization;
+                    }
+                }
+                return id;
+            },
+            productId: function(){
+                var organizationId = this.getReactively('organizationId');
+                var id = 0;
+                if (organizationId) {
+                    if (organizationId === 'organization') {
+                        product = Project.findOne($stateParams.product);
+                    } else {
+                        product = Project.findOne({$or: [{$and: [{organization: organizationId}, {namespace: $stateParams.product}]}, {_id: $stateParams.product}]});
+                    }
+                    if (product) {
+                        id = $stateParams.id = product._id;
+                    } else {
+                        id = $stateParams.id;
+                    }
+                }
+                return id;
+            },
+            sprintId: function() {
+                var id = 0;
+                var productId = this.getReactively('productId');
+                if (productId) {
+                    var sprint = Sprint.findOne({$or: [{$and: [{projectId: productId}, {number: parseInt($stateParams.sprint)}]}, {_id: $stateParams.sprint}]});
+                    if (sprint) {
+                        id = sprint._id;
+                    } else {
+                        id = $stateParams.sprint;
+                    }
+                }
+                return id;
+            },
             sprint: function () {
-                project = Project.findOne($stateParams.id);
-                sprint = Sprint.findOne({_id: $stateParams.sprintId});
-
+                var productId = this.getReactively('productId');
+                var sprintId = this.getReactively('sprintId');
+                project = Project.findOne(productId);
+                sprint = Sprint.findOne({_id: sprintId});
+console.info(project);
+console.info(sprint);
                 tasks = ['1'];
                 daysCorrect = ['1'];
                 if (sprint) {
@@ -63,8 +108,8 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                     timeTotalTeams = timeTotal;
 
                     notes = Note.find({
-                        $and: [{sprintId: $stateParams.sprintId}],
-                        $or: [{projectId: $stateParams.id}, {projectId: null}]
+                        $and: [{sprintId: sprintId}],
+                        $or: [{projectId: productId}, {projectId: null}]
                     }).fetch();
 
                     // Calculando a quantidade de tempo das tarefas.
@@ -83,8 +128,8 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
 
                     // Calculando aquantidade de tarefas prontas.
                     notesDone = Note.find({
-                        $and: [{sprintId: $stateParams.sprintId}, {statusId: '1'}],
-                        $or: [{projectId: $stateParams.id}, {projectId: null}]
+                        $and: [{sprintId: sprintId}, {statusId: '1'}],
+                        $or: [{projectId: productId}, {projectId: null}]
                     }).fetch();
                     if (notesDone) {
                         timeTotal = 0;

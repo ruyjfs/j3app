@@ -3,12 +3,18 @@
 angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id', 'storyId', '$stateParams', '$reactive',
     function ($scope, $mdDialog, id, storyId, $stateParams, $reactive) {
         //$reactive(this).attach($scope);
+        //this.subscribe('users');
+        Meteor.subscribe('project');
 
         project = Project.findOne({'namespace': $stateParams.id});
         if (project) {
             $stateParams.id = project._id;
         }
 
+        Meteor.subscribe('team');
+        Meteor.subscribe('note');
+        Meteor.subscribe('story');
+        Meteor.subscribe('users');
         $scope.form = {};
         if (id) {
             $scope.form = Note.findOne(id);
@@ -22,18 +28,10 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id'
 
         if (storyId) {
             $scope.form.story = storyId;
-            if ($stateParams.sprintId != 1) {
-                $scope.form.sprintId = $stateParams.sprintId;
-                $scope.form.owner = Meteor.userId();
-            }
+            $scope.form.sprintId = Sprint.findOne({projectId: $stateParams.id, number: parseInt($stateParams.sprint)})._id;
+            $scope.form.owner = Meteor.userId();
         }
 
-        //this.subscribe('users');
-        Meteor.subscribe('project');
-        Meteor.subscribe('team');
-        Meteor.subscribe('note');
-        Meteor.subscribe('story');
-        Meteor.subscribe('users');
         $scope.helpers({
             stories: function () {
                 return Story.find({projectId: $stateParams.id, $or: [{trash: false}, {trash: null}, {_id: $scope.form.story}]}, {sort: {name: 1}});
