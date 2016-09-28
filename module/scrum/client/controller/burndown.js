@@ -9,11 +9,11 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
         this.subscribe('message');
         this.subscribe('project');
         this.subscribe('team');
-        this.subscribe('burndown', function(){return [this.productId]});
-        this.subscribe('status', function(){return [this.productId]});
-        this.subscribe('note', function(){return [this.productId]});
-        this.subscribe('story', function(){return [this.productId]});
-        this.subscribe('sprint', function(){return [this.productId]});
+        this.subscribe('burndown', function(){return [$stateParams.product]});
+        this.subscribe('status', function(){return [$stateParams.product]});
+        this.subscribe('note', function(){return [$stateParams.product]});
+        this.subscribe('story', function(){return [$stateParams.product]});
+        this.subscribe('sprint', function(){return [$stateParams.product]});
         this.helpers({
             organizationId: function(){
                 var id = 'organization';
@@ -48,6 +48,7 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                 var id = 0;
                 var productId = this.getReactively('productId');
                 if (productId) {
+                    console.info(productId);
                     var sprint = Sprint.findOne({$or: [{$and: [{projectId: productId}, {number: parseInt($stateParams.sprint)}]}, {_id: $stateParams.sprint}]});
                     if (sprint) {
                         id = sprint._id;
@@ -62,8 +63,6 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                 var sprintId = this.getReactively('sprintId');
                 project = Project.findOne(productId);
                 sprint = Sprint.findOne({_id: sprintId});
-console.info(project);
-console.info(sprint);
                 tasks = ['1'];
                 daysCorrect = ['1'];
                 if (sprint) {
@@ -111,6 +110,10 @@ console.info(sprint);
                         $and: [{sprintId: sprintId}],
                         $or: [{projectId: productId}, {projectId: null}]
                     }).fetch();
+
+                    console.info(sprintId);
+                    console.info(productId);
+                    console.info(notes);
 
                     // Calculando a quantidade de tempo das tarefas.
                     if (notes) {
@@ -283,7 +286,7 @@ console.info(sprint);
                 // Let's put a sequence number aside so we can use it in the event callbacks
                 var seq = 0,
                     delays = 80,
-                    durations = 500;
+                    durations = 150;
 
                 // Once the chart is fully created we reset the sequence
                 chart.on('created', function () {

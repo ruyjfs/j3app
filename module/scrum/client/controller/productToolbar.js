@@ -60,7 +60,6 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
             },
             sprint: function () {
                 var productId = this.getReactively('productId');
-                console.log(productId);
                 var sprintId = this.getReactively('sprintId');
                 dateNow = moment().format('x');
                 if (sprintId == '1' || sprintId == '') {
