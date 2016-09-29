@@ -1,12 +1,23 @@
 //Meteor.publish("message", function (contactId) {
-Meteor.publish("team", function (options, searchString) {
+Meteor.publish("team", function (organizationId, options, searchString) {
     if (this.userId){
-        selector = {
-            $or: [
-                {'userId' : this.userId},
-                {'members' : this.userId}
-            ]
-        };
+        if (organizationId && organizationId != 'organization') {
+            var organization = Organization.findOne({'namespace': organizationId});
+            if (organization) {
+                organizationId = organization._id;
+            }
+            where = {$or: [{organization: null}, {organization: ''}, {organization: organizationId}]};
+        } else {
+            where = {$or: [{organization: null}, {organization: ''}]};
+        }
+        selector = where;
+        //{
+            //$or: [
+                //{'userId' : this.userId},
+                //{'members' : this.userId},
+                //where
+        //    //]
+        //};
 
         if (typeof searchString === 'string' && searchString.length) {
                 selector.name = {

@@ -117,7 +117,7 @@ if (Meteor.isClient) {
         'No organization': 'Sem organização',
         'No organization products': 'Produtos sem organização',
 
-        'Teams': 'Times',
+        'Teams': 'Equipes',
         'Members': 'Membros',
         'Products': 'Produtos',
         'Visualization': 'Visualização',

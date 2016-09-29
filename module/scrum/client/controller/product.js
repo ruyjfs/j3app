@@ -17,7 +17,7 @@ angular.module('scrum').controller('ProductCtrl', ['$scope', '$mdDialog', '$mdSi
         //console.log(Meteor.userId());
         this.subscribe('users');
         this.subscribe('project');
-        this.subscribe('team');
+        this.subscribe('team', function(){return [$stateParams.organization]});
         this.subscribe('organization');
 
         var organizationNamespace = $stateParams.organization;

@@ -17,6 +17,8 @@ angular.module('scrum').controller('TeamSaveCtrl', [ '$scope', '$rootScope', '$m
             organization = Organization.findOne({'namespace': $stateParams.organization});
             organizationId = organization._id;
         }
+        console.log(organizationId);
+        console.log(organization);
         if (organization) {
             if (organization.members) {
                 whereUser = {_id: {$in: organization.members}};
@@ -35,9 +37,13 @@ angular.module('scrum').controller('TeamSaveCtrl', [ '$scope', '$rootScope', '$m
         if (id) {
             //$scope.form = $meteor.object(Project, id, false);
             $scope.form = Team.findOne(id);
+            if (!$scope.form.color) {
+                $scope.form.color = '#ffcc80';
+            }
             $scope.action = 'Edit';
         } else {
             $scope.form = {};
+            $scope.form.color = '#ffcc80';
             $scope.form.time = 1;
             $scope.action = 'Insert';
         }

@@ -5,17 +5,18 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$reactive', '$
         $reactive(this).attach($scope);
         //this.title = 'Project';
 
+        //this.subscribe('team');
+        //this.subscribe('users');
+        this.subscribe('organization');
+        //this.subscribe('team', function(){return [$stateParams.organization]});
         var organizationNamespace = $stateParams.organization;
         organizationId = '';
-        if (organizationNamespace != '0') {
+        if (organizationNamespace != 'organization') {
             var organization = Organization.findOne({namespace: organizationNamespace});
             if (organization) {
                 organizationId = organization._id;
             }
         }
-        //this.subscribe('team');
-        //this.subscribe('users');
-        this.subscribe('organization');
 
         if (id) {
             //$scope.form = $meteor.object(Project, id, false);
@@ -30,15 +31,20 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$reactive', '$
             $scope.form.organization = organizationId;
         }
 
-        if ($scope.form.teams) {
-            $scope.teams = Team.find({
-                $or: [{members : Meteor.userId()}, {userId : Meteor.userId()}, {_id: {$in: $scope.form.teams}}]
-            }, {sort: {name: 1}}).fetch();
+        if ($stateParams.organization != 'organization') {
+            $scope.teams =  Team.find({organization: organizationId}, {sort: {name: 1}}).fetch();
         } else {
-            $scope.teams =  Team.find({
-                $or: [{members : Meteor.userId()}, {userId : Meteor.userId()}]
-            }).fetch();
+            if ($scope.form.teams) {
+                $scope.teams = Team.find({
+                    $or: [{members : Meteor.userId()}, {userId : Meteor.userId()}, {_id: {$in: $scope.form.teams}}]
+                }, {sort: {name: 1}}).fetch();
+            } else {
+                $scope.teams =  Team.find({
+                    $or: [{members : Meteor.userId()}, {userId : Meteor.userId()}]
+                }, {sort: {name: 1}}).fetch();
+            }
         }
+
 
         if (organizationId == 0) {
             $scope.users = Meteor.users.find({}, {sort: {name: 1, lastName: 1}}).fetch();

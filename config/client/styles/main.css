@@ -3,6 +3,29 @@ body.md-toast-animating {
     /*background-color: rgba(0,0,0,.04);*/
 }
 
+/*md-tabs {*/
+    /*display: initial !important;*/
+    /*margin: 0;*/
+    /*border-radius: 2px;*/
+    /*overflow: hidden;*/
+    /*position: relative;*/
+    /*-webkit-flex-shrink: 0;*/
+    /*-ms-flex-negative: 0;*/
+    /*flex-shrink: 0;*/
+/*}*/
+
+/*md-content {*/
+    /*display: block;*/
+    /*/!*display: initial !important;*!/*/
+    /*position: relative;*/
+    /*overflow: auto;*/
+    /*-webkit-overflow-scrolling: touch;*/
+/*}*/
+
+.md-errors-spacer {
+    display: none;
+}
+
 .md-chips .md-chip-input-container {
     display: block;
     line-height: 32px;
