@@ -3,9 +3,6 @@ Meteor.publish('userStatus', function() {
 });
 Meteor.publish("users", function (strSearch, options) {
 
-    Counts.publish(this, 'totalUser', Team.find(selector), {
-        noReady: true
-    });
 
     selector = {};
     if (typeof strSearch === 'string' && strSearch.length) {
@@ -21,6 +18,10 @@ Meteor.publish("users", function (strSearch, options) {
 
         $options : 'i'
     };
+
+    Counts.publish(this, 'totalUser', Meteor.users.find(selector), {
+        noReady: true
+    });
 
     return Meteor.users.find(selector, options);
 });
