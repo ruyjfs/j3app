@@ -1,10 +1,11 @@
 Meteor.publish('userStatus', function() {
     return Meteor.users.find({});
 });
-Meteor.publish("users", function (strSearch, options) {
+Meteor.publish("users", function (strSearch, options, selector) {
 
-
-    selector = {};
+    if (!selector) {
+        selector = {};
+    }
     if (typeof strSearch === 'string' && strSearch.length) {
         selector.name = {
             $or: [

@@ -1,8 +1,17 @@
 angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDialog', '$mdUtil', '$log', '$reactive', '$rootScope', '$stateParams',
     function ($scope, $mdDialog, $mdUtil, $log, $reactive, $rootScope, $stateParams) {
         $reactive(this).attach($scope);
+
+        var members = null;
+        if (this.organization) {
+            members
+        }
         this.subscribe('users', function(){
-            return [this.getReactively('memberSearchText')];
+            return [
+                this.getReactively('memberSearchText'),
+                {},
+                {_id: {$in: this.getReactively('organization').members}}
+            ];
         });
         this.formAdd = {};
         this.subscribe('organization',  function(){}, function(){
@@ -67,6 +76,14 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
 
         this.searchText = '';
         this.helpers({
+            organization: function(){
+                if ($stateParams.organization !== 'organization') {
+                    var organization = Organization.findOne({$or: [{_id: $stateParams.organization}, {namespace: $stateParams.organization}]});
+                    return organization;
+                } else {
+                    return {};
+                }
+            },
             members: function() {
                 arrOrganization = Organization.findOne({namespace: organizationNamespace});
                 var searchString = this.getReactively('searchText');

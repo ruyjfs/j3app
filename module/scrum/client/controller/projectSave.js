@@ -32,7 +32,7 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$reactive', '$
         }
 
         if ($stateParams.organization != 'organization') {
-            $scope.teams =  Team.find({organization: organizationId}, {sort: {name: 1}}).fetch();
+            $scope.teams =  Team.find({$or: [{organization: null}, {organization: ''}, {organization: organizationId}]}, {sort: {name: 1}}).fetch();
         } else {
             if ($scope.form.teams) {
                 $scope.teams = Team.find({
