@@ -8,10 +8,17 @@ Meteor.publish("team", function (organizationId, options, searchString) {
             }
             selector = {
                 $or: [
-                    {'userId' : this.userId},
-                    {'members' : this.userId}
+                    {'userId': this.userId},
+                    {'members': this.userId}
                 ],
                 $and: [{$or: [{organization: null}, {organization: ''}, {organization: organizationId}]}]
+            };
+        } else if (organizationId == 'organization') {
+            selector = {
+                $or: [
+                    {'userId': this.userId},
+                    {'members': this.userId}
+                ]
             };
         } else {
             selector = {
