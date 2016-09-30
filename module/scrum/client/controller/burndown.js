@@ -48,7 +48,6 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                 var id = 0;
                 var productId = this.getReactively('productId');
                 if (productId) {
-                    console.info(productId);
                     var sprint = Sprint.findOne({$or: [{$and: [{projectId: productId}, {number: parseInt($stateParams.sprint)}]}, {_id: $stateParams.sprint}]});
                     if (sprint) {
                         id = sprint._id;
@@ -110,10 +109,6 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
                         $and: [{sprintId: sprintId}],
                         $or: [{projectId: productId}, {projectId: null}]
                     }).fetch();
-
-                    console.info(sprintId);
-                    console.info(productId);
-                    console.info(notes);
 
                     // Calculando a quantidade de tempo das tarefas.
                     if (notes) {

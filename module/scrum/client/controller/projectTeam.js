@@ -24,7 +24,6 @@ angular.module('scrum').controller('ProjectTeamCtrl', [ '$scope', '$mdDialog', '
         this.subscribe('sprint', function(){return [$stateParams.id]});
         this.helpers({
             teams: function() {
-                console.info($stateParams.id)
                 $stateParams.sprintId = Sprint.findOne({projectId: $stateParams.id, number: parseInt($stateParams.sprint)})._id;
 
                 project = Project.findOne($stateParams.id);
