@@ -4,23 +4,46 @@
         <!--Show Custom Toast-->
         <!--</md-button>-->
         <!--<md-content>-->
+        <div layout-gt-sm="row">
+            <md-input-container>
+                <!--<md-input-container class="md-block">-->
+                    <!--<label>{{ 'Members' | translate }}</label>-->
+                    <!--<md-select ng-model="form.members" id="members" aria-label=""  placeholder="Members" multiple="true" required>-->
+                        <!--<md-option  ng-repeat="member in vm.members" value="{{member._id}}">-->
+                            <!--{{member.name}}-->
+                        <!--</md-option>-->
+                    <!--</md-select>-->
+                <!--</md-input-container>-->
+                <md-select ng-model="vm.member" id="members" aria-label="" multiple="true" placeholder="Members">
+                    <md-option value="">
+                        {{ 'Ownerless' | translate }}
+                    </md-option>
+                    <md-option  ng-repeat="member in vm.members" value="{{member._id}}">
+                        {{member.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>{{ 'Search' | translate }}</label>
+                <input type="text" ng-model="vm.searchText"/>
+            </md-input-container>
+        </div>
         <table id="scrumy-board" cellspacing="0" class="live scrum" style="min-height: 300px;">
             <tbody id="scrumy-board-body">
-
             <section>
-                <md-subheader class="md-primary">
-                    <tr id="scrumy-board-header" style="position: relative; text-align: center;">
-                        <th id="story-header" style="text-align: center;">
-                            <span>{{ 'Story' | translate}}</span>
-                        </th>
-                        <th id="plus-header">
-                        </th>
-                        <th class="plus-header" ng-repeat="status in vm.states">
-                            <span>{{ status.name | translate}}</span> <br>
-                            <a href="#" class="select-all" style="display: none">{{ 'Select All' | translate}}</a>
-                        </th>
-                    </tr>
-                </md-subheader>
+                <!--<md-subheader class="md-primary">-->
+                    <!--<tr id="scrumy-board-header" style="position: relative; text-align: center;">-->
+                        <!--<th id="story-header" style="text-align: center;">-->
+                            <!--<span>{{ 'Story' | translate}}</span>-->
+                        <!--</th>-->
+                        <!--<th id="plus-header">-->
+                        <!--</th>-->
+                        <!--<th class="plus-header" ng-repeat="status in vm.states">-->
+                            <!--<span>{{ status.name | translate}}</span> <br>-->
+                            <!--<a href="#" class="select-all" style="display: none">{{ 'Select All' | translate}}</a>-->
+                        <!--</th>-->
+                    <!--</tr>-->
+                <!--</md-subheader>-->
                 <tr class="story-task-row" ng-repeat="story in vm.stories">
                     <td rowspan="" id="story-915989-title" class="stories">
                         <div id="story_editor_915989">

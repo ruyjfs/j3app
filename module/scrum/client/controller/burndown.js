@@ -8,7 +8,7 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
         this.subscribe('users');
         this.subscribe('message');
         this.subscribe('project');
-        this.subscribe('team');
+        this.subscribe('team', function(){return [$stateParams.organization]});
         this.subscribe('burndown', function(){return [$stateParams.product]});
         this.subscribe('status', function(){return [$stateParams.product]});
         this.subscribe('note', function(){return [$stateParams.product]});

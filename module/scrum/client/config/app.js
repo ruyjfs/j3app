@@ -72,6 +72,7 @@ if (Meteor.isClient) {
         'Nonexistent Sprint!': 'Não é possível por a tarefa nesta sprint.',
         'To-do': 'A fazer',
         'Done': 'Pronto',
+        'Ownerless': 'Sem responsável',
 
         'Week': 'Semana',
         'Skip weekend': 'Pular finais de semana',

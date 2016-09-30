@@ -35,7 +35,7 @@ angular.module('scrum').controller('PlanningPokerCtrl', [ '$scope', '$mdDialog',
         //Meteor.subscribe('project');
         this.subscribe('users');
         this.subscribe('project');
-        this.subscribe('team');
+        this.subscribe('team', function(){return [$stateParams.organization]});
         this.subscribe('status', function(){return [$stateParams.id]});
         this.subscribe('note', function(){return [$stateParams.id]});
         this.subscribe('story', function(){return [$stateParams.id]});

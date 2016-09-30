@@ -5,7 +5,7 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$reactive', '$
         $reactive(this).attach($scope);
         //this.title = 'Project';
 
-        //this.subscribe('team');
+        //this.subscribe('team', function(){return [$stateParams.organization]});
         //this.subscribe('users');
         this.subscribe('organization');
         //this.subscribe('team', function(){return [$stateParams.organization]});

@@ -16,7 +16,7 @@ angular.module('scrum').controller('OrganizationCtrl', ['$scope', '$mdDialog', '
 
         //console.log(Meteor.user()._id);
         this.subscribe('organization');
-        this.subscribe('team');
+        this.subscribe('team', function(){return [$stateParams.organization]});
         this.subscribe('project');
         this.subscribe('users');
         this.helpers({

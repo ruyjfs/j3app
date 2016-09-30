@@ -10,7 +10,7 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
         this.subscribe('users');
         this.subscribe('organization');
         this.subscribe('project');
-        this.subscribe('team');
+        this.subscribe('team', function(){return [$stateParams.organization]});
         //this.subscribe('status', function(){return [$stateParams.product]});
         //this.subscribe('note', function(){return [$stateParams.product]});
         //this.subscribe('story', function(){return [$stateParams.product]});

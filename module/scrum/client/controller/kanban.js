@@ -37,13 +37,47 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
         this.subscribe('users');
         this.subscribe('organization');
         this.subscribe('project');
-        this.subscribe('team');
+        this.subscribe('team', function(){return [$stateParams.organization]});
         this.subscribe('burndown', function(){return [$stateParams.product]});
         this.subscribe('status', function(){return [$stateParams.product]});
-        this.subscribe('note', function(){return [$stateParams.product]});
+        this.subscribe('note', function(){return [$stateParams.product, {}, this.getReactively('searchText')]});
         this.subscribe('story', function(){return [$stateParams.product]});
         this.subscribe('sprint', function(){return [$stateParams.product]});
+        //this.subscribe('users', function(){
+        //    console.log(this.getReactively('searchText'));
+        //    return [this.getReactively('searchText')];
+        //});
+
+//        var searchText = this.getReactively('searchText');
+//        selector = {story: story._id, sprintId: sprintId};
+//        if (typeof searchString === 'string' && searchString.length) {
+//            selector.name = {
+//                $regex:  `.*${searchString}.*`,
+//            $options : 'i'
+//        };
+//    }
+//var notes = Note.find(selector).fetch();
         this.helpers({
+            members: function () {
+                var productId = this.getReactively('productId');
+                project = Project.findOne(productId);
+                usersId = [];
+                if (project && project.teams) {
+                    teams = Team.find({_id: {$in: project.teams}}, {sort: {name: 1}}).fetch().map(function(team){
+                        if (team.members) {
+                            team.members.map(function(userId){
+                                usersId.push(userId);
+                            });
+                        }
+                        return team.members;
+                    });
+                }
+                if ($scope.form && $scope.form.owner){
+                    usersId.push($scope.form.owner);
+                }
+                users = Meteor.users.find({_id: {$in: usersId}}, {sort: {name: 1, lastName: 1}});
+                return users;
+            },
             organizationId: function(){
                 var id = 'organization';
                 if ($stateParams.organization !== 'organization') {
@@ -92,6 +126,7 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
             stories: function() {
                 var productId = this.getReactively('productId');
                 var sprintId = this.getReactively('sprintId');
+                var member = this.getReactively('member');
                 var stories = Story.find({$or: [{projectId: productId}, {projectId: null}]}, {sort: {order: 1, name: 1}}).map(function(story){
                     var states = Status.find({projectId: productId, $or: [{trash: false}, {trash: null}]}, {sort: {order: 1, name: 1}}).fetch();
                     states.unshift({name: 'To-do', _id: null});
@@ -99,7 +134,11 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                     story.states = states.map(function(status) {
                         var notes = [];
                         if (status && status._id) {
-                            notes = Note.find({story: story._id, statusId: status._id, sprintId: sprintId}).map(function(note) {
+                            selector = {story: story._id, statusId: status._id, sprintId: sprintId};
+                            if (member && member.length > 0) {
+                                selector.owner ={$in: member};
+                            }
+                            notes = Note.find(selector).map(function(note) {
                                 note.owner = Meteor.users.findOne(note.owner);
                                 if (note.owner && note.owner.status) {
                                     if (note.owner.status.lastLogin) {
@@ -144,7 +183,11 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                                 return note;
                             });
                         } else {
-                            notes = Note.find({story:story._id, sprintId: sprintId, $or: [{statusId: status._id}, {statusId: ''}]}).map(function(note) {
+                            selector = {story:story._id, sprintId: sprintId, $or: [{statusId: status._id}, {statusId: ''}]};
+                            if (member && member.length > 0) {
+                                selector.owner = {$in: member};
+                            }
+                            notes = Note.find(selector).map(function(note) {
                                 note.owner = Meteor.users.findOne(note.owner);
                                 if (note.owner && note.owner.status) {
 
@@ -197,7 +240,11 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
 
                     return story;
                 }).filter(function(story){
-                    var notes = Note.find({story:story._id, sprintId: sprintId}).fetch();
+                    if (member && member.length > 0) {
+                        var notes = Note.find({story:story._id, sprintId: sprintId, owner: {$in: member}}).fetch();
+                    } else {
+                        var notes = Note.find({story:story._id, sprintId: sprintId}).fetch();
+                    }
                     return (notes.length > 0);
                 });
 

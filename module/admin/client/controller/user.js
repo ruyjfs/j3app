@@ -9,7 +9,7 @@
 
         //console.log(Meteor.user()._id);
         this.subscribe('project');
-        this.subscribe('team');
+        this.subscribe('team', function(){return [$stateParams.organization]});
         this.helpers({
             users: function () {
                 Meteor.subscribe('users');

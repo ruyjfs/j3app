@@ -3,7 +3,7 @@
 angular.module('user').controller('Friend2Ctrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$reactive',
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive) {
         $reactive(this).attach($scope);
-        this.subscribe('team');
+        this.subscribe('team', function(){return [$stateParams.organization]});
         this.helpers({
             friend: function() {
                 //Meteor.subscribe('users');
