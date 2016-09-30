@@ -96,7 +96,6 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
         });
 
         this.total = function() {
-            console.log(Counts.get('totalUser'));
             return Counts.get('totalUser');
         };
         this.pageChanged = function(newPage) {

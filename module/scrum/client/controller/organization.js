@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams'',
 //    function($scope, $stateParams){
-angular.module('scrum').controller('OrganizationCtrl', ['$scope', '$mdDialog', '$mdSidenav', '$log', '$reactive', '$rootScope',
-    function ($scope, $mdDialog, $mdSidenav, $log, $reactive, $rootScope) {
+angular.module('scrum').controller('OrganizationCtrl', ['$scope', '$mdDialog', '$mdSidenav', '$log', '$reactive', '$rootScope', '$stateParams',
+    function ($scope, $mdDialog, $mdSidenav, $log, $reactive, $rootScope, $stateParams) {
         $reactive(this).attach($scope);
 
         //Materialize.toast(
@@ -16,7 +16,7 @@ angular.module('scrum').controller('OrganizationCtrl', ['$scope', '$mdDialog', '
 
         //console.log(Meteor.user()._id);
         this.subscribe('organization');
-        this.subscribe('team', function(){return [$stateParams.organization]});
+        this.subscribe('team');
         this.subscribe('project');
         this.subscribe('users');
         this.helpers({

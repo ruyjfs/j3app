@@ -38,7 +38,7 @@
                 </div>
                 <md-input-container class="md-block">
                     <label>{{ 'Members' | translate }}</label>
-                    <md-select ng-model="form.members" id="members" aria-label=""  placeholder="Members" multiple="true" required>
+                    <md-select ng-model="form.members" id="members" aria-label=""  placeholder="{{ 'Members' | translate }}" multiple="true" required>
                         <md-option  ng-repeat="member in members" value="{{member._id}}">
                             {{member.name}}
                         </md-option>
