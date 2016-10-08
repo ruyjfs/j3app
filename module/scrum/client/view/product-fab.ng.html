@@ -2,34 +2,37 @@
     <div class="fixed-action-btn horizontal">
         <md-fab-speed-dial md-direction="up" class="md-scale">
             <md-fab-trigger>
-                <md-button aria-label="menu" class="md-fab btn-floating btn-large hoverable animated fadeInUp">
-                    <md-tooltip md-direction="left" md-visible="tooltipVisible">Add</md-tooltip>
-                    <!--<md-icon md-svg-src="img/icons/menu.svg" aria-label="menu"></md-icon>-->
-                    <i title="" class="material-icons">add</i>
-                </md-button>
-            </md-fab-trigger>
-            <md-fab-actions>
-                <!--<div ng-repeat="item in vm.items">-->
-                <md-button aria-label="Project" class="md-fab md-primary btn-floating md-raised md-mini red hoverable"
-                           ng-click="vm.modalProjectSave($event)" style="line-height: 0px;">
+                <md-button ng-click="vm.modalProjectSave($event)" aria-label="menu" class="md-fab btn-floating btn-large hoverable animated fadeInUp red">
                     <md-tooltip md-direction="left" md-visible="tooltipVisible"
                                 md-autohide="false">
-                        {{ 'Product' | translate}}
+                        {{ 'Add Product' | translate}}
                     </md-tooltip>
-                    <!--<md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>-->
-                    <i class="material-icons">business_center</i>
+                    <!--<md-icon md-svg-src="img/icons/menu.svg" aria-label="menu"></md-icon>-->
+                    <i title="" class="material-icons">business_center</i>
                 </md-button>
-                <md-button aria-label="Team" class="md-fab  md-primary btn-floating md-raised md-mini blue hoverable"
-                           ng-click="vm.modalTeamSave($event)" style="line-height: 0px;">
-                    <md-tooltip md-direction="top" md-visible="tooltipVisible"
-                                md-autohide="false">
-                        {{ 'Team' | translate}}
-                    </md-tooltip>
-                    <!--<md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>-->
-                    <i class="material-icons">group_work</i>
-                </md-button>
+            </md-fab-trigger>
+            <!--<md-fab-actions>-->
+                <!--<div ng-repeat="item in vm.items">-->
+                <!--<md-button aria-label="Project" class="md-fab md-primary btn-floating md-raised md-mini red hoverable"-->
+                           <!--ng-click="vm.modalProjectSave($event)" style="line-height: 0px;">-->
+                    <!--<md-tooltip md-direction="left" md-visible="tooltipVisible"-->
+                                <!--md-autohide="false">-->
+                        <!--{{ 'Product' | translate}}-->
+                    <!--</md-tooltip>-->
+                    <!--&lt;!&ndash;<md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>&ndash;&gt;-->
+                    <!--<i class="material-icons">business_center</i>-->
+                <!--</md-button>-->
+                <!--<md-button aria-label="Team" class="md-fab  md-primary btn-floating md-raised md-mini blue hoverable"-->
+                           <!--ng-click="vm.modalTeamSave($event)" style="line-height: 0px;">-->
+                    <!--<md-tooltip md-direction="top" md-visible="tooltipVisible"-->
+                                <!--md-autohide="false">-->
+                        <!--{{ 'Team' | translate}}-->
+                    <!--</md-tooltip>-->
+                    <!--&lt;!&ndash;<md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>&ndash;&gt;-->
+                    <!--<i class="material-icons">group_work</i>-->
+                <!--</md-button>-->
                 <!--</div>-->
-            </md-fab-actions>
+            <!--</md-fab-actions>-->
         </md-fab-speed-dial>
 
         <!--<a class="btn-floating btn-large waves-effect waves-light deep-orange hoverable" href="#">-->

@@ -313,6 +313,21 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
                 }
             });
         };
+
+
+        this.modalStatusSave = function (ev, id) {
+            $mdDialog.show({
+                controller: 'StatusSaveCtrl',
+                templateUrl: 'module/scrum/client/view/status-save.ng.html',
+                clickOutsideToClose: true,
+                locals: {'id': id},
+                targetEvent: ev
+            }).then(function (answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
+        };
         //$scope.showCustomToast = function() {
         //    $mdToast.show({
         //        hideDelay   : 300000,

@@ -17,7 +17,6 @@ angular.module("scrum").run(['$rootScope', '$state', function($rootScope, $state
     //if (!Meteor.userId() && $state.current.url !== '/scrum') {
     //    $state.go('scrum');
     //}
-
 }]);
 
 /**
@@ -31,6 +30,23 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
         var $footer = 'module/scrum/client/view/footer.ng.html';
 
         $stateProvider
+            .state('scrum/', {
+                url: '/scrum/',
+                views: {
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
+                    "header2": {
+                        templateUrl: 'module/scrum/client/view/header-toolbar-organization.ng.html',
+                    },
+                    "mainZoom": {
+                        templateUrl: 'module/scrum/client/view/organization.ng.html',
+                    },
+                    "main2": {
+                        templateUrl: 'module/scrum/client/view/organization-fab.ng.html',
+                    },
+                }
+            })
             .state('scrum/organization/all', {
                 url: '/scrum/organization',
                 views: {
@@ -80,7 +96,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                         templateUrl: 'module/scrum/client/view/team.ng.html',
                     },
                     "main2": {
-                        templateUrl: 'module/scrum/client/view/product-fab.ng.html',
+                        templateUrl: 'module/scrum/client/view/team-fab.ng.html',
                     },
                 }
                 //controller: 'TeamCtrl'
@@ -193,7 +209,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                         templateUrl: 'module/scrum/client/view/kanban.ng.html',
                     },
                     "main2": {
-                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                        templateUrl: 'module/scrum/client/view/kanban-fab.ng.html',
                     },
                 }
             })
@@ -271,9 +287,9 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     "mainBounce": {
                         templateUrl: 'module/scrum/client/view/sprint.ng.html',
                     },
-                    "main2": {
-                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
-                    },
+                    //"main2": {
+                    //    templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                    //},
                 }
             })
             .state('scrum/organization/product/trash', {
@@ -285,9 +301,9 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     "mainBounce": {
                         templateUrl: 'module/scrum/client/view/trash.ng.html',
                     },
-                    "main2": {
-                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
-                    },
+                    //"main2": {
+                    //    templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                    //},
                 }
             })
             .state('scrum/organization/product/status', {
@@ -303,7 +319,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                         templateUrl: 'module/scrum/client/view/status.ng.html',
                     },
                     "main2": {
-                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                        templateUrl: 'module/scrum/client/view/status-fab.ng.html',
                     },
                 }
             })
@@ -320,7 +336,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                         templateUrl: 'module/scrum/client/view/story.ng.html',
                     },
                     "main2": {
-                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                        templateUrl: 'module/scrum/client/view/story-fab.ng.html',
                     },
                 }
             })
@@ -336,9 +352,9 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     "mainBounce": {
                         templateUrl: 'module/scrum/client/view/project-team.ng.html',
                     },
-                    "main2": {
-                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
-                    },
+                    //"main2": {
+                    //    templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                    //},
                 }
             })
             .state('scrum/organization/product/planning-poker', {
@@ -353,9 +369,9 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     "mainBounce": {
                         templateUrl: 'module/scrum/client/view/planning-poker.ng.html',
                     },
-                    "main2": {
-                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
-                    },
+                    //"main2": {
+                    //    templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                    //},
                 }
             })
             .state('scrum/organization/product/backlog', {
@@ -387,9 +403,9 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     "mainBounce": {
                         templateUrl: 'module/scrum/client/view/burndown.ng.html',
                     },
-                    "main2": {
-                        templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
-                    },
+                    //"main2": {
+                    //    templateUrl: 'module/scrum/client/view/product-fab-content.ng.html',
+                    //},
                 }
             });
         var strDomain = window.location.hostname;

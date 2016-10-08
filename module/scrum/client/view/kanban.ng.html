@@ -7,18 +7,19 @@
         <div layout-gt-sm="row">
             <md-input-container>
                 <!--<md-input-container class="md-block">-->
-                    <!--<label>{{ 'Members' | translate }}</label>-->
-                    <!--<md-select ng-model="form.members" id="members" aria-label=""  placeholder="Members" multiple="true" required>-->
-                        <!--<md-option  ng-repeat="member in vm.members" value="{{member._id}}">-->
-                            <!--{{member.name}}-->
-                        <!--</md-option>-->
-                    <!--</md-select>-->
+                <!--<label>{{ 'Members' | translate }}</label>-->
+                <!--<md-select ng-model="form.members" id="members" aria-label=""  placeholder="Members" multiple="true" required>-->
+                <!--<md-option  ng-repeat="member in vm.members" value="{{member._id}}">-->
+                <!--{{member.name}}-->
+                <!--</md-option>-->
+                <!--</md-select>-->
                 <!--</md-input-container>-->
-                <md-select ng-model="vm.member" id="members" aria-label="" multiple="true" placeholder="{{ 'Members' | translate }}">
+                <md-select ng-model="vm.member" id="members" aria-label="" multiple="true"
+                           placeholder="{{ 'Members' | translate }}">
                     <md-option value="">
                         {{ 'Ownerless' | translate }}
                     </md-option>
-                    <md-option  ng-repeat="member in vm.members" value="{{member._id}}">
+                    <md-option ng-repeat="member in vm.members" value="{{member._id}}">
                         {{member.name}}
                     </md-option>
                 </md-select>
@@ -32,17 +33,34 @@
             <tbody id="scrumy-board-body">
             <section>
                 <!--<md-subheader class="md-primary">-->
-                    <tr id="scrumy-board-header" style="position: relative; text-align: center;">
-                        <th id="story-header" style="text-align: center;">
-                            <span>{{ 'Story' | translate}}</span>
-                        </th>
-                        <th id="plus-header">
-                        </th>
-                        <th class="plus-header" ng-repeat="status in vm.states">
-                            <span>{{ status.name | translate}}</span> <br>
-                            <a href="#" class="select-all" style="display: none">{{ 'Select All' | translate}}</a>
-                        </th>
-                    </tr>
+                <tr id="scrumy-board-header" style="position: relative; text-align: center;">
+                    <th id="story-header" style="text-align: center;">
+                        <span>{{ 'Story' | translate}}</span>
+                    </th>
+                    <th id="plus-header">
+                        <md-button class="md-fab md-mini hoverable purple" aria-label="Edit"
+                                   ng-click="vm.modalStatusSave($event)" style="line-height: 0;">
+                            <md-tooltip md-direction="top">{{ 'Add status' | translate}}</md-tooltip>
+                            <!--<md-icon md-svg-icon="content:ic_noteadd_24px" aria-label="Edit"></md-icon>-->
+                            <i title="" class="material-icons ng-scope">flag</i>
+                            <!--<i title="" class="material-icons ng-scope" style="-->
+                            <!--position: absolute;-->
+                            <!--display: block;-->
+                            <!--top: 12px;-->
+                            <!--left: 11px;-->
+                            <!--/* background-color: rgb(239,108,0); */-->
+                            <!--color: rgb(239,108,0);-->
+                            <!--font-size: 16px;-->
+                            <!--font-weight: bold;">add</i>-->
+                        </md-button>
+                    </th>
+                    <th class="plus-header" ng-repeat="status in vm.states">
+                        <span>{{ status.name | translate}}</span> <br>
+                        <a href="#" class="select-all" style="display: none">{{ 'Select All' | translate}}</a>
+                    </th>
+                    <!--<th id="plus-header">-->
+                    <!--</th>-->
+                </tr>
                 <!--</md-subheader>-->
                 <tr class="story-task-row" ng-repeat="story in vm.stories">
                     <td rowspan="" id="story-915989-title" class="stories">
@@ -56,10 +74,19 @@
                     </td>
                     <td class="verify centered" style="display: grid; vertical-align: middle;">
                         <md-button class="md-fab md-mini hoverable" aria-label="Edit"
-                                   ng-click="modalNoteSave($event, '', story._id)">
-                            <md-tooltip md-direction="left">Add task</md-tooltip>
-                            <md-icon md-svg-icon="content:ic_add_24px" aria-label="Edit"></md-icon>
-                            <!--<i title="" class="material-icons ng-scope">add</i>-->
+                                   ng-click="modalNoteSave($event, '', story._id)" style="line-height: 0;">
+                            <md-tooltip md-direction="top">{{ 'Add task' | translate}}</md-tooltip>
+                            <!--<md-icon md-svg-icon="content:ic_noteadd_24px" aria-label="Edit"></md-icon>-->
+                            <i title="" class="material-icons ng-scope">note</i>
+                            <!--<i title="" class="material-icons ng-scope" style="-->
+    <!--position: absolute;-->
+    <!--display: block;-->
+    <!--top: 12px;-->
+    <!--left: 11px;-->
+    <!--/* background-color: rgb(239,108,0); */-->
+    <!--color: rgb(239,108,0);-->
+    <!--font-size: 16px;-->
+    <!--font-weight: bold;">add</i>-->
                         </md-button>
                     </td>
                     <td data-sortable-row="{{story._id}}" data-statusId="{{status._id}}"
@@ -78,9 +105,8 @@
                             <span class="note-notHandle text-darken-4">{{note.owner.name}}
                                 <i class=" activator material-icons right" style="">more_vert</i>
                             </span>
-
+                                <md-tooltip md-direction="top" style="font-size: 18px; text-justify: auto;">{{note.description}}</md-tooltip>
                                 <p>{{note.description}}</p>
-
                                 <p></p>
                             </div>
                             <div class="card-reveal" layout="row" style="padding: 0px;" layout-align="end end">

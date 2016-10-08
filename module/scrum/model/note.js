@@ -35,6 +35,12 @@ Meteor.methods({
         formNew.statusId = form.statusId;
         id = form.noteId;
         delete formNew._id;
+
+        if ( (formNew.statusId == 1 && formOld.statusId != 1) || (formNew.statusId != 1 && formOld.statusId == 1) ) {
+            formNew.dateDone = new Date();
+        } else {
+            formNew.dateDone = '';
+        }
         Note.update(id, { $set: formNew});
 
         Meteor.call('burndownSave', form, function (error, result) {

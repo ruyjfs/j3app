@@ -24,6 +24,9 @@
                 <!--<label></label>-->
                 <!--<md-input-container class="md-block">-->
                     <p ng-if="form.createdAt"><b>{{'Created at' | translate}}</b> {{form.createdAt}}</p>
+                    <p ng-if="form.dateDone"><b>{{'Done in' | translate}}</b> {{form.dateDone}}</p>
+                    <p ng-if="form.createdBy"><b>{{'Created by' | translate}}</b> {{form.createdBy}}</p>
+                    <p ng-if="form.createdBy"><b>{{'Done by' | translate}}</b> {{form.doneBy}}</p>
                 <!--</md-input-container>-->
             </div>
         </md-dialog-content>

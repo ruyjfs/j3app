@@ -4,6 +4,12 @@ angular.module('scrum').controller('NoteViewCtrl', [ '$scope', '$mdDialog', 'id'
     function ($scope, $mdDialog, id, storyId, $stateParams, $reactive) {
         //$reactive(this).attach($scope);
 
+        //this.subscribe('users');
+        Meteor.subscribe('project');
+        Meteor.subscribe('team');
+        Meteor.subscribe('note');
+        Meteor.subscribe('story');
+        Meteor.subscribe('users');
         $scope.form = {};
         if (id) {
             $scope.form = Note.findOne(id);
@@ -12,6 +18,23 @@ angular.module('scrum').controller('NoteViewCtrl', [ '$scope', '$mdDialog', 'id'
                 $scope.form.createdAt = moment($scope.form.createdAt).format('L H[h]m');
             } else {
                 $scope.form.createdAt = '';
+            }
+            if ($scope.form.dateDone) {
+                $scope.form.dateDone = moment($scope.form.dateDone).format('L H[h]m');
+            } else {
+                $scope.form.dateDone = '';
+            }
+            $scope.form.user = Meteor.users.findOne($scope.form.userId);
+            if ($scope.form.user) {
+                $scope.form.createdBy = $scope.form.user.name + ' ' + $scope.form.user.lastName;
+            } else {
+                $scope.form.createdBy = '';
+            }
+            $scope.form.owner = Meteor.users.findOne($scope.form.owner);
+            if ($scope.form.owner) {
+                $scope.form.doneBy = $scope.form.owner.name + ' ' + $scope.form.owner.lastName;
+            } else {
+                $scope.form.doneBy = '';
             }
         } else {
             $scope.form.projectId = $stateParams.id;
@@ -26,12 +49,6 @@ angular.module('scrum').controller('NoteViewCtrl', [ '$scope', '$mdDialog', 'id'
             }
         }
 
-        //this.subscribe('users');
-        Meteor.subscribe('project');
-        Meteor.subscribe('team');
-        Meteor.subscribe('note');
-        Meteor.subscribe('story');
-        Meteor.subscribe('users');
         $scope.helpers({
             stories: function () {
                 return Story.find({projectId: $stateParams.id}, {sort: {name: 1}});

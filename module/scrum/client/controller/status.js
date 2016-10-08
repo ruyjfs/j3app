@@ -1,11 +1,11 @@
 angular.module('scrum').controller('StatusCtrl', [ '$scope', '$mdDialog', '$reactive', '$stateParams',
     function ($scope, $mdDialog, $reactive, $stateParams) {
         $reactive(this).attach($scope);
-        if (!$stateParams.id) {
+        if (!$stateParams.product) {
             $state.go('scrum');
         }
 
-        this.id = $stateParams.id;
+        this.id = $stateParams.product;
         this.sprintId = $stateParams.sprintId;
 
 

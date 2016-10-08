@@ -73,10 +73,19 @@ if (Meteor.isClient) {
         'To-do': 'A fazer',
         'Done': 'Pronto',
         'Ownerless': 'Sem responsável',
+        'Add Status': 'Adicionar um status',
+        'Add Sask': 'Adicionar uma tarefa',
+        'Add Story': 'Adicionar uma história',
+        'Add Organization': 'Adicionar uma organização',
+        'Add Product': 'Adicionar um produto',
+        'Add Team': 'Adicionar uma equipe',
 
         'Week': 'Semana',
         'Skip weekend': 'Pular finais de semana',
         'Created at': 'Criado em',
+        'Created by': 'Criado por',
+        'Done in': 'Feito em',
+        'Done by': 'Feito por',
 
         // Team
         'Time per member': 'Tempo por membro',

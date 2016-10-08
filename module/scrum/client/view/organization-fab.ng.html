@@ -2,25 +2,28 @@
     <div class="fixed-action-btn horizontal">
         <md-fab-speed-dial md-direction="up" class="md-scale">
             <md-fab-trigger>
-                <md-button aria-label="menu" class="md-fab btn-floating btn-large hoverable animated fadeInUp">
-                    <md-tooltip md-direction="left" md-visible="tooltipVisible">Add</md-tooltip>
-                    <!--<md-icon md-svg-src="img/icons/menu.svg" aria-label="menu"></md-icon>-->
-                    <i title="" class="material-icons">add</i>
-                </md-button>
-            </md-fab-trigger>
-            <md-fab-actions>
-                <!--<div ng-repeat="item in vm.items">-->
-                <md-button aria-label="Project" class="md-fab md-primary btn-floating md-raised md-mini red hoverable"
-                           ng-click="vm.modalOrganizationSave($event)" style="line-height: 0px;">
+                <md-button ng-click="vm.modalOrganizationSave($event)" aria-label="menu" class="md-fab btn-floating btn-large hoverable red  accent-4 animated fadeInUp">
                     <md-tooltip md-direction="left" md-visible="tooltipVisible"
                                 md-autohide="false">
-                        {{ 'Organization' | translate}}
+                        {{ 'Add Organization' | translate}}
                     </md-tooltip>
-                    <!--<md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>-->
-                    <i class="material-icons">location_city</i>
+                    <!--<md-icon md-svg-src="img/icons/menu.svg" aria-label="menu"></md-icon>-->
+                    <i title="" class="material-icons">location_city</i>
                 </md-button>
-                <!--</div>-->
-            </md-fab-actions>
+            </md-fab-trigger>
+            <!--<md-fab-actions>-->
+                <!--&lt;!&ndash;<div ng-repeat="item in vm.items">&ndash;&gt;-->
+                <!--<md-button aria-label="Project" class="md-fab md-primary btn-floating md-raised md-mini red hoverable"-->
+                           <!--ng-click="vm.modalOrganizationSave($event)" style="line-height: 0px;">-->
+                    <!--<md-tooltip md-direction="left" md-visible="tooltipVisible"-->
+                                <!--md-autohide="false">-->
+                        <!--{{ 'Organization' | translate}}-->
+                    <!--</md-tooltip>-->
+                    <!--&lt;!&ndash;<md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>&ndash;&gt;-->
+                    <!--<i class="material-icons">location_city</i>-->
+                <!--</md-button>-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--</md-fab-actions>-->
         </md-fab-speed-dial>
 
         <!--<a class="btn-floating btn-large waves-effect waves-light deep-orange hoverable" href="#">-->

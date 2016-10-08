@@ -31,6 +31,7 @@ angular.module("user").controller("ModulesGridCtrl", ['$scope', '$state', '$mdDi
         }
         $scope.listItemClick = function($index, $link) {
             titleMiddle = '';
+            console.log($link);
             $state.go($link);
             var clickedItem = $scope.items[$index];
             $mdBottomSheet.hide(clickedItem);
