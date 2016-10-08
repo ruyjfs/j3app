@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id', 'storyId', '$stateParams', '$reactive',
-    function ($scope, $mdDialog, id, storyId, $stateParams, $reactive) {
+angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id', 'storyId', 'sprint', '$stateParams', '$reactive',
+    function ($scope, $mdDialog, id, storyId, sprint, $stateParams, $reactive) {
         //$reactive(this).attach($scope);
         //this.subscribe('users');
         Meteor.subscribe('project');
@@ -24,6 +24,10 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id'
             $scope.form.projectId = $stateParams.id;
             $scope.form.time = 1;
             $scope.action = 'Insert';
+        }
+
+        if (sprint) {
+            $scope.form.sprintId = Sprint.findOne({projectId: $stateParams.id, number: parseInt($stateParams.sprint)})._id;
         }
 
         if (storyId) {

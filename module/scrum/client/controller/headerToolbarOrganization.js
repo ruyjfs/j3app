@@ -28,7 +28,8 @@ angular.module('scrum').controller('HeaderToolbarOrganizationCtrl', ['$scope', '
                 targetEvent: ev,
                 locals: {
                     id: id,
-                    storyId: storyId
+                    storyId: storyId,
+                    sprint: ''
                 }
             }).then(function (answer) {
                 $scope.status = 'You said the information was "' + answer + '".';

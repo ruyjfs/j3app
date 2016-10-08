@@ -5,7 +5,9 @@ angular.module('scrum').controller('ProductFabContentCtrl', ['$scope', '$mdDialo
         $('#logo-middle').show();
         $reactive(this).attach($scope);
 
-        $scope.modalNoteSave = function (ev, id, storyId) {
+        $scope.sprint = $stateParams;
+
+        $scope.modalNoteSave = function (ev, id, storyId, sprint) {
             $mdDialog.show({
                 controller: 'NoteSaveCtrl',
                 templateUrl: 'module/scrum/client/view/note-save.ng.html',
@@ -13,7 +15,8 @@ angular.module('scrum').controller('ProductFabContentCtrl', ['$scope', '$mdDialo
                 targetEvent: ev,
                 locals: {
                     id: id,
-                    storyId: storyId
+                    storyId: storyId,
+                    sprint: sprint
                 }
             }).then(function (answer) {
                 $scope.status = 'You said the information was "' + answer + '".';
