@@ -74,7 +74,7 @@ if (Meteor.isClient) {
         'Done': 'Pronto',
         'Ownerless': 'Sem responsável',
         'Add Status': 'Adicionar um status',
-        'Add Sask': 'Adicionar uma tarefa',
+        'Add Task': 'Adicionar uma tarefa',
         'Add Story': 'Adicionar uma história',
         'Add Organization': 'Adicionar uma organização',
         'Add Product': 'Adicionar um produto',
