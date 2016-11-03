@@ -108,7 +108,6 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
                         sort: this.getReactively('sort')
                     });
                     //this.getReactively('total') = Meteor.users.find(selector).fetch().length;
-                    console.log(Meteor.users.find(selector).fetch().length);
                     return users;
                 } else {
                     return [];
@@ -116,7 +115,9 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
             }
         });
 
-        this.total = '';
+        this.total = function() {
+            return Counts.get('totalUser');
+        };
         this.pageChanged = function(newPage) {
             this.page = newPage;
         };
