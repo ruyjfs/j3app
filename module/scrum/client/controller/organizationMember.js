@@ -4,15 +4,16 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
 
         var members = null;
         if (this.organization) {
-            members
+            //members
         }
-        this.subscribe('users', function(){
-            return [
-                this.getReactively('memberSearchText'),
-                {},
-                {_id: {$in: this.getReactively('organization').members}}
-            ];
-        });
+        //this.subscribe('users', function(){
+        //    return [
+        //        this.getReactively('searchText'),
+        //        {},
+        //        {_id: {$in: this.getReactively('members')}}
+        //    ];
+        //});
+        //console.log(this.getReactively('members'));
         this.formAdd = {};
         this.subscribe('organization',  function(){}, function(){
             var organization = Organization.findOne({namespace: organizationNamespace});
@@ -92,6 +93,7 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
                     selector = {
                         $or: [
                             {name: {$regex:  `.*${searchString}.*`, $options : 'i' }},
+                            {lastName: {$regex:  `.*${searchString}.*`, $options : 'i' }},
                             {email: {$regex:  `.*${searchString}.*`, $options : 'i' }},
                             {emails: {address: {$regex:  `.*${searchString}.*`, $options : 'i' }}},
                         ]
@@ -105,6 +107,8 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
                         skip: parseInt((this.getReactively('page') - 1) * this.getReactively('perPage')),
                         sort: this.getReactively('sort')
                     });
+                    //this.getReactively('total') = Meteor.users.find(selector).fetch().length;
+                    console.log(Meteor.users.find(selector).fetch().length);
                     return users;
                 } else {
                     return [];
@@ -112,9 +116,7 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
             }
         });
 
-        this.total = function() {
-            return Counts.get('totalUser');
-        };
+        this.total = '';
         this.pageChanged = function(newPage) {
             this.page = newPage;
         };

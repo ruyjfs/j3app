@@ -6,6 +6,9 @@ Meteor.publish("users", function (strSearch, options, selector) {
     if (!selector) {
         selector = {};
     }
+
+    //console.log('strSearch');
+    //console.log(strSearch);
     if (typeof strSearch === 'string' && strSearch.length) {
         selector.name = {
             $or: [
