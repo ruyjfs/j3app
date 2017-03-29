@@ -16,6 +16,9 @@ angular.module("user").controller("ResetCtrl", ['$scope', '$reactive', '$state',
                 from: '"j3scrum Accounts" <no-reply@j3scrum.com>'
             };
 
+
+            console.log('$scope.dataForm.email');
+            console.log($scope.dataForm.email);
             //Accounts.emailTemplates.siteName = "j3scrum";
             //Accounts.emailTemplates.from = '"j3scrum Accounts" <no-reply@j3scrum.com>';
             //Accounts.emailTemplates.headers = 'Olá. Para resetar sua senha é simples, basta clicar no link abaixo.';
