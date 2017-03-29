@@ -43,10 +43,10 @@ if (Meteor.isServer) {
             // username: 'no-reply@j3scrum.com',
             // password: 'j3scrumno-reply',
             // server:   'smtp.zoho.com',
+            // port: 587
             username: 'no-reply@j3rotherhood.com',
             password: 'j3no-reply',
             server:   'smtp-relay.gmail.com',
-            // port: 587
             port: 25
         };
 

@@ -47,8 +47,10 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
                     } else {
                         Materialize.toast('Check the link in your email to reset the password.', 4000);
                     }
+                    console.log(err);
                 }
             );
+            console.log('Emvio de email:');
             $mdDialog.hide();
         };
 
