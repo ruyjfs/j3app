@@ -11,9 +11,24 @@ if (Meteor.isServer) {
         // process.env.MAIL_URL="smtp://no-reply:j3scrumno-reply@smtp.zoho.com:25";
         // process.env.MAIL_URL="smtp://no-reply:Z6n2MFqPefVN@smtp.zoho.com:587";
         // process.env.MAIL_URL="smtp://no-reply:Z6n2MFqPefVN@smtp.zoho.com:587";
-        process.env.MAIL_URL="smtp://no-reply:j3scrumno-reply@smtp.zoho.com:587";
+        // process.env.MAIL_URL="smtp://no-reply:j3scrumno-reply@smtp.zoho.com:587";
         // process.env.MAIL_URL="smtp://no-reply:j3scrumno-reply@smtp.zoho.com:465";
         // process.env.MAIL_URL="smtp://ruy:Ruyjr-1478953@smtp.zoho.com:465";
         // Z6n2MFqPefVN
-    });
+
+
+
+        smtp = {
+            username: 'ruy',   // eg: server@gentlenode.com
+            password: 'Ruyjr-1478953',   // eg: 3eeP1gtizk5eziohfervU
+            server:   'smtp.zoho.com',  // eg: mail.gandi.net
+            port: 25
+        };
+
+        process.env.MAIL_URL = 'smtp://' +
+            encodeURIComponent(smtp.username) + ':' +
+            encodeURIComponent(smtp.password) + '@' +
+            encodeURIComponent(smtp.server) + ':' +
+            smtp.port;
+});
 }
