@@ -46,10 +46,10 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
                         Materialize.toast('Error sending forgot password email - ' + err, 4000);
                     } else {
                         Materialize.toast('Check the link in your email to reset the password.', 4000);
-                        $mdDialog.hide();
                     }
                 }
             );
+            $mdDialog.hide();
         };
 
         $scope.register = function () {

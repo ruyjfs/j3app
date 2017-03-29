@@ -46,7 +46,8 @@ if (Meteor.isServer) {
             username: 'no-reply@j3rotherhood.com',
             password: 'j3no-reply',
             server:   'smtp-relay.gmail.com',
-            port: 587
+            // port: 587
+            port: 25
         };
 
         process.env.MAIL_URL = 'smtp://' +
