@@ -18,17 +18,23 @@ if (Meteor.isServer) {
 
 
 
-        smtp = {
-            username: 'ruy',   // eg: server@gentlenode.com
-            password: 'Ruyjr-1478953',   // eg: 3eeP1gtizk5eziohfervU
-            server:   'smtp.zoho.com',  // eg: mail.gandi.net
-            port: 25
-        };
+        // smtp = {
+        //     // username: 'ruy',   // eg: server@gentlenode.com
+        //     // password: 'ruy-1478953',   // eg: 3eeP1gtizk5eziohfervU
+        //     username: 'ruyjfs@gmail.com',   // eg: server@gentlenode.com
+        //     password: 'ryu-1478953',   // eg: 3eeP1gtizk5eziohfervU
+        //     // server:   'smtp.zoho.com',  // eg: mail.gandi.net
+        //     server:   'smtp-relay.gmail.com',  // eg: mail.gandi.net
+        //     port: 25
+        // };
+        //
+        // process.env.MAIL_URL = 'smtp://' +
+        //     encodeURIComponent(smtp.username) + ':' +
+        //     encodeURIComponent(smtp.password) + '@' +
+        //     encodeURIComponent(smtp.server) + ':' +
+        //     smtp.port;
 
-        process.env.MAIL_URL = 'smtp://' +
-            encodeURIComponent(smtp.username) + ':' +
-            encodeURIComponent(smtp.password) + '@' +
-            encodeURIComponent(smtp.server) + ':' +
-            smtp.port;
+
+        process.env.MAIL_URL = 'smtp://ruyjfs%40gmail.com:ryu-1478953@smtp.gmail.com:587';
 });
 }
