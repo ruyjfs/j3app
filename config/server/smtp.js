@@ -9,7 +9,11 @@ if (Meteor.isServer) {
         // process.env.MAIL_URL="smtp://no-reply:j3scrumno-reply@smtp.zoho.com:465";
         // process.env.MAIL_URL="smtp://no-reply:Z6n2MFqPefVN@mx.zohomail.com:25";
         // process.env.MAIL_URL="smtp://no-reply:j3scrumno-reply@smtp.zoho.com:25";
-        process.env.MAIL_URL="smtp://no-reply:Z6n2MFqPefVN@smtp.zoho.com:587";
+        // process.env.MAIL_URL="smtp://no-reply:Z6n2MFqPefVN@smtp.zoho.com:587";
+        // process.env.MAIL_URL="smtp://no-reply:Z6n2MFqPefVN@smtp.zoho.com:587";
+        process.env.MAIL_URL="smtp://no-reply:j3scrumno-reply@smtp.zoho.com:587";
+        // process.env.MAIL_URL="smtp://no-reply:j3scrumno-reply@smtp.zoho.com:465";
+        // process.env.MAIL_URL="smtp://ruy:Ruyjr-1478953@smtp.zoho.com:465";
         // Z6n2MFqPefVN
     });
 }

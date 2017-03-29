@@ -431,7 +431,6 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
             $urlRouterProvider.otherwise('/scrum/organization');
             //$urlRouterProvider.otherwise('/' + strModule + '/home');
         } else {
-            console.log(strModule);
             $urlRouterProvider.otherwise('/' + strModule);
         }
     }

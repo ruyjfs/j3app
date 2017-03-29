@@ -13,7 +13,8 @@ angular.module("user").controller("ResetCtrl", ['$scope', '$reactive', '$state',
                 email: $scope.dataForm.email,
                 subject: "Reset your password on j3scrum.",
                 siteName: "j3scrum",
-                from: '"j3scrum Accounts" <no-reply@j3scrum.com>'
+                // from: '"j3scrum Accounts" <no-reply@j3scrum.com>'
+                from: '"j3scrum Accounts" <ruyjfs@gmail.com>'
             };
 
 
