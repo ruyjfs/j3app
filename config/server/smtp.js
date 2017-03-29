@@ -16,7 +16,23 @@ if (Meteor.isServer) {
         // process.env.MAIL_URL="smtp://ruy:Ruyjr-1478953@smtp.zoho.com:465";
         // Z6n2MFqPefVN
 
+        // Accounts.emailTemplates.resetPassword.text = function(user, url){
+        //     url = url.replace('#/', '');
+        //     return "Click this link to reset your password: " + url;
+        // };
 
+
+
+        Accounts.emailTemplates.siteName = "j3scrum";
+        Accounts.emailTemplates.from = "j3scrum <no-reply@j3scrum.com>";
+        // Accounts.emailTemplates.resetPassword.text = function(user, url){
+        //     var token = url.substring(url.lastIndexOf('/')+1, url.length);
+        //     var newUrl = Meteor.absoluteUrl('reset/' + token);
+        //     var str = 'Hi,\n';
+        //     str+= 'To reset your password, please click follow link...\n';
+        //     str+= newUrl;
+        //     return str;
+        // };
 
         smtp = {
             // username: 'no-reply@j3scrum.com',

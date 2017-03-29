@@ -34,7 +34,13 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
                 email: $scope.dataForm.email
             };
 
-
+// console.log('aeeee');
+//             Accounts.emailTemplates.resetPassword.text
+//             Accounts.emailTemplates.resetPassword.siteName = "j3scrum";
+//             Accounts.emailTemplates.resetPassword.from = '"j3scrum Accounts" <no-reply@j3scrum.com>';
+//             Accounts.emailTemplates.resetPassword.headers = 'Olá. Para resetar sua senha é simples, basta clicar no link abaixo.';
+            Accounts.forgotPassword.from = "j3scrum Reset Password <no-reply@j3scrum.com>";
+            // Accounts.emailTemplates.from = "j3scrum Reset Password <no-reply@j3scrum.com>";
             Accounts.forgotPassword($scope.credentials, function(err) {
                     if (err) {
                         Materialize.toast('Error sending forgot password email - ' + err, 4000);
