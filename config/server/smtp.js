@@ -18,23 +18,25 @@ if (Meteor.isServer) {
 
 
 
-        // smtp = {
-        //     // username: 'ruy',   // eg: server@gentlenode.com
-        //     // password: 'ruy-1478953',   // eg: 3eeP1gtizk5eziohfervU
-        //     username: 'ruyjfs@gmail.com',   // eg: server@gentlenode.com
-        //     password: 'ryu-1478953',   // eg: 3eeP1gtizk5eziohfervU
-        //     // server:   'smtp.zoho.com',  // eg: mail.gandi.net
-        //     server:   'smtp-relay.gmail.com',  // eg: mail.gandi.net
-        //     port: 25
-        // };
-        //
-        // process.env.MAIL_URL = 'smtp://' +
-        //     encodeURIComponent(smtp.username) + ':' +
-        //     encodeURIComponent(smtp.password) + '@' +
-        //     encodeURIComponent(smtp.server) + ':' +
-        //     smtp.port;
+        smtp = {
+            // username: 'no-reply@j3scrum.com',
+            // password: 'j3scrumno-reply',
+            // server:   'smtp.zoho.com',
+            username: 'no-reply@j3rotherhood.com',
+            password: 'j3no-reply',
+            server:   'smtp-relay.gmail.com',
+            port: 587
+        };
+
+        process.env.MAIL_URL = 'smtp://' +
+            encodeURIComponent(smtp.username) + ':' +
+            encodeURIComponent(smtp.password) + '@' +
+            encodeURIComponent(smtp.server) + ':' +
+            smtp.port;
 
 
-        process.env.MAIL_URL = 'smtp://ruyjfs%40gmail.com:ryu-1478953@smtp.gmail.com:587';
+        // process.env.MAIL_URL = 'smtp://ruyjfs%40gmail.com:ryu-1478953@smtp.gmail.com:587';
+        // process.env.MAIL_URL = 'smtp://no-reply%40j3rotherhood.com:j3no-reply@smtp-relay.gmail.com:25';
+        // process.env.MAIL_URL = 'smtp://no-reply%40j3scrum.com:j3scrumno-reply@smtp.zoho.com:25';
 });
 }
