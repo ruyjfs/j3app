@@ -30,6 +30,10 @@
                     <!--<md-button class="md-raised md-primary" ng-click="lc.login()"-->
                     <!--aria-label="login">Sign In-->
                     <!--</md-button>-->
+                    <div vc-recaptcha key="'6LfzYxsUAAAAAPA9ty6hk__9X9k5Jf2UqcGosT62'"
+                         on-create="setWidgetId(widgetId)"
+                         on-success="setResponse(response)"
+                         on-expire="cbExpiration()"></div>
                     <md-button type="submit" class="md-raised md-primary" ng-click="login()" aria-label="login">
                         {{'Sign in' | translate}}
                     </md-button>

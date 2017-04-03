@@ -6,6 +6,7 @@ if (Meteor.isClient) {
         'angularUtils.directives.dirPagination',
         'uiGmapgoogle-maps',
         //'ngCookies',
-        'ngMaterial'
+        'ngMaterial',
+        'vcRecaptcha'
     ]);
 }

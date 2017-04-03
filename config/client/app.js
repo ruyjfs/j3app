@@ -261,6 +261,12 @@ if (Meteor.isClient) {
                 // Handle the situation
                 console.log(error_message);
             });
+
+
+        // reCAPTCHA.config({
+        //     publickey: '6LfzYxsUAAAAAPA9ty6hk__9X9k5Jf2UqcGosT62',
+        //     // hl: 'pt' // optional display language
+        // });
     });
 
 

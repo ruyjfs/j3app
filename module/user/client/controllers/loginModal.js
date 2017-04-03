@@ -1,7 +1,8 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$mdDialog', '$state', '$reactive',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $mdDialog, $state, $reactive) {
+angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$mdDialog', '$state', '$reactive', 'vcRecaptchaService',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $mdDialog, $state, $reactive, recaptcha) {
+    console.info(recaptcha);
         $reactive(this).attach($scope);
         this.subscribe('users');
 
@@ -112,5 +113,20 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
         $scope.close = function () {
             $mdDialog.hide();
         }
+
+
+        $scope.setWidgetId = function (widgetId) {
+            // store the `widgetId` for future usage.
+            // For example for getting the response with
+            // `recaptcha.getResponse(widgetId)`.
+        };
+
+        $scope.setResponse = function (response) {
+            // send the `response` to your server for verification.
+        };
+
+        $scope.cbExpiration = function() {
+            // reset the 'response' object that is on scope
+        };
     }
 ]);
