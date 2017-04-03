@@ -69,16 +69,19 @@ angular.module('user').config(['$urlRouterProvider', '$stateProvider', '$locatio
                         return $meteor.logout().then(function(){
 
                             switch (strDomain) {
-                                case 'j3scrum.com' :
-                                    strModule = 'j3scrum.com/scrum';
+                                case 'j3scrum.com':
+                                case '172.17.0.1':
+                                    // strModule = 'j3scrum.com/scrum';
+                                    // strModule = 'j3scrum.com/scrum';
+                                    strModule = 'scrum';
                                     break;
-                                case  'j3game.com':
+                                case 'j3game.com':
                                     strModule = 'game';
                                     break;
-                                case  'j3tec.com':
+                                case 'j3tec.com':
                                     strModule = 'tec';
                                     break;
-                                case  'j3drive.com':
+                                case 'j3drive.com':
                                     strModule = 'drive';
                                     break;
                                 default:

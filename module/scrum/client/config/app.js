@@ -32,6 +32,9 @@ if (Meteor.isClient) {
         'Finally, it is a Sprint Retrospective and the team of planning the next sprint':
             'Finalmente, faz-se uma Sprint Retrospective e a equipe parte para o planejamento do próximo Sprint',
 
+        'Company focused on changing the world with the best of technology': 'Empresa voltada à mudar o mundo com o melhor da tecnologia',
+        'Starting small but with a giant dream': 'Começando pequeno mas com um sonho gigante',
+
         //HELP
         'Here you register organizations or saying best companies within the companies you register people and products of it. It may be published for all people can sail. Note that the namespace is the organization\'s url to facilitate their direct access to a orgnização or if you want to disclose it. For example www.j3scrum.com/namespaceoforganization/namespaceofproduct/numberofsprint. Organizations can have multiple Teams. Teams can have Differing permissions. Namespace is unique and this is where repositories for this organization will be created.':
             'Aqui você cadastra as organizações ou dizendo melhor as empresas, dentro das empresas você cadastra as pessoas e os produtos dela. Podendo ser publica para todas as pessoas poderem vela. Repare que o namespace é a url da organização para facilitar o seu acesso direto à uma orgnização ou caso queira divulga-la. Por exemplo www.j3scrum.com/namespacedaorganizacao/namespacedoproduto/numerodasprint. As organizações podem ter várias equipes. As equipes podem ter diferentes permissões. Namespace é único e é aí que repositórios para esta organização será criado.',
