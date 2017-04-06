@@ -40,14 +40,14 @@ if (Meteor.isServer) {
         // };
 
         smtp = {
-            // username: 'no-reply@j3scrum.com',
-            // password: 'j3scrumno-reply',
-            // server:   'smtp.zoho.com',
-            // port: 587
-            username: 'no-reply@j3rotherhood.com',
-            password: 'j3no-reply',
-            server:   'smtp-relay.gmail.com',
-            port: 25
+            username: 'no-reply@j3scrum.com',
+            password: 'j3scrumno-reply',
+            server:   'smtp.zoho.com',
+            port: 587
+            // username: 'no-reply@j3rotherhood.com',
+            // password: 'j3no-reply',
+            // server:   'smtp-relay.gmail.com',
+            // port: 25
         };
 
         process.env.MAIL_URL = 'smtp://' +
@@ -55,7 +55,6 @@ if (Meteor.isServer) {
             encodeURIComponent(smtp.password) + '@' +
             encodeURIComponent(smtp.server) + ':' +
             smtp.port;
-
 
         // process.env.MAIL_URL = 'smtp://ruyjfs%40gmail.com:ryu-1478953@smtp.gmail.com:587';
         // process.env.MAIL_URL = 'smtp://no-reply%40j3rotherhood.com:j3no-reply@smtp-relay.gmail.com:25';
