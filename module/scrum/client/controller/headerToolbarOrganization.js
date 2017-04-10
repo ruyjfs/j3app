@@ -3,10 +3,15 @@
 angular.module('scrum').controller('HeaderToolbarOrganizationCtrl', ['$scope', '$mdDialog', '$stateParams', '$reactive', '$state', '$timeout', '$rootScope', '$location',
     function ($scope, $mdDialog, $stateParams, $reactive, $state, $timeout, $rootScope, $location) {
         $reactive(this).attach($scope);
+        $scope.$state = $state;
+        $scope.$location = $location;
 
+        this.redirect = function (route) {
+            $location.path(route);
+        };
         this.menus = [
             //{name: 'Home',         link: '/scrum',              icon: 'home',            class: ''},
-            {name: 'Organization', link: '/scrum/organization', icon: 'location_city',   class: ''},
+            {name: 'Organization', link: 'scrum/', icon: 'location_city',   class: ''},
         ];
         if ($location.path()) {
             arrUrl = $location.path().split('/');
@@ -61,4 +66,25 @@ angular.module('scrum').controller('HeaderToolbarOrganizationCtrl', ['$scope', '
                 $scope.status = 'You cancelled the dialog.';
             });
         };
+
+
+        $(document).ready(function () {
+            $('.showMenu').on('click', function () {
+                var elm = $(this),
+                    elmMenu = elm.closest('.menu'),
+                    elmMenu2 = $('.menu2'),
+                    elmContent = $('.dynamic .content-main');
+                if (elmMenu.hasClass('extended')) {
+                    elmMenu.removeClass('extended');
+                    elmMenu2.removeClass('extended');
+                    elmContent.removeClass('extended');
+                    elmMenu.find('.material-icon').removeClass('arrow').addClass('hamburger');
+                } else {
+                    elmMenu.addClass('extended');
+                    elmMenu2.addClass('extended');
+                    elmContent.addClass('extended');
+                    elmMenu.find('.material-icon').removeClass('hamburger').addClass('arrow');
+                }
+            });
+        });
     }]);

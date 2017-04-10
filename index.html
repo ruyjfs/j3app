@@ -93,7 +93,12 @@
 <header>
     <div ng-include="'module/scrum/client/view/header.ng.html'"></div>
     <div ui-view="header"></div>
-    <div ui-view="header2"></div>
+
+    <div class="dynamic animated fadeInLeft">
+        <div class="menu">
+            <div ui-view="header2"></div>
+        </div>
+    </div>
     <!--<div ng-include="'module/scrum/client/view/product-toolbar.ng.html'"></div>-->
     <!--<div ng-include="'module/admin/client/view/toolbar.ng.html'"></div>-->
 </header>

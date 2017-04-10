@@ -1,26 +1,62 @@
-<div ng-controller="HeaderToolbarOrganizationCtrl as vm" flex style="height: 100%;">
-    <!--<nav class="navbar-fixed brown darken-2 hide-on-med-and-down" role="navigation" style="z-index: 1;">-->
-    <nav class="navbar-fixed brown darken-2  animated fadeInLeft" role="navigation" style="z-index: 1;
-    width: 40px;
-    height: 100%;
-    position: fixed;
-    left: 0;">
-        <!--<div class="nav-wrapper container center">-->
-        <!--<div class="container">-->
-        <div class="nav-wrapper left">
-            <ul ng-repeat="menu in vm.menus" class="row left left" layout="row" layout-align="left start" style="width: 40px; margin-bottom: 0;">
-                <li class="{{menu.class}}" style="width: 40px;">
-                    <md-tooltip md-direction="right" md-autohide="false"> {{ menu.name | translate }}</md-tooltip>
-                    <a href="{{menu.link}}" style="padding: 0 8px;">
-                        <!--Scrum-->
-                        <!--<i class="material-icons" style="height: 20px; line-height: initial; font-size: 20px;">home</i>-->
-                        <i class="material-icons" style="height: 40px; line-height: 40px;">{{menu.icon}}</i>
-                    </a>
-                </li>
-            </ul>
-        </div>
+<div ng-controller="HeaderToolbarOrganizationCtrl as ctrl" flex style="height: 100%;">
+    <!--<nav class="navbar-fixed brown darken-2  animated fadeInLeft" role="navigation" style="z-index: 1;-->
+    <!--width: 40px;-->
+    <!--height: 100%;-->
+    <!--position: fixed;-->
+    <!--left: 0;">-->
+        <!--<div class="nav-wrapper left">-->
+            <!--<ul ng-repeat="menu in ctrl.menus" class="row left left" layout="row" layout-align="left start" style="width: 40px; margin-bottom: 0;">-->
+                <!--<li class="{{menu.class}}" style="width: 40px;">-->
+                    <!--<md-tooltip md-direction="right" md-autohide="false"> {{ menu.name | translate }}</md-tooltip>-->
+                    <!--<a href="{{menu.link}}" style="padding: 0 8px;">-->
+                        <!--<i class="material-icons" style="height: 40px; line-height: 40px;">{{menu.icon}}</i>-->
+                    <!--</a>-->
+                <!--</li>-->
+            <!--</ul>-->
         <!--</div>-->
-    </nav>
+    <!--</nav>-->
+    <!--<div class="dynamic animated fadeInLeft">-->
+        <!--<div class="menu">-->
+            <div class="title">
+                <div class="row showMenu">
+                    <!--<div class="col_1"><i class="material-icons">menu</i></div>-->
+                    <div class="col_1">
+                        <section class="material-green">
+                            <div class="material-icon hamburger">
+                                <span class="first"></span>
+                                <span class="second"></span>
+                                <span class="third"></span>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col_2">{{ 'Menu' | translate}}</div>
+                </div>
+            </div>
+            <div class="content brown darken-2">
+                <div class="row waves-effect waves-orange  {{menu.class}}" ng-repeat="menu in ctrl.menus" data-ng-class="{ active: $state.includes(menu.link) }" ng-click="ctrl.redirect(menu.link)">
+                    <div class="col_1"><i class="material-icons">{{menu.icon}}</i></div>
+                    <div class="col_2">{{ menu.name | translate }}</div>
+                </div>
+            </div>
+        <!--</div>-->
+        <!--<div class="menu2" style="flex: 0 0 auto; ">-->
+            <!--teste-->
+            <!--teste-->
+            <!--teste-->
+        <!--</div>-->
+        <!--<div class="content-main">-->
+            <!--<p>TESTE 1</p>-->
+            <!--<p>TESTE 1</p>-->
+            <!--<p>TESTE 1</p>-->
+            <!--<p>TESTE 1</p>-->
+            <!--<p>TESTE 1</p>-->
+        <!--</div>-->
+    <!--</div>-->
+
+
+
+
+
     <!--<nav class="brown darken-2 .hide-on-small-only hide-on-large-only" role="navigation">-->
         <!--<div class="nav-wrapper center-align">-->
             <!--<ul class="center-align">-->
@@ -32,43 +68,43 @@
                 <!--</li>-->
                 <!--<li class="waves-effect">-->
                     <!--<md-tooltip md-direction="botom" md-autohide="false"> Burndown</md-tooltip>-->
-                    <!--<a href="/scrum/burndown/{{vm.id}}/{{vm.sprintId}}">-->
+                    <!--<a href="/scrum/burndown/{{ctrl.id}}/{{ctrl.sprintId}}">-->
                         <!--<i class="material-icons">equalizer</i>-->
                     <!--</a>-->
                 <!--</li>-->
                 <!--<li class="waves-effect">-->
                     <!--<md-tooltip md-direction="botom" md-autohide="false"> Kanban</md-tooltip>-->
-                    <!--<a href="/scrum/kanban/{{vm.id}}/{{vm.sprintId}}">-->
+                    <!--<a href="/scrum/kanban/{{ctrl.id}}/{{ctrl.sprintId}}">-->
                         <!--<i class="material-icons">view_column</i>-->
                     <!--</a>-->
                 <!--</li>-->
                 <!--<li class="waves-effect">-->
                     <!--<md-tooltip md-direction="botom" md-autohide="false"> Backlog</md-tooltip>-->
-                    <!--<a href="/scrum/backlog/{{vm.id}}/{{vm.sprintId}}">-->
+                    <!--<a href="/scrum/backlog/{{ctrl.id}}/{{ctrl.sprintId}}">-->
                         <!--<i class="material-icons">developer_board</i>-->
                     <!--</a>-->
                 <!--</li>-->
                 <!--<li class="waves-effect">-->
                     <!--<md-tooltip md-direction="botom" md-autohide="false"> Team</md-tooltip>-->
-                    <!--<a href="/scrum/project-team/{{vm.id}}/{{vm.sprintId}}">-->
+                    <!--<a href="/scrum/project-team/{{ctrl.id}}/{{ctrl.sprintId}}">-->
                         <!--<i class="material-icons">group_work</i>-->
                     <!--</a>-->
                 <!--</li>-->
                 <!--<li class="waves-effect">-->
                     <!--<md-tooltip md-direction="botom" md-autohide="false"> Story</md-tooltip>-->
-                    <!--<a href="/scrum/story/{{vm.id}}/{{vm.sprintId}}">-->
+                    <!--<a href="/scrum/story/{{ctrl.id}}/{{ctrl.sprintId}}">-->
                         <!--<i class="material-icons">content_paste</i>-->
                     <!--</a>-->
                 <!--</li>-->
                 <!--<li class="waves-effect">-->
                     <!--<md-tooltip md-direction="botom" md-autohide="false"> Status</md-tooltip>-->
-                    <!--<a href="/scrum/status/{{vm.id}}/{{vm.sprintId}}">-->
+                    <!--<a href="/scrum/status/{{ctrl.id}}/{{ctrl.sprintId}}">-->
                         <!--<i class="material-icons">style</i>-->
                     <!--</a>-->
                 <!--</li>-->
                 <!--<li class="waves-effect">-->
                     <!--<md-tooltip md-direction="botom" md-autohide="false"> Sprint</md-tooltip>-->
-                    <!--<a href="/scrum/sprint/{{vm.id}}/{{vm.sprintId}}">-->
+                    <!--<a href="/scrum/sprint/{{ctrl.id}}/{{ctrl.sprintId}}">-->
                         <!--<i class="material-icons">history</i>-->
                     <!--</a>-->
                 <!--</li>-->
@@ -89,25 +125,25 @@
     <!--<a href="/scrum/project" class="waves-effect waves-orange"><i class="material-icons">business_center</i></a>-->
     <!--</md-button>-->
     <!--<md-button aria-label="comment" class="md-icon-button">-->
-    <!--<a href="/scrum/sprint/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">history</i></a>-->
+    <!--<a href="/scrum/sprint/{{ctrl.id}}/{{ctrl.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">history</i></a>-->
     <!--</md-button>-->
     <!--<md-button aria-label="label" class="md-icon-button">-->
-    <!--<a href="/scrum/status/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">style</i></a>-->
+    <!--<a href="/scrum/status/{{ctrl.id}}/{{ctrl.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">style</i></a>-->
     <!--</md-button>-->
     <!--<md-button aria-label="label" class="md-icon-button">-->
-    <!--<a href="/scrum/story/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">content_paste</i></a>-->
+    <!--<a href="/scrum/story/{{ctrl.id}}/{{ctrl.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">content_paste</i></a>-->
     <!--</md-button>-->
     <!--<md-button aria-label="label" class="md-icon-button">-->
-    <!--<a href="/scrum/project-team/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">group_work</i></a>-->
+    <!--<a href="/scrum/project-team/{{ctrl.id}}/{{ctrl.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">group_work</i></a>-->
     <!--</md-button>-->
     <!--<md-button aria-label="photo" class="md-icon-button">-->
-    <!--<a href="/scrum/backlog/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">view_column</i></a>-->
+    <!--<a href="/scrum/backlog/{{ctrl.id}}/{{ctrl.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">view_column</i></a>-->
     <!--</md-button>-->
     <!--<md-button aria-label="label" class="md-icon-button">-->
-    <!--<a href="/scrum/kanban/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">developer_board</i></a>-->
+    <!--<a href="/scrum/kanban/{{ctrl.id}}/{{ctrl.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">developer_board</i></a>-->
     <!--</md-button>-->
     <!--<md-button aria-label="comment" class="md-icon-button">-->
-    <!--<a href="/scrum/burndown/{{vm.id}}/{{vm.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">equalizer</i></a>-->
+    <!--<a href="/scrum/burndown/{{ctrl.id}}/{{ctrl.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">equalizer</i></a>-->
     <!--</md-button>-->
     <!--</md-fab-actions>-->
     <!--</md-toolbar>-->
