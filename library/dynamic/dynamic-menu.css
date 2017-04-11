@@ -284,12 +284,12 @@ section:active:before {
 .dynamic .content-main , .content-main{
     /*transition: width 0.5s;*/
     transition: width 0.4s;
-    background-color: darkslateblue;
+    /*background-color: darkslateblue;*/
     /*width: 90%;*/
-    height: 100vh;
+    /*height: 100vh;*/
     float: left;
     position: relative;
-    border: solid #000 15px;
+    /*border: solid #000 15px;*/
     /*display: block;*/
     display: flex;
     width: calc(100% - 48px);

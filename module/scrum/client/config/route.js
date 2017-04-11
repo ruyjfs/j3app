@@ -36,7 +36,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
-                    "header2": {
+                    "menuLeft": {
                         templateUrl: 'module/scrum/client/view/header-toolbar-organization.ng.html',
                     },
                     "mainZoom": {
@@ -53,7 +53,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
-                    "header2": {
+                    "menuLeft": {
                         templateUrl: 'module/scrum/client/view/header-toolbar-organization.ng.html',
                     },
                     "mainZoom": {
@@ -71,7 +71,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
-                    "header2": {
+                    "menuLeft": {
                         templateUrl: 'module/scrum/client/view/header-toolbar-organization.ng.html',
                     },
                     "mainZoom": {
@@ -89,7 +89,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
-                    "header2": {
+                    "menuLeft": {
                         templateUrl: 'module/scrum/client/view/header-toolbar.ng.html',
                     },
                     "mainZoom": {
@@ -107,7 +107,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
-                    "header2": {
+                    "menuLeft": {
                         templateUrl: 'module/scrum/client/view/header-toolbar.ng.html',
                     },
                     "mainZoom": {
@@ -124,7 +124,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
-                    "header2": {
+                    "menuLeft": {
                         templateUrl: 'module/scrum/client/view/header-toolbar.ng.html',
                     },
                     "mainZoom": {
@@ -142,7 +142,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
-                    "header2": {
+                    "menuLeft": {
                         templateUrl: 'module/scrum/client/view/header-toolbar.ng.html',
                     },
                     "mainZoom": {
@@ -184,7 +184,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
-                    "header2": {
+                    "menuLeft": {
                         templateUrl: 'module/scrum/client/view/header-toolbar.ng.html',
                     },
                     "mainZoom": {
@@ -202,7 +202,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
-                    "header2": {
+                    "menuLeft": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
                     "mainZoom": {
@@ -219,7 +219,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
-                    "header2": {
+                    "menuLeft": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
                     "mainFadeInLeftBig": {
@@ -236,7 +236,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
-                    "header2": {
+                    "menuLeft": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
                     "mainFadeInRightBig": {
@@ -253,7 +253,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
             //        //"header": {
             //        //    templateUrl: $header,
             //        //},
-            //        "header2": {
+            //        "menuLeft": {
             //            templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
             //        },
             //        "mainBounce": {
@@ -281,7 +281,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
-                    "header2": {
+                    "menuLeft": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
                     "mainBounce": {
@@ -295,7 +295,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
             .state('scrum/organization/product/trash', {
                 url: '/scrum/:organization/:product/trash/:sprint',
                 views: {
-                    "header2": {
+                    "menuLeft": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
                     "mainBounce": {
@@ -312,7 +312,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
-                    "header2": {
+                    "menuLeft": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
                     "mainBounce": {
@@ -329,7 +329,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
-                    "header2": {
+                    "menuLeft": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
                     "mainBounce": {
@@ -346,7 +346,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
-                    "header2": {
+                    "menuLeft": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
                     "mainBounce": {
@@ -363,7 +363,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
-                    "header2": {
+                    "menuLeft": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
                     "mainBounce": {
@@ -380,7 +380,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
-                    "header2": {
+                    "menuLeft": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
                     "mainBounce": {
@@ -397,7 +397,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
-                    "header2": {
+                    "menuLeft": {
                         templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
                     "mainBounce": {

@@ -93,12 +93,7 @@
 <header>
     <div ng-include="'module/scrum/client/view/header.ng.html'"></div>
     <div ui-view="header"></div>
-
-    <div class="dynamic animated fadeInLeft">
-        <div class="menu">
-            <div ui-view="header2"></div>
-        </div>
-    </div>
+    <div ui-view="header2"></div>
     <!--<div ng-include="'module/scrum/client/view/product-toolbar.ng.html'"></div>-->
     <!--<div ng-include="'module/admin/client/view/toolbar.ng.html'"></div>-->
 </header>
@@ -169,12 +164,17 @@
         <!--</div>-->
         <div flex >
             <!--<md-content flex layout-margin>-->
-            <div ui-view="main"></div>
-            <div ui-view="mainFade" class="fade"></div>
-            <div ui-view="mainFadeInLeftBig" class="fadeLeftBig"></div>
-            <div ui-view="mainFadeInRightBig" class="fadeRightBig"></div>
-            <div ui-view="mainBounce" class="bounce" style="padding-left: 40px;"></div>
-            <div ui-view="mainZoom" class="zoom" style="padding-left: 40px;"></div>
+            <div class="dynamic animated fadeInLeft">
+                <div class="menu">
+                    <div ui-view="menuLeft"></div>
+                </div>
+            </div>
+            <div ui-view="main" class="content-main"></div>
+            <div ui-view="mainFade" class="fade content-main"></div>
+            <div ui-view="mainFadeInLeftBig" class="fadeLeftBig content-main"></div>
+            <div ui-view="mainFadeInRightBig" class="fadeRightBig content-main"></div>
+            <div ui-view="mainBounce" class="bounce content-main"></div>
+            <div ui-view="mainZoom" class="zoom content-main"></div>
             <div ui-view="main2"></div>
             <!--</md-content>-->
         </div>
@@ -189,8 +189,8 @@
 <footer class="page-footer" style="margin-top: 0px; padding-top: 0px; z-index: 2;">
     <div ui-view="footer" ></div>
     <div ng-include="'module/scrum/client/view/footer.ng.html'"></div>
-    <script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>
-    <script type="text/javascript" src="angular-recaptcha.js"></script>
+    <!--<script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>-->
+    <!--<script type="text/javascript" src="angular-recaptcha.js"></script>-->
 </footer>
 </body>
 <script>
@@ -201,5 +201,4 @@
 
     ga('create', 'UA-77341461-1', 'auto');
     ga('send', 'pageview');
-
 </script>
