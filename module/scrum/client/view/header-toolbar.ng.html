@@ -1,26 +1,47 @@
-<div ng-controller="HeaderToolbarCtrl as vm" flex style="height: 100%;">
+<div ng-controller="HeaderToolbarCtrl as ctrl" flex class="flex" style="height: 100%;">
+    <div class="title">
+        <div class="row showMenu">
+            <!--<div class="col_1"><i class="material-icons">menu</i></div>-->
+            <div class="col_1">
+                <section class="material-green">
+                    <div class="material-icon hamburger">
+                        <span class="first"></span>
+                        <span class="second"></span>
+                        <span class="third"></span>
+                    </div>
+                </section>
+            </div>
+            <div class="col_2">{{ 'Menus' | translate}}</div>
+        </div>
+    </div>
+    <div class="content brown darken-2">
+            <div class="row waves-effect waves-orange  {{menu.class}}" ng-repeat="menu in ctrl.menus" data-ng-class="{ active: $state.includes(menu.link) }" ng-click="$location.path(menu.link)">
+                <div class="col_1"><i class="material-icons">{{menu.icon}}</i></div>
+                <div class="col_2">{{ menu.name | translate }}</div>
+            </div>
+    </div>
     <!--<nav class="navbar-fixed brown darken-2 hide-on-med-and-down" role="navigation" style="z-index: 1;">-->
-    <nav class="navbar-fixed brown darken-2  animated fadeInLeft" role="navigation" style="z-index: 1;
-    width: 40px;
-    height: 100%;
-    position: fixed;
-    left: 0;">
+    <!--<nav class="navbar-fixed brown darken-2  animated fadeInLeft" role="navigation" style="z-index: 1;-->
+    <!--width: 40px;-->
+    <!--height: 100%;-->
+    <!--position: fixed;-->
+    <!--left: 0;">-->
         <!--<div class="nav-wrapper container center">-->
         <!--<div class="container">-->
-        <div class="nav-wrapper left">
-            <ul ng-repeat="menu in vm.menus" class="row left left" layout="row" layout-align="left start" style="width: 40px; margin-bottom: 0;">
-                <li class="{{menu.class}}" style="width: 40px;">
-                    <md-tooltip md-direction="right" md-autohide="false"> {{ menu.name | translate }}</md-tooltip>
-                    <a href="{{menu.link}}" style="padding: 0 8px;">
-                        <!--Scrum-->
-                        <!--<i class="material-icons" style="height: 20px; line-height: initial; font-size: 20px;">home</i>-->
-                        <i class="material-icons" style="height: 40px; line-height: 40px;">{{menu.icon}}</i>
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <!--<div class="nav-wrapper left">-->
+            <!--<ul ng-repeat="menu in vm.menus" class="row left left" layout="row" layout-align="left start" style="width: 40px; margin-bottom: 0;">-->
+                <!--<li class="{{menu.class}}" style="width: 40px;">-->
+                    <!--<md-tooltip md-direction="right" md-autohide="false"> {{ menu.name | translate }}</md-tooltip>-->
+                    <!--<a href="{{menu.link}}" style="padding: 0 8px;">-->
+                        <!--&lt;!&ndash;Scrum&ndash;&gt;-->
+                        <!--&lt;!&ndash;<i class="material-icons" style="height: 20px; line-height: initial; font-size: 20px;">home</i>&ndash;&gt;-->
+                        <!--<i class="material-icons" style="height: 40px; line-height: 40px;">{{menu.icon}}</i>-->
+                    <!--</a>-->
+                <!--</li>-->
+            <!--</ul>-->
         <!--</div>-->
-    </nav>
+        <!--</div>-->
+    <!--</nav>-->
     <!--<nav class="brown darken-2 .hide-on-small-only hide-on-large-only" role="navigation">-->
         <!--<div class="nav-wrapper center-align">-->
             <!--<ul class="center-align">-->

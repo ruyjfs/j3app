@@ -3,6 +3,7 @@
 angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog', '$stateParams', '$reactive', '$state', '$timeout', '$rootScope', '$location',
     function ($scope, $mdDialog, $stateParams, $reactive, $state, $timeout, $rootScope, $location) {
         $reactive(this).attach($scope);
+        $scope.$location = $location;
         if (!$stateParams.product) {
             $state.go('scrum');
         }
@@ -231,7 +232,7 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
             {name: 'Status',           link: '/scrum/' + organization + '/' + product +'/status/'+ sprint,   icon: 'flag',           class: ''},
             {name: 'Sprint',           link: '/scrum/' + organization + '/' + product +'/sprint/'+ sprint,   icon: 'date_range',      class: ''},
             {name: 'Members',          link: '/scrum/' + organization + '/' + product +'/product-team/'+ sprint,     icon: 'group',   class: ''},
-            {name: 'Trash',            link: '/scrum/' + organization + '/' + product +'/trash/'+ sprint,   icon: 'delete',      class: ''},
+            {name: 'Trash',            link: '/scrum/' + organization + '/' + product +'/trash/'+ sprint,   icon: 'delete',      class: ''}
             //{name: 'Burndown',  link: '/scrum/burndown/'+this.id+'/'+this.sprintId, icon: 'show_chart',       class: ''},
             //{name: 'Product',   link: '/scrum/product', icon: 'business_center'}
         ];
@@ -288,4 +289,24 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
                 $scope.status = 'You cancelled the dialog.';
             });
         };
+
+        $(document).ready(function () {
+            $('.showMenu').on('click', function () {
+                var elm = $(this),
+                    elmMenu = elm.closest('.menu'),
+                    elmMenu2 = $('.menu2'),
+                    elmContent = $('.dynamic .content-main');
+                if (elmMenu.hasClass('extended')) {
+                    elmMenu.removeClass('extended');
+                    elmMenu2.removeClass('extended');
+                    elmContent.removeClass('extended');
+                    elmMenu.find('.material-icon').removeClass('arrow').addClass('hamburger');
+                } else {
+                    elmMenu.addClass('extended');
+                    elmMenu2.addClass('extended');
+                    elmContent.addClass('extended');
+                    elmMenu.find('.material-icon').removeClass('hamburger').addClass('arrow');
+                }
+            });
+        });
     }]);

@@ -3,6 +3,7 @@
 angular.module('scrum').controller('HeaderToolbarCtrl', ['$scope', '$mdDialog', '$stateParams', '$reactive', '$state', '$timeout', '$rootScope', '$location',
     function ($scope, $mdDialog, $stateParams, $reactive, $state, $timeout, $rootScope, $location) {
         $reactive(this).attach($scope);
+        $scope.$location = $location;
 
 
         var organization = $stateParams.organization;
@@ -13,7 +14,7 @@ angular.module('scrum').controller('HeaderToolbarCtrl', ['$scope', '$mdDialog', 
             //{name: 'Home',         link: '/scrum',              icon: 'home',            class: ''},
             {name: 'Organization',     link: '/scrum/organization', icon: 'location_city',   class: ''},
             {name: 'Product',          link: '/scrum/' + organization,      icon: 'business_center',      class: ''},
-            {name: 'Team',             link: '/scrum/' + organization + '/team',         icon: 'group_work', class: ''},
+            {name: 'Team',             link: '/scrum/' + organization + '/team',         icon: 'group_work', class: ''}
             //{name: 'Product',      link: '/scrum/product',      icon: 'business_center',      class: ''},
         ];
         if ($location.path()) {
@@ -73,4 +74,24 @@ angular.module('scrum').controller('HeaderToolbarCtrl', ['$scope', '$mdDialog', 
                 $scope.status = 'You cancelled the dialog.';
             });
         };
+
+        $(document).ready(function () {
+            $('.showMenu').on('click', function () {
+                var elm = $(this),
+                    elmMenu = elm.closest('.menu'),
+                    elmMenu2 = $('.menu2'),
+                    elmContent = $('.dynamic .content-main');
+                if (elmMenu.hasClass('extended')) {
+                    elmMenu.removeClass('extended');
+                    elmMenu2.removeClass('extended');
+                    elmContent.removeClass('extended');
+                    elmMenu.find('.material-icon').removeClass('arrow').addClass('hamburger');
+                } else {
+                    elmMenu.addClass('extended');
+                    elmMenu2.addClass('extended');
+                    elmContent.addClass('extended');
+                    elmMenu.find('.material-icon').removeClass('hamburger').addClass('arrow');
+                }
+            });
+        });
     }]);

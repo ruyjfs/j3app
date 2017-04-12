@@ -11,7 +11,7 @@ angular.module('scrum').controller('HeaderToolbarOrganizationCtrl', ['$scope', '
         };
         this.menus = [
             //{name: 'Home',         link: '/scrum',              icon: 'home',            class: ''},
-            {name: 'Organization', link: 'scrum/', icon: 'location_city',   class: ''},
+            {name: 'Organization', link: '/scrum/organization', icon: 'location_city',   class: ''}
         ];
         if ($location.path()) {
             arrUrl = $location.path().split('/');
