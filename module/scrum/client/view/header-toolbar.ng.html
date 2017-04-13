@@ -1,8 +1,8 @@
 <div ng-controller="HeaderToolbarCtrl as ctrl" flex class="flex" style="height: 100%;">
     <div class="title">
-        <div class="row showMenu">
+        <div class="row showMenu ">
             <!--<div class="col_1"><i class="material-icons">menu</i></div>-->
-            <div class="col_1">
+            <div class="col_1 hide-on-med-and-down">
                 <section class="material-green">
                     <div class="material-icon hamburger">
                         <span class="first"></span>
@@ -11,7 +11,7 @@
                     </div>
                 </section>
             </div>
-            <div class="col_2">{{ 'Menus' | translate}}</div>
+            <div class="col_2">{{'Menus' | translate}}</div>
         </div>
     </div>
     <div class="content brown darken-2">

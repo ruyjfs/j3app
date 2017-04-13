@@ -45,6 +45,7 @@ body {
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none;
+    transition: width 0.4s;
 }
 
 .dynamic .menu {
@@ -67,6 +68,7 @@ body {
     transition: width 0.4s;
 }
 .dynamic .menu.extended , .menu2.extended {
+    transition: width 0.4s;
     width: 320px;
 }
 .dynamic .col_2{
@@ -74,11 +76,11 @@ body {
     display: none;
 }
 .dynamic .menu.extended .col_2{
-    -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadein 1s; /* Firefox < 16 */
-    -ms-animation: fadein 1s; /* Internet Explorer */
-    -o-animation: fadein 1s; /* Opera < 12.1 */
-    animation: fadein 1s;
+    /*-webkit-animation: fadein 1s; !* Safari, Chrome and Opera > 12.1 *!*/
+    /*-moz-animation: fadein 1s; !* Firefox < 16 *!*/
+    /*-ms-animation: fadein 1s; !* Internet Explorer *!*/
+    /*-o-animation: fadein 1s; !* Opera < 12.1 *!*/
+    /*animation: fadein 1s;*/
     display: block;
 }
 .dynamic .menu h2{
@@ -115,7 +117,7 @@ body {
     text-align: left;
 }
 .dynamic .menu.extended .scroll {
-    transition: width 0.4s;
+    transition: width 0.4s, background-color 0.5s;
     /*overflow-y: scroll;*/
     overflow: auto;
     /*height: 100%;*/
@@ -132,12 +134,12 @@ body {
 
 .dynamic .menu.extended .content .row{
     /*margin: 0;*/
-    transition: background-color 0.5s, width 0.4s;
+    transition: background-color 1.5s 0.2s, width 0.4s;
     /*transition-delay: 0.5s, 4ms;*/
     /*transition-delay: 0.2s, 4ms;*/
     /*transition-delay: 0.2s;*/
     /*border-bottom: solid 1px rgba(0,0,0,.12);*/
-    width: 321px;
+    width: 320px;
 }
 
 /*.dynamic .menu .content {*/
@@ -157,10 +159,10 @@ body {
 }
 .dynamic .menu .content .row{
     margin: 0;
-    transition: background-color 0.5s;
+    transition: background-color 0.5s 0.5s, width 0.4s 0s;
     /*transition-delay: 0.5s, 4ms;*/
     /*transition-delay: 0.2s, 4ms;*/
-    transition-delay: 0.2s;
+    /*transition-delay: 0.2s;*/
     border-bottom: solid 1px rgba(0,0,0,.12);
     width: 48px;
 }
@@ -187,7 +189,8 @@ body {
     /*padding: 0 15px 0 15px;*/
     padding: 0 11px 0 11px;
     display:flex;
-     margin-bottom: 0;
+    margin-bottom: 0;
+    transition: width 0.4s;
 }
 
 .dynamic .col{
@@ -365,6 +368,12 @@ section:active:before {
 
 
 .dynamic .menu .active {
+    /*transition: background-color 10s;*/
     color: #fff;
     background-color: #EF6C00;
+}
+.dynamic .menu .row.active:hover {
+    /*transition: background-color 10s;*/
+    color: #fff;
+    background-color: #d65a00 !important;
 }

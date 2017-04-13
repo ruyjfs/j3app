@@ -72,14 +72,14 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //    templateUrl: $header,
                     //},
                     "menuLeft": {
-                        templateUrl: 'module/scrum/client/view/header-toolbar-organization.ng.html',
+                        templateUrl: 'module/scrum/client/view/header-toolbar-organization.ng.html'
                     },
                     "mainZoom": {
-                        templateUrl: 'module/scrum/client/view/organization.ng.html',
+                        templateUrl: 'module/scrum/client/view/organization.ng.html'
                     },
                     "main2": {
-                        templateUrl: 'module/scrum/client/view/organization-fab.ng.html',
-                    },
+                        templateUrl: 'module/scrum/client/view/organization-fab.ng.html'
+                    }
                 }
                 //controller: 'ProductCtrl'
             })
@@ -90,14 +90,14 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //    templateUrl: $header,
                     //},
                     "menuLeft": {
-                        templateUrl: 'module/scrum/client/view/header-toolbar.ng.html',
+                        templateUrl: 'module/scrum/client/view/header-toolbar.ng.html'
                     },
                     "mainZoom": {
-                        templateUrl: 'module/scrum/client/view/team.ng.html',
+                        templateUrl: 'module/scrum/client/view/team.ng.html'
                     },
                     "main2": {
-                        templateUrl: 'module/scrum/client/view/team-fab.ng.html',
-                    },
+                        templateUrl: 'module/scrum/client/view/team-fab.ng.html'
+                    }
                 }
                 //controller: 'TeamCtrl'
             })
