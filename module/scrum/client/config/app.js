@@ -162,6 +162,7 @@ if (Meteor.isClient) {
         //'ngCookies',
         'ngMaterial',
         'pascalprecht.translate',
+        'vcRecaptcha'
         //'utilsPagination'
     ]).config(function ($translateProvider) {
         $translateProvider.translations('pt-BR', ptBR);

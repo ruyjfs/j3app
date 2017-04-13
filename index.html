@@ -10,6 +10,13 @@
     <!--<script src="public/library/jquery/touchPunch/jquery.ui.touch-punch.min.js"></script>-->
     <!--<title>j3scrum</title>-->
     <meta name="google-site-verification" content="e3EZ4OAnMK6b_Ya6aIB1qzBYHzhs8cuH9ED721qrec0" />
+
+    <!--<script src='https://www.google.com/recaptcha/api.js'></script>-->
+    <script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>
+    <script src="library/client/angular-recaptcha-4.0.0/release/angular-recaptcha.js"></script>
+    <!--<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"-->
+            <!--async defer>-->
+    <!--</script>-->
     <title ng-show="title">{{title}}</title>
 </head>
 <!--<body layout="column">-->
@@ -170,6 +177,12 @@
                 <div class="menu animated fadeInLeft ">
                     <div ui-view="menuLeft"></div>
                 </div>
+                teste
+                <div
+                        vc-recaptcha
+                        theme="light"
+                        key="'6LfzYxsUAAAAAPA9ty6hk__9X9k5Jf2UqcGosT62'"
+                ></div>
                 <div class="menu2" style="flex: 0 0 auto; "></div>
                 <div ui-view="mainFadeInLeftBig" class="fadeLeftBig content-main"></div>
                 <div ui-view="mainFadeInRightBig" class="fadeRightBig content-main"></div>

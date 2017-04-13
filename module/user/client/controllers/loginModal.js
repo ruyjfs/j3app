@@ -1,8 +1,9 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
 angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$mdDialog', '$state', '$reactive', 'vcRecaptchaService',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $mdDialog, $state, $reactive, recaptcha) {
-    console.info(recaptcha);
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $mdDialog, $state, $reactive, vcRecaptchaService) {
+        // var response = vcRecaptchaService.getResponse("6LfzYxsUAAAAAG-ZibVjJ4hVfGVL7CFBIPNdhkqc");
+        // console.info(response);
         $reactive(this).attach($scope);
         this.subscribe('users');
 
@@ -112,7 +113,7 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
 
         $scope.close = function () {
             $mdDialog.hide();
-        }
+        };
 
 
         $scope.setWidgetId = function (widgetId) {
