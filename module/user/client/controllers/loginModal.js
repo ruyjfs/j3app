@@ -2,7 +2,7 @@
 //    function($scope, $stateParams, $meteor){
 angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$mdDialog', '$state', '$reactive', 'vcRecaptchaService',
     function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $mdDialog, $state, $reactive, vcRecaptchaService) {
-        // var response = vcRecaptchaService.getResponse("6LfzYxsUAAAAAG-ZibVjJ4hVfGVL7CFBIPNdhkqc");
+        // var response = vcRecaptchaService.getResponse("recaptcha-1");
         // console.info(response);
         $reactive(this).attach($scope);
         this.subscribe('users');
@@ -15,9 +15,38 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
             confirmPassword: ''
         };
 
+        $scope.recaptcha = {
+            response : null,
+            widgetId : null,
+            key : "6LfzYxsUAAAAAPA9ty6hk__9X9k5Jf2UqcGosT62"
+        };
+
+        let intTry = 0;
+
+
+        $scope.setResponse = function (response) {
+            console.info('Response available');
+            $scope.recaptcha.response = response;
+        };
+        $scope.setWidgetId = function (widgetId) {
+            console.info('Created widget ID: %s', widgetId);
+            $scope.recaptcha.widgetId = widgetId;
+        };
+        $scope.cbExpiration = function() {
+            console.info('Captcha expired. Resetting response object');
+            vcRecaptchaService.reload($scope.widgetId);
+            $scope.recaptcha.response = null;
+        };
+
+
+
+
         $scope.error = '';
 
         $scope.login = function () {
+            intTry += 1;
+console.log(intTry);
+            return false;
             Meteor.loginWithPassword(this.dataForm.email, this.dataForm.password, function(err) {
                 if (err) {
                     //console.log(err);

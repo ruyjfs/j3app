@@ -1,3 +1,17 @@
+/**
+ * @license angular-recaptcha build:2017-03-14
+ * https://github.com/vividcortex/angular-recaptcha
+ * Copyright (c) 2017 VividCortex
+ **/
+
+/*global angular, Recaptcha */
+(function (ng) {
+    'use strict';
+
+    ng.module('vcRecaptcha', []);
+
+}(angular));
+
 /*global angular */
 (function (ng) {
     'use strict';
@@ -11,7 +25,7 @@
     /**
      * An angular service to wrap the reCaptcha API
      */
-    app.provider('vcRecaptchaService', function(){
+    app.provider('vcRecaptchaService', function () {
         var provider = this;
         var config = {};
         provider.onLoadFunctionName = 'vcRecaptchaApiLoaded';
@@ -22,7 +36,7 @@
          * @since 2.5.0
          * @param defaults  object which overrides the current defaults object.
          */
-        provider.setDefaults = function(defaults){
+        provider.setDefaults = function (defaults) {
             ng.copy(defaults, config);
         };
 
@@ -32,7 +46,7 @@
          * @since 2.5.0
          * @param siteKey  the reCaptcha public key (refer to the README file if you don't know what this is).
          */
-        provider.setSiteKey = function(siteKey){
+        provider.setSiteKey = function (siteKey) {
             config.key = siteKey;
         };
 
@@ -42,7 +56,7 @@
          * @since 2.5.0
          * @param theme  The reCaptcha theme.
          */
-        provider.setTheme = function(theme){
+        provider.setTheme = function (theme) {
             config.theme = theme;
         };
 
@@ -52,7 +66,7 @@
          * @since 2.5.0
          * @param stoken  The reCaptcha stoken.
          */
-        provider.setStoken = function(stoken){
+        provider.setStoken = function (stoken) {
             config.stoken = stoken;
         };
 
@@ -62,7 +76,7 @@
          * @since 2.5.0
          * @param size  The reCaptcha size.
          */
-        provider.setSize = function(size){
+        provider.setSize = function (size) {
             config.size = size;
         };
 
@@ -72,7 +86,7 @@
          * @since 2.5.0
          * @param type  The reCaptcha type.
          */
-        provider.setType = function(type){
+        provider.setType = function (type) {
             config.type = type;
         };
 
@@ -81,7 +95,7 @@
          *
          * @param lang  The reCaptcha language.
          */
-        provider.setLang = function(lang){
+        provider.setLang = function (lang) {
             config.lang = lang;
         };
 
@@ -91,11 +105,11 @@
          * @since 2.5.0
          * @param onLoadFunctionName  string name which overrides the name of the onload function. Should match what is in the recaptcha script querystring onload value.
          */
-        provider.setOnLoadFunctionName = function(onLoadFunctionName){
+        provider.setOnLoadFunctionName = function (onLoadFunctionName) {
             provider.onLoadFunctionName = onLoadFunctionName;
         };
 
-        provider.$get = ['$rootScope','$window', '$q', '$document', function ($rootScope, $window, $q, $document) {
+        provider.$get = ['$rootScope', '$window', '$q', '$document', function ($rootScope, $window, $q, $document) {
             var deferred = $q.defer(), promise = deferred.promise, instances = {}, recaptcha;
 
             $window.vcRecaptchaApiLoadedCallback = $window.vcRecaptchaApiLoadedCallback || [];
@@ -109,7 +123,7 @@
             $window.vcRecaptchaApiLoadedCallback.push(callback);
 
             $window[provider.onLoadFunctionName] = function () {
-                $window.vcRecaptchaApiLoadedCallback.forEach(function(callback) {
+                $window.vcRecaptchaApiLoadedCallback.forEach(function (callback) {
                     callback();
                 });
             };
@@ -135,11 +149,11 @@
                 callback();
             } else {
                 // Generate link on demand
-                var script = $document.get(0).createElement('script');
+                var script = $window.document.createElement('script');
                 script.async = true;
                 script.defer = true;
-                script.src = 'https://www.google.com/recaptcha/api.js?onload='+provider.onLoadFunctionName+'&render=explicit';
-                $document.get(0).body.appendChild(script);
+                script.src = 'https://www.google.com/recaptcha/api.js?onload=' + provider.onLoadFunctionName + '&render=explicit';
+                $document.find('body').append(script);
             }
 
             return {
@@ -245,5 +259,120 @@
 
         }];
     });
+
+}(angular));
+
+/*global angular, Recaptcha */
+(function (ng) {
+    'use strict';
+
+    var app = ng.module('vcRecaptcha');
+
+    app.directive('vcRecaptcha', ['$document', '$timeout', 'vcRecaptchaService', function ($document, $timeout, vcRecaptcha) {
+
+        return {
+            restrict: 'A',
+            require: "?^^form",
+            scope: {
+                response: '=?ngModel',
+                key: '=?',
+                stoken: '=?',
+                theme: '=?',
+                size: '=?',
+                type: '=?',
+                lang: '=?',
+                tabindex: '=?',
+                required: '=?',
+                onCreate: '&',
+                onSuccess: '&',
+                onExpire: '&'
+            },
+            link: function (scope, elm, attrs, ctrl) {
+                scope.widgetId = null;
+
+                if (ctrl && ng.isDefined(attrs.required)) {
+                    scope.$watch('required', validate);
+                }
+
+                var removeCreationListener = scope.$watch('key', function (key) {
+                    var callback = function (gRecaptchaResponse) {
+                        // Safe $apply
+                        $timeout(function () {
+                            scope.response = gRecaptchaResponse;
+                            validate();
+
+                            // Notify about the response availability
+                            scope.onSuccess({response: gRecaptchaResponse, widgetId: scope.widgetId});
+                        });
+                    };
+
+                    vcRecaptcha.create(elm[0], {
+
+                        callback: callback,
+                        key: key,
+                        stoken: scope.stoken || attrs.stoken || null,
+                        theme: scope.theme || attrs.theme || null,
+                        type: scope.type || attrs.type || null,
+                        lang: scope.lang || attrs.lang || null,
+                        tabindex: scope.tabindex || attrs.tabindex || null,
+                        size: scope.size || attrs.size || null,
+                        'expired-callback': expired
+
+                    }).then(function (widgetId) {
+                        // The widget has been created
+                        validate();
+                        scope.widgetId = widgetId;
+                        scope.onCreate({widgetId: widgetId});
+
+                        scope.$on('$destroy', destroy);
+
+                        scope.$on('reCaptchaReset', function (event, resetWidgetId) {
+                            if (ng.isUndefined(resetWidgetId) || widgetId === resetWidgetId) {
+                                scope.response = "";
+                                validate();
+                            }
+                        })
+
+                    });
+
+                    // Remove this listener to avoid creating the widget more than once.
+                    removeCreationListener();
+                });
+
+                function destroy() {
+                    if (ctrl) {
+                        // reset the validity of the form if we were removed
+                        ctrl.$setValidity('recaptcha', null);
+                    }
+
+                    cleanup();
+                }
+
+                function expired() {
+                    // Safe $apply
+                    $timeout(function () {
+                        scope.response = "";
+                        validate();
+
+                        // Notify about the response availability
+                        scope.onExpire({widgetId: scope.widgetId});
+                    });
+                }
+
+                function validate() {
+                    if (ctrl) {
+                        ctrl.$setValidity('recaptcha', scope.required === false ? null : Boolean(scope.response));
+                    }
+                }
+
+                function cleanup() {
+                    vcRecaptcha.destroy(scope.widgetId);
+
+                    // removes elements reCaptcha added.
+                    ng.element($document[0].querySelectorAll('.pls-container')).parent().remove();
+                }
+            }
+        };
+    }]);
 
 }(angular));
