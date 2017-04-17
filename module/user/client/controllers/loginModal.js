@@ -1,8 +1,9 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$mdDialog', '$state', '$reactive', 'vcRecaptchaService',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $mdDialog, $state, $reactive, vcRecaptchaService) {
+angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$mdDialog', '$state', '$reactive', '$document',
+    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $mdDialog, $state, $reactive, $document) {
         // var response = vcRecaptchaService.getResponse("recaptcha-1");
+        // console.info(vcRecaptchaService.);
         // console.info(response);
         $reactive(this).attach($scope);
         this.subscribe('users');
@@ -15,6 +16,9 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
             confirmPassword: ''
         };
 
+
+        $scope.intCaptchaKey = '6LfzYxsUAAAAAPA9ty6hk__9X9k5Jf2UqcGosT62';
+
         $scope.recaptcha = {
             response : null,
             widgetId : null,
@@ -23,44 +27,53 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
 
         let intTry = 0;
 
-
-        $scope.setResponse = function (response) {
-            console.info('Response available');
-            $scope.recaptcha.response = response;
-        };
-        $scope.setWidgetId = function (widgetId) {
-            console.info('Created widget ID: %s', widgetId);
-            $scope.recaptcha.widgetId = widgetId;
-        };
-        $scope.cbExpiration = function() {
-            console.info('Captcha expired. Resetting response object');
-            vcRecaptchaService.reload($scope.widgetId);
-            $scope.recaptcha.response = null;
-        };
-
-
-
-
         $scope.error = '';
+        let intCatpchaIdReset = false;
+        $scope.renderCaptchaReset = () => {
+            if ($('#recaptcha-reset').is(':empty')) {
+                intCatpchaIdReset = grecaptcha.render('recaptcha-reset', {
+                    'sitekey' : '6LfzYxsUAAAAAPA9ty6hk__9X9k5Jf2UqcGosT62'
+                });
+            }
+        };
+        let intCatpchaIdCreate = false;
+        $scope.renderCaptchaCreate = () => {
+            if ($('#recaptcha-create').is(':empty')) {
+                intCatpchaIdCreate = grecaptcha.render('recaptcha-create', {
+                    'sitekey' : '6LfzYxsUAAAAAPA9ty6hk__9X9k5Jf2UqcGosT62'
+                });
+            }
+        };
 
+        let intCatpchaIdLogin;
         $scope.login = function () {
             intTry += 1;
-console.log(intTry);
-            return false;
-            Meteor.loginWithPassword(this.dataForm.email, this.dataForm.password, function(err) {
-                if (err) {
-                    //console.log(err);
-                    //$scope.error = 'User not found';
-                    Materialize.toast('User not found!', 4000);
-                } else {
-                    $mdDialog.hide();
-                    // console.info('scrum/organization');
-                    $state.go('scrum/organization');
-                }
-            });
+            if (intTry == 4) {
+                intCatpchaIdLogin = grecaptcha.render('recaptcha-login', {
+                    'sitekey' : '6LfzYxsUAAAAAPA9ty6hk__9X9k5Jf2UqcGosT62'
+                });
+            }
+
+            if (intTry < 4 ||  intTry > 4 && grecaptcha.getResponse(intCatpchaIdLogin)) {
+                Meteor.loginWithPassword(this.dataForm.email, this.dataForm.password, function(err) {
+                    if (err) {
+                        Materialize.toast('User not found!', 4000);
+                    } else {
+                        $mdDialog.hide();
+                        $state.go('scrum/organization');
+                    }
+                });
+            } else if (intTry > 4 && !grecaptcha.getResponse(intCatpchaIdLogin)) {
+                Materialize.toast('Check if you are a robot!', 4000);
+            }
         };
 
         $scope.reset = function () {
+            if (!grecaptcha.getResponse(intCatpchaIdReset)) {
+                Materialize.toast('Check if you are a robot!', 4000);
+                return false;
+            }
+
             $scope.credentials = {
                 email: $scope.dataForm.email
             };
@@ -86,7 +99,10 @@ console.log(intTry);
         };
 
         $scope.register = function () {
-
+            if (!grecaptcha.getResponse(intCatpchaIdCreate)) {
+                Materialize.toast('Check if you are a robot!', 4000);
+                return false;
+            }
             if (!$scope.dataForm.name || !$scope.dataForm.lastName) {
                 //$scope.error = 'Registration error - Inform you name';
                 Materialize.toast('Registration error - Inform you name', 4000);
@@ -142,21 +158,6 @@ console.log(intTry);
 
         $scope.close = function () {
             $mdDialog.hide();
-        };
-
-
-        $scope.setWidgetId = function (widgetId) {
-            // store the `widgetId` for future usage.
-            // For example for getting the response with
-            // `recaptcha.getResponse(widgetId)`.
-        };
-
-        $scope.setResponse = function (response) {
-            // send the `response` to your server for verification.
-        };
-
-        $scope.cbExpiration = function() {
-            // reset the 'response' object that is on scope
         };
     }
 ]);

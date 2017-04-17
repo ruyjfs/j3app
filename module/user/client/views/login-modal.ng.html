@@ -5,8 +5,9 @@
             <!--<span flex></span>-->
         <!--</div>-->
     <!--</md-toolbar>-->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!--<script src="https://www.google.com/recaptcha/api.js" async defer></script>-->
     <!--<script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>-->
+    <!--<script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoadedsasd&render=explicit" async defer></script>-->
     <md-tabs md-dynamic-height md-border-bottom style="min-width:550px;max-width:800px;max-height:810px; ">
         <md-tab label="{{'Sign in' | translate}}">
             <md-content class="md-padding">
@@ -29,8 +30,8 @@
                         <label>{{ 'Password' | translate }}</label>
                         <input type="password" ng-model="dataForm.password" aria-label="password"/>
                     </md-input-container>
-                    <div class="center-align">
-                        <div class="g-recaptcha" data-sitekey="6LfzYxsUAAAAAPA9ty6hk__9X9k5Jf2UqcGosT62" id="recaptcha-login"></div>
+                    <div class="center-align captcha">
+                        <div id="recaptcha-login"></div>
                     </div>
                     <md-button flex type="submit" class="md-raised md-primary" ng-click="login()" aria-label="login">
                         {{'Sign in' | translate}}
@@ -38,7 +39,7 @@
                 </form>
             </md-content>
         </md-tab>
-        <md-tab label="{{'Create account' | translate}}">
+        <md-tab label="{{'Create account' | translate}}" ng-click="renderCaptchaCreate()">
             <md-content class="md-padding">
                 <!--<div layout="row" layout-align="space-around center">-->
                 <!--<div>Register</div>-->
@@ -79,8 +80,8 @@
                         <md-icon md-svg-icon="action:ic_lock_open_24px"></md-icon>
                         <input type="password" ng-model="dataForm.confirmPassword" aria-label="confirmPassword"  required/>
                     </md-input-container>
-                    <div class="center-align">
-                        <div class="g-recaptcha" data-sitekey="6LfzYxsUAAAAAPA9ty6hk__9X9k5Jf2UqcGosT62" id="recaptcha-create"></div>
+                    <div class="center-align captcha">
+                        <div id="recaptcha-create"></div>
                     </div>
                     <md-button type="submit" class="md-raised md-primary" ng-click="register()" flex>
                         {{'Create account' | translate}}
@@ -88,7 +89,7 @@
                 </form>
             </md-content>
         </md-tab>
-        <md-tab label="{{'Forgot password?' | translate}}">
+        <md-tab label="{{'Forgot password?' | translate}}" ng-click="renderCaptchaReset()">
             <md-content class="md-padding">
                 <!--<div layout="row" layout-align="space-around center">-->
                 <!--<div>Login with:</div>-->
@@ -104,8 +105,8 @@
                         <md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
                         <input type="text" ng-model="dataForm.email" aria-label="email"/>
                     </md-input-container>
-                    <div class="center-align">
-                        <div class="g-recaptcha" data-sitekey="6LfzYxsUAAAAAPA9ty6hk__9X9k5Jf2UqcGosT62" id="recaptcha-reset"></div>
+                    <div class="center-align captcha">
+                        <div id="recaptcha-reset"></div>
                     </div>
                     <md-button type="submit" class="md-raised md-primary"
                                ng-click="reset()" aria-label="login">{{'Reset password' | translate}}
