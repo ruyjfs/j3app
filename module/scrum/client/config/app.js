@@ -161,8 +161,7 @@ if (Meteor.isClient) {
         //'uiGmapgoogle-maps',
         //'ngCookies',
         'ngMaterial',
-        'pascalprecht.translate',
-        'vcRecaptcha'
+        'pascalprecht.translate'
         //'utilsPagination'
     ]).config(function ($translateProvider) {
         $translateProvider.translations('pt-BR', ptBR);

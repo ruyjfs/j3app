@@ -4,8 +4,7 @@ if (Meteor.isClient) {
         'ui.router',
         'angularUtils.directives.dirPagination',
         'uiGmapgoogle-maps',
-        'ngMaterial',
-        'vcRecaptcha'
+        'ngMaterial'
     ]);
 
 
