@@ -34,6 +34,8 @@ angular.module('scrum').controller('HeaderCtrl',
                 console.log(objUser);
             }
             $translate.use(strLanguage);
+
+            Session.set('lang', strLang);
         };
 
         //$rootScope.$on('$stateChangeStart',

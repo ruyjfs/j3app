@@ -240,6 +240,9 @@ md-icon{
     margin-top: 0;
 }
 
+md-toast {
+    z-index: 1000;
+}
 
 .md-toast-content {
     height: 62px !important;
@@ -253,3 +256,7 @@ md-icon{
 /*form md-datepicker .md-datepicker-input-container, form md-datepicker  .md-datepicker-button.md-icon-button{*/
               /*margin-left: 0;*/
           /*}*/
+.toast {
+    line-height: 42px;
+    height: 100%;
+}

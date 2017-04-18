@@ -19,14 +19,6 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
 
         $scope.intCaptchaKey = '6LfzYxsUAAAAAPA9ty6hk__9X9k5Jf2UqcGosT62';
 
-        $scope.recaptcha = {
-            response : null,
-            widgetId : null,
-            key : "6LfzYxsUAAAAAPA9ty6hk__9X9k5Jf2UqcGosT62"
-        };
-
-        let intTry = 0;
-
         $scope.error = '';
         let intCatpchaIdReset = false;
         $scope.renderCaptchaReset = () => {
@@ -46,6 +38,7 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
         };
 
         let intCatpchaIdLogin;
+        let intTry = 0;
         $scope.login = function () {
             intTry += 1;
             if (intTry == 4) {

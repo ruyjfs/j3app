@@ -1,4 +1,5 @@
 if (Meteor.isClient) {
+    let strLang;
     angular.module('admin').run(function($rootScope, $stateParams){
 
         var booSucess = false;

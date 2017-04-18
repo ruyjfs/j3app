@@ -1,8 +1,12 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams'',
 //    function($scope, $stateParams){
-angular.module('scrum').controller('OrganizationCtrl', ['$scope', '$mdDialog', '$mdSidenav', '$log', '$reactive', '$rootScope', '$stateParams',
-    function ($scope, $mdDialog, $mdSidenav, $log, $reactive, $rootScope, $stateParams) {
+angular.module('scrum').controller('OrganizationCtrl', ['$scope', '$mdDialog', '$mdSidenav', '$log', '$reactive', '$rootScope', '$stateParams', '$document', '$translate',
+    function ($scope, $mdDialog, $mdSidenav, $log, $reactive, $rootScope, $stateParams, $document, $translate) {
         $reactive(this).attach($scope);
+        $translate.use(Session.get('lang'));
+        Materialize.toast($translate.instant('Welcome') + '!!! \\o/', 4000, 'rounded orange darken-1');
+        // $translate.refresh();
+        // let $translate = $filter('translate');
 
         //Materialize.toast(
         //    'Hello, this screen you can view the products you created and the products that you participate, either in you being on the team linked to the project or standing as PO or Scrum Master.'+
@@ -15,15 +19,62 @@ angular.module('scrum').controller('OrganizationCtrl', ['$scope', '$mdDialog', '
         //);
 
         //console.log(Meteor.user()._id);
-        this.subscribe('organization');
+        this.subscribe('organization', () => {
+            let organisations = Organization.find({}, {sort: {name: 1}}).map(function (organization) {
+                projectsId = [];
+                let n = 0;
+                organization.total = {};
+                if (organization.members) {
+                    organization.total.members = organization.members.length;
+                } else {
+                    organization.total.members = 0;
+                }
+                organization.total.projects = Project.find({organization: organization._id}).map(function(project){
+                    projectsId[n] = project._id;
+                    n++;
+                    return project._id;
+                }).length;
+                organization.total.teams = Team.find({organization: organization._id}).fetch().length;
+                if (organization.visibility && organization.visibility == 3) {
+                    organization.visualization = 'public';
+                } else {
+                    organization.visualization = 'private';
+                }
+                return organization;
+            });
+            console.info(organisations);
+            if (organisations.length == 0) {
+                Materialize.toast(
+                    $translate.instant('Hi, my name is Ryu, i will help you with whatever it takes.')
+                    , 120000);
+                Materialize.toast(
+                    $translate.instant('You have no organization, click the red button to create an organization, or contact the owner of an organization to add you to their organization.')
+                    , 120000);
+                Materialize.toast(
+                    $translate.instant('You can create products without organization, just enter the card without organization. For more information, click on the question mark icon in the top menu.')
+                    , 120000);
+                Materialize.toast(
+                    $translate.instant('If you have any questions or suggestions, please contact us at contact@j3scrum.com.')
+                    , 120000);
+                Materialize.toast(
+                    $translate.instant('To close these messages, drag to the side.')
+                    , 120000);
+                Materialize.toast(
+                    $translate.instant("I'm so glad you joined j3scrum, many things are still to come, best regards!!!")
+                    , 120000);
+                $document.ready(() => {
+                    $('.md-fab').addClass('pulse');
+                });
+            }
+        });
         this.subscribe('team');
         this.subscribe('project');
         this.subscribe('users');
         this.helpers({
             organisations: function () {
-                var organisations = Organization.find({}, {sort: {name: 1}}).map(function (organization) {
+                let organisations = Organization.find({}, {sort: {name: 1}}).map(function (organization) {
                     projectsId = [];
-                    var n = 0;
+                    let n = 0;
                     organization.total = {};
                     if (organization.members) {
                         organization.total.members = organization.members.length;
@@ -91,9 +142,34 @@ angular.module('scrum').controller('OrganizationCtrl', ['$scope', '$mdDialog', '
 
                     return organization;
                 });
+                // console.info(organisations);
+                //
+                // if (organisations.length == 0) {
+                //     Materialize.toast(
+                //         $translate.instant('Hi, my name is Ryu, i will help you with whatever it takes.')
+                //         , 120000);
+                //     Materialize.toast(
+                //         $translate.instant('You have no organization, click the red button to create an organization, or contact the owner of an organization to add you to their organization.')
+                //         , 120000);
+                //     Materialize.toast(
+                //         $translate.instant('You can create products without organization, just enter the card without organization. For more information, click on the question mark icon in the top menu.')
+                //         , 120000);
+                //     Materialize.toast(
+                //         $translate.instant('If you have any questions or suggestions, please contact us at contact@j3scrum.com.')
+                //         , 120000);
+                //     Materialize.toast(
+                //         $translate.instant('To close these messages, drag to the side.')
+                //         , 120000);
+                //     Materialize.toast(
+                //         $translate.instant("I'm so glad you joined j3scrum, many things are still to come, best regards!!!")
+                //         , 120000);
+                //     $document.ready(() => {
+                //         $('.md-fab').addClass('pulse');
+                //     });
+                // }
                 return organisations;
             }
-        });
+        }, false);
 
         //this.projects = Project.find(
         //                {

@@ -128,7 +128,7 @@ if (Meteor.isClient) {
         'Organization': 'Organização',
         'Organization full name': 'Nome completo da organização',
         'No organization': 'Sem organização',
-        'No organization products': 'Produtos sem organização',
+        'Products without organization': 'Produtos sem organização',
 
         'Teams': 'Equipes',
         'Members': 'Membros',
@@ -151,8 +151,21 @@ if (Meteor.isClient) {
 
         'Channel': 'Canal',
         'of': 'do',
-    };
 
+        // Ryu
+        'Welcome': 'Bem vindo',
+        'Hi, my name is Ryu, i will help you with whatever it takes.' : 'Olá, meu nome é Ryu e irei ajudar no que for preciso.',
+        'You have no organization, click the red button to create an organization, or contact the owner of an organization to add you to their organization.'
+            : 'Você não tem organização, clique no botão vermelho para criar uma organização ou contate o dono de uma organização para adiciona-lo na organização dele',
+        'You can create products without organization, just enter the card without organization. For more information, click on the question mark icon in the top menu.'
+            : 'Você pode criar produtos sem organização, basta entrar no cartão sem organização. Para mais informações, clique no botão de interrogação no menu superior.',
+        'If you have any questions or suggestions, please contact us at contact@j3scrum.com.'
+            : 'Se tiver qualquer dúvida ou sugestão, por favor nos fale pelo e-mail contact@j3scrum.com.',
+        'To close these messages, drag to the side.'
+            : 'Para fechar essas mensages, arraste elas para o lado.',
+        "I'm so glad you joined j3scrum, many things are still to come, best regards!!!"
+            : 'Eu fico muito feliz que tenha entrado no j3scrum, muitas coisas ainda estão por vir, grande abraço!!!'
+    };
     angular.module('scrum', [
         'angular-meteor',
         'angular-meteor.auth',
@@ -164,6 +177,7 @@ if (Meteor.isClient) {
         'pascalprecht.translate'
         //'utilsPagination'
     ]).config(function ($translateProvider) {
+        let strLang;
         $translateProvider.translations('pt-BR', ptBR);
         $translateProvider.translations('en-US', {});
         $translateProvider.translations('de', {
@@ -172,23 +186,24 @@ if (Meteor.isClient) {
             BUTTON_LANG_EN: 'englisch',
             BUTTON_LANG_DE: 'deutsch'
         });
-
         if (Meteor.userId()) {
             Meteor.subscribe('users', function(){
                 objUser = Meteor.users.findOne(Meteor.userId());
                 if (!objUser.language) {
-                    strLanguage = window.navigator.userLanguage || window.navigator.language || 'en-US';
-                    Meteor.call('userSave', {_id: objUser._id, language: strLanguage}, function (error) {});
+                    strLang = window.navigator.userLanguage || window.navigator.language || 'en-US';
+                    Meteor.call('userSave', {_id: objUser._id, language: strLang}, function (error) {});
                 } else {
-                    strLanguage = objUser.language;
+                    strLang = objUser.language;
                 }
-                $translateProvider.preferredLanguage(strLanguage);
-                $translateProvider.use(strLanguage);
+                $translateProvider.preferredLanguage(strLang);
+                $translateProvider.use(strLang);
+                Session.set('lang', strLang);
                 return objUser;
             });
         } else {
-            strLanguage = window.navigator.userLanguage || window.navigator.language || 'en-US';
-            $translateProvider.preferredLanguage(strLanguage);
+            strLang = window.navigator.userLanguage || window.navigator.language || 'en-US';
+            $translateProvider.preferredLanguage(strLang);
+            Session.set('lang', strLang);
         }
         $translateProvider.useSanitizeValueStrategy(null);
     }).directive('teste', function () {
