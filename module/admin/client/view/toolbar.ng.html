@@ -1,78 +1,140 @@
-<md-toolbar  class="navbar-fixed" layout="row" layout-align="start center" layout-padding>
-    <!--<md-toolbar md-scroll-shrink layout="row" layout-align="start center" style="position: fixed;"  layout-padding>-->
-    <!--<md-toolbar  md-scroll-shrink ng-if="true" layout-align="start center" layout-padding style="position: fixed;">-->
-    <md-button class="md-icon-button" ng-click="toggleMenu()"  hide-gt-md>
-        <!--<md-icon md-svg-icon="navigation:ic_menu_24px" aria-label="Menu"></md-icon>-->
-        <i class="material-icons">menu</i>
-    </md-button>
-    <!--<md-toolbar class="md-theme-indigo">-->
-    <!--Brotherhood-->
-    <!--</md-toolbar>-->
-    <!--<h2>-->
-    <!--<a ui-sref="brotherhood"><span class="md-title">brotherhood</span></a>-->
-    <span class="md-title" style="text-transform: capitalize;">{{title}}</span>
-    <!--<span class="md-title" layout-align="center center" style="text-transform: capitalize;">Nome do projeto</span>-->
-    <!--</h2>-->
-    <!--<a ui-sref="brotherhood"><span class="md-title">brotherhood</span></a>-->
-    <!--<md-toolbar class="md-theme-indigo">-->
-    <!--<h1 class="md-toolbar-tools">Brotherhood</h1>-->
-    <!--<span class="md-title"><a ui-sref="brotherhood" class="md-toolbar-tools">brotherhood</a></span>-->
-
-    <!--teste-->
-    <!--</md-toolbar>-->
-    <span flex></span>
-    <div class="navbar-right navbar-text">
-        <md-button ng-href="/user/login" ng-hide="$root.currentUser">Login</md-button>
-        <md-button ng-href="/user/register" ng-hide="$root.currentUser">Sign up</md-button>
-        <!--<div ng-show="$root.currentUser">{{ $root.currentUser.name }}</div>-->
-        <div hide-md hide-sm show-gt-md >
-            <!--<md-button ng-repeat="menuItem in menuItems" class="md-icon-button" ng-click="redirect(menuItem.link)" ng-show="$root.currentUser">-->
-            <!--&lt;!&ndash;<md-icon md-svg-icon="action:ic_group_work_24px" aria-label="Chat"></md-icon>&ndash;&gt;-->
-                <!--<i class="material-icons">{{menuItem.icon}}</i>-->
-            <!--</md-button>-->
-            <md-button class="md-icon-button" ng-click="redirect('/scrum/organization')" ng-show="$root.currentUser">
-                <!--<md-icon md-svg-icon="places:ic_business_24px" aria-label="Chat"></md-icon>-->
-                <!--<md-icon md-svg-icon="action:group_work_24px"  aria-label="Add"    ></md-icon>-->
-                <i class="material-icons">business_center</i>
-                <!--<md-icon md-font-icon="business_center" aria-label="teste" class="step"></md-icon>-->
-                <!--<md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>-->
-            </md-button>
-            <md-button class="md-icon-button" ng-click="redirect('/scrum/team')" ng-show="$root.currentUser">
-                <!--<md-icon md-svg-icon="action:ic_group_work_24px" aria-label="Chat"></md-icon>-->
-                <i class="material-icons">group_work</i>
-            </md-button>
-            <md-button class="md-icon-button" ng-click="toggleContactList()" ng-show="$root.currentUser">
-                <!--<md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>-->
-                <i class="material-icons">chat</i>
-            </md-button>
-            <md-button class="md-icon-button" ng-click="toggleContactList()" ng-show="$root.currentUser">
-                <!--<md-icon md-svg-icon="action:ic_language_24px" aria-label="Chat"></md-icon>-->
-                <i class="material-icons">language</i>
-            </md-button>
-            <md-button class="md-icon-button" ng-click="toggleContactList()" ng-show="$root.currentUser">
-                <!--<md-icon md-svg-icon="action:ic_settings_24px" aria-label="Chat"></md-icon>-->
-                <i class="material-icons">settings</i>
-            </md-button>
-            <!--<md-button class="md-icon-button" layout="row" layout-align="center center" ng-href="/user/logout" ng-show="$root.currentUser" style="margin-bottom: -19px;">-->
-            <md-button class="md-icon-button" layout="row" layout-align="center center" ng-click="redirect('/user/logout')" ng-show="$root.currentUser" style="margin-bottom: -19px;">
-                <!--<md-icon md-svg-icon="action:ic_settings_power_24px" aria-label="Exit"></md-icon>-->
-                <i class="material-icons">power_settings_new</i>
-            </md-button>
-        </div>
-        <div hide-gt-md>
-            <md-button class="md-icon-button" ng-click="toggleContactList()" ng-show="$root.currentUser">
-                <!--<md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>-->
-                <i class="material-icons">chat</i>
-            </md-button>
-            <!--<md-button class="md-icon-button" layout="row" layout-align="center center" ng-href="/user/logout" ng-show="$root.currentUser" style="margin-bottom: -19px;">-->
-            <!--<md-button ng-click="toggleContactList()" ng-show="$root.currentUser">-->
-                <!--&lt;!&ndash;<md-icon md-svg-icon="communication:ic_chat_24px" aria-label="Chat"></md-icon>&ndash;&gt;-->
-                <!--<i class="material-icons">chat</i>-->
-            <!--</md-button>-->
-            <!--<md-button ng-href="/user/logout" ng-show="$root.currentUser" style="margin-bottom: -12px;">-->
-                <!--<i class="material-icons">power_settings_new</i>-->
-                <!--&lt;!&ndash;<md-icon md-svg-icon="action:ic_settings_power_new_24px" aria-label="Exit"></md-icon>&ndash;&gt;-->
-            <!--</md-button>-->
+<div flex style="height: 100%;">
+    <div class="title">
+        <div class="row showMenu">
+            <!--<div class="col_1"><i class="material-icons">menu</i></div>-->
+            <div class="col_1 hide-on-med-and-down">
+                <section class="material-green ">
+                    <div class="material-icon hamburger">
+                        <span class="first"></span>
+                        <span class="second"></span>
+                        <span class="third"></span>
+                    </div>
+                </section>
+            </div>
+            <div class="col_2">{{ 'Menu' | translate}}</div>
         </div>
     </div>
-</md-toolbar>
+    <div class="content brown darken-2">
+        <div class="scroll">
+            <div class="row waves-effect waves-orange  {{menu.class}}" ng-repeat="menu in ctrl.menus" data-ng-class="{ active: $state.includes(menu.link) }" ng-click="$location.path(menu.link)">
+                <div class="col_1"><i class="material-icons">{{menu.icon}}</i></div>
+                <div class="col_2">{{ menu.name | translate }}</div>
+            </div>
+        </div>
+    </div>
+    <!--<nav class="navbar-fixed brown darken-2 hide-on-med-and-down" role="navigation" style="z-index: 1;">-->
+    <!--<nav class="navbar-fixed brown darken-2  animated fadeInLeft" role="navigation" style="z-index: 1;-->
+    <!--width: 40px;-->
+    <!--height: 100%;-->
+    <!--position: fixed;-->
+    <!--left: 0;">-->
+        <!--<div class="nav-wrapper container center">-->
+        <!--<div class="container">-->
+        <!--<div class="nav-wrapper left">-->
+            <!--<ul ng-repeat="menu in ctrl.menus" class="row left left" layout="row" layout-align="left start" style="width: 40px; margin-bottom: 0;">-->
+                <!--<li class="{{menu.class}}" style="width: 40px;">-->
+                    <!--<md-tooltip md-direction="right" md-autohide="false"> {{ menu.name | translate }}</md-tooltip>-->
+                    <!--<a href="{{menu.link}}" style="padding: 0 8px;">-->
+                        <!--&lt;!&ndash;Scrum&ndash;&gt;-->
+                        <!--&lt;!&ndash;<i class="material-icons" style="height: 20px; line-height: initial; font-size: 20px;">home</i>&ndash;&gt;-->
+                        <!--<i class="material-icons" style="height: 40px; line-height: 40px;">{{menu.icon}}</i>-->
+                    <!--</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <!--</div>-->
+    <!--</nav>-->
+    <!--<nav class="brown darken-2 .hide-on-small-only hide-on-large-only" role="navigation">-->
+        <!--<div class="nav-wrapper center-align">-->
+            <!--<ul class="center-align">-->
+                <!--<li class="waves-effect">-->
+                    <!--<md-tooltip md-direction="botom" md-autohide="false"> Product</md-tooltip>-->
+                    <!--<a href="/scrum/project">-->
+                        <!--<i class="material-icons">business_center</i>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li class="waves-effect">-->
+                    <!--<md-tooltip md-direction="botom" md-autohide="false"> Burndown</md-tooltip>-->
+                    <!--<a href="/scrum/burndown/{{ctrl.id}}/{{ctrl.sprintId}}">-->
+                        <!--<i class="material-icons">equalizer</i>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li class="waves-effect">-->
+                    <!--<md-tooltip md-direction="botom" md-autohide="false"> Kanban</md-tooltip>-->
+                    <!--<a href="/scrum/kanban/{{ctrl.id}}/{{ctrl.sprintId}}">-->
+                        <!--<i class="material-icons">view_column</i>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li class="waves-effect">-->
+                    <!--<md-tooltip md-direction="botom" md-autohide="false"> Backlog</md-tooltip>-->
+                    <!--<a href="/scrum/backlog/{{ctrl.id}}/{{ctrl.sprintId}}">-->
+                        <!--<i class="material-icons">developer_board</i>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li class="waves-effect">-->
+                    <!--<md-tooltip md-direction="botom" md-autohide="false"> Team</md-tooltip>-->
+                    <!--<a href="/scrum/project-team/{{ctrl.id}}/{{ctrl.sprintId}}">-->
+                        <!--<i class="material-icons">group_work</i>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li class="waves-effect">-->
+                    <!--<md-tooltip md-direction="botom" md-autohide="false"> Story</md-tooltip>-->
+                    <!--<a href="/scrum/story/{{ctrl.id}}/{{ctrl.sprintId}}">-->
+                        <!--<i class="material-icons">content_paste</i>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li class="waves-effect">-->
+                    <!--<md-tooltip md-direction="botom" md-autohide="false"> Status</md-tooltip>-->
+                    <!--<a href="/scrum/status/{{ctrl.id}}/{{ctrl.sprintId}}">-->
+                        <!--<i class="material-icons">style</i>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li class="waves-effect">-->
+                    <!--<md-tooltip md-direction="botom" md-autohide="false"> Sprint</md-tooltip>-->
+                    <!--<a href="/scrum/sprint/{{ctrl.id}}/{{ctrl.sprintId}}">-->
+                        <!--<i class="material-icons">history</i>-->
+                    <!--</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</nav>-->
+    <!--<md-fab-toolbar count="3" md-direction="left">-->
+    <!--<md-fab-trigger class="align-with-text">-->
+    <!--<md-button aria-label="menu" class="md-fab md-primary btn-floating btn-large">-->
+    <!--&lt;!&ndash;<md-button aria-label="menu" class="md-fab md-primary ">&ndash;&gt;-->
+    <!--<i class="material-icons">menu</i>-->
+    <!--</md-button>-->
+    <!--</md-fab-trigger>-->
+    <!--<md-toolbar>-->
+    <!--<md-fab-actions class="md-toolbar-tools">-->
+    <!--<md-button aria-label="comment" class="md-icon-button">-->
+    <!--<md-tooltip md-direction="top" md-autohide="false"> Product </md-tooltip>-->
+    <!--<a href="/scrum/project" class="waves-effect waves-orange"><i class="material-icons">business_center</i></a>-->
+    <!--</md-button>-->
+    <!--<md-button aria-label="comment" class="md-icon-button">-->
+    <!--<a href="/scrum/sprint/{{ctrl.id}}/{{ctrl.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">history</i></a>-->
+    <!--</md-button>-->
+    <!--<md-button aria-label="label" class="md-icon-button">-->
+    <!--<a href="/scrum/status/{{ctrl.id}}/{{ctrl.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">style</i></a>-->
+    <!--</md-button>-->
+    <!--<md-button aria-label="label" class="md-icon-button">-->
+    <!--<a href="/scrum/story/{{ctrl.id}}/{{ctrl.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">content_paste</i></a>-->
+    <!--</md-button>-->
+    <!--<md-button aria-label="label" class="md-icon-button">-->
+    <!--<a href="/scrum/project-team/{{ctrl.id}}/{{ctrl.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">group_work</i></a>-->
+    <!--</md-button>-->
+    <!--<md-button aria-label="photo" class="md-icon-button">-->
+    <!--<a href="/scrum/backlog/{{ctrl.id}}/{{ctrl.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">view_column</i></a>-->
+    <!--</md-button>-->
+    <!--<md-button aria-label="label" class="md-icon-button">-->
+    <!--<a href="/scrum/kanban/{{ctrl.id}}/{{ctrl.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">developer_board</i></a>-->
+    <!--</md-button>-->
+    <!--<md-button aria-label="comment" class="md-icon-button">-->
+    <!--<a href="/scrum/burndown/{{ctrl.id}}/{{ctrl.sprintId}}" class="waves-effect waves-orange"><i class="material-icons">equalizer</i></a>-->
+    <!--</md-button>-->
+    <!--</md-fab-actions>-->
+    <!--</md-toolbar>-->
+    <!--</md-fab-toolbar>-->
+    <md-progress-linear class="md-accent" md-mode="buffer" value="{{sprint.progressDone}}"
+                        md-buffer-value="{{sprint.progress}}"></md-progress-linear>
+</div>

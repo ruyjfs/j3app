@@ -12,7 +12,11 @@ angular.module('admin').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //"header": {
                     //    templateUrl: $header,
                     //},
-                    "main": {
+                    "menuLeft": {
+                        templateUrl: 'module/admin/client/view/toolbar.ng.html',
+                        controller: 'UserToolbarCtrl as ctrl'
+                    },
+                    "mainZoom": {
                         templateUrl: 'module/admin/client/view/default.ng.html',
                         controller: 'DefaultAdminCtrl'
                     },
@@ -20,7 +24,28 @@ angular.module('admin').config(['$urlRouterProvider', '$stateProvider', '$locati
                     //    templateUrl: $footer,
                     //}
                 }
-            });
+            })
+            .state('admin/users', {
+                url: '/admin/users',
+                views: {
+                    //"header": {
+                    //    templateUrl: $header,
+                    //},
+                    "menuLeft": {
+                        templateUrl: 'module/admin/client/view/toolbar.ng.html',
+                        controller: 'UserToolbarCtrl as ctrl'
+                    },
+                    "mainZoom": {
+                        templateUrl: 'module/admin/client/view/default.ng.html',
+                        controller: 'DefaultAdminCtrl'
+                    },
+                    // "main2": {
+                    //     templateUrl: 'module/scrum/client/view/organization-fab.ng.html'
+                    // }
+                }
+                //controller: 'ProductCtrl'
+            })
+        ;
 
         $urlRouterProvider.otherwise("/admin");
     }
