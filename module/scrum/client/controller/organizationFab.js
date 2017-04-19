@@ -4,6 +4,15 @@ angular.module('scrum').controller('OrganizationFabCtrl', ['$scope', '$mdDialog'
     function ($scope, $mdDialog, $stateParams, $reactive, $state, $timeout, $rootScope) {
         $reactive(this).attach($scope);
 
+        Meteor.subscribe('organization', () => {
+            let organisations = Organization.find({}, {sort: {name: 1}}).map((organization) => {return organization});
+            if (organisations.length == 0) {
+                $document.ready(() => {
+                    $('.md-fab').addClass('pulse');
+                });
+            }
+        });
+
         $scope.modalNoteSave = function (ev, id, storyId) {
             $mdDialog.show({
                 controller: 'NoteSaveCtrl',

@@ -68,6 +68,8 @@ angular.module('user').config(['$urlRouterProvider', '$stateProvider', '$locatio
                     "logout": ['$meteor', '$state', function($meteor, $state) {
                         return $meteor.logout().then(function(){
 
+                            Session.set('booMsgWelcome', false);
+                            Session.set('booMsgOrganization', false);
                             switch (strDomain) {
                                 case 'j3scrum.com':
                                 case '172.17.0.1':

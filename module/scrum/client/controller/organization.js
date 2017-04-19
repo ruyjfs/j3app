@@ -4,7 +4,10 @@ angular.module('scrum').controller('OrganizationCtrl', ['$scope', '$mdDialog', '
     function ($scope, $mdDialog, $mdSidenav, $log, $reactive, $rootScope, $stateParams, $document, $translate) {
         $reactive(this).attach($scope);
         $translate.use(Session.get('lang'));
-        Materialize.toast($translate.instant('Welcome') + '!!! \\o/', 4000, 'rounded orange darken-1');
+        if (Session.get('booMsgWelcome') != true) {
+            Materialize.toast($translate.instant('Welcome') + '!!! \\o/', 4000, 'rounded orange darken-1');
+            Session.set('booMsgWelcome', true);
+        }
         // $translate.refresh();
         // let $translate = $filter('translate');
 
@@ -19,52 +22,34 @@ angular.module('scrum').controller('OrganizationCtrl', ['$scope', '$mdDialog', '
         //);
 
         //console.log(Meteor.user()._id);
-        this.subscribe('organization', () => {
-            let organisations = Organization.find({}, {sort: {name: 1}}).map(function (organization) {
-                projectsId = [];
-                let n = 0;
-                organization.total = {};
-                if (organization.members) {
-                    organization.total.members = organization.members.length;
-                } else {
-                    organization.total.members = 0;
-                }
-                organization.total.projects = Project.find({organization: organization._id}).map(function(project){
-                    projectsId[n] = project._id;
-                    n++;
-                    return project._id;
-                }).length;
-                organization.total.teams = Team.find({organization: organization._id}).fetch().length;
-                if (organization.visibility && organization.visibility == 3) {
-                    organization.visualization = 'public';
-                } else {
-                    organization.visualization = 'private';
-                }
-                return organization;
-            });
-            console.info(organisations);
+        Meteor.subscribe('organization', () => {
+            let organisations = Organization.find({}, {sort: {name: 1}}).map((organization) => {return organization});
             if (organisations.length == 0) {
-                Materialize.toast(
-                    $translate.instant('Hi, my name is Ryu, i will help you with whatever it takes.')
-                    , 120000);
-                Materialize.toast(
-                    $translate.instant('You have no organization, click the red button to create an organization, or contact the owner of an organization to add you to their organization.')
-                    , 120000);
-                Materialize.toast(
-                    $translate.instant('You can create products without organization, just enter the card without organization. For more information, click on the question mark icon in the top menu.')
-                    , 120000);
-                Materialize.toast(
-                    $translate.instant('If you have any questions or suggestions, please contact us at contact@j3scrum.com.')
-                    , 120000);
-                Materialize.toast(
-                    $translate.instant('To close these messages, drag to the side.')
-                    , 120000);
-                Materialize.toast(
-                    $translate.instant("I'm so glad you joined j3scrum, many things are still to come, best regards!!!")
-                    , 120000);
-                $document.ready(() => {
-                    $('.md-fab').addClass('pulse');
-                });
+                if (Session.get('booMsgOrganization') != true) {
+                    Materialize.toast(
+                        $translate.instant('Hi, my name is Ryu, i will help you with whatever it takes.')
+                        , 120000);
+                    Materialize.toast(
+                        $translate.instant('You have no organization, click the red button to create an organization, or contact the owner of an organization to add you to their organization.')
+                        , 120000);
+                    Materialize.toast(
+                        $translate.instant('You can create products without organization, just enter the card without organization. For more information, click on the question mark icon in the top menu.')
+                        , 120000);
+                    Materialize.toast(
+                        $translate.instant('If you have any questions or suggestions, please contact us at contact@j3scrum.com.')
+                        , 120000);
+                    Materialize.toast(
+                        $translate.instant('To close these messages, drag to the side.')
+                        , 120000);
+                    Materialize.toast(
+                        $translate.instant("I'm so glad you joined j3scrum, many things are still to come, best regards!!!")
+                        , 120000);
+                    Session.set('booMsgOrganization', true);
+                }
+                // $document.ready(() => {
+                //     $('.md-fab').addClass('pulse');
+                //     console.log($('.md-fab'));
+                // });
             }
         });
         this.subscribe('team');
@@ -142,34 +127,10 @@ angular.module('scrum').controller('OrganizationCtrl', ['$scope', '$mdDialog', '
 
                     return organization;
                 });
-                // console.info(organisations);
-                //
-                // if (organisations.length == 0) {
-                //     Materialize.toast(
-                //         $translate.instant('Hi, my name is Ryu, i will help you with whatever it takes.')
-                //         , 120000);
-                //     Materialize.toast(
-                //         $translate.instant('You have no organization, click the red button to create an organization, or contact the owner of an organization to add you to their organization.')
-                //         , 120000);
-                //     Materialize.toast(
-                //         $translate.instant('You can create products without organization, just enter the card without organization. For more information, click on the question mark icon in the top menu.')
-                //         , 120000);
-                //     Materialize.toast(
-                //         $translate.instant('If you have any questions or suggestions, please contact us at contact@j3scrum.com.')
-                //         , 120000);
-                //     Materialize.toast(
-                //         $translate.instant('To close these messages, drag to the side.')
-                //         , 120000);
-                //     Materialize.toast(
-                //         $translate.instant("I'm so glad you joined j3scrum, many things are still to come, best regards!!!")
-                //         , 120000);
-                //     $document.ready(() => {
-                //         $('.md-fab').addClass('pulse');
-                //     });
-                // }
+                // console.log(this.getReactively('organisations'));
                 return organisations;
             }
-        }, false);
+        }, true);
 
         //this.projects = Project.find(
         //                {
