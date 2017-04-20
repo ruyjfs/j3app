@@ -16,11 +16,7 @@ Meteor.publish("team", function (organizationId, options, searchString) {
             };
         } else if (organizationId == 'organization') {
             selector = {
-                $or: [
-                    {'userId': this.userId},
-                    {'members': this.userId}
-                ],
-                $and: [{$or: [{organization: null}, {organization: ''}]}]
+                $and: [{$or: [{'userId': this.userId}, {'members': this.userId}]}, {$or: [{organization: null}, {organization: ''}]}]
             };
         } else {
             selector = {

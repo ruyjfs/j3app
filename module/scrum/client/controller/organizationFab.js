@@ -1,7 +1,7 @@
 //angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
 //    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('OrganizationFabCtrl', ['$scope', '$mdDialog', '$stateParams', '$reactive', '$state', '$timeout', '$rootScope',
-    function ($scope, $mdDialog, $stateParams, $reactive, $state, $timeout, $rootScope) {
+angular.module('scrum').controller('OrganizationFabCtrl', ['$scope', '$mdDialog', '$stateParams', '$reactive', '$state', '$timeout', '$rootScope', '$document',
+    function ($scope, $mdDialog, $stateParams, $reactive, $state, $timeout, $rootScope, $document) {
         $reactive(this).attach($scope);
 
         Meteor.subscribe('organization', () => {

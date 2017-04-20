@@ -8,7 +8,7 @@ angular.module('scrum').controller('ProjectSaveCtrl', ['$scope', '$reactive', '$
         //this.subscribe('team', function(){return [$stateParams.organization]});
         //this.subscribe('users');
         this.subscribe('organization');
-        //this.subscribe('team', function(){return [$stateParams.organization]});
+        // this.subscribe('team', function(){return [$stateParams.organization]});
         var organizationNamespace = $stateParams.organization;
         organizationId = '';
         if (organizationNamespace != 'organization') {

@@ -413,6 +413,8 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
         switch (strDomain) {
             case 'j3scrum.com':
             case '172.17.0.1':
+            case 'localhost':
+
                 strModule = 'scrum';
                 break;
             case 'j3game.com':

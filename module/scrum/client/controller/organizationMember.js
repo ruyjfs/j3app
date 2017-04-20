@@ -69,7 +69,7 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
             });
         };
 
-        this.perPage = 2;
+        this.perPage = 5;
         this.page = 1;
         this.sort = {
             name: 1
@@ -108,16 +108,39 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
                         sort: this.getReactively('sort')
                     });
                     //this.getReactively('total') = Meteor.users.find(selector).fetch().length;
+                    console.info(users);
                     return users;
                 } else {
                     return [];
                 }
+            },
+            total: () => {
+                arrOrganization = Organization.findOne({namespace: organizationNamespace});
+                var searchString = this.getReactively('searchText');
+                selector = {};
+                if (typeof searchString === 'string' && searchString.length) {
+                    selector = {
+                        $or: [
+                            {name: {$regex:  `.*${searchString}.*`, $options : 'i' }},
+                            {lastName: {$regex:  `.*${searchString}.*`, $options : 'i' }},
+                            {email: {$regex:  `.*${searchString}.*`, $options : 'i' }},
+                            {emails: {address: {$regex:  `.*${searchString}.*`, $options : 'i' }}},
+                        ]
+                    };
+                }
+                if (arrOrganization && arrOrganization.members) {
+                    selector._id = { $in: arrOrganization.members };
+                    let users = Meteor.users.find(selector, {});
+                    return users.map((result) => {return result}).length;
+                } else {
+                    return 0;
+                }
             }
         });
 
-        this.total = function() {
-            return Counts.get('totalUser');
-        };
+        // this.total = function() {
+        //     return Counts.get('totalUser');
+        // };
         this.pageChanged = function(newPage) {
             this.page = newPage;
         };

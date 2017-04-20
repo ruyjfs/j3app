@@ -1,4 +1,4 @@
-<div ng-controller="OrganizationMemberCtrl as vmMember" flex>
+<div ng-controller="OrganizationMemberCtrl as ctrl" flex>
     <!--<md-content class="md-padding">-->
 
     <md-content>
@@ -54,8 +54,8 @@
     <div layout-gt-sm="row">
         <md-content class="md-padding autocomplete md-block" flex-gt-sm>
             <md-contact-chips
-                    ng-model="vmMember.formAdd.members"
-                    md-contacts="vmMember.querySearch($query)"
+                    ng-model="ctrl.formAdd.members"
+                    md-contacts="ctrl.querySearch($query)"
                     md-contact-name="name"
                     md-contact-image="image"
                     md-contact-email="email"
@@ -86,7 +86,7 @@
             <!--&lt;!&ndash;</div>&ndash;&gt;-->
         <!--</md-input-container>-->
         <md-input-container>
-            <md-button class="md-fab md-mini hoverable" aria-label="Edit" ng-click="vmMember.save()">
+            <md-button class="md-fab md-mini hoverable" aria-label="Edit" ng-click="ctrl.save()">
                 <md-icon md-svg-icon="content:ic_add_24px" aria-label="Add"></md-icon>
             </md-button>
         </md-input-container>
@@ -94,19 +94,19 @@
     <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
             <label>{{ 'Type the name or email to search' | translate }}</label>
-            <input type="text" ng-model="vmMember.searchText"/>
+            <input type="text" ng-model="ctrl.searchText"/>
         </md-input-container>
         <md-input-container>
             <md-select ng-model="order" placeholder="{{ 'Sort order' | translate }}">
-                <md-option ng-click="vmMember.sortChange('1')" value="1">{{ 'Ascending' | translate }}</md-option>
-                <md-option ng-click="vmMember.sortChange('-1')" value="-1">{{ 'Descending' | translate }}</md-option>
+                <md-option ng-click="ctrl.sortChange('1')" value="1">{{ 'Ascending' | translate }}</md-option>
+                <md-option ng-click="ctrl.sortChange('-1')" value="-1">{{ 'Descending' | translate }}</md-option>
             </md-select>
         </md-input-container>
     </div>
     <md-content>
         <md-list>
             <md-list-item class="md-3-line" pagination-id="member"
-                          dir-paginate="members in vmMember.members | itemsPerPage: vmMember.perPage" total-items="vmMember.total()">
+                          dir-paginate="members in ctrl.members | itemsPerPage: ctrl.perPage" total-items="ctrl.total">
                 <div class="md-list-item-text" layout="column" layout-align="center center">
                     <h3>{{members.name}}</h3>
                     <!--<h4>{{item.who}}</h4>-->
@@ -125,7 +125,7 @@
             </md-list-item>
         </md-list>
     </md-content>
-    <dir-pagination-controls pagination-id="member" on-page-change="vmMember.pageChanged(newPageNumber)"></dir-pagination-controls>
+    <dir-pagination-controls pagination-id="member" on-page-change="ctrl.pageChanged(newPageNumber)"></dir-pagination-controls>
     <!--<h1 class="md-display-2">Team</h1> {{test}}-->
     <!--<p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>-->
     <!--</md-content>-->
