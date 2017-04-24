@@ -73,8 +73,33 @@ angular.module('scrum').controller('ProductFabCtrl', ['$scope', '$mdDialog', '$s
             //    .targetEvent(ev)
 
             $mdDialog.show({
-                controller: 'TeamSaveCtrl',
+                controller: 'TeamSaveCtrl as ctrl',
                 templateUrl: 'module/scrum/client/view/team-save.ng.html',
+                clickOutsideToClose: true,
+                locals: {
+                    id: id
+                },
+                targetEvent: ev
+            }).then(function (answer) {
+                this.status = 'You said the information was "' + answer + '".';
+            }, function () {
+                this.status = 'You cancelled the dialog.';
+            });
+        };
+
+        this.modalOrganizationMemberSave = function (ev, id) {
+            //$mdDialog.alert()
+            //    .parent(angular.element(document.querySelector('#popupContainer')))
+            //    .clickOutsideToClose(true)
+            //    .title('This is an alert title')
+            //    .content('You can specify some description text in here.')
+            //    .ariaLabel('Alert Dialog Demo')
+            //    .ok('Got it!')
+            //    .targetEvent(ev)
+
+            $mdDialog.show({
+                controller: 'OrganizationMemberSaveCtrl as ctrl',
+                templateUrl: 'module/scrum/client/view/organization-member-save.ng.html',
                 clickOutsideToClose: true,
                 locals: {
                     id: id

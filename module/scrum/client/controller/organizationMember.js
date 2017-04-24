@@ -23,6 +23,27 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
         var organizationNamespace = $stateParams.organization;
 
         this.formAdd.members = [];
+        this.save = function(ev){
+            var formAddNew = {};
+            formAddNew._id = this.formAdd._id;
+            formAddNew.members = this.formAdd.members.map(function(member){
+                return member._id;
+            });
+            this.getReactively('formAdd').members  = [];
+            Meteor.call('organizationSaveMembers', formAddNew, function (error) {
+                if (error) {
+                    Materialize.toast('Erro: ' + error, 4000);
+                } else {
+                    Materialize.toast('Saved successfully!', 4000);
+                }
+            });
+        };
+
+        this.perPage = 5;
+        this.page = 1;
+        this.sort = {
+            name: 1
+        };
         $scope.filterSelected = true;
         this.querySearch = function(strSearch) {
             selector = {};
@@ -50,30 +71,8 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
 
             return users;
             //return this.getReactively('allContacts');
-        }
-
-
-        this.save = function(ev){
-            var formAddNew = {};
-            formAddNew._id = this.formAdd._id;
-            formAddNew.members = this.formAdd.members.map(function(member){
-                return member._id;
-            });
-            this.getReactively('formAdd').members  = [];
-            Meteor.call('organizationSaveMembers', formAddNew, function (error) {
-                if (error) {
-                    Materialize.toast('Erro: ' + error, 4000);
-                } else {
-                    Materialize.toast('Saved successfully!', 4000);
-                }
-            });
         };
 
-        this.perPage = 5;
-        this.page = 1;
-        this.sort = {
-            name: 1
-        };
 
         this.searchText = '';
         this.helpers({
@@ -138,35 +137,13 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
             }
         });
 
-        // this.total = function() {
-        //     return Counts.get('totalUser');
-        // };
         this.pageChanged = function(newPage) {
             this.page = newPage;
         };
+
         this.sortChange = function(sort) {
             this.sort = {
                 name: parseInt(sort)
             };
         };
-
-        //$scope.remove = function(team) {
-        //    this.teams.remove(team);
-        //};
-        //
-        //$scope.modalSave = function(ev, id){
-        //    $mdDialog.show({
-        //        controller: 'TeamSaveCtrl',
-        //        templateUrl: 'module/scrum/client/view/team-save.ng.html',
-        //        clickOutsideToClose:true,
-        //        locals : {
-        //            id: id
-        //        },
-        //        targetEvent: ev
-        //    }).then(function(answer) {
-        //        $scope.status = 'You said the information was "' + answer + '".';
-        //    }, function() {
-        //        $scope.status = 'You cancelled the dialog.';
-        //    });
-        //};
 }]);

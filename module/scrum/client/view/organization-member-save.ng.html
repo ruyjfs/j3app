@@ -1,0 +1,30 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <div layout-gt-sm="row">
+        <md-content class="md-padding autocomplete md-block" flex-gt-sm>
+            <md-contact-chips
+                    ng-model="ctrl.formAdd.members"
+                    md-contacts="ctrl.querySearch($query)"
+                    md-contact-name="name"
+                    md-contact-image="image"
+                    md-contact-email="email"
+                    md-require-match="true"
+                    md-highlight-flags="i"
+                    filter-selected="true"
+                    placeholder="{{ 'Type the name or email to add' | translate }}">
+            </md-contact-chips>
+        </md-content>
+        <!--<md-input-container>-->
+            <!--<md-button class="md-fab md-mini hoverable" aria-label="Edit" ng-click="ctrl.save()">-->
+                <!--<md-icon md-svg-icon="content:ic_add_24px" aria-label="Add"></md-icon>-->
+            <!--</md-button>-->
+        <!--</md-input-container>-->
+    </div>
+    <md-dialog-actions layout="row">
+        <button class="btn white waves-effect waves-orange hoverable" type="button" ng-click="ctrl.close()">
+            {{ 'Cancel' | translate }}
+        </button>
+        <button class="btn orange darken-3 waves-effect waves-light hoverable" type="button" ng-click="ctrl.save()">
+            {{ 'Add' | translate }}
+        </button>
+    </md-dialog-actions>
+</md-dialog>

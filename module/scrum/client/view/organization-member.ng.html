@@ -52,46 +52,6 @@
         <!--</table>-->
     </md-content>
     <div layout-gt-sm="row">
-        <md-content class="md-padding autocomplete md-block" flex-gt-sm>
-            <md-contact-chips
-                    ng-model="ctrl.formAdd.members"
-                    md-contacts="ctrl.querySearch($query)"
-                    md-contact-name="name"
-                    md-contact-image="image"
-                    md-contact-email="email"
-                    md-require-match="true"
-                    md-highlight-flags="i"
-                    filter-selected="true"
-                    placeholder="{{ 'Type the name or email to add' | translate }}">
-            </md-contact-chips>
-            <!--<div ng-messages="vm.formAdd.members.$error" ng-if="vm.formAdd.members.$touched">-->
-                <!--<div ng-message="minlength">{{'Your entry is not long enough' | translate }}.</div>-->
-            <!--</div>-->
-        </md-content>
-        <!--<md-input-container class="md-block" flex-gt-sm>-->
-            <!--<label>{{ 'Type the name or email to add' | translate }}</label>-->
-            <!--<md-contact-chips-->
-                    <!--ng-model="vm.asyncContacts"-->
-                    <!--md-contacts="vm.allContacts($query)"-->
-                    <!--md-contact-name="name"-->
-                    <!--md-contact-image="image"-->
-                    <!--md-contact-email="email"-->
-                    <!--md-require-match="true"-->
-                    <!--md-highlight-flags="i"-->
-                    <!--filter-selected="vm.filterSelected"-->
-                    <!--placeholder="">-->
-            <!--</md-contact-chips>-->
-            <!--&lt;!&ndash;<div ng-messages="form.name.$error">&ndash;&gt;-->
-            <!--&lt;!&ndash;<div ng-message="required">required</div>&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--</md-input-container>-->
-        <md-input-container>
-            <md-button class="md-fab md-mini hoverable" aria-label="Edit" ng-click="ctrl.save()">
-                <md-icon md-svg-icon="content:ic_add_24px" aria-label="Add"></md-icon>
-            </md-button>
-        </md-input-container>
-    </div>
-    <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
             <label>{{ 'Type the name or email to search' | translate }}</label>
             <input type="text" ng-model="ctrl.searchText"/>
