@@ -91,8 +91,8 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                             user.messagesNotVisualized = '';
                         } else {
                             //if ($rootScope.chat) {
-                            var s = new buzz.sound('/sound/message-msn.mp3');
-                            s.play();
+                            // var s = new buzz.sound('/sound/message-msn.mp3');
+                            // s.play();
                             //}
                         }
 
@@ -214,8 +214,8 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                             user.messagesNotVisualized = '';
                         } else {
                             //if ($rootScope.chat) {
-                            var s = new buzz.sound('/sound/message-msn.mp3');
-                            s.play();
+                            // var s = new buzz.sound('/sound/message-msn.mp3');
+                            // s.play();
                             //}
                         }
 
