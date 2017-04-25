@@ -72,7 +72,7 @@ body {
     width: 190px;
 }
 .dynamic .col_2{
-    margin-left: 5px;
+    margin-left: 10px;
     transition: display 2.5s;
     display: none;
 }
@@ -90,7 +90,7 @@ body {
 .dynamic h4 {
     margin: 0;
 }
-.dynamic .title{
+.dynamic .menu .title{
     color: #fff;
     /*background-color: #b50a03;*/
 }
