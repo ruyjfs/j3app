@@ -26,6 +26,7 @@ angular.module('scrum').controller('OrganizationMemberSaveCtrl', ['$scope', '$re
                     Materialize.toast('Erro: ' + error, 4000);
                 } else {
                     Materialize.toast('Saved successfully!', 4000);
+                    $mdDialog.hide();
                 }
             });
         };

@@ -268,3 +268,11 @@ md-toast {
     user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
     cursor: move;
 }
+
+/*.card .card-action {*/
+    /*padding: 8px;*/
+/*}*/
+
+md-dialog-actions .btn{
+    box-shadow: none;
+}

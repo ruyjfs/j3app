@@ -1,56 +1,4 @@
 <div ng-controller="OrganizationMemberCtrl as ctrl" flex>
-    <!--<md-content class="md-padding">-->
-
-    <md-content>
-        <!--<md-list>-->
-            <!--<md-list-item class="md-3-line" ng-repeat="team in vm.teams">-->
-                <!--<div class="md-list-item-text" layout="column" layout-align="center center">-->
-                    <!--<h3>{{team.name}}</h3>-->
-                    <!--&lt;!&ndash;<h4>{{item.who}}</h4>&ndash;&gt;-->
-                    <!--<p>{{team.description}}</p>-->
-                <!--</div>-->
-                <!--<div class="md-list-item-text" layout="row" layout-align="center center">-->
-                    <!--<md-button class="md-fab md-mini hoverable" aria-label="Edit" ng-click="modalSave($event, team._id)">-->
-                        <!--<md-icon md-svg-icon="content:ic_create_24px" aria-label="Edit"></md-icon>-->
-                    <!--</md-button>-->
-                    <!--<md-button class="md-fab md-mini hoverable" aria-label="Remove" ng-click="remove(team._id)">-->
-                        <!--<md-icon md-svg-icon="content:ic_clear_24px" aria-label="Remove"></md-icon>-->
-                    <!--</md-button>-->
-                <!--</div>-->
-                <!--<md-divider ng-if="!$last"></md-divider>-->
-            <!--</md-list-item>-->
-        <!--</md-list>-->
-
-
-
-        <!--<table class="table table-hover table-mc-light-blue" flex>-->
-        <!--<thead>-->
-        <!--<tr>-->
-        <!--<th data-field="id">Name</th>-->
-        <!--<th data-field="name">Item Name</th>-->
-        <!--<th data-field="price">Item Price</th>-->
-        <!--</tr>-->
-        <!--</thead>-->
-
-        <!--<tbody>-->
-        <!--<tr>-->
-        <!--<td>Alvin</td>-->
-        <!--<td>Eclair</td>-->
-        <!--<td>$0.87</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-        <!--<td>Alan</td>-->
-        <!--<td>Jellybean</td>-->
-        <!--<td>$3.76</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-        <!--<td>Jonathan</td>-->
-        <!--<td>Lollipop</td>-->
-        <!--<td>$7.00</td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
-        <!--</table>-->
-    </md-content>
     <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
             <label>{{ 'Type the name or email to search' | translate }}</label>
@@ -63,29 +11,73 @@
             </md-select>
         </md-input-container>
     </div>
-    <md-content>
-        <md-list>
-            <md-list-item class="md-3-line" pagination-id="member"
-                          dir-paginate="members in ctrl.members | itemsPerPage: ctrl.perPage" total-items="ctrl.total">
-                <div class="md-list-item-text" layout="column" layout-align="center center">
-                    <h3>{{members.name}}</h3>
-                    <!--<h4>{{item.who}}</h4>-->
-                    <p>{{members.email}}</p>
+    <md-content style="min-height: 400px;">
+        <div dir-paginate="user in ctrl.members | itemsPerPage: ctrl.perPage" total-items="ctrl.total" style="display: inline-flex;">
+            <div class="card small orange lighten-3 hoverable" style="margin:10px;min-width:306px;height:144px;">
+                <div class="card-content white-text">
+                    <p>
+                        <span class="card-title activator text-darken-4">{{user.nameTreated}}
+                        <!--<i class="material-icons right">more_vert</i>-->
+                    </span>
+                    </p>
+                    <p>
+                    <span class="md-subhead" style="color: rgba(0,0,0,0.54);">
+                                <i class="material-icons">star</i>
+                                <i class="material-icons">star</i>
+                                <i class="material-icons">star</i>
+                                <i class="material-icons">star_half</i>
+                                <i class="material-icons">star_border</i>
+                            </span>
+                    </p>
+                    <div class="md-media-sm card-media" style="
+    position: absolute;
+    display: block;
+    top: 16px;
+    right: 93px;">
+                        <img alt="{{user.name}}" ng-src="{{user.img}}" class="md-avatar md-whiteframe-3dp" style="
+                                    display: block;
+                                    position: absolute;
+                                    padding-top: 0px;
+                                    /*margin-top: 14px;*/
+                                    background-color: {{user.statusColor}};
+                                    border: solid 6px  {{user.statusColor}};
+
+                                    width: 60px;
+                                    height: 60px;
+                                    /*margin-top: 4px;*/
+                                    /*width: 40px;*/
+                                    /*height: 40px;*/
+                                    margin-top: 6px;
+
+                                    margin-bottom: 8px;
+                                    /* margin-right: 16px; */
+                                    /* border-radius: 50%; */
+                                    border-radius: 12%;
+                                    box-sizing: content-box;
+                                    "/>
+                    </div>
+                    <!--<p>{{user.description}}</p>-->
                 </div>
-                <!--<div class="md-list-item-text" layout="row" layout-align="center center">-->
-                    <!--<md-button class="md-fab md-mini hoverable" aria-label="Edit"-->
-                               <!--ng-click="modalSave($event, team._id)">-->
-                        <!--<md-icon md-svg-icon="content:ic_create_24px" aria-label="Edit"></md-icon>-->
-                    <!--</md-button>-->
-                    <!--<md-button class="md-fab md-mini hoverable" aria-label="Remove" ng-click="remove(team._id)" style="line-height: 0px;">-->
-                    <!--<i class="material-icons">delete</i>-->
-                    <!--</md-button>-->
-                <!--</div>-->
-                <md-divider></md-divider>
-            </md-list-item>
+                <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4">{{user.name}}<i
+                                            class="material-icons right">close</i></span>
+                </div>
+                <div class="card-action center orange lighten-3" style="padding: 8px;">
+                    <a href="#" ng-click="ctrl.modalDelete($event, user._id)">
+                        <i class="material-icons right">delete</i>
+                        <!--<md-tooltip md-direction="bottom" md-autohide="false">-->
+                            <!--{{ 'Delete' | translate}}-->
+                        <!--</md-tooltip>-->
+                    </a>
+                </div>
+            </div>
+        </div>
+        <md-list style="display: none;">
+            <md-list-item class="md-3-line" pagination-id="member" dir-paginate="members in ctrl.members | itemsPerPage: ctrl.perPage" total-items="ctrl.total">
+        </md-list-item>
         </md-list>
+        <dir-pagination-controls pagination-id="member" on-page-change="ctrl.pageChanged(newPageNumber)"></dir-pagination-controls>
     </md-content>
-    <dir-pagination-controls pagination-id="member" on-page-change="ctrl.pageChanged(newPageNumber)"></dir-pagination-controls>
     <!--<h1 class="md-display-2">Team</h1> {{test}}-->
     <!--<p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>-->
     <!--</md-content>-->

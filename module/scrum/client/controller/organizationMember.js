@@ -22,57 +22,12 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
         });
         var organizationNamespace = $stateParams.organization;
 
-        this.formAdd.members = [];
-        this.save = function(ev){
-            var formAddNew = {};
-            formAddNew._id = this.formAdd._id;
-            formAddNew.members = this.formAdd.members.map(function(member){
-                return member._id;
-            });
-            this.getReactively('formAdd').members  = [];
-            Meteor.call('organizationSaveMembers', formAddNew, function (error) {
-                if (error) {
-                    Materialize.toast('Erro: ' + error, 4000);
-                } else {
-                    Materialize.toast('Saved successfully!', 4000);
-                }
-            });
-        };
-
-        this.perPage = 5;
+        this.perPage = 9;
         this.page = 1;
         this.sort = {
             name: 1
         };
         $scope.filterSelected = true;
-        this.querySearch = function(strSearch) {
-            selector = {};
-            if (typeof strSearch === 'string' && strSearch.length) {
-                //{
-                //    $or: [
-                //        //{name: {$regex:  `.*${strSearch}.*`, $options : 'i' }},
-                //        //{email: {$regex:  `.*${strSearch}.*`, $options : 'i' }}
-                //        {name: strSearch}
-                //    ]
-                //}
-            }
-
-            users = Meteor.users.find({}).fetch();
-            return users.map(function (user, index) {
-                user.name = user.name + ' ' + user.lastName;
-                // Imagem do gravatar.
-                if (user.emails && user.emails[0].address) {
-                    user.image = 'http://www.gravatar.com/avatar/' + CryptoJS.MD5(user.emails[0].address).toString() + '?s=40&d=mm';
-                } else {
-                    user.image = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=40&d=mm&f=y';
-                }
-                return user;
-            });
-
-            return users;
-            //return this.getReactively('allContacts');
-        };
-
 
         this.searchText = '';
         this.helpers({
@@ -101,14 +56,94 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
 
                 if (arrOrganization && arrOrganization.members) {
                     selector._id = { $in: arrOrganization.members };
-                    var users = Meteor.users.find(selector, {
+                    let users = Meteor.users.find(selector, {
                         limit: parseInt(this.getReactively('perPage')),
                         skip: parseInt((this.getReactively('page') - 1) * this.getReactively('perPage')),
                         sort: this.getReactively('sort')
                     });
-                    //this.getReactively('total') = Meteor.users.find(selector).fetch().length;
-                    console.info(users);
-                    return users;
+
+                    return users.map(function(user){
+                        if (user.status) {
+                            if (user.status.lastLogin) {
+                                if (moment(new Date).diff(moment(user.status.lastLogin.date), 'days') > 2) {
+                                    user.statusLastLoginDate = moment(user.status.lastLogin.date).format('L H[h]m');
+                                } else {
+                                    user.statusLastLoginDate = moment(user.status.lastLogin.date).fromNow(); // in 40 minutes
+                                }
+                            }
+                            //console.log(user.status.lastLogin.date);
+                            //moment(user.status.lastLogin.date).format('L LT')
+                            //user.status.lastLogin.dateTreated = '';
+                            if (user.status.idle == true) {
+                                user.statusColor = ' #FFC107';
+                                user.statusName = ' Away';
+                            } else if (user.status.online == true) {
+                                user.statusColor = ' #9ACD32';
+                                user.statusName = ' Online';
+                            } else {
+                                user.statusColor = ' rgba(224, 224, 224, 0.77)';
+                                user.statusName = ' Offline';
+                            }
+                        } else {
+                            user.statusColor = ' rgba(224, 224, 224, 0.77)';
+                            user.statusName = ' Offline';
+                        }
+                        // Imagem do gravatar.
+                        if (user.emails && user.emails[0].address) {
+                            user.img = 'http://www.gravatar.com/avatar/' + CryptoJS.MD5(user.emails[0].address).toString() + '?s=60&d=mm';
+                        } else {
+                            user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=60&d=mm&f=y';
+                        }
+                        user.nameTreated = user.name + ' ' + user.lastName;
+                        if (user.nameTreated.length > 14) {
+                            user.nameTreated = user.nameTreated.substr(0,13) + '...';
+                        }
+
+                        sprint = Sprint.findOne({_id: $stateParams.sprintId});
+
+                        if (sprint) {
+                            sprintPreviousNumber = sprint.number - 1;
+                            sprintNextNumber = sprint.number + 1;
+                            sprintPrevious = Sprint.findOne({projectId: $stateParams.id, number: sprintPreviousNumber});
+                            sprintNext = Sprint.findOne({projectId: $stateParams.id, number: sprintNextNumber});
+
+                            if (sprintPrevious) {
+                                notesPrevious = Note.find({sprintId: sprintPrevious._id, owner: user._id}).fetch();
+                            } else {
+                                notesPrevious = [];
+                            }
+                            notesCurrent = Note.find({sprintId: sprint._id, owner: user._id}).fetch();
+                            notesNext = Note.find({sprintId: sprintNext._id, owner: user._id}).fetch();
+                            if (sprintPrevious) {
+                                notesDonePrevious = Note.find({sprintId: sprintPrevious._id, owner: user._id, statusId: '1'}).fetch();
+                            } else {
+                                notesDonePrevious = [];
+                            }
+                            notesDoneCurrent = Note.find({sprintId: sprint._id, owner: user._id, statusId: '1'}).fetch();
+                            notesDoneNext = Note.find({sprintId: sprintNext._id, owner: user._id, statusId: '1'}).fetch();
+                        } else {
+                            sprintPreviousNumber = 0;
+                            sprintPrevious = {};
+                            sprintNextNumber = 2;
+                            sprintNext = Sprint.findOne({projectId: $stateParams.id, number: sprintNextNumber});
+                            notesDonePrevious = [];
+                            notesDoneCurrent = [];
+                            notesDoneNext = [];
+                            notesPrevious = [];
+                            notesCurrent = [];
+                            notesNext = [];
+                        }
+
+                        user.sprintIdPrevious = (sprintPrevious)? sprintPrevious._id : '';
+                        user.sprintIdCurrent = (sprint) ? sprint._id: '';
+                        user.sprintIdNext = (sprintNext) ? sprintNext._id : '';
+
+                        user.sprintPrevious = {taskRemaining: notesDonePrevious.length, taskTotal: notesPrevious.length};
+                        user.sprintCurrent = {taskRemaining: notesDoneCurrent.length, taskTotal: notesCurrent.length};
+                        user.sprintNext = {taskRemaining: notesDoneNext.length, taskTotal: notesNext.length};
+
+                        return user;
+                    });
                 } else {
                     return [];
                 }
@@ -145,5 +180,49 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
             this.sort = {
                 name: parseInt(sort)
             };
+        };
+
+        this.close = function () {
+            $mdDialog.hide();
+        };
+
+        this.modalDelete = function (ev, id) {
+                let parentEl = angular.element(document.body);
+                $mdDialog.show({
+                    parent: parentEl,
+                    targetEvent: ev,
+                    template:
+                    '<md-dialog aria-label="List dialog">' +
+                    '  <md-dialog-content>'+
+                    '    <p>Would you like to remove this member of organization?</p>' +
+                    '  </md-dialog-content>' +
+                    '  <md-dialog-actions>' +
+                    '    <md-button ng-click="ctrl.close()" class="white orange-text text-darken-3 btn waves-effect waves-orange hoverable ng-binding">' +
+                    '      Cancel' +
+                    '    </md-button>' +
+                    '    <md-button ng-click="ctrl.delete(\'' + id + '\')" class="btn orange darken-3 waves-effect waves-light hoverable ng-binding">' +
+                    '      Remove' +
+                    '    </md-button>' +
+                    '  </md-dialog-actions>' +
+                    '</md-dialog>',
+                    controller: 'OrganizationMemberCtrl as ctrl'
+                });
+        };
+
+        this.delete = (id) => {
+            let arrOrganization = Organization.findOne({namespace: organizationNamespace});
+            let formAddNew = {};
+            formAddNew._id = this.formAdd._id;
+            formAddNew.members = arrOrganization.members.filter(function(memberId){
+                return (memberId != id);
+            });
+            Meteor.call('organizationUpdateMembers', formAddNew, function (error) {
+                if (error) {
+                    Materialize.toast('Erro: ' + error, 4000);
+                } else {
+                    Materialize.toast('Member removed successfully!', 4000);
+                    $mdDialog.hide();
+                }
+            });
         };
 }]);

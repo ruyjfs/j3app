@@ -50,6 +50,14 @@ Meteor.methods({
         delete dataForm._id;
         Organization.update(id, { $set: dataForm});
     },
+    organizationUpdateMembers: function(dataFormNew)
+    {
+        id = dataFormNew._id;
+        dataForm = Organization.findOne(id);
+        dataForm.members = dataFormNew.members;
+        delete dataForm._id;
+        Organization.update(id, { $set: dataForm});
+    },
     organizationDelete: function(id){
         Organization.remove(id);
     },
