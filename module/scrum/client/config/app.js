@@ -164,7 +164,8 @@ if (Meteor.isClient) {
         'To close these messages, drag to the side.'
             : 'Para fechar essas mensages, arraste elas para o lado.',
         "I'm so glad you joined j3scrum, many things are still to come, best regards!!!"
-            : 'Eu fico muito feliz que tenha entrado no j3scrum, muitas coisas ainda estão por vir, grande abraço!!!'
+            : 'Eu fico muito feliz que tenha entrado no j3scrum, muitas coisas ainda estão por vir, grande abraço!!!',
+        'in alpha' : 'em alfa'
     };
     angular.module('scrum', [
         'angular-meteor',

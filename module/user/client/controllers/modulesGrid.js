@@ -3,7 +3,7 @@ angular.module("user").controller("ModulesGridCtrl", ['$scope', '$state', '$mdDi
         if (Meteor.user().email == 'ruyjfs@gmail.com') {
             $scope.items = [
                 { name: 'Admin', icon: 'tune', link: 'admin'},
-                { name: 'User', icon: 'person', link: 'user'},
+                { name: 'You', icon: 'person', link: 'user'},
                 { name: 'j3scrum', icon: 'dashboard', link: 'scrum/organization'},
                 { name: 'j3game', icon: 'videogame_asset', link: 'game'},
                 //{ name: 'j3drive', icon: 'directions_car', link: 'drive'},
@@ -16,7 +16,7 @@ angular.module("user").controller("ModulesGridCtrl", ['$scope', '$state', '$mdDi
             ];
         } else {
             $scope.items = [
-                { name: 'User', icon: 'person', link: 'user'},
+                { name: 'You', icon: 'person', link: 'user'},
                 { name: 'j3scrum', icon: 'dashboard', link: 'scrum/organization'},
                 { name: 'j3game', icon: 'videogame_asset', link: 'game'},
                 //{ name: 'j3drive', icon: 'directions_car', link: 'drive'},

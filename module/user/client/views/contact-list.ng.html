@@ -1,4 +1,4 @@
-<div ng-controller="ContactListCtrl as vm">
+<div ng-controller="ContactListCtrl as ctrl">
     <md-toolbar class="md-theme-light fixed-top" style="width: 240px;display: block;position: fixed;-webkit-backface-visibility: hidden;
 -webkit-transform: translateZ(0);">
         <div class="md-toolbar-tools" >
@@ -6,13 +6,13 @@
                 <!--<md-icon md-svg-icon="social:ic_people_24px" aria-label="Contact"></md-icon>-->
                 <!--Contacts-->
             <!--</md-button>-->
-            <img alt="{{vm.user.name}}" ng-src="{{vm.user.img}}" class="md-avatar md-whiteframe-3dp" style="
+            <img alt="{{ctrl.user.name}}" ng-src="{{ctrl.user.img}}" class="md-avatar md-whiteframe-3dp" style="
                     display: block;
                     position: absolute;
                     padding-top: 0px;
                     /*margin-top: 14px;*/
-                    background-color: {{vm.user.statusColor}};
-                    border: solid 5px  {{vm.user.statusColor}};
+                    background-color: {{ctrl.user.statusColor}};
+                    border: solid 5px  {{ctrl.user.statusColor}};
 
                     /*width: 50px;*/
                     /*height: 50px;*/
@@ -37,7 +37,7 @@
         display: flex;
         top: 3px;
         color: #9E9E9E;">
-                    {{vm.user.statusName}}
+                    {{ctrl.user.statusName}}
                 </p>
                 <p style="
         /* height: 1px; */
@@ -47,7 +47,7 @@
         display: flex;
         top: 5px;
         color: #FFFFFF;">
-                    {{vm.user.nameTreated}}
+                    {{ctrl.user.nameTreated}}
                 </p>
             </div>
         </div>
@@ -64,21 +64,21 @@
         <!--<form>-->
             <!--<md-input-container>-->
                 <!--<label for="testInput">Procurar amigo</label>-->
-                <!--<input type="text" id="testInput" ng-model="vm.data" md-autofocus>-->
+                <!--<input type="text" id="testInput" ng-model="ctrl.data" md-autofocus>-->
             <!--</md-input-container>-->
         <!--</form>-->
-        <!--<li class="waves-effect waves-orange" ng-repeat="user in vm.users"  layout="row">-->
+        <!--<li class="waves-effect waves-orange" ng-repeat="user in ctrl.users"  layout="row">-->
 
         <li style="height: 64px;"></li>
         <li style="border-bottom: solid 1px rgba(0,0,0,0.12);" >
 
             <!--<span class="alertSidNav">{{user.messagesNotVisualized}}</span>-->
         </li>
-        <li ng-if="vm.usersOnline" style="border-bottom: solid 1px rgba(0,0,0,0.12);" >
-            Online ({{vm.usersOnlineTotal}})
+        <li ng-if="ctrl.usersOnline" style="border-bottom: solid 1px rgba(0,0,0,0.12);" >
+            Online ({{ctrl.usersOnlineTotal}})
             <!--<span class="alertSidNav">{{user.messagesNotVisualized}}</span>-->
         </li>
-        <li ng-repeat="user in vm.usersOnline" style="border-bottom: solid 1px rgba(0,0,0,0.12);" >
+        <li ng-repeat="user in ctrl.usersOnline" style="border-bottom: solid 1px rgba(0,0,0,0.12);" >
             <img alt="{{user.name}}" ng-src="{{user.img}}" class="md-avatar md-whiteframe-3dp" style="
                     display: block;
                     position: absolute;
@@ -129,10 +129,10 @@
             <!--<span class="alertSidNav">{{user.messagesNotVisualized}}</span>-->
         </li>
         <li style="border-bottom: solid 1px rgba(0,0,0,0.12);" >
-            Offline ({{vm.usersOfflineTotal}})
+            Offline ({{ctrl.usersOfflineTotal}})
             <!--<span class="alertSidNav">{{user.messagesNotVisualized}}</span>-->
         </li>
-        <li ng-repeat="user in vm.usersOffline" style="border-bottom: solid 1px rgba(0,0,0,0.12);" >
+        <li ng-repeat="user in ctrl.usersOffline" style="border-bottom: solid 1px rgba(0,0,0,0.12);" >
             <img alt="{{user.name}}" ng-src="{{user.img}}" class="md-avatar md-whiteframe-3dp" style="
                     display: block;
                     position: absolute;
@@ -199,12 +199,15 @@
             </a>
             <!--<span class="alertSidNav">{{user.messagesNotVisualized}}</span>-->
         </li>
+        <li ng-if="ctrl.usersOnlineTotal == 0 && ctrl.usersOfflineTotal == 0" ng-click="ctrl.redirect('user')" style="cursor: pointer;">
+            <p>Você não possui contatos! Adicione pelo menu superior chamado de Apps e depois na opção "Você" ou ir direto por aqui.</p>
+        </li>
         <!--<div>-->
             <!--<md-list ng-cloak>-->
                 <!--&lt;!&ndash;<md-divider></md-divider>&ndash;&gt;-->
                 <!--&lt;!&ndash;<md-subheader class="md-no-sticky">Avatar with Secondary Action Icon</md-subheader>&ndash;&gt;-->
-                <!--&lt;!&ndash;<md-list-item ng-repeat="user in vm.users" ng-click="toggleChat(user._id)">&ndash;&gt;-->
-                <!--<md-list-item ng-repeat="user in vm.users" layout="row" data-activates="nav-chat" class="button-collapse nav-button-right">-->
+                <!--&lt;!&ndash;<md-list-item ng-repeat="user in ctrl.users" ng-click="toggleChat(user._id)">&ndash;&gt;-->
+                <!--<md-list-item ng-repeat="user in ctrl.users" layout="row" data-activates="nav-chat" class="button-collapse nav-button-right">-->
                     <!--<img alt="" ng-src="" class="md-avatar" />-->
                     <!--&lt;!&ndash;<p>{{user.emails[0].address}}</p>&ndash;&gt;-->
                     <!--{{user.name}} {{user.lastName}}-->
