@@ -22,7 +22,7 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
         });
         var organizationNamespace = $stateParams.organization;
 
-        this.perPage = 9;
+        this.perPage = 20;
         this.page = 1;
         this.sort = {
             name: 1
