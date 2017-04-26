@@ -51,9 +51,6 @@ angular.module("user").controller("Default2Ctrl", ['$scope', '$reactive', '$stat
             }
         });
 
-        this.teste = 'haha11';
-        $scope.teste2 = 'haha22';
-
         this.modalContactSave = function(ev, id){
             $mdDialog.show({
                 controller: 'ContactSaveCtrl',

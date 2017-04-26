@@ -1,5 +1,5 @@
-angular.module("user").controller("ModulesGridCtrl", ['$scope', '$state', '$mdDialog', '$mdBottomSheet',
-    function($scope, $state, $mdDialog,  $mdBottomSheet){
+angular.module("user").controller("ModulesGridCtrl", ['$scope', '$state', '$mdDialog', '$mdBottomSheet', '$location',
+    function($scope, $state, $mdDialog,  $mdBottomSheet, $location){
         if (Meteor.user().email == 'ruyjfs@gmail.com') {
             $scope.items = [
                 { name: 'Admin', icon: 'tune', link: 'admin'},
@@ -31,8 +31,8 @@ angular.module("user").controller("ModulesGridCtrl", ['$scope', '$state', '$mdDi
         }
         $scope.listItemClick = function($index, $link) {
             titleMiddle = '';
-            console.log($link);
-            $state.go($link);
+            // $state.go($link);
+            $location.path($link);
             var clickedItem = $scope.items[$index];
             $mdBottomSheet.hide(clickedItem);
             $('.brand-logo').removeClass('animated flip').hide().show().addClass('animated flip');

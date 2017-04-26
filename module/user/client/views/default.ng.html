@@ -16,7 +16,7 @@
                         /*padding-top: 0;*/
                         /*margin-top: 14px;*/
                         background-color: {{vm.user.statusColor}};
-                        border: solid 7px  {{vm.user.statusColor}};
+                        border: solid 4px  {{vm.user.statusColor}};
 
                         width: 120px;
                         height: 120px;
@@ -29,12 +29,12 @@
                         /*margin-bottom: 8px;*/
                         /* margin-right: 16px; */
                         /* border-radius: 50%; */
-                        border-radius: 12%;
+                        border-radius: 4%;
                         box-sizing: content-box;
                         margin: 0;
                         "/>
                         </div>
-                        <div class="container animated fadeInUp">
+                        <div class="container animated fadeInUp" style="    text-shadow: 2px 1px 5px rgba(0, 0, 0, 0.33);">
                             <h4 class="white-text" style="margin-left: 15px;">{{vm.user.name}} {{vm.user.lastName}}</h4>
                             <h6 class="white-text" style="margin: 0 0 0 15px;line-height: 5px;">@{{vm.user.username}}</h6>
                         </div>
@@ -43,7 +43,7 @@
                 <div class="card-content" style=" padding: 0 20px 0 20px;box-shadow: 6px 4px 13px #000;">
                     <span class="card-title activator"><i class="material-icons right grey-text text-darken-4" style="padding: 12px 0 12px 0;">more_vert</i></span>
                     <md-tabs md-dynamic-height md-border-bottom class="container">
-                        <md-tab label="You">
+                        <md-tab label="{{'You' | translate}}">
                             <div ng-include="'module/user/client/views/user-save.ng.html'"></div>
                         </md-tab>
                         <!--<md-tab label="Emails">-->
@@ -65,7 +65,7 @@
                         <!--In development...-->
                         <!--</md-content>-->
                         <!--</md-tab>-->
-                        <md-tab label="Contacts">
+                        <md-tab label="{{'Contacts' | translate}}">
                             <md-content class="md-padding">
                                 <div ng-include="'module/user/client/views/contact.ng.html'"></div>
                             </md-content>
@@ -81,40 +81,53 @@
             <!--<span>Gravatar é um lugar onde você centralizar sua foto para que ela fique com você indepedente do site/sistema/aplicativo/jogo que você use.</span>-->
             <!--<br />-->
         </md-content>
-        <div class="fixed-action-btn horizontal">
-            <md-fab-speed-dial md-direction="up" md-open="vm.isOpen"
-                               class="md-scale" ng-class="{ 'md-hover-full': vm.hover }"
-                               ng-mouseenter="vm.isOpen=true" ng-mouseleave="vm.isOpen=false">
+        <div class="fixed-action-btn horizontal ">
+            <md-fab-speed-dial md-direction="up" class="md-scale">
                 <md-fab-trigger>
-                    <md-button aria-label="menu" class="md-fab btn-floating btn-large hoverable">
-                        <md-tooltip md-direction="left" md-visible="tooltipVisible">Add</md-tooltip>
-                        <!--<md-icon md-svg-src="img/icons/menu.svg" aria-label="menu"></md-icon>-->
-                        <i title="" class="material-icons">add</i>
-                    </md-button>
-                </md-fab-trigger>
-                <md-fab-actions>
-                    <md-button aria-label="Contact"
-                               class="md-fab  md-primary btn-floating md-raised md-mini blue hoverable"
-                               ng-click="vm.modalContactSave($event)" style="line-height: 0px;">
+                    <md-button ng-click="vm.modalContactSave($event)" aria-label="menu" class="md-fab btn-floating btn-large hoverable animated bounceInUp">
                         <md-tooltip md-direction="left" md-visible="tooltipVisible"
                                     md-autohide="false">
-                            Contact
+                            {{ 'Add Contact' | translate}}
                         </md-tooltip>
-                        <!--<md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>-->
-                        <i class="material-icons">person</i>
+                        <i title="" class="material-icons">person_add</i>
                     </md-button>
-                    <md-button aria-label="Address"
-                               class="md-fab md-primary btn-floating md-raised md-mini red hoverable"
-                               ng-click="vm.modalAddressSave($event)" style="line-height: 0px;">
-                        <md-tooltip md-direction="top" md-visible="tooltipVisible"
-                                    md-autohide="false">
-                            Address
-                        </md-tooltip>
-                        <!--<md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>-->
-                        <i class="material-icons">home</i>
-                    </md-button>
-                </md-fab-actions>
+                </md-fab-trigger>
             </md-fab-speed-dial>
+        </div>
+        <!--<div class="fixed-action-btn horizontal">-->
+            <!--<md-fab-speed-dial md-direction="up" md-open="vm.isOpen"-->
+                               <!--class="md-scale" ng-class="{ 'md-hover-full': vm.hover }"-->
+                               <!--ng-mouseenter="vm.isOpen=true" ng-mouseleave="vm.isOpen=false">-->
+                <!--<md-fab-trigger>-->
+                    <!--<md-button aria-label="menu" class="md-fab btn-floating btn-large hoverable">-->
+                        <!--<md-tooltip md-direction="left" md-visible="tooltipVisible">Add</md-tooltip>-->
+                        <!--&lt;!&ndash;<md-icon md-svg-src="img/icons/menu.svg" aria-label="menu"></md-icon>&ndash;&gt;-->
+                        <!--<i title="" class="material-icons">add</i>-->
+                    <!--</md-button>-->
+                <!--</md-fab-trigger>-->
+                <!--<md-fab-actions>-->
+                    <!--<md-button aria-label="Contact"-->
+                               <!--class="md-fab  md-primary btn-floating md-raised md-mini blue hoverable"-->
+                               <!--ng-click="vm.modalContactSave($event)" style="line-height: 0px;">-->
+                        <!--<md-tooltip md-direction="left" md-visible="tooltipVisible"-->
+                                    <!--md-autohide="false">-->
+                            <!--Contact-->
+                        <!--</md-tooltip>-->
+                        <!--&lt;!&ndash;<md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>&ndash;&gt;-->
+                        <!--<i class="material-icons">person</i>-->
+                    <!--</md-button>-->
+                    <!--<md-button aria-label="Address"-->
+                               <!--class="md-fab md-primary btn-floating md-raised md-mini red hoverable"-->
+                               <!--ng-click="vm.modalAddressSave($event)" style="line-height: 0px;">-->
+                        <!--<md-tooltip md-direction="top" md-visible="tooltipVisible"-->
+                                    <!--md-autohide="false">-->
+                            <!--Address-->
+                        <!--</md-tooltip>-->
+                        <!--&lt;!&ndash;<md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>&ndash;&gt;-->
+                        <!--<i class="material-icons">home</i>-->
+                    <!--</md-button>-->
+                <!--</md-fab-actions>-->
+            <!--</md-fab-speed-dial>-->
 
             <!--<a class="btn-floating btn-large waves-effect waves-light deep-orange hoverable" href="#">-->
             <!--<i title="" class="material-icons">add</i>-->
@@ -127,7 +140,7 @@
             <!--<a href="#" ng-click="vm.modalProjectSave($event, project._id)" class="btn-floating red hoverable"><i-->
             <!--title="" class="material-icons">business_center</i></a>-->
             <!--</ul>-->
-        </div>
+        <!--</div>-->
     </div>
 </div>
 <!--</div>-->

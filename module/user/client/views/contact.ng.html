@@ -14,7 +14,7 @@
     <md-content style="min-height: 400px;">
         <div dir-paginate="user in ctrl.members | itemsPerPage: ctrl.perPage" total-items="ctrl.total" style="display: inline-flex;">
             <div class="card small grey-text text-darken-4 hoverable" style="margin:10px;min-width:276px;height:144px;">
-                <div class="card-content">
+                <div class="card-content" style="background-color: rgba(255, 188, 0, 0.23);">
                     <p>
                         <span class="card-title activator grey-text text-darken-4 ">{{user.nameTreated}}
                             <!--<i class="material-icons right">more_vert</i>-->
@@ -55,7 +55,7 @@
                 </div>
                 <div class="card-action center grey-text text-darken-4" style="padding: 8px;">
                     <a href="#" ng-click="ctrl.modalDelete($event, user._id)" class="grey-text text-darken-4 ">
-                        <i class="material-icons right">delete</i>
+                        <i class="material-icons right">clear</i>
                         <!--<md-tooltip md-direction="bottom" md-autohide="false">-->
                         <!--{{ 'Delete' | translate}}-->
                         <!--</md-tooltip>-->
@@ -69,7 +69,4 @@
         </md-list>
         <dir-pagination-controls pagination-id="member" on-page-change="ctrl.pageChanged(newPageNumber)"></dir-pagination-controls>
     </md-content>
-    <!--<h1 class="md-display-2">Team</h1> {{test}}-->
-    <!--<p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>-->
-    <!--</md-content>-->
 </div>

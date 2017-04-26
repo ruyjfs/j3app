@@ -20,9 +20,9 @@ angular.module('user').config(['$urlRouterProvider', '$stateProvider', '$locatio
                         templateUrl: 'module/user/client/views/default.ng.html',
                         controller: 'DefaultCtrl',
                     },
-                    //"footer": {
+                    // "footer": {
                     //    templateUrl: $footer,
-                    //}
+                    // }
                 }
             })
             .state('user/login', {

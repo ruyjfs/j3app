@@ -5,17 +5,17 @@
             <md-input-container>
                 <md-icon md-svg-icon="action:ic_face_24px"></md-icon>
                 <input type="text" ng-model="vm.form.username"
-                       placeholder="Username" aria-label="username"/>
+                       placeholder="{{'Username' | translate}}" aria-label="username"/>
             </md-input-container>
             <md-input-container>
                 <md-icon md-svg-icon="action:ic_face_24px"></md-icon>
                 <input type="text" ng-model="vm.form.name"
-                       placeholder="Name" aria-label="name"/>
+                       placeholder="{{'Name' | translate}}" aria-label="name"/>
             </md-input-container>
             <md-input-container>
                 <md-icon md-svg-icon="action:ic_face_24px"></md-icon>
                 <input type="text" ng-model="vm.form.lastName"
-                       placeholder="Last name" aria-label="lastName"/>
+                       placeholder="{{ 'Last name' | translate }}" aria-label="lastName"/>
             </md-input-container>
             <span>Troque sua foto pelo site gravatar <a href="http://pt.gravatar.com/" target="_blank" src="">clicando aqui</a>.</span>
             <span>Gravatar é um lugar onde você centralizar sua foto para que ela fique com você indepedente do site/sistema/aplicativo/jogo que você use.</span>
@@ -35,7 +35,7 @@
                        <!--placeholder="Confirm password" aria-label="confirmPassword"/>-->
             <!--</md-input-container>-->
             <md-button class="md-raised md-primary" ng-click="vm.saveUser()" flex>
-                Save
+                {{'Save' | translate}}
             </md-button>
             <div flex></div>
         </form>

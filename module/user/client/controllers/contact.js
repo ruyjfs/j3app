@@ -98,7 +98,7 @@ angular.module('scrum').controller('ContactCtrl', [ '$scope', '$mdDialog', '$mdS
                 template:
                 '<md-dialog aria-label="List dialog">' +
                 '  <md-dialog-content>'+
-                '    <p>Would you like to remove this member of organization?</p>' +
+                '    <p>Would you like to remove this contact?</p>' +
                 '  </md-dialog-content>' +
                 '  <md-dialog-actions>' +
                 '    <md-button ng-click="ctrl.close()" class="white orange-text text-darken-3 btn waves-effect waves-orange hoverable ng-binding">' +

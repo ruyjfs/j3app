@@ -378,3 +378,7 @@ section:active:before {
     color: #fff;
     background-color: #d65a00 !important;
 }
+
+.color-transition {
+    transition: background-color .7s;
+}

@@ -7,7 +7,7 @@
             <md-button class="md-grid-item-content" ng-click="listItemClick($index, item.link)">
                 <!--<md-icon md-svg-src="{{item.icon}}"></md-icon>-->
                 <i class="material-icons" style="font-size: 48px;">{{item.icon}}</i>
-                <div class="md-grid-text"> {{ item.name }} </div>
+                <div class="md-grid-text"> {{ item.name | translate }} </div>
             </md-button>
         </md-list-item>
     </md-list>
