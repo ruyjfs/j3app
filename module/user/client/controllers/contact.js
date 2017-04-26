@@ -13,6 +13,10 @@ angular.module('scrum').controller('ContactCtrl', [ '$scope', '$mdDialog', '$mdS
         $scope.filterSelected = true;
 
         this.searchText = '';
+
+        this.subscribe('users');
+        this.subscribe('userStatus');
+        this.subscribe('contact');
         this.helpers({
             members: function() {
                 let searchString = this.getReactively('searchText');
@@ -34,7 +38,7 @@ angular.module('scrum').controller('ContactCtrl', [ '$scope', '$mdDialog', '$mdS
                     sort: this.getReactively('sort')
                 });
 
-                return users.map(function(user){
+                users = users.map(function(user){
                     if (user.status) {
                         if (user.status.lastLogin) {
                             if (moment(new Date).diff(moment(user.status.lastLogin.date), 'days') > 2) {
@@ -69,6 +73,16 @@ angular.module('scrum').controller('ContactCtrl', [ '$scope', '$mdDialog', '$mdS
                     }
                     return user;
                 });
+
+                users = users.filter((user) => {
+                    let objContact = Contact.findOne({$or: [
+                        {userId: user._id, contactId: Meteor.userId()},
+                        {contactId: user._id, userId: Meteor.userId()}
+                    ]});
+                    return (typeof objContact != 'undefined');
+                });
+
+                return users;
             },
             total: () => {
                 console.info(this.getReactively('members'));
@@ -90,7 +104,7 @@ angular.module('scrum').controller('ContactCtrl', [ '$scope', '$mdDialog', '$mdS
             $mdDialog.hide();
         };
 
-        this.modalDelete = function (ev, id) {
+        this.modalRemove = function (ev, id) {
             let parentEl = angular.element(document.body);
             $mdDialog.show({
                 parent: parentEl,
@@ -104,27 +118,20 @@ angular.module('scrum').controller('ContactCtrl', [ '$scope', '$mdDialog', '$mdS
                 '    <md-button ng-click="ctrl.close()" class="white orange-text text-darken-3 btn waves-effect waves-orange hoverable ng-binding">' +
                 '      Cancel' +
                 '    </md-button>' +
-                '    <md-button ng-click="ctrl.delete(\'' + id + '\')" class="btn orange darken-3 waves-effect waves-light hoverable ng-binding">' +
+                '    <md-button ng-click="ctrl.remove(\'' + id + '\')" class="btn orange darken-3 waves-effect waves-light hoverable ng-binding">' +
                 '      Remove' +
                 '    </md-button>' +
                 '  </md-dialog-actions>' +
                 '</md-dialog>',
-                controller: 'OrganizationMemberCtrl as ctrl'
+                controller: 'ContactCtrl as ctrl'
             });
         };
-
-        this.delete = (id) => {
-            let arrOrganization = Organization.findOne({namespace: organizationNamespace});
-            let formAddNew = {};
-            formAddNew._id = this.formAdd._id;
-            formAddNew.members = arrOrganization.members.filter(function(memberId){
-                return (memberId != id);
-            });
-            Meteor.call('organizationUpdateMembers', formAddNew, function (error) {
+        this.remove = (id) => {
+            Meteor.call('contactRemove', id, function (error) {
                 if (error) {
                     Materialize.toast('Erro: ' + error, 4000);
                 } else {
-                    Materialize.toast('Member removed successfully!', 4000);
+                    Materialize.toast('Contact removed successfully!', 4000);
                     $mdDialog.hide();
                 }
             });

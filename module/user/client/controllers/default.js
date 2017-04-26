@@ -53,7 +53,7 @@ angular.module("user").controller("Default2Ctrl", ['$scope', '$reactive', '$stat
 
         this.modalContactSave = function(ev, id){
             $mdDialog.show({
-                controller: 'ContactSaveCtrl',
+                controller: 'ContactSaveCtrl as ctrl',
                 templateUrl: 'module/user/client/views/contact-save.ng.html',
                 clickOutsideToClose:true,
                 locals : {

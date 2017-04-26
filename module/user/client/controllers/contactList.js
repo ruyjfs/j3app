@@ -128,11 +128,22 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                         sort: {name: 1, lastName: 1}
                     }
                 );
+
                 users = users.filter((user) => {
-                    let objContact = Contact.findOne({$or: [{_id: Meteor.userId(), userId: user._id}, {_id: user._id, userId: Meteor.userId()}]});
+                    let objContact = Contact.findOne({$or: [
+                        {userId: user._id, contactId: Meteor.userId()},
+                        {contactId: user._id, userId: Meteor.userId()}
+                    ]});
                     return (typeof objContact != 'undefined');
                 });
                 return users;
+            },
+            booIsUsers: () => {
+                let booResult = false;
+                if (this.getReactively('users').length > 0) {
+                    booResult = true;
+                }
+                return booResult;
             },
             usersOnline: function () {
                 let users = [];

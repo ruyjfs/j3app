@@ -200,7 +200,7 @@
             </a>
             <!--<span class="alertSidNav">{{user.messagesNotVisualized}}</span>-->
         </li>
-        <li ng-if="ctrl.usersOnlineTotal == 0 && ctrl.usersOfflineTotal == 0" ng-click="ctrl.redirect('user')" style="cursor: pointer;">
+        <li ng-if="ctrl.booIsUsers == false" ng-click="ctrl.redirect('user')" style="cursor: pointer;">
             <p>Você não possui contatos! Adicione pelo menu superior chamado de Apps e depois na opção "Você" ou ir direto por aqui.</p>
         </li>
         <!--<div>-->

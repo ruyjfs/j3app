@@ -27,6 +27,36 @@ Meteor.methods({
             Contact.insert(dataForm);
         }
     },
+    contactSaveAll: function(dataForm){
+        let objForm = {};
+        if (dataForm.userId) {
+            objForm.userId = dataForm.userId;
+        } else {
+            objForm.userId = Meteor.userId();
+        }
+        objForm.createdAt = new Date();
+        dataForm.contacts.forEach((strValue) => {
+            objForm.contactId = strValue;
+            objContact = Contact.findOne({$or: [
+                {userId: objForm.contactId, contactId: objForm.userId},
+                {contactId: objForm.contactId, userId: objForm.userId}
+            ]});
+
+            if (typeof objContact == 'undefined') {
+                Contact.insert(objForm);
+            }
+        });
+    },
+    contactRemove: function(intId){
+        let objContact = Contact.findOne({$or: [
+            {userId: intId, contactId: Meteor.userId()},
+            {contactId: intId, userId: Meteor.userId()}
+        ]});
+
+        if (typeof objContact != 'undefined') {
+            Contact.remove(objContact._id);
+        }
+    },
     //invite: function (partyId, userId) {
     //    check(partyId, String);
     //    check(userId, String);
