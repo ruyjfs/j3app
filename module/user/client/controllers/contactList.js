@@ -146,39 +146,27 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
                 return booResult;
             },
             usersOnline: function () {
-                let users = [];
-                if (this.getReactively('users').length > 0) {
+                // let users = [];
+                // if (this.getReactively('users').length > 0) {
                     users = this.getReactively('users').filter((user) => {
                         return (user.status == true)
                     });
-                }
+                // }
                 return users;
             },
             usersOnlineTotal: function () {
-                let total = 0;
-                if (this.getReactively('users').length > 0) {
-                    total = this.getReactively('users').filter((user) => {
-                        return (user.status == true)
-                    }).fetch().length;
-                }
-                return total;
+                return $(this.getReactively('usersOnline')).length;
             },
             usersOfflineTotal: function () {
-                let total = 0;
-                if (this.getReactively('users').length > 0) {
-                    total = this.getReactively('users').filter((user) => {
-                        return (user.status != true)
-                    }).fetch().length;
-                }
-                return total;
+                return $(this.getReactively('usersOffline')).length;
             },
             usersOffline: function () {
-                let users = [];
-                if (this.getReactively('users').length > 0) {
+                // let users = [];
+                // if (this.getReactively('users').length > 0) {
                     users = this.getReactively('users').filter((user) => {
                         return (user.status != true)
                     });
-                }
+                // }
                 return users;
             }
         });

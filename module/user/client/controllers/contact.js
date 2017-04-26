@@ -3,7 +3,6 @@
 angular.module('scrum').controller('ContactCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$log', '$reactive', '$stateParams',
     function ($scope, $mdDialog, $mdSidenav, $log, $reactive, $stateParams) {
         $reactive(this).attach($scope);
-        var members = null;
 
         this.perPage = 20;
         this.page = 1;
@@ -18,7 +17,7 @@ angular.module('scrum').controller('ContactCtrl', [ '$scope', '$mdDialog', '$mdS
         this.subscribe('userStatus');
         this.subscribe('contact');
         this.helpers({
-            members: function() {
+            contacts: function() {
                 let searchString = this.getReactively('searchText');
                 selector = {};
                 if (typeof searchString === 'string' && searchString.length) {
@@ -85,8 +84,26 @@ angular.module('scrum').controller('ContactCtrl', [ '$scope', '$mdDialog', '$mdS
                 return users;
             },
             total: () => {
-                console.info(this.getReactively('members'));
-                // return this.getReactively('members').fetch().length;
+                let searchString = this.getReactively('searchText');
+                selector = {};
+                if (typeof searchString === 'string' && searchString.length) {
+                    selector = {
+                        $or: [
+                            {name: {$regex:  `.*${searchString}.*`, $options : 'i' }},
+                            {lastName: {$regex:  `.*${searchString}.*`, $options : 'i' }},
+                            {email: {$regex:  `.*${searchString}.*`, $options : 'i' }},
+                            {emails: {address: {$regex:  `.*${searchString}.*`, $options : 'i' }}},
+                        ]
+                    };
+                }
+                let users = Meteor.users.find(selector).fetch().filter((user) => {
+                    let objContact = Contact.findOne({$or: [
+                        {userId: user._id, contactId: Meteor.userId()},
+                        {contactId: user._id, userId: Meteor.userId()}
+                    ]});
+                    return (typeof objContact != 'undefined');
+                });
+                return users.length;
             }
         });
 
