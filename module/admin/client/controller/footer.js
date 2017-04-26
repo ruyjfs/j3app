@@ -16,7 +16,7 @@ angular.module('admin').controller('FooterCtrl', [ '$scope', '$timeout', '$mdSid
                         case 'j3scrum':
                             strClassColor = 'brown darken-4';
                             break;
-                        case 'j3tect':
+                        case 'j3tec':
                             strClassColor = 'blue darken-4';
                             break;
                         case 'j3game':
