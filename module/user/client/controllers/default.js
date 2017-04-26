@@ -32,7 +32,7 @@ angular.module("user").controller("Default2Ctrl", ['$scope', '$reactive', '$stat
 
                     // Imagem do gravatar.
                     if (user.emails && user.emails[0].address) {
-                        user.img = 'http://www.gravatar.com/avatar/' + CryptoJS.MD5(user.emails[0].address).toString() + '?s=60&d=mm';
+                        user.img = 'http://www.gravatar.com/avatar/' + CryptoJS.MD5(user.emails[0].address).toString() + '?s=150&d=mm';
                     } else {
                         user.img = 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s=60&d=mm&f=y';
                     }
