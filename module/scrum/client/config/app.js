@@ -1,3 +1,7 @@
+// import angular from 'angular';
+
+
+
 if (Meteor.isClient) {
     ptBR = {
         //  Menu
