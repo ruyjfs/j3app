@@ -55,7 +55,6 @@ angular.module('admin').run(function ($rootScope, $stateParams) {
                 //    booSucess = true;
                 //}, 3000);
             });
-
 });
 
 //teste = 'aqui';

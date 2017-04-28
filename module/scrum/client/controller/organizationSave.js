@@ -1,7 +1,5 @@
-//angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
-//    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('OrganizationSaveCtrl', ['$scope', '$reactive', '$mdDialog', '$rootScope', 'id',
-    function ($scope, $reactive, $mdDialog, $rootScope, id) {
+angular.module('scrum').controller('OrganizationSaveCtrl',
+    function ($scope, $reactive, $mdDialog, $rootScope, id, $document) {
         $reactive(this).attach($scope);
         this.title = 'Organization';
         Meteor.subscribe('users');
@@ -32,26 +30,18 @@ angular.module('scrum').controller('OrganizationSaveCtrl', ['$scope', '$reactive
         $scope.users = Meteor.users.find({}, {sort: {name: 1, lastName: 1}}).fetch();
 
         $scope.save = function () {
-            isValid = true;
-            if (id) {
-                where = {$and: [{namespace: $scope.form.namespace}], _id: {$not: id}};
-            } else {
-                where = {$and: [{namespace: $scope.form.namespace}]};
-            }
-            spacenameExist = Organization.findOne(where);
-
-            if (spacenameExist) {
-                    Materialize.toast('Erro: ' + 'Namespace already exists', 4000);
-            } else {
+            if ($scope.elmForm.$valid) {
                 Meteor.call('organizationSave', $scope.form, function (error) {
                     if (error) {
-                        Materialize.toast('Erro: ' + error, 4000);
+                        Materialize.toast(error, 4000);
                     } else {
                         Materialize.toast('Saved successfully!', 4000);
                         $scope.form = '';
                         $mdDialog.hide();
                     }
                 });
+            } else {
+                Materialize.toast('Erro: ', 4000);
             }
         };
 
@@ -109,5 +99,8 @@ angular.module('scrum').controller('OrganizationSaveCtrl', ['$scope', '$reactive
         $scope.remove = function(team) {
             this.teams.remove(team);
         };
+
+        $document.ready(() => {
+        });
     }
-]);
+);

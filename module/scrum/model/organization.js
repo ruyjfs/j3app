@@ -16,27 +16,40 @@ Organization.allow({
 //yemiX6y3u7vnqpS3n
 //92okH9HNck243cdQ5
 Meteor.methods({
-    organizationIsValid: function(dataNew) {
-        console.log(dataNew);
-        return false;
-    },
-    organizationSave: function(dataForm){
-        //if (!this.organizationIsValid(dataForm)) {
-        //    throw new Meteor.Error('todos.updateText.unauthorized',
-        //        'Cannot edit todos in a private list that is not yours');
-        //}
-
-        if (!dataForm.userId) {
-            dataForm.userId = Meteor.userId();
+    organizationSave: (dataForm) => {
+        if (
+                (!dataForm.name) ||
+                (!dataForm.namespace)
+        ) {
+           throw new Meteor.Error('required', 'Tell us the all information needed!');
         }
 
         if (dataForm._id) {
-            id = dataForm._id;
-            delete dataForm._id;
-            Organization.update(id, { $set: dataForm});
+            console.info('tem id');
+        //     where = {$and: [{namespace: $scope.form.namespace}], _id: {$not: id}};
         } else {
-            Organization.insert(dataForm);
+            console.info('nao tem id');
+        //     where = {$and: [{namespace: $scope.form.namespace}]};
         }
+        // spacenameExist = Organization.findOne(where);
+        // console.info(spacenameExist);
+        //
+        // if (spacenameExist) {
+        //     Materialize.toast('Erro: ' + 'Namespace already exists', 4000);
+
+
+
+        // if (!dataForm.userId) {
+        //     dataForm.userId = Meteor.userId();
+        // }
+        //
+        // if (dataForm._id) {
+        //     id = dataForm._id;
+        //     delete dataForm._id;
+        //     Organization.update(id, { $set: dataForm});
+        // } else {
+        //     Organization.insert(dataForm);
+        // }
     },
     organizationSaveMembers: function(dataFormNew)
     {

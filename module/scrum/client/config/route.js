@@ -12,7 +12,7 @@ angular.module("scrum").run(['$rootScope', '$state', function($rootScope, $state
             $scope.showSpinner();  //this is a function you created to show the loading animation
             console.log('aquui');
         }
-    })
+    });
 
     //if (!Meteor.userId() && $state.current.url !== '/scrum') {
     //    $state.go('scrum');
