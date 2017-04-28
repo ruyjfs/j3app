@@ -1,4 +1,3 @@
-if (Meteor.isClient) {
     angular.module('admin',[
         'angular-meteor',
         'ui.router',
@@ -9,7 +8,6 @@ if (Meteor.isClient) {
 
     //console.log(theme);
     //angular.module('admin').config(theme);
-}
 
 //if (Meteor.isClient) {
 //    angular.module('admin',[

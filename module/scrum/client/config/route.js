@@ -161,7 +161,6 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                         setTimeout(function(){
                             $('.parallax').parallax();
                         }, 200);
-                        console.log('aaaa');
                     }
                 },
                 waitOn: function(){

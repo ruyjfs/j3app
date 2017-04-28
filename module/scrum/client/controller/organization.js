@@ -22,6 +22,7 @@ angular.module('scrum').controller('OrganizationCtrl', ['$scope', '$mdDialog', '
         //);
 
         //console.log(Meteor.user()._id);
+        // $rootScope.booLoading = true;
         Meteor.subscribe('organization', () => {
             let organisations = Organization.find({}, {sort: {name: 1}}).map((organization) => {return organization});
             if (organisations.length == 0) {
@@ -52,7 +53,18 @@ angular.module('scrum').controller('OrganizationCtrl', ['$scope', '$mdDialog', '
                 // });
             }
         });
-        this.subscribe('team', function(){return [$stateParams.organization]});
+        // this.subscribe('team', () => [$stateParams.organization], {
+        //     onStop: (error) => {
+        //         $rootScope.booLoading = false;
+        //         if (error) {
+        //             console.log('An error happened - ', error);
+        //         } else {
+        //             console.log('The subscription stopped');
+        //         }
+        //     }
+        // });
+        // console.log('asd');
+        // console.log($rootScope.booLoading);
         this.subscribe('project');
         this.subscribe('users');
         this.helpers({
