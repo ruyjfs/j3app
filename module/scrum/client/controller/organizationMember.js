@@ -41,7 +41,7 @@ angular.module('scrum').controller('OrganizationMemberCtrl', [ '$scope', '$mdDia
             },
             members: function() {
                 arrOrganization = Organization.findOne({namespace: organizationNamespace});
-                var searchString = this.getReactively('searchText');
+                let searchString = this.getReactively('searchText');
                 selector = {};
                 if (typeof searchString === 'string' && searchString.length) {
                     selector = {

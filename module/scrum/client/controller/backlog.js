@@ -1,6 +1,10 @@
-angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$reactive', '$stateParams', '$rootScope',
+angular.module('scrum').controller('BacklogCtrl',
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $reactive, $stateParams, $rootScope) {
         $reactive(this).attach($scope);
+
+        $scope.booLoading = false;
+        $('#progressBar').fadeOut('slow');
+
         this.subscribe('users');
         this.subscribe('organization');
         this.subscribe('project');
@@ -719,4 +723,4 @@ angular.module('scrum').controller('BacklogCtrl', [ '$scope', '$mdDialog', '$mdS
                 }
             });
         };
-}]);
+});

@@ -10,13 +10,26 @@ angular.module("scrum").run(['$rootScope', '$state', function($rootScope, $state
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
         if (toState.name == 'state.with.resolve') {
             $scope.showSpinner();  //this is a function you created to show the loading animation
-            console.log('aquui');
         }
+
+        // $rootScope.progressbar.start();
+        // $('#progressBar').animateCss('fadeIn');
+        $('#progressBar').fadeIn('slow');
     });
 
     //if (!Meteor.userId() && $state.current.url !== '/scrum') {
     //    $state.go('scrum');
     //}
+    // //     // first create instance when app starts
+    // //     $rootScope.progressbar = ngProgressFactory.createInstance();
+    // //
+    // //
+    // $rootScope.$on("$stateChangeSuccess", function () {
+        // $rootScope.progressbar.complete();
+        // $('#progressBar').animateCss('fadeOut');
+        // $('#progressBar').fadeOut('slow');
+        // console.log('termino');
+    // });
 }]);
 
 /**
@@ -63,6 +76,12 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                         templateUrl: 'module/scrum/client/view/organization-fab.ng.html',
                     },
                 }
+                // ,
+                // resolve: {
+                //     collection: () => {
+                //         console.log('Termino rota');
+                //     }
+                // }
                 //controller: 'ProductCtrl'
             })
             .state('scrum/home', {

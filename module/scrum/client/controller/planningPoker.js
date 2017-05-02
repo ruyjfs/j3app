@@ -3,6 +3,8 @@
 angular.module('scrum').controller('PlanningPokerCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$stateParams', '$reactive', '$mdToast',
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $stateParams, $reactive, $mdToast) {
         $reactive(this).attach($scope);
+        $scope.booLoading = false;
+        $('#progressBar').fadeOut('slow');
 
         this.id = $stateParams.id;
         this.sprintId = $stateParams.sprintId;
@@ -33,13 +35,13 @@ angular.module('scrum').controller('PlanningPokerCtrl', [ '$scope', '$mdDialog',
         //});
 
         //Meteor.subscribe('project');
-        this.subscribe('users');
-        this.subscribe('project');
-        this.subscribe('team', function(){return [$stateParams.organization]});
-        this.subscribe('status', function(){return [$stateParams.id]});
-        this.subscribe('note', function(){return [$stateParams.id]});
-        this.subscribe('story', function(){return [$stateParams.id]});
-        this.subscribe('sprint', function(){return [$stateParams.id]});
+        // this.subscribe('users');
+        // this.subscribe('project');
+        // this.subscribe('team', function(){return [$stateParams.organization]});
+        // this.subscribe('status', function(){return [$stateParams.id]});
+        // this.subscribe('note', function(){return [$stateParams.id]});
+        // this.subscribe('story', function(){return [$stateParams.id]});
+        // this.subscribe('sprint', function(){return [$stateParams.id]});
         //this.helpers({
         //    stories: function() {
         //        var stories = Story.find({$or: [{projectId: $stateParams.id}, {projectId: null}]}).map(function(story){

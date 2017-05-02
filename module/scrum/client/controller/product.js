@@ -1,9 +1,8 @@
-//angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams'',
-//    function($scope, $stateParams){
-angular.module('scrum').controller('ProductCtrl', ['$scope', '$mdDialog', '$mdSidenav', '$log', '$reactive', '$rootScope', '$stateParams',
+angular.module('scrum').controller('ProductCtrl',
     function ($scope, $mdDialog, $mdSidenav, $log, $reactive, $rootScope, $stateParams) {
         $reactive(this).attach($scope);
-        //
+        $rootScope.titleMiddle = '';
+
         //Materialize.toast(
         //    'Hello, this screen you can view the products you created and the products that you participate, either in you being on the team linked to the project or standing as PO or Scrum Master.'+
         //    20000
@@ -14,16 +13,65 @@ angular.module('scrum').controller('ProductCtrl', ['$scope', '$mdDialog', '$mdSi
         //    20000
         //);
 
-        //console.log(Meteor.userId());
-        this.subscribe('users');
-        this.subscribe('project');
-        this.subscribe('team', function(){return [$stateParams.organization]});
-        this.subscribe('organization');
+        $scope.progressBar = {};
+        $scope.progressBar.organization = Meteor.subscribe('organization').ready();
+        this.subscribe('organization', () => {}, {onReady: () => {$scope.progressBar.organization = true;}});
+        $scope.progressBar.project = Meteor.subscribe('project').ready();
+        this.subscribe('project', () => {}, {onReady: function () {$scope.progressBar.project = true;}});
+        $scope.progressBar.users = Meteor.subscribe('users').ready();
+        this.subscribe('users', () => {}, {onReady: function () {$scope.progressBar.users = true;}});
+        $scope.progressBar.team = Meteor.subscribe('team',
+            $stateParams.organization,
+        ).ready();
+        this.subscribe('team', () => {
+            return [
+                $stateParams.organization,
+            ]
+        }, {onReady: function () {$scope.progressBar.team = true;}});
+        $scope.booLoading = true;
+        $scope.$watchCollection('progressBar', function() {
+            if (
+                $scope.progressBar.organization,
+                    $scope.progressBar.project,
+                    $scope.progressBar.users,
+                    $scope.progressBar.team
+            ) {
+                // let organisations = Organization.find({}, {sort: {name: 1}}).map((organization) => {return organization});
+                // if (organisations.length == 0) {
+                //     if (Session.get('booMsgOrganization') != true) {
+                //         Materialize.toast(
+                //             $translate.instant('Hi, my name is Ryu, i will help you with whatever it takes.')
+                //             , 120000);
+                //         Materialize.toast(
+                //             $translate.instant('You have no organization, click the red button to create an organization, or contact the owner of an organization to add you to their organization.')
+                //             , 120000);
+                //         Materialize.toast(
+                //             $translate.instant('You can create products without organization, just enter the card without organization. For more information, click on the question mark icon in the top menu.')
+                //             , 120000);
+                //         Materialize.toast(
+                //             $translate.instant('If you have any questions or suggestions, please contact us at contact@j3scrum.com.')
+                //             , 120000);
+                //         Materialize.toast(
+                //             $translate.instant('To close these messages, drag to the side.')
+                //             , 120000);
+                //         Materialize.toast(
+                //             $translate.instant("I'm so glad you joined j3scrum, many things are still to come, best regards!!!")
+                //             , 120000);
+                //         Session.set('booMsgOrganization', true);
+                //     }
+                //     $document.ready(() => {
+                //         $('.md-fab').addClass('pulse');
+                //         console.log($('.md-fab'));
+                //     });
+                // }
+                $scope.booLoading = false;
+                $('#progressBar').fadeOut('slow');
+            }
+        });
 
-        var organizationNamespace = $stateParams.organization;
             this.helpers({
             projects: function () {
-                var organizationId = '';
+                let organizationId = '';
                 if ($stateParams.organization == 'organization') {
                     projects = Project.find({$or: [{organization: ''}, {organization: null}]}, {sort: {name: 1}});
                 } else {
@@ -111,46 +159,6 @@ angular.module('scrum').controller('ProductCtrl', ['$scope', '$mdDialog', '$mdSi
             }
         });
 
-        //this.projects = Project.find(
-        //                {
-        //                    //$or: [
-        //                    //    {
-        //                    //        'userId' : $rootScope.currentUser._id,
-        //                    //        'contactId' : contactId
-        //                    //    }
-        //                    //    ,
-        //                    //    {
-        //                    //        'userId' : contactId,
-        //                    //        'contactId' : $rootScope.currentUser._id
-        //                    //    }
-        //                    //]
-        //                }
-        //            );
-        //
-        //console.log(this.projects);
-
-        //this.projects = $meteor.collection( function() {
-        //    return Project.find(
-        //        {
-        //            //$or: [
-        //            //    {
-        //            //        'userId' : $rootScope.currentUser._id,
-        //            //        'contactId' : contactId
-        //            //    }
-        //            //    ,
-        //            //    {
-        //            //        'userId' : contactId,
-        //            //        'contactId' : $rootScope.currentUser._id
-        //            //    }
-        //            //]
-        //        }
-        //    );
-        //});
-
-        //$scope.projects = [];
-//console.log($rootScope.currentUser._id);
-//console.log($rootScope.currentUser);
-
         this.items = [
             {name: "Project", icon: "business_center", direction: "left", color: 'red'},
             {name: "Team", icon: "group_work", direction: "top", color: 'blue'}
@@ -162,15 +170,15 @@ angular.module('scrum').controller('ProductCtrl', ['$scope', '$mdDialog', '$mdSi
             } else {
                 return true;
             }
-        }
+        };
 
         this.remove = function (id) {
             this.projects.remove(id);
-        }
+        };
 
         this.modalProjectSave = function (ev, id) {
             $mdDialog.show({
-                controller: 'ProjectSaveCtrl',
+                controller: 'ProjectSaveCtrl as ctrl',
                 templateUrl: 'module/scrum/client/view/project-save.ng.html',
                 clickOutsideToClose: true,
                 locals: {
@@ -183,30 +191,5 @@ angular.module('scrum').controller('ProductCtrl', ['$scope', '$mdDialog', '$mdSi
                 this.status = 'You cancelled the dialog.';
             });
         };
-
-        $rootScope.titleMiddle = '';
-        this.modalTeamSave = function (ev, id) {
-            //$mdDialog.alert()
-            //    .parent(angular.element(document.querySelector('#popupContainer')))
-            //    .clickOutsideToClose(true)
-            //    .title('This is an alert title')
-            //    .content('You can specify some description text in here.')
-            //    .ariaLabel('Alert Dialog Demo')
-            //    .ok('Got it!')
-            //    .targetEvent(ev)
-
-            $mdDialog.show({
-                controller: 'TeamSaveCtrl',
-                templateUrl: 'module/scrum/client/view/team-save.ng.html',
-                clickOutsideToClose: true,
-                locals: {
-                    id: id
-                },
-                targetEvent: ev
-            }).then(function (answer) {
-                this.status = 'You said the information was "' + answer + '".';
-            }, function () {
-                this.status = 'You cancelled the dialog.';
-            });
-        };
-    }]);
+    }
+);

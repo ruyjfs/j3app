@@ -11,7 +11,7 @@ angular.module('scrum').controller('NoteSaveCtrl', [ '$scope', '$mdDialog', 'id'
             $stateParams.id = project._id;
         }
 
-        Meteor.subscribe('team');
+        // Meteor.subscribe('team');
         Meteor.subscribe('note');
         Meteor.subscribe('story');
         Meteor.subscribe('users');

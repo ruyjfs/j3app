@@ -1,6 +1,10 @@
-angular.module('scrum').controller('StatusCtrl', [ '$scope', '$mdDialog', '$reactive', '$stateParams',
+angular.module('scrum').controller('StatusCtrl',
     function ($scope, $mdDialog, $reactive, $stateParams) {
         $reactive(this).attach($scope);
+
+        $scope.booLoading = false;
+        $('#progressBar').fadeOut('slow');
+
         if (!$stateParams.product) {
             $state.go('scrum');
         }
@@ -71,4 +75,4 @@ angular.module('scrum').controller('StatusCtrl', [ '$scope', '$mdDialog', '$reac
             });
         };
     }
-]);
+);

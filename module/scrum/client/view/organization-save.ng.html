@@ -1,7 +1,7 @@
 <md-dialog aria-label="Mango (Fruit)">
     <!--<md-tabs md-dynamic-height md-border-bottom style="min-width:550px;max-width:800px;max-height:810px; ">-->
             <!--<md-content class="md-padding">-->
-                <form name="elmForm" novalidate>
+                <form name="ctrl.elmForm" novalidate>
                     <!--<md-toolbar>-->
                     <!--<div class="md-toolbar-tools">-->
                     <!--<h2>Save product</h2>-->
@@ -12,27 +12,28 @@
                         <md-content layout-padding>
                             <md-input-container class="md-block" required="required">
                                 <label>{{ 'Color' | translate}}</label>
-                                <input ng-model="form.color" id="color" type="color" aria-label="Name"  required>
+                                <input ng-model="ctrl.form.color" id="color" type="color" aria-label="Name"  required>
                             </md-input-container>
                             <md-input-container class="md-block"  required="required">
                                 <label>{{ 'Organization full name' | translate }} <b class="red-text">*</b></label>
-                                <input name="name" ng-model="form.name" type="text" required>
-                                <div ng-messages="elmForm.name.$error">
-                                    <div ng-message="required">{{'How we should call your organization' | translate}}!</div>
+                                <input name="name" ng-model="ctrl.form.name" type="text" required>
+                                <div ng-messages="ctrl.elmForm.name.$error">
+                                    <div ng-message="required">{{'How we should call your organization' | translate}}?</div>
                                 </div>
                             </md-input-container>
                             <md-input-container class="md-block" required="required">
                                 <label>{{ 'Namespace' | translate }} <b class="red-text">*</b></label>
-                                <input name="namespace" ng-model="form.namespace" type="text" required>
-                                <div ng-messages="elmForm.namespace.$error">
-                                    <div ng-message="required">{{'How we should find your organization' | translate}}!</div>
+                                <input name="namespace" ng-model="ctrl.form.namespace" type="text" required>
+                                <div class="hint">{{'This is the name of the organization url and must be unique' | translate}}.</div>
+                                <div ng-messages="ctrl.elmForm.namespace.$error">
+                                    <div ng-message="required">{{'How we should find your organization' | translate}}?</div>
                                 </div>
                             </md-input-container>
                             <md-input-container class="md-block">
                                 <label>{{ 'Websit URL' | translate }}</label>
-                                <input ng-model="form.url" type="text">
+                                <input ng-model="ctrl.form.url" type="text">
                             </md-input-container>
-                            <md-radio-group ng-model="form.visibility">
+                            <md-radio-group ng-model="ctrl.form.visibility">
                                 <md-radio-button value="1" class="md-primary"> <i class="material-icons">security</i> {{ 'Private - Only organization members' | translate }}</md-radio-button>
                                 <md-radio-button value="3" > <i class="material-icons">public</i> {{ 'Public - Everyone can see' | translate }}</md-radio-button>
                             </md-radio-group>
@@ -42,7 +43,7 @@
                             </md-input-container>
                             <!--<md-input-container class="md-block">-->
                             <!--<label>{{ 'Owner' | translate }}</label>-->
-                            <!--<md-select ng-model="form.userId" aria-label="" placeholder="Owner" required>-->
+                            <!--<md-select ng-model="ctrl.form.userId" aria-label="" placeholder="Owner" required>-->
                             <!--<md-option ng-repeat="user in users" value="{{user._id}}">-->
                             <!--{{user.name}} {{user.lastName}}-->
                             <!--</md-option>-->
@@ -51,13 +52,13 @@
                             <!--<div layout-gt-sm="row">-->
                             <!--<md-input-container class="md-block">-->
                             <!--<label>{{ 'Organization full name' | translate }}</label>-->
-                            <!--<input ng-model="form.name" type="text" aria-label="Name" required>-->
+                            <!--<input ng-model="ctrl.form.name" type="text" aria-label="Name" required>-->
                             <!--</md-input-container>-->
                             <!--</div>-->
                             <!--<div layout-gt-sm="row">-->
                             <!--<md-input-container class="md-block">-->
                             <!--<label>Scrum Master</label>-->
-                            <!--<md-select ng-model="form.scrumMaster" aria-label="" placeholder="Scrum Master" required-->
+                            <!--<md-select ng-model="ctrl.form.scrumMaster" aria-label="" placeholder="Scrum Master" required-->
                             <!--multiple="true">-->
                             <!--<md-option ng-repeat="user in users" value="{{user._id}}">-->
                             <!--{{user.name}} {{user.lastName}}-->
@@ -66,7 +67,7 @@
                             <!--</md-input-container>-->
                             <!--<md-input-container class="md-block">-->
                             <!--<label>Product Owner (PO)</label>-->
-                            <!--<md-select ng-model="form.productOwner" aria-label="" placeholder="Product Owner (PO)" required-->
+                            <!--<md-select ng-model="ctrl.form.productOwner" aria-label="" placeholder="Product Owner (PO)" required-->
                             <!--multiple="true">-->
                             <!--<md-option ng-repeat="user in users" value="{{user._id}}">-->
                             <!--{{user.name}} {{user.lastName}}-->
@@ -76,7 +77,7 @@
                             <!--</div>-->
                             <!--<md-input-container class="md-block">-->
                             <!--<label>{{ 'Team' | translate }}</label>-->
-                            <!--<md-select ng-model="form.teams" id="teams" aria-label="" placeholder="Team" multiple="true"-->
+                            <!--<md-select ng-model="ctrl.form.teams" id="teams" aria-label="" placeholder="Team" multiple="true"-->
                             <!--required>-->
                             <!--<md-option ng-repeat="team in teams" value="{{team._id}}">-->
                             <!--{{team.name}}-->
@@ -86,7 +87,7 @@
                             <!--<div layout-gt-sm="row">-->
                             <!--<md-input-container class="md-block">-->
                             <!--<label>Week</label>-->
-                            <!--<md-select ng-model="form.week" id="week" aria-label="" placeholder="Week" required>-->
+                            <!--<md-select ng-model="ctrl.form.week" id="week" aria-label="" placeholder="Week" required>-->
                             <!--<md-option ng-repeat="week in weeks" value="{{week}}">-->
                             <!--{{week}}-->
                             <!--</md-option>-->
@@ -96,13 +97,13 @@
                             <!--<div flex="15" layout layout-align="center center">-->
                             <!--<span class="md-body-1">{{ 'Week' | translate }}</span>-->
                             <!--</div>-->
-                            <!--<md-slider ng-model="form.week" id="time-slider" flex md-discrete step="1" min="1" max="4" aria-label="Time"></md-slider>-->
+                            <!--<md-slider ng-model="ctrl.form.week" id="time-slider" flex md-discrete step="1" min="1" max="4" aria-label="Time"></md-slider>-->
                             <!--<div flex="10" layout layout-align="center center">-->
-                            <!--<span class="md-body-1">{{form.week}}</span>-->
+                            <!--<span class="md-body-1">{{ctrl.form.week}}</span>-->
                             <!--</div>-->
                             <!--</div>-->
                             <!--<md-input-container class="md-block">-->
-                            <!--<md-switch ng-model="form.skipWeekend" aria-label="Weekend">-->
+                            <!--<md-switch ng-model="ctrl.form.skipWeekend" aria-label="Weekend">-->
                             <!--{{ 'Skip weekend' | translate }}-->
                             <!--</md-switch>-->
                             <!--</md-input-container>-->
@@ -122,13 +123,13 @@
         <!--Save-->
         <!--<i class="material-icons right">send</i>-->
         <!--</md-button>-->
-        <button class="orange-text text-darken-3 btn white waves-effect waves-orange hoverable" type="button" ng-click="close()">
+        <button class="orange-text text-darken-3 btn white waves-effect waves-orange hoverable" type="button" ng-click="ctrl.close()">
         <!--<i class="material-icons right">close</i>-->
         {{ 'Cancel' | translate }}
         </button>
-        <button ng-disabled="elmForm.$invalid" class="btn orange darken-3 waves-effect waves-light hoverable" type="submit" ng-click="save()">
+        <button ng-disabled="ctrl.elmForm.$invalid" class="btn orange darken-3 waves-effect waves-light hoverable" type="submit" ng-click="ctrl.save()">
         <!--<i class="material-icons right">check</i>-->
-        {{ action | translate }}
+        {{ ctrl.action | translate }}
         </button>
     </md-dialog-actions>
 </md-dialog>

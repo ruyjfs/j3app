@@ -1,42 +1,42 @@
 angular.module('scrum').controller('OrganizationSaveCtrl',
-    function ($scope, $reactive, $mdDialog, $rootScope, id, $document) {
+    function ($scope, $reactive, $mdDialog, $rootScope, id, $translate) {
         $reactive(this).attach($scope);
-        this.title = 'Organization';
-        Meteor.subscribe('users');
-        $rootScope.organizationId = id;
-
+        $translate.use(Session.get('lang'));
         if (id) {
             //$scope.form = $meteor.object(Organization, id, false);
-            $scope.form = Organization.findOne(id);
-            $scope.action = 'Edit';
+            this.form = Organization.findOne(id);
+            this.action = 'Edit';
         } else {
-            $scope.form = {};
-            $scope.form.color = '#ffcc80';
-            $scope.userId = Meteor.userId();
-            $scope.action = 'Insert';
-            $scope.form.visibility = 3;
+            this.form = {};
+            this.form.color = '#ffcc80';
+            this.userId = Meteor.userId();
+            this.action = 'Insert';
+            this.form.visibility = 3;
         }
 
         //Meteor.subscribe('team');
-        //if ($scope.form.teams) {
-        //    $scope.teams = Team.find({
-        //        $or: [{members : Meteor.userId()}, {userId : Meteor.userId()}, {_id: {$in: $scope.form.teams}}]
+        //if (this.form.teams) {
+        //    this.teams = Team.find({
+        //        $or: [{members : Meteor.userId()}, {userId : Meteor.userId()}, {_id: {$in: this.form.teams}}]
         //    }, {sort: {name: 1}}).fetch();
         //} else {
-        //    $scope.teams =  Team.find({
+        //    this.teams =  Team.find({
         //        $or: [{members : Meteor.userId()}, {userId : Meteor.userId()}]
         //    }).fetch();
         //}
-        $scope.users = Meteor.users.find({}, {sort: {name: 1, lastName: 1}}).fetch();
+        this.users = Meteor.users.find({}, {sort: {name: 1, lastName: 1}}).fetch();
 
-        $scope.save = function () {
-            if ($scope.elmForm.$valid) {
-                Meteor.call('organizationSave', $scope.form, function (error) {
+        this.save = function () {
+            if (this.elmForm.$valid) {
+                Meteor.call('organizationSave', this.form, function (error) {
                     if (error) {
-                        Materialize.toast(error, 4000);
+                        $('md-dialog').animateCss('jello');
+                        Materialize.toast($translate.instant('Notice') + ': '+ $translate.instant(error.reason) + '!', 4000, 'rounded red accent-1');
                     } else {
-                        Materialize.toast('Saved successfully!', 4000);
-                        $scope.form = '';
+                        // Materialize.toast('Saved successfully!', 4000, 'rounded green accent-1 green-text text-darken-4');
+                        // Materialize.toast('Saved successfully!', 4000, 'rounded green white-text');
+                        Materialize.toast($translate.instant('Saved successfully') + '!', 4000, 'rounded green accent-1 green-text text-darken-4');
+                        this.form = '';
                         $mdDialog.hide();
                     }
                 });
@@ -45,9 +45,9 @@ angular.module('scrum').controller('OrganizationSaveCtrl',
             }
         };
 
-        $scope.close = function () {
+        this.close = function () {
             $mdDialog.hide();
-        }
+        };
 
         this.perPage = 5;
         this.page = 1;
@@ -71,15 +71,12 @@ angular.module('scrum').controller('OrganizationSaveCtrl',
                 });
             },
             users: function() {
-                 var users = Meteor.users.find({}, {
+                 let users = Meteor.users.find({}, {
 
                     //limit: parseInt(this.getReactively('perPage')),
                     //skip: parseInt((this.getReactively('page') - 1) * this.getReactively('perPage')),
                     //sort: this.getReactively('sort')
                 });
-
-                console.log(users);
-
                 return users;
             }
         });
@@ -96,11 +93,8 @@ angular.module('scrum').controller('OrganizationSaveCtrl',
             };
         };
 
-        $scope.remove = function(team) {
+        this.remove = function(team) {
             this.teams.remove(team);
         };
-
-        $document.ready(() => {
-        });
     }
 );

@@ -15,10 +15,17 @@ Meteor.publish("organization", function (options) {
         //Counts.publish(this, 'total', Team.find(selector), {
         //    noReady: true
         //});
+
+
         result = Organization.find(selector, options);
+        // Counts.publish(this, 'totalOrganization', result, {
+        //     noReady: true
+        // });
+
         return (result)? result : [];
     } else {
         return [];
+        // return this.ready();
     }
 
 

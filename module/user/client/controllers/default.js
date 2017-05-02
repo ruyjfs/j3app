@@ -2,6 +2,8 @@ angular.module("user").controller("Default2Ctrl", ['$scope', '$reactive', '$stat
     function($scope, $reactive, $state, $mdDialog){
 
         $reactive(this).attach($scope);
+        $scope.booLoading = false;
+        $('#progressBar').fadeOut('slow');
 
         //$scope.dataForm = $meteor.object(Users, $rootScope.currentUser._id, false);
         //$scope.members = $meteor.collection(Meteor.users, false).subscribe('users');

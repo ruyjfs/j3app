@@ -43,6 +43,19 @@ if (Meteor.isClient) {
         'Here you register organizations or saying best companies within the companies you register people and products of it. It may be published for all people can sail. Note that the namespace is the organization\'s url to facilitate their direct access to a orgnização or if you want to disclose it. For example www.j3scrum.com/namespaceoforganization/namespaceofproduct/numberofsprint. Organizations can have multiple Teams. Teams can have Differing permissions. Namespace is unique and this is where repositories for this organization will be created.':
             'Aqui você cadastra as organizações ou dizendo melhor as empresas, dentro das empresas você cadastra as pessoas e os produtos dela. Podendo ser publica para todas as pessoas poderem vela. Repare que o namespace é a url da organização para facilitar o seu acesso direto à uma orgnização ou caso queira divulga-la. Por exemplo www.j3scrum.com/namespacedaorganizacao/namespacedoproduto/numerodasprint. As organizações podem ter várias equipes. As equipes podem ter diferentes permissões. Namespace é único e é aí que repositórios para esta organização será criado.',
 
+        // Scrum - Form - Organization
+        'How we should call your organization': 'Como devemos chamar sua organização',
+        'This is the name of the organization url and must be unique': 'Este é o nome da url da organização e deve ser único',
+        'How we should find your organization': 'Como devemos encontrar suar organização',
+        'Namespace already exists': 'Este namespace já existe',
+        'Notice': 'Aviso',
+        'Saved successfully': 'Salvo com sucesso',
+
+        // Scrum - Form - Product
+        'How we should find this product of organization': 'Como devemos encontrar este produto da organizzação',
+        'The product url must be unique in the organization': 'O nome da url do produto deve ser único dentro desta organização',
+        'How should we call this product': 'Como devemos chamar este produto',
+        'Namespace already exists for a product in this organization': 'Este namespace já existe dentro desta organização',
 
         //  Scrum
         'Team': 'Equipe',
@@ -231,6 +244,23 @@ if (Meteor.isClient) {
     }).config(function (paginationTemplateProvider) {
         paginationTemplateProvider.setPath('library/directives/pagination.tpl.html');
     });
+
+    // angular.module('scrum', []).run(function ($rootScope, ngProgressFactory) {
+    // angular.module('scrum', []).run(function ($rootScope) {
+    // //
+    // //     // first create instance when app starts
+    // //     $rootScope.progressbar = ngProgressFactory.createInstance();
+    // //
+    //     $rootScope.$on("$routeChangeStart", function () {
+    // //         $rootScope.progressbar.start();
+    //         console.log('começo');
+    //     });
+    // //
+    //     $rootScope.$on("$routeChangeSuccess", function () {
+    // //         $rootScope.progressbar.complete();
+    //         console.log('termino');
+    //     });
+    // });
 
     //angular.module('scrum')
     //    .config(function($mdThemingProvider){

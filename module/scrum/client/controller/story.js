@@ -1,9 +1,9 @@
-//angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
-//    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('StoryCtrl', [ '$scope', '$reactive', '$stateParams', '$mdDialog',
+angular.module('scrum').controller('StoryCtrl',
     function ($scope, $reactive, $stateParams, $mdDialog) {
         $reactive(this).attach($scope);
 
+        $scope.booLoading = false;
+        $('#progressBar').fadeOut('slow');
 
         this.id = $stateParams.id;
         this.sprintId = $stateParams.sprintId;
@@ -66,4 +66,4 @@ angular.module('scrum').controller('StoryCtrl', [ '$scope', '$reactive', '$state
                 }
             });
         };
-}]);
+});

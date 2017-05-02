@@ -6,7 +6,7 @@ angular.module('scrum').controller('NoteViewCtrl', [ '$scope', '$mdDialog', 'id'
 
         //this.subscribe('users');
         Meteor.subscribe('project');
-        Meteor.subscribe('team');
+        // Meteor.subscribe('team');
         Meteor.subscribe('note');
         Meteor.subscribe('story');
         Meteor.subscribe('users');

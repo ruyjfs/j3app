@@ -17,6 +17,24 @@ Project.allow({
 //92okH9HNck243cdQ5
 Meteor.methods({
     projectSave: function(dataForm){
+        if (
+            (!dataForm.name) ||
+            (!dataForm.organization) ||
+            (!dataForm.namespace)
+        ) {
+            throw new Meteor.Error('required', 'Tell us the all information needed');
+        }
+
+        if (dataForm._id) {
+            where = {namespace: dataForm.namespace, organization: dataForm.organization, _id: {$ne: dataForm._id}};
+        } else {
+            where = {$and: [{namespace: dataForm.namespace}, {organization: dataForm.organization}]};
+        }
+        spacenameExist = Project.findOne(where);
+        if (spacenameExist) {
+            throw new Meteor.Error('notice', 'Namespace already exists for a product in this organization');
+        }
+
         if (!dataForm.userId) {
             dataForm.userId = Meteor.userId();
         }

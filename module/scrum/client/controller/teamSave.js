@@ -1,6 +1,4 @@
-//angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
-//    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('TeamSaveCtrl', [ '$scope', '$rootScope', '$mdDialog', 'id', '$stateParams',
+angular.module('scrum').controller('TeamSaveCtrl',
     function ($scope, $rootScope, $mdDialog, id, $stateParams) {
 
         //project = Project.findOne({'namespace': $stateParams.product});
@@ -8,17 +6,12 @@ angular.module('scrum').controller('TeamSaveCtrl', [ '$scope', '$rootScope', '$m
         //    $stateParams.id = project._id;
         //}
         $scope.title = 'Scrum';
-        //Meteor.subscribe('users');
-        //Meteor.subscribe('team');
-        //$scope.members = $meteor.collection(Meteor.users, false).subscribe('users');
         var organization =  false;
         var organizationId = false;
         if ($stateParams.organization != 'organization') {
             organization = Organization.findOne({'namespace': $stateParams.organization});
             organizationId = organization._id;
         }
-        console.log(organizationId);
-        console.log(organization);
         if (organization) {
             if (organization.members) {
                 whereUser = {_id: {$in: organization.members}};
@@ -76,4 +69,4 @@ angular.module('scrum').controller('TeamSaveCtrl', [ '$scope', '$rootScope', '$m
             $mdDialog.hide();
         }
     }
-]);
+);

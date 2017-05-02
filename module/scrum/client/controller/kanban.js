@@ -1,8 +1,9 @@
-//angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
-//    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSidenav', '$mdUtil', '$log', '$stateParams', '$reactive', '$mdToast',
+angular.module('scrum').controller('KanbanCtrl',
     function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $stateParams, $reactive, $mdToast) {
         $reactive(this).attach($scope);
+
+        $scope.booLoading = false;
+        $('#progressBar').fadeOut('slow');
 
         this.organization = $stateParams.organization;
         this.product = $stateParams.product;
@@ -431,4 +432,4 @@ angular.module('scrum').controller('KanbanCtrl', [ '$scope', '$mdDialog', '$mdSi
         //        $scope.status = 'You cancelled the dialog.';
         //    });
         //};
-}]);
+});

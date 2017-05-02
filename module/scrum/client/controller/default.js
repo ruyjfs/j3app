@@ -1,8 +1,8 @@
-//angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
-//    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('DefaultCtrl', [ '$scope', '$mdDialog',
+angular.module('scrum').controller('DefaultCtrl',
     function ($scope, $mdDialog) {
-        $scope.modalLogin = function(ev){
+        $scope.booLoading = false;
+        $('#progressBar').fadeOut('slow');
+        $scope.modalLogin = function (ev) {
             //$mdDialog.alert()
             //    .parent(angular.element(document.querySelector('#popupContainer')))
             //    .clickOutsideToClose(true)
@@ -16,17 +16,18 @@ angular.module('scrum').controller('DefaultCtrl', [ '$scope', '$mdDialog',
                 module: 'user',
                 controller: 'LoginModalCtrl',
                 templateUrl: 'module/user/client/views/login-modal.ng.html',
-                clickOutsideToClose:true,
+                clickOutsideToClose: true,
                 targetEvent: ev
-            }).then(function(answer) {
+            }).then(function (answer) {
                 $scope.status = 'You said the information was "' + answer + '".';
-            }, function() {
+            }, function () {
                 $scope.status = 'You cancelled the dialog.';
             });
         };
 
 
-        $scope.t = function($text) {
+        $scope.t = function ($text) {
             return $text;
         };
-}]);
+    }
+);

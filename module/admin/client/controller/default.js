@@ -1,5 +1,7 @@
-angular.module("admin").controller("DefaultAdminCtrl", ['$scope', '$state', '$mdDialog',
+angular.module("admin").controller("DefaultAdminCtrl",
     function($scope, $state, $mdDialog){
+        $scope.booLoading = false;
+        $('#progressBar').fadeOut('slow');
 
         this.teste = 'haha Admin';
         $scope.teste2 = 'haha Admin';
@@ -142,4 +144,5 @@ angular.module("admin").controller("DefaultAdminCtrl", ['$scope', '$state', '$md
         //    },
         //    zoom: 8
         //};
-    }]);
+    }
+);

@@ -3,19 +3,18 @@
 angular.module('scrum').controller('OrganizationFabCtrl', ['$scope', '$mdDialog', '$stateParams', '$reactive', '$state', '$timeout', '$rootScope', '$document',
     function ($scope, $mdDialog, $stateParams, $reactive, $state, $timeout, $rootScope, $document) {
         $reactive(this).attach($scope);
-
-        Meteor.subscribe('organization', () => {
-            let organisations = Organization.find({}, {sort: {name: 1}}).map((organization) => {return organization});
-            if (organisations.length == 0) {
-                $document.ready(() => {
-                    $('.md-fab').addClass('pulse');
-                });
-            }
-        });
+        // Meteor.subscribe('organization', () => {
+        //     let organisations = Organization.find({}, {sort: {name: 1}}).map((organization) => {return organization});
+        //     if (organisations.length == 0) {
+        //         $document.ready(() => {
+        //             $('.md-fab').addClass('pulse');
+        //         });
+        //     }
+        // });
 
         $scope.modalNoteSave = function (ev, id, storyId) {
             $mdDialog.show({
-                controller: 'NoteSaveCtrl',
+                controller: 'NoteSaveCtrl as ctrl',
                 templateUrl: 'module/scrum/client/view/note-save.ng.html',
                 clickOutsideToClose: true,
                 targetEvent: ev,
@@ -33,7 +32,7 @@ angular.module('scrum').controller('OrganizationFabCtrl', ['$scope', '$mdDialog'
 
         $scope.modalStorySave = function (ev, id) {
             $mdDialog.show({
-                controller: 'StorySaveCtrl',
+                controller: 'StorySaveCtrl as ctrl',
                 templateUrl: 'module/scrum/client/view/story-save.ng.html',
                 clickOutsideToClose: true,
                 locals: {id: id},
@@ -43,7 +42,7 @@ angular.module('scrum').controller('OrganizationFabCtrl', ['$scope', '$mdDialog'
 
         $scope.modalStatusSave = function (ev, id) {
             $mdDialog.show({
-                controller: 'StatusSaveCtrl',
+                controller: 'StatusSaveCtrl as ctrl',
                 templateUrl: 'module/scrum/client/view/status-save.ng.html',
                 clickOutsideToClose: true,
                 locals: {'id': id},
@@ -57,7 +56,7 @@ angular.module('scrum').controller('OrganizationFabCtrl', ['$scope', '$mdDialog'
 
         this.modalOrganizationSave = function (ev, id) {
             $mdDialog.show({
-                controller: 'OrganizationSaveCtrl',
+                controller: 'OrganizationSaveCtrl as ctrl',
                 templateUrl: 'module/scrum/client/view/organization-save.ng.html',
                 clickOutsideToClose: true,
                 locals: {
@@ -82,7 +81,7 @@ angular.module('scrum').controller('OrganizationFabCtrl', ['$scope', '$mdDialog'
             //    .targetEvent(ev)
 
             $mdDialog.show({
-                controller: 'TeamSaveCtrl',
+                controller: 'TeamSaveCtrl as ctrl',
                 templateUrl: 'module/scrum/client/view/team-save.ng.html',
                 clickOutsideToClose: true,
                 locals: {

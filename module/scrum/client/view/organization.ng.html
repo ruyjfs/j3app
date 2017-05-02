@@ -1,5 +1,6 @@
 <div ng-controller="OrganizationCtrl as vm">
     <!--teste {{booLoading}}-->
+    <!--teste {{teste2}} {{progressBar}}-->
     <!--<md-content>-->
         <!--<md-tabs md-center-tabs md-dynamic-height md-border-bottom>-->
             <!--<md-tab label="{{ 'Product' | translate }}">-->
@@ -7,7 +8,7 @@
                     <div class="row">
                         <!--<div class="container col l4 s12 row">-->
                         <div class="col l4 s12" ng-repeat="organization in vm.organisations">
-                            <div ng-if="organization" class="card small orange lighten-3 hoverable" style="background-color: {{organization.color}} !important;">
+                            <div ng-if="organization" class="card small orange lighten-3 hoverable animated fadeIn" style="background-color: {{organization.color}} !important;">
                                 <div class="card-content white-text">
                                     <span class="card-title activator text-darken-4">{{organization.name}}<i class="material-icons right">more_vert</i></span>
                                     <p>{{organization.description}}</p>
@@ -34,9 +35,9 @@
                             </div>
                         </div>
                         <div class="col l4 s12">
-                            <div class="card small orange lighten-3 hoverable">
+                            <div class="card small orange lighten-3 hoverable animated fadeIn">
                                 <div class="card-content white-text">
-                                    <span class="card-title activator text-darken-4">{{ 'No organization' | translate }}
+                                    <span class="card-title text-darken-4">{{ 'No organization' | translate }}
                                         <!--<i class="material-icons right">more_vert</i>-->
                                     </span>
                                     <p>{{ 'Products without organization' | translate }}.</p>

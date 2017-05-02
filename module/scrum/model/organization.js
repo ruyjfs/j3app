@@ -21,35 +21,30 @@ Meteor.methods({
                 (!dataForm.name) ||
                 (!dataForm.namespace)
         ) {
-           throw new Meteor.Error('required', 'Tell us the all information needed!');
+           throw new Meteor.Error('required', 'Tell us the all information needed');
         }
-
         if (dataForm._id) {
-            console.info('tem id');
-        //     where = {$and: [{namespace: $scope.form.namespace}], _id: {$not: id}};
+            where = {namespace: dataForm.namespace, _id: {$ne: dataForm._id}};
         } else {
-            console.info('nao tem id');
-        //     where = {$and: [{namespace: $scope.form.namespace}]};
+            where = {namespace: dataForm.namespace};
         }
-        // spacenameExist = Organization.findOne(where);
-        // console.info(spacenameExist);
-        //
-        // if (spacenameExist) {
-        //     Materialize.toast('Erro: ' + 'Namespace already exists', 4000);
+        spacenameExist = Organization.findOne(where);
 
+        if (spacenameExist) {
+            throw new Meteor.Error('notice', 'Namespace already exists');
+        } else {
+            if (!dataForm.userId) {
+                dataForm.userId = Meteor.userId();
+            }
 
-
-        // if (!dataForm.userId) {
-        //     dataForm.userId = Meteor.userId();
-        // }
-        //
-        // if (dataForm._id) {
-        //     id = dataForm._id;
-        //     delete dataForm._id;
-        //     Organization.update(id, { $set: dataForm});
-        // } else {
-        //     Organization.insert(dataForm);
-        // }
+            if (dataForm._id) {
+                id = dataForm._id;
+                delete dataForm._id;
+                Organization.update(id, { $set: dataForm});
+            } else {
+                Organization.insert(dataForm);
+            }
+        }
     },
     organizationSaveMembers: function(dataFormNew)
     {

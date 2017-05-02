@@ -1,8 +1,9 @@
-//angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
-//    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog', '$stateParams', '$reactive', '$state', '$timeout', '$rootScope',
+angular.module('scrum').controller('ProjectContentCtrl',
     function ($scope, $mdDialog, $stateParams, $reactive, $state, $timeout, $rootScope) {
         $reactive(this).attach($scope);
+
+        $scope.booLoading = false;
+        $('#progressBar').fadeOut('slow');
 
         //$scope.title = 'Scrum';
 
@@ -433,4 +434,5 @@ angular.module('scrum').controller('ProjectContentCtrl', ['$scope', '$mdDialog',
         //        this.tooltipVisible = self.isOpen;
         //    }
         //});
-    }]);
+    }
+);

@@ -1,10 +1,4 @@
-//angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
-//    function($scope, $stateParams, $meteor){
-angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$mdSidenav', '$mdUtil', '$log', '$mdDialog', '$state', '$reactive', '$document',
-    function ($scope, $timeout, $mdSidenav, $mdUtil, $log, $mdDialog, $state, $reactive, $document) {
-        // var response = vcRecaptchaService.getResponse("recaptcha-1");
-        // console.info(vcRecaptchaService.);
-        // console.info(response);
+angular.module('user').controller('LoginModalCtrl', ($scope, $timeout, $mdSidenav, $mdUtil, $log, $mdDialog, $state, $reactive, $document, $location) => {
         $reactive(this).attach($scope);
         this.subscribe('users');
 
@@ -54,6 +48,7 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
                     } else {
                         $mdDialog.hide();
                         $state.go('scrum/organization');
+                        // $location.path('scrum/organization');
                     }
                 });
             } else if (intTry > 4 && !grecaptcha.getResponse(intCatpchaIdLogin)) {
@@ -153,4 +148,4 @@ angular.module('user').controller('LoginModalCtrl', [ '$scope', '$timeout', '$md
             $mdDialog.hide();
         };
     }
-]);
+);

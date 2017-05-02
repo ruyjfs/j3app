@@ -1,5 +1,7 @@
-angular.module("brotherhood").controller("DefaultCtrl", ['$scope', '$state', '$mdDialog',
+angular.module("brotherhood").controller("DefaultCtrl",
     function($scope, $state, $mdDialog){
+        $scope.booLoading = false;
+        $('#progressBar').fadeOut('slow');
 
         $scope.projects = [
             {
@@ -139,4 +141,5 @@ angular.module("brotherhood").controller("DefaultCtrl", ['$scope', '$state', '$m
         //    },
         //    zoom: 8
         //};
-    }]);
+    }
+);

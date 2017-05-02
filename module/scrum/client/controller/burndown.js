@@ -1,8 +1,8 @@
-//angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
-//    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$reactive',
+angular.module('scrum').controller('BurndownCtrl',
     function ($scope, $stateParams, $reactive) {
         $reactive(this).attach($scope);
+        $scope.booLoading = false;
+        $('#progressBar').fadeOut('slow');
 
         sprint = {};
         this.subscribe('users');
@@ -388,4 +388,4 @@ angular.module('scrum').controller('BurndownCtrl', ['$scope', '$stateParams', '$
             }
         });
     }
-]);
+);
