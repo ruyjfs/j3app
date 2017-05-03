@@ -14,24 +14,19 @@ angular.module('scrum').controller('ProductCtrl',
         //);
 
         $scope.progressBar = {};
-        $scope.progressBar.organization = Meteor.subscribe('organization').ready();
+        // $scope.progressBar.organization = Meteor.subscribe('organization').ready();
         this.subscribe('organization', () => {}, {onReady: () => {$scope.progressBar.organization = true;}});
-        $scope.progressBar.project = Meteor.subscribe('project').ready();
+        // $scope.progressBar.project = Meteor.subscribe('project').ready();
         this.subscribe('project', () => {}, {onReady: function () {$scope.progressBar.project = true;}});
-        $scope.progressBar.users = Meteor.subscribe('users').ready();
+        // $scope.progressBar.users = Meteor.subscribe('users').ready();
         this.subscribe('users', () => {}, {onReady: function () {$scope.progressBar.users = true;}});
-        $scope.progressBar.team = Meteor.subscribe('team',
-            $stateParams.organization,
-        ).ready();
-        this.subscribe('team', () => {
-            return [
-                $stateParams.organization,
-            ]
-        }, {onReady: function () {$scope.progressBar.team = true;}});
+        // $scope.progressBar.team = Meteor.subscribe('team', $stateParams.organization).ready();
+        this.subscribe('team', () => {return [$stateParams.organization]}, {onReady: function () {$scope.progressBar.team = true;}});
         $scope.booLoading = true;
+        console.log($scope.progressBar);
         $scope.$watchCollection('progressBar', function() {
             if (
-                $scope.progressBar.organization,
+                    $scope.progressBar.organization,
                     $scope.progressBar.project,
                     $scope.progressBar.users,
                     $scope.progressBar.team
