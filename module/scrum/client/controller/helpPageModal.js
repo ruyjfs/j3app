@@ -1,9 +1,7 @@
-//angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
-//    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('HelpPageModalCtrl', [ '$scope', '$mdDialog', '$stateParams', '$reactive', '$location',
-    function ($scope, $mdDialog, $stateParams, $reactive, $location) {
-        //$reactive(this).attach($scope);
-
+angular.module('scrum').controller('HelpPageModalCtrl',
+    function ($scope, $mdDialog, $stateParams, $reactive, $location, $state) {
+        $reactive(this).attach($scope);
+        $scope.$state = $state;
 
         var arrHelpMessagePage = [
             {link: 'scrum', title: 'Scrum', msg:
@@ -105,7 +103,6 @@ angular.module('scrum').controller('HelpPageModalCtrl', [ '$scope', '$mdDialog',
             });
             $scope.helpTitle = title;
             $scope.helpMsg = msg;
-            console.info($scope.helpMsg );
         }
 
 
@@ -114,27 +111,9 @@ angular.module('scrum').controller('HelpPageModalCtrl', [ '$scope', '$mdDialog',
                 //return Story.find({projectId: $stateParams.id}, {sort: {name: 1}});
             }
         });
-        $scope.save = function () {
-            //Meteor.call('noteSave', $scope.form, function (error) {
-            //
-            //    if ($scope.projectIdOld != $scope.form.projectId) {
-            //        $scope.form.story = '';
-            //        $scope.form.sprintId = '';
-            //        $scope.form.statusId = '';
-            //    }
-            //
-            //    if (error) {
-            //        Materialize.toast('Erro: ' + error, 4000);
-            //    } else {
-            //        Materialize.toast('Saved successfully!', 4000);
-            //        $scope.form = '';
-            //        $mdDialog.hide();
-            //    }
-            //});
-        };
 
         $scope.close = function () {
             $mdDialog.hide();
         }
     }
-]);
+);

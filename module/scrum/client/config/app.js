@@ -209,7 +209,13 @@ if (Meteor.isClient) {
         "I'm so glad you joined j3scrum, many things are still to come, best regards!!!"
             : 'Eu fico muito feliz que tenha entrado no j3scrum, muitas coisas ainda estão por vir, grande abraço!!!',
         'in alpha' : 'em alfa',
-
+        // HELP Organization
+        'What is a organization' : 'O que é uma organização',
+        'What you can do on the organization screen' : 'O que você pode fazer na tela da organização',
+        'An organization can be a company, a group of people, a government agency, among others.' :
+            'Uma organização pode ser uma empresa, um grupo de pessoas, um orgão do governo, entre outros.',
+        'Following the hierarchy in j3scrum, an organization, poussui several products and teams. Teams are made up of members of the organization. The products are composed of a team and various tasks, these tasks are separated by the schedule of each sprint and by stories, these stories are like categories that help to visualize them in the screen of Kanbam and Bakclog.':
+            'Seguindo a hierarquia no j3scrum, uma organização, poussui vários produtos e times. Os times são composto por membros da organização. Os produtos são compostos por um time e várias tarefas, essas tarefas são separadas pelo cronograma de cada sprint e por histórias, essas histórias são como categorias que ajudam a visual-las na tela do Kanbam e Bakclog.',
         // Ryu Product
         'This is where the products of the organization are.' : 'Aqui é onde fica os produtos da organização.',
         'In scrum we call any type of project in a product.' : 'No scrum chamamos qualquer tipo de projeto em produto.',
@@ -222,9 +228,9 @@ if (Meteor.isClient) {
         'Following the hierarchical order in j3scrum, an organization owns the products, a product has several sprints and each sprint have several tasks.' :
             'Seguindo a ordem hierárquica no j3scrum, uma organização possui os produtos, um produto possuí várias sprints e cada sprint pussuí várias tarefas.',
         'The idea is that if the final product is a motorcycle, you first deliver a bike, then a tricycle and in the end deliver the bike.' :
-            'A idéia é que se o produto final for uma moto, primeiro você entrega uma bicicleta, depois um triciclo e no final entregar a moto.',
-        'Careful following this idea, do not go handing over a steering wheel, a seat and a wheel, that will not help.' :
-            'Cuidado, seguindo essa idéia, não vá entregar um volante, um banco e uma roda, isso não vai servir de nada.',
+            'A idéia é que se o produto final for uma moto, primeiro você entrega uma bicicleta, depois um triciclo e no final entrega a moto.',
+        'Careful to following this idea, do not go handing over a steering wheel, a seat and a wheel, that will not help.' :
+            'Cuidado ao seguir essa idéia, não vá entregar um volante, um banco e uma roda, isso não vai servir de nada.',
         'Remember, deliveries with something of real value, something functional.' :
             'Lembre-se, entregas com algo de valor real, algo funcional.',
         'Relax, when entering the product you will know better how the scrum works and the main one as it is a kanban.' :
@@ -236,6 +242,25 @@ if (Meteor.isClient) {
         'Do not forget, every screen has the question button in the upper corner to better explain the scrum and the functionality of each screen.' :
             'Não se esqueca, toda tela tem o botão de interrogação no canto superior para explicar melhor o scrum e as funcionalidades de cada tela.',
         'Good luck with the product!!!' : 'Boa sorte com o produto',
+        // MODAL HELP
+        'What is a j3scrum': 'O que é o j3scrum',
+        'What is a product': 'O que é um produto',
+        'What you can do on the product screen': 'O que se pode fazer na tela do produto',
+        'You can view your products, the products you are part of, and the products in your organization that are shared internally or publicly':
+            'Você pode visualizar os seus produtos, os produtos que você faça parte e os produtos da organização que estão compartilhados internamente ou públicos',
+        'You can be part of a product being in the team linked to the product or being as PO or Scrum Master':
+            'Você pode fazer parte de um produto estando no time vinculado ao produto ou estando como PO ou Scrum Master',
+        'You can only edit projects that you own. Before registering a product, first register a team that will be part of the product, you can link the team to your new product created':
+            'Você só pode editar projetos que você seja o dono. Antes de cadastrar um produto, primeiro cadastre uma equipe que vai fazer parte do produto, você pode vincular o time ao seu novo produto criado',
+
+        // Ryu Kanban
+        // Ryu Backlog
+
+
+        // MODAL HELP
+        'Close' : 'Fechar',
+
+
 
         // Modulo User
         'Contacts' : 'Contatos',

@@ -6,13 +6,176 @@
                 <!--<span flex></span>-->
             <!--</div>-->
         <!--</md-toolbar>-->
-        <md-dialog-content style="min-width:400px;max-width:800px;max-height:810px; ">
-            <h5>{{helpTitle}}</h5>
-            <div  ng-show="$root.currentUser">
-                <md-input-container class="md-block">
-                    {{helpMsg | translate}}
-                </md-input-container>
-            </div>
+        <md-dialog-content style="padding: 0;" >
+            <!--<h5>{{helpTitle}}</h5>-->
+            <!--<div  ng-show="$root.currentUser">-->
+                <!--<md-input-container class="md-block">-->
+                    <!--{{helpMsg | translate}}-->
+                <!--</md-input-container>-->
+            <!--</div>-->
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="j3scrum">
+                    <md-content class="md-padding">
+                        <h5>{{'What is a j3scrum' | translate}}?</h5>
+                        <p>j3scrum é um aplicativo multiplataforma (Web, Android, Ios, Extensão de navegador e Windows), é totalmente gratuito focado em ajudar à todos no desenvolvimento de um projeto, O scrum atualmente é muito utilizada pela TI, porém pode ser utilizado em outras areas também.</p>
+                        <p>
+                            Um produto é feito com várias tarefas certo?
+                            No scrum dividimos essas tarefas por ciclos e chamamos de sprints. Uma sprint tem uma data incial e data final, seguindo um cronograma.
+                            A idéia é de entregarmos partes do produto durante o seu desenvolvimento e não entregar somente quando o produto está pronto e finalizado.
+                        </p>
+                        <p>
+                            No final de cada ciclo que chamamos de sprint, é entrgue algo sólido, algo de valor, sem ser o produto todo e sim entragas dividias por partes.
+                            Por exemplo: Vamos supor que o produto final seja uma moto.
+                            Então vamos entregar por sprint, primeiro uma bicicletar, depois um triciclo e no final a moto.
+                            Seguindo essa idéia, tenha cuidado pra não entregar uma roda, um banco ou um guidom, tenha em mente que é algo de valor, algo que dê para usar.
+                        </p>
+                        <h5>Vantagens do Scrum</h5>
+                        <p>No scrum conseguimos ter transparência e controle muito maior no desenvolvimento de um produto.</p>
+                        <p>Antecipa os erros, perca de tempo e garante a confiança com entregas rápidas.</p>
+                        <p>Tendo as tarefas bem divididas em um cronograma sólido.</p>
+                        <p>Os integrantes não ficam sobrecarregados, pois seguindo o scrum não se coloca uma quantidade de tempo de tarefas maior do que o tempo da equipe.</p>
+                        <p>Lembre-se que quem dá os prazos de cada tarefa é a equipe responsável pela criação do produto, no caso o time da os prazos das tarefas e com isso é montado o cronograma</p>
+                        <br />
+                        <h5>Vantagens do j3scrum</h5>
+                        <p>No j3scrum você não precisa saber scrum, você consegue aprender scrum usando ele.</p>
+                        <p>Você é ecológico economizando dinheiro e matéria prima com postis, pincel e quadro.</p>
+                        <p>Você carrega toda sua organização, projetos, equipes e tudo que o scrum pode oferecer, tudo isso dentro do seu bolso com você a onde você for.</p>
+                        <p>No j3scrum você pode cadastrar os integrantes da sua equipe, montar e dividir as suas equipes, criar seu produto, criar as histórias do projeto e os postits ficarem bem organizados. Você pode escolher as cores dos postits de cada tarefa, assim ficando mais visivel no Kanban de todas as suas equipes.</p>
+                        <p>Experimente, ele é totalmente gratuito mesmo, não custa nada.</p>
+                        <p>Estamos à disposição para melhorias, ajustes e novas idéias também.</p>
+                        <p>Não sabe o que é a metodoliga SCRUM relaxa, você vai aprender em uma forma fácil e intuitiva usando o j3scrum.</p>
+                    </md-content>
+                </md-tab>
+                <md-tab label="{{'Organization' | translate}}" md-active="$state.includes('/scrum/organization')">
+                    <md-content class="md-padding">
+                        <h5>{{'What is a organization' | translate}}?</h5>
+                        <p>{{'An organization can be a company, a group of people, a government agency, among others.' | translate}}</p>
+                        <p>{{'Following the hierarchy in j3scrum, an organization, poussui several products and teams. Teams are made up of members of the organization. The products are composed of a team and various tasks, these tasks are separated by the schedule of each sprint and by stories, these stories are like categories that help to visualize them in the screen of Kanbam and Bakclog.' | translate}}</p>
+                        <h5>{{'What you can do on the organization screen' | translate}}?</h5>
+                        <p>{{'Here you register organizations or saying best companies within the companies you register people and products of it. It may be published for all people can sail. Note that the namespace is the organization\'s url to facilitate their direct access to a orgnização or if you want to disclose it. For example www.j3scrum.com/namespaceoforganization/namespaceofproduct/numberofsprint. Organizations can have multiple Teams. Teams can have Differing permissions. Namespace is unique and this is where repositories for this organization will be created.' | translate}}</p>
+                    </md-content>
+                </md-tab>
+                <md-tab label="{{'Team' | translate}}">
+                    <md-content class="md-padding">
+                        <h5>{{'What is a team' | translate}}?</h5>
+                        <p>{{'' | translate}}</p>
+                        <p></p>
+                    </md-content>
+                </md-tab>
+                <md-tab label="{{'Product' | translate}}">
+                    <md-content class="md-padding">
+                        <h5>{{'What is a product' | translate}}?</h5>
+                        <p>{{'In scrum we call any type of project in a product.' | translate}}</p>
+                        <p>{{'To develop the whole product is necessary of several tasks and these tasks are to separate in cycles that we call sprints.' | translate}}</p>
+                        <p>{{'Each cycle, in this case, each sprint has a start and end date, thus taking a timeline of each stage of the product.' | translate}}</p>
+                        <p>{{'At the end of each sprint, we were able to deliver something of value, not being the whole product, but dividing parts.' | translate}}</p>
+                        <p>{{'Following the hierarchical order in j3scrum, an organization owns the products, a product has several sprints and each sprint have several tasks.' | translate}}</p>
+                        <p>{{'The idea is that if the final product is a motorcycle, you first deliver a bike, then a tricycle and in the end deliver the bike.' | translate}}</p>
+                        <p>{{'Careful to following this idea, do not go handing over a steering wheel, a seat and a wheel, that will not help.' | translate}}</p>
+                        <p>{{'Remember, deliveries with something of real value, something functional.' | translate}}</p>
+                        <p>{{'Relax, when entering the product you will know better how the scrum works and the main one as it is a kanban.' | translate}}</p>
+                        <p>{{"After creating a product, log in to get access to scrum features such as Kanban, Backlog, Burndown, among others. In short, you'll have access to everything your product is related to, including its tasks." | translate}}</p>
+                        <br />
+                        <h5>{{'What you can do on the product screen' | translate}}?</h5>
+                        <p>{{'You can view your products, the products you are part of, and the products in your organization that are shared internally or publicly' | translate}}.</p>
+                        <p>{{'You can be part of a product being in the team linked to the product or being as PO or Scrum Master' | translate}}.</p>
+                        <p>{{'You can only edit projects that you own. Before registering a product, first register a team that will be part of the product, you can link the team to your new product created' | translate}}.</p>
+                    </md-content>
+                </md-tab>
+                <md-tab label="{{'Kanban' | translate}}">
+                    <md-content class="md-padding">
+                        <h5>{{'What is a Kanban' | translate}}?</h5>
+                        <p>{{'' | translate}}</p>
+                        <br />
+                        <h5>{{'What you can do on the kanban screen' | translate}}?</h5>
+                        <p>{{'' | translate}}</p>
+                    </md-content>
+                </md-tab>
+                <md-tab label="{{'Backlog' | translate}}">
+                    <md-content class="md-padding">
+                        <h5>{{'What is a backlog' | translate}}?</h5>
+                        <p>{{'' | translate}}</p>
+                        <br />
+                        <h5>{{'What you can do on the backlog screen' | translate}}?</h5>
+                        <p>{{'' | translate}}</p>
+                        Aqui podemos ver todas as tarefas que estão no backlog e fazer o planejamento das tarefas e sprint, adicionando também mais tarefas.
+                    </md-content>
+                </md-tab>
+                <md-tab label="{{'Burndown' | translate}}">
+                    <md-content class="md-padding">
+                        <h5>{{'What is a product' | translate}}?</h5>
+                        <p>{{'' | translate}}</p>
+                        <br />
+                        <h5>{{'What you can do on the burndown screen' | translate}}?</h5>
+                        <p>{{'' | translate}}</p>
+                        No burndown todos os membros da equipe, vê em forma de gráfico como está o desempenho do projeto,
+                        olhando para este gráfico da pra medir se vamos conseguir entregar todas as tarefas da sprint no prazo ou não.
+                        A linha vermelha informa como seria o ideal e o amarelo informa o desempenho atual da equipe.
+                        Não se preocupe no começo o gráfico não vai ficar conforme o esperado, pois leva um tempo para a equipe ir amadurecendo e se acostumar com este tipo de metodologia.
+                    </md-content>
+                </md-tab>
+                <md-tab label="{{'Story' | translate}}">
+                    <md-content class="md-padding">
+                        <h5>{{'What is a story' | translate}}?</h5>
+                        <p>{{'' | translate}}</p>
+                        <br />
+                        <h5>{{'What you can do on the story screen' | translate}}?</h5>
+                        <p>{{'' | translate}}</p>
+                        A História é um agrupamento de tarefas, a história é o que define as cores dos postits e separação no Kanban.
+                        Você pode definir as histórias do produto de diversas formas, por exemplo:
+                        Exemplo 1: Tarefas relacionado ao cadastro de usuário, pesquisa de usuário, deletar o usuário, essas são tarefas da História Usuário que tem a cor Azul.
+                        Exemplo 2: Definir a história pelo tipo, como: Novas, Manutenção, Refatoração, Idéias e Erro
+                        Lembrando que para adicionar uma tarefa, é bom você adicionar primeiro uma História. Com isso deixando o seu Kanban e Backlog bem dividido e colorido.
+                    </md-content>
+                </md-tab>
+                <md-tab label="{{'Status' | translate}}">
+                    <md-content class="md-padding">
+                        <h5>{{'What is a status' | translate}}?</h5>
+                        <p>{{'' | translate}}</p>
+                        <br />
+                        <h5>{{'What you can do on the status screen' | translate}}?</h5>
+                        <p>{{'' | translate}}</p>
+                        O Status é a situação das tarefas.
+                        A situação é utilizada no Kanban, para os integrantes do projeto seguir o processo que foi definido aqui para este produto.
+                        Tem duas situaçẽos fixas que você não poderá alterar, são elas: "To do" (À fazer) e "Done" (Pronto), essas situações ja vem pré-definido sempre na tela do Kanban
+                        e não é exibido nesta tela. Quando uma tarefa no Kanban fica no status "To do" significa que é uma tarefa para alguem da equipe fazer e no status "Done", significa
+                        que é uma tarefa concluída, toda tarefa concluída no kanban, fica com a cor cinza no BackLog.
+                        Você pode adicionar quantos status quiser, podendo também escolher a ordem deles.
+                    </md-content>
+                </md-tab>
+                <md-tab label="{{'Sprint' | translate}}">
+                    <md-content class="md-padding">
+                        <h5>{{'What is a sprint' | translate}}?</h5>
+                        <p>{{'' | translate}}</p>
+                        <br />
+                        <h5>{{'What you can do on the status screen' | translate}}?</h5>
+                        <p>{{'' | translate}}</p>
+                        Uma sprint é um ciclo, todo ciclo tem uma data inicial e data final.
+                        No topo desta tela tem uma data e um número antes da data (Ex: (1) 17/04/2016 - 23/04/2016), este número equivale ao número da sprint e a data é a data inicial e data final.
+                        Você pode mudar de sprint clicando na data que está no topo da tela, ao mudar de sprint reflete automaticamente ao Backlog, Kanban e Burndown.
+                        A sprint é criada automaticamente, conforme a data atual e quantidade de semanas que foi definido no cadastro do produto, você pode apenas editar as datas da sprint.
+                    </md-content>
+                </md-tab>
+                <md-tab label="{{'Members' | translate}}">
+                    <md-content class="md-padding">
+                        <h5>{{'What is a members' | translate}}?</h5>
+                        <p>{{'' | translate}}</p>
+                        <br />
+                        <h5>{{'What you can do on the product screen' | translate}}?</h5>
+                        <p>{{'' | translate}}</p>
+                    </md-content>
+                </md-tab>
+                <md-tab label="{{'Trash' | translate}}">
+                    <md-content class="md-padding">
+                        <h5>{{'What is a trash' | translate}}?</h5>
+                        <p>{{'' | translate}}</p>
+                        <br />
+                        <h5>{{'What you can do on the trash screen' | translate}}?</h5>
+                        <p>{{'' | translate}}</p>
+                        'Esta é a lixeira do produto. Tudo que você excluir ficará nesta lixeira. Cada produto tem sua própria lixeira.'
+                    </md-content>
+                </md-tab>
+            </md-tabs>
         </md-dialog-content>
     </form>
     <md-dialog-actions layout="row">
