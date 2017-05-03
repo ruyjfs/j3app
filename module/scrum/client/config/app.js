@@ -216,13 +216,19 @@ if (Meteor.isClient) {
         'To develop the whole product is necessary of several tasks and these tasks are to separate in cycles that we call sprints.' :
             'Para desenvolver todo o produto é necessário de várias tarefas e essas tarefas são separar em ciclos que chamamos de sprints.',
         'Each cycle, in this case, each sprint has a start and end date, thus taking a timeline of each stage of the product.' :
-            'Cada ciclo, no caso, cada sprint  tem uma data inicial e final, com isso tendo um cronograma de cada etapa do produto.',
-        'At the end of each sprint, we deliver something of value to the end user.' :
-            'No final de cada sprint, conseguimos entregar algo de valor para o usuário final.',
-        'Following the hierarchical order in j3scrum, an organization owns the products, a product has several sprints and each sprint have several tasks, these tasks are separated by stories, which can be called categories, these stories are to help in visualizing the kanban.' :
-            'Seguindo a ordem hierárquica no j3scrum, uma organização possui os produtos, um produto possuí várias sprints e cada sprint pussuí várias tarefas, essas tarefas são separadas por histórias, que pode ser chamado de categorias, essas histórias são para ajudar na visualização do Kanban.',
-        'Relax, when entering the product, you will know what a kanban is.' :
-            'Relaxa ao entrar no produto você saberá o que é um kanban.',
+            'Cada ciclo, no caso, cada sprint, tem uma data inicial e final, com isso tendo um cronograma de cada etapa do produto.',
+        'At the end of each sprint, we were able to deliver something of value, not being the whole product, but dividing parts.' :
+            'No final de cada sprint, conseguimos entregar algo de valor, sem ser o produto todo e sim entragas dividias por partes.',
+        'Following the hierarchical order in j3scrum, an organization owns the products, a product has several sprints and each sprint have several tasks.' :
+            'Seguindo a ordem hierárquica no j3scrum, uma organização possui os produtos, um produto possuí várias sprints e cada sprint pussuí várias tarefas.',
+        'The idea is that if the final product is a motorcycle, you first deliver a bike, then a tricycle and in the end deliver the bike.' :
+            'A idéia é que se o produto final for uma moto, primeiro você entrega uma bicicleta, depois um triciclo e no final entregar a moto.',
+        'Careful following this idea, do not go handing over a steering wheel, a seat and a wheel, that will not help.' :
+            'Cuidado, seguindo essa idéia, não vá entregar um volante, um banco e uma roda, isso não vai servir de nada.',
+        'Remember, deliveries with something of real value, something functional.' :
+            'Lembre-se, entregas com algo de valor real, algo funcional.',
+        'Relax, when entering the product you will know better how the scrum works and the main one as it is a kanban.' :
+            'Relaxa ao entrar no produto você saberá melhor como o scrum funciona e o principal, como é um kanban.',
         'Click the red button to create a product.' :
             'Clique no botão vermelho para criar um produto.',
         "After creating a product, log in to get access to scrum features such as Kanban, Backlog, Burndown, among others. In short, you'll have access to everything your product is related to, including its tasks." :

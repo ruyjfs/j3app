@@ -38,37 +38,46 @@ angular.module('scrum').controller('ProductCtrl',
                     if (Session.get('booMsgProduct') != true) {
                         Materialize.toast(
                             $translate.instant('This is where the products of the organization are.')
-                            , 120000);
+                            , 140000);
                         Materialize.toast(
                             $translate.instant('In scrum we call any type of project in a product.')
-                            , 120000);
+                            , 140000);
                         Materialize.toast(
                             $translate.instant('To develop the whole product is necessary of several tasks and these tasks are to separate in cycles that we call sprints.')
-                            , 120000);
+                            , 140000);
                         Materialize.toast(
                             $translate.instant('Each cycle, in this case, each sprint has a start and end date, thus taking a timeline of each stage of the product.')
-                            , 120000);
+                            , 140000);
                         Materialize.toast(
-                            $translate.instant('At the end of each sprint, we deliver something of value to the end user.')
-                            , 120000);
+                            $translate.instant('At the end of each sprint, we were able to deliver something of value, not being the whole product, but dividing parts.')
+                            , 140000);
                         Materialize.toast(
-                            $translate.instant("Following the hierarchical order in j3scrum, an organization owns the products, a product has several sprints and each sprint have several tasks, these tasks are separated by stories, which can be called categories, these stories are to help in visualizing the kanban.")
-                            , 120000);
+                            $translate.instant("Following the hierarchical order in j3scrum, an organization owns the products, a product has several sprints and each sprint have several tasks.")
+                            , 140000);
                         Materialize.toast(
-                            $translate.instant("Relax, when entering the product, you will know what a kanban is.")
-                            , 120000);
+                            $translate.instant("The idea is that if the final product is a motorcycle, you first deliver a bike, then a tricycle and in the end deliver the bike.")
+                            , 140000);
+                        Materialize.toast(
+                            $translate.instant("Careful following this idea, do not go handing over a steering wheel, a seat and a wheel, that will not help.")
+                            , 140000);
+                        Materialize.toast(
+                            $translate.instant("Remember, deliveries with something of real value, something functional.")
+                            , 140000);
+                        Materialize.toast(
+                            $translate.instant("Relax, when entering the product you will know better how the scrum works and the main one as it is a kanban.")
+                            , 140000);
                         Materialize.toast(
                             $translate.instant("Click the red button to create a product.")
-                            , 120000);
+                            , 140000);
                         Materialize.toast(
                             $translate.instant("After creating a product, log in to get access to scrum features such as Kanban, Backlog, Burndown, among others. In short, you'll have access to everything your product is related to, including its tasks.")
-                            , 120000);
+                            , 140000);
                         Materialize.toast(
                             $translate.instant("Do not forget, every screen has the question button in the upper corner to better explain the scrum and the functionality of each screen.")
-                            , 120000);
+                            , 140000);
                         Materialize.toast(
                             $translate.instant("Good luck with the product!!!")
-                            , 120000);
+                            , 140000);
                         Session.set('booMsgProduct', true);
                     }
                     $document.ready(() => {
