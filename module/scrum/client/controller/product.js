@@ -113,21 +113,21 @@ angular.module('scrum').controller('ProductCtrl',
                         );
                     }
 
-                    // if (!sprint) {
-                    //     Meteor.call('sprintCreate', project._id, function (error, result) {
-                    //         if (error) {
-                    //             //console.log(error);
-                    //         } else {
-                    //             //console.log('Saved!');
-                    //             $scope.form = '';
-                    //             $mdDialog.hide();
-                    //         }
-                    //         //$rootScope.titleMiddle = result.dateStart + ' - ' + result.dateEnd + ' (' + result.number + ')';
-                    //
-                    //         sprint = result;
-                    //         //console.info(result);
-                    //     });
-                    // }
+                    if (!sprint) {
+                        Meteor.call('sprintCreate', project._id, function (error, result) {
+                            if (error) {
+                                //console.log(error);
+                            } else {
+                                //console.log('Saved!');
+                                $scope.form = '';
+                                $mdDialog.hide();
+                            }
+                            //$rootScope.titleMiddle = result.dateStart + ' - ' + result.dateEnd + ' (' + result.number + ')';
+
+                            sprint = result;
+                            //console.info(result);
+                        });
+                    }
 
                     //if (sprint) {
                     project.sprint = sprint;
