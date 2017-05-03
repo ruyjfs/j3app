@@ -17,15 +17,15 @@ angular.module('scrum').controller('SprintCtrl',
         this.searchText = '';
         this.subscribe('sprint', function(){
                 return [
-                    $stateParams.id,
+                    this.getReactively('productId'),
                     {},
                     this.getReactively('searchText')
                 ]
             }
         );
-        this.total = function() {
-            return Counts.get('totalSprint');
-        };
+        // this.total = function() {
+        //     return Counts.get('totalSprint');
+        // };
         this.pageChanged = function(newPage) {
             this.page = newPage;
         };
@@ -35,8 +35,50 @@ angular.module('scrum').controller('SprintCtrl',
             };
         };
         this.helpers({
+            organizationId: function(){
+                var id = 'organization';
+                if ($stateParams.organization !== 'organization') {
+                    var organization = Organization.findOne({$or: [{_id: $stateParams.organization}, {namespace: $stateParams.organization}]});
+                    if (organization) {
+                        id = organization._id;
+                    } else {
+                        id = $stateParams.organization;
+                    }
+                }
+                return id;
+            },
+            productId: function(){
+                var organizationId = this.getReactively('organizationId');
+                var id = 0;
+                if (organizationId) {
+                    if (organizationId === 'organization') {
+                        product = Project.findOne($stateParams.product);
+                    } else {
+                        product = Project.findOne({$or: [{$and: [{organization: organizationId}, {namespace: $stateParams.product}]}, {_id: $stateParams.product}]});
+                    }
+                    if (product) {
+                        id = $stateParams.id = product._id;
+                    } else {
+                        id = $stateParams.id;
+                    }
+                }
+                return id;
+            },
+            sprintId: function() {
+                var id = 0;
+                var productId = this.getReactively('productId');
+                if (productId) {
+                    var sprint = Sprint.findOne({$or: [{$and: [{projectId: productId}, {number: parseInt($stateParams.sprint)}]}, {_id: $stateParams.sprint}]});
+                    if (sprint) {
+                        id = sprint._id;
+                    } else {
+                        id = $stateParams.sprint;
+                    }
+                }
+                return id;
+            },
             sprints: function () {
-                return Sprint.find({},
+                return Sprint.find({projectId: this.getReactively('productId')},
                     {
                         limit: parseInt(this.getReactively('perPage')),
                         skip: parseInt((this.getReactively('page') - 1) * this.getReactively('perPage')),
@@ -68,12 +110,20 @@ angular.module('scrum').controller('SprintCtrl',
                     //sprint.dateEndTreated = moment.unix(sprint.dateEnd).calendar('L');
                     return sprint;
                 });
-            }
+            },
+            total: () => {
+                let arrSprint = Sprint.find({projectId: this.getReactively('productId')}).fetch();
+                if (arrSprint) {
+                    return arrSprint.length;
+                } else {
+                    return 0;
+                }
+        }
         });
 
         this.modalSave = function(ev, id){
             $mdDialog.show({
-                controller: 'SprintSaveCtrl',
+                controller: 'SprintSaveCtrl as ctrl',
                 templateUrl: 'module/scrum/client/view/sprint-save.ng.html',
                 clickOutsideToClose:true,
                 locals: {id: id},

@@ -65,6 +65,8 @@ if (Meteor.isClient) {
         'How we should call this story' : 'Como devemos chamar essa história',
         // Scrum - Form - Status
         'How should we understand this task' : 'Como devemos entender essa tarefa',
+        // Scrum - Form - Status
+        'This task belongs to which story' : 'Essa tarefa pertence a qual história',
 
         'Task sent to trash' : 'Tarefa enviada pra lixeira',
         'Story sent to trash' : 'História enviada pra lixeira',
@@ -100,6 +102,7 @@ if (Meteor.isClient) {
         'made by': 'feito por',
         'Login or Register': 'Entre ou Cadastre-se',
         'Coming soon!': 'Em breve!',
+        'Goal': 'Meta',
 
         // Kanban
         'Product backlog': 'Backlog do produto',
