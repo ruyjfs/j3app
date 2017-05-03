@@ -59,6 +59,20 @@ if (Meteor.isClient) {
         // Scrum - Form - Team
         'How we should call this team' : 'Como devemos chamar essa equipe',
         'Who are the members of this team' : 'Quais são os integrantes dessa equipe',
+        // Scrum - Form - Status
+        'How we should call this status' : 'Como devemos chamar essa situação',
+        // Scrum - Form - Status
+        'How we should call this story' : 'Como devemos chamar essa história',
+        // Scrum - Form - Status
+        'How should we understand this task' : 'Como devemos entender essa tarefa',
+
+        'Task sent to trash' : 'Tarefa enviada pra lixeira',
+        'Story sent to trash' : 'História enviada pra lixeira',
+        'Status sent to trash' : 'Situação enviada pra lixeira',
+
+        'Restored history' : 'História restaurada',
+        'Restored status' : 'Situação restaurada',
+        'Restored tarsk' : 'Tarefa restaurada',
 
         //  Scrum
         'Team': 'Equipe',

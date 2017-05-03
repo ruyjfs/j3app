@@ -1,5 +1,5 @@
 <md-dialog aria-label="Mango (Fruit)">
-    <form>
+    <form name="elmForm">
         <!--<md-toolbar>-->
             <!--<div class="md-toolbar-tools">-->
                 <!--<h2>Save Status</h2>-->
@@ -9,16 +9,19 @@
         <md-dialog-content style="min-width:400px;max-width:800px;max-height:810px; ">
             <div  ng-show="$root.currentUser">
                 <md-input-container class="md-block">
-                    <label>{{ 'Name' | translate}}</label>
-                    <input ng-model="form.name" id="nameInput" type="text" aria-label="Name" required>
+                    <label>{{ 'Name' | translate}} <b class="red-text">*</b></label>
+                    <input name="name" ng-model="ctrl.form.name" id="nameInput" type="text" aria-label="Name" required>
+                    <div ng-messages="elmForm.name.$error">
+                        <div ng-message="required">{{'How we should call this status' | translate}}?</div>
+                    </div>
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>{{ 'Order' | translate}}</label>
-                    <input ng-model="form.order" id="order" type="number" aria-label="Name" required>
+                    <input ng-model="ctrl.form.order" id="order" type="number" aria-label="Name">
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>{{ 'Description' | translate}}</label>
-                    <textarea ng-model="form.description" id="description" aria-label="Description"></textarea>
+                    <textarea ng-model="ctrl.form.description" id="description" aria-label="Description"></textarea>
                 </md-input-container>
                 <!--<md-checkbox ng-model="newParty.public" id="public" aria-label="Public">-->
                     <!--Public-->
@@ -28,11 +31,11 @@
     </form>
     <md-dialog-actions layout="row">
         <span flex></span>
-        <button class="orange-text text-darken-3 btn white waves-effect waves-orange hoverable" type="button" ng-click="close()">
+        <button class="orange-text text-darken-3 btn white waves-effect waves-orange hoverable" type="button" ng-click="ctrl.close()">
             {{'Cancel' | translate}}
         </button>
-        <button class="btn orange darken-3 waves-effect waves-light hoverable" type="button" ng-click="save()">
-            {{action | translate}}
+        <button ng-disabled="elmForm.$invalid" class="btn orange darken-3 waves-effect waves-light hoverable" type="button" ng-click="ctrl.save()">
+            {{ctrl.action | translate}}
         </button>
     </md-dialog-actions>
 </md-dialog>

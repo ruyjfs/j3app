@@ -1,34 +1,37 @@
-angular.module('scrum').controller('StorySaveCtrl', [ '$scope', '$mdDialog', 'id', '$stateParams',
-    function ($scope, $mdDialog, id, $stateParams) {
-        project = Project.findOne({'namespace': $stateParams.id});
+angular.module('scrum').controller('StorySaveCtrl',
+    function ($scope, $mdDialog, id, $stateParams, $reactive, $translate) {
+        $reactive(this).attach($scope);
+        $translate.use(Session.get('lang'));
+
+        let project = Project.findOne({'namespace': $stateParams.id});
         if (project) {
             $stateParams.id = project._id;
         }
 
         if (id) {
-            $scope.form = Story.findOne(id);
-            $scope.action = 'Edit';
+            this.form = Story.findOne(id);
+            this.action = 'Edit';
         } else {
-            $scope.form = {};
-            $scope.form.color = '#ffcc80';
-            $scope.action = 'Insert';
+            this.form = {};
+            this.form.color = '#ffcc80';
+            this.action = 'Insert';
         }
-        $scope.form.projectId = $stateParams.id;
+        this.form.projectId = $stateParams.id;
 
-        $scope.save = function () {
-            Meteor.call('storySave', $scope.form, function (error) {
+        this.save = () => {
+            Meteor.call('storySave', this.form, function (error) {
                 if (error) {
-                    Materialize.toast('Erro: ' + error, 4000);
+                    $('md-dialog').animateCss('jello');
+                    Materialize.toast($translate.instant('Notice') + ': '+ $translate.instant(error.reason) + '!', 4000, 'rounded red accent-1');
                 } else {
-                    Materialize.toast('Saved successfully!', 4000);
-                    $scope.form = '';
+                    Materialize.toast($translate.instant('Saved successfully') + '!', 4000, 'rounded green accent-1 green-text text-darken-4');
                     $mdDialog.hide();
                 }
             });
         };
 
-        $scope.close = function () {
+        this.close = () => {
             $mdDialog.hide();
         }
     }
-]);
+);

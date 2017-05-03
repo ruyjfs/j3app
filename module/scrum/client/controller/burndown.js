@@ -1,19 +1,75 @@
 angular.module('scrum').controller('BurndownCtrl',
     function ($scope, $stateParams, $reactive) {
         $reactive(this).attach($scope);
-        $scope.booLoading = false;
-        $('#progressBar').fadeOut('slow');
 
         sprint = {};
-        this.subscribe('users');
-        this.subscribe('message');
-        this.subscribe('project');
-        this.subscribe('team', function(){return [$stateParams.organization]});
-        this.subscribe('burndown', function(){return [$stateParams.product]});
-        this.subscribe('status', function(){return [$stateParams.product]});
-        this.subscribe('note', function(){return [$stateParams.product]});
-        this.subscribe('story', function(){return [$stateParams.product]});
-        this.subscribe('sprint', function(){return [$stateParams.product]});
+
+        $scope.progressBar = {};
+        $scope.progressBar.users = Meteor.subscribe('users').ready();
+        this.subscribe('users', () => {}, {onReady: () => {$scope.progressBar.users = true;}});
+        $scope.progressBar.organization = Meteor.subscribe('organization').ready();
+        this.subscribe('organization', () => {}, {onReady: () => {$scope.progressBar.organization = true;}});
+        $scope.progressBar.project = Meteor.subscribe('project').ready();
+        this.subscribe('project', () => {}, {onReady: () => {$scope.progressBar.project = true;}});
+        $scope.progressBar.team = Meteor.subscribe('team', $stateParams.organization).ready();
+        this.subscribe('team', () => {return [$stateParams.organization]}, {onReady: () => {$scope.progressBar.team = true;}});
+        $scope.progressBar.sprint = Meteor.subscribe('team', $stateParams.organization).ready();
+        this.subscribe('sprint', () => {return [$stateParams.organization]}, {onReady: () => {$scope.progressBar.sprint = true;}});
+        $scope.progressBar.burndown = Meteor.subscribe('burndown', $stateParams.organization).ready();
+        this.subscribe('burndown', function(){return [$stateParams.product]}, {onReady: () => {$scope.progressBar.burndown = true;}});
+        $scope.progressBar.status = Meteor.subscribe('status', $stateParams.product).ready();
+        this.subscribe('status', function(){return [$stateParams.product]}, {onReady: () => {$scope.progressBar.status = true;}});
+        $scope.progressBar.note = Meteor.subscribe('note', $stateParams.product).ready();
+        this.subscribe('note', function(){return [$stateParams.product, {}, this.getReactively('searchText')]}, {onReady: () => {$scope.progressBar.note = true;}});
+        $scope.progressBar.story = Meteor.subscribe('story', $stateParams.product).ready();
+        this.subscribe('story', function(){return [$stateParams.product]}, {onReady: () => {$scope.progressBar.story = true;}});
+        $scope.progressBar.sprint = Meteor.subscribe('sprint', $stateParams.product).ready();
+        this.subscribe('sprint', function(){return [$stateParams.product]}, {onReady: () => {$scope.progressBar.sprint = true;}});
+        $scope.booLoading = true;
+        $scope.$watchCollection('progressBar', function() {
+            if (
+                $scope.progressBar.users,
+                    $scope.progressBar.organization,
+                    $scope.progressBar.project,
+                    $scope.progressBar.team,
+                    $scope.progressBar.burndown,
+                    $scope.progressBar.status,
+                    $scope.progressBar.note,
+                    $scope.progressBar.story,
+                    $scope.progressBar.sprint
+            ) {
+                // let organisations = Organization.find({}, {sort: {name: 1}}).map((organization) => {return organization});
+                // if (organisations.length == 0) {
+                //     if (Session.get('booMsgOrganization') != true) {
+                //         Materialize.toast(
+                //             $translate.instant('Hi, my name is Ryu, i will help you with whatever it takes.')
+                //             , 120000);
+                //         Materialize.toast(
+                //             $translate.instant('You have no organization, click the red button to create an organization, or contact the owner of an organization to add you to their organization.')
+                //             , 120000);
+                //         Materialize.toast(
+                //             $translate.instant('You can create products without organization, just enter the card without organization. For more information, click on the question mark icon in the top menu.')
+                //             , 120000);
+                //         Materialize.toast(
+                //             $translate.instant('If you have any questions or suggestions, please contact us at contact@j3scrum.com.')
+                //             , 120000);
+                //         Materialize.toast(
+                //             $translate.instant('To close these messages, drag to the side.')
+                //             , 120000);
+                //         Materialize.toast(
+                //             $translate.instant("I'm so glad you joined j3scrum, many things are still to come, best regards!!!")
+                //             , 120000);
+                //         Session.set('booMsgOrganization', true);
+                //     }
+                //     $document.ready(() => {
+                //         $('.md-fab').addClass('pulse');
+                //         console.log($('.md-fab'));
+                //     });
+                // }
+                $scope.booLoading = false;
+                $('#progressBar').fadeOut('slow');
+            }
+        });
         this.helpers({
             organizationId: function(){
                 var id = 'organization';
@@ -280,8 +336,8 @@ angular.module('scrum').controller('BurndownCtrl',
 
                 // Let's put a sequence number aside so we can use it in the event callbacks
                 var seq = 0,
-                    delays = 80,
-                    durations = 150;
+                    delays = 50,
+                    durations = 60;
 
                 // Once the chart is fully created we reset the sequence
                 chart.on('created', function () {

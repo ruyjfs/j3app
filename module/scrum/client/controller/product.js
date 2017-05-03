@@ -21,14 +21,15 @@ angular.module('scrum').controller('ProductCtrl',
         this.subscribe('users', () => {}, {onReady: function () {$scope.progressBar.users = true;}});
         $scope.progressBar.team = Meteor.subscribe('team', $stateParams.organization).ready();
         this.subscribe('team', () => {return [$stateParams.organization]}, {onReady: function () {$scope.progressBar.team = true;}});
-        $scope.progressBar.sprint = Meteor.subscribe('team', $stateParams.organization).ready();
-        this.subscribe('sprint', () => {return [$stateParams.organization]}, {onReady: function () {$scope.progressBar.team = true;}});
+        $scope.progressBar.sprint = Meteor.subscribe('sprint', $stateParams.organization).ready();
+        this.subscribe('sprint', () => {return [$stateParams.organization]}, {onReady: function () {$scope.progressBar.sprint = true;}});
         $scope.booLoading = true;
         $scope.$watchCollection('progressBar', function() {
             if (
                     $scope.progressBar.organization,
                     $scope.progressBar.project,
                     $scope.progressBar.users,
+                    $scope.progressBar.sprint,
                     $scope.progressBar.team
             ) {
                 // let organisations = Organization.find({}, {sort: {name: 1}}).map((organization) => {return organization});
@@ -151,8 +152,6 @@ angular.module('scrum').controller('ProductCtrl',
                     return project;
                 });
 
-                console.log('projects');
-                console.log(projects);
                 return projects;
             }
         }, true);

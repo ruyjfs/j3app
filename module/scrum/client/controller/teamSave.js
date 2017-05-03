@@ -1,6 +1,7 @@
 angular.module('scrum').controller('TeamSaveCtrl',
     function ($scope, $rootScope, $mdDialog, id, $stateParams, $reactive, $translate) {
         $reactive(this).attach($scope);
+        $translate.use(Session.get('lang'));
 
         let organization =  false;
         let organizationId = false;

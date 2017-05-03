@@ -1,9 +1,7 @@
-//angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
-//    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('TrashTaskCtrl', [ '$scope', '$reactive', '$stateParams', '$mdDialog',
-    function ($scope, $reactive, $stateParams, $mdDialog) {
+angular.module('scrum').controller('TrashTaskCtrl',
+    function ($scope, $reactive, $stateParams, $mdDialog, $translate) {
         $reactive(this).attach($scope);
-
+        $translate.use(Session.get('lang'));
 
         this.id = $stateParams.id;
         this.sprintId = $stateParams.sprintId;
@@ -52,8 +50,9 @@ angular.module('scrum').controller('TrashTaskCtrl', [ '$scope', '$reactive', '$s
                 if (error) {
                     Materialize.toast('Erro: ' + error, 4000);
                 } else {
-                    Materialize.toast('Restored successfully!', 4000);
+                    Materialize.toast($translate.instant('Task sent to trash') + '!', 4000, 'rounded green accent-1 green-text text-darken-4');
                 }
             });
         };
-}]);
+    }
+);

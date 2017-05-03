@@ -1,12 +1,14 @@
-angular.module('scrum').controller('TrashStatusCtrl', [ '$scope', '$mdDialog', '$reactive', '$stateParams',
-    function ($scope, $mdDialog, $reactive, $stateParams) {
+angular.module('scrum').controller('TrashStatusCtrl',
+    function ($scope, $mdDialog, $reactive, $stateParams, $translate) {
         $reactive(this).attach($scope);
-        if (!$stateParams.id) {
-            $state.go('scrum');
-        }
+        $translate.use(Session.get('lang'));
+
+        // if (!$stateParams.id) {
+        //     $state.go('scrum');
+        // }
 
         this.id = $stateParams.product;
-        this.sprintId = Sprint.findOne({projectId: $stateParams.id, number: parseInt($stateParams.sprint)})._id;
+        this.sprintId = $stateParams.sprintId;
 
 
         this.perPage = 5;
@@ -53,9 +55,9 @@ angular.module('scrum').controller('TrashStatusCtrl', [ '$scope', '$mdDialog', '
                 if (error) {
                     Materialize.toast('Erro: ' + error, 4000);
                 } else {
-                    Materialize.toast('Restored successfully!', 4000);
+                    Materialize.toast($translate.instant('Status sent to trash') + '!', 4000, 'rounded green accent-1 green-text text-darken-4');
                 }
             });
         };
     }
-]);
+);

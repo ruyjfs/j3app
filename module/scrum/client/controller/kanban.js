@@ -1,63 +1,80 @@
 angular.module('scrum').controller('KanbanCtrl',
-    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $stateParams, $reactive, $mdToast) {
+    function ($scope, $mdDialog, $mdSidenav, $mdUtil, $log, $stateParams, $reactive, $translate) {
         $reactive(this).attach($scope);
-
-        $scope.booLoading = false;
-        $('#progressBar').fadeOut('slow');
+        $translate.use(Session.get('lang'));
 
         this.organization = $stateParams.organization;
         this.product = $stateParams.product;
         this.sprint = $stateParams.sprint;
-        //this.call('statusFindByProject', {productId: $stateParams.id}, function(error, result){
-        //    this.states = result;
-        //});
-        //Meteor.call('storyFindByProject', {productId: $stateParams.id}, function(error, result){
-        //    Session.set('stories', result);
-        //    //this.stories = result;
-        //    console.log('story');
-        //    console.log(result);
-        //    setTimeout(function(){
-        //        testando();
-        //    }, 300);
-        //});
 
-        //this.helpers({
-        //    stories: function() {
-        //        return Session.get('stories');
-        //    }
-        //});
+        $scope.progressBar = {};
+        $scope.progressBar.users = Meteor.subscribe('users').ready();
+        this.subscribe('users', () => {}, {onReady: () => {$scope.progressBar.users = true;}});
+        $scope.progressBar.organization = Meteor.subscribe('organization').ready();
+        this.subscribe('organization', () => {}, {onReady: () => {$scope.progressBar.organization = true;}});
+        $scope.progressBar.project = Meteor.subscribe('project').ready();
+        this.subscribe('project', () => {}, {onReady: () => {$scope.progressBar.project = true;}});
+        $scope.progressBar.team = Meteor.subscribe('team', $stateParams.organization).ready();
+        this.subscribe('team', () => {return [$stateParams.organization]}, {onReady: () => {$scope.progressBar.team = true;}});
+        $scope.progressBar.sprint = Meteor.subscribe('team', $stateParams.organization).ready();
+        this.subscribe('sprint', () => {return [$stateParams.organization]}, {onReady: () => {$scope.progressBar.sprint = true;}});
+        $scope.progressBar.burndown = Meteor.subscribe('burndown', $stateParams.organization).ready();
+        this.subscribe('burndown', function(){return [$stateParams.product]}, {onReady: () => {$scope.progressBar.burndown = true;}});
+        $scope.progressBar.status = Meteor.subscribe('status', $stateParams.product).ready();
+        this.subscribe('status', function(){return [$stateParams.product]}, {onReady: () => {$scope.progressBar.status = true;}});
+        $scope.progressBar.note = Meteor.subscribe('note', $stateParams.product).ready();
+        this.subscribe('note', function(){return [$stateParams.product, {}, this.getReactively('searchText')]}, {onReady: () => {$scope.progressBar.note = true;}});
+        $scope.progressBar.story = Meteor.subscribe('story', $stateParams.product).ready();
+        this.subscribe('story', function(){return [$stateParams.product]}, {onReady: () => {$scope.progressBar.story = true;}});
+        $scope.progressBar.sprint = Meteor.subscribe('sprint', $stateParams.product).ready();
+        this.subscribe('sprint', function(){return [$stateParams.product]}, {onReady: () => {$scope.progressBar.sprint = true;}});
+        $scope.booLoading = true;
+        $scope.$watchCollection('progressBar', function() {
+            if (
+                    $scope.progressBar.users,
+                    $scope.progressBar.organization,
+                    $scope.progressBar.project,
+                    $scope.progressBar.team,
+                    $scope.progressBar.burndown,
+                    $scope.progressBar.status,
+                    $scope.progressBar.note,
+                    $scope.progressBar.story,
+                    $scope.progressBar.sprint
+            ) {
+                // let organisations = Organization.find({}, {sort: {name: 1}}).map((organization) => {return organization});
+                // if (organisations.length == 0) {
+                //     if (Session.get('booMsgOrganization') != true) {
+                //         Materialize.toast(
+                //             $translate.instant('Hi, my name is Ryu, i will help you with whatever it takes.')
+                //             , 120000);
+                //         Materialize.toast(
+                //             $translate.instant('You have no organization, click the red button to create an organization, or contact the owner of an organization to add you to their organization.')
+                //             , 120000);
+                //         Materialize.toast(
+                //             $translate.instant('You can create products without organization, just enter the card without organization. For more information, click on the question mark icon in the top menu.')
+                //             , 120000);
+                //         Materialize.toast(
+                //             $translate.instant('If you have any questions or suggestions, please contact us at contact@j3scrum.com.')
+                //             , 120000);
+                //         Materialize.toast(
+                //             $translate.instant('To close these messages, drag to the side.')
+                //             , 120000);
+                //         Materialize.toast(
+                //             $translate.instant("I'm so glad you joined j3scrum, many things are still to come, best regards!!!")
+                //             , 120000);
+                //         Session.set('booMsgOrganization', true);
+                //     }
+                //     $document.ready(() => {
+                //         $('.md-fab').addClass('pulse');
+                //         console.log($('.md-fab'));
+                //     });
+                // }
+                $scope.booLoading = false;
+                $('#progressBar').fadeOut('slow');
+            }
+        });
 
-        //Meteor.subscribe('note');
-        //Meteor.subscribe('users');
-        //this.call('storyFindByProject', {productId: $stateParams.id}, function(error, result){
-        //    console.log('asd');
-        //    this.stories = result
-        //});
 
-        //Meteor.subscribe('project');
-        this.subscribe('users');
-        this.subscribe('organization');
-        this.subscribe('project');
-        this.subscribe('team', function(){return [$stateParams.organization]});
-        this.subscribe('burndown', function(){return [$stateParams.product]});
-        this.subscribe('status', function(){return [$stateParams.product]});
-        this.subscribe('note', function(){return [$stateParams.product, {}, this.getReactively('searchText')]});
-        this.subscribe('story', function(){return [$stateParams.product]});
-        this.subscribe('sprint', function(){return [$stateParams.product]});
-        //this.subscribe('users', function(){
-        //    console.log(this.getReactively('searchText'));
-        //    return [this.getReactively('searchText')];
-        //});
-
-//        var searchText = this.getReactively('searchText');
-//        selector = {story: story._id, sprintId: sprintId};
-//        if (typeof searchString === 'string' && searchString.length) {
-//            selector.name = {
-//                $regex:  `.*${searchString}.*`,
-//            $options : 'i'
-//        };
-//    }
-//var notes = Note.find(selector).fetch();
         this.helpers({
             members: function () {
                 var productId = this.getReactively('productId');
@@ -283,10 +300,6 @@ angular.module('scrum').controller('KanbanCtrl',
                     storyId: storyId,
                     sprint: ''
                 }
-            }).then(function (answer) {
-                $scope.status = 'You said the information was "' + answer + '".';
-            }, function () {
-                $scope.status = 'You cancelled the dialog.';
             });
         };
 
@@ -300,10 +313,6 @@ angular.module('scrum').controller('KanbanCtrl',
                     id: id,
                     storyId: storyId
                 }
-            }).then(function (answer) {
-                $scope.status = 'You said the information was "' + answer + '".';
-            }, function () {
-                $scope.status = 'You cancelled the dialog.';
             });
         };
 
@@ -312,11 +321,10 @@ angular.module('scrum').controller('KanbanCtrl',
                 if (error) {
                     Materialize.toast('Erro: ' + error, 4000);
                 } else {
-                    Materialize.toast('Deleted successfully!', 4000);
+                    Materialize.toast($translate.instant('Task sent to trash') + '!', 4000, 'rounded green accent-1 green-text text-darken-4');
                 }
             });
         };
-
 
         this.modalStatusSave = function (ev, id) {
             $mdDialog.show({
@@ -325,10 +333,6 @@ angular.module('scrum').controller('KanbanCtrl',
                 clickOutsideToClose: true,
                 locals: {'id': id},
                 targetEvent: ev
-            }).then(function (answer) {
-                $scope.status = 'You said the information was "' + answer + '".';
-            }, function () {
-                $scope.status = 'You cancelled the dialog.';
             });
         };
         //$scope.showCustomToast = function() {

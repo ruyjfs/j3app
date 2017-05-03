@@ -1,6 +1,4 @@
-//angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
-//    function($scope, $stateParams, $meteor){
-angular.module('scrum').controller('ProductFabContentCtrl', ['$scope', '$mdDialog', '$stateParams', '$reactive', '$state', '$timeout', '$rootScope',
+angular.module('scrum').controller('ProductFabContentCtrl',
     function ($scope, $mdDialog, $stateParams, $reactive, $state, $timeout, $rootScope) {
         $('#logo-middle').show();
         $reactive(this).attach($scope);
@@ -9,7 +7,7 @@ angular.module('scrum').controller('ProductFabContentCtrl', ['$scope', '$mdDialo
 
         $scope.modalNoteSave = function (ev, id, storyId, sprint) {
             $mdDialog.show({
-                controller: 'NoteSaveCtrl',
+                controller: 'NoteSaveCtrl as ctrl',
                 templateUrl: 'module/scrum/client/view/note-save.ng.html',
                 clickOutsideToClose: true,
                 targetEvent: ev,
@@ -27,7 +25,7 @@ angular.module('scrum').controller('ProductFabContentCtrl', ['$scope', '$mdDialo
 
         $scope.modalStorySave = function (ev, id) {
             $mdDialog.show({
-                controller: 'StorySaveCtrl',
+                controller: 'StorySaveCtrl as ctrl',
                 templateUrl: 'module/scrum/client/view/story-save.ng.html',
                 clickOutsideToClose: true,
                 locals: {id: id},
@@ -37,7 +35,7 @@ angular.module('scrum').controller('ProductFabContentCtrl', ['$scope', '$mdDialo
 
         $scope.modalStatusSave = function (ev, id) {
             $mdDialog.show({
-                controller: 'StatusSaveCtrl',
+                controller: 'StatusSaveCtrl as ctrl',
                 templateUrl: 'module/scrum/client/view/status-save.ng.html',
                 clickOutsideToClose: true,
                 locals: {'id': id},
@@ -48,4 +46,5 @@ angular.module('scrum').controller('ProductFabContentCtrl', ['$scope', '$mdDialo
                 $scope.status = 'You cancelled the dialog.';
             });
         };
-    }]);
+    }
+);

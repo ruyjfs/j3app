@@ -1,6 +1,7 @@
 angular.module('scrum').controller('TeamCtrl',
-    function ($scope, $mdDialog, $mdUtil, $log, $reactive, $stateParams, $reactive) {
+    function ($scope, $mdDialog, $mdUtil, $log, $reactive, $stateParams, $translate) {
         $reactive(this).attach($scope);
+        $translate.use(Session.get('lang'));
 
         this.perPage = 9;
         this.page = 1;

@@ -1,5 +1,5 @@
 <md-dialog aria-label="Mango (Fruit)">
-    <form>
+    <form name="elmForm">
         <!--<md-toolbar>-->
             <!--<div class="md-toolbar-tools">-->
                 <!--<h2>Save sprint</h2>-->
@@ -10,15 +10,15 @@
             <div  ng-show="$root.currentUser">
                 <md-input-container class="md-block">
                     <label>{{ 'Number' | translate}}</label>
-                    <input ng-model="form.number" type="number" aria-label="Name" required disabled>
-                    <div ng-messages="form.name.$error">
-                        <div ng-message="required">required</div>
-                    </div>
+                    <input ng-model="ctrl.form.number" type="number" aria-label="Name">
                 </md-input-container>
-                <h6 style="color: rgba(0,0,0,0.54);">{{ 'Date start' | translate}}</h6>
-                <md-datepicker ng-model="form.dateStart" md-placeholder="Enter date start"></md-datepicker>
-                <h6 style="color: rgba(0,0,0,0.54);">{{ 'Date end' | translate}}</h6>
-                <md-datepicker ng-model="form.dateEnd" md-placeholder="Enter date end"></md-datepicker>
+                <h6 style="color: rgba(0,0,0,0.54);">{{ 'Date start' | translate}} <b class="red-text">*</b></h6>
+                <md-datepicker name="dateStart" ng-model="ctrl.form.dateStart" md-placeholder="Enter date start"></md-datepicker>
+                <div ng-messages="elmForm.dateStart.$error">
+                    <div ng-message="required">{{'How should we understand this task' | translate}}?</div>
+                </div>
+                <h6 style="color: rgba(0,0,0,0.54);">{{ 'Date end' | translate}} <b class="red-text">*</b></h6>
+                <md-datepicker name="dateEnd" ng-model="ctrl.form.dateEnd" md-placeholder="Enter date end"></md-datepicker>
                 <!--<md-input-container class="md-block">-->
                     <!--<label>Date start</label>-->
                     <!--<input ng-model="form.dateStart" type="text" aria-label="Date start" required>-->
@@ -37,19 +37,23 @@
                     <!--</div>-->
                 <!--</md-input-container>-->
                 <md-input-container class="md-block">
-                    <label>{{ 'Description' | translate}}</label>
-                    <textarea ng-model="form.description" id="description" aria-label="Description"></textarea>
+                    <label>{{ 'Name' | translate}} <b class="red-text">*</b></label>
+                    <input ng-model="ctrl.form.name" id="nameInput" type="text" aria-label="Name">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>{{ 'Goal' | translate}}</label>
+                    <textarea ng-model="ctrl.form.description" id="description" aria-label="Description"></textarea>
                 </md-input-container>
             </div>
         </md-dialog-content>
     </form>
     <md-dialog-actions layout="row">
         <span flex></span>
-        <button class="orange-text text-darken-3 btn white waves-effect waves-orange hoverable" type="button" ng-click="close()">
+        <button class="orange-text text-darken-3 btn white waves-effect waves-orange hoverable" type="button" ng-click="ctrl.close()">
             {{'Cancel' | translate}}
         </button>
-        <button class="btn orange darken-3 waves-effect waves-light hoverable" type="button" ng-click="save()">
-            {{action | translate}}
+        <button ng-disabled="elmForm.$invalid" class="btn orange darken-3 waves-effect waves-light hoverable" type="button" ng-click="ctrl.save()">
+            {{ctrl.action | translate}}
         </button>
     </md-dialog-actions>
 </md-dialog>
