@@ -1,12 +1,14 @@
 //Meteor.publish("message", function (contactId) {
-Meteor.publish("sprint", function (projectId, options, searchString) {
-    if (this.userId && projectId){
-        var project = Project.findOne({'namespace': projectId});
-        if (project) {
-            projectId = project._id;
-        }
+Meteor.publish("sprint", function (organizationId, options, searchString) {
+    // if (this.userId && projectId){
+    if (this.userId){
+        // var project = Project.findOne({'namespace': projectId});
+        // if (project) {
+        //     projectId = project._id;
+        // }
 
-        selector = {$or: [{projectId: projectId}, {projectId: null}]};
+        // selector = {$or: [{projectId: projectId}, {projectId: null}]};
+        selector = {};
         if (typeof searchString === 'string' && searchString.length) {
             selector.number = parseInt(searchString);
         }
@@ -15,7 +17,7 @@ Meteor.publish("sprint", function (projectId, options, searchString) {
         });
         result = Sprint.find(selector, options);
         return (result)? result : [];
-    } else if (this.userId) {
+    // } else if (this.userId) {
         //result = Sprint.find(selector, options);
         //return result;
     } else {

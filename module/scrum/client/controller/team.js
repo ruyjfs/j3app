@@ -1,5 +1,5 @@
 angular.module('scrum').controller('TeamCtrl',
-    function ($scope, $mdDialog, $mdUtil, $log, $reactive, $stateParams) {
+    function ($scope, $mdDialog, $mdUtil, $log, $reactive, $stateParams, $reactive) {
         $reactive(this).attach($scope);
 
         this.perPage = 9;
@@ -10,11 +10,11 @@ angular.module('scrum').controller('TeamCtrl',
 console.log('s3');
         this.teamSearchText = '';
         $scope.progressBar = {};
-        // $scope.progressBar.organization = Meteor.subscribe('organization').ready();
+        $scope.progressBar.organization = Meteor.subscribe('organization').ready();
         this.subscribe('organization', () => {}, {onReady: () => {$scope.progressBar.organization = true;}});
-        // $scope.progressBar.team = Meteor.subscribe('team', $stateParams.organization, {}, this.getReactively('teamSearchText'), true).ready();
+        $scope.progressBar.team = Meteor.subscribe('team', $stateParams.organization, {}, this.getReactively('teamSearchText'), true).ready();
         this.subscribe('team', () => {return [$stateParams.organization]}, {onReady: function () {$scope.progressBar.team = true;}});
-        // $scope.progressBar.users = Meteor.subscribe('users').ready();
+        $scope.progressBar.users = Meteor.subscribe('users').ready();
         this.subscribe('users', () => {}, {onReady: function () {$scope.progressBar.users = true;}});
         $scope.booLoading = true;
         console.log($scope.progressBar);
@@ -164,7 +164,7 @@ console.log('s3');
 
         $scope.modalSave = function(ev, id){
             $mdDialog.show({
-                controller: 'TeamSaveCtrl',
+                controller: 'TeamSaveCtrl as ctrl',
                 templateUrl: 'module/scrum/client/view/team-save.ng.html',
                 clickOutsideToClose:true,
                 locals : {

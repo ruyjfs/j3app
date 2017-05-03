@@ -1,13 +1,9 @@
 angular.module('scrum').controller('TeamSaveCtrl',
-    function ($scope, $rootScope, $mdDialog, id, $stateParams) {
+    function ($scope, $rootScope, $mdDialog, id, $stateParams, $reactive) {
+        $reactive(this).attach($scope);
 
-        //project = Project.findOne({'namespace': $stateParams.product});
-        //if (project) {
-        //    $stateParams.id = project._id;
-        //}
-        $scope.title = 'Scrum';
-        var organization =  false;
-        var organizationId = false;
+        let organization =  false;
+        let organizationId = false;
         if ($stateParams.organization != 'organization') {
             organization = Organization.findOne({'namespace': $stateParams.organization});
             organizationId = organization._id;
@@ -22,50 +18,41 @@ angular.module('scrum').controller('TeamSaveCtrl',
             whereUser = {};
         }
         if (whereUser) {
-            $scope.members = Meteor.users.find(whereUser, {sort: {name: 1, lastName: 1}}).fetch();
+            this.members = Meteor.users.find(whereUser, {sort: {name: 1, lastName: 1}}).fetch();
         } else {
-            $scope.members = [];
+            this.members = [];
         }
 
         if (id) {
-            //$scope.form = $meteor.object(Project, id, false);
-            $scope.form = Team.findOne(id);
-            if (!$scope.form.color) {
-                $scope.form.color = '#ffcc80';
+            //this.form = $meteor.object(Project, id, false);
+            this.form = Team.findOne(id);
+            if (!this.form.color) {
+                this.form.color = '#ffcc80';
             }
-            $scope.action = 'Edit';
+            this.action = 'Edit';
         } else {
-            $scope.form = {};
-            $scope.form.color = '#ffcc80';
-            $scope.form.time = 1;
-            $scope.action = 'Insert';
+            this.form = {};
+            this.form.color = '#ffcc80';
+            this.form.time = 1;
+            this.action = 'Insert';
         }
         if (organizationId) {
-            $scope.form.organization = organizationId;
+            this.form.organization = organizationId;
         }
 
-        $scope.save = function (){
-            //$meteor.call('teamSave', $scope.teamForm).then(
-            //    function(data){
-            //        console.log('success inviting', data);
-            //    },
-            //    function(err){
-            //        console.log('failed', err);
-            //    }
-            //);
-
-            Meteor.call('teamSave', $scope.form, function (error) {
+        this.save = function (){
+            Meteor.call('teamSave', this.form, (error) => {
                 if (error) {
                     Materialize.toast('Erro: ' + error, 4000);
                 } else {
                     Materialize.toast('Saved successfully!', 4000);
-                    $scope.form = '';
+                    this.form = '';
                     $mdDialog.hide();
                 }
             });
         };
 
-        $scope.close = function () {
+        this.close = () => {
             $mdDialog.hide();
         }
     }

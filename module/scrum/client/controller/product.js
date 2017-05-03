@@ -12,18 +12,18 @@ angular.module('scrum').controller('ProductCtrl',
         //    'In all screens with the most (+) button you can add something, then add a team to the project elogo then the product linking the team in the registration of the product.',
         //    20000
         //);
-
         $scope.progressBar = {};
         // $scope.progressBar.organization = Meteor.subscribe('organization').ready();
         this.subscribe('organization', () => {}, {onReady: () => {$scope.progressBar.organization = true;}});
-        // $scope.progressBar.project = Meteor.subscribe('project').ready();
+        $scope.progressBar.project = Meteor.subscribe('project').ready();
         this.subscribe('project', () => {}, {onReady: function () {$scope.progressBar.project = true;}});
-        // $scope.progressBar.users = Meteor.subscribe('users').ready();
+        $scope.progressBar.users = Meteor.subscribe('users').ready();
         this.subscribe('users', () => {}, {onReady: function () {$scope.progressBar.users = true;}});
-        // $scope.progressBar.team = Meteor.subscribe('team', $stateParams.organization).ready();
+        $scope.progressBar.team = Meteor.subscribe('team', $stateParams.organization).ready();
         this.subscribe('team', () => {return [$stateParams.organization]}, {onReady: function () {$scope.progressBar.team = true;}});
+        $scope.progressBar.sprint = Meteor.subscribe('team', $stateParams.organization).ready();
+        this.subscribe('sprint', () => {return [$stateParams.organization]}, {onReady: function () {$scope.progressBar.team = true;}});
         $scope.booLoading = true;
-        console.log($scope.progressBar);
         $scope.$watchCollection('progressBar', function() {
             if (
                     $scope.progressBar.organization,
@@ -64,7 +64,7 @@ angular.module('scrum').controller('ProductCtrl',
             }
         });
 
-            this.helpers({
+        this.helpers({
             projects: function () {
                 let organizationId = '';
                 if ($stateParams.organization == 'organization') {
@@ -81,7 +81,7 @@ angular.module('scrum').controller('ProductCtrl',
                     if (!project.namespace || $stateParams.organization == 'organization') {
                         project.namespace = project._id;
                     }
-                    Meteor.subscribe('sprint', project._id);
+
                     //projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}, {scrumMaster: {$in: [Meteor.userId()]}}]}).map(function(project){
                     if (project.teams) {
                         project.teams = Team.find({
@@ -112,21 +112,21 @@ angular.module('scrum').controller('ProductCtrl',
                         );
                     }
 
-                    if (!sprint) {
-                        Meteor.call('sprintCreate', project._id, function (error, result) {
-                            if (error) {
-                                //console.log(error);
-                            } else {
-                                //console.log('Saved!');
-                                $scope.form = '';
-                                $mdDialog.hide();
-                            }
-                            //$rootScope.titleMiddle = result.dateStart + ' - ' + result.dateEnd + ' (' + result.number + ')';
-
-                            sprint = result;
-                            //console.info(result);
-                        });
-                    }
+                    // if (!sprint) {
+                    //     Meteor.call('sprintCreate', project._id, function (error, result) {
+                    //         if (error) {
+                    //             //console.log(error);
+                    //         } else {
+                    //             //console.log('Saved!');
+                    //             $scope.form = '';
+                    //             $mdDialog.hide();
+                    //         }
+                    //         //$rootScope.titleMiddle = result.dateStart + ' - ' + result.dateEnd + ' (' + result.number + ')';
+                    //
+                    //         sprint = result;
+                    //         //console.info(result);
+                    //     });
+                    // }
 
                     //if (sprint) {
                     project.sprint = sprint;
@@ -150,9 +150,12 @@ angular.module('scrum').controller('ProductCtrl',
 
                     return project;
                 });
+
+                console.log('projects');
+                console.log(projects);
                 return projects;
             }
-        });
+        }, true);
 
         this.items = [
             {name: "Project", icon: "business_center", direction: "left", color: 'red'},

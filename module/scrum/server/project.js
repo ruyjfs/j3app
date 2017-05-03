@@ -18,7 +18,7 @@ Meteor.publish("project", function (options) {
         result = Project.find(selector, options);
         return (result)? result : [];
     } else {
-        return [];
+        return this.ready();
     }
 
 
