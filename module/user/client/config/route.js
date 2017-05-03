@@ -70,6 +70,7 @@ angular.module('user').config(['$urlRouterProvider', '$stateProvider', '$locatio
 
                             Session.set('booMsgWelcome', false);
                             Session.set('booMsgOrganization', false);
+                            Session.set('booMsgProduct', false);
                             switch (strDomain) {
                                 case 'j3scrum.com':
                                 case '172.17.0.1':

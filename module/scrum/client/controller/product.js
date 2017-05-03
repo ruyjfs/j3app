@@ -1,6 +1,7 @@
 angular.module('scrum').controller('ProductCtrl',
-    function ($scope, $mdDialog, $mdSidenav, $log, $reactive, $rootScope, $stateParams) {
+    function ($scope, $mdDialog, $mdSidenav, $log, $reactive, $rootScope, $stateParams, $translate, $document) {
         $reactive(this).attach($scope);
+        $translate.use(Session.get('lang'));
         $rootScope.titleMiddle = '';
 
         //Materialize.toast(
@@ -32,34 +33,49 @@ angular.module('scrum').controller('ProductCtrl',
                     $scope.progressBar.sprint,
                     $scope.progressBar.team
             ) {
-                // let organisations = Organization.find({}, {sort: {name: 1}}).map((organization) => {return organization});
-                // if (organisations.length == 0) {
-                //     if (Session.get('booMsgOrganization') != true) {
-                //         Materialize.toast(
-                //             $translate.instant('Hi, my name is Ryu, i will help you with whatever it takes.')
-                //             , 120000);
-                //         Materialize.toast(
-                //             $translate.instant('You have no organization, click the red button to create an organization, or contact the owner of an organization to add you to their organization.')
-                //             , 120000);
-                //         Materialize.toast(
-                //             $translate.instant('You can create products without organization, just enter the card without organization. For more information, click on the question mark icon in the top menu.')
-                //             , 120000);
-                //         Materialize.toast(
-                //             $translate.instant('If you have any questions or suggestions, please contact us at contact@j3scrum.com.')
-                //             , 120000);
-                //         Materialize.toast(
-                //             $translate.instant('To close these messages, drag to the side.')
-                //             , 120000);
-                //         Materialize.toast(
-                //             $translate.instant("I'm so glad you joined j3scrum, many things are still to come, best regards!!!")
-                //             , 120000);
-                //         Session.set('booMsgOrganization', true);
-                //     }
-                //     $document.ready(() => {
-                //         $('.md-fab').addClass('pulse');
-                //         console.log($('.md-fab'));
-                //     });
-                // }
+                let arrProject = Project.find({}, {sort: {name: 1}}).fetch();
+                if (arrProject.length == 0) {
+                    if (Session.get('booMsgProduct') != true) {
+                        Materialize.toast(
+                            $translate.instant('This is where the products of the organization are.')
+                            , 120000);
+                        Materialize.toast(
+                            $translate.instant('In scrum we call any type of project in a product.')
+                            , 120000);
+                        Materialize.toast(
+                            $translate.instant('To develop the whole product is necessary of several tasks and these tasks are to separate in cycles that we call sprints.')
+                            , 120000);
+                        Materialize.toast(
+                            $translate.instant('Each cycle, in this case, each sprint has a start and end date, thus taking a timeline of each stage of the product.')
+                            , 120000);
+                        Materialize.toast(
+                            $translate.instant('At the end of each sprint, we deliver something of value to the end user.')
+                            , 120000);
+                        Materialize.toast(
+                            $translate.instant("Following the hierarchical order in j3scrum, an organization owns the products, a product has several sprints and each sprint have several tasks, these tasks are separated by stories, which can be called categories, these stories are to help in visualizing the kanban.")
+                            , 120000);
+                        Materialize.toast(
+                            $translate.instant("Relax, when entering the product, you will know what a kanban is.")
+                            , 120000);
+                        Materialize.toast(
+                            $translate.instant("Click the red button to create a product.")
+                            , 120000);
+                        Materialize.toast(
+                            $translate.instant("After creating a product, log in to get access to scrum features such as Kanban, Backlog, Burndown, among others. In short, you'll have access to everything your product is related to, including its tasks.")
+                            , 120000);
+                        Materialize.toast(
+                            $translate.instant("Do not forget, every screen has the question button in the upper corner to better explain the scrum and the functionality of each screen.")
+                            , 120000);
+                        Materialize.toast(
+                            $translate.instant("Good luck with the product!!!")
+                            , 120000);
+                        Session.set('booMsgProduct', true);
+                    }
+                    $document.ready(() => {
+                        $('.md-fab').addClass('pulse');
+                        console.log($('.md-fab'));
+                    });
+                }
                 $scope.booLoading = false;
                 $('#progressBar').fadeOut('slow');
             }

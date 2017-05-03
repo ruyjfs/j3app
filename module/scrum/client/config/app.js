@@ -147,7 +147,6 @@ if (Meteor.isClient) {
         'Descending': 'Decrescente',
 
         'Posted by': 'Postado por',
-        'Hello': 'Olá',
         'Chat': 'Bate-papo',
         'Login': 'Realizar Login',
         'Sign up': 'Cadastrar',
@@ -187,10 +186,17 @@ if (Meteor.isClient) {
         'of': 'do',
 
         // Ryu
-        'Welcome': 'Bem vindo',
-        'Hi, my name is Ryu, i will help you with whatever it takes.' : 'Olá, meu nome é Ryu e irei ajudar no que for preciso.',
-        'You have no organization, click the red button to create an organization, or contact the owner of an organization to add you to their organization.'
-            : 'Você não tem organização, clique no botão vermelho para criar uma organização ou contate o dono de uma organização para adiciona-lo na organização dele',
+        'Welcome': 'Seja bem vindo(a)',
+        'Hi': 'Oi',
+        'Hello': 'Olá',
+        "What's up": 'E ae',
+        "Hi, I hope everything is okay with you": 'Olá, espero que esteja tudo bem com você',
+
+        // Ryu Organization
+        // 'Hi, my name is Ryu, i will help you with whatever it takes.' : 'Olá, meu nome é Ryu e irei ajudar no que for preciso.',
+        'My name is Ryu, i will help you with whatever it takes.' : 'Meu nome é Ryu e irei ajudar no que for preciso.',
+        'It looks like you do not have an organization yet, click the red button to create an organization, or contact the owner of an organization to add you to their organization.'
+            : 'Parece que você não tem uma organização ainda, clique no botão vermelho para criar uma organização ou contate o dono de uma organização para adiciona-lo na organização dele',
         'You can create products without organization, just enter the card without organization. For more information, click on the question mark icon in the top menu.'
             : 'Você pode criar produtos sem organização, basta entrar no cartão sem organização. Para mais informações, clique no botão de interrogação no menu superior.',
         'If you have any questions or suggestions, please contact us at contact@j3scrum.com.'
@@ -200,6 +206,27 @@ if (Meteor.isClient) {
         "I'm so glad you joined j3scrum, many things are still to come, best regards!!!"
             : 'Eu fico muito feliz que tenha entrado no j3scrum, muitas coisas ainda estão por vir, grande abraço!!!',
         'in alpha' : 'em alfa',
+
+        // Ryu Product
+        'This is where the products of the organization are.' : 'Aqui é onde fica os produtos da organização.',
+        'In scrum we call any type of project in a product.' : 'No scrum chamamos qualquer tipo de projeto em produto.',
+        'To develop the whole product is necessary of several tasks and these tasks are to separate in cycles that we call sprints.' :
+            'Para desenvolver todo o produto é necessário de várias tarefas e essas tarefas são separar em ciclos que chamamos de sprints.',
+        'Each cycle, in this case, each sprint has a start and end date, thus taking a timeline of each stage of the product.' :
+            'Cada ciclo, no caso, cada sprint  tem uma data inicial e final, com isso tendo um cronograma de cada etapa do produto.',
+        'At the end of each sprint, we deliver something of value to the end user.' :
+            'No final de cada sprint, conseguimos entregar algo de valor para o usuário final.',
+        'Following the hierarchical order in j3scrum, an organization owns the products, a product has several sprints and each sprint have several tasks, these tasks are separated by stories, which can be called categories, these stories are to help in visualizing the kanban.' :
+            'Seguindo a ordem hierárquica no j3scrum, uma organização possui os produtos, um produto possuí várias sprints e cada sprint pussuí várias tarefas, essas tarefas são separadas por histórias, que pode ser chamado de categorias, essas histórias são para ajudar na visualização do Kanban.',
+        'Relax, when entering the product, you will know what a kanban is.' :
+            'Relaxa ao entrar no produto você saberá o que é um kanban.',
+        'Click the red button to create a product.' :
+            'Clique no botão vermelho para criar um produto.',
+        "After creating a product, log in to get access to scrum features such as Kanban, Backlog, Burndown, among others. In short, you'll have access to everything your product is related to, including its tasks." :
+            'Depois que criar um produto, entre nele para ter acesso às funcionalidades do scrum, como o Kanban, Backlog, Burndown, entre outros, resumindo você terá acesso à tudo que o seu produto está relacionado, incluindo as tarefas dele.',
+        'Do not forget, every screen has the question button in the upper corner to better explain the scrum and the functionality of each screen.' :
+            'Não se esqueca, toda tela tem o botão de interrogação no canto superior para explicar melhor o scrum e as funcionalidades de cada tela.',
+        'Good luck with the product!!!' : 'Boa sorte com o produto',
 
         // Modulo User
         'Contacts' : 'Contatos',

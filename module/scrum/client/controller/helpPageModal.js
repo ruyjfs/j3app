@@ -11,7 +11,7 @@ angular.module('scrum').controller('HelpPageModalCtrl', [ '$scope', '$mdDialog',
                 'No j3scrum você pode cadastrar os integrantes da sua equipe, montar e dividir as suas equipes, criar seu projeto, criar as estorias do projeto e os postits ficarem bem organizados. Você pode escolher as cores dos postits de cada projeto, assim ficando mais visivel no Kanban de todas as suas equipes. ' +
                 'Experimente, ele é totalmente gratuito mesmo, não custa nada. ' +
                 'Estamos à disposição para melhorias, ajustes e novas idéias também. ' +
-                'Não sabe o que é a metodoliga SCRUM acesse: <a href="www.desenvolvimentoagil.com.br" target="_blank">www.desenvolvimentoagil.com.br</a> e saiba muito mais. '
+                'Não sabe o que é a metodoliga SCRUM acesse: www.desenvolvimentoagil.com.br e saiba muito mais. '
             },
             {link: 'scrum/product', title: 'Product and Team', msg:
                 'Olá, nessa tela você pode visualizar os produtos que você criou e os produtos que ' +

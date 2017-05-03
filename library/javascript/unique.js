@@ -4,4 +4,4 @@ Array.prototype.unique = function() {
         if(a.indexOf(e)==-1)
             a.push(e);
     return a;
-}
+};

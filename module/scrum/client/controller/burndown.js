@@ -336,7 +336,7 @@ angular.module('scrum').controller('BurndownCtrl',
 
                 // Let's put a sequence number aside so we can use it in the event callbacks
                 var seq = 0,
-                    delays = 50,
+                    delays = 80,
                     durations = 60;
 
                 // Once the chart is fully created we reset the sequence

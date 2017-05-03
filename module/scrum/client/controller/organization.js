@@ -1,9 +1,17 @@
 angular.module('scrum').controller('OrganizationCtrl', function ($scope, $mdDialog, $mdSidenav, $log, $reactive, $rootScope, $stateParams, $document, $translate) {
     $reactive(this).attach($scope);
-
     $translate.use(Session.get('lang'));
+
+    let arrMsg = [];
+    arrMsg[1] = 'Hi';
+    arrMsg[2] = 'Hello';
+    arrMsg[3] = 'Welcome';
+    arrMsg[4] = "What's up";
+    arrMsg[5] = "Hi, I hope everything is okay with you";
+
     if (Session.get('booMsgWelcome') != true) {
-        Materialize.toast($translate.instant('Welcome') + '!!! \\o/', 4000, 'rounded orange darken-1');
+        // Materialize.toast($translate.instant(arrMsg[Math.floor(Math.random()*(5)+(1))]) + '!!! \\o/', 4000, 'rounded orange darken-1');
+        Materialize.toast($translate.instant(arrMsg[Math.floor(Math.random()*(5)+(1))]) + '!!! \\o/', 4000);
         Session.set('booMsgWelcome', true);
     }
     // $translate.refresh();
@@ -61,10 +69,10 @@ angular.module('scrum').controller('OrganizationCtrl', function ($scope, $mdDial
                     if (organisations.length == 0) {
                         if (Session.get('booMsgOrganization') != true) {
                             Materialize.toast(
-                                $translate.instant('Hi, my name is Ryu, i will help you with whatever it takes.')
+                                $translate.instant('My name is Ryu, i will help you with whatever it takes.')
                                 , 120000);
                             Materialize.toast(
-                                $translate.instant('You have no organization, click the red button to create an organization, or contact the owner of an organization to add you to their organization.')
+                                $translate.instant('It looks like you do not have an organization yet, click the red button to create an organization, or contact the owner of an organization to add you to their organization.')
                                 , 120000);
                             Materialize.toast(
                                 $translate.instant('You can create products without organization, just enter the card without organization. For more information, click on the question mark icon in the top menu.')
