@@ -56,6 +56,9 @@ if (Meteor.isClient) {
         'The product url must be unique in the organization': 'O nome da url do produto deve ser único dentro desta organização',
         'How should we call this product': 'Como devemos chamar este produto',
         'Namespace already exists for a product in this organization': 'Este namespace já existe dentro desta organização',
+        // Scrum - Form - Team
+        'How we should call this team' : 'Como devemos chamar essa equipe',
+        'Who are the members of this team' : 'Quais são os integrantes dessa equipe',
 
         //  Scrum
         'Team': 'Equipe',

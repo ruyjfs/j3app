@@ -1,5 +1,5 @@
 angular.module('scrum').controller('TeamSaveCtrl',
-    function ($scope, $rootScope, $mdDialog, id, $stateParams, $reactive) {
+    function ($scope, $rootScope, $mdDialog, id, $stateParams, $reactive, $translate) {
         $reactive(this).attach($scope);
 
         let organization =  false;
@@ -40,12 +40,13 @@ angular.module('scrum').controller('TeamSaveCtrl',
             this.form.organization = organizationId;
         }
 
-        this.save = function (){
+        this.save = () => {
             Meteor.call('teamSave', this.form, (error) => {
                 if (error) {
-                    Materialize.toast('Erro: ' + error, 4000);
+                    $('md-dialog').animateCss('jello');
+                    Materialize.toast($translate.instant('Notice') + ': '+ $translate.instant(error.reason) + '!', 4000, 'rounded red accent-1');
                 } else {
-                    Materialize.toast('Saved successfully!', 4000);
+                    Materialize.toast($translate.instant('Saved successfully') + '!', 4000, 'rounded green accent-1 green-text text-darken-4');
                     this.form = '';
                     $mdDialog.hide();
                 }

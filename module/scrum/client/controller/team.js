@@ -7,7 +7,6 @@ angular.module('scrum').controller('TeamCtrl',
         this.sort = {
             name: 1
         };
-console.log('s3');
         this.teamSearchText = '';
         $scope.progressBar = {};
         $scope.progressBar.organization = Meteor.subscribe('organization').ready();
@@ -17,7 +16,6 @@ console.log('s3');
         $scope.progressBar.users = Meteor.subscribe('users').ready();
         this.subscribe('users', () => {}, {onReady: function () {$scope.progressBar.users = true;}});
         $scope.booLoading = true;
-        console.log($scope.progressBar);
         $scope.$watchCollection('progressBar', function() {
             if (
                     $scope.progressBar.organization,

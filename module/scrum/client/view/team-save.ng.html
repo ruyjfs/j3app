@@ -1,5 +1,5 @@
 <md-dialog aria-label="Mango (Fruit)">
-    <form>
+    <form name="elmForm">
         <!--<md-toolbar>-->
             <!--<div class="md-toolbar-tools">-->
                 <!--<h2>Save team</h2>-->
@@ -13,8 +13,11 @@
                     <input ng-model="ctrl.form.color" id="color" type="color" aria-label="Name" required>
                 </md-input-container>
                 <md-input-container class="md-block">
-                    <label>{{ 'Name' | translate }}</label>
-                    <input ng-model="ctrl.form.name" id="nameInput" type="text" aria-label="Name" required>
+                    <label>{{ 'Name' | translate }} <b class="red-text">*</b></label>
+                    <input name="name" ng-model="ctrl.form.name" id="nameInput" type="text" aria-label="Name" required>
+                    <div ng-messages="elmForm.name.$error">
+                        <div ng-message="required">{{'How we should call this team' | translate}}?</div>
+                    </div>
                     <!--<div ng-messages="form.name.$error">-->
                         <!--<div ng-message="required">required</div>-->
                     <!--</div>-->
@@ -33,16 +36,19 @@
                     </div>
                     <md-slider ng-model="ctrl.form.time" id="time-slider" flex md-discrete step="1" min="1" max="9" aria-label="Time"></md-slider>
                     <div flex="10" layout layout-align="center center">
-                        <span class="md-body-1">{{form.time}}h </span>
+                        <span class="md-body-1">{{ctrl.form.time}}h </span>
                     </div>
                 </div>
                 <md-input-container class="md-block">
-                    <label>{{ 'Members' | translate }}</label>
-                    <md-select ng-model="ctrl.form.members" id="members" aria-label=""  placeholder="{{ 'Members' | translate }}" multiple="true" required>
-                        <md-option  ng-repeat="member in members" value="{{member._id}}">
+                    <label>{{ 'Members' | translate }} <b class="red-text">*</b></label>
+                    <md-select name="members" ng-model="ctrl.form.members" id="members" aria-label=""  placeholder="{{ 'Members' | translate }} *" multiple="true" required>
+                        <md-option  ng-repeat="member in ctrl.members" value="{{member._id}}">
                             {{member.name}}
                         </md-option>
                     </md-select>
+                    <div ng-messages="elmForm.members.$error">
+                        <div ng-message="required">{{'Who are the members of this team' | translate}}?</div>
+                    </div>
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>{{ 'Description' | translate }}</label>
@@ -66,9 +72,9 @@
             <!--<i class="material-icons right">close</i>-->
             {{ 'Cancel' | translate }}
         </button>
-        <button class="btn orange darken-3 waves-effect waves-light hoverable" type="button" ng-click="ctrl.save()">
+        <button ng-disabled="elmForm.$invalid" class="btn orange darken-3 waves-effect waves-light hoverable" type="button" ng-click="ctrl.save()">
             <!--<i class="material-icons right">check</i>-->
-            {{ action | translate }}
+            {{ ctrl.action | translate }}
         </button>
     </md-dialog-actions>
 </md-dialog>

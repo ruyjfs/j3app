@@ -1,5 +1,5 @@
-angular.module('scrum').controller('OrganizationMemberSaveCtrl', ['$scope', '$reactive', '$mdDialog', '$rootScope', 'id', '$stateParams',
-    function ($scope, $reactive, $mdDialog, $rootScope, id, $stateParams) {
+angular.module('scrum').controller('OrganizationMemberSaveCtrl',
+    function ($scope, $reactive, $mdDialog, $rootScope, id, $stateParams, $translate) {
         $reactive(this).attach($scope);
 
         let organizationNamespace = $stateParams.organization;
@@ -23,9 +23,12 @@ angular.module('scrum').controller('OrganizationMemberSaveCtrl', ['$scope', '$re
             console.info(formAddNew);
             Meteor.call('organizationSaveMembers', formAddNew, function (error) {
                 if (error) {
-                    Materialize.toast('Erro: ' + error, 4000);
+                    $('md-dialog').animateCss('jello');
+                    Materialize.toast($translate.instant('Notice') + ': '+ $translate.instant(error.reason) + '!', 4000, 'rounded red accent-1');
                 } else {
-                    Materialize.toast('Saved successfully!', 4000);
+                    // Materialize.toast('Saved successfully!', 4000, 'rounded green accent-1 green-text text-darken-4');
+                    // Materialize.toast('Saved successfully!', 4000, 'rounded green white-text');
+                    Materialize.toast($translate.instant('Saved successfully') + '!', 4000, 'rounded green accent-1 green-text text-darken-4');
                     $mdDialog.hide();
                 }
             });
@@ -63,4 +66,4 @@ angular.module('scrum').controller('OrganizationMemberSaveCtrl', ['$scope', '$re
             });
         };
     }
-]);
+);

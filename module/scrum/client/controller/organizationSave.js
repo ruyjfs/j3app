@@ -26,7 +26,7 @@ angular.module('scrum').controller('OrganizationSaveCtrl',
         //}
         this.users = Meteor.users.find({}, {sort: {name: 1, lastName: 1}}).fetch();
 
-        this.save = function () {
+        this.save = () => {
             if (this.elmForm.$valid) {
                 Meteor.call('organizationSave', this.form, function (error) {
                     if (error) {
