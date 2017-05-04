@@ -1,5 +1,5 @@
 <md-dialog aria-label="Mango (Fruit)">
-    <form name="elmForm">
+    <form name="elmForm" ng-submit="ctrl.save()">
         <!--<md-toolbar>-->
             <!--<div class="md-toolbar-tools">-->
                 <!--<h2>Save Note</h2>-->
@@ -49,7 +49,7 @@
                 </div>
                 <md-input-container class="md-block">
                     <label>{{'Description' | translate}} <b class="red-text">*</b></label>
-                    <textarea name="description" ng-model="ctrl.form.description" id="description" aria-label="Description" required></textarea>
+                    <textarea name="description" ng-model="ctrl.form.description" id="description" aria-label="Description" required md-autofocus></textarea>
                     <div ng-messages="elmForm.description.$error">
                         <div ng-message="required">{{'How should we understand this task' | translate}}?</div>
                     </div>
@@ -59,14 +59,14 @@
                 <!--</md-checkbox>-->
             </div>
         </md-dialog-content>
-    </form>
     <md-dialog-actions layout="row">
         <span flex></span>
         <button class="orange-text text-darken-3 btn white waves-effect waves-orange hoverable" type="button" ng-click="ctrl.close()">
             {{'Cancel' | translate}}
         </button>
-        <button ng-disabled="elmForm.$invalid" class="btn orange darken-3 waves-effect waves-light hoverable" type="button" ng-click="ctrl.save()">
+        <button ng-disabled="elmForm.$invalid" class="btn orange darken-3 waves-effect waves-light hoverable" type="submit" ng-click="ctrl.save()">
             {{ctrl.action | translate}}
         </button>
     </md-dialog-actions>
+    </form>
 </md-dialog>

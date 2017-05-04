@@ -339,7 +339,7 @@ angular.module('scrum').controller('BacklogCtrl',
                             //$mdDialog.hide();
                         }
                         //$rootScope.titleMiddle = result.dateStart + ' - ' + result.dateEnd + ' (' + result.number + ')';
-                        $rootScope.titleMiddle = ' (' + result.number + ') ' + moment(result.dateStart).format('L') + ' - ' + moment(result.dateEnd).format('L');
+                        $rootScope.titleMiddle = ' #' + result.number + ' ' + moment(result.dateStart).format('L') + ' - ' + moment(result.dateEnd).format('L');
 
                         if (sprintId == 1 || sprintId == '') {
                             /* @todo arrumar depois */
@@ -432,8 +432,10 @@ angular.module('scrum').controller('BacklogCtrl',
                             }
                         });
                         sprint.timeTotalNotes = timeTotal;
+                        sprint.totalNotes = notes.length;
                     } else {
                         sprint.timeTotalNotes = 0;
+                        sprint.totalNotes = 0;
                     }
 
                     notesDone = Note.find({
@@ -459,9 +461,9 @@ angular.module('scrum').controller('BacklogCtrl',
 
                     //console.log(sprint.progress);
                     if (typeof(sprint.dateStart) === 'string') {
-                        $rootScope.titleMiddle = ' (' + sprint.number + ') ' + moment(sprint.dateStart, 'x').format('L') + ' - ' + moment(sprint.dateEnd, 'x').format('L');
+                        $rootScope.titleMiddle = ' #' + sprint.number + ' ' + moment(sprint.dateStart, 'x').format('L') + ' - ' + moment(sprint.dateEnd, 'x').format('L');
                     } else {
-                        $rootScope.titleMiddle = ' (' + sprint.number + ') ' + moment(sprint.dateStart).format('L') + ' - ' + moment(sprint.dateEnd).format('L');
+                        $rootScope.titleMiddle = ' #' + sprint.number + ' ' + moment(sprint.dateStart).format('L') + ' - ' + moment(sprint.dateEnd).format('L');
                     }
                     //sprint.hoursMember = project.ti;
                 }
@@ -547,8 +549,10 @@ angular.module('scrum').controller('BacklogCtrl',
                             }
                         });
                         $rootScope.sprintNext.timeTotalNotes = timeTotal;
+                        $rootScope.sprintNext.totalNotes = notes.length;
                     } else {
                         $rootScope.sprintNext.timeTotalNotes = 0;
+                        $rootScope.sprintNext.totalNotes = 0;
                     }
 
                     notesDone = Note.find({
@@ -647,8 +651,10 @@ angular.module('scrum').controller('BacklogCtrl',
                             }
                         });
                         $rootScope.sprintPrevious.timeTotalNotes = parseInt(timeTotal);
+                        $rootScope.sprintPrevious.totalNotes = notes.length;
                     } else {
                         $rootScope.sprintPrevious.timeTotalNotes = 0;
+                        $rootScope.sprintPrevious.totalNotes = 0;
                     }
 
                     notesDone = Note.find({

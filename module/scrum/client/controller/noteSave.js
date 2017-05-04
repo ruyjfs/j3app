@@ -1,5 +1,5 @@
 angular.module('scrum').controller('NoteSaveCtrl',
-    function ($scope, $mdDialog, id, storyId, sprint, $stateParams, $reactive, $translate) {
+    function ($scope, $mdDialog, id, storyId, sprint, $stateParams, $reactive, $translate, $document) {
         $reactive(this).attach($scope);
         //this.subscribe('users');
         // Meteor.subscribe('project');
@@ -8,6 +8,19 @@ angular.module('scrum').controller('NoteSaveCtrl',
         if (project) {
             $stateParams.id = project._id;
         }
+
+        // $document.ready(() => {
+        //     console.log($("#description"));
+        //     $("#description").keypress(function (e) {
+        //         console.log('teste');
+        //         if(e.which == 13 && !e.shiftKey) {
+        //             console.log('teste2');
+        //             $(this).closest("form").submit();
+        //             e.preventDefault();
+        //             return false;
+        //         }
+        //     });
+        // });
 
         // Meteor.subscribe('team');
         // Meteor.subscribe('note');

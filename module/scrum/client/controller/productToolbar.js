@@ -198,9 +198,9 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
                     //console.log(sprint.dateStart);
                     //console.log(sprint.progress);
                     if (typeof(sprint.dateStart) === 'string') {
-                        $rootScope.titleMiddle = ' (' + sprint.number + ') ' + moment(sprint.dateStart, 'x').format('L') + ' - ' + moment(sprint.dateEnd, 'x').format('L');
+                        $rootScope.titleMiddle = ' #' + sprint.number + ' ' + moment(sprint.dateStart, 'x').format('L') + ' - ' + moment(sprint.dateEnd, 'x').format('L');
                     } else {
-                        $rootScope.titleMiddle = ' (' + sprint.number + ') ' + moment(sprint.dateStart).format('L') + ' - ' + moment(sprint.dateEnd).format('L');
+                        $rootScope.titleMiddle = ' #' + sprint.number + ' ' + moment(sprint.dateStart).format('L') + ' - ' + moment(sprint.dateEnd).format('L');
                     }
                     //sprint.hoursMember = project.ti;
                 }

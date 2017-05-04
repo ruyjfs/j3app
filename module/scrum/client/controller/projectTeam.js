@@ -32,8 +32,6 @@ angular.module('scrum').controller('ProjectTeamCtrl',
         this.subscribe('project', () => {}, {onReady: () => {$scope.progressBar.project = true;}});
         $scope.progressBar.team = Meteor.subscribe('team', $stateParams.organization).ready();
         this.subscribe('team', () => {return [$stateParams.organization]}, {onReady: () => {$scope.progressBar.team = true;}});
-        $scope.progressBar.sprint = Meteor.subscribe('team', $stateParams.organization).ready();
-        this.subscribe('sprint', () => {return [$stateParams.organization]}, {onReady: () => {$scope.progressBar.sprint = true;}});
         $scope.progressBar.burndown = Meteor.subscribe('burndown', $stateParams.organization).ready();
         this.subscribe('burndown', function(){return [$stateParams.product]}, {onReady: () => {$scope.progressBar.burndown = true;}});
         $scope.progressBar.status = Meteor.subscribe('status', $stateParams.product).ready();
@@ -91,6 +89,18 @@ angular.module('scrum').controller('ProjectTeamCtrl',
         });
 
         this.helpers({
+            organizationId: function(){
+                var id = 'organization';
+                if ($stateParams.organization !== 'organization') {
+                    var organization = Organization.findOne({$or: [{_id: $stateParams.organization}, {namespace: $stateParams.organization}]});
+                    if (organization) {
+                        id = organization._id;
+                    } else {
+                        id = $stateParams.organization;
+                    }
+                }
+                return id;
+            },
             productId: function(){
                 var organizationId = this.getReactively('organizationId');
                 var id = 0;
@@ -124,7 +134,9 @@ angular.module('scrum').controller('ProjectTeamCtrl',
             teams: function() {
                 $stateParams.sprintId = this.getReactively('sprintId');
 
-                project = Project.findOne($stateParams.id);
+                project = Project.findOne(this.getReactively('productId'));
+                console.log(this.getReactively('productId'));
+                console.log(project);
                 if (Meteor.user()){
                     userId = Meteor.userId();
                 } else {
@@ -179,7 +191,7 @@ angular.module('scrum').controller('ProjectTeamCtrl',
                                 }
 
                                 sprint = Sprint.findOne({_id: $stateParams.sprintId});
-
+console.log(sprint);
                                 if (sprint) {
                                     sprintPreviousNumber = sprint.number - 1;
                                     sprintNextNumber = sprint.number + 1;

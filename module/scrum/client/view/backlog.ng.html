@@ -11,24 +11,22 @@
                 <th id="header-sprintAnterior" class="header">
                     <span>{{ 'Previous sprint backlog' | translate }}</span> <br>
                     <!--10/10/2010 - 10/10/2010 <br>-->
-                    ({{sprintPrevious.number}}) {{sprintPrevious.dateStartTreated}} - {{sprintPrevious.dateEndTreated}}
+                    #{{sprintPrevious.number}} {{sprintPrevious.dateStartTreated}} - {{sprintPrevious.dateEndTreated}}
                     <br>
-                    (<span class="sprintHorasGastas">{{sprintPrevious.timeTotalNotes}}
-                    h</span>/ {{sprintPrevious.timeTotal}}h )
+                    {{sprintPrevious.totalNotes}} ({{sprintPrevious.timeTotalNotes}}h - {{sprintPrevious.timeTotal}}h)
                     <a href="#" class="select-all" style="display: none">{{'Select All' | translate}}</a>
                 </th>
                 <th id="header-sprintAtual" class="header">
                     <span>{{'Current sprint backlog' | translate}}</span> <br>
-                    ({{sprint.number}}) {{sprint.dateStartTreated}} - {{sprint.dateEndTreated}}<br>
-                    (<span class="sprintHorasGastas">{{sprint.timeTotalNotes}}h</span>/ {{sprint.timeTotal}}h )
+                    #{{sprint.number}} {{sprint.dateStartTreated}} - {{sprint.dateEndTreated}}<br>
+                    {{sprint.totalNotes}} ({{sprint.timeTotalNotes}}h - {{sprint.timeTotal}}h)
                     <a href="#" class="select-all" style="display: none">{{'Select All' | translate}}</a>
                 </th>
                 <th id="header-proximaSprint" class="header">
                     <span>{{'Next sprint backlog' | translate}}</span> <br>
                     <!--10/10/2010 - 10/10/2010 <br>-->
-                    ({{sprintNext.number}}) {{sprintNext.dateStartTreated}} - {{sprintNext.dateEndTreated}}<br>
-                    (<span class="sprintHorasGastas">{{sprintNext.timeTotalNotes}}hs</span>/ {{sprintNext.timeTotal}}hs
-                    )
+                    #{{sprintNext.number}} {{sprintNext.dateStartTreated}} - {{sprintNext.dateEndTreated}}<br>
+                    {{sprintNext.totalNotes}} ({{sprintNext.timeTotalNotes}}h - {{sprintNext.timeTotal}}h)
                     <a href="#" class="select-all" style="display: none">{{'Select All' | translate}}</a>
                 </th>
             </tr>

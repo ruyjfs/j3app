@@ -273,9 +273,23 @@ angular.module('scrum').controller('KanbanCtrl',
                 return stories;
             },
             states: function(){
-                var states = Status.find({projectId: this.getReactively('productId'), $or: [{trash: false}, {trash: null}]}, {sort: {order: 1, name: 1}}).fetch();
-                states.unshift({name: 'To-do', _id: null});
-                states.push({name: 'Done', _id: 1});
+                console.log('aaaa');
+                let states = Status.find({projectId: this.getReactively('productId'), $or: [{trash: false}, {trash: null}]}, {sort: {order: 1, name: 1}}).map((status) => {
+                    let arrNote = Note.find({sprintId: this.getReactively('sprintId'), statusId: status._id , projectId: this.getReactively('productId'), $or: [{trash: false}, {trash: null}]}).fetch();
+                    status.totalNotes = arrNote.length;
+                    status.timeTotalNotes = (arrNote.length > 0)? arrNote.reduce((sum, value) => {return sum + value.time}, 0) : 0;
+                    return status;
+                });
+                let statesTodo = {name: 'To-do', _id: null},
+                    arrNotesTodo = Note.find({sprintId: this.getReactively('sprintId'), $or: [{statusId: null}, {statusId: ''}]}).fetch(),
+                    statesDone = {name: 'Done', _id: '1'},
+                    arrNotesDone = Note.find({sprintId: this.getReactively('sprintId'), statusId: statesDone._id, projectId: this.getReactively('productId'), $or: [{trash: false}, {trash: null}]}).fetch();
+                statesTodo.totalNotes = arrNotesTodo.length;
+                statesTodo.timeTotalNotes = (arrNotesTodo.length > 0)? arrNotesTodo.reduce((sum, note) => {return sum + note.time}, 0) : 0;
+                statesDone.totalNotes = arrNotesDone.length;
+                statesDone.timeTotalNotes = (arrNotesDone.length > 0)? arrNotesDone.reduce((sum, note) => {return sum + note.time}, 0) : 0;
+                states.unshift(statesTodo);
+                states.push(statesDone);
                 return states;
             }
         });

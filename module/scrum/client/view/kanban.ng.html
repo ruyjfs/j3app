@@ -55,7 +55,8 @@
                         </md-button>
                     </th>
                     <th class="plus-header" ng-repeat="status in vm.states">
-                        <span>{{ status.name | translate}}</span> <br>
+                        <span>{{status.name | translate}}</span> <br>
+                        <span>{{status.totalNotes}} ({{status.timeTotalNotes}}h)</span>
                         <a href="#" class="select-all" style="display: none">{{ 'Select All' | translate}}</a>
                     </th>
                     <!--<th id="plus-header">-->

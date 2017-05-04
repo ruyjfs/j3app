@@ -40,7 +40,7 @@ angular.module('scrum').controller('ProjectContentCtrl',
                             //$mdDialog.hide();
                         }
                         //$rootScope.titleMiddle = result.dateStart + ' - ' + result.dateEnd + ' (' + result.number + ')';
-                        $rootScope.titleMiddle = ' (' + result.number + ') ' + moment(result.dateStart).format('L') + ' - ' + moment(result.dateEnd).format('L');
+                        $rootScope.titleMiddle = ' #' + result.number + ' ' + moment(result.dateStart).format('L') + ' - ' + moment(result.dateEnd).format('L');
 
                         if ($stateParams.sprintId == 1 || $stateParams.sprintId == '') {
                             $state.go('scrum/content', {id: $stateParams.id, sprintId: result._id})
@@ -163,9 +163,9 @@ angular.module('scrum').controller('ProjectContentCtrl',
 
                     //console.log(sprint.progress);
                     if (typeof(sprint.dateStart) === 'string') {
-                        $rootScope.titleMiddle = ' (' + sprint.number + ') ' + moment(sprint.dateStart, 'x').format('L') + ' - ' + moment(sprint.dateEnd, 'x').format('L');
+                        $rootScope.titleMiddle = ' #' + sprint.number + ' ' + moment(sprint.dateStart, 'x').format('L') + ' - ' + moment(sprint.dateEnd, 'x').format('L');
                     } else {
-                        $rootScope.titleMiddle = ' (' + sprint.number + ') ' + moment(sprint.dateStart).format('L') + ' - ' + moment(sprint.dateEnd).format('L');
+                        $rootScope.titleMiddle = ' #' + sprint.number + ' ' + moment(sprint.dateStart).format('L') + ' - ' + moment(sprint.dateEnd).format('L');
                     }
                     //sprint.hoursMember = project.ti;
                 }
