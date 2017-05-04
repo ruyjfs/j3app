@@ -679,7 +679,7 @@ angular.module('scrum').controller('BacklogCtrl',
         });
         $scope.modalStorySave = function (ev, id) {
             $mdDialog.show({
-                controller: 'StorySaveCtrl',
+                controller: 'StorySaveCtrl as ctrl',
                 templateUrl: 'module/scrum/client/view/story-save.ng.html',
                 clickOutsideToClose: true,
                 locals: {id: id},
@@ -688,7 +688,7 @@ angular.module('scrum').controller('BacklogCtrl',
         };
         $scope.modalNoteSave = function (ev, id, storyId) {
             $mdDialog.show({
-                controller: 'NoteSaveCtrl',
+                controller: 'NoteSaveCtrl as ctrl',
                 templateUrl: 'module/scrum/client/view/note-save.ng.html',
                 clickOutsideToClose: true,
                 targetEvent: ev,
@@ -705,7 +705,7 @@ angular.module('scrum').controller('BacklogCtrl',
         };
         $scope.modalNoteView = function (ev, id, storyId) {
             $mdDialog.show({
-                controller: 'NoteViewCtrl',
+                controller: 'NoteViewCtrl as ctrl',
                 templateUrl: 'module/scrum/client/view/note-view.ng.html',
                 clickOutsideToClose: true,
                 targetEvent: ev,
