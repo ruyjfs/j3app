@@ -79,10 +79,9 @@ angular.module('scrum').controller('SprintCtrl',
             },
             sprints: function () {
                 let selector = {projectId: this.getReactively('productId')};
-                if (typeof this.getReactively('searchString') === 'string' && this.getReactively('searchString').length) {
-                    selector.number = parseInt(this.getReactively('searchString'));
+                if (typeof this.getReactively('searchText') === 'string' && this.getReactively('searchText').length) {
+                    selector.number = parseInt(this.getReactively('searchText'));
                 }
-                console.log(selector);
                 return Sprint.find(selector,
                     {
                         limit: parseInt(this.getReactively('perPage')),
@@ -118,8 +117,8 @@ angular.module('scrum').controller('SprintCtrl',
             },
             total: () => {
                 let selector = {projectId: this.getReactively('productId')};
-                if (typeof this.getReactively('searchString') === 'string' && this.getReactively('searchString').length) {
-                    selector.number = parseInt(this.getReactively('searchString'));
+                if (typeof this.getReactively('searchText') === 'string' && this.getReactively('searchText').length) {
+                    selector.number = parseInt(this.getReactively('searchText'));
                 }
                 let arrSprint = Sprint.find(selector).fetch();
                 if (arrSprint) {
