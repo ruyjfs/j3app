@@ -12,9 +12,11 @@ angular.module('scrum').controller('HeaderToolbarCtrl', ['$scope', '$mdDialog', 
 
         this.menus = [
             //{name: 'Home',         link: '/scrum',              icon: 'home',            class: ''},
-            {name: 'Organization',     link: '/scrum/organization', icon: 'location_city',   class: ''},
-            {name: 'Team',             link: '/scrum/' + organization + '/team',         icon: 'group_work', class: ''},
-            {name: 'Product',          link: '/scrum/' + organization,      icon: 'business_center',      class: ''}
+            {name: 'You organizations',     link: '/scrum/organizations', icon: 'home',   class: ''},
+            // {name: 'Organization',          link: '/scrum/' + organization,      icon: 'location_city',      class: ''},
+            {name: 'Products',          link: '/scrum/' + organization + '/products',      icon: 'business_center',      class: ''},
+            {name: 'Teams',             link: '/scrum/' + organization + '/teams',         icon: 'group_work', class: ''},
+            // {name: 'Product',          link: '/scrum/' + organization,      icon: 'business_center',      class: ''}
             //{name: 'Product',      link: '/scrum/product',      icon: 'business_center',      class: ''},
         ];
         if ($location.path()) {

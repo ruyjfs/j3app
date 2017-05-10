@@ -12,47 +12,38 @@
 <!--<md-button ng-href="{{project.link}}">Enter</md-button>-->
 <!--</div>-->
 <!--</md-card>-->
-<div ng-controller="ProductCtrl as vm">
-    <!--<md-content>-->
-        <!--<md-tabs md-center-tabs md-dynamic-height md-border-bottom>-->
-            <!--<md-tab label="{{ 'Product' | translate }}">-->
-                <md-content class="md-padding">
-                    <div class="row">
-                        <!--<div class="container col l4 s12 row">-->
-                        <div class="col l4 s12" ng-repeat="project in vm.projects">
-                            <div ng-if="project" class="card small orange lighten-3 hoverable animated fadeIn" style="background-color: {{project.color}} !important;">
-                                <div class="card-content white-text">
-                                    <span class="card-title activator text-darken-4">{{project.name}}<i
-                                            class="material-icons right">more_vert</i></span>
-                                    <p>{{project.description}}</p>
-                                </div>
-                                <div class="card-reveal">
-                                    <span class="card-title grey-text text-darken-4">{{project.name}}<i
-                                            class="material-icons right">close</i></span>
-                                    <p>{{project.owner.name}}</p>
-                                    <p>{{project.description}}</p>
-                                </div>
-                                <div class="card-action center orange lighten-3" style="background-color: {{project.color}} !important;">
-                                    <!--<a href="#">{{_ 'Delete'}}</a>-->
-                                    <!--<a href="#projectSave" data-id="{{_id}}" class="modal-trigger">{{_ 'Edit'}}</a>-->
-                                    <!--<a href="/project/save/{{_id}}">{{_ 'Edit'}}</a>-->
-                                    <!--<a href="/scrum/kanban">{{_ 'Enter'}}</a>-->
-                                    <!--<a href="#" ng-if="vm.isOwner(project.userId)" ng-click="vm.remove(project._id)">Delete</a>-->
-                                    <a href="#" ng-if="vm.isOwner(project.userId)" ng-click="vm.modalProjectSave($event, project._id)">{{ 'Edit' | translate }}</a>
-                                    <!--<a href="#" ng-click="vm.modalProjectSave($event, project._id)">Edit</a>-->
-                                    <!--<a href="#" ng-click="redirect('scrum/kanban/project._id')">Enter</a>-->
-                                    <a href="/scrum/{{project.organizationNamespace}}/{{project.namespace}}/kanban/{{project.sprint.number}}">{{ 'Enter' | translate }}</a>
-                                </div>
-                            </div>
-                        </div>
+
+<style>
+    .liquidFillGaugeText { font-family: Helvetica; font-weight: bold; }
+</style>
+<div ng-controller="ProductCtrl as ctrl">
+    <md-content class="md-padding">
+        <div class="row">
+            <div class="col s12 m6">
+                <!--<div class="card blue-grey darken-1">-->
+                <div class="card hoverable animated fadeIn">
+                    <div class="card-content">
+                        <span class="card-title black-text">{{'Active team' | translate}}</span>
+                        <svg id="fillgauge2" width="100%" height="200" onclick="gauge2.update(NewValue());"></svg>
                     </div>
-                </md-content>
-            <!--</md-tab>-->
-            <!--<md-tab label="{{ 'Team' | translate }}">-->
-                <!--<md-content class="md-padding">-->
-                    <!--<div ng-include="'module/scrum/client/view/team.ng.html'"></div>-->
-                <!--</md-content>-->
-            <!--</md-tab>-->
-        <!--</md-tabs>-->
-    <!--</md-content>-->
+                    <!--<div class="card-action">-->
+                        <!--<a href="#">This is a link</a>-->
+                        <!--<a href="#">This is a link</a>-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <div class="card hoverable animated fadeIn">
+                    <div class="card-content">
+                        <span class="card-title black-text">{{'Tasks completed' | translate}}</span>
+                        <svg id="fillgauge1" width="100%" height="200" onclick="gauge1.update(NewValue());"></svg>
+                    </div>
+                    <!--<div class="card-action">-->
+                        <!--<a href="#">This is a link</a>-->
+                        <!--<a href="#">This is a link</a>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </md-content>
 </div>

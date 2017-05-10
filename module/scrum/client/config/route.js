@@ -61,7 +61,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                 }
             })
             .state('scrum/organization/all', {
-                url: '/scrum/organization',
+                url: '/scrum/organizations',
                 views: {
                     //"header": {
                     //    templateUrl: $header,
@@ -70,7 +70,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                         templateUrl: 'module/scrum/client/view/header-toolbar-organization.ng.html',
                     },
                     "mainFadeIn": {
-                        templateUrl: 'module/scrum/client/view/organization.ng.html',
+                        templateUrl: 'module/scrum/client/view/organizations.ng.html',
                     },
                     "main2": {
                         templateUrl: 'module/scrum/client/view/organization-fab.ng.html',
@@ -102,8 +102,8 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                 }
                 //controller: 'ProductCtrl'
             })
-            .state('scrum/organization/team', {
-                url: '/scrum/:organization/team',
+            .state('scrum/organization/teams', {
+                url: '/scrum/:organization/teams',
                 views: {
                     //"header": {
                     //    templateUrl: $header,
@@ -130,15 +130,15 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                         templateUrl: 'module/scrum/client/view/header-toolbar.ng.html',
                     },
                     "mainFadeIn": {
-                        templateUrl: 'module/scrum/client/view/product.ng.html',
+                        templateUrl: 'module/scrum/client/view/organization.ng.html',
                     },
                     "main2": {
-                        templateUrl: 'module/scrum/client/view/product-fab.ng.html',
+                        templateUrl: 'module/scrum/client/view/organization-fab.ng.html',
                     },
                 }
             })
-            .state('scrum/organization/product', {
-                url: '/scrum/:organization/:product',
+            .state('scrum/organization/products', {
+                url: '/scrum/:organization/products',
                 views: {
                     //"header": {
                     //    templateUrl: $header,
@@ -147,13 +147,12 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                         templateUrl: 'module/scrum/client/view/header-toolbar.ng.html',
                     },
                     "mainFadeIn": {
-                        templateUrl: 'module/scrum/client/view/product.ng.html',
+                        templateUrl: 'module/scrum/client/view/products.ng.html',
                     },
                     "main2": {
-                        templateUrl: 'module/scrum/client/view/product-fab.ng.html',
+                        templateUrl: 'module/scrum/client/view/products-fab.ng.html',
                     },
                 }
-                //controller: 'ProductCtrl'
             })
             .state('scrum/organization/product/all', {
                 url: '/scrum/organization/product',
@@ -196,14 +195,14 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     },
                 }
             })
-            .state('scrum/product', {
-                url: '/scrum/product',
+            .state('scrum/organization/product', {
+                url: '/scrum/:organization/:product/:sprint',
                 views: {
                     //"header": {
                     //    templateUrl: $header,
                     //},
                     "menuLeft": {
-                        templateUrl: 'module/scrum/client/view/header-toolbar.ng.html',
+                        templateUrl: 'module/scrum/client/view/product-toolbar.ng.html',
                     },
                     "mainFadeIn": {
                         templateUrl: 'module/scrum/client/view/product.ng.html',
@@ -214,6 +213,24 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                 }
                 //controller: 'ProductCtrl'
             })
+            // .state('scrum/product', {
+            //     url: '/scrum/product',
+            //     views: {
+            //         //"header": {
+            //         //    templateUrl: $header,
+            //         //},
+            //         "menuLeft": {
+            //             templateUrl: 'module/scrum/client/view/header-toolbar.ng.html',
+            //         },
+            //         "mainFadeIn": {
+            //             templateUrl: 'module/scrum/client/view/product.ng.html',
+            //         },
+            //         "main2": {
+            //             templateUrl: 'module/scrum/client/view/product-fab.ng.html',
+            //         },
+            //     }
+            //     //controller: 'ProductCtrl'
+            // })
             .state('scrum/organization/product/kanban', {
                 url: '/scrum/:organization/:product/kanban/:sprint',
                 views: {
@@ -452,7 +469,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
 
         if (Meteor.userId()) {
             //$urlRouterProvider.otherwise( '/' + strModule + "/product");
-            $urlRouterProvider.otherwise('/scrum/organization');
+            $urlRouterProvider.otherwise('/scrum/organizations');
             //$urlRouterProvider.otherwise('/' + strModule + '/home');
         } else {
             $urlRouterProvider.otherwise('/' + strModule);

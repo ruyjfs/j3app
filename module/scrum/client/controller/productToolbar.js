@@ -220,9 +220,11 @@ angular.module('scrum').controller('ProductToolbarCtrl', ['$scope', '$mdDialog',
         }
 
         this.menus = [
-            {name: 'Organization',     link: '/scrum/organization', icon: 'location_city',   class: ''},
-            {name: 'Team',             link: '/scrum/' + organization + '/team',         icon: 'group_work', class: ''},
-            {name: 'Product',          link: '/scrum/' + organization,      icon: 'business_center',      class: ''},
+            {name: 'You organizations',     link: '/scrum/organizations', icon: 'home',   class: ''},
+            // {name: 'Organization',     link: '/scrum/organization', icon: 'location_city',   class: ''},
+            {name: 'Products',          link: '/scrum/' + organization + '/products',      icon: 'business_center',      class: ''},
+            {name: 'Teams',             link: '/scrum/' + organization + '/teams',         icon: 'group_work', class: ''},
+            {name: 'Product',          link: '/scrum/' + organization + '/' + product + '/' + sprint,      icon: 'business_center',      class: ''},
             {name: 'Kanban',           link: '/scrum/' + organization + '/' + product +'/kanban/'+ sprint,   icon: 'view_column',     class: ''},
             // {name: 'Task List',        link: '/scrum/' + organization + '/' + product +'/task-list/'+ sprint,   icon: 'view_list',     class: ''},
             {name: 'Backlog',          link: '/scrum/' + organization + '/' + product +'/backlog/'+ sprint,  icon: 'developer_board', class: ''},

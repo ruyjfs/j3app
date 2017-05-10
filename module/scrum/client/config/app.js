@@ -5,7 +5,9 @@
 if (Meteor.isClient) {
     ptBR = {
         //  Menu
-        'Home': 'Principal',
+        // 'Home': 'Principal',
+        'Organizations': 'Organizações',
+        'You organizations': 'Suas organizações',
         'Language': 'Linguagem',
         'Settings': 'Configuração',
         'Options': 'Opções',
@@ -95,6 +97,8 @@ if (Meteor.isClient) {
         'Time': 'Tempo',
         'Color': 'Cor',
         'Order': 'Ordem',
+        'Active team': 'Membros ativos',
+        'Tasks completed': 'Tarefas concluídas',
         'Task amount previous sprint (Remaining/Total)': 'Quantidade de tarefas na sprint anterior (Restantes/Total)',
         'Task amount current sprint (Remaining/Total)': 'Quantidade de tarefas na sprint atual (Restantes/Total)',
         'Task amount next sprint (Remaining/Total)': 'Quantidade de tarefas na próxima sprint (Restantes/Total)',

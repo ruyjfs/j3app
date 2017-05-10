@@ -1,4 +1,4 @@
-angular.module('scrum').controller('ProductCtrl',
+angular.module('scrum').controller('ProductsCtrl',
     function ($scope, $mdDialog, $mdSidenav, $log, $reactive, $rootScope, $stateParams, $translate, $document) {
         $reactive(this).attach($scope);
         $translate.use(Session.get('lang'));
@@ -192,38 +192,5 @@ angular.module('scrum').controller('ProductCtrl',
                 this.status = 'You cancelled the dialog.';
             });
         };
-
-
-        $document.ready(() => {
-            // var gauge1 = loadLiquidFillGauge("fillgauge1", 55);
-            var config1 = liquidFillGaugeDefaultSettings();
-            config1.circleColor = "#4e342e";
-            config1.circleColor = "#ef6c00";
-            config1.textColor = "#ef6c00";
-            config1.waveTextColor = "#ef6c00";
-            config1.waveColor = "#ffb74d";
-            config1.circleThickness = 0.2;
-            // config1.textVertPosition = 0.2;
-            config1.waveAnimateTime = 1000;
-            var gauge2 = loadLiquidFillGauge("fillgauge1", 45, config1);
-            var config2 = liquidFillGaugeDefaultSettings();
-            // config1.circleColor = "#4e342e";
-            // config1.circleColor = "#ef6c00";
-            // config1.textColor = "#ef6c00";
-            config2.waveTextColor = "rgb(0, 101, 183)";
-            config2.waveColor = "rgb(64, 178, 255)";
-            config2.circleThickness = 0.2;
-            config2.waveAnimateTime = 1000;
-            var gauge3 = loadLiquidFillGauge("fillgauge2", 45, config2);
-
-            function NewValue(){
-                if(Math.random() > .5){
-                    return Math.round(Math.random()*100);
-                } else {
-                    return (Math.random()*100).toFixed(1);
-                }
-            }
-        });
-
     }
 );
