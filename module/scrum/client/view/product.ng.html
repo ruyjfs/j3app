@@ -15,16 +15,81 @@
 
 <style>
     .liquidFillGaugeText { font-family: Helvetica; font-weight: bold; }
+
+    #main {
+        float: left;
+        width: 750px;
+    }
+
+    #sidebar {
+        float: right;
+        width: 100px;
+    }
+
+    #sequence {
+        width: 600px;
+        height: 70px;
+    }
+
+    #legend {
+        padding: 10px 0 0 3px;
+    }
+
+    #sequence text, #legend text {
+        font-weight: 600;
+        fill: #fff;
+    }
+
+    #chart {
+        position: relative;
+    }
+
+    #chart path {
+        stroke: #fff;
+    }
+
+    #explanation {
+        position: absolute;
+        top: 260px;
+        left: 305px;
+        width: 140px;
+        text-align: center;
+        color: #666;
+        z-index: -1;
+    }
+
+    #percentage {
+        font-size: 2.5em;
+    }
 </style>
 <div ng-controller="ProductCtrl as ctrl">
     <md-content class="md-padding">
+        <div class="row">
+            <div class="col s12 m12 l6">
+                <div class="card hoverable animated fadeIn">
+                    <div class="card-content">
+                        <span class="card-title black-text">{{'Task' | translate}}s por história</span>
+                        <div id="chartTasks" class="center-align"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m12 l6">
+                <div class="card hoverable animated fadeIn">
+                    <div class="card-content">
+                        <span class="card-title black-text">{{'Task' | translate}}s por situação</span>
+                        <div id="chartBar" class="center-align"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col s12 m6">
                 <!--<div class="card blue-grey darken-1">-->
                 <div class="card hoverable animated fadeIn">
                     <div class="card-content">
-                        <span class="card-title black-text">{{'Active team' | translate}}</span>
+                        <span class="card-title black-text">{{'Active team now' | translate}}</span>
                         <svg id="fillgauge2" width="100%" height="200" onclick="gauge2.update(NewValue());"></svg>
+                        <!--http://bl.ocks.org/msqr/3202712-->
                     </div>
                     <!--<div class="card-action">-->
                         <!--<a href="#">This is a link</a>-->
@@ -43,6 +108,24 @@
                         <!--<a href="#">This is a link</a>-->
                     <!--</div>-->
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m12">
+                <div ng-include="'module/scrum/client/view/project-team.ng.html'"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m12">
+                <span>Total de tarefas -> Story -> Status -> Task</span>
+                <span>
+                --Quantidade de tarefas pra terminar
+                --Quantidade de tarefas paradas
+                --Quantidade de tarefas sendo feitas.
+                --Quantidade de tarefas prontas
+                -Quantidade de sprints
+                -quantidade de pessoas
+                </span>
             </div>
         </div>
     </md-content>

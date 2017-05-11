@@ -207,9 +207,9 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                     "mainFadeIn": {
                         templateUrl: 'module/scrum/client/view/product.ng.html',
                     },
-                    "main2": {
-                        templateUrl: 'module/scrum/client/view/product-fab.ng.html',
-                    },
+                    // "main2": {
+                    //     templateUrl: 'module/scrum/client/view/product-fab.ng.html',
+                    // },
                 }
                 //controller: 'ProductCtrl'
             })

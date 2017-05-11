@@ -97,7 +97,7 @@ if (Meteor.isClient) {
         'Time': 'Tempo',
         'Color': 'Cor',
         'Order': 'Ordem',
-        'Active team': 'Membros ativos',
+        'Active team now': 'Membros ativos agora',
         'Tasks completed': 'Tarefas concluídas',
         'Task amount previous sprint (Remaining/Total)': 'Quantidade de tarefas na sprint anterior (Restantes/Total)',
         'Task amount current sprint (Remaining/Total)': 'Quantidade de tarefas na sprint atual (Restantes/Total)',
