@@ -5,7 +5,7 @@
 if (Meteor.isClient) {
     ptBR = {
         //  Menu
-        // 'Home': 'Principal',
+        'Home': 'Início',
         'Organizations': 'Organizações',
         'You organizations': 'Suas organizações',
         'Language': 'Linguagem',

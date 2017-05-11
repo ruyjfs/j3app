@@ -135,8 +135,8 @@ angular.module('scrum').controller('ProjectTeamCtrl',
                 $stateParams.sprintId = this.getReactively('sprintId');
 
                 project = Project.findOne(this.getReactively('productId'));
-                console.log(this.getReactively('productId'));
-                console.log(project);
+                // console.log(this.getReactively('productId'));
+                // console.log(project);
                 if (Meteor.user()){
                     userId = Meteor.userId();
                 } else {
@@ -191,7 +191,7 @@ angular.module('scrum').controller('ProjectTeamCtrl',
                                 }
 
                                 sprint = Sprint.findOne({_id: $stateParams.sprintId});
-console.log(sprint);
+// console.log(sprint);
                                 if (sprint) {
                                     sprintPreviousNumber = sprint.number - 1;
                                     sprintNextNumber = sprint.number + 1;
