@@ -71,7 +71,7 @@
             <md-input-container class="md-block">
                 <label>{{ 'Team' | translate }}</label>
                 <md-select ng-model="ctrl.form.teams" id="teams" aria-label="" placeholder="Team" multiple="true">
-                    <md-option ng-repeat="team in teams" value="{{team._id}}">
+                    <md-option ng-repeat="team in ctrl.teams" value="{{team._id}}">
                         {{team.name}}
                     </md-option>
                 </md-select>
