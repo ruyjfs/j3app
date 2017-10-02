@@ -51,9 +51,6 @@ angular.module('scrum').controller('OrganizationCtrl', function ($scope, $mdDial
     // Meteor.subscribe funciona ao navegar entre as rotas e o this.subscribe funciona com o f5 na tela. BUG BUG BUG!!!
     // $('#progressBar').fadeIn('slow');
     setTimeout(() => {
-        console.info('Aaaaaaaa');
-
-
         $scope.progressBar = {};
         $scope.progressBar.organization = Meteor.subscribe('organization').ready();
         this.subscribe('organization', () => {}, {onReady: () => {$scope.progressBar.organization = true;}});
