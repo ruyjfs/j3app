@@ -1,6 +1,6 @@
 <div ng-controller="OrganizationFabCtrl as vm" class="fixed-action-btn horizontal">
-    <div class="fixed-action-btn horizontal ">
-        <md-fab-speed-dial md-direction="up" class="md-scale">
+    <div  class="fixed-action-btn horizontal ">
+        <md-fab-speed-dial id="fab-organization" md-direction="up" class="md-scale">
             <md-fab-trigger>
                 <md-button ng-click="vm.modalOrganizationSave($event)" aria-label="menu" class="md-fab btn-floating btn-large hoverable red  accent-4 animated bounceInUp">
                     <md-tooltip md-direction="left" md-visible="tooltipVisible"
@@ -36,6 +36,16 @@
         <!--<a href="#" ng-click="vm.modalProjectSave($event, project._id)" class="btn-floating red hoverable"><i-->
         <!--title="" class="material-icons">business_center</i></a>-->
         <!--</ul>-->
+    </div>
+    <!-- <a id="fab-organization" class="waves-effect waves-light btn btn-floating" ><i class="material-icons">menu</i></a> -->
+
+    <!-- Tap Target Structure -->
+    <div class="tap-target red accent-4 white-text" data-activates="fab-organization">
+      <div class="tap-target-content">
+        <!-- <h5>{{ 'Organization' | translate}}</h5> -->
+        <p>{{ 'Click here to register an organization or someone else to add it to an organization' | translate}}.</p>
+        <p>{{ 'To know what an organization is, click on the question mark icon' | translate}}.</p>
+      </div>
     </div>
     <!--</div>-->
     <!--<br/>-->
@@ -106,8 +116,6 @@
     <!--&lt;!&ndash;</tbody>&ndash;&gt;-->
     <!--&lt;!&ndash;</table>&ndash;&gt;-->
     <!--</md-content>-->
-
-    {{test}}
     <!--&lt;!&ndash;<p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>&ndash;&gt;-->
 
     <!--</div>-->

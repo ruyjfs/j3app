@@ -212,6 +212,10 @@ if (Meteor.isClient) {
             : 'Para fechar essas mensages, arraste elas para o lado.',
         "I'm so glad you joined j3scrum, many things are still to come, best regards!!!"
             : 'Eu fico muito feliz que tenha entrado no j3scrum, muitas coisas ainda estão por vir, grande abraço!!!',
+        "To know what an organization is, click on the question mark icon"
+            : 'Para saber o que é uma organização, clique no ícone de interrogação',
+        "Click here to register an organization or someone else to add it to an organization"
+            : 'Clique aqui para cadastrar uma organização ou pessa para alguém adiciona-lo em uma organização',
         'in alpha' : 'em alfa',
         // HELP Organization
         'What is a organization' : 'O que é uma organização',

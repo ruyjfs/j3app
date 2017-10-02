@@ -53,7 +53,7 @@ angular.module('scrum').config(['$urlRouterProvider', '$stateProvider', '$locati
                         templateUrl: 'module/scrum/client/view/header-toolbar-organization.ng.html',
                     },
                     "mainFadeIn": {
-                        templateUrl: 'module/scrum/client/view/organization.ng.html',
+                        templateUrl: 'module/scrum/client/view/organizations.ng.html',
                     },
                     "main2": {
                         templateUrl: 'module/scrum/client/view/organization-fab.ng.html',

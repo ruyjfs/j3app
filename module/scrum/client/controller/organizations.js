@@ -71,21 +71,26 @@ angular.module('scrum').controller('OrganizationsCtrl', function ($scope, $mdDia
                             Materialize.toast(
                                 $translate.instant('My name is Ryu, i will help you with whatever it takes.')
                                 , 120000);
-                            Materialize.toast(
-                                $translate.instant('It looks like you do not have an organization yet, click the red button to create an organization, or contact the owner of an organization to add you to their organization.')
-                                , 120000);
-                            Materialize.toast(
-                                $translate.instant('You can create products without organization, just enter the card without organization. For more information, click on the question mark icon in the top menu.')
-                                , 120000);
+                            // Materialize.toast(
+                            //     $translate.instant('It looks like you do not have an organization yet.')
+                            //     , 120000);
+                            // Materialize.toast(
+                            //     $translate.instant('It looks like you do not have an organization yet, click the red button to create an organization, or contact the owner of an organization to add you to their organization.')
+                            //     , 120000);
+                            // Materialize.toast(
+                            //     $translate.instant('You can create products without organization, just enter the card without organization. For more information, click on the question mark icon in the top menu.')
+                            //     , 120000);
                             Materialize.toast(
                                 $translate.instant('If you have any questions or suggestions, please contact us at contact@j3scrum.com.')
                                 , 120000);
-                            Materialize.toast(
-                                $translate.instant('To close these messages, drag to the side.')
-                                , 120000);
+                            // Materialize.toast(
+                            //     $translate.instant('To close these messages, drag to the side.')
+                            //     , 120000);
                             Materialize.toast(
                                 $translate.instant("I'm so glad you joined j3scrum, many things are still to come, best regards!!!")
                                 , 120000);
+
+                            $('.tap-target').tapTarget('open');
                             Session.set('booMsgOrganization', true);
                         }
                         $document.ready(() => {
