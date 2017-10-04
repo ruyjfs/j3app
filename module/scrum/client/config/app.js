@@ -228,7 +228,7 @@ if (Meteor.isClient) {
         'This is where the products of the organization are.' : 'Aqui é onde fica os produtos da organização.',
         'In scrum we call any type of project in a product.' : 'No scrum chamamos qualquer tipo de projeto em produto.',
         'To develop the whole product is necessary of several tasks and these tasks are to separate in cycles that we call sprints.' :
-            'Para desenvolver todo o produto é necessário de várias tarefas e essas tarefas são separar em ciclos que chamamos de sprints.',
+            'Para desenvolver todo o produto é necessário de várias tarefas e essas tarefas são separadas em ciclos que chamamos de sprints.',
         'Each cycle, in this case, each sprint has a start and end date, thus taking a timeline of each stage of the product.' :
             'Cada ciclo, no caso, cada sprint, tem uma data inicial e final, com isso tendo um cronograma de cada etapa do produto.',
         'At the end of each sprint, we were able to deliver something of value, not being the whole product, but dividing parts.' :
