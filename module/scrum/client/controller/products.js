@@ -18,7 +18,8 @@ angular.module('scrum').controller('ProductsCtrl',
         this.subscribe('organization', () => {}, {onReady: () => {$scope.progressBar.organization = true;}});
         $scope.progressBar.project = Meteor.subscribe('project').ready();
         this.subscribe('project', () => {}, {onReady: function () {$scope.progressBar.project = true;}});
-        $scope.progressBar.users = Meteor.subscribe('users').ready();
+        $scope.progressBar.users = Meteor.subscribe('users').ready();123456
+
         this.subscribe('users', () => {}, {onReady: function () {$scope.progressBar.users = true;}});
         $scope.progressBar.team = Meteor.subscribe('team', $stateParams.organization).ready();
         this.subscribe('team', () => {return [$stateParams.organization]}, {onReady: function () {$scope.progressBar.team = true;}});
