@@ -36,33 +36,34 @@ angular.module('scrum').controller('ProductsCtrl',
             ) {
                 let arrProject = Project.find({}, {sort: {name: 1}}).fetch();
                 if (arrProject.length == 0) {
-                    if (Session.get('booMsgProduct') != true) {
-                        Materialize.toast(
-                            $translate.instant('This is where the products of the organization are.')
-                            , 140000);
-                        Materialize.toast(
-                            $translate.instant('In scrum we call any type of project in a product.')
-                            , 140000);
-                        Materialize.toast(
-                            $translate.instant("Following the hierarchical order in j3scrum, an organization owns the products, a product has several sprints and each sprint have several tasks.")
-                            , 140000);
-                        Materialize.toast(
-                            $translate.instant("Relax, when entering the product you will know better how the scrum works and the main one as it is a kanban.")
-                            , 140000);
-                        Materialize.toast(
-                            $translate.instant("Click the red button to create a product.")
-                            , 140000);
-                        Materialize.toast(
-                            $translate.instant("Do not forget, every screen has the question button in the upper corner to better explain the scrum and the functionality of each screen.")
-                            , 140000);
-                        Materialize.toast(
-                            $translate.instant("Good luck with the product!!!")
-                            , 140000);
+                    // if (Session.get('booMsgProduct') != true) {
+                    //     Materialize.toast(
+                    //         $translate.instant('This is where the products of the organization are.')
+                    //         , 140000);
+                    //     Materialize.toast(
+                    //         $translate.instant('In scrum we call any type of project in a product.')
+                    //         , 140000);
+                    //     Materialize.toast(
+                    //         $translate.instant("Following the hierarchical order in j3scrum, an organization owns the products, a product has several sprints and each sprint have several tasks.")
+                    //         , 140000);
+                    //     Materialize.toast(
+                    //         $translate.instant("Relax, when entering the product you will know better how the scrum works and the main one as it is a kanban.")
+                    //         , 140000);
+                    //     Materialize.toast(
+                    //         $translate.instant("Click the red button to create a product.")
+                    //         , 140000);
+                    //     Materialize.toast(
+                    //         $translate.instant("Do not forget, every screen has the question button in the upper corner to better explain the scrum and the functionality of each screen.")
+                    //         , 140000);
+                    //     Materialize.toast(
+                    //         $translate.instant("Good luck with the product!!!")
+                    //         , 140000);
+
+                        $('.tap-target').tapTarget('open');
                         Session.set('booMsgProduct', true);
-                    }
+                    // }
                     $document.ready(() => {
                         $('.md-fab').addClass('pulse');
-                        console.log($('.md-fab'));
                     });
                 }
                 $scope.booLoading = false;
