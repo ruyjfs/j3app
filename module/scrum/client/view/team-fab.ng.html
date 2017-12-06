@@ -1,6 +1,6 @@
 <div ng-controller="ProductFabCtrl as vm" class="fixed-action-btn horizontal">
     <div class="fixed-action-btn horizontal">
-        <md-fab-speed-dial md-direction="up" class="md-scale">
+        <md-fab-speed-dial id="fab-team" md-direction="up" class="md-scale">
             <md-fab-trigger>
                 <md-button aria-label="menu" class="md-fab btn-floating btn-large hoverable animated bounceInUp">
                     <md-tooltip md-direction="left" md-visible="tooltipVisible"
@@ -13,7 +13,7 @@
             </md-fab-trigger>
             <md-fab-actions>
                 <md-button aria-label="Team" class="md-fab  md-primary btn-floating md-raised md-mini blue darken-4 hoverable"
-                           ng-click="vm.modalTeamSave($event)" style="line-height: 0px;">
+                           ng-click="vm.modalTeamSave($event)" style="">
                     <md-tooltip md-direction="left" md-visible="tooltipVisible"
                                 md-autohide="false">
                         {{ 'Add Team' | translate}}
@@ -30,5 +30,13 @@
                 </md-button>
             </md-fab-actions>
         </md-fab-speed-dial>
+    </div>
+    <div class="tap-target red accent-4 white-text" data-activates="fab-team">
+        <div class="tap-target-content">
+            <!-- <h5>{{ 'Organization' | translate}}</h5> -->
+            <p>{{ 'Click here to register an organization or someone else to add it to an organization' |
+                translate}}.</p>
+            <p>{{ 'To know what an organization is, click on the question mark icon' | translate}}.</p>
+        </div>ll
     </div>
 </div>

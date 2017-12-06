@@ -5,13 +5,44 @@ angular.module('scrum').controller('BacklogCtrl',
         $scope.booLoading = false;
         $('#progressBar').fadeOut('slow');
 
-        this.subscribe('users');
-        this.subscribe('organization');
-        this.subscribe('project');
-        this.subscribe('status', function(){return [$stateParams.product]});
-        this.subscribe('note', function(){return [$stateParams.product]});
-        this.subscribe('story', function(){return [$stateParams.product]});
-        this.subscribe('sprint', function(){return [$stateParams.product]});
+        $scope.progressBar = {};
+        $scope.progressBar.users = Meteor.subscribe('users').ready();
+        this.subscribe('users', () => {}, {onReady: () => {$scope.progressBar.users = true;}});
+        $scope.progressBar.organization = Meteor.subscribe('organization').ready();
+        this.subscribe('organization', () => {}, {onReady: () => {$scope.progressBar.organization = true;}});
+        $scope.progressBar.project = Meteor.subscribe('project').ready();
+        this.subscribe('project', () => {}, {onReady: () => {$scope.progressBar.project = true;}});
+        $scope.progressBar.team = Meteor.subscribe('team', $stateParams.organization).ready();
+        this.subscribe('team', () => {return [$stateParams.organization]}, {onReady: () => {$scope.progressBar.team = true;}});
+        $scope.progressBar.sprint = Meteor.subscribe('team', $stateParams.organization).ready();
+        this.subscribe('sprint', () => {return [$stateParams.organization]}, {onReady: () => {$scope.progressBar.sprint = true;}});
+        $scope.progressBar.burndown = Meteor.subscribe('burndown', $stateParams.organization).ready();
+        this.subscribe('burndown', function(){return [$stateParams.product]}, {onReady: () => {$scope.progressBar.burndown = true;}});
+        $scope.progressBar.status = Meteor.subscribe('status', $stateParams.product).ready();
+        this.subscribe('status', function(){return [$stateParams.product]}, {onReady: () => {$scope.progressBar.status = true;}});
+        $scope.progressBar.note = Meteor.subscribe('note', $stateParams.product).ready();
+        this.subscribe('note', function(){return [$stateParams.product, {}, this.getReactively('searchText')]}, {onReady: () => {$scope.progressBar.note = true;}});
+        $scope.progressBar.story = Meteor.subscribe('story', $stateParams.product).ready();
+        this.subscribe('story', function(){return [$stateParams.product]}, {onReady: () => {$scope.progressBar.story = true;}});
+        $scope.progressBar.sprint = Meteor.subscribe('sprint', $stateParams.product).ready();
+        this.subscribe('sprint', function(){return [$stateParams.product]}, {onReady: () => {$scope.progressBar.sprint = true;}});
+        $scope.booLoading = true;
+        $scope.$watchCollection('progressBar', function() {
+            if (
+                $scope.progressBar.users,
+                    $scope.progressBar.organization,
+                    $scope.progressBar.project,
+                    $scope.progressBar.team,
+                    $scope.progressBar.burndown,
+                    $scope.progressBar.status,
+                    $scope.progressBar.note,
+                    $scope.progressBar.story,
+                    $scope.progressBar.sprint
+            ) {
+                $scope.booLoading = false;
+                $('#progressBar').fadeOut('slow');
+            }
+        });
         this.helpers({
             organizationId: function(){
                 var id = 'organization';
@@ -67,7 +98,7 @@ angular.module('scrum').controller('BacklogCtrl',
                                 note.owner.statusLastLoginDate = moment(note.owner.status.lastLogin.date).format('L H[h]m');
                             } else {
                                 note.owner.statusLastLoginDate = moment(note.owner.status.lastLogin.date).fromNow(); // in 40 minutes
-                            } 
+                            }
                         }
                         //console.log(note.owner.status.lastLogin.date);
                         //moment(note.owner.status.lastLogin.date).format('L LT')

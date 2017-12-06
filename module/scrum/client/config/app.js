@@ -4,6 +4,8 @@
 
 if (Meteor.isClient) {
     ptBR = {
+        'In development' : 'Em desenvolvimento',
+
         //  Menu
         'Home': 'Início',
         'Organizations': 'Organizações',
@@ -225,6 +227,9 @@ if (Meteor.isClient) {
         'Following the hierarchy in j3scrum, an organization, poussui several products and teams. Teams are made up of members of the organization. The products are composed of a team and various tasks, these tasks are separated by the schedule of each sprint and by stories, these stories are like categories that help to visualize them in the screen of Kanbam and Bakclog.':
             'Seguindo a hierarquia no j3scrum, uma organização, poussui vários produtos e times. Os times são composto por membros da organização. Os produtos são compostos por um time e várias tarefas, essas tarefas são separadas pelo cronograma de cada sprint e por histórias, essas histórias são como categorias que ajudam a visual-las na tela do Kanbam e Bakclog.',
         // Ryu Product
+        'Click here to register an product' : 'Clique aqui para incluir um produto',
+        "To know what an product is, click on the question mark icon"
+            : 'Para saber o que é um produto, clique no ícone de interrogação',
         'This is where the products of the organization are.' : 'Aqui é onde fica os produtos da organização.',
         'In scrum we call any type of project in a product.' : 'No scrum chamamos qualquer tipo de projeto em produto.',
         'To develop the whole product is necessary of several tasks and these tasks are to separate in cycles that we call sprints.' :
@@ -254,12 +259,18 @@ if (Meteor.isClient) {
         'What is a j3scrum': 'O que é o j3scrum',
         'What is a product': 'O que é um produto',
         'What you can do on the product screen': 'O que se pode fazer na tela do produto',
+        'What is a team': 'O que é uma equipe',
+        'What you can do on the team screen': 'O que se pode fazer na tela de equipes',
+        'What is a Kanban': 'O que é o Kanban',
+        'What you can do on the kanban screen': 'O que é o Kanban',
+        // 'What is a Kanban': 'O que é o Kanban',
+        // 'What you can do on the kanban screen': 'O que é o Kanban',
         'You can view your products, the products you are part of, and the products in your organization that are shared internally or publicly':
             'Você pode visualizar os seus produtos, os produtos que você faça parte e os produtos da organização que estão compartilhados internamente ou públicos',
         'You can be part of a product being in the team linked to the product or being as PO or Scrum Master':
             'Você pode fazer parte de um produto estando no time vinculado ao produto ou estando como PO ou Scrum Master',
-        'You can only edit projects that you own. Before registering a product, first register a team that will be part of the product, you can link the team to your new product created':
-            'Você só pode editar projetos que você seja o dono. Antes de cadastrar um produto, primeiro cadastre uma equipe que vai fazer parte do produto, você pode vincular o time ao seu novo produto criado',
+        'You can only edit products that you own. Before registering a product, first register a team that will be part of the product, you can link the team to your new product created':
+            'Você só pode editar produtos que você seja o dono. Antes de cadastrar um produto, primeiro cadastre uma equipe que vai fazer parte do produto, você pode vincular o time ao seu novo produto criado',
 
         // Ryu Kanban
         // Ryu Backlog

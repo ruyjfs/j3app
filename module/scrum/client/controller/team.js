@@ -46,6 +46,7 @@ angular.module('scrum').controller('TeamCtrl',
                 //             , 120000);
                 //         Session.set('booMsgOrganization', true);
                 //     }
+                // $('.tap-target').tapTarget('open');
                 //     $document.ready(() => {
                 //         $('.md-fab').addClass('pulse');
                 //         console.log($('.md-fab'));
