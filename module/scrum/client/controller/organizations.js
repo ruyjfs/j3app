@@ -83,11 +83,11 @@ angular.module('scrum').controller('OrganizationsCtrl', function ($scope, $mdDia
                             Materialize.toast(
                                 $translate.instant('If you have any questions or suggestions, please contact us at contact@j3scrum.com.')
                                 , 120000);
-                            // Materialize.toast(
-                            //     $translate.instant('To close these messages, drag to the side.')
-                            //     , 120000);
                             Materialize.toast(
                                 $translate.instant("I'm so glad you joined j3scrum, many things are still to come, best regards!!!")
+                                , 120000);
+                            Materialize.toast(
+                                $translate.instant('To close these messages, drag to the side.')
                                 , 120000);
 
                             $('.tap-target').tapTarget('open');
@@ -102,6 +102,14 @@ angular.module('scrum').controller('OrganizationsCtrl', function ($scope, $mdDia
             }
         });
     }, 500);
+
+    this.exist = ($arrValue) => {
+        return ($arrValue.length > 0);
+    };
+
+    this.showNoOrganization = () => {
+        return (moment(Meteor.user.createdAt).format('YYYY') < 2016);
+    };
 
     this.helpers({
         organisations: function () {

@@ -16,8 +16,16 @@
                 </div>
                 <md-content>
                     <div class="row">
+                        <div class="row" ng-if="!vmTeam.exist(vmTeam.teams)">
+                            <div class="col s12 center-align">
+                                <p>Essa organização ainda não possui uma equipe, antes de criar uma equipe adicione as pessoas que serão membros da organização.</p>
+                                <p>Nas equipes é definido o tempo de esforço dos membros dela, essas equipes são adicionadas ao produto para realizar as tarefas.</p>
+                                <p>Para saber mais, clique no ícone de interrogação no canto direito superior. Lá explicamos tudo sobre o scrum e o j3scrum.</p>
+                                <p>Para criar uma equipe ou adicionar o membro, clique no botão laranja.</p>
+                            </div>
+                        </div>
                         <!--<div class="container col l4 s12 row">-->
-                        <div class="col l4 s12" ng-repeat="team in vmTeam.teams ">
+                        <div class="col l4 s12" ng-repeat="team in vmTeam.teams">
                             <div ng-if="team" class="card small orange lighten-3 hoverable animated fadeIn" style="background-color: {{team.color}} !important;">
                                 <div class="card-content white-text">
                                     <span class="card-title activator text-darken-4">{{team.name}}<i

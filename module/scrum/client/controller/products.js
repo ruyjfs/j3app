@@ -71,6 +71,10 @@ angular.module('scrum').controller('ProductsCtrl',
             }
         });
 
+        this.exist = ($arrValue) => {
+            return ($arrValue.length > 0);
+        };
+
         this.helpers({
             projects: function () {
                 let organizationId = '';

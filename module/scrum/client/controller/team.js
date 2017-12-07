@@ -56,6 +56,11 @@ angular.module('scrum').controller('TeamCtrl',
                 $('#progressBar').fadeOut('slow');
             }
         });
+
+        this.exist = ($arrValue) => {
+            return ($arrValue.length > 0);
+        };
+
         this.helpers({
             organizationId: function(){
                 var id = 'organization';

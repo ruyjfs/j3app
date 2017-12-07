@@ -4,7 +4,7 @@ angular.module("user").controller("ModulesGridCtrl", ['$scope', '$state', '$mdDi
             $scope.items = [
                 { name: 'Admin', icon: 'tune', link: 'admin'},
                 { name: 'You', icon: 'person', link: 'user'},
-                { name: 'j3scrum', icon: 'dashboard', link: 'scrum/organization'},
+                { name: 'j3scrum', icon: 'dashboard', link: 'scrum/organizations'},
                 { name: 'j3game', icon: 'videogame_asset', link: 'game'},
                 //{ name: 'j3drive', icon: 'directions_car', link: 'drive'},
                 { name: 'j3tec', icon: 'domain', link: 'tec'},
@@ -17,7 +17,7 @@ angular.module("user").controller("ModulesGridCtrl", ['$scope', '$state', '$mdDi
         } else {
             $scope.items = [
                 { name: 'You', icon: 'person', link: 'user'},
-                { name: 'j3scrum', icon: 'dashboard', link: 'scrum/organization'},
+                { name: 'j3scrum', icon: 'dashboard', link: 'scrum/organizations'},
                 { name: 'j3game', icon: 'videogame_asset', link: 'game'},
                 //{ name: 'j3drive', icon: 'directions_car', link: 'drive'},
                 { name: 'j3tec', icon: 'domain', link: 'tec'},

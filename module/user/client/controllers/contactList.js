@@ -172,7 +172,7 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
             },
             usersOnline: function () {
                     users = this.getReactively('users').filter((user) => {
-                        return (user.status == true)
+                        return (user.status.online == true)
                     });
                 return users;
             },
@@ -184,7 +184,7 @@ angular.module('user').controller('ContactListCtrl', ['$scope', '$timeout', '$md
             },
             usersOffline: function () {
                 users = this.getReactively('users').filter((user) => {
-                    return (user.status != true)
+                    return (user.status.online == false)
                 });
                 return users;
             }

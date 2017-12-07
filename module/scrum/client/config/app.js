@@ -125,6 +125,7 @@ if (Meteor.isClient) {
         'Add Organization': 'Adicionar uma organização',
         'Add Product': 'Adicionar um produto',
         'Add Team': 'Adicionar uma equipe',
+        'Add Member': 'Adicionar membro da organização',
 
         'Week': 'Semana',
         'Skip weekend': 'Pular finais de semana',
@@ -272,6 +273,12 @@ if (Meteor.isClient) {
         'You can only edit products that you own. Before registering a product, first register a team that will be part of the product, you can link the team to your new product created':
             'Você só pode editar produtos que você seja o dono. Antes de cadastrar um produto, primeiro cadastre uma equipe que vai fazer parte do produto, você pode vincular o time ao seu novo produto criado',
 
+        'What is a backlog': 'O que é o Backlog',
+        'What is a story': 'O que é a história',
+        'What is a status': 'O que é a situação',
+        'What is a sprint': 'O que é a sprint',
+        'What is a members': 'O que é o membro',
+        'What is a trash': 'O que é a lixeira',
         // Ryu Kanban
         // Ryu Backlog
 
