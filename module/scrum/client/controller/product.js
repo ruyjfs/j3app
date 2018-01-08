@@ -4,6 +4,69 @@ angular.module('scrum').controller('ProductCtrl',
         $translate.use(Session.get('lang'));
         $rootScope.titleMiddle = '';
 
+
+
+
+
+        this.organization = $stateParams.organization;
+        this.product = $stateParams.product;
+        this.sprint = $stateParams.sprint;
+
+        $scope.progressBar = {};
+        $scope.progressBar.users = Meteor.subscribe('users').ready();
+        this.subscribe('users', () => {}, {onReady: () => {$scope.progressBar.users = true;}});
+        $scope.progressBar.organization = Meteor.subscribe('organization').ready();
+        this.subscribe('organization', () => {}, {onReady: () => {$scope.progressBar.organization = true;}});
+        $scope.progressBar.project = Meteor.subscribe('project').ready();
+        this.subscribe('project', () => {}, {onReady: () => {$scope.progressBar.project = true;}});
+        $scope.progressBar.team = Meteor.subscribe('team', $stateParams.organization).ready();
+        this.subscribe('team', () => {return [$stateParams.organization]}, {onReady: () => {$scope.progressBar.team = true;}});
+        $scope.progressBar.sprint = Meteor.subscribe('team', $stateParams.organization).ready();
+        this.subscribe('sprint', () => {return [$stateParams.organization]}, {onReady: () => {$scope.progressBar.sprint = true;}});
+        $scope.progressBar.burndown = Meteor.subscribe('burndown', $stateParams.organization).ready();
+        this.subscribe('burndown', function(){return [$stateParams.product]}, {onReady: () => {$scope.progressBar.burndown = true;}});
+        $scope.progressBar.status = Meteor.subscribe('status', $stateParams.product).ready();
+        this.subscribe('status', function(){return [$stateParams.product]}, {onReady: () => {$scope.progressBar.status = true;}});
+        $scope.progressBar.note = Meteor.subscribe('note', $stateParams.product).ready();
+        this.subscribe('note', function(){return [$stateParams.product, {}, this.getReactively('searchText')]}, {onReady: () => {$scope.progressBar.note = true;}});
+        $scope.progressBar.story = Meteor.subscribe('story', $stateParams.product).ready();
+        this.subscribe('story', function(){return [$stateParams.product]}, {onReady: () => {$scope.progressBar.story = true;}});
+        $scope.progressBar.sprint = Meteor.subscribe('sprint', $stateParams.product).ready();
+        this.subscribe('sprint', function(){return [$stateParams.product]}, {onReady: () => {$scope.progressBar.sprint = true;}});
+        $scope.booLoading = true;
+        $scope.$watchCollection('progressBar', function() {
+            if (
+                $scope.progressBar.users,
+                    $scope.progressBar.organization,
+                    $scope.progressBar.project,
+                    $scope.progressBar.team,
+                    $scope.progressBar.burndown,
+                    $scope.progressBar.status,
+                    $scope.progressBar.note,
+                    $scope.progressBar.story,
+                    $scope.progressBar.sprint
+            ) {
+                $scope.booLoading = false;
+                $('#progressBar').fadeOut('slow');
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //Materialize.toast(
         //    'Hello, this screen you can view the products you created and the products that you participate, either in you being on the team linked to the project or standing as PO or Scrum Master.'+
         //    20000
@@ -13,220 +76,72 @@ angular.module('scrum').controller('ProductCtrl',
         //    'In all screens with the most (+) button you can add something, then add a team to the project elogo then the product linking the team in the registration of the product.',
         //    20000
         //);
-        $scope.progressBar = {};
-        // $scope.progressBar.organization = Meteor.subscribe('organization').ready();
-        this.subscribe('organization', () => {}, {onReady: () => {$scope.progressBar.organization = true;}});
-        $scope.progressBar.project = Meteor.subscribe('project').ready();
-        this.subscribe('project', () => {}, {onReady: function () {$scope.progressBar.project = true;}});
-        $scope.progressBar.users = Meteor.subscribe('users').ready();
-        this.subscribe('users', () => {}, {onReady: function () {$scope.progressBar.users = true;}});
-        $scope.progressBar.team = Meteor.subscribe('team', $stateParams.organization).ready();
-        this.subscribe('team', () => {return [$stateParams.organization]}, {onReady: function () {$scope.progressBar.team = true;}});
-        $scope.progressBar.sprint = Meteor.subscribe('sprint', $stateParams.organization).ready();
-        this.subscribe('sprint', () => {return [$stateParams.organization]}, {onReady: function () {$scope.progressBar.sprint = true;}});
-        $scope.booLoading = true;
-        $scope.$watchCollection('progressBar', function() {
-            if (
-                    $scope.progressBar.organization,
-                    $scope.progressBar.project,
-                    $scope.progressBar.users,
-                    $scope.progressBar.sprint,
-                    $scope.progressBar.team
-            ) {
-                let arrProject = Project.find({}, {sort: {name: 1}}).fetch();
-                if (arrProject.length == 0) {
-                    if (Session.get('booMsgProduct') != true) {
-                        Materialize.toast(
-                            $translate.instant('This is where the products of the organization are.')
-                            , 140000);
-                        Materialize.toast(
-                            $translate.instant('In scrum we call any type of project in a product.')
-                            , 140000);
-                        Materialize.toast(
-                            $translate.instant("Following the hierarchical order in j3scrum, an organization owns the products, a product has several sprints and each sprint have several tasks.")
-                            , 140000);
-                        Materialize.toast(
-                            $translate.instant("Relax, when entering the product you will know better how the scrum works and the main one as it is a kanban.")
-                            , 140000);
-                        Materialize.toast(
-                            $translate.instant("Click the red button to create a product.")
-                            , 140000);
-                        Materialize.toast(
-                            $translate.instant("Do not forget, every screen has the question button in the upper corner to better explain the scrum and the functionality of each screen.")
-                            , 140000);
-                        Materialize.toast(
-                            $translate.instant("Good luck with the product!!!")
-                            , 140000);
-                        Session.set('booMsgProduct', true);
-                    }
-                    $document.ready(() => {
-                        $('.md-fab').addClass('pulse');
-                        console.log($('.md-fab'));
-                    });
-                }
-                $scope.booLoading = false;
-                $('#progressBar').fadeOut('slow');
-            }
-        });
 
-        this.helpers({
-            projects: function () {
-                let organizationId = '';
-                if ($stateParams.organization == 'organization') {
-                    projects = Project.find({$or: [{organization: ''}, {organization: null}]}, {sort: {name: 1}});
-                } else {
-                    organization = Organization.findOne({namespace: $stateParams.organization});
-                    if (organization) {
-                        organizationId = organization._id;
-                    }
-                    projects = Project.find({organization: organizationId}, {sort: {name: 1}});
-                }
+        //
+        //
+        //
+        // $scope.progressBar = {};
+        // // $scope.progressBar.organization = Meteor.subscribe('organization').ready();
+        // this.subscribe('organization', () => {}, {onReady: () => {$scope.progressBar.organization = true;}});
+        // $scope.progressBar.project = Meteor.subscribe('project').ready();
+        // this.subscribe('project', () => {}, {onReady: function () {$scope.progressBar.project = true;}});
+        // $scope.progressBar.users = Meteor.subscribe('users').ready();
+        // this.subscribe('users', () => {}, {onReady: function () {$scope.progressBar.users = true;}});
+        // $scope.progressBar.team = Meteor.subscribe('team', $stateParams.organization).ready();
+        // this.subscribe('team', () => {return [$stateParams.organization]}, {onReady: function () {$scope.progressBar.team = true;}});
+        // $scope.progressBar.sprint = Meteor.subscribe('sprint', $stateParams.organization).ready();
+        // this.subscribe('sprint', () => {return [$stateParams.organization]}, {onReady: function () {$scope.progressBar.sprint = true;}});
+        // $scope.booLoading = true;
+        // $scope.$watchCollection('progressBar', function() {
+        //     if (
+        //             $scope.progressBar.organization,
+        //             $scope.progressBar.project,
+        //             $scope.progressBar.users,
+        //             $scope.progressBar.sprint,
+        //             $scope.progressBar.team
+        //     ) {
+        //         let arrProject = Project.find({}, {sort: {name: 1}}).fetch();
+        //         if (arrProject.length == 0) {
+        //             if (Session.get('booMsgProduct') != true) {
+        //                 Materialize.toast(
+        //                     $translate.instant('This is where the products of the organization are.')
+        //                     , 140000);
+        //                 Materialize.toast(
+        //                     $translate.instant('In scrum we call any type of project in a product.')
+        //                     , 140000);
+        //                 Materialize.toast(
+        //                     $translate.instant("Following the hierarchical order in j3scrum, an organization owns the products, a product has several sprints and each sprint have several tasks.")
+        //                     , 140000);
+        //                 Materialize.toast(
+        //                     $translate.instant("Relax, when entering the product you will know better how the scrum works and the main one as it is a kanban.")
+        //                     , 140000);
+        //                 Materialize.toast(
+        //                     $translate.instant("Click the red button to create a product.")
+        //                     , 140000);
+        //                 Materialize.toast(
+        //                     $translate.instant("Do not forget, every screen has the question button in the upper corner to better explain the scrum and the functionality of each screen.")
+        //                     , 140000);
+        //                 Materialize.toast(
+        //                     $translate.instant("Good luck with the product!!!")
+        //                     , 140000);
+        //                 Session.set('booMsgProduct', true);
+        //             }
+        //             $document.ready(() => {
+        //                 $('.md-fab').addClass('pulse');
+        //                 console.log($('.md-fab'));
+        //             });
+        //         }
+        //         $scope.booLoading = false;
+        //         $('#progressBar').fadeOut('slow');
+        //     }
+        // });
 
-                projects = projects.map(function (project) {
-                    if (!project.namespace || $stateParams.organization == 'organization') {
-                        project.namespace = project._id;
-                    }
+        this.member = {total: 0, active: 0};
+        let chartGauge = () => {
+            let nuTotal = this.member.total;
+            let nuActive = this.member.active;
+            let nuTick = nuTotal;
 
-                    //projects = Project.find({$or: [{userId: Meteor.userId()}, {teams: {$in: teamsId}}, {scrumMaster: {$in: [Meteor.userId()]}}]}).map(function(project){
-                    if (project.teams) {
-                        project.teams = Team.find({
-                            _id: {$in: project.teams},
-                            $or: [{'members': Meteor.userId(), userId: Meteor.userId()}]
-                        }).fetch();
-                    }
-                    project.owner = Meteor.users.findOne(project.userId);
-                    dateNow = moment().format('x');
-                    sprint = Sprint.findOne(
-                        {
-                            $and: [
-                                {projectId: project._id},
-                                {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
-                            ]
-                        }
-                    );
-
-                    if (!sprint) {
-                        dateNow = moment()._d;
-                        sprint = Sprint.findOne(
-                            {
-                                $and: [
-                                    {projectId: project._id},
-                                    {dateStart: {$lte: dateNow}, dateEnd: {$gte: dateNow}}
-                                ]
-                            }
-                        );
-                    }
-
-                    if (!sprint) {
-                        Meteor.call('sprintCreate', project._id, function (error, result) {
-                            if (error) {
-                                //console.log(error);
-                            } else {
-                                //console.log('Saved!');
-                                $scope.form = '';
-                                $mdDialog.hide();
-                            }
-                            //$rootScope.titleMiddle = result.dateStart + ' - ' + result.dateEnd + ' (' + result.number + ')';
-
-                            sprint = result;
-                            //console.info(result);
-                        });
-                    }
-
-                    //if (sprint) {
-                    project.sprint = sprint;
-                    //} else {
-                    //    Meteor.call('sprintCreate', project._id, function (error, result) {
-                    //        if (error) {
-                    //            console.log(error);
-                    //        } else {
-                    //            //console.log('Saved!');
-                    //            //$scope.form = '';
-                    //            //$mdDialog.hide();
-                    //            project.sprint = result;
-                    //        }
-                    //    });
-                    //}
-                    if (project.organization) {
-                        project.organizationNamespace = organization.namespace;
-                    } else {
-                        project.organizationNamespace = 'organization';
-                    }
-
-                    return project;
-                });
-
-                return projects;
-            }
-        }, true);
-
-        this.items = [
-            {name: "Project", icon: "business_center", direction: "left", color: 'red'},
-            {name: "Team", icon: "group_work", direction: "top", color: 'blue'}
-        ];
-
-        this.isOwner = function (userId) {
-            if (userId) {
-                return (Meteor.userId() == userId);
-            } else {
-                return true;
-            }
-        };
-
-        this.remove = function (id) {
-            this.projects.remove(id);
-        };
-
-        this.modalProjectSave = function (ev, id) {
-            $mdDialog.show({
-                controller: 'ProjectSaveCtrl as ctrl',
-                templateUrl: 'module/scrum/client/view/project-save.ng.html',
-                clickOutsideToClose: true,
-                locals: {
-                    id: id
-                },
-                targetEvent: ev
-            }).then(function (answer) {
-                this.status = 'You said the information was "' + answer + '".';
-            }, function () {
-                this.status = 'You cancelled the dialog.';
-            });
-        };
-
-
-        $document.ready(() => {
-            // var gauge1 = loadLiquidFillGauge("fillgauge1", 55);
-            var config1 = liquidFillGaugeDefaultSettings();
-            config1.circleColor = "#4e342e";
-            config1.circleColor = "#ef6c00";
-            config1.textColor = "#ef6c00";
-            config1.waveTextColor = "#ef6c00";
-            config1.waveColor = "#ffb74d";
-            config1.circleThickness = 0.2;
-            // config1.textVertPosition = 0.2;
-            config1.waveAnimateTime = 1000;
-            var gauge2 = loadLiquidFillGauge("fillgauge1", 45, config1);
-            var config2 = liquidFillGaugeDefaultSettings();
-            // config1.circleColor = "#4e342e";
-            // config1.circleColor = "#ef6c00";
-            // config1.textColor = "#ef6c00";
-            config2.waveTextColor = "rgb(0, 101, 183)";
-            config2.waveColor = "rgb(64, 178, 255)";
-            config2.circleThickness = 0.2;
-            config2.waveAnimateTime = 1000;
-            // var gauge3 = loadLiquidFillGauge("fillgauge2", 45, config2);
-
-            function NewValue(){
-                if(Math.random() > .5){
-                    return Math.round(Math.random()*100);
-                } else {
-                    return (Math.random()*100).toFixed(1);
-                }
-            }
-
-        });
-
-        chartGauge = () => {
             var gauge = function(container, configuration) {
                 var that = {};
                 var config = {
@@ -248,7 +163,7 @@ angular.module('scrum').controller('ProductCtrl',
 
                     transitionMs				: 750,
 
-                    majorTicks					: 5,
+                    majorTicks					: nuTick,
                     // labelFormat					: d3.format(',g'),
                     labelFormat					: d3.format('.4'),
                     labelInset					: 10,
@@ -360,8 +275,8 @@ angular.module('scrum').controller('ProductCtrl',
                         [0, config.pointerTailLength],
                         [config.pointerWidth / 2, 0] ];
                     var pointerLine = d3.line().curve(d3.curveMonotoneX);
-                        // .x(function(d) { return x(d.date); })
-                        // .y(function(d) { return y(d.close); });
+                    // .x(function(d) { return x(d.date); })
+                    // .y(function(d) { return y(d.close); });
                     // var pointerLine = d3.svg.line().interpolate('monotone');
                     // var pointerLine = d3.line().interpolate('monotone');
                     console.info(pointerLine);
@@ -395,37 +310,140 @@ angular.module('scrum').controller('ProductCtrl',
                 return that;
             };
 
-            function onDocumentReady() {
+            // function onDocumentReady() {
                 var powerGauge = gauge('#power-gauge', {
                     size: 300,
                     clipWidth: 300,
                     clipHeight: 200,
                     ringWidth: 60,
-                    maxValue: 10,
+                    maxValue: nuTotal,
                     transitionMs: 4000,
                 });
                 powerGauge.render();
+                powerGauge.update(nuActive);
 
-                function updateReadings() {
-                    // just pump in random data here...
-                    powerGauge.update(Math.random() * 10);
-                }
+                // function updateReadings() {
+                // just pump in random data here...
+                // powerGauge.update(Math.random() * 10);
+                // powerGauge.update(nuActive);
+                // }
 
                 // every few seconds update reading values
-                updateReadings();
-                setInterval(function() {
-                    updateReadings();
-                }, 5 * 100);
-            }
+                // updateReadings();
+                // setInterval(function() {
+                //     updateReadings();
+                // }, 5 * 100);
+            // }
 
             // if ( !window.isLoaded ) {
             //     window.addEventListener("load", function() {
             //         onDocumentReady();
             //     }, false);
             // } else {
-                onDocumentReady();
+            //     onDocumentReady();
             // }
+
+            return powerGauge;
         };
+
+        this.helpers({
+            organizationId: function(){
+                var id = 'organization';
+                if ($stateParams.organization !== 'organization') {
+                    var organization = Organization.findOne({$or: [{_id: $stateParams.organization}, {namespace: $stateParams.organization}]});
+                    if (organization) {
+                        id = organization._id;
+                    } else {
+                        id = $stateParams.organization;
+                    }
+                }
+                return id;
+            },
+            productId: function(){
+                var organizationId = this.getReactively('organizationId');
+                var id = 0;
+                if (organizationId) {
+                    if (organizationId === 'organization') {
+                        product = Project.findOne($stateParams.product);
+                    } else {
+                        product = Project.findOne({$or: [{$and: [{organization: organizationId}, {namespace: $stateParams.product}]}, {_id: $stateParams.product}]});
+                    }
+                    if (product) {
+                        id = $stateParams.id = product._id;
+                    } else {
+                        id = $stateParams.id;
+                    }
+                }
+                return id;
+            },
+            member: function() {
+                let member = {};
+                member.active = 0;
+                member.total = 0;
+                project = Project.findOne(this.getReactively('productId'));
+                if (project && project.teams) {
+                    teams = Team.find({_id: {$in: project.teams}}).fetch().map(function(team){
+                        if (team.members) {
+                            team.members = Meteor.users.find({_id: {$in: team.members}}).map(function(user){
+                                if (user.status) {
+                                    if (user.status.lastLogin) {
+                                        if (moment(new Date).diff(moment(user.status.lastLogin.date), 'days') > 2) {
+                                            user.statusLastLoginDate = moment(user.status.lastLogin.date).format('L H[h]m');
+                                        } else {
+                                            user.statusLastLoginDate = moment(user.status.lastLogin.date).fromNow(); // in 40 minutes
+                                        }
+                                    }
+                                    if (user.status.idle == true || user.status.online == true) {
+                                        member.active++;
+                                    }
+                                }
+                                member.total++;
+                                return user;
+                            });
+                        }
+                        return team;
+                    });
+                }
+
+                // console.info('aaa3');
+                // chartGauge();
+            return member;
+        }
+        }, true);
+
+        $document.ready(() => {
+            // var gauge1 = loadLiquidFillGauge("fillgauge1", 55);
+            var config1 = liquidFillGaugeDefaultSettings();
+            config1.circleColor = "#4e342e";
+            config1.circleColor = "#ef6c00";
+            config1.textColor = "#ef6c00";
+            config1.waveTextColor = "#ef6c00";
+            config1.waveColor = "#ffb74d";
+            config1.circleThickness = 0.2;
+            // config1.textVertPosition = 0.2;
+            config1.waveAnimateTime = 1000;
+            var gauge2 = loadLiquidFillGauge("fillgauge1", 45, config1);
+            var config2 = liquidFillGaugeDefaultSettings();
+            // config1.circleColor = "#4e342e";
+            // config1.circleColor = "#ef6c00";
+            // config1.textColor = "#ef6c00";
+            config2.waveTextColor = "rgb(0, 101, 183)";
+            config2.waveColor = "rgb(64, 178, 255)";
+            config2.circleThickness = 0.2;
+            config2.waveAnimateTime = 1000;
+            // var gauge3 = loadLiquidFillGauge("fillgauge2", 45, config2);
+
+            function NewValue(){
+                if(Math.random() > .5){
+                    return Math.round(Math.random()*100);
+                } else {
+                    return (Math.random()*100).toFixed(1);
+                }
+            }
+
+            console.info('www2')
+            teste = chartGauge();
+        });
 
         function chartMain(objJson) {
 
