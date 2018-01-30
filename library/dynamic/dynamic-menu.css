@@ -59,13 +59,14 @@ body {
     /*top: 33px;*/
     top: 0;
     left: 0;
-    z-index: 3;
+    /*z-index: 3;*/
     /*height: 64px;*/
     height: 100%;
     /*line-height: 64px;*/
     line-height: 56px;
     white-space: nowrap;
     transition: width 0.4s;
+    z-index: 1001;
 }
 .dynamic .menu.extended , .menu2.extended {
     transition: width 0.4s;
