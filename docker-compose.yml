@@ -1,0 +1,14 @@
+version: "3.5"
+services:
+  app:
+    container_name: j3app
+    image: ruyjfs/web-nginx-meteor-ubuntu
+    working_dir: /var/www
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/var/www
+    # entrypoint: ["/bin/sh", "./docker/entrypoint.sh"]
+    command: meteor
+    tty: false
+    restart: on-failure
