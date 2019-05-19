@@ -8,7 +8,7 @@ services:
       - 3000:3000
     volumes:
       - .:/var/www
-    # entrypoint: ["/bin/sh", "./docker/entrypoint.sh"]
-    command: meteor
+    entrypoint: ["/bin/sh", "./docker/entrypoint.sh"]
+    command: mupx deploy
     tty: false
     restart: on-failure
