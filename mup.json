@@ -2,9 +2,12 @@
   // Servev authenticatios info
   "servers": [
     {
-      "host": "159.203.162.121",
-      "username": "meteor",
-      "password": "meteor-159357",
+      // "host": "159.203.162.121",
+      "host": "159.89.241.213",
+      // "username": "meteor",
+      "username": "root",
+      "password": "159357",
+      // "password": "meteor-159357",
       // or pem file (ssh based authentication)
       // WARNING: Keys protected by a passphrase are not supported
       // "pem": "~/.ssh/id_rsa",
@@ -21,7 +24,8 @@
   // Location of app (local directory). This can reference '~' as the users home directory.
   // i.e., "app": "~/Meteor/my-app",
   // This is the same as the line below.
-  "app": "/var/www/j3app",
+  // "app": "/var/www",
+  "app": "/var/www/workplace/j3app",
   // Configure environment
   // ROOT_URL must be set to your correct domain (https or http)
   "env": {

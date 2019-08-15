@@ -6,12 +6,12 @@ services:
     working_dir: /var/www
     ports:
       - 3000:3000
-      - 27017:27017
     volumes:
       - .:/var/www
-    entrypoint: ['/bin/sh', './docker/entrypoint.sh']
-    environment:
-      METEOR_ALLOW_SUPERUSER: '1'
-    command: meteor --allow-superuser
+      - ~/.ssh/id_rsa:/root/.ssh/id_rsa
+    # entrypoint: ['/bin/sh', './docker/entrypoint.sh']
+    # environment:
+    # METEOR_ALLOW_SUPERUSER: 'true'
+    command: mupx deploy --allow-superuser
     tty: false
     restart: on-failure
