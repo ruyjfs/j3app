@@ -1,17 +1,18 @@
-version: '3.5'
+version: "3.5"
 services:
   app:
     container_name: j3app
-    image: meteor
+    build: .
+    image: ruyjfs/meteor
     working_dir: /var/www
     ports:
       - 3000:3000
       - 27017:27017
     volumes:
       - .:/var/www
-    entrypoint: ['/bin/sh', './docker/entrypoint.sh']
+    entrypoint: ["/bin/sh", "./docker/entrypoint.sh"]
     environment:
-      METEOR_ALLOW_SUPERUSER: '1'
+      METEOR_ALLOW_SUPERUSER: "1"
     command: meteor --allow-superuser
     tty: false
     restart: on-failure
