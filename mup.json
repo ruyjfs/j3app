@@ -2,12 +2,12 @@
   // Servev authenticatios info
   "servers": [
     {
-      // "host": "159.203.162.121",
-      "host": "159.89.241.213",
+      "host": "167.172.12.190",
       // "username": "meteor",
       "username": "root",
-      "password": "159357",
-      // "password": "meteor-159357",
+      // "password": "******",
+      "pem": "~/.ssh/id_rsa_digital_ocean",
+      // "pem": "~/.ssh/id_rsa",
       // or pem file (ssh based authentication)
       // WARNING: Keys protected by a passphrase are not supported
       // "pem": "~/.ssh/id_rsa",
